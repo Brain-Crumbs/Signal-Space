@@ -126,8 +126,9 @@ export function isObserverDataset(value: unknown): value is ObserverDataset {
         (r.localPhase === undefined || p.readouts.includes('local-phase')) &&
         (r.localFrequency === undefined ||
           p.readouts.includes('local-frequency')) &&
-        (r.sourceTag === undefined ||
-          (p.marks.kind === 'source-tag' && boundedText(r.sourceTag))),
+        (p.marks.kind === 'source-tag'
+          ? boundedText(r.sourceTag)
+          : r.sourceTag === undefined),
     )
   );
 }

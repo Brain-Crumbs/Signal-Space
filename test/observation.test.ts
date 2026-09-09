@@ -173,6 +173,12 @@ test('observer export enforces UTF-16 bounds for run IDs and readable source tag
     isObserverDataset({ ...data, physicalRunId: astralRunId }),
     false,
   );
+  const missingTag = structuredClone(data);
+  missingTag.protocol.marks = {
+    kind: 'source-tag',
+    channel: 'readable-emitter-labels',
+  };
+  assert.equal(isObserverDataset(missingTag), false);
 
   for (const source of ['x'.repeat(4097), '😀'.repeat(3000)]) {
     const renamed = JSON.parse(
