@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/schema/scenario.v1.schema.json",
+  "title": "Signal Space Paper I Scenario v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "modelVersion",
+    "id",
+    "c0",
+    "rateScale",
+    "filterWidth",
+    "nodes",
+    "links",
+    "boundaries",
+    "initialHistory",
+    "interventions",
+    "observation",
+    "solver",
+    "units"
+  ],
+  "properties": {
+    "modelVersion": {
+      "const": "paper-i-v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "c0": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "rateScale": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "filterWidth": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/link"
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "left",
+        "right"
+      ],
+      "properties": {
+        "left": { "$ref": "#/$defs/boundary" },
+        "right": { "$ref": "#/$defs/boundary" }
+      }
+    },
+    "initialHistory": {
+      "type": "object",
+      "required": [
+        "startTime",
+        "endTime",
+        "nodes",
+        "pendingPackets",
+        "filters",
+        "pendingResponses"
+      ]
+    },
+    "interventions": {
+      "type": "array"
+    },
+    "observation": {
+      "type": "object",
+      "required": [
+        "sampleTimes",
+        "visible",
+        "detectorLatency"
+      ]
+    },
+    "solver": {
+      "type": "object",
+      "required": [
+        "method",
+        "absoluteTolerance",
+        "relativeTolerance"
+      ]
+    },
+    "units": {
+      "type": "object",
+      "required": [
+        "time",
+        "length",
+        "angle",
+        "rate",
+        "angularFrequency",
+        "density"
+      ]
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "position",
+        "omega0",
+        "omega",
+        "phi",
+        "amplitude",
+        "gain",
+        "relaxationTime",
+        "emission",
+        "response"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "position": {
+          "type": "number"
+        },
+        "omega0": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "omega": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "phi": {
+          "type": "number"
+        },
+        "amplitude": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "gain": {
+          "type": "number"
+        },
+        "relaxationTime": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "emission": {
+          "oneOf": [
+            { "$ref": "#/$defs/emissionE0" },
+            { "$ref": "#/$defs/emissionE1" }
+          ]
+        },
+        "response": {
+          "enum": [
+            "R0",
+            "R1",
+            "R2"
+          ]
+        }
+      }
+    },
+    "emissionE0": {
+      "type": "object", "additionalProperties": false, "required": ["law", "nu"],
+      "properties": { "law": { "const": "E0" }, "nu": { "type": "number", "exclusiveMinimum": 0 } }
+    },
+    "emissionE1": {
+      "type": "object", "additionalProperties": false, "required": ["law", "q"],
+      "properties": { "law": { "const": "E1" }, "q": { "type": "number", "exclusiveMinimum": 0 } }
+    },
+    "boundary": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "const": "open" } } },
+        { "type": "object", "additionalProperties": false, "required": ["kind", "rate"], "properties": { "kind": { "const": "driven" }, "rate": { "type": "number", "minimum": 0 } } },
+        { "type": "object", "additionalProperties": false, "required": ["kind", "exteriorDistance"], "properties": { "kind": { "const": "mirror" }, "exteriorDistance": { "type": "number", "exclusiveMinimum": 0 } } },
+        { "type": "object", "additionalProperties": false, "required": ["kind", "closureDelay"], "properties": { "kind": { "const": "periodic" }, "closureDelay": { "type": "number", "exclusiveMinimum": 0 } } }
+      ]
+    },
+    "link": {
+      "type": "object",
+      "required": [
+        "id",
+        "source",
+        "target",
+        "sourcePort",
+        "targetPort",
+        "delay"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "sourcePort": {
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
+        "targetPort": {
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
+        "delay": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    }
+  }
+}
