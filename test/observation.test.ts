@@ -109,6 +109,18 @@ test('half-open gate and bins, detector latency, and jitter order are explicit',
     recordObserver({ runId: 'bin', snapshot }, negative).arrivals[0]!.timestamp,
     -0.8,
   );
+  const tied = recordObserver(
+    { runId: 'bin', snapshot },
+    {
+      ...detector(),
+      quantization: { width: 1, origin: 0 },
+      readouts: ['local-phase'],
+    },
+  );
+  assert.ok(isObserverDataset(tied));
+  const reversedTies = structuredClone(tied);
+  reversedTies.arrivals.reverse();
+  assert.equal(isObserverDataset(reversedTies), false);
   const jittered = recordObserver(
     { runId: 'bin', snapshot },
     {

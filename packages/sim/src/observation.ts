@@ -108,6 +108,13 @@ const boundedText = (value: unknown): value is string =>
 function protocolValid(value: unknown): value is DetectorProtocol {
   return validProtocol(value) && value.gate.end > value.gate.start;
 }
+function compareLocalArrivals(a: LocalArrival, b: LocalArrival): number {
+  const timestampOrder = a.timestamp - b.timestamp;
+  if (timestampOrder !== 0) return timestampOrder;
+  const encodedA = JSON.stringify(a);
+  const encodedB = JSON.stringify(b);
+  return encodedA < encodedB ? -1 : encodedA > encodedB ? 1 : 0;
+}
 /** Reject excess fields at every layer and undeclared optional channels. */
 export function isObserverDataset(value: unknown): value is ObserverDataset {
   if (
@@ -122,7 +129,7 @@ export function isObserverDataset(value: unknown): value is ObserverDataset {
       (p.timestamp.kind === 'local-phase' ? 'rad' : 's') &&
     value.arrivals.every(
       (r, i) =>
-        (i === 0 || r.timestamp >= value.arrivals[i - 1]!.timestamp) &&
+        (i === 0 || compareLocalArrivals(value.arrivals[i - 1]!, r) <= 0) &&
         (p.readouts.includes('local-phase')
           ? r.localPhase !== undefined
           : r.localPhase === undefined) &&
@@ -231,15 +238,7 @@ export function recordObserver(
     arrivals.push(record);
   }
   // Canonical tie ordering uses only permitted fields, never hidden physical order.
-  arrivals.sort(
-    (a, b) =>
-      a.timestamp - b.timestamp ||
-      (JSON.stringify(a) < JSON.stringify(b)
-        ? -1
-        : JSON.stringify(a) > JSON.stringify(b)
-          ? 1
-          : 0),
-  );
+  arrivals.sort(compareLocalArrivals);
   return {
     kind: 'local-arrivals-v1',
     physicalRunId: truth.runId,
