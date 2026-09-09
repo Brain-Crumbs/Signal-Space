@@ -28,6 +28,8 @@ export interface PacketRecord {
   port: Port;
   target?: string;
   kind: 'emitted' | 'pending' | 'received' | 'escaped' | 'absorbed';
+  /** Simulator-only index into the declared intervention plan. */
+  interventionIndex?: number;
 }
 interface Stream {
   id: string;
@@ -212,16 +214,44 @@ export class PacketSolver {
       !(s.solver.relativeTolerance > 0)
     )
       invalid('Positive finite step and tolerances are required.');
-    if (s.interventions.length || s.initialHistory.pendingResponses.length)
+    if (s.initialHistory.pendingResponses.length)
       throw new EnvelopeFailure(
         'UNSUPPORTED_MODEL',
-        'Event interventions and delayed response laws belong to T05; nonempty pending responses cannot be evolved yet.',
+        'T05 does not define delayed response laws; nonempty pending responses cannot be evolved yet.',
       );
     if (ports.some((p) => s.boundaries[p].kind !== 'open'))
       throw new EnvelopeFailure(
         'UNSUPPORTED_MODEL',
         'T04 supports open boundaries; driven event sources and mirror/ring adapters require declared later protocols.',
       );
+    if (s.interventions.length > this.maxEvents)
+      invalid('Intervention plan exceeds event budget.');
+    for (const action of s.interventions) {
+      if (action.kind === 'change-parameter')
+        throw new EnvelopeFailure(
+          'UNSUPPORTED_MODEL',
+          'Packet parameter changes require a separately declared law.',
+        );
+      if (action.kind === 'remove-pulse') {
+        if (action.value !== undefined)
+          invalid('remove-pulse target is a packet ID; value must be absent.');
+      } else {
+        const value = action.value as { linkId?: unknown } | undefined;
+        if (
+          !value ||
+          typeof value !== 'object' ||
+          Array.isArray(value) ||
+          Object.keys(value).length !== 1 ||
+          typeof value.linkId !== 'string' ||
+          !s.links.some(
+            (l) => l.id === value.linkId && l.source === action.target,
+          )
+        )
+          invalid(
+            'add-probe requires a source target and value {linkId} naming its positive-delay route.',
+          );
+      }
+    }
     this.state = s.nodes.flatMap((n) => [n.phi, n.omega]);
     this.filters = s.nodes.flatMap((n) => [
       s.initialHistory.filters[n.id]!.left,
@@ -242,9 +272,13 @@ export class PacketSolver {
       invalid('Initial packet inventory exceeds resource limits.');
     const ids = new Set<string>();
     for (const packet of this.pending) {
-      if (ids.has(packet.id) || packet.id.startsWith('event:'))
+      if (
+        ids.has(packet.id) ||
+        packet.id.startsWith('event:') ||
+        packet.id.startsWith('probe:')
+      )
         invalid(
-          'Initial packet IDs must be unique and cannot use reserved event: prefix.',
+          'Initial packet IDs must be unique and cannot use reserved event:/probe: prefixes.',
         );
       ids.add(packet.id);
       const route = s.links.find(
@@ -441,6 +475,9 @@ export class PacketSolver {
     }
     const nextEvent = Math.min(
       this.pending[0]?.arrivalTime ?? Infinity,
+      ...this.scenario.interventions
+        .filter((a) => a.time > this.time)
+        .map((a) => a.time),
       ...this.streams.map((s) => s.next),
     );
     const resolutionStep = Math.min(
@@ -498,15 +535,61 @@ export class PacketSolver {
     this.history.push(this.sample());
   }
   private processEvents(): void {
-    const arrivals = this.pending.filter((p) => p.arrivalTime === this.time);
+    const actions = this.scenario.interventions.flatMap((action, index) =>
+      action.time === this.time ? [{ action, index }] : [],
+    );
+    const removals = new Map<string, number>();
+    const probes: Array<{ packet: Packet; index: number; sourcePort: Port }> =
+      [];
+    for (const { action, index } of actions) {
+      if (action.kind === 'remove-pulse') {
+        if (
+          removals.has(action.target) ||
+          !this.pending.some((p) => p.id === action.target)
+        )
+          invalid(
+            'remove-pulse must name one pending packet at intervention time.',
+          );
+        removals.set(action.target, index);
+      } else {
+        const route = this.scenario.links.find(
+          (l) => l.id === (action.value as { linkId: string }).linkId,
+        )!;
+        const arrivalTime = this.time + route.delay;
+        if (!Number.isFinite(arrivalTime) || arrivalTime <= this.time)
+          numerical('Probe travel time must be representably positive.');
+        probes.push({
+          index,
+          sourcePort: route.sourcePort,
+          packet: {
+            id: `probe:${index}`,
+            source: route.source,
+            target: route.target,
+            port: route.targetPort,
+            emissionTime: this.time,
+            arrivalTime,
+          },
+        });
+      }
+    }
+    const arrivals = this.pending.filter(
+      (p) => p.arrivalTime === this.time && !removals.has(p.id),
+    );
     const candidates = this.streams.filter((s) => s.next === this.time);
     // Reserve worst-case output capacity before consuming any RNG or arrivals.
-    if (this.events + arrivals.length + candidates.length > this.maxEvents) {
+    if (
+      this.events + arrivals.length + candidates.length + actions.length >
+      this.maxEvents
+    ) {
       this.limit = 'maxEvents';
       return;
     }
     if (
-      this.pending.length - arrivals.length + candidates.length >
+      this.pending.length -
+        removals.size -
+        arrivals.length +
+        candidates.length +
+        probes.length >
       this.maxPending
     ) {
       this.limit = 'maxPending';
@@ -570,6 +653,32 @@ export class PacketSolver {
         });
       } else this.records.push({ ...record, kind: 'escaped' });
     }
+    for (const packet of this.pending.filter((p) => removals.has(p.id)))
+      this.records.push({
+        time: this.time,
+        packetId: packet.id,
+        source: packet.source,
+        target: packet.target,
+        port: packet.port,
+        kind: 'absorbed',
+        interventionIndex: removals.get(packet.id)!,
+      });
+    for (const { packet, index, sourcePort } of probes) {
+      const base = {
+        time: this.time,
+        packetId: packet.id,
+        source: packet.source,
+        interventionIndex: index,
+      };
+      this.records.push({ ...base, port: sourcePort, kind: 'emitted' });
+      this.records.push({
+        ...base,
+        target: packet.target,
+        port: packet.port,
+        kind: 'pending',
+      });
+      this.pending.push(packet);
+    }
     this.filters = nextFilters;
     for (const packet of arrivals)
       this.records.push({
@@ -581,8 +690,8 @@ export class PacketSolver {
         kind: 'received',
       });
     this.pending = this.pending
-      .filter((p) => p.arrivalTime !== this.time)
+      .filter((p) => p.arrivalTime !== this.time && !removals.has(p.id))
       .sort((a, b) => a.arrivalTime - b.arrivalTime || order(a.id, b.id));
-    this.events += arrivals.length + candidates.length;
+    this.events += arrivals.length + candidates.length + actions.length;
   }
 }

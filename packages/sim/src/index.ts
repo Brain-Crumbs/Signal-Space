@@ -349,3 +349,16 @@ export async function* execute(
     };
   }
 }
+
+export { branchPacketRun } from './interventions.js';
+export type { InterventionLineage } from './interventions.js';
+export {
+  recordObserver,
+  isObserverDataset,
+  observerDatasetSchema,
+} from './observation.js';
+export type {
+  DetectorProtocol,
+  LocalArrival,
+  ObserverDataset,
+} from './observation.js';

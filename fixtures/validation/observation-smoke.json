@@ -1,0 +1,397 @@
+{
+  "purpose": "T05 technical acceptance smoke; not paper results",
+  "command": "node --import tsx scripts/observation-smoke.mjs",
+  "runtime": "v24.19.0",
+  "repository": "https://github.com/Brain-Crumbs/Signal-Space",
+  "sourceSha256": {
+    "packages/sim/src/observation.ts": "c95dcb197cf220d57639acc66204f6fac119258cc1d8a1ec04758cf1a84101e3",
+    "packages/sim/src/interventions.ts": "a7fd150bf438a2c8dc60a495930e907cabec3ce5b6a73b04fcfd569010a2ba4a",
+    "packages/sim/src/packets.ts": "c4d65a8d16adefda06ae4006383120b8ad9f3aed09f3afaf93777434edfa96a3",
+    "packages/sim/src/envelope.ts": "985b2d12f7abbfbbd914abc971ae201a75ffad4bdcba3c76dabecabb43ba3dfd",
+    "packages/model/src/validate.js": "3fce218ca6413095fc4772b5200ce3a88f3495a8d5b4532a0449e3b4976ed839",
+    "packages/model/schema/scenario.v1.schema.json": "d501a8c56935c71b75414cd5e3191666516b02e411469c52d41f43180f2b2fc6",
+    "package-lock.json": "e20b6c2f22fe532c3c61334e9881db1b5b749a492bdac71dda1582879ebff8b7",
+    "scripts/observation-smoke.mjs": "fe7608bbde15e5bb55fa718e6999cfe6c0675cb9f8b46a8e77fefc3d19b33956"
+  },
+  "engineVersion": "packet-thinning-rk4-v1",
+  "scenario": {
+    "modelVersion": "paper-i-v1",
+    "id": "pair",
+    "c0": 1,
+    "rateScale": 1,
+    "filterWidth": 0.1,
+    "nodes": [
+      {
+        "id": "A",
+        "position": 0,
+        "omega0": 2,
+        "omega": 2,
+        "phi": 0,
+        "amplitude": 1,
+        "gain": 0.5,
+        "relaxationTime": 1,
+        "emission": {
+          "law": "E0",
+          "nu": 0.001
+        },
+        "response": "R1"
+      },
+      {
+        "id": "B",
+        "position": 1,
+        "omega0": 2,
+        "omega": 2,
+        "phi": 3.141592653589793,
+        "amplitude": 1,
+        "gain": 0.5,
+        "relaxationTime": 1,
+        "emission": {
+          "law": "E0",
+          "nu": 0.001
+        },
+        "response": "R1"
+      }
+    ],
+    "links": [
+      {
+        "id": "A-B",
+        "source": "A",
+        "target": "B",
+        "sourcePort": "right",
+        "targetPort": "left",
+        "delay": 1
+      },
+      {
+        "id": "B-A",
+        "source": "B",
+        "target": "A",
+        "sourcePort": "left",
+        "targetPort": "right",
+        "delay": 1
+      }
+    ],
+    "boundaries": {
+      "left": {
+        "kind": "open"
+      },
+      "right": {
+        "kind": "open"
+      }
+    },
+    "initialHistory": {
+      "startTime": -1,
+      "endTime": 0,
+      "nodes": {
+        "A": {
+          "phiAtZero": 0,
+          "omega": 2
+        },
+        "B": {
+          "phiAtZero": 3.141592653589793,
+          "omega": 2
+        }
+      },
+      "pendingPackets": [
+        {
+          "id": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "emissionTime": -0.75,
+          "arrivalTime": 0.25
+        }
+      ],
+      "filters": {
+        "A": {
+          "left": 0,
+          "right": 0
+        },
+        "B": {
+          "left": 0,
+          "right": 0
+        }
+      },
+      "pendingResponses": [],
+      "rngState": {
+        "algorithm": "xoshiro128**",
+        "state": "00000001"
+      }
+    },
+    "interventions": [],
+    "observation": {
+      "sampleTimes": [0, 1],
+      "visible": ["local-phase", "arrival-time"],
+      "detectorLatency": 0
+    },
+    "solver": {
+      "method": "rk4",
+      "step": 0.01,
+      "absoluteTolerance": 1e-9,
+      "relativeTolerance": 1e-7
+    },
+    "units": {
+      "time": "s",
+      "length": "m",
+      "angle": "rad",
+      "rate": "s^-1",
+      "angularFrequency": "rad s^-1",
+      "density": "s^-1"
+    }
+  },
+  "options": {
+    "seed": "t05-physical-smoke-v1"
+  },
+  "until": 1.5,
+  "lineage": [
+    {
+      "runId": "t05-removal",
+      "parentRunId": "t05-baseline",
+      "forkTime": 0.125,
+      "method": "replay-parent-prefix-v1",
+      "interventions": [
+        {
+          "time": 0.25,
+          "kind": "remove-pulse",
+          "target": "initial-pulse"
+        }
+      ]
+    },
+    {
+      "runId": "t05-probe",
+      "parentRunId": "t05-baseline",
+      "forkTime": 0.125,
+      "method": "replay-parent-prefix-v1",
+      "interventions": [
+        {
+          "time": 0.25,
+          "kind": "add-probe",
+          "target": "A",
+          "value": {
+            "linkId": "A-B"
+          }
+        }
+      ]
+    }
+  ],
+  "observerDatasets": [
+    {
+      "kind": "local-arrivals-v1",
+      "physicalRunId": "t05-baseline",
+      "protocol": {
+        "observerId": "B-detector",
+        "nodeId": "B",
+        "seed": "t05-detector-smoke-v1",
+        "retentionProbability": 1,
+        "timestamp": {
+          "kind": "local-phase"
+        },
+        "gate": {
+          "start": 3.141592653589793,
+          "end": 6.243812346869285
+        },
+        "latency": 0,
+        "jitter": {
+          "kind": "none"
+        },
+        "quantization": {
+          "width": 0.01,
+          "origin": 0
+        },
+        "readouts": [],
+        "marks": {
+          "kind": "none"
+        }
+      },
+      "timestampUnit": "rad",
+      "operationOrder": "reference-gate-retain-latency-jitter-quantize-sort",
+      "missingness": {
+        "kind": "independent-bernoulli",
+        "realizedMissingCount": "unknown"
+      },
+      "arrivals": [
+        {
+          "timestamp": 3.64,
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "kind": "local-arrivals-v1",
+      "physicalRunId": "t05-baseline",
+      "protocol": {
+        "observerId": "B-missed",
+        "nodeId": "B",
+        "seed": "t05-detector-smoke-v1",
+        "retentionProbability": 0,
+        "timestamp": {
+          "kind": "local-phase"
+        },
+        "gate": {
+          "start": 3.141592653589793,
+          "end": 6.243812346869285
+        },
+        "latency": 0,
+        "jitter": {
+          "kind": "none"
+        },
+        "quantization": {
+          "width": 0.01,
+          "origin": 0
+        },
+        "readouts": [],
+        "marks": {
+          "kind": "none"
+        }
+      },
+      "timestampUnit": "rad",
+      "operationOrder": "reference-gate-retain-latency-jitter-quantize-sort",
+      "missingness": {
+        "kind": "independent-bernoulli",
+        "realizedMissingCount": "unknown"
+      },
+      "arrivals": []
+    }
+  ],
+  "simulatorOnly": {
+    "baseline": {
+      "finalSample": {
+        "time": 1.5,
+        "nodes": {
+          "A": {
+            "phi": 2.999999999999978,
+            "omega": 2,
+            "left": 0,
+            "right": 0
+          },
+          "B": {
+            "phi": 6.243812346869285,
+            "omega": 2.053846705062055,
+            "left": 0.00003726653172078681,
+            "right": 0
+          }
+        }
+      },
+      "records": [
+        {
+          "time": 0,
+          "packetId": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "pending"
+        },
+        {
+          "time": 0.25,
+          "packetId": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "received"
+        }
+      ],
+      "physicalHistorySha256": "2cc7e1cff608339c4b62be2204379d5614974a4f7d073c6d13952b05787cefbb"
+    },
+    "removed": {
+      "finalSample": {
+        "time": 1.5,
+        "nodes": {
+          "A": {
+            "phi": 2.999999999999978,
+            "omega": 2,
+            "left": 0,
+            "right": 0
+          },
+          "B": {
+            "phi": 6.141592653589727,
+            "omega": 2,
+            "left": 0,
+            "right": 0
+          }
+        }
+      },
+      "records": [
+        {
+          "time": 0,
+          "packetId": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "pending"
+        },
+        {
+          "time": 0.25,
+          "packetId": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "absorbed",
+          "interventionIndex": 0
+        }
+      ],
+      "physicalHistorySha256": "d5eb02b723be868cf50be0a8168df8078abda59f8190ec8538f8caefae19b4c4"
+    },
+    "probed": {
+      "finalSample": {
+        "time": 1.5,
+        "nodes": {
+          "A": {
+            "phi": 2.9999999999999787,
+            "omega": 2,
+            "left": 0,
+            "right": 0
+          },
+          "B": {
+            "phi": 6.257964485204929,
+            "omega": 2.15735600670828,
+            "left": 0.8208872527707092,
+            "right": 0
+          }
+        }
+      },
+      "records": [
+        {
+          "time": 0,
+          "packetId": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "pending"
+        },
+        {
+          "time": 0.25,
+          "packetId": "probe:0",
+          "source": "A",
+          "interventionIndex": 0,
+          "port": "right",
+          "kind": "emitted"
+        },
+        {
+          "time": 0.25,
+          "packetId": "probe:0",
+          "source": "A",
+          "interventionIndex": 0,
+          "target": "B",
+          "port": "left",
+          "kind": "pending"
+        },
+        {
+          "time": 0.25,
+          "packetId": "initial-pulse",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "received"
+        },
+        {
+          "time": 1.25,
+          "packetId": "probe:0",
+          "source": "A",
+          "target": "B",
+          "port": "left",
+          "kind": "received"
+        }
+      ],
+      "physicalHistorySha256": "5e4d3fcab3c3fb334f6c106a753c8e6c7a86f4adc410ecf8dac0092b54113586"
+    }
+  }
+}
