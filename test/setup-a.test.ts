@@ -17,6 +17,32 @@ const close = (actual: number, expected: number, tolerance = 1e-8) =>
     `${actual} != ${expected} (tol ${tolerance})`,
   );
 
+function analyticR1Trajectory(
+  time: number,
+  points: SetupAProtocol['points'],
+  duration: number,
+) {
+  let cursor = 0;
+  let phi = 0;
+  let omega = 2;
+  for (const [index, point] of points.entries()) {
+    if (point.time > time) break;
+    const end = Math.min(points[index + 1]?.time ?? duration, time);
+    const dt = end - cursor;
+    if (dt <= 0) {
+      cursor = end;
+      continue;
+    }
+    const target = 2 + 0.5 * Math.tanh(point.left + point.right);
+    const decay = Math.exp(-dt);
+    phi += target * dt + (omega - target) * (1 - decay);
+    omega = target + (omega - target) * decay;
+    cursor = end;
+    if (cursor >= time) break;
+  }
+  return { phi, omega };
+}
+
 test('Setup A isolated baseline has uniform recurrence and no arrivals', () => {
   const result = runSetupA(createSetupAProtocol('isolated'), 'R0');
   assert.ok(result.samples.length > 1);
@@ -89,9 +115,20 @@ test('Setup A records fixed-sum switching, pulse ordering, bounds, ticks, and fi
   );
   close(early.summary.inputIntegral, late.summary.inputIntegral);
   assert.notEqual(
-    early.summary.finalPhaseDisplacement,
-    late.summary.finalPhaseDisplacement,
+    early.protocol.points[0]!.left + early.protocol.points[0]!.right,
+    late.protocol.points[0]!.left + late.protocol.points[0]!.right,
   );
+  for (const result of [early, late]) {
+    for (const sample of result.samples) {
+      const expected = analyticR1Trajectory(
+        sample.time,
+        result.protocol.points,
+        result.protocol.duration,
+      );
+      close(sample.phi, expected.phi, 2e-7);
+      close(sample.omega, expected.omega, 2e-7);
+    }
+  }
 
   const pulse = runSetupA(
     createSetupAProtocol('finite-pulse', {
@@ -135,6 +172,10 @@ test('Setup A response curve saves pulse phase/amplitude and defers interpretati
 
 test('Setup A definitions are schema-compatible across protocols and variants', () => {
   assert.equal(setupAVariants.length, 5);
+  assert.throws(
+    () => createSetupAProtocol('unknown' as never),
+    /Unknown Setup A protocol unknown/,
+  );
   for (const definition of createSetupASmokeDefinitions()) {
     assert.doesNotThrow(() => validateDefinition(definition));
     assert.equal(definition.mode, 'envelope');

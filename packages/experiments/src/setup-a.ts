@@ -388,16 +388,18 @@ export function createSetupAProtocol(
       ],
       duration,
     );
-  return protocol(
-    id,
-    'Equal-integral sequence: late',
-    'The same total input as the early sequence, concentrated late.',
-    [
-      { time: 0, left: 0, right: 0 },
-      { time: duration / 2, left: 1, right: 0 },
-    ],
-    duration,
-  );
+  if (id === 'equal-integral-late')
+    return protocol(
+      id,
+      'Equal-integral sequence: late',
+      'The same total input as the early sequence, concentrated late.',
+      [
+        { time: 0, left: 0, right: 0 },
+        { time: duration / 2, left: 1, right: 0 },
+      ],
+      duration,
+    );
+  throw new RangeError(`Unknown Setup A protocol ${id}.`);
 }
 
 export function setupAVariant(id: SetupAVariantId): SetupAVariant {
