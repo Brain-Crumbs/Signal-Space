@@ -2,10 +2,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createSample } from '@signal-space/experiments';
 import { PacketSolver, execute } from '@signal-space/sim';
+import { createWorkerHandler } from '@signal-space/sim/worker';
 import type {
   PacketOptions,
   PacketSnapshot,
   RunEvent,
+  RunRequest,
 } from '@signal-space/sim';
 
 const options: PacketOptions = { seed: 't04-smoke-v1' };
@@ -135,6 +137,48 @@ test('same-runtime replay preserves every raw event, RNG, queue and adaptive con
     if (corrupt === 'seed') bad.options.seed = 'another';
     if (corrupt === 'pending' && checkpoint.pending.length === 0) continue;
     assert.throws(() => new PacketSolver(s, options, bad), /Checkpoint/);
+  }
+});
+test('supplementary Unicode seeds and node IDs retain their complete characters', () => {
+  const s = pair();
+  const first = run(new PacketSolver(s, { seed: '😀' }), 2);
+  const second = run(new PacketSolver(s, { seed: '😁' }), 2);
+  assert.notDeepEqual(first.streams, second.streams);
+  assert.notDeepEqual(first.records, second.records);
+  assert.deepEqual(run(new PacketSolver(s, { seed: '😀' }), 2), first);
+  const renamed = JSON.parse(
+    JSON.stringify(s).replaceAll('"A"', '"😀"').replaceAll('"B"', '"😁"'),
+  );
+  const unicode = run(new PacketSolver(renamed, options), 2);
+  assert.equal(new Set(unicode.streams.map((stream) => stream.rng)).size, 4);
+});
+test('malformed packet checkpoints fail as INVALID_HISTORY in direct and worker execution', async () => {
+  for (const packetResume of [null, false, 0, '', [], {}]) {
+    const request = {
+      runId: 'invalid-checkpoint',
+      mode: 'packets',
+      scenario: pair(),
+      packets: options,
+      until: 2,
+      packetResume,
+    } as unknown as RunRequest;
+    const direct: RunEvent[] = [];
+    for await (const event of execute(request)) direct.push(event);
+    const worker: RunEvent[] = [];
+    await createWorkerHandler((event) => worker.push(event))({
+      type: 'run',
+      request,
+    });
+    assert.deepEqual(worker, direct);
+    const final = direct.at(-1);
+    assert.ok(final?.type === 'failed');
+    assert.equal(final.error.code, 'INVALID_HISTORY');
+    assert.ok(
+      !direct.some(
+        (event) =>
+          event.type === 'packet-snapshot' || event.type === 'completed',
+      ),
+    );
   }
 });
 test('packet accounting, causal support, no retransmission, positive bounded omega', () => {

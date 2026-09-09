@@ -77,11 +77,12 @@ function invalid(message: string): never {
 function numerical(message: string): never {
   throw new EnvelopeFailure('NUMERICAL_FAILURE', message);
 }
-/** FNV-1a seed derivation; JSON tuple encoding prevents ambiguous stream names. */
+/** FNV-1a over UTF-16 code units; JSON tuples prevent ambiguous stream names. */
 function seedState(seed: string, id: string): number {
   let hash = 2166136261;
-  for (const c of JSON.stringify(['physical-emission-v1', seed, id])) {
-    hash = Math.imul(hash ^ c.charCodeAt(0), 16777619) >>> 0;
+  const encoded = JSON.stringify(['physical-emission-v1', seed, id]);
+  for (let i = 0; i < encoded.length; i++) {
+    hash = Math.imul(hash ^ encoded.charCodeAt(i), 16777619) >>> 0;
   }
   return hash;
 }
@@ -270,6 +271,9 @@ export class PacketSolver {
     this.history.push(this.sample());
     if (resume !== undefined) {
       if (
+        resume === null ||
+        typeof resume !== 'object' ||
+        Array.isArray(resume) ||
         resume.kind !== 'packet-thinning-rk4-v1' ||
         canonical(resume.scenario) !== canonical(s) ||
         canonical(resume.options) !== canonical(this.options) ||
