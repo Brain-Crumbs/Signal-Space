@@ -601,6 +601,28 @@ test('representable event intervals near zero are not coalesced', () => {
   assert.equal(solver.sample().nodes[node.id]!.receptionLeft, 1);
 });
 
+test('representable multi-ULP event intervals remain distinct', () => {
+  const s = driven(),
+    node = s.nodes[0]!,
+    later = 1 + 4 * Number.EPSILON;
+  s.boundaries.left = { kind: 'driven', rate: 0 };
+  const solver = new EnvelopeSolver(s, {
+    boundaryInputs: {
+      left: [
+        { time: 0, rate: 0 },
+        { time: 1, rate: 1 },
+        { time: later, rate: 2 },
+      ],
+    },
+  });
+  while (solver.snapshot().time < 1) solver.advance(later);
+  assert.equal(solver.snapshot().time, 1);
+  assert.equal(solver.sample().nodes[node.id]!.receptionLeft, 1);
+  solver.advance(later);
+  assert.equal(solver.snapshot().time, later);
+  assert.equal(solver.sample().nodes[node.id]!.receptionLeft, 2);
+});
+
 test('sampled prehistory uses phase Hermite derivative and rejects hidden between-knot frequency violations', async () => {
   const s = createSample('pair');
   const points = [-1, 0].map((time) => ({
@@ -964,6 +986,15 @@ test('phase spacing is measured exactly below a floating-point binade', async ()
   const s = isolated(),
     node = s.nodes[0]!;
   node.phi = 36028797018963964;
+  s.initialHistory.nodes[node.id]!.phiAtZero = node.phi;
+  const result = await run(s, 0);
+  assert.equal(result.last.nodes[node.id]!.phi, node.phi);
+});
+
+test('negative phase spacing is measured toward increasing phase', async () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.phi = -(2 ** 55);
   s.initialHistory.nodes[node.id]!.phiAtZero = node.phi;
   const result = await run(s, 0);
   assert.equal(result.last.nodes[node.id]!.phi, node.phi);

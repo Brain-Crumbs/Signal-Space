@@ -162,6 +162,7 @@ function stable(value: unknown): string {
 const PORTABLE_REPLAY_ABSOLUTE_TOLERANCE = 1e-12;
 const PORTABLE_REPLAY_MAX_ULPS = 32n;
 const PHYSICAL_BOUND_MAX_ULPS = 8n;
+const UNRESOLVABLE_INTERVAL_MAX_ULPS = 1n;
 const FLOAT64_SIGN_BIT = 1n << 63n;
 const FLOAT64_MASK = (1n << 64n) - 1n;
 const replayBits = new DataView(new ArrayBuffer(8));
@@ -185,12 +186,12 @@ function withinUlps(
         : expectedBits - actualBits;
   return distance <= maximumDistance;
 }
-function float64Spacing(value: number): number {
-  const magnitude = Math.abs(value);
-  if (magnitude === 0) return Number.MIN_VALUE;
-  replayBits.setFloat64(0, magnitude);
-  replayBits.setBigUint64(0, replayBits.getBigUint64(0) + 1n);
-  return replayBits.getFloat64(0) - magnitude;
+function float64NextSpacing(value: number): number {
+  if (value === 0) return Number.MIN_VALUE;
+  replayBits.setFloat64(0, value);
+  const bits = replayBits.getBigUint64(0);
+  replayBits.setBigUint64(0, value > 0 ? bits + 1n : bits - 1n);
+  return replayBits.getFloat64(0) - value;
 }
 function portableReplayEqual(actual: unknown, expected: unknown): boolean {
   if (typeof actual === 'number' && typeof expected === 'number')
@@ -482,7 +483,10 @@ export class EnvelopeSolver {
     this.boundaries = [];
     for (const time of [...boundarySet].sort((a, b) => a - b)) {
       const previous = this.boundaries.at(-1);
-      if (previous === undefined || !withinUlps(time, previous, 8n))
+      if (
+        previous === undefined ||
+        !withinUlps(time, previous, UNRESOLVABLE_INTERVAL_MAX_ULPS)
+      )
         this.boundaries.push(time);
       this.canonicalBoundaryTimes.set(time, this.boundaries.at(-1)!);
     }
@@ -586,7 +590,10 @@ export class EnvelopeSolver {
     });
   }
   private source(time: number): Vector {
-    if (time > this.time && withinUlps(time, this.time, 8n))
+    if (
+      time > this.time &&
+      withinUlps(time, this.time, UNRESOLVABLE_INTERVAL_MAX_ULPS)
+    )
       return [...this.state];
     if (time > this.time)
       throw new EnvelopeFailure(
@@ -787,8 +794,7 @@ export class EnvelopeSolver {
   }
   private tickIndex(phi: number): number {
     const section = this.options.tickSection ?? 0,
-      magnitude = Math.max(Math.abs(phi), Math.abs(section)),
-      spacing = float64Spacing(magnitude),
+      spacing = Math.max(float64NextSpacing(phi), float64NextSpacing(section)),
       index = Math.floor((phi - section) / TAU),
       lower = section + index * TAU,
       upper = section + (index + 1) * TAU;
