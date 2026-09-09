@@ -111,8 +111,17 @@ function protocolValid(value: unknown): value is DetectorProtocol {
 function compareLocalArrivals(a: LocalArrival, b: LocalArrival): number {
   const timestampOrder = a.timestamp - b.timestamp;
   if (timestampOrder !== 0) return timestampOrder;
-  const encodedA = JSON.stringify(a);
-  const encodedB = JSON.stringify(b);
+  // Encode a fixed field sequence so imported object insertion order cannot
+  // become an undeclared tie-breaking channel.
+  const key = (arrival: LocalArrival) =>
+    JSON.stringify([
+      arrival.side,
+      arrival.localPhase ?? null,
+      arrival.localFrequency ?? null,
+      arrival.sourceTag ?? null,
+    ]);
+  const encodedA = key(a);
+  const encodedB = key(b);
   return encodedA < encodedB ? -1 : encodedA > encodedB ? 1 : 0;
 }
 /** Reject excess fields at every layer and undeclared optional channels. */
