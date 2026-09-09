@@ -62,7 +62,21 @@ export async function* execute(
       return;
     }
     // Own the input before the first yield so callers cannot mutate an active run.
-    const scenario: unknown = structuredClone(request.scenario);
+    let scenario: unknown;
+    try {
+      scenario = structuredClone(request.scenario);
+    } catch {
+      yield {
+        type: 'failed',
+        runId,
+        error: {
+          code: 'INVALID_SCENARIO',
+          message: 'Scenario must be structured-cloneable.',
+          details: [{ path: '$', message: 'Input cannot be cloned.' }],
+        },
+      };
+      return;
+    }
     yield { type: 'progress', runId, fraction: 0, stage: 'validating' };
     await yieldTask();
     if (options.signal?.aborted) {

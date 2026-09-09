@@ -122,8 +122,11 @@ export function validateScenario(value) {
     errors.push(issue('initialHistory', 'must span [negative time, 0]'));
   const boundaryDelays = ['left', 'right']
     .map((side) => value.boundaries?.[side])
-    .filter((b) => b?.kind === 'periodic')
-    .map((b) => b.closureDelay);
+    .flatMap((b) => {
+      if (b?.kind === 'periodic') return [b.closureDelay];
+      if (b?.kind === 'mirror') return [2 * (b.exteriorDistance / value.c0)];
+      return [];
+    });
   const maxDelay = Math.max(0, ...links.map((l) => l.delay), ...boundaryDelays);
   if (hist?.startTime > -maxDelay)
     errors.push(

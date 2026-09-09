@@ -43,3 +43,5 @@ PR #24 review validation enforces closed nested scenario shapes, complete per-cl
 Follow-up review checks reject mismatched t=0 history endpoints and pending responses for undeclared clocks, preserving one consistent initial physical state.
 
 Pending-packet source/target membership is checked at the same preparation boundary; regression cases reject each undeclared endpoint before inspection exposes a snapshot.
+
+Mirror round-trip history coverage (parent contract item 12) and classification of uncloneable input are covered by targeted execution regressions.

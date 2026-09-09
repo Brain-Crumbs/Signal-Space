@@ -23,3 +23,5 @@ Source-first private workspaces are bundled by Vite/esbuild and run in developme
 Review hardening: closed scenario objects reject undeclared fields instead of copying them into typed snapshots. The history and filter maps must contain exactly the scenario node IDs. Pending packets at t=0 require finite emissionTime <= 0 <= arrivalTime with arrivalTime > emissionTime. Arrivals exactly at zero are queued for initial delivery; they are not already included in receiver filters. These checks validate preparation only, not propagation against the future solver. Declared unknown response payloads and intervention values remain unrestricted.
 
 History endpoint phase/frequency must agree exactly with the initial node state, and pending response targets must belong to the scenario. Inspection rejects inconsistent preparations instead of choosing one copy as authoritative.
+
+Failure to clone caller input produces `INVALID_SCENARIO` with a field-level detail, before any snapshot or progress is exposed. `INTERNAL` remains reserved for failures after the input-cloning boundary. Mirror preparation history includes the ideal-reflection round trip `2d/c0`.

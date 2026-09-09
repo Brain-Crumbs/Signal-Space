@@ -189,3 +189,32 @@ test('pending packet source and target must be declared clocks', async () => {
     await rejects(scenario);
   }
 });
+
+test('mirror round trips contribute to the required history horizon', async () => {
+  const scenario = preparation();
+  scenario.boundaries.left = { kind: 'mirror', exteriorDistance: 2 };
+  // c0=1 and distance=2 require four seconds of history, not the link's one.
+  const validation = validateScenario(scenario);
+  assert.equal(validation.ok, false);
+  assert.ok(
+    validation.errors.some((e) => e.path === 'initialHistory.startTime'),
+  );
+  await rejects(scenario);
+  scenario.initialHistory.startTime = -4;
+  assert.equal((await collect(scenario)).at(-1)?.type, 'completed');
+  scenario.boundaries.right = { kind: 'mirror', exteriorDistance: 3 };
+  await rejects(scenario);
+  scenario.initialHistory.startTime = -6;
+  assert.equal((await collect(scenario)).at(-1)?.type, 'completed');
+});
+
+test('uncloneable extension values are invalid scenarios, not internal failures', async () => {
+  for (const value of [() => 1, Symbol('invalid')]) {
+    const response = preparation();
+    response.initialHistory.pendingResponses[0]!.payload = value;
+    await rejects(response);
+    const intervention = preparation();
+    intervention.interventions[0]!.value = value;
+    await rejects(intervention);
+  }
+});
