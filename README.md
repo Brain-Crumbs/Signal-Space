@@ -55,3 +55,5 @@ npm run test:browser
 The browser suite uses the **production build**, including its emitted worker, and compares its snapshot to the shared engine. Run `npm run build` after source changes before running it separately. CI installs from the lockfile and runs these checks on pull requests and main. Browser installation needs network access and Linux system dependencies; this is test tooling, not an application runtime requirement.
 
 Use `npm run format` to format code and docs. The original dependency-free model tests can also be run with `node --test test/model-contract.test.js`.
+
+Stochastic packets (T04): `node apps/cli/dist/index.js --sample pair --until 2 --seed pair-smoke-v1`. This runs the same seeded engine exposed to the production Web Worker and exports complete physical checkpoints in JSON Lines. See [packet engine](docs/packet-engine.md) for numerical controls, replay and resource limits; these smoke runs are not paper findings.

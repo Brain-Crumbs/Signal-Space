@@ -61,3 +61,37 @@ test('CLI --until runs the shared deterministic engine and validates duration', 
     assert.equal(cli('--until', value).status, 1);
   assert.equal(cli('--until').status, 1);
 });
+
+test('CLI --seed selects shared packet execution and requires a duration', async () => {
+  const result = cli(
+    '--sample',
+    'pair',
+    '--until',
+    '0.3',
+    '--seed',
+    'cli-smoke',
+  );
+  assert.equal(result.status, 0, result.stderr);
+  const expected = [];
+  for await (const event of execute({
+    runId: 'cli-packets',
+    mode: 'packets',
+    scenario: createSample('pair'),
+    until: 0.3,
+    packets: { seed: 'cli-smoke' },
+  }))
+    expected.push(event);
+  assert.deepEqual(
+    result.stdout
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line)),
+    expected,
+  );
+  for (const args of [
+    ['--seed'],
+    ['--seed', 'x'],
+    ['--until', '1', '--seed', ''],
+  ])
+    assert.equal(cli(...args).status, 1);
+});
