@@ -242,6 +242,16 @@ test('invalid, unsupported and uncovered detector protocols fail before exportin
         ...changes,
       } as DetectorProtocol),
     );
+  for (const runId of [42, true, { length: 1 }])
+    assert.throws(() =>
+      recordObserver(
+        { runId, snapshot } as unknown as {
+          runId: string;
+          snapshot: PacketSnapshot;
+        },
+        detector(),
+      ),
+    );
 });
 test('physical removal branches and re-evolves filters/frequency, preserving the parent and common prefix', () => {
   const solver = new PacketSolver(scenario(), options);

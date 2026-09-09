@@ -144,7 +144,12 @@ export function recordObserver(
   truth: { runId: string; snapshot: PacketSnapshot },
   protocol: DetectorProtocol,
 ): ObserverDataset {
-  if (!protocolValid(protocol) || !truth.runId || truth.runId.length > 4096)
+  if (
+    !protocolValid(protocol) ||
+    typeof truth.runId !== 'string' ||
+    !truth.runId ||
+    truth.runId.length > 4096
+  )
     throw new Error('Invalid detector protocol or physical run ID.');
   const p = structuredClone(protocol),
     snapshot = truth.snapshot;
