@@ -587,6 +587,32 @@ test('sampled prehistory uses phase Hermite derivative and rejects hidden betwee
   assert.equal(last.error.code, 'INVALID_HISTORY');
 });
 
+test('solver tolerances do not widen physical prehistory bounds', () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.gain = 0.2;
+  node.response = 'R1';
+  s.solver.absoluteTolerance = 1;
+  s.solver.relativeTolerance = 1;
+  const prehistory = [
+    {
+      time: -1,
+      nodes: { [node.id]: { phi: -8 / 3, omega: 2 } },
+    },
+    {
+      time: 0,
+      nodes: { [node.id]: { phi: 0, omega: 2 } },
+    },
+  ];
+  assert.throws(
+    () => new EnvelopeSolver(s, { prehistory }),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY',
+  );
+});
+
 test('prehistory uses gain bounds immediately before a time-zero intervention', async () => {
   const s = createSample('pair'),
     changed = s.nodes[0]!,

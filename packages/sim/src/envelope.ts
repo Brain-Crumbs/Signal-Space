@@ -542,11 +542,7 @@ export class EnvelopeSolver {
             p.time - prior.time,
           );
           const [lower, upper] = this.bounds(n, 0, true);
-          if (
-            lo < lower - this.tolerance(lower) ||
-            hi > upper + this.tolerance(upper) ||
-            lo <= 0
-          )
+          if (lo < lower || hi > upper || lo <= 0)
             fail(
               'History phase derivative must remain in the admissible frequency interval, including between knots.',
             );

@@ -33,7 +33,7 @@ The CLI accepts `--until seconds`: `node apps/cli/dist/index.js --sample pair --
 
 ## Preparation and supported interventions
 
-The default established preparation uses the scenario's constant admissible frequency and linear phase over its declared history interval. `envelope.prehistory` optionally supplies strictly increasing `{time, nodes: {id: {phi, omega}}}` knots covering that interval through zero. They define a cubic Hermite **phase function**, with frequency given by its derivative. Its endpoint must match the scenario and its entire derivative must lie in the admissible frequency interval. Sampling a history function into this data format keeps requests and checkpoints structured-cloneable; executable callbacks are not accepted.
+The default established preparation uses the scenario's constant admissible frequency and linear phase over its declared history interval. `envelope.prehistory` optionally supplies strictly increasing `{time, nodes: {id: {phi, omega}}}` knots covering that interval through zero. They define a cubic Hermite **phase function**, with frequency given by its derivative. Its endpoint must match the scenario and its entire derivative must lie in the physical admissible frequency interval; solver error tolerances do not widen this input-domain bound. Sampling a history function into this data format keeps requests and checkpoints structured-cloneable; executable callbacks are not accepted.
 
 `preparation: 'empty-links'` suppresses every pre-zero source emission on transport links. Clocks still have their declared phase history. Source emissions beginning at zero first arrive at the positive link delay; driven exterior ports are unaffected. Established and empty links are separate preparations.
 
