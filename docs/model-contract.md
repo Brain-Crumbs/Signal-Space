@@ -28,3 +28,9 @@ Snapshots include unwrapped phase/frequency, prehistory, filters, pending packet
 - Autonomous emissions never branch on reception. Tagged one-return transponders are a separate protocol.
 - No response or inference code may read global time, delayed source phase, private packet ID, or another node's state unless the observation protocol provides a physical measurement.
 - `chi`, tick-section choice, E0/E1, R0/R1/R2, preparation, and normalization are declared inputs. There is no implicit synchronization, reset, force, or phase mark.
+
+- Initial pending packets satisfy finite `emissionTime <= 0 <= arrivalTime` and strictly positive transit time. A packet arriving exactly at zero awaits delivery; its filter increment is not included in the initial filter state. History and filter maps contain exactly the declared clock IDs. Closed scenario objects reject undeclared fields; explicitly unknown response payloads and intervention values remain extensible.
+- Duplicated initial history endpoints must equal each node's unwrapped `phi` and `omega` exactly at t=0; validation does not reconcile or wrap them. Every pending response targets a declared clock.
+- Pending packet source and target IDs must both belong to the declared scenario node set, matching the link and pending-response membership rules.
+- A mirror at `exteriorDistance = d` returns an edge clock's emission after round-trip delay `2d/c0` (instantaneous ideal reflection, no mirror processing latency). The history horizon includes both mirrors, all links and periodic closure delays; `startTime <= -tau_max`.
+- Response payloads and intervention values may contain arbitrary structured-cloneable data without shared memory. Uncloneable inputs are invalid scenarios at the execution boundary.

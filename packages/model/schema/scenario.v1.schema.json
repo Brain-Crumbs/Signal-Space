@@ -55,13 +55,14 @@
     "boundaries": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "left",
-        "right"
-      ],
+      "required": ["left", "right"],
       "properties": {
-        "left": { "$ref": "#/$defs/boundary" },
-        "right": { "$ref": "#/$defs/boundary" }
+        "left": {
+          "$ref": "#/$defs/boundary"
+        },
+        "right": {
+          "$ref": "#/$defs/boundary"
+        }
       }
     },
     "initialHistory": {
@@ -73,26 +74,164 @@
         "pendingPackets",
         "filters",
         "pendingResponses"
-      ]
+      ],
+      "properties": {
+        "startTime": {
+          "type": "number",
+          "exclusiveMaximum": 0
+        },
+        "endTime": {
+          "const": 0
+        },
+        "nodes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["phiAtZero", "omega"],
+            "properties": {
+              "phiAtZero": {
+                "type": "number"
+              },
+              "omega": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "pendingPackets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/packet"
+          }
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["left", "right"],
+            "properties": {
+              "left": {
+                "type": "number",
+                "minimum": 0
+              },
+              "right": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "pendingResponses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["nodeId", "dueTime", "payload"],
+            "properties": {
+              "nodeId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dueTime": {
+                "type": "number",
+                "minimum": 0
+              },
+              "payload": {}
+            },
+            "additionalProperties": false
+          }
+        },
+        "rngState": {
+          "type": "object",
+          "required": ["algorithm", "state"],
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "minLength": 1
+            },
+            "state": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     },
     "interventions": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["time", "kind", "target"],
+        "properties": {
+          "time": {
+            "type": "number",
+            "minimum": 0
+          },
+          "kind": {
+            "enum": ["remove-pulse", "add-probe", "change-parameter"]
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {}
+        },
+        "additionalProperties": false
+      }
     },
     "observation": {
       "type": "object",
-      "required": [
-        "sampleTimes",
-        "visible",
-        "detectorLatency"
-      ]
+      "required": ["sampleTimes", "visible", "detectorLatency"],
+      "properties": {
+        "sampleTimes": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "visible": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "local-phase",
+              "local-frequency",
+              "arrival-time",
+              "reported-count"
+            ]
+          }
+        },
+        "detectorLatency": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
     },
     "solver": {
       "type": "object",
-      "required": [
-        "method",
-        "absoluteTolerance",
-        "relativeTolerance"
-      ]
+      "required": ["method", "absoluteTolerance", "relativeTolerance"],
+      "properties": {
+        "method": {
+          "enum": ["rk4", "dopri5", "event"]
+        },
+        "step": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "absoluteTolerance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "relativeTolerance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
     },
     "units": {
       "type": "object",
@@ -103,7 +242,28 @@
         "rate",
         "angularFrequency",
         "density"
-      ]
+      ],
+      "properties": {
+        "time": {
+          "const": "s"
+        },
+        "length": {
+          "const": "m"
+        },
+        "angle": {
+          "const": "rad"
+        },
+        "rate": {
+          "const": "s^-1"
+        },
+        "angularFrequency": {
+          "const": "rad s^-1"
+        },
+        "density": {
+          "const": "s^-1"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "$defs": {
@@ -154,33 +314,102 @@
         },
         "emission": {
           "oneOf": [
-            { "$ref": "#/$defs/emissionE0" },
-            { "$ref": "#/$defs/emissionE1" }
+            {
+              "$ref": "#/$defs/emissionE0"
+            },
+            {
+              "$ref": "#/$defs/emissionE1"
+            }
           ]
         },
         "response": {
-          "enum": [
-            "R0",
-            "R1",
-            "R2"
-          ]
+          "enum": ["R0", "R1", "R2"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "emissionE0": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["law", "nu"],
+      "properties": {
+        "law": {
+          "const": "E0"
+        },
+        "nu": {
+          "type": "number",
+          "exclusiveMinimum": 0
         }
       }
     },
-    "emissionE0": {
-      "type": "object", "additionalProperties": false, "required": ["law", "nu"],
-      "properties": { "law": { "const": "E0" }, "nu": { "type": "number", "exclusiveMinimum": 0 } }
-    },
     "emissionE1": {
-      "type": "object", "additionalProperties": false, "required": ["law", "q"],
-      "properties": { "law": { "const": "E1" }, "q": { "type": "number", "exclusiveMinimum": 0 } }
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["law", "q"],
+      "properties": {
+        "law": {
+          "const": "E1"
+        },
+        "q": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
     },
     "boundary": {
       "oneOf": [
-        { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "const": "open" } } },
-        { "type": "object", "additionalProperties": false, "required": ["kind", "rate"], "properties": { "kind": { "const": "driven" }, "rate": { "type": "number", "minimum": 0 } } },
-        { "type": "object", "additionalProperties": false, "required": ["kind", "exteriorDistance"], "properties": { "kind": { "const": "mirror" }, "exteriorDistance": { "type": "number", "exclusiveMinimum": 0 } } },
-        { "type": "object", "additionalProperties": false, "required": ["kind", "closureDelay"], "properties": { "kind": { "const": "periodic" }, "closureDelay": { "type": "number", "exclusiveMinimum": 0 } } }
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": {
+            "kind": {
+              "const": "open"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "rate"],
+          "properties": {
+            "kind": {
+              "const": "driven"
+            },
+            "rate": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "exteriorDistance"],
+          "properties": {
+            "kind": {
+              "const": "mirror"
+            },
+            "exteriorDistance": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "closureDelay"],
+          "properties": {
+            "kind": {
+              "const": "periodic"
+            },
+            "closureDelay": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        }
       ]
     },
     "link": {
@@ -204,22 +433,54 @@
           "type": "string"
         },
         "sourcePort": {
-          "enum": [
-            "left",
-            "right"
-          ]
+          "enum": ["left", "right"]
         },
         "targetPort": {
-          "enum": [
-            "left",
-            "right"
-          ]
+          "enum": ["left", "right"]
         },
         "delay": {
           "type": "number",
           "exclusiveMinimum": 0
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "packet": {
+      "type": "object",
+      "required": [
+        "id",
+        "source",
+        "target",
+        "emissionTime",
+        "arrivalTime",
+        "port"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "emissionTime": {
+          "type": "number",
+          "maximum": 0
+        },
+        "arrivalTime": {
+          "type": "number",
+          "minimum": 0
+        },
+        "port": {
+          "enum": ["left", "right"]
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
