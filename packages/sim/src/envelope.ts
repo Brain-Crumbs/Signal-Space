@@ -648,6 +648,20 @@ export class EnvelopeSolver {
     }
     return error;
   }
+  /** Apply the same proposal update used after every adaptive trial. */
+  private proposedStep(h: number, error: number, valid: boolean): number {
+    const factor =
+      !Number.isFinite(error) || !valid
+        ? 0.5
+        : error === 0
+          ? 2
+          : Math.min(2, Math.max(0.2, 0.9 * error ** -0.2));
+    return Math.min(
+      this.scenario.solver.step ?? 0.01,
+      this.minDelay,
+      h * factor,
+    );
+  }
   /** Direct and propagated discontinuities are exact step endpoints. */
   private nextBoundary(until: number): number {
     let lo = 0,
@@ -691,17 +705,7 @@ export class EnvelopeSolver {
     // Local RK4 error plus midpoint error of the retained cubic dense output.
     const error = this.adaptiveError(coarse, first, second);
     const valid = this.validSegment(first) && this.validSegment(second);
-    const factor =
-      !Number.isFinite(error) || !valid
-        ? 0.5
-        : error === 0
-          ? 2
-          : Math.min(2, Math.max(0.2, 0.9 * error ** -0.2));
-    this.nextStep = Math.min(
-      this.scenario.solver.step ?? 0.01,
-      this.minDelay,
-      h * factor,
-    );
+    this.nextStep = this.proposedStep(h, error, valid);
     if (!Number.isFinite(error) || error > 1 || !valid) {
       this.rejectedSteps++;
       return [];
@@ -832,13 +836,15 @@ export class EnvelopeSolver {
     )
       fail('Malformed checkpoint state or step metadata.');
     let end = 0,
-      state = this.state;
+      state = this.state,
+      proposedStep = this.nextStep;
     for (let pair = 0; pair < s.segments.length; pair += 2) {
       const first = s.segments[pair],
         second = s.segments[pair + 1];
       if (!first || !second)
         fail('Checkpoint history must contain complete RK4 half-step pairs.');
-      const midpoint = end + (second.end - end) / 2;
+      const step = second.end - end,
+        midpoint = end + step / 2;
       if (
         first.start !== end ||
         first.end !== midpoint ||
@@ -847,6 +853,10 @@ export class EnvelopeSolver {
         stable(second.y0) !== stable(first.y1)
       )
         fail('Checkpoint history must contain contiguous RK4 half-step pairs.');
+      if (step > proposedStep * (1 + 1e-12))
+        fail(
+          'Checkpoint RK4 pair violates adaptive step-size growth controls.',
+        );
       if (this.nextBoundary(second.end) !== second.end)
         fail('Checkpoint RK4 step pair crosses a scheduled solver boundary.');
       const coarse = this.rk4(end, state, second.end, true);
@@ -899,6 +909,7 @@ export class EnvelopeSolver {
       const error = this.adaptiveError(coarse, first, second);
       if (!Number.isFinite(error) || error > 1)
         fail('Checkpoint RK4 half-step pair violates adaptive error controls.');
+      proposedStep = this.proposedStep(step, error, true);
       end = second.end;
       state = second.y1;
       this.time = end;
@@ -907,6 +918,8 @@ export class EnvelopeSolver {
     }
     if (end !== s.time || stable(state) !== stable(s.state))
       fail('Checkpoint endpoint disagrees with complete history.');
+    if (s.nextStep > proposedStep * (1 + 1e-12))
+      fail('Checkpoint next step violates adaptive step-size growth controls.');
     this.time = s.time;
     this.state = s.state;
     this.nextStep = s.nextStep;

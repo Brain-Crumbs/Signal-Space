@@ -277,6 +277,65 @@ test('checkpoint restore rejects RK4 pairs that cross scheduled boundaries', () 
   );
 });
 
+test('checkpoint restore rejects adaptive mesh growth unavailable to the controller', () => {
+  const s = isolated();
+  s.solver.step = 0.2;
+  s.solver.absoluteTolerance = 1000;
+  s.solver.relativeTolerance = 1000;
+  const solver = new EnvelopeSolver(s),
+    rk4 = (
+      solver as unknown as {
+        rk4(t: number, y: number[], end: number, left: boolean): DenseSegment;
+      }
+    ).rk4.bind(solver),
+    snapshot = solver.snapshot(),
+    first = rk4(0, snapshot.state, 0.0005, false),
+    second = rk4(first.end, first.y1, 0.001, true),
+    third = rk4(second.end, second.y1, second.end + 0.05, false),
+    fourth = rk4(third.end, third.y1, second.end + 0.1, true);
+  snapshot.time = fourth.end;
+  snapshot.state = fourth.y1;
+  snapshot.segments = [first, second, third, fourth];
+  snapshot.acceptedSteps = 2;
+  assert.throws(
+    () => new EnvelopeSolver(s, {}, snapshot),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('adaptive step-size growth'),
+  );
+});
+
+test('checkpoint restore rejects an impossible saved next-step proposal', () => {
+  const s = isolated();
+  s.solver.step = 0.2;
+  s.solver.absoluteTolerance = 1000;
+  s.solver.relativeTolerance = 1000;
+  const solver = new EnvelopeSolver(s),
+    rk4 = (
+      solver as unknown as {
+        rk4(t: number, y: number[], end: number, left: boolean): DenseSegment;
+      }
+    ).rk4.bind(solver),
+    snapshot = solver.snapshot(),
+    first = rk4(0, snapshot.state, 0.0005, false),
+    second = rk4(first.end, first.y1, 0.001, true);
+  snapshot.time = second.end;
+  snapshot.state = second.y1;
+  snapshot.segments = [first, second];
+  snapshot.acceptedSteps = 1;
+  snapshot.nextStep = 0.2;
+  assert.throws(
+    () => new EnvelopeSolver(s, {}, snapshot),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('adaptive step-size growth'),
+  );
+});
+
 test('reflection exchanges ports, adds pi, and preserves R2 histories and total emissions', async () => {
   const s = createSample('pair');
   s.nodes.forEach((n) => {
