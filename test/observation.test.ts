@@ -310,6 +310,56 @@ test('a probe follows positive-delay transport, changes the receiving law, and c
   assert.equal(records[2]!.time - records[0]!.time, 1);
   assert.equal(branch.lineage.interventions[0]!.kind, 'add-probe');
 });
+test('branch lineage requires distinct bounded string IDs at untyped boundaries', () => {
+  const snapshot = new PacketSolver(scenario(), options).snapshot();
+  const interventions = [
+    { time: 0.125, kind: 'remove-pulse', target: 'initial-0' },
+  ] as const;
+  const saved = JSON.stringify(snapshot);
+  for (const invalid of [
+    undefined,
+    null,
+    42,
+    true,
+    {},
+    { length: 1 },
+    '',
+    'x'.repeat(4097),
+  ]) {
+    for (const [parentId, branchId] of [
+      [invalid, 'branch'],
+      ['parent', invalid],
+    ]) {
+      assert.throws(
+        () =>
+          branchPacketRun(
+            { runId: parentId as string, snapshot },
+            branchId as string,
+            [...interventions],
+          ),
+        { code: 'INVALID_REQUEST', message: /run IDs must be strings/ },
+      );
+    }
+  }
+  assert.throws(
+    () =>
+      branchPacketRun({ runId: 'same', snapshot }, 'same', [...interventions]),
+    { code: 'INVALID_REQUEST' },
+  );
+  for (const [parentId, branchId] of [
+    ['p', 'b'],
+    ['p'.repeat(4096), 'b'.repeat(4096)],
+  ]) {
+    const { lineage } = branchPacketRun(
+      { runId: parentId!, snapshot },
+      branchId!,
+      [...interventions],
+    );
+    assert.equal(lineage.parentRunId, parentId);
+    assert.equal(lineage.runId, branchId);
+  }
+  assert.equal(JSON.stringify(snapshot), saved);
+});
 test('bad physical actions fail; simultaneous removal precedes joint arrivals and respects budgets', () => {
   const s = scenario();
   for (const action of [

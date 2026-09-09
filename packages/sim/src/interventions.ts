@@ -21,10 +21,18 @@ export function branchPacketRun(
   runId: string,
   interventions: Intervention[],
 ): { solver: PacketSolver; lineage: InterventionLineage } {
-  if (!parent.runId || !runId || parent.runId === runId)
+  if (
+    typeof parent.runId !== 'string' ||
+    !parent.runId ||
+    parent.runId.length > 4096 ||
+    typeof runId !== 'string' ||
+    !runId ||
+    runId.length > 4096 ||
+    parent.runId === runId
+  )
     throw new EnvelopeFailure(
       'INVALID_REQUEST',
-      'Distinct nonempty parent and branch run IDs are required.',
+      'Distinct nonempty parent and branch run IDs must be strings of at most 4096 characters.',
     );
   const original = new PacketSolver(
     parent.snapshot.scenario,
