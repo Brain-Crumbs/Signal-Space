@@ -61,6 +61,8 @@ Probe IDs reserve `probe:<intervention-index>`. Their emitted/pending records, a
 
 At an action time, validate all removals against the already-pending inventory; apply removals before coincident arrivals, then sum surviving arrivals jointly. A probe emitted at that time arrives only after its strictly positive link delay. Duplicate/missing/already-consumed removal targets fail instead of becoming silent no-ops. Action batches reserve resource budgets before applying any mutation or advancing RNG. Actions count toward `maxEvents`; queued probes count toward `maxPending`. Time-zero actions are supported by a new scenario and run before the initial sample; a post-event checkpoint cannot be retroactively changed at its timestamp.
 
+The engine sorts an execution index once by time and original plan position, preserving the scenario order, probe IDs and lineage. A pending-action cursor avoids rescanning future or completed actions on each step: scheduling costs O(A log A) setup and O(S + A) plan inspections over S steps and A actions. The cursor advances only after a batch succeeds and is reconstructed during trusted checkpoint replay; rejected trials and resource failures do not consume it. These bounds concern intervention scheduling, not packet-inventory or numerical integration work.
+
 Use a separate run identity and paired lineage when comparing interventions:
 
 ```ts

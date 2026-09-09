@@ -141,6 +141,11 @@ export class PacketSolver {
   private state: number[];
   private filters: number[];
   private streams: Stream[] = [];
+  private actions: Array<{
+    action: Scenario['interventions'][number];
+    index: number;
+  }>;
+  private nextAction = 0;
   private pending: Packet[];
   private history: PacketSample[] = [];
   private records: PacketRecord[] = [];
@@ -252,6 +257,10 @@ export class PacketSolver {
           );
       }
     }
+    // Keep original plan indices for probe IDs and lineage; only execution is sorted.
+    this.actions = s.interventions
+      .map((action, index) => ({ action, index }))
+      .sort((a, b) => a.action.time - b.action.time || a.index - b.index);
     this.state = s.nodes.flatMap((n) => [n.phi, n.omega]);
     this.filters = s.nodes.flatMap((n) => [
       s.initialHistory.filters[n.id]!.left,
@@ -475,9 +484,7 @@ export class PacketSolver {
     }
     const nextEvent = Math.min(
       this.pending[0]?.arrivalTime ?? Infinity,
-      ...this.scenario.interventions
-        .filter((a) => a.time > this.time)
-        .map((a) => a.time),
+      this.actions[this.nextAction]?.action.time ?? Infinity,
       ...this.streams.map((s) => s.next),
     );
     const resolutionStep = Math.min(
@@ -535,9 +542,9 @@ export class PacketSolver {
     this.history.push(this.sample());
   }
   private processEvents(): void {
-    const actions = this.scenario.interventions.flatMap((action, index) =>
-      action.time === this.time ? [{ action, index }] : [],
-    );
+    let endAction = this.nextAction;
+    while (this.actions[endAction]?.action.time === this.time) endAction++;
+    const actions = this.actions.slice(this.nextAction, endAction);
     const removals = new Map<string, number>();
     const probes: Array<{ packet: Packet; index: number; sourcePort: Port }> =
       [];
@@ -693,5 +700,8 @@ export class PacketSolver {
       .filter((p) => p.arrivalTime !== this.time && !removals.has(p.id))
       .sort((a, b) => a.arrivalTime - b.arrivalTime || order(a.id, b.id));
     this.events += arrivals.length + candidates.length + actions.length;
+    // Commit the cursor only after the complete batch passes its resource gates.
+    // Checkpoint replay reconstructs it from the immutable plan and advance log.
+    this.nextAction = endAction;
   }
 }

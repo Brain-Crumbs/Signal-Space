@@ -379,6 +379,109 @@ test('a probe follows positive-delay transport, changes the receiving law, and c
   assert.equal(records[2]!.time - records[0]!.time, 1);
   assert.equal(branch.lineage.interventions[0]!.kind, 'add-probe');
 });
+test('unordered actions preserve plan IDs, time-zero batches, and replay across batches', () => {
+  const s = scenario();
+  const probe = (time: number) => ({
+    time,
+    kind: 'add-probe' as const,
+    target: 'A',
+    value: { linkId: 'A-B' },
+  });
+  s.interventions = [
+    probe(0.25),
+    probe(0),
+    { time: 0.125, kind: 'remove-pulse', target: 'initial-0' },
+    probe(0.125),
+    probe(0),
+  ];
+  const solver = new PacketSolver(s, options);
+  const checkpoints: PacketSnapshot[] = [];
+  for (const until of [0, 0.1, 0.125, 0.2, 0.25]) {
+    const checkpoint = finish(solver, until);
+    checkpoints.push(checkpoint);
+    assert.deepEqual(checkpoint.scenario.interventions, s.interventions);
+  }
+  const result = finish(solver, 1.5);
+  for (const checkpoint of checkpoints) {
+    const replay = new PacketSolver(
+      s,
+      options,
+      JSON.parse(JSON.stringify(checkpoint)),
+    );
+    // Reproduce the remaining bounded calls, including intermediate checkpoints.
+    for (const until of [0.1, 0.125, 0.2, 0.25, 1.5]) {
+      if (until > replay.time) finish(replay, until);
+    }
+    assert.deepEqual(replay.snapshot(), result);
+  }
+  assert.deepEqual(
+    result.records
+      .filter((r) => r.kind === 'emitted' && r.interventionIndex !== undefined)
+      .map((r) => [r.time, r.packetId, r.interventionIndex]),
+    [
+      [0, 'probe:1', 1],
+      [0, 'probe:4', 4],
+      [0.125, 'probe:3', 3],
+      [0.25, 'probe:0', 0],
+    ],
+  );
+  assert.deepEqual(
+    result.records.filter((r) => r.packetId === 'initial-0').map((r) => r.kind),
+    ['pending', 'absorbed'],
+  );
+  assert.deepEqual(
+    result.records
+      .filter((r) => r.kind === 'received' && r.packetId.startsWith('probe:'))
+      .map((r) => [r.time, r.packetId]),
+    [
+      [1, 'probe:1'],
+      [1, 'probe:4'],
+      [1.125, 'probe:3'],
+      [1.25, 'probe:0'],
+    ],
+  );
+});
+test('10,000 future actions require only bounded scheduling inspections per step', () => {
+  const s = scenario();
+  s.initialHistory.pendingPackets = [];
+  s.nodes.forEach((n) => {
+    n.response = 'R0';
+    n.gain = 0;
+    n.emission = { law: 'E0', nu: 1e-12 };
+  });
+  s.interventions = Array.from({ length: 10000 }, (_, i) => ({
+    time: 1000 + (10000 - i),
+    kind: 'add-probe',
+    target: 'A',
+    value: { linkId: 'A-B' },
+  }));
+  const solver = new PacketSolver(s, options);
+  // Count plan reads after setup, avoiding a machine-dependent timing assertion.
+  const internal = solver as unknown as { scenario: typeof s };
+  let inspections = 0;
+  for (const action of internal.scenario.interventions) {
+    const time = action.time;
+    Object.defineProperty(action, 'time', {
+      get() {
+        inspections++;
+        return time;
+      },
+    });
+  }
+  for (let i = 0; i < 10000; i++) solver.advance(200);
+  assert.equal(solver.incomplete, null);
+  assert.ok(solver.time > 0 && solver.time < 200);
+  assert.ok(
+    inspections <= 30000,
+    `unexpected plan scans: ${inspections} inspections`,
+  );
+  solver.advance(200);
+  assert.equal(solver.incomplete, 'maxSteps');
+  const result = solver.snapshot();
+  assert.equal(result.steps, 10000);
+  assert.equal(result.events, 0);
+  assert.deepEqual(result.records, []);
+});
 test('branch lineage requires distinct bounded string IDs at untyped boundaries', () => {
   const snapshot = new PacketSolver(scenario(), options).snapshot();
   const interventions = [
