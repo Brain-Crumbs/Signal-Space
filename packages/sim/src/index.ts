@@ -1,3 +1,18 @@
+import { EnvelopeSolver, EnvelopeFailure } from './envelope.js';
+import type {
+  EnvelopeOptions,
+  EnvelopeSnapshot,
+  EnvelopeSample,
+  TickCrossing,
+} from './envelope.js';
+export type {
+  EnvelopeOptions,
+  EnvelopeSnapshot,
+  EnvelopeSample,
+  TickCrossing,
+  HistoryPoint,
+} from './envelope.js';
+export { emission, envelopeRoutes } from './envelope.js';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import schema from '@signal-space/model/schema' with { type: 'json' };
 import { validateScenario } from '@signal-space/model';
@@ -5,11 +20,21 @@ import type { Scenario, Snapshot, ValidationIssue } from '@signal-space/model';
 
 export interface RunRequest {
   runId: string;
-  mode: 'inspect';
+  mode: 'inspect' | 'envelope';
   scenario: unknown;
+  until?: number;
+  envelope?: EnvelopeOptions;
+  resume?: EnvelopeSnapshot;
 }
 export interface RunFailure {
-  code: 'INVALID_REQUEST' | 'INVALID_SCENARIO' | 'INTERNAL' | 'BUSY';
+  code:
+    | 'INVALID_REQUEST'
+    | 'INVALID_SCENARIO'
+    | 'INTERNAL'
+    | 'BUSY'
+    | 'INVALID_HISTORY'
+    | 'UNSUPPORTED_MODEL'
+    | 'NUMERICAL_FAILURE';
   message: string;
   details?: ValidationIssue[];
 }
@@ -18,10 +43,17 @@ export type RunEvent =
       type: 'progress';
       runId: string;
       fraction: number;
-      stage: 'validating' | 'preparing';
+      stage: 'validating' | 'preparing' | 'integrating';
     }
   | { type: 'snapshot'; runId: string; snapshot: Snapshot }
-  | { type: 'completed'; runId: string; mode: 'inspect' }
+  | { type: 'completed'; runId: string; mode: 'inspect' | 'envelope' }
+  | {
+      type: 'envelope-sample';
+      runId: string;
+      sample: EnvelopeSample;
+      ticks: TickCrossing[];
+    }
+  | { type: 'envelope-snapshot'; runId: string; snapshot: EnvelopeSnapshot }
   | { type: 'cancelled'; runId: string }
   | { type: 'failed'; runId: string; error: RunFailure };
 export type WorkerCommand =
@@ -58,8 +90,8 @@ function hasSharedMemory(value: unknown, seen = new Set<object>()): boolean {
   );
 }
 
-/** Shared Node/browser execution boundary. T02 only inspects preparation at t=0.
- * It never advances time or claims to integrate the Paper I equations.
+/** Shared Node/browser execution boundary. Inspect returns preparation only;
+ * envelope integrates the deterministic Paper I equations.
  * Exactly one terminal event is yielded; snapshots are detached copies.
  */
 export async function* execute(
@@ -69,14 +101,13 @@ export async function* execute(
   const runId = typeof request?.runId === 'string' ? request.runId : '';
   const cancelled = (): RunEvent => ({ type: 'cancelled', runId });
   try {
-    if (!runId || request.mode !== 'inspect') {
+    if (!runId || !['inspect', 'envelope'].includes(request.mode)) {
       yield {
         type: 'failed',
         runId,
         error: {
           code: 'INVALID_REQUEST',
-          message:
-            'Provide a runId and mode inspect. Numerical evolution is not implemented.',
+          message: 'Provide a runId and mode inspect or envelope.',
         },
       };
       return;
@@ -87,9 +118,11 @@ export async function* execute(
     }
     // Own the input before the first yield so callers cannot mutate an active run.
     let scenario: unknown;
+    let owned: RunRequest;
     try {
-      scenario = structuredClone(request.scenario);
-      if (hasSharedMemory(scenario))
+      owned = structuredClone(request);
+      scenario = owned.scenario;
+      if (hasSharedMemory(owned))
         throw new Error('Shared memory is not owned input.');
     } catch {
       yield {
@@ -149,6 +182,70 @@ export async function* execute(
       yield cancelled();
       return;
     }
+    if (owned.mode === 'envelope') {
+      const until = owned.until;
+      if (typeof until !== 'number' || !Number.isFinite(until) || until < 0)
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'Provide a finite nonnegative until time.',
+        );
+      const solver = new EnvelopeSolver(scenario, owned.envelope, owned.resume);
+      if (until < solver.time)
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'until must not precede the checkpoint.',
+        );
+      const start = solver.time;
+      yield {
+        type: 'envelope-sample',
+        runId,
+        sample: solver.sample(),
+        ticks: [],
+      };
+      let attempts = 0;
+      while (solver.time < until) {
+        if (options.signal?.aborted) {
+          yield {
+            type: 'envelope-snapshot',
+            runId,
+            snapshot: solver.snapshot(),
+          };
+          yield cancelled();
+          return;
+        }
+        const previous = solver.time;
+        const ticks = solver.advance(until);
+        if (solver.time > previous)
+          yield {
+            type: 'envelope-sample',
+            runId,
+            sample: solver.sample(),
+            ticks,
+          };
+        if (++attempts % 32 === 0) {
+          yield {
+            type: 'progress',
+            runId,
+            fraction: (solver.time - start) / (until - start),
+            stage: 'integrating',
+          };
+          await yieldTask();
+        }
+      }
+      yield { type: 'envelope-snapshot', runId, snapshot: solver.snapshot() };
+      await yieldTask();
+      if (options.signal?.aborted) {
+        yield cancelled();
+        return;
+      }
+      yield { type: 'progress', runId, fraction: 1, stage: 'integrating' };
+      if (options.signal?.aborted) {
+        yield cancelled();
+        return;
+      }
+      yield { type: 'completed', runId, mode: 'envelope' };
+      return;
+    }
     const snapshot: Snapshot = {
       schemaVersion: 1,
       time: 0,
@@ -174,7 +271,7 @@ export async function* execute(
       type: 'failed',
       runId,
       error: {
-        code: 'INTERNAL',
+        code: error instanceof EnvelopeFailure ? error.code : 'INTERNAL',
         message: error instanceof Error ? error.message : 'Execution failed.',
       },
     };

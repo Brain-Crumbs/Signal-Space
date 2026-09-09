@@ -47,3 +47,19 @@ Pending-packet source/target membership is checked at the same preparation bound
 Mirror round-trip history coverage (parent contract item 12) and classification of uncloneable input are covered by targeted execution regressions.
 
 Shared-memory rejection and ordinary buffer ownership regressions protect detached preparation/snapshot semantics.
+
+## T03 causal deterministic envelopes (#4)
+
+Paper I §§3.1–3.5 / equations (8)–(13), using the source transcription in parent #1, now map to `packages/sim/src/envelope.ts` and the `envelope` execution mode:
+
+| Contract                     | Implementation and evidence                                                                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| E0/E1 directional emissions  | Shared rate function and integrated directional intensities; positivity, rate-sum and per-cycle controls                     |
+| R0/R1/R2 feedback            | Adaptive RK4 method of steps; analytic free phase and exponential R1, both gain signs, R2 reflection                         |
+| Positive-delay reception     | Retained cubic history and off-grid retarded source evaluations; causal empty-link startup and refinement                    |
+| Predictive preparation/state | Linear or sampled phase prehistory, separate empty links, versioned history-complete checkpoint, corruption/restart controls |
+| Ticks/state bounds           | Unwrapped phases, cubic crossing times, frequency bounds, rejection without clipping                                         |
+| Open/prescribed ports        | Piecewise external rates and recorded gain-change boundaries; transport seam for T13                                         |
+| Shared execution             | CLI `--until`, production worker parity, cooperative cancellation with checkpoint                                            |
+
+See `docs/envelope-solver.md` for units, algorithms, error controls, supported interventions and limitations. `test/envelope.test.ts` supplies inexpensive independent controls; the scenario fixtures remain smoke inputs rather than completed A–I protocols. Event dynamics, mirror/ring adapters, observer diagnostics, publication runs and manuscript conclusions remain deferred.

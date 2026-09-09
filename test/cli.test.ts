@@ -40,3 +40,24 @@ test('CLI rejects invalid flags and file failures with nonzero exit and structur
     assert.equal(JSON.parse(result.stderr).type, 'failed');
   }
 });
+
+test('CLI --until runs the shared deterministic engine and validates duration', async () => {
+  const result = cli('--sample', 'pair', '--until', '0.13');
+  assert.equal(result.status, 0, result.stderr);
+  const actual = result.stdout
+    .trim()
+    .split('\n')
+    .map((line) => JSON.parse(line));
+  const expected = [];
+  for await (const event of execute({
+    runId: 'cli-envelope',
+    mode: 'envelope',
+    scenario: createSample('pair'),
+    until: 0.13,
+  }))
+    expected.push(event);
+  assert.deepEqual(actual, expected);
+  for (const value of ['-1', 'NaN', 'Infinity', ''])
+    assert.equal(cli('--until', value).status, 1);
+  assert.equal(cli('--until').status, 1);
+});
