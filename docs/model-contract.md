@@ -30,3 +30,4 @@ Snapshots include unwrapped phase/frequency, prehistory, filters, pending packet
 - `chi`, tick-section choice, E0/E1, R0/R1/R2, preparation, and normalization are declared inputs. There is no implicit synchronization, reset, force, or phase mark.
 
 - Initial pending packets satisfy finite `emissionTime <= 0 <= arrivalTime` and strictly positive transit time. A packet arriving exactly at zero awaits delivery; its filter increment is not included in the initial filter state. History and filter maps contain exactly the declared clock IDs. Closed scenario objects reject undeclared fields; explicitly unknown response payloads and intervention values remain extensible.
+- Duplicated initial history endpoints must equal each node's unwrapped `phi` and `omega` exactly at t=0; validation does not reconcile or wrap them. Every pending response targets a declared clock.

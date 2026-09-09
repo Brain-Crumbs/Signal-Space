@@ -21,3 +21,5 @@ The smoke fixtures only validate plumbing and expose the user-supplied initial s
 Source-first private workspaces are bundled by Vite/esbuild and run in development through tsx. Strict TypeScript applies to new TS code; the T01 JavaScript semantic validator is exposed through declarations. ESLint forbids Node/React imports in shared source and Node/CLI imports in the web app.
 
 Review hardening: closed scenario objects reject undeclared fields instead of copying them into typed snapshots. The history and filter maps must contain exactly the scenario node IDs. Pending packets at t=0 require finite emissionTime <= 0 <= arrivalTime with arrivalTime > emissionTime. Arrivals exactly at zero are queued for initial delivery; they are not already included in receiver filters. These checks validate preparation only, not propagation against the future solver. Declared unknown response payloads and intervention values remain unrestricted.
+
+History endpoint phase/frequency must agree exactly with the initial node state, and pending response targets must belong to the scenario. Inspection rejects inconsistent preparations instead of choosing one copy as authoritative.

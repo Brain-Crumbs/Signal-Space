@@ -39,3 +39,5 @@ The npm workspace, pinned Node/toolchain and lockfile, strict TypeScript boundar
 `inspect` checks the isolated/pair contract fixtures and returns the supplied complete initial snapshot at t=0. Contract, shared execution, cancellation, malformed-input, CLI parity and production-worker parity checks cover this infrastructure. See `docs/execution-api.md` and README validation commands. These checks add no physical law or numerical findings. The A–I protocols, actual solver, evolved-state replay, diagnostics and publication runs remain assigned to their later tasks.
 
 PR #24 review validation enforces closed nested scenario shapes, complete per-clock history/filter maps and causal pending-packet times at the preparation boundary (§11.1; parent contract items 2, 6–7). Negative execution tests verify rejection before any snapshot is exposed; zero-time arrival and extensible-payload controls preserve supported preparations.
+
+Follow-up review checks reject mismatched t=0 history endpoints and pending responses for undeclared clocks, preserving one consistent initial physical state.

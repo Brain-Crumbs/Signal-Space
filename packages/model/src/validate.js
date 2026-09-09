@@ -148,6 +148,32 @@ export function validateScenario(value) {
           ),
         );
   }
+  for (const n of nodes) {
+    const endpoint = hist?.nodes?.[n?.id];
+    if (!endpoint) continue;
+    for (const [historyKey, nodeKey] of [
+      ['phiAtZero', 'phi'],
+      ['omega', 'omega'],
+    ])
+      if (!finite(endpoint[historyKey]) || endpoint[historyKey] !== n[nodeKey])
+        errors.push(
+          issue(
+            `initialHistory.nodes.${n.id}.${historyKey}`,
+            `must equal the node's ${nodeKey} at t=0`,
+          ),
+        );
+  }
+  const responses = Array.isArray(hist?.pendingResponses)
+    ? hist.pendingResponses
+    : [];
+  for (const [i, response] of responses.entries())
+    if (!ids.has(response?.nodeId))
+      errors.push(
+        issue(
+          `initialHistory.pendingResponses[${i}].nodeId`,
+          'must reference a scenario node',
+        ),
+      );
   const packets = Array.isArray(hist?.pendingPackets)
     ? hist.pendingPackets
     : [];

@@ -142,3 +142,35 @@ test('causal boundary packets and declared arbitrary payloads survive inspection
     assert.deepEqual(snapshot.snapshot.history, scenario.initialHistory);
   }
 });
+
+test('history endpoints must match initial phase and frequency exactly', async () => {
+  for (const field of ['phiAtZero', 'omega'] as const) {
+    const scenario = preparation();
+    scenario.initialHistory.nodes['A']![field] += 0.1;
+    const validation = validateScenario(scenario);
+    assert.equal(validation.ok, false);
+    assert.ok(
+      validation.errors.some(
+        (e) => e.path === `initialHistory.nodes.A.${field}`,
+      ),
+    );
+    await rejects(scenario);
+  }
+  const scenario = preparation();
+  scenario.nodes[0]!.phi += 4 * Math.PI;
+  scenario.initialHistory.nodes['A']!.phiAtZero = scenario.nodes[0]!.phi;
+  assert.equal((await collect(scenario)).at(-1)?.type, 'completed');
+});
+
+test('pending responses must target a declared clock', async () => {
+  const scenario = preparation();
+  scenario.initialHistory.pendingResponses[0]!.nodeId = 'ghost';
+  const validation = validateScenario(scenario);
+  assert.equal(validation.ok, false);
+  assert.ok(
+    validation.errors.some(
+      (e) => e.path === 'initialHistory.pendingResponses[0].nodeId',
+    ),
+  );
+  await rejects(scenario);
+});
