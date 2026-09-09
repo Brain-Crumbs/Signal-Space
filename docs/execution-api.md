@@ -2,7 +2,7 @@
 
 Engineering foundation for Paper I §11; parent #1, task #3. This adds no physical equations. The original Paper III attachment is background only and is not an implementation source for this task.
 
-Both adapters call `execute({ runId, mode: 'inspect', scenario }, { signal })` from `@signal-space/sim`. It is an async generator of structured-cloneable `RunEvent` values, independent of React and Node APIs. A run owns a cloned input before its first progress yield. JSON Schema validation precedes semantic validation, so malformed collections cannot reach the semantic validator. Failures contain codes, messages and field paths.
+Both adapters call `execute({ runId, mode: 'inspect', scenario }, { signal })` from `@signal-space/sim`. It is an async generator of structured-cloneable `RunEvent` values, independent of React and Node APIs. A run owns a cloned input before its first progress yield. The nested history, observation, solver, intervention and unit fields are structurally constrained at the runtime boundary. JSON Schema validation precedes semantic validation, so malformed collections cannot reach the semantic validator. Failures contain codes, messages and field paths.
 
 | Event       | Meaning                                                                                                          |
 | ----------- | ---------------------------------------------------------------------------------------------------------------- |

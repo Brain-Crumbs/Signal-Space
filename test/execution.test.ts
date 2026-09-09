@@ -117,3 +117,31 @@ test('worker cancels only matching run, rejects overlap, and accepts a later run
   await handle({ type: 'run', request: { ...request(), runId: 'later' } });
   assert.ok(events.some((e) => e.type === 'completed' && e.runId === 'later'));
 });
+
+test('nested preparation fields cannot cross the typed execution boundary malformed', async () => {
+  const base = createSample('isolated');
+  for (const scenario of [
+    {
+      ...base,
+      initialHistory: { ...base.initialHistory, pendingPackets: null },
+    },
+    {
+      ...base,
+      initialHistory: {
+        ...base.initialHistory,
+        filters: { A: { left: -1, right: 0 } },
+      },
+    },
+    { ...base, initialHistory: { ...base.initialHistory, nodes: { A: true } } },
+    { ...base, observation: { ...base.observation, sampleTimes: 'tomorrow' } },
+    { ...base, solver: { ...base.solver, method: 'unknown' } },
+    { ...base, units: { ...base.units, time: 'minutes' } },
+  ]) {
+    const events = await collect({ ...request(), scenario });
+    const final = events.at(-1);
+    assert.ok(final?.type === 'failed');
+    assert.equal(final.error.code, 'INVALID_SCENARIO');
+    assert.ok(final.error.details?.length);
+    assert.ok(!events.some((e) => e.type === 'snapshot'));
+  }
+});

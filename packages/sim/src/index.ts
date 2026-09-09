@@ -1,5 +1,5 @@
 import { Ajv2020 } from 'ajv/dist/2020.js';
-import schema from '@signal-space/model/schema';
+import schema from '@signal-space/model/schema' with { type: 'json' };
 import { validateScenario } from '@signal-space/model';
 import type { Scenario, Snapshot, ValidationIssue } from '@signal-space/model';
 
