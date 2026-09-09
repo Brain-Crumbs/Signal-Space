@@ -832,9 +832,10 @@ export class EnvelopeSolver {
       s.acceptedSteps < 0 ||
       !Number.isSafeInteger(s.rejectedSteps) ||
       s.rejectedSteps < 0 ||
+      s.acceptedSteps + s.rejectedSteps > (this.options.maxSteps ?? 100000) ||
       s.segments.length !== s.acceptedSteps * 2
     )
-      fail('Malformed checkpoint state or step metadata.');
+      fail('Malformed checkpoint state, step metadata, or attempt budget.');
     let end = 0,
       state = this.state,
       proposedStep = this.nextStep;

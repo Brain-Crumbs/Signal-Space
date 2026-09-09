@@ -336,6 +336,21 @@ test('checkpoint restore rejects an impossible saved next-step proposal', () => 
   );
 });
 
+test('checkpoint restore rejects counters beyond the lifetime attempt budget', () => {
+  const s = isolated(),
+    options: EnvelopeOptions = { maxSteps: 1 },
+    snapshot = new EnvelopeSolver(s, options).snapshot();
+  snapshot.rejectedSteps = 2;
+  assert.throws(
+    () => new EnvelopeSolver(s, options, snapshot),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('attempt budget'),
+  );
+});
+
 test('reflection exchanges ports, adds pi, and preserves R2 histories and total emissions', async () => {
   const s = createSample('pair');
   s.nodes.forEach((n) => {
