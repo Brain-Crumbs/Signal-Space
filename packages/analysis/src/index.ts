@@ -53,7 +53,13 @@ export interface PairClassification {
   status: RegimeStatus;
   definition: string;
   evidence: WindowEvidence[];
-  perturbationRecovery?: { demonstrated: boolean; finalError: number };
+  perturbationRecovery?: {
+    demonstrated: boolean;
+    displaced: boolean;
+    postPerturbationSampleCount: number;
+    maximumError: number;
+    finalError: number;
+  };
   failure?: { code: string; message: string };
 }
 
@@ -86,9 +92,14 @@ function samplesIn(series: AnalysisSeries, window: MeasurementWindow) {
   finite(window.end, 'window.end');
   if (window.end <= window.start)
     throw new RangeError('A measurement window must have positive duration.');
-  return series.samples.filter(
+  const samples = series.samples.filter(
     (s) => s.time >= window.start && s.time <= window.end,
   );
+  if (samples[0]?.time !== window.start || samples.at(-1)?.time !== window.end)
+    throw new RangeError(
+      'Every window requires saved samples at both declared boundaries.',
+    );
+  return samples;
 }
 
 /** Phase-advance estimator, not an average of correlated instantaneous samples. */
@@ -230,13 +241,29 @@ export function classifyPair(
       failure: series.failed,
     };
   assertSeries(series);
-  if (
-    !criteria.windows.length ||
-    criteria.windows.some((w) => w.start < criteria.transientEnd)
-  )
-    throw new RangeError(
-      'Windows must be nonempty and begin after the declared transient.',
-    );
+  finite(criteria.transientEnd, 'transientEnd');
+  if (!criteria.windows.length)
+    throw new RangeError('At least one measurement window is required.');
+  criteria.windows.forEach((window, index) => {
+    finite(window.start, `windows[${index}].start`);
+    finite(window.end, `windows[${index}].end`);
+    if (window.end <= window.start)
+      throw new RangeError('Measurement windows must have positive duration.');
+    if (window.start < criteria.transientEnd)
+      throw new RangeError(
+        'Measurement windows must begin after the declared transient.',
+      );
+    const previous = criteria.windows[index - 1];
+    if (
+      previous &&
+      (window.start > previous.start ||
+        window.end < previous.end ||
+        (window.start === previous.start && window.end === previous.end))
+    )
+      throw new RangeError(
+        'Measurement windows must be ordered shortest to longest and each contain the previous window.',
+      );
+  });
   for (const key of [
     'frequencyTolerance',
     'phaseRangeTolerance',
@@ -244,6 +271,20 @@ export function classifyPair(
   ] as const)
     if (!(criteria[key] >= 0) || !Number.isFinite(criteria[key]))
       throw new RangeError(`${key} must be finite and nonnegative.`);
+  if (criteria.perturbation) {
+    finite(criteria.perturbation.time, 'perturbation.time');
+    finite(
+      criteria.perturbation.referenceOffset,
+      'perturbation.referenceOffset',
+    );
+    if (
+      !(criteria.perturbation.recoveryTolerance >= 0) ||
+      !Number.isFinite(criteria.perturbation.recoveryTolerance)
+    )
+      throw new RangeError(
+        'perturbation.recoveryTolerance must be finite and nonnegative.',
+      );
+  }
   let evidence: WindowEvidence[];
   try {
     evidence = criteria.windows.map((w) =>
@@ -266,18 +307,26 @@ export function classifyPair(
     slipping = evidence.map((e) => e.slipCount !== 0);
   let recovery: PairClassification['perturbationRecovery'];
   if (criteria.perturbation) {
-    const final = series.samples
-        .filter((s) => s.time >= criteria.perturbation!.time)
-        .at(-1),
-      finalError = final
-        ? Math.abs(
-            requireNode(final, a).phi -
-              requireNode(final, b).phi -
-              criteria.perturbation.referenceOffset,
-          )
-        : Infinity;
+    const perturbation = criteria.perturbation,
+      postPerturbation = series.samples.filter(
+        (sample) => sample.time > perturbation.time,
+      ),
+      errors = postPerturbation.map((sample) =>
+        Math.abs(
+          requireNode(sample, a).phi -
+            requireNode(sample, b).phi -
+            perturbation.referenceOffset,
+        ),
+      ),
+      finalError = errors.at(-1) ?? Infinity,
+      displaced = errors
+        .slice(0, -1)
+        .some((error) => error > perturbation.recoveryTolerance);
     recovery = {
-      demonstrated: finalError <= criteria.perturbation.recoveryTolerance,
+      demonstrated: displaced && finalError <= perturbation.recoveryTolerance,
+      displaced,
+      postPerturbationSampleCount: errors.length,
+      maximumError: errors.length ? Math.max(...errors) : Infinity,
       finalError,
     };
   }
@@ -347,6 +396,11 @@ export function aggregateReplicates(
     throw new RangeError('confidence must be between zero and one.');
   if (new Set(runs.map((r) => r.runId)).size !== runs.length)
     throw new RangeError('Replicate run IDs must be unique.');
+  const seeds = runs.flatMap((run) =>
+    run.seed === undefined ? [] : [run.seed],
+  );
+  if (new Set(seeds).size !== seeds.length)
+    throw new RangeError('Stochastic replicate seeds must be unique.');
   runs.forEach((r) => {
     finite(r.value, 'replicate value');
     if (!Number.isInteger(r.sampleCount) || r.sampleCount < 1)
@@ -362,7 +416,7 @@ export function aggregateReplicates(
     confidence,
     mean,
     interval: [mean - halfWidth, mean + halfWidth] as [number, number],
-    seedCount: new Set(runs.map((r) => r.seed).filter(Boolean)).size,
+    seedCount: seeds.length,
     replicateCount: runs.length,
     sampleCount: runs.reduce((s, r) => s + r.sampleCount, 0),
     dependence:
@@ -459,9 +513,16 @@ export function responseFront(
   c0: number,
   tolerance: number,
 ) {
-  if (!(c0 > 0) || !(tolerance >= 0))
-    throw new RangeError('c0 must be positive and tolerance nonnegative.');
-  return onsets.map((point) => {
+  if (!Number.isFinite(c0) || !(c0 > 0))
+    throw new RangeError('c0 must be finite and positive.');
+  if (!Number.isFinite(tolerance) || !(tolerance >= 0))
+    throw new RangeError('tolerance must be finite and nonnegative.');
+  finite(perturbation.position, 'perturbation.position');
+  finite(perturbation.time, 'perturbation.time');
+  return onsets.map((point, index) => {
+    finite(point.position, `onsets[${index}].position`);
+    if (point.onsetTime !== undefined)
+      finite(point.onsetTime, `onsets[${index}].onsetTime`);
     const causalBound =
       perturbation.time + Math.abs(point.position - perturbation.position) / c0;
     return {
