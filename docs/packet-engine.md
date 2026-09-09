@@ -1,0 +1,54 @@
+# T04 stochastic packets
+
+Implements Paper I §3.3 equation (13a), §3.4 and §11.1 as transcribed in epic #1, task #5. These are small technical controls, not paper results. The attached older Paper III is not the numerical source for this model.
+
+```ts
+import { execute } from '@signal-space/sim';
+for await (const event of execute({
+  runId: 'pair-packets',
+  mode: 'packets',
+  scenario,
+  until: 2, // seconds, absolute simulator time
+  packets: { seed: 'pair-smoke-v1' },
+})) {
+  // packet-sample: simulator phase/frequency and left/right receiver filters
+  // packet-snapshot: complete state, raw lifecycle records, seeds and history
+  // completed, incomplete, cancelled or failed: terminal outcome
+}
+```
+
+CLI: `node apps/cli/dist/index.js --sample pair --until 2 --seed pair-smoke-v1`. Output is JSON Lines; incomplete resource-limited runs exit with code 2, failure with 1 and cancellation with 130. The existing production Web Worker accepts exactly the same typed request. Interactive event controls remain T17.
+
+## Physical construction and numerical controls
+
+Each emitter and port has a separate pseudorandom stream, identified by the JSON tuple `[nodeId, port]`. Seed derivation is FNV-1a over `['physical-emission-v1', seed, streamId]`; generation uses Mulberry32 and `(uint32 + 0.5)/2^32`, an open-interval uniform draw. Colliding derived stream states within a scenario fail explicitly. This deterministic finite-state generator approximates independent underlying Poisson random measures; it is not cryptographic and long-run statistical certification is outside this smoke implementation. Detector/intervention seed namespaces are separate metadata and never advance physical RNG streams. T05 will define detector/intervention behavior.
+
+For E0, `nuMax = nu`; for E1, `nuMax = q*(omega0+abs(gain))/(2*pi)`. Each port uses the constant thinning bound `nuMax*(1+amplitude)/2`. Exponential candidate waits use that bound; acceptance uses the pre-event phase/frequency directional intensity divided by the bound. Every candidate, accepted or rejected, retains its next waiting time and RNG state. Thus there is no fixed count per cycle or resampling on pause. Waiting/travel times must be finite and representably positive. Rate overflow and invalid bounds fail instead of silently changing the point process. Thinning is the conditional-intensity construction; continuously evolving intensities are evaluated on a numerically integrated trajectory.
+
+Between event boundaries, phase and frequency evolve with adaptive RK4 step doubling (two half steps retained). The local error estimate is `abs(fine-coarse)/15`, scaled by `absoluteTolerance + relativeTolerance*max(abs(initial),abs(fine))` per phase/frequency component. Both tolerances and the maximum step must be positive and finite. `event` and `rk4` select this same packet integrator; `dopri5` is rejected. Steps are capped by the next candidate/arrival, requested stop, configured maximum (default 0.01 s), `filterWidth/4`, each `relaxationTime/4`, and `0.1/(omega0+abs(gain))`. The latter caps resolve fast filter and oscillator scales even when a coarse local error estimate would alias an oscillation. Nonfinite, nonmonotone or out-of-frequency-bound half-step/end states reject the trial; there is no physical clipping. An eight-ULP relative allowance covers frequency representation roundoff. Tolerances control local integration error, not a certified global trajectory error or cross-runtime identical events.
+
+Left/right receiver memory decays analytically as `exp(-dt/h)`; the RK stages evaluate this same analytic decay. All arrivals with exactly equal represented timestamps are counted together, then add `count/h` per port. Nearby distinct timestamps are not merged. Phases/frequencies are continuous at reception, with no reset. Since emission intensity depends on continuous phase/frequency, equal-time arrivals and candidate acceptance use the same pre-event oscillator state. The filters' summed value drives the nonlinear response in subsequent continuous evolution.
+
+## Inventory and lifecycle
+
+Preparation uses exactly the supplied finite pending inventory and nonnegative receiver memory. An empty inventory is an empty-link preparation, not an implicit stationary event history. Pre-zero oscillator history remains in the scenario but never manufactures random packets. Initial packet IDs must be unique and cannot begin with reserved `event:`; endpoints, receiving port and `emissionTime + link.delay === arrivalTime` must match a declared route. Zero-time arrivals jump jointly before the initial sample. Generated IDs use the emitter/port stream and candidate ordinal, including rejected candidates in the ordinal.
+
+The stable queue sorts by arrival time and then ID. Records distinguish `emitted`, `pending`, `received` and `escaped`. Ordinary receptions consume exactly one packet and never branch/retransmit. At open ends outward output escapes immediately; internal transport has positive delay. The record union reserves `absorbed` for explicit future physical removals, but T04 does not generate absorption without such a law. All IDs, source labels, filters and global timestamps here are simulator truth; they are not observer-readable marks.
+
+T04 supports open boundaries. Driven event sources, mirror/ring transport, physical interventions and delayed response laws fail explicitly pending their assigned protocols. A nonempty pending-response inventory is rejected, not ignored; supported snapshots preserve the empty list. InitialHistory's legacy RNG metadata is retained verbatim for provenance but does not seed this new algorithm. A required explicit `packets.seed` selects the physical streams; only a packet checkpoint restores their evolved states.
+
+## Checkpoints, cancellation and resource limits
+
+`packet-thinning-rk4-v1` snapshots contain the original owned scenario/options, unwrapped state, separate filters, stream identities/bounds/RNG states/candidate times, pending packets/responses, accepted integration history, raw lifecycle records, every adaptive advance request (including rejection), next step and lifetime resource counters. JSON round-trip preserves this data. Resume with the same scenario/options and `packetResume: snapshot`. Restore replays the bounded advance trace and compares the entire checkpoint exactly, independent of object key order. Edited physical state, RNG, events, history or counters fail as `INVALID_HISTORY`; saved values are never trusted as replacement evolution. Restore is linear in original bounded computation and currently synchronous.
+
+Same configuration/seed/version/runtime and the same advance/stop schedule reproduce the raw events and continuation exactly. Cancellation occurs at an existing accepted/rejected trial boundary, so its checkpoint resumes the unchanged mesh. Introducing a new arbitrary stop time can split an RK step and alter the mesh; compare such trajectories within numerical tolerances. Transcendental last bits may differ across runtimes, and thinning decisions near thresholds may therefore diverge; cross-runtime checkpoint replay is not guaranteed. Browser same-runtime resume and Node/browser smoke parity are tested separately.
+
+Defaults are 10,000 adaptive attempts, 10,000 candidates plus receptions and 10,000 pending packets. Each optional `maxSteps`, `maxEvents`, `maxPending` is an integer in [1,100000]; at most 128 nodes and one million node/attempt history entries are allowed. The sorted queue is intentionally simple and not optimized for research-scale traffic. Records and history are bounded by these budgets, not retained without a limit. Event batches reserve worst-case pending capacity before consuming RNG or applying arrival jumps, so the pending limit can stop conservatively even if some candidates would have escaped or been rejected.
+
+Exhaustion yields a complete diagnostic checkpoint followed by `incomplete` with the limiting budget, never `completed`. If the limit is reached at an arrival/candidate boundary, continuous evolution has reached that time and the queue retains the unapplied batch; the saved incomplete flag distinguishes that state from a fully processed sample. Budget-exhausted snapshots are inspectable/replayable but remain exhausted; increasing immutable options is a new run. Cancellation yields a checkpoint then `cancelled`; cooperative execution services the worker task queue every 32 trials. Numerical failures yield a structured failure.
+
+## Independent checks and interpretation
+
+`test/packets.test.ts` checks analytic exponential memory, summed zero/off-grid jumps and insertion order, fixed-intensity R0 emissions over 64 predeclared seeds (six-sigma Poisson total bands with broad variance/covariance controls), exact replay and corruption rejection, causal support, one terminal outcome per ordinary packet, E1/R2 frequency bounds, detector invariance, negative-gain R1 against independent convolution quadrature, resource limits and cancellation. CLI and production browser worker tests cover the shared execution path. These controls assess implementation, not a scientific regime.
+
+The deterministic envelope and event engines are distinct nonlinear models: generally `E[tanh(rHat/rStar)] != tanh(E[rHat]/rStar)`. Raising raw event intensity at fixed `rStar` changes mean feedback as well as noise. No event-mean/envelope equality or undeclared high-count scaling is asserted. Full experiments, detector reports, intervention laws, statistical inference and publication exports remain later tasks.

@@ -1,3 +1,12 @@
+import { PacketSolver } from './packets.js';
+import type { PacketOptions, PacketSample, PacketSnapshot } from './packets.js';
+export { PacketSolver } from './packets.js';
+export type {
+  PacketOptions,
+  PacketSample,
+  PacketSnapshot,
+  PacketRecord,
+} from './packets.js';
 import { EnvelopeSolver, EnvelopeFailure } from './envelope.js';
 import type {
   EnvelopeOptions,
@@ -21,11 +30,13 @@ import type { Scenario, Snapshot, ValidationIssue } from '@signal-space/model';
 
 export interface RunRequest {
   runId: string;
-  mode: 'inspect' | 'envelope';
+  mode: 'inspect' | 'envelope' | 'packets';
   scenario: unknown;
   until?: number;
   envelope?: EnvelopeOptions;
   resume?: EnvelopeSnapshot;
+  packets?: PacketOptions;
+  packetResume?: PacketSnapshot;
 }
 export interface RunFailure {
   code:
@@ -47,7 +58,11 @@ export type RunEvent =
       stage: 'validating' | 'preparing' | 'integrating';
     }
   | { type: 'snapshot'; runId: string; snapshot: Snapshot }
-  | { type: 'completed'; runId: string; mode: 'inspect' | 'envelope' }
+  | {
+      type: 'completed';
+      runId: string;
+      mode: 'inspect' | 'envelope' | 'packets';
+    }
   | {
       type: 'envelope-sample';
       runId: string;
@@ -55,6 +70,9 @@ export type RunEvent =
       ticks: TickCrossing[];
     }
   | { type: 'envelope-snapshot'; runId: string; snapshot: EnvelopeSnapshot }
+  | { type: 'packet-sample'; runId: string; sample: PacketSample }
+  | { type: 'packet-snapshot'; runId: string; snapshot: PacketSnapshot }
+  | { type: 'incomplete'; runId: string; reason: string }
   | { type: 'cancelled'; runId: string }
   | { type: 'failed'; runId: string; error: RunFailure };
 export type WorkerCommand =
@@ -102,13 +120,13 @@ export async function* execute(
   const runId = typeof request?.runId === 'string' ? request.runId : '';
   const cancelled = (): RunEvent => ({ type: 'cancelled', runId });
   try {
-    if (!runId || !['inspect', 'envelope'].includes(request.mode)) {
+    if (!runId || !['inspect', 'envelope', 'packets'].includes(request.mode)) {
       yield {
         type: 'failed',
         runId,
         error: {
           code: 'INVALID_REQUEST',
-          message: 'Provide a runId and mode inspect or envelope.',
+          message: 'Provide a runId and mode inspect, envelope or packets.',
         },
       };
       return;
@@ -183,6 +201,59 @@ export async function* execute(
       yield cancelled();
       return;
     }
+    if (owned.mode === 'packets') {
+      if (owned.resume !== undefined || owned.envelope !== undefined)
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'Envelope state/options cannot be used in packet mode.',
+        );
+      const until = owned.until;
+      if (
+        typeof until !== 'number' ||
+        !Number.isFinite(until) ||
+        until < 0 ||
+        !owned.packets
+      )
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'Provide packet options with a seed and a finite nonnegative until time.',
+        );
+      const solver = new PacketSolver(
+        scenario,
+        owned.packets,
+        owned.packetResume,
+      );
+      if (until < solver.time)
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'until precedes checkpoint time.',
+        );
+      yield { type: 'packet-sample', runId, sample: solver.sample() };
+      let attempts = 0;
+      while (solver.time < until && !solver.incomplete) {
+        if (options.signal?.aborted) {
+          yield { type: 'packet-snapshot', runId, snapshot: solver.snapshot() };
+          yield cancelled();
+          return;
+        }
+        const previous = solver.time;
+        solver.advance(until);
+        if (solver.time > previous)
+          yield { type: 'packet-sample', runId, sample: solver.sample() };
+        if (++attempts % 32 === 0) await yieldTask();
+      }
+      yield { type: 'packet-snapshot', runId, snapshot: solver.snapshot() };
+      if (solver.incomplete)
+        yield { type: 'incomplete', runId, reason: solver.incomplete };
+      else if (options.signal?.aborted) yield cancelled();
+      else yield { type: 'completed', runId, mode: 'packets' };
+      return;
+    }
+    if (owned.packets !== undefined || owned.packetResume !== undefined)
+      throw new EnvelopeFailure(
+        'INVALID_REQUEST',
+        'Packet options/checkpoints require packet mode.',
+      );
     if (owned.mode === 'envelope') {
       const until = owned.until;
       if (typeof until !== 'number' || !Number.isFinite(until) || until < 0)

@@ -131,3 +131,89 @@ test('production worker integrates the same causal history as Node', async ({
     resumed.push(event);
   expect(resumed.at(-1)?.type).toBe('completed');
 });
+
+test('production worker runs and resumes seeded packets using the shared engine', async ({
+  page,
+}) => {
+  const workerUrls: string[] = [];
+  page.on('worker', (worker) => workerUrls.push(worker.url()));
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Inspect preparation' }).click();
+  await expect(page.getByRole('status')).toHaveText('Completed');
+  const scenario = createSample('pair');
+  const result = await page.evaluate(
+    async ({ url, scenario }) => {
+      const worker = new Worker(url, { type: 'module' });
+      return await new Promise<{ checkpoint: unknown; terminal: string }>(
+        (resolve, reject) => {
+          let checkpoint: unknown;
+          let resumed = false;
+          worker.onerror = () => {
+            worker.terminate();
+            reject(new Error('Worker failed'));
+          };
+          worker.onmessage = ({ data }) => {
+            if (data.type === 'packet-snapshot' && !resumed)
+              checkpoint = data.snapshot;
+            if (['failed', 'incomplete', 'cancelled'].includes(data.type)) {
+              worker.terminate();
+              reject(new Error(JSON.stringify(data)));
+            }
+            if (data.type === 'completed') {
+              if (resumed) {
+                worker.terminate();
+                resolve({ checkpoint, terminal: data.type });
+              } else {
+                resumed = true;
+                worker.postMessage({
+                  type: 'run',
+                  request: {
+                    runId: 'resume',
+                    mode: 'packets',
+                    scenario,
+                    until: 1.3,
+                    packets: { seed: 'browser-packets' },
+                    packetResume: checkpoint,
+                  },
+                });
+              }
+            }
+          };
+          worker.postMessage({
+            type: 'run',
+            request: {
+              runId: 'packets',
+              mode: 'packets',
+              scenario,
+              until: 1.2,
+              packets: { seed: 'browser-packets' },
+            },
+          });
+        },
+      );
+    },
+    { url: workerUrls[0]!, scenario },
+  );
+  expect(result.terminal).toBe('completed');
+  let nodeSnapshot;
+  for await (const event of execute({
+    runId: 'node',
+    mode: 'packets',
+    scenario,
+    until: 1.2,
+    packets: { seed: 'browser-packets' },
+  }))
+    if (event.type === 'packet-snapshot') nodeSnapshot = event.snapshot;
+  expect(nodeSnapshot).toBeDefined();
+  const browser = result.checkpoint as NonNullable<typeof nodeSnapshot>;
+  expect(browser.records.length).toBeGreaterThan(0);
+  expect(browser.records.length).toBe(nodeSnapshot!.records.length);
+  browser.records.forEach((record, i) => {
+    const reference = nodeSnapshot!.records[i]!;
+    expect({ ...record, time: 0 }).toEqual({ ...reference, time: 0 });
+    expect(record.time).toBeCloseTo(reference.time, 12);
+  });
+  browser.state.forEach((value, i) =>
+    expect(value).toBeCloseTo(nodeSnapshot!.state[i]!, 12),
+  );
+});
