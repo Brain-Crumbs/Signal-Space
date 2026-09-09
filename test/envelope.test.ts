@@ -398,6 +398,30 @@ test('checkpoint restore tolerates portable last-bit replay differences', async 
   assert.doesNotThrow(() => new EnvelopeSolver(s, {}, checkpoint));
 });
 
+test('checkpoint restore rejects macroscopic changes to large replay values', () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.phi = 6e11;
+  node.emission = { law: 'E0', nu: 0 };
+  s.initialHistory.nodes[node.id]!.phiAtZero = node.phi;
+  const solver = new EnvelopeSolver(s);
+  solver.advance(0.2);
+  const checkpoint = solver.snapshot();
+  for (const segment of checkpoint.segments) {
+    segment.y0[0]! += 0.5;
+    segment.y1[0]! += 0.5;
+  }
+  checkpoint.state[0]! += 0.5;
+  assert.throws(
+    () => new EnvelopeSolver(s, {}, checkpoint),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('contiguous RK4'),
+  );
+});
+
 test('checkpoint restore tolerates a last-bit acceptance-threshold flip', () => {
   const s = isolated();
   s.solver.absoluteTolerance = 1000;

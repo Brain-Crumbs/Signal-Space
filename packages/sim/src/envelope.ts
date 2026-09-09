@@ -159,15 +159,24 @@ function stable(value: unknown): string {
       : v,
   );
 }
-const PORTABLE_REPLAY_TOLERANCE = 1e-12;
+const PORTABLE_REPLAY_ABSOLUTE_TOLERANCE = 1e-12;
+const PORTABLE_REPLAY_MAX_ULPS = 32;
+function replayUlp(value: number): number {
+  const magnitude = Math.abs(value);
+  if (magnitude === 0 || magnitude < 2 ** -1022) return Number.MIN_VALUE;
+  return 2 ** (Math.floor(Math.log2(magnitude)) - 52);
+}
 function portableReplayEqual(actual: unknown, expected: unknown): boolean {
   if (typeof actual === 'number' && typeof expected === 'number')
     return (
       Number.isFinite(actual) &&
       Number.isFinite(expected) &&
       Math.abs(actual - expected) <=
-        PORTABLE_REPLAY_TOLERANCE *
-          Math.max(1, Math.abs(actual), Math.abs(expected))
+        Math.max(
+          PORTABLE_REPLAY_ABSOLUTE_TOLERANCE,
+          PORTABLE_REPLAY_MAX_ULPS *
+            Math.max(replayUlp(actual), replayUlp(expected)),
+        )
     );
   if (Array.isArray(actual) || Array.isArray(expected))
     return (
@@ -962,7 +971,7 @@ export class EnvelopeSolver {
         portableThresholdDisagreement =
           valid &&
           Number.isFinite(error) &&
-          Math.abs(error - 1) <= PORTABLE_REPLAY_TOLERANCE;
+          Math.abs(error - 1) <= PORTABLE_REPLAY_ABSOLUTE_TOLERANCE;
       if (accepted !== attempt.accepted && !portableThresholdDisagreement)
         fail(
           'Checkpoint attempt outcome disagrees with adaptive controller replay.',
