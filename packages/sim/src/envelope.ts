@@ -185,6 +185,13 @@ function withinUlps(
         : expectedBits - actualBits;
   return distance <= maximumDistance;
 }
+function float64Spacing(value: number): number {
+  const magnitude = Math.abs(value);
+  if (magnitude === 0) return Number.MIN_VALUE;
+  replayBits.setFloat64(0, magnitude);
+  replayBits.setBigUint64(0, replayBits.getBigUint64(0) + 1n);
+  return replayBits.getFloat64(0) - magnitude;
+}
 function portableReplayEqual(actual: unknown, expected: unknown): boolean {
   if (typeof actual === 'number' && typeof expected === 'number')
     return (
@@ -475,11 +482,7 @@ export class EnvelopeSolver {
     this.boundaries = [];
     for (const time of [...boundarySet].sort((a, b) => a - b)) {
       const previous = this.boundaries.at(-1);
-      if (
-        previous === undefined ||
-        Math.abs(time - previous) >
-          8 * Number.EPSILON * Math.max(1, Math.abs(time), Math.abs(previous))
-      )
+      if (previous === undefined || !withinUlps(time, previous, 8n))
         this.boundaries.push(time);
       this.canonicalBoundaryTimes.set(time, this.boundaries.at(-1)!);
     }
@@ -583,11 +586,7 @@ export class EnvelopeSolver {
     });
   }
   private source(time: number): Vector {
-    if (
-      time > this.time &&
-      time - this.time <=
-        8 * Number.EPSILON * Math.max(1, Math.abs(time), Math.abs(this.time))
-    )
+    if (time > this.time && withinUlps(time, this.time, 8n))
       return [...this.state];
     if (time > this.time)
       throw new EnvelopeFailure(
@@ -789,10 +788,7 @@ export class EnvelopeSolver {
   private tickIndex(phi: number): number {
     const section = this.options.tickSection ?? 0,
       magnitude = Math.max(Math.abs(phi), Math.abs(section)),
-      spacing =
-        magnitude === 0
-          ? Number.MIN_VALUE
-          : 2 ** (Math.floor(Math.log2(magnitude)) - 52),
+      spacing = float64Spacing(magnitude),
       index = Math.floor((phi - section) / TAU),
       lower = section + index * TAU,
       upper = section + (index + 1) * TAU;

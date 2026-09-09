@@ -583,6 +583,24 @@ test('numerically coincident propagated and direct boundaries are coalesced', as
   assert.equal(solver.snapshot().time, 0.31);
 });
 
+test('representable event intervals near zero are not coalesced', () => {
+  const s = driven(),
+    node = s.nodes[0]!;
+  s.boundaries.left = { kind: 'driven', rate: 0 };
+  const solver = new EnvelopeSolver(s, {
+    boundaryInputs: {
+      left: [
+        { time: 0, rate: 0 },
+        { time: 1e-16, rate: 1 },
+      ],
+    },
+  });
+  assert.equal(solver.sample().nodes[node.id]!.receptionLeft, 0);
+  solver.advance(1e-16);
+  assert.equal(solver.snapshot().time, 1e-16);
+  assert.equal(solver.sample().nodes[node.id]!.receptionLeft, 1);
+});
+
 test('sampled prehistory uses phase Hermite derivative and rejects hidden between-knot frequency violations', async () => {
   const s = createSample('pair');
   const points = [-1, 0].map((time) => ({
@@ -940,6 +958,15 @@ test('phases too coarse to resolve individual tick sections fail before sampling
   const last = events.at(-1);
   assert.ok(last?.type === 'failed');
   assert.equal(last.error.code, 'NUMERICAL_FAILURE');
+});
+
+test('phase spacing is measured exactly below a floating-point binade', async () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.phi = 36028797018963964;
+  s.initialHistory.nodes[node.id]!.phiAtZero = node.phi;
+  const result = await run(s, 0);
+  assert.equal(result.last.nodes[node.id]!.phi, node.phi);
 });
 
 test('worker envelope cancellation emits a resumable checkpoint and no completion', async () => {
