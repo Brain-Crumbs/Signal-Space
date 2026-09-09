@@ -12,6 +12,7 @@ import {
   runManifest,
   runSweep,
   resumeSweep,
+  validateSweepCheckpoint,
   type ExperimentDefinition,
 } from '@signal-space/experiments';
 
@@ -39,7 +40,7 @@ test('canonical definitions resolve stable identities and hierarchical seeds', a
     definition({
       mode: 'packets',
       packets: {},
-      parameters: [{ id: 'gain', path: 'nodes.A.gain', values: [0, 0.1] }],
+      parameters: [{ id: 'c0', path: 'c0', values: [1, 1.1] }],
       replicates: 1,
     }),
     {
@@ -78,6 +79,74 @@ test('manifest budgets are enforced in the shared execution request', async () =
     maxEvents: 4,
     maxPending: 5,
   });
+});
+
+test('envelope budgets apply when solver options are omitted', async () => {
+  const plan = await resolveDefinition(
+    definition({ budgets: { maxJobs: 1, maxSteps: 7 } }),
+    {
+      createdAt: '2026-01-01T00:00:00.000Z',
+      codeRevision: 'fixture',
+      source: 'test',
+    },
+  );
+  assert.equal(plan.manifests[0]!.execution.envelope?.maxSteps, 7);
+});
+
+test('resolved manifests reject scenario hash tampering', async () => {
+  const plan = await resolveDefinition(definition(), {
+    createdAt: '2026-01-01T00:00:00.000Z',
+    codeRevision: 'fixture',
+    source: 'test',
+  });
+  const tampered = structuredClone(plan.manifests[0]!);
+  tampered.scenario.c0 += 0.1;
+  await assert.rejects(runManifest(tampered), /scenarioHash does not match/);
+});
+
+test('definition validation rejects invalid resolved values and unbounded plans', async () => {
+  await assert.rejects(
+    resolveDefinition(
+      definition({
+        parameters: [{ id: 'omega', path: 'nodes.A.omega', values: [-1] }],
+      }),
+    ),
+    /resolved scenario violates/,
+  );
+  await assert.rejects(
+    resolveDefinition(
+      definition({
+        parameters: [{ id: 'gain', path: 'nodes.A.gain', values: [0, 0] }],
+      }),
+    ),
+    /duplicate values/,
+  );
+  await assert.rejects(
+    resolveDefinition(
+      definition({
+        replicates: 2,
+        budgets: { maxJobs: 1, maxRuns: 1 },
+      }),
+    ),
+    /exceeds budgets.maxRuns/,
+  );
+  await assert.rejects(
+    resolveDefinition(
+      definition({
+        mode: 'packets',
+        packets: { maxSteps: 0 },
+      }),
+    ),
+    /packets.maxSteps/,
+  );
+  await assert.rejects(
+    resolveDefinition(
+      definition({
+        tolerances: { absolute: Infinity, relative: 1e-7 },
+      }),
+    ),
+    /finite positive tolerances/,
+  );
 });
 
 test('all A-I smoke definitions resolve without launching research-scale work', async () => {
@@ -163,11 +232,67 @@ test('resume retries cancelled attempts instead of silently dropping them', asyn
     onRun: () => controller.abort(),
   });
   assert.equal(partial.status, 'cancelled');
+  assert.ok(partial.checkpoint.attempts.length >= partial.results.length);
+  assert.deepEqual(
+    partial.checkpoint.completed.map((result) => result.runId),
+    partial.checkpoint.attempts
+      .filter((result) => result.status === 'completed')
+      .map((result) => result.runId),
+  );
   const resumed = await resumeSweep(plan, partial.checkpoint, {
     concurrency: 1,
   });
   assert.equal(resumed.status, 'completed');
   assert.equal(resumed.results.length, plan.manifests.length);
+});
+
+test('resource-incomplete attempts remain auditable and cannot continue', async () => {
+  const plan = await resolveDefinition(
+    definition({
+      mode: 'packets',
+      packets: {},
+      replicates: 1,
+      budgets: { maxJobs: 1, maxSteps: 1, checkpointEvery: 1 },
+    }),
+    {
+      createdAt: '2026-01-01T00:00:00.000Z',
+      codeRevision: 'fixture',
+      source: 'test',
+    },
+  );
+  const outcome = await runSweep(plan);
+  assert.equal(outcome.status, 'partial');
+  assert.equal(outcome.checkpoint.completed.length, 0);
+  assert.equal(outcome.checkpoint.attempts[0]!.status, 'incomplete');
+  await assert.rejects(
+    continueRun(outcome.checkpoint.attempts[0]!, 0.08),
+    /Cannot continue an incomplete run/,
+  );
+});
+
+test('checkpoint validation checks plan result identity and terminal status', async () => {
+  const plan = await resolveDefinition(definition({ replicates: 1 }), {
+    createdAt: '2026-01-01T00:00:00.000Z',
+    codeRevision: 'fixture',
+    source: 'test',
+  });
+  const outcome = await runSweep(plan);
+  const badStatus = structuredClone(outcome.checkpoint);
+  badStatus.attempts[0]!.status = 'failed';
+  await assert.rejects(validateSweepCheckpoint(badStatus), /terminal event/);
+  const badId = structuredClone(outcome.checkpoint);
+  badId.attempts[0]!.runId = 'foreign-run';
+  await assert.rejects(validateSweepCheckpoint(badId), /IDs differ/);
+  await assert.rejects(
+    resumeSweep(plan, {
+      ...outcome.checkpoint,
+      attempts: outcome.checkpoint.attempts.map((result) => ({
+        ...result,
+        manifest: { ...result.manifest, definitionHash: 'foreign' },
+      })),
+    }),
+    /scenarioHash|definitionHash|IDs differ|outside the current plan/,
+  );
 });
 
 test('continuation uses the complete solver checkpoint rather than restarting', async () => {

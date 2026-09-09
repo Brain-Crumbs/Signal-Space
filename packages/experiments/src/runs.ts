@@ -53,6 +53,7 @@ export interface ExperimentWindows {
 
 export interface ExperimentBudgets {
   maxJobs: number;
+  maxRuns?: number;
   maxSteps?: number;
   maxEvents?: number;
   maxPending?: number;
@@ -135,6 +136,8 @@ export interface SweepCheckpoint {
   definitionHash: string;
   planSize: number;
   completed: RunResult[];
+  /** Append-only attempt history, including failed/cancelled/incomplete runs. */
+  attempts: RunResult[];
   createdAt: string;
   status: 'partial' | 'completed' | 'cancelled';
 }
@@ -259,6 +262,115 @@ function validateFiniteRange(value: number, name: string, minimum = 0): void {
     invalid(`${name} must be finite and >= ${minimum}`);
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+
+function validatePositiveInteger(value: unknown, name: string): void {
+  if (!Number.isInteger(value) || (value as number) < 1)
+    invalid(`${name} must be a positive integer`);
+}
+
+function validateEnvelopeOptions(value: unknown): void {
+  if (value === undefined) return;
+  if (!isRecord(value)) invalid('envelope options must be an object');
+  const allowed = new Set([
+    'preparation',
+    'prehistory',
+    'boundaryInputs',
+    'tickSection',
+    'maxSteps',
+  ]);
+  if (Object.keys(value).some((key) => !allowed.has(key)))
+    invalid('envelope options contain an unknown key');
+  if (
+    value.preparation !== undefined &&
+    value.preparation !== 'established' &&
+    value.preparation !== 'empty-links'
+  )
+    invalid('envelope preparation is invalid');
+  if (value.tickSection !== undefined && !Number.isFinite(value.tickSection))
+    invalid('envelope tickSection must be finite');
+  if (value.maxSteps !== undefined)
+    validatePositiveInteger(value.maxSteps, 'envelope.maxSteps');
+  if (value.prehistory !== undefined) {
+    if (!Array.isArray(value.prehistory) || value.prehistory.length < 2)
+      invalid('envelope prehistory needs at least two points');
+    for (const point of value.prehistory) {
+      if (
+        !isRecord(point) ||
+        !Number.isFinite(point.time) ||
+        (point.time as number) > 0 ||
+        !isRecord(point.nodes)
+      )
+        invalid('envelope prehistory point is invalid');
+      for (const node of Object.values(point.nodes)) {
+        if (
+          !isRecord(node) ||
+          !Number.isFinite(node.phi) ||
+          !Number.isFinite(node.omega) ||
+          (node.omega as number) <= 0
+        )
+          invalid('envelope prehistory node is invalid');
+      }
+    }
+  }
+  if (value.boundaryInputs !== undefined) {
+    if (!isRecord(value.boundaryInputs))
+      invalid('envelope boundaryInputs must be an object');
+    if (
+      Object.keys(value.boundaryInputs).some(
+        (key) => key !== 'left' && key !== 'right',
+      )
+    )
+      invalid('envelope boundaryInputs contain an unknown side');
+    for (const side of ['left', 'right']) {
+      const entries = value.boundaryInputs[side];
+      if (entries === undefined) continue;
+      if (!Array.isArray(entries) || entries.length === 0)
+        invalid(`envelope boundaryInputs.${side} must be nonempty`);
+      for (const entry of entries) {
+        if (
+          !isRecord(entry) ||
+          !Number.isFinite(entry.time) ||
+          !Number.isFinite(entry.rate) ||
+          (entry.time as number) < 0 ||
+          (entry.rate as number) < 0
+        )
+          invalid(`envelope boundaryInputs.${side} contains an invalid entry`);
+      }
+    }
+  }
+}
+
+function validatePacketOptions(value: unknown): void {
+  if (!isRecord(value)) invalid('packet options must be an object');
+  const allowed = new Set([
+    'detectorSeed',
+    'interventionSeed',
+    'maxSteps',
+    'maxEvents',
+    'maxPending',
+  ]);
+  if (Object.keys(value).some((key) => !allowed.has(key)))
+    invalid('packet options contain an unknown key');
+  for (const field of ['detectorSeed', 'interventionSeed']) {
+    if (
+      value[field] !== undefined &&
+      (typeof value[field] !== 'string' || value[field].length > 4096)
+    )
+      invalid(`packets.${field} must be a string of at most 4096 characters`);
+  }
+  for (const field of allowed) {
+    if (
+      value[field] !== undefined &&
+      field !== 'detectorSeed' &&
+      field !== 'interventionSeed'
+    )
+      validatePositiveInteger(value[field], `packets.${field}`);
+  }
+}
+
 export function validateDefinition(
   definition: unknown,
 ): asserts definition is ExperimentDefinition {
@@ -284,6 +396,8 @@ export function validateDefinition(
     invalid('packets options require packet mode');
   if (value.mode !== 'envelope' && value.envelope !== undefined)
     invalid('envelope options require envelope mode');
+  validateEnvelopeOptions(value.envelope);
+  if (value.packets !== undefined) validatePacketOptions(value.packets);
   if (
     !Number.isInteger(value.replicates) ||
     value.replicates! < 1 ||
@@ -313,10 +427,12 @@ export function validateDefinition(
   }
   if (
     !value.tolerances ||
+    !Number.isFinite(value.tolerances.absolute) ||
+    !Number.isFinite(value.tolerances.relative) ||
     value.tolerances.absolute <= 0 ||
     value.tolerances.relative <= 0
   )
-    invalid('positive tolerances are required');
+    invalid('finite positive tolerances are required');
   if (!Array.isArray(value.observables))
     invalid('observables must be an array');
   const budgets = value.budgets;
@@ -333,6 +449,20 @@ export function validateDefinition(
       (!Number.isInteger(limit) || (limit as number) < 1)
     )
       invalid(`${name} must be a positive integer`);
+  if (budgets.maxRuns !== undefined && budgets.maxRuns > 1_000_000)
+    invalid('budgets.maxRuns must not exceed 1000000');
+  if (value.mode === 'packets') {
+    for (const name of ['maxSteps', 'maxEvents', 'maxPending'] as const) {
+      const limit = value.packets?.[name] ?? budgets[name];
+      if (limit !== undefined && limit > 100_000)
+        invalid(`packet ${name} must not exceed 100000`);
+    }
+  }
+  if (value.mode === 'envelope') {
+    const limit = value.envelope?.maxSteps ?? budgets.maxSteps;
+    if (limit !== undefined && limit > 1_000_000)
+      invalid('envelope maxSteps must not exceed 1000000');
+  }
   const axes = value.parameters ?? [];
   const axisIds = new Set<string>();
   for (const axis of axes) {
@@ -341,6 +471,11 @@ export function validateDefinition(
     axisIds.add(axis.id);
     if (axis.values.some((entry) => !isPrimitive(entry)))
       invalid(`parameter axis ${axis.id} contains a non-JSON value`);
+    const uniqueValues = new Set(
+      axis.values.map((entry) => canonicalJson(entry)),
+    );
+    if (uniqueValues.size !== axis.values.length)
+      invalid(`parameter axis ${axis.id} contains duplicate values`);
   }
   const variants = value.variants ?? [];
   const variantIds = new Set<string>();
@@ -402,15 +537,18 @@ function boundedExecution(
     mode: definition.mode,
     until: definition.until,
   };
-  if (definition.envelope) {
-    const maxSteps = definition.budgets.maxSteps;
+  const maxSteps = definition.budgets.maxSteps;
+  if (
+    definition.mode === 'envelope' &&
+    (definition.envelope !== undefined || maxSteps !== undefined)
+  ) {
     execution.envelope = {
-      ...clone(definition.envelope),
+      ...(definition.envelope ? clone(definition.envelope) : {}),
       ...(maxSteps === undefined
         ? {}
         : {
             maxSteps: Math.min(
-              definition.envelope.maxSteps ?? maxSteps,
+              definition.envelope?.maxSteps ?? maxSteps,
               maxSteps,
             ),
           }),
@@ -447,6 +585,15 @@ export async function resolveDefinition(
   const controls = definition.controls?.length
     ? definition.controls
     : [{ id: 'baseline', kind: 'analytic' as const }];
+  const maxRuns = definition.budgets.maxRuns ?? 100_000;
+  let runCount = variants.length * controls.length * definition.replicates;
+  for (const axis of definition.parameters ?? []) {
+    if (axis.values.length > maxRuns || runCount > maxRuns / axis.values.length)
+      invalid('resolved Cartesian run plan exceeds budgets.maxRuns');
+    runCount *= axis.values.length;
+  }
+  if (runCount > maxRuns)
+    invalid('resolved Cartesian run plan exceeds budgets.maxRuns');
   const provenance: ManifestProvenance = {
     modelVersion: definition.scenario.modelVersion,
     codeRevision: options.codeRevision ?? 'unknown',
@@ -478,6 +625,11 @@ export async function resolveDefinition(
           applyControl(scenario, control);
           if (definition.interventions)
             scenario.interventions = clone(definition.interventions);
+          const resolvedValidation = validateScenario(scenario);
+          if (!resolvedValidation.ok)
+            invalid(
+              `resolved scenario violates the model contract at ${resolvedValidation.errors[0]?.path ?? '$'}`,
+            );
           const scenarioHash = await sha256(scenario);
           const base: ExperimentManifest = {
             kind: MANIFEST_KIND,
@@ -530,9 +682,7 @@ export function isSweepCheckpoint(value: unknown): value is SweepCheckpoint {
   );
 }
 
-export function validateManifest(
-  value: unknown,
-): asserts value is ExperimentManifest {
+export async function validateManifest(value: unknown): Promise<void> {
   if (!isExperimentManifest(value))
     throw new Error('Invalid Signal Space run manifest.');
   if (
@@ -545,6 +695,9 @@ export function validateManifest(
   const validation = validateScenario(value.scenario);
   if (!validation.ok)
     throw new Error('Run manifest contains an invalid scenario.');
+  const actualScenarioHash = await sha256(value.scenario);
+  if (actualScenarioHash !== value.scenarioHash)
+    throw new Error('Run manifest scenarioHash does not match its scenario.');
   if (!Number.isFinite(value.execution.until) || value.execution.until < 0)
     throw new Error('Run manifest contains an invalid until time.');
   if (
@@ -558,17 +711,34 @@ export function validateManifest(
     throw new Error('Only packet manifests may contain a physical seed.');
 }
 
-export function validateSweepCheckpoint(
-  value: unknown,
-): asserts value is SweepCheckpoint {
+export async function validateSweepCheckpoint(value: unknown): Promise<void> {
   if (!isSweepCheckpoint(value) || value.schemaVersion !== 1 || !value.sweepId)
     throw new Error('Invalid Signal Space sweep checkpoint.');
-  const ids = new Set<string>();
+  if (!Array.isArray(value.completed))
+    throw new Error('Sweep checkpoint is missing completed results.');
+  const attempts = value.attempts ?? value.completed;
+  if (!Array.isArray(attempts))
+    throw new Error('Sweep checkpoint is missing attempt history.');
+  const completedIds = new Set<string>();
   for (const result of value.completed) {
-    if (ids.has(result.runId))
-      throw new Error('Sweep checkpoint contains duplicate run results.');
-    ids.add(result.runId);
-    validateManifest(result.manifest);
+    if (completedIds.has(result.runId) || result.status !== 'completed')
+      throw new Error('Sweep checkpoint completed results are inconsistent.');
+    await validateManifest(result.manifest);
+    if (
+      result.runId !== result.manifest.runId ||
+      statusFor(result.events) !== result.status
+    )
+      throw new Error('Sweep checkpoint completed result is inconsistent.');
+    completedIds.add(result.runId);
+  }
+  for (const result of attempts) {
+    await validateManifest(result.manifest);
+    if (result.runId !== result.manifest.runId)
+      throw new Error('Sweep checkpoint result and manifest IDs differ.');
+    if (statusFor(result.events) !== result.status)
+      throw new Error(
+        'Sweep checkpoint result status does not match its terminal event.',
+      );
   }
 }
 
@@ -609,7 +779,7 @@ export async function runManifest(
   signal?: AbortSignal,
   resume?: RunEvent,
 ): Promise<RunResult> {
-  validateManifest(manifest);
+  await validateManifest(manifest);
   const events: RunEvent[] = [];
   const options = signal ? { signal } : {};
   for await (const event of execute(requestFor(manifest, resume), options))
@@ -639,6 +809,10 @@ export async function continueRun(
 ): Promise<RunResult> {
   if (result.status === 'failed')
     throw new Error('Cannot continue a failed run.');
+  if (result.status === 'incomplete')
+    throw new Error(
+      'Cannot continue an incomplete run; create a new run with revised immutable budgets.',
+    );
   if (!Number.isFinite(until) || until < result.manifest.execution.until)
     throw new Error('Continuation until must extend the previous run.');
   const snapshot = latestSnapshot(result);
@@ -652,7 +826,7 @@ export async function continueRun(
 
 function checkpointFor(
   plan: ExperimentPlan,
-  results: RunResult[],
+  attempts: RunResult[],
   status: SweepCheckpoint['status'],
 ): SweepCheckpoint {
   return {
@@ -661,7 +835,10 @@ function checkpointFor(
     sweepId: plan.definition.id,
     definitionHash: plan.definitionHash,
     planSize: plan.manifests.length,
-    completed: results.map(clone),
+    completed: attempts
+      .filter((result) => result.status === 'completed')
+      .map(clone),
+    attempts: attempts.map(clone),
     createdAt: new Date().toISOString(),
     status,
   };
@@ -679,19 +856,30 @@ export async function runSweep(
     throw new Error('Sweep concurrency must be a positive integer.');
   const prior = options.checkpoint;
   if (prior) {
-    validateSweepCheckpoint(prior);
+    await validateSweepCheckpoint(prior);
     if (
       prior.definitionHash !== plan.definitionHash ||
       prior.planSize !== plan.manifests.length
     )
       throw new Error('Checkpoint does not belong to this experiment plan.');
   }
+  const priorAttempts = prior ? (prior.attempts ?? prior.completed) : [];
+  const plannedIds = new Set(plan.manifests.map((manifest) => manifest.runId));
+  for (const result of priorAttempts) {
+    if (
+      !plannedIds.has(result.runId) ||
+      result.manifest.definitionHash !== plan.definitionHash
+    )
+      throw new Error('Checkpoint contains a result outside the current plan.');
+  }
   // A cancelled, failed, or resource-incomplete attempt is retained in the
   // checkpoint for audit but is eligible for a fresh attempt on resume.
-  const results = (prior?.completed ?? []).filter(
-    (result) => result.status === 'completed',
+  const results = priorAttempts.map(clone);
+  const completedIds = new Set(
+    priorAttempts
+      .filter((result) => result.status === 'completed')
+      .map((result) => result.runId),
   );
-  const completedIds = new Set(results.map((result) => result.runId));
   const pending = plan.manifests.filter(
     (manifest) => !completedIds.has(manifest.runId),
   );
@@ -709,13 +897,17 @@ export async function runSweep(
     }
   };
   await Promise.all(Array.from({ length: concurrency }, () => worker()));
+  const allCompleted = plan.manifests.every((manifest) =>
+    results.some(
+      (result) =>
+        result.runId === manifest.runId && result.status === 'completed',
+    ),
+  );
   const status: SweepOutcome['status'] = options.signal?.aborted
     ? 'cancelled'
-    : results.some((result) => result.status === 'failed')
-      ? 'partial'
-      : results.length === plan.manifests.length
-        ? 'completed'
-        : 'partial';
+    : allCompleted
+      ? 'completed'
+      : 'partial';
   const checkpoint = checkpointFor(
     plan,
     results,
@@ -734,6 +926,6 @@ export async function resumeSweep(
   checkpoint: SweepCheckpoint,
   options: Omit<SweepOptions, 'checkpoint'> = {},
 ): Promise<SweepOutcome> {
-  validateSweepCheckpoint(checkpoint);
+  await validateSweepCheckpoint(checkpoint);
   return runSweep(plan, { ...options, checkpoint });
 }

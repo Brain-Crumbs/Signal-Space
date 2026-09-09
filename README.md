@@ -2,7 +2,7 @@
 
 A local mathematics workspace and reproducible toolkit for the Paper I directional signal-clock model.
 
-**Current capability:** validate scenarios, inspect their initial preparation, and evolve deterministic Paper I envelopes with causal delay history, error controls, ticks and complete restart snapshots. The CLI and typed Web Worker share one solver. The React shell still displays preparation only; stochastic events, interactive evolution controls and A–I protocols follow in later tasks.
+**Current capability:** validate scenarios, inspect their initial preparation, and evolve deterministic Paper I envelopes with causal delay history, error controls, ticks and complete restart snapshots. Seeded stochastic packets, pure observer recording and physical intervention branches are also available through the shared engine. The CLI and typed Web Worker share the numerical implementation. The React shell still displays preparation only; interactive evolution controls and A–I protocols follow in later tasks.
 
 ## Quick start
 
@@ -46,7 +46,7 @@ The web build is in `apps/web/dist`; the bundled CLI is in `apps/cli/dist/index.
 | `apps/cli`             | File/sample input, JSONL output and SIGINT adapter                             |
 | `apps/web`             | React shell; typed commands/results across a Web Worker                        |
 
-See [envelope solver](docs/envelope-solver.md), [execution contract](docs/execution-api.md), [experiment runs](docs/experiment-runs.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
+See [detector records and physical branches](docs/observation.md), [envelope solver](docs/envelope-solver.md), [execution contract](docs/execution-api.md), [experiment runs](docs/experiment-runs.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
 
 ## Validation
 

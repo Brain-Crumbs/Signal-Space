@@ -59,12 +59,23 @@ async function loadPlan(path: string) {
   return resolveDefinition(value, { source: path, ...gitMetadata() });
 }
 
-async function runDefinitionManifest(path: string): Promise<void> {
+function setTerminalExit(status: string): void {
+  if (status === 'cancelled') process.exitCode = 130;
+  else if (status === 'incomplete' || status === 'partial')
+    process.exitCode = 2;
+  else if (status === 'failed') process.exitCode = 1;
+}
+
+async function runDefinitionManifest(
+  path: string,
+  signal?: AbortSignal,
+): Promise<void> {
   const value = await jsonFile(path);
   if (isExperimentManifest(value)) {
     emit({ type: 'manifest', manifest: value });
-    const result = await runManifest(value);
+    const result = await runManifest(value, signal);
     for (const event of result.events) emit(event);
+    setTerminalExit(result.status);
     return;
   }
   const plan = await loadPlan(path);
@@ -74,14 +85,16 @@ async function runDefinitionManifest(path: string): Promise<void> {
     );
   const manifest = plan.manifests[0]!;
   emit({ type: 'manifest', manifest });
-  const result = await runManifest(manifest);
+  const result = await runManifest(manifest, signal);
   for (const event of result.events) emit(event);
+  setTerminalExit(result.status);
 }
 
 async function runSweepCommand(
   path: string,
   checkpointPath: string | undefined,
   concurrencyText: string | undefined,
+  signal?: AbortSignal,
 ): Promise<void> {
   const plan = await loadPlan(path);
   const concurrency =
@@ -98,26 +111,38 @@ async function runSweepCommand(
         `${JSON.stringify(checkpoint, null, 2)}\n`,
       );
   };
+  let checkpointWrites = Promise.resolve();
   const outcome = await runSweep(plan, {
     ...(concurrency === undefined ? {} : { concurrency }),
+    ...(signal ? { signal } : {}),
     onRun: (result) => emit({ type: 'run-result', result }),
     onCheckpoint: (checkpoint) => {
-      emit({ type: 'checkpoint', checkpoint });
-      void save(checkpoint);
+      emit({
+        type: 'checkpoint',
+        sweepId: checkpoint.sweepId,
+        status: checkpoint.status,
+        completedRunCount: checkpoint.completed.length,
+        attemptCount: checkpoint.attempts.length,
+        planSize: checkpoint.planSize,
+      });
+      if (checkpointPath)
+        checkpointWrites = checkpointWrites.then(() => save(checkpoint));
     },
   });
-  if (checkpointPath) await save(outcome.checkpoint);
+  await checkpointWrites;
   emit({
     type: 'sweep-completed',
     status: outcome.status,
     runCount: outcome.results.length,
   });
+  setTerminalExit(outcome.status);
 }
 
 async function resumeSweepCommand(
   definitionPath: string,
   checkpointPath: string,
   concurrencyText: string | undefined,
+  signal?: AbortSignal,
 ): Promise<void> {
   const value = await jsonFile(checkpointPath);
   if (!isSweepCheckpoint(value))
@@ -125,10 +150,18 @@ async function resumeSweepCommand(
   const plan = await loadPlan(definitionPath);
   const concurrency =
     concurrencyText === undefined ? undefined : Number(concurrencyText);
+  let checkpointWrites = Promise.resolve();
   const outcome = await resumeSweep(plan, value, {
     ...(concurrency === undefined ? {} : { concurrency }),
+    ...(signal ? { signal } : {}),
     onRun: (result) => emit({ type: 'run-result', result }),
+    onCheckpoint: (checkpoint) => {
+      checkpointWrites = checkpointWrites.then(() =>
+        writeFile(checkpointPath, `${JSON.stringify(checkpoint, null, 2)}\n`),
+      );
+    },
   });
+  await checkpointWrites;
   await writeFile(
     checkpointPath,
     `${JSON.stringify(outcome.checkpoint, null, 2)}\n`,
@@ -138,47 +171,57 @@ async function resumeSweepCommand(
     status: outcome.status,
     runCount: outcome.results.length,
   });
+  setTerminalExit(outcome.status);
 }
 
 async function handleManifestCommand(command: string): Promise<void> {
   const manifestPath = option('--manifest', args.slice(1));
-  if (command === 'validate') {
-    if (!manifestPath)
-      throw new Error('validate requires --manifest definition.json.');
-    const plan = await loadPlan(manifestPath);
-    emit({
-      type: 'validated',
-      definitionHash: plan.definitionHash,
-      runCount: plan.manifests.length,
-    });
-    return;
-  }
-  if (command === 'run') {
-    if (!manifestPath)
-      throw new Error('run requires --manifest definition.json.');
-    await runDefinitionManifest(manifestPath);
-    return;
-  }
-  if (command === 'sweep') {
-    if (!manifestPath)
-      throw new Error('sweep requires --manifest definition.json.');
-    await runSweepCommand(
+  const controller = command === 'validate' ? undefined : new AbortController();
+  const cancel = () => controller?.abort();
+  if (controller) process.on('SIGINT', cancel);
+  try {
+    if (command === 'validate') {
+      if (!manifestPath)
+        throw new Error('validate requires --manifest definition.json.');
+      const plan = await loadPlan(manifestPath);
+      emit({
+        type: 'validated',
+        definitionHash: plan.definitionHash,
+        runCount: plan.manifests.length,
+      });
+      return;
+    }
+    if (command === 'run') {
+      if (!manifestPath)
+        throw new Error('run requires --manifest definition.json.');
+      await runDefinitionManifest(manifestPath, controller?.signal);
+      return;
+    }
+    if (command === 'sweep') {
+      if (!manifestPath)
+        throw new Error('sweep requires --manifest definition.json.');
+      await runSweepCommand(
+        manifestPath,
+        option('--checkpoint', args.slice(1)),
+        option('--concurrency', args.slice(1)),
+        controller?.signal,
+      );
+      return;
+    }
+    const checkpointPath = option('--checkpoint', args.slice(1));
+    if (!manifestPath || !checkpointPath)
+      throw new Error(
+        'resume requires --manifest definition.json and --checkpoint checkpoint.json.',
+      );
+    await resumeSweepCommand(
       manifestPath,
-      option('--checkpoint', args.slice(1)),
+      checkpointPath,
       option('--concurrency', args.slice(1)),
+      controller?.signal,
     );
-    return;
+  } finally {
+    if (controller) process.off('SIGINT', cancel);
   }
-  const checkpointPath = option('--checkpoint', args.slice(1));
-  if (!manifestPath || !checkpointPath)
-    throw new Error(
-      'resume requires --manifest definition.json and --checkpoint checkpoint.json.',
-    );
-  await resumeSweepCommand(
-    manifestPath,
-    checkpointPath,
-    option('--concurrency', args.slice(1)),
-  );
 }
 
 async function legacy(): Promise<void> {

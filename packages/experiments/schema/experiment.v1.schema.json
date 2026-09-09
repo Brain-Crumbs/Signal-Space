@@ -93,6 +93,7 @@
       "required": ["maxJobs"],
       "properties": {
         "maxJobs": { "type": "integer", "minimum": 1, "maximum": 64 },
+        "maxRuns": { "type": "integer", "minimum": 1, "maximum": 1000000 },
         "maxSteps": { "type": "integer", "minimum": 1 },
         "maxEvents": { "type": "integer", "minimum": 1 },
         "maxPending": { "type": "integer", "minimum": 1 },

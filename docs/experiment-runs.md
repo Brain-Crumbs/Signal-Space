@@ -6,7 +6,7 @@ T07 implements the declarative run layer for Paper I §§11.1 and 11.11. The sou
 
 An `ExperimentDefinition` contains one validated `paper-i-v1` scenario, an execution mode (`inspect`, `envelope`, or `packets`), an absolute end time, parameter axes, explicit E/R variants, named analytic/causal/state-bound/statistical controls, interventions, transient and measurement windows, tolerances, requested observables, replicate count, a root seed, and resource/checkpoint budgets. The scenario remains the authority for units, histories, filters, pending packets/responses, observation protocol, solver settings and physical interventions.
 
-Parameter paths are top-level scenario fields or `nodes.<node id>.<numeric field>`. Axes are expanded in sorted axis-id order. Variants and controls are applied to detached scenarios, so every resolved manifest contains the complete reproducible scenario rather than an undocumented notebook patch.
+Parameter paths are top-level scenario fields or `nodes.<node id>.<numeric field>`. Axes are expanded in sorted axis-id order. Duplicate axis values are rejected, and the resolved Cartesian plan is bounded by `budgets.maxRuns` (default 100,000). Variants and controls are applied to detached scenarios and revalidated, so every resolved manifest contains the complete reproducible scenario rather than an undocumented notebook patch.
 
 ## Identity and provenance
 
@@ -16,7 +16,7 @@ Each manifest stores model/schema versions, code revision, dirty state, source, 
 
 ## Sweeps and recovery
 
-`runSweep` bounds concurrent jobs by `budgets.maxJobs` and the requested concurrency. It emits detached run results/checkpoints through callbacks and returns a `SweepCheckpoint` containing finished attempts. `resumeSweep` verifies the definition hash, plan size, manifest shape and unique run IDs before skipping only successfully completed work; cancelled, failed and resource-incomplete attempts remain auditable but are retried. A restarted sweep is a new execution from its manifest; `continueRun` is a separate operation that extends the end time from the saved full solver checkpoint and transfers delay history, filters, queues and RNG state. It never reconstructs state from current phases alone.
+`runSweep` bounds concurrent jobs by `budgets.maxJobs` and the requested concurrency. It emits detached run results/checkpoints through callbacks and returns a `SweepCheckpoint` with both successful `completed` results and append-only `attempts`, including cancelled, failed and resource-incomplete runs. `resumeSweep` verifies the definition hash, plan membership, scenario hashes, terminal statuses and manifest identity before skipping only successfully completed work; unsuccessful attempts remain auditable but are retried. A restarted sweep is a new execution from its manifest; `continueRun` is a separate operation that extends the end time from the saved full solver checkpoint and transfers delay history, filters, queues and RNG state. It never reconstructs state from current phases alone. Resource-incomplete runs cannot be continued without revised immutable budgets.
 
 The CLI exposes:
 
@@ -26,5 +26,7 @@ npm run cli -- run --manifest definition.json
 npm run cli -- sweep --manifest definition.json --checkpoint sweep.json --concurrency 2
 npm run cli -- resume --manifest definition.json --checkpoint sweep.json
 ```
+
+The CLI writes checkpoint files in sequence, reports compact checkpoint summaries on stdout, returns nonzero status for failed, incomplete or partial runs, and maps SIGINT to a cancelled run. Packet and envelope solver options are validated before a definition is accepted.
 
 The exported `smokeSetupIds` and `createSmokeDefinition` provide inexpensive, protocol-shaped fixtures for setups A–I. They deliberately use the existing isolated/pair contract fixtures and do not launch research-scale scans. No research manifests are bundled.

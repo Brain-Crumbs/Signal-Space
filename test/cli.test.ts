@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { createSample } from '@signal-space/experiments';
 import { execute } from '@signal-space/sim';
 import type { RunEvent } from '@signal-space/sim';
@@ -94,4 +97,53 @@ test('CLI --seed selects shared packet execution and requires a duration', async
     ['--until', '1', '--seed', ''],
   ])
     assert.equal(cli(...args).status, 1);
+});
+
+test('CLI propagates incomplete run status and persists append-only sweep attempts', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'signal-space-cli-'));
+  const definitionPath = join(directory, 'definition.json');
+  const checkpointPath = join(directory, 'checkpoint.json');
+  const definition = {
+    schemaVersion: 'paper-i-experiment-v1',
+    id: 'cli-incomplete',
+    scenario: createSample('isolated'),
+    mode: 'packets',
+    until: 0.04,
+    windows: { transient: 0, measurement: { start: 0, end: 0.04 } },
+    tolerances: { absolute: 1e-9, relative: 1e-7 },
+    replicates: 1,
+    seed: 'cli-test',
+    observables: ['phase'],
+    packets: {},
+    budgets: { maxJobs: 1, maxSteps: 1, checkpointEvery: 1 },
+  };
+  try {
+    await writeFile(definitionPath, `${JSON.stringify(definition)}\n`);
+    const run = cli('run', '--manifest', definitionPath);
+    assert.equal(run.status, 2, run.stderr);
+    const sweep = cli(
+      'sweep',
+      '--manifest',
+      definitionPath,
+      '--checkpoint',
+      checkpointPath,
+    );
+    assert.equal(sweep.status, 2, sweep.stderr);
+    const checkpoint = JSON.parse(await readFile(checkpointPath, 'utf8')) as {
+      attempts: unknown[];
+      completed: unknown[];
+    };
+    assert.equal(checkpoint.completed.length, 0);
+    assert.equal(checkpoint.attempts.length, 1);
+    const checkpointEvent = sweep.stdout
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line))
+      .find((event) => event.type === 'checkpoint');
+    assert.ok(checkpointEvent);
+    assert.equal(checkpointEvent.attemptCount, 1);
+    assert.equal('checkpoint' in checkpointEvent, false);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
