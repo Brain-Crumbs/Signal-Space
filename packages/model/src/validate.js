@@ -179,6 +179,12 @@ export function validateScenario(value) {
     : [];
   for (const [i, packet] of packets.entries()) {
     const p = `initialHistory.pendingPackets[${i}]`;
+    for (const endpoint of ['source', 'target'])
+      if (!ids.has(packet?.[endpoint]))
+        errors.push(
+          issue(`${p}.${endpoint}`, 'must reference a scenario node'),
+        );
+
     if (!finite(packet?.emissionTime) || packet.emissionTime > 0)
       errors.push(issue(`${p}.emissionTime`, 'must be finite and <= 0'));
     if (!finite(packet?.arrivalTime) || packet.arrivalTime < 0)

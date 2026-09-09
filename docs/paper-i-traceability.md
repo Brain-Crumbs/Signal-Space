@@ -41,3 +41,5 @@ The npm workspace, pinned Node/toolchain and lockfile, strict TypeScript boundar
 PR #24 review validation enforces closed nested scenario shapes, complete per-clock history/filter maps and causal pending-packet times at the preparation boundary (§11.1; parent contract items 2, 6–7). Negative execution tests verify rejection before any snapshot is exposed; zero-time arrival and extensible-payload controls preserve supported preparations.
 
 Follow-up review checks reject mismatched t=0 history endpoints and pending responses for undeclared clocks, preserving one consistent initial physical state.
+
+Pending-packet source/target membership is checked at the same preparation boundary; regression cases reject each undeclared endpoint before inspection exposes a snapshot.

@@ -174,3 +174,18 @@ test('pending responses must target a declared clock', async () => {
   );
   await rejects(scenario);
 });
+
+test('pending packet source and target must be declared clocks', async () => {
+  for (const endpoint of ['source', 'target'] as const) {
+    const scenario = preparation();
+    scenario.initialHistory.pendingPackets[0]![endpoint] = 'ghost';
+    const validation = validateScenario(scenario);
+    assert.equal(validation.ok, false);
+    assert.ok(
+      validation.errors.some(
+        (e) => e.path === `initialHistory.pendingPackets[0].${endpoint}`,
+      ),
+    );
+    await rejects(scenario);
+  }
+});
