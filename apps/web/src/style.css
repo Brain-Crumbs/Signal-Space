@@ -1,0 +1,152 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #dfeaf4;
+  background: #0c1521;
+  font-synthesis: none;
+  line-height: 1.6;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 1040px;
+  margin: auto;
+  padding: 48px 24px;
+}
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.04em;
+}
+h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+header {
+  margin-bottom: 36px;
+}
+.eyebrow {
+  color: #73d7ec;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+}
+header > p:last-child {
+  color: #a9bdcf;
+}
+.controls {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+label {
+  display: block;
+  margin-bottom: 6px;
+}
+button,
+select {
+  font: inherit;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid #476078;
+  min-height: 48px;
+}
+select {
+  background: #152639;
+  color: #dfeaf4;
+}
+button {
+  background: #73d7ec;
+  color: #091823;
+  font-weight: 650;
+  cursor: pointer;
+}
+.secondary {
+  background: transparent;
+  color: #dfeaf4;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+:focus-visible {
+  outline: 3px solid #f6c56d;
+  outline-offset: 4px;
+}
+.results {
+  background: #142334;
+  border: 1px solid #2e455b;
+  border-radius: 8px;
+  padding: 24px;
+}
+.status {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+[role='status'] {
+  color: #73d7ec;
+}
+progress {
+  width: 100%;
+  height: 6px;
+  accent-color: #73d7ec;
+}
+.empty {
+  padding: 32px 0;
+  color: #a9bdcf;
+}
+.table-wrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #33495e;
+}
+details {
+  margin-top: 20px;
+}
+summary {
+  cursor: pointer;
+}
+pre {
+  overflow: auto;
+  font-size: 0.875rem;
+  max-height: 360px;
+}
+aside {
+  margin-top: 24px;
+  padding-left: 18px;
+  border-left: 3px solid #73d7ec;
+  color: #a9bdcf;
+}
+aside p {
+  margin-top: 4px;
+}
+[role='alert'] {
+  color: #ffb6ad;
+}
+@media (max-width: 520px) {
+  main {
+    padding: 28px 16px;
+  }
+  .controls > div,
+  select {
+    width: 100%;
+  }
+  .results {
+    padding: 16px;
+  }
+}

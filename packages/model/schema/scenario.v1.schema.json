@@ -55,10 +55,7 @@
     "boundaries": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "left",
-        "right"
-      ],
+      "required": ["left", "right"],
       "properties": {
         "left": { "$ref": "#/$defs/boundary" },
         "right": { "$ref": "#/$defs/boundary" }
@@ -80,19 +77,11 @@
     },
     "observation": {
       "type": "object",
-      "required": [
-        "sampleTimes",
-        "visible",
-        "detectorLatency"
-      ]
+      "required": ["sampleTimes", "visible", "detectorLatency"]
     },
     "solver": {
       "type": "object",
-      "required": [
-        "method",
-        "absoluteTolerance",
-        "relativeTolerance"
-      ]
+      "required": ["method", "absoluteTolerance", "relativeTolerance"]
     },
     "units": {
       "type": "object",
@@ -159,28 +148,63 @@
           ]
         },
         "response": {
-          "enum": [
-            "R0",
-            "R1",
-            "R2"
-          ]
+          "enum": ["R0", "R1", "R2"]
         }
       }
     },
     "emissionE0": {
-      "type": "object", "additionalProperties": false, "required": ["law", "nu"],
-      "properties": { "law": { "const": "E0" }, "nu": { "type": "number", "exclusiveMinimum": 0 } }
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["law", "nu"],
+      "properties": {
+        "law": { "const": "E0" },
+        "nu": { "type": "number", "exclusiveMinimum": 0 }
+      }
     },
     "emissionE1": {
-      "type": "object", "additionalProperties": false, "required": ["law", "q"],
-      "properties": { "law": { "const": "E1" }, "q": { "type": "number", "exclusiveMinimum": 0 } }
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["law", "q"],
+      "properties": {
+        "law": { "const": "E1" },
+        "q": { "type": "number", "exclusiveMinimum": 0 }
+      }
     },
     "boundary": {
       "oneOf": [
-        { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "const": "open" } } },
-        { "type": "object", "additionalProperties": false, "required": ["kind", "rate"], "properties": { "kind": { "const": "driven" }, "rate": { "type": "number", "minimum": 0 } } },
-        { "type": "object", "additionalProperties": false, "required": ["kind", "exteriorDistance"], "properties": { "kind": { "const": "mirror" }, "exteriorDistance": { "type": "number", "exclusiveMinimum": 0 } } },
-        { "type": "object", "additionalProperties": false, "required": ["kind", "closureDelay"], "properties": { "kind": { "const": "periodic" }, "closureDelay": { "type": "number", "exclusiveMinimum": 0 } } }
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": { "kind": { "const": "open" } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "rate"],
+          "properties": {
+            "kind": { "const": "driven" },
+            "rate": { "type": "number", "minimum": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "exteriorDistance"],
+          "properties": {
+            "kind": { "const": "mirror" },
+            "exteriorDistance": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "closureDelay"],
+          "properties": {
+            "kind": { "const": "periodic" },
+            "closureDelay": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
       ]
     },
     "link": {
@@ -204,16 +228,10 @@
           "type": "string"
         },
         "sourcePort": {
-          "enum": [
-            "left",
-            "right"
-          ]
+          "enum": ["left", "right"]
         },
         "targetPort": {
-          "enum": [
-            "left",
-            "right"
-          ]
+          "enum": ["left", "right"]
         },
         "delay": {
           "type": "number",

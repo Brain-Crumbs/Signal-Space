@@ -1,1 +1,13 @@
-{"name":"@signal-space/model","private":true,"version":"1.0.0","type":"module","exports":{".":"./src/index.js"}}
+{
+  "name": "@signal-space/model",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./schema": "./schema/scenario.v1.schema.json"
+  }
+}

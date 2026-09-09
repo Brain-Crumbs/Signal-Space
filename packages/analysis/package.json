@@ -1,0 +1,12 @@
+{
+  "name": "@signal-space/analysis",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@signal-space/model": "1.0.0"
+  }
+}
