@@ -1,4 +1,4 @@
-# T02 execution boundary
+# Shared execution boundary
 
 Engineering foundation for Paper I §11; parent #1, task #3. This adds no physical equations. The original Paper III attachment is background only and is not an implementation source for this task.
 
@@ -16,7 +16,7 @@ Both adapters call `execute({ runId, mode: 'inspect', scenario }, { signal })` f
 
 The engine yields to the task queue between preparation stages so worker cancel messages can be delivered. Synchronous validation itself is not interruptible; large inputs may postpone cancellation until the next stage. Callers must consume the generator to a terminal event (or deliberately stop it). An abort before completion produces exactly one cancelled event and no completed event. A snapshot may already have been delivered; it is still the supplied preparation, not evidence of a completed simulation.
 
-The smoke fixtures only validate plumbing and expose the user-supplied initial state. A snapshot at t=0 is not a solved trajectory, restart algorithm, evolved history, event realization, observer record or completed A–I protocol. Other execution modes fail explicitly until implemented. T03 must extend this interface with actual integration and complete evolving history; T04 owns stochastic scheduling and T07 owns run manifests/checkpoints/provenance. No tolerance or convergence claim is made here.
+The smoke fixtures only validate plumbing and expose the user-supplied initial state. A snapshot at t=0 is not a solved trajectory, restart algorithm, evolved history, event realization, observer record or completed A–I protocol. The `envelope` mode now provides actual integration and complete evolving history as described below; T04 owns stochastic scheduling and T07 owns run manifests/checkpoints/provenance. No tolerance or convergence claim is made here.
 
 Source-first private workspaces are bundled by Vite/esbuild and run in development through tsx. Strict TypeScript applies to new TS code; the T01 JavaScript semantic validator is exposed through declarations. ESLint forbids Node/React imports in shared source and Node/CLI imports in the web app.
 
@@ -27,3 +27,9 @@ History endpoint phase/frequency must agree exactly with the initial node state,
 Failure to clone caller input produces `INVALID_SCENARIO` with a field-level detail, before any snapshot or progress is exposed. `INTERNAL` remains reserved for failures after the input-cloning boundary. Mirror preparation history includes the ideal-reflection round trip `2d/c0`.
 
 SharedArrayBuffer values and views backed by shared memory are rejected, including within nested containers, because structured cloning cannot detach their backing storage. Ordinary ArrayBuffers and typed views remain supported and are owned before the first progress event.
+
+## T03 envelope execution (#4)
+
+`execute({ runId, mode: 'envelope', scenario, until, envelope?, resume? })` integrates deterministic envelopes through absolute time `until`. See [numerical contract, preparation and restart](envelope-solver.md). The entire request, including options and checkpoint, is cloned before the first progress yield and rejects shared memory. `inspect` is unchanged.
+
+Additional events are `envelope-sample` (physical sample plus tick crossings), `envelope-snapshot` (versioned complete evolved history), and progress stage `integrating`. Completion explicitly reports `mode: 'envelope'`. Numerical/configuration errors use `INVALID_REQUEST`, `INVALID_HISTORY`, `UNSUPPORTED_MODEL` or `NUMERICAL_FAILURE`; they do not emit completion. Cancellation during evolution emits the last accepted checkpoint before its terminal cancellation event. CLI `--until` and the production worker consume the same implementation.

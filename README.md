@@ -2,7 +2,7 @@
 
 A local mathematics workspace and reproducible toolkit for the Paper I directional signal-clock model.
 
-**Current capability:** validate a supplied scenario and inspect its complete initial preparation at t = 0 through a Node CLI or React Web Worker. This is the T02 engineering smoke check; no time integration, simulated event stream or scientific result is produced yet.
+**Current capability:** validate scenarios, inspect their initial preparation, and evolve deterministic Paper I envelopes with causal delay history, error controls, ticks and complete restart snapshots. The CLI and typed Web Worker share one solver. The React shell still displays preparation only; stochastic events, interactive evolution controls and A–I protocols follow in later tasks.
 
 ## Quick start
 
@@ -23,6 +23,7 @@ To inspect a JSON scenario or build both applications:
 npm run cli -- --file fixtures/scenarios/pair.json
 npm run build
 node apps/cli/dist/index.js --sample pair
+node apps/cli/dist/index.js --sample pair --until 1
 npm run preview -w @signal-space/web
 ```
 
@@ -32,16 +33,16 @@ The web build is in `apps/web/dist`; the bundled CLI is in `apps/cli/dist/index.
 
 ## Workspace
 
-| Path                   | Responsibility                                                                   |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| `packages/model`       | Versioned TypeScript contracts, JSON Schema, semantic validation                 |
-| `packages/sim`         | Shared async execution API and cancellable worker adapter; solver follows in T03 |
-| `packages/analysis`    | Initial-state inventory; numerical diagnostics follow in T06                     |
-| `packages/experiments` | Independent copies of isolated/pair smoke fixtures; A–I protocols follow later   |
-| `apps/cli`             | File/sample input, JSONL output and SIGINT adapter                               |
-| `apps/web`             | React shell; typed commands/results across a Web Worker                          |
+| Path                   | Responsibility                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `packages/model`       | Versioned TypeScript contracts, JSON Schema, semantic validation               |
+| `packages/sim`         | Shared execution API, causal envelope solver and cancellable worker adapter    |
+| `packages/analysis`    | Initial-state inventory; numerical diagnostics follow in T06                   |
+| `packages/experiments` | Independent copies of isolated/pair smoke fixtures; A–I protocols follow later |
+| `apps/cli`             | File/sample input, JSONL output and SIGINT adapter                             |
+| `apps/web`             | React shell; typed commands/results across a Web Worker                        |
 
-See [execution contract](docs/execution-api.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
+See [envelope solver](docs/envelope-solver.md), [execution contract](docs/execution-api.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
 
 ## Validation
 

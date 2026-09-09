@@ -159,9 +159,9 @@ export function App() {
       <aside>
         <strong>Workspace smoke check</strong>
         <p>
-          This checks the supplied preparation at t = 0. Time evolution,
-          numerical integration and experiment results are not available yet.
-          The displayed state is simulator truth.
+          This checks the supplied preparation at t = 0. Envelope evolution is
+          available through the CLI and shared worker API; interactive evolution
+          controls follow in T17. The displayed state is simulator truth.
         </p>
       </aside>
     </main>
