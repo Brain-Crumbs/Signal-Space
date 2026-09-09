@@ -558,6 +558,28 @@ test('piecewise inputs and gain changes use exact discontinuity boundaries witho
   }
 });
 
+test('numerically coincident propagated and direct boundaries are coalesced', async () => {
+  const s = createSample('pair');
+  s.links[0]!.delay = 0.1;
+  s.links[1]!.delay = 0.2;
+  s.boundaries.left = { kind: 'driven', rate: 0 };
+  const options: EnvelopeOptions = {
+      boundaryInputs: {
+        left: [
+          { time: 0, rate: 0 },
+          { time: 0.3, rate: 1 },
+        ],
+      },
+    },
+    solver = new EnvelopeSolver(s, options),
+    boundaries = (
+      solver as unknown as { boundaries: number[] }
+    ).boundaries.filter((time) => Math.abs(time - 0.3) < 1e-12);
+  assert.deepEqual(boundaries, [0.3]);
+  while (solver.snapshot().time < 0.31) solver.advance(0.31);
+  assert.equal(solver.snapshot().time, 0.31);
+});
+
 test('sampled prehistory uses phase Hermite derivative and rejects hidden between-knot frequency violations', async () => {
   const s = createSample('pair');
   const points = [-1, 0].map((time) => ({
@@ -610,6 +632,30 @@ test('solver tolerances do not widen physical prehistory bounds', () => {
       error instanceof Error &&
       'code' in error &&
       error.code === 'INVALID_HISTORY',
+  );
+});
+
+test('prehistory bounds permit only representation-scale roundoff', () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.gain = 0.2;
+  node.response = 'R1';
+  node.omega = 2.2;
+  s.initialHistory.startTime = -0.1;
+  s.initialHistory.nodes[node.id]!.omega = node.omega;
+  assert.doesNotThrow(
+    () =>
+      new EnvelopeSolver(s, {
+        prehistory: [
+          {
+            time: -0.1,
+            nodes: {
+              [node.id]: { phi: -0.22000000000000003, omega: 2.2 },
+            },
+          },
+          { time: 0, nodes: { [node.id]: { phi: 0, omega: 2.2 } } },
+        ],
+      }),
   );
 });
 
@@ -694,6 +740,23 @@ test('segments ending at gain changes use left-limit bounds', () => {
       }
     ).validSegment.bind(solver);
   assert.equal(validSegment(segment), false);
+});
+
+test('solver tolerances do not widen evolved physical bounds', () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.gain = -0.2;
+  node.response = 'R1';
+  node.relaxationTime = 0.01;
+  s.boundaries.left = { kind: 'driven', rate: 1.3 };
+  s.solver.step = 0.061;
+  s.solver.relativeTolerance = 1;
+  const solver = new EnvelopeSolver(s);
+  solver.advance(0.061);
+  const snapshot = solver.snapshot();
+  assert.equal(snapshot.acceptedSteps, 0);
+  assert.equal(snapshot.rejectedSteps, 1);
+  assert.ok(snapshot.nextStep < 0.061);
 });
 
 test('dense intensity history cannot decrease between increasing endpoints', () => {

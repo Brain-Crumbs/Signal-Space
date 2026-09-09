@@ -161,6 +161,7 @@ function stable(value: unknown): string {
 }
 const PORTABLE_REPLAY_ABSOLUTE_TOLERANCE = 1e-12;
 const PORTABLE_REPLAY_MAX_ULPS = 32n;
+const PHYSICAL_BOUND_MAX_ULPS = 8n;
 const FLOAT64_SIGN_BIT = 1n << 63n;
 const FLOAT64_MASK = (1n << 64n) - 1n;
 const replayBits = new DataView(new ArrayBuffer(8));
@@ -171,14 +172,18 @@ function orderedReplayBits(value: number): bigint {
     ? FLOAT64_MASK - bits
     : FLOAT64_SIGN_BIT + bits;
 }
-function withinPortableReplayUlps(actual: number, expected: number): boolean {
+function withinUlps(
+  actual: number,
+  expected: number,
+  maximumDistance: bigint,
+): boolean {
   const actualBits = orderedReplayBits(actual),
     expectedBits = orderedReplayBits(expected),
     distance =
       actualBits > expectedBits
         ? actualBits - expectedBits
         : expectedBits - actualBits;
-  return distance <= PORTABLE_REPLAY_MAX_ULPS;
+  return distance <= maximumDistance;
 }
 function portableReplayEqual(actual: unknown, expected: unknown): boolean {
   if (typeof actual === 'number' && typeof expected === 'number')
@@ -186,7 +191,7 @@ function portableReplayEqual(actual: unknown, expected: unknown): boolean {
       Number.isFinite(actual) &&
       Number.isFinite(expected) &&
       (Math.abs(actual - expected) <= PORTABLE_REPLAY_ABSOLUTE_TOLERANCE ||
-        withinPortableReplayUlps(actual, expected))
+        withinUlps(actual, expected, PORTABLE_REPLAY_MAX_ULPS))
     );
   if (Array.isArray(actual) || Array.isArray(expected))
     return (
@@ -461,7 +466,16 @@ export class EnvelopeSolver {
           'Too many propagated discontinuity boundaries.',
         );
     }
-    this.boundaries = [...boundarySet].sort((a, b) => a - b);
+    this.boundaries = [];
+    for (const time of [...boundarySet].sort((a, b) => a - b)) {
+      const previous = this.boundaries.at(-1);
+      if (
+        previous === undefined ||
+        Math.abs(time - previous) >
+          8 * Number.EPSILON * Math.max(1, Math.abs(time), Math.abs(previous))
+      )
+        this.boundaries.push(time);
+    }
     this.minDelay = Math.min(
       Infinity,
       ...envelopeRoutes(scenario).map((l) => l.delay),
@@ -542,7 +556,11 @@ export class EnvelopeSolver {
             p.time - prior.time,
           );
           const [lower, upper] = this.bounds(n, 0, true);
-          if (lo < lower || hi > upper || lo <= 0)
+          if (
+            (lo < lower && !withinUlps(lo, lower, PHYSICAL_BOUND_MAX_ULPS)) ||
+            (hi > upper && !withinUlps(hi, upper, PHYSICAL_BOUND_MAX_ULPS)) ||
+            lo <= 0
+          )
             fail(
               'History phase derivative must remain in the admissible frequency interval, including between knots.',
             );
@@ -708,8 +726,8 @@ export class EnvelopeSolver {
       );
       return (
         lo > 0 &&
-        lo >= lower - this.tolerance(lower) &&
-        hi <= upper + this.tolerance(upper) &&
+        (lo >= lower || withinUlps(lo, lower, PHYSICAL_BOUND_MAX_ULPS)) &&
+        (hi <= upper || withinUlps(hi, upper, PHYSICAL_BOUND_MAX_ULPS)) &&
         phaseRate > 0 &&
         intensitiesMonotone
       );
