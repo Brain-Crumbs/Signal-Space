@@ -17,13 +17,39 @@ import type { SampleId } from '@signal-space/experiments';
 const args = process.argv.slice(2);
 const commands = new Set(['validate', 'run', 'sweep', 'resume']);
 
-function option(name: string, values: string[]): string | undefined {
-  const index = values.indexOf(name);
-  if (index < 0) return undefined;
-  const value = values[index + 1];
-  if (!value || value.startsWith('--'))
-    throw new Error(`${name} requires a value.`);
-  return value;
+interface ManifestCommandOptions {
+  manifest?: string;
+  checkpoint?: string;
+  concurrency?: string;
+}
+
+function parseManifestCommandOptions(
+  command: string,
+  values: string[],
+): ManifestCommandOptions {
+  const allowed = new Set(
+    command === 'validate' || command === 'run'
+      ? ['--manifest']
+      : ['--manifest', '--checkpoint', '--concurrency'],
+  );
+  const parsed: ManifestCommandOptions = {};
+  const seen = new Set<string>();
+  for (let index = 0; index < values.length; index++) {
+    const name = values[index];
+    if (!name?.startsWith('--') || !allowed.has(name))
+      throw new Error(
+        `Unrecognized or misplaced argument ${name ?? '(missing)'}.`,
+      );
+    if (seen.has(name)) throw new Error(`${name} may only be specified once.`);
+    seen.add(name);
+    const value = values[++index];
+    if (!value || value.startsWith('--'))
+      throw new Error(`${name} requires a value.`);
+    if (name === '--manifest') parsed.manifest = value;
+    else if (name === '--checkpoint') parsed.checkpoint = value;
+    else parsed.concurrency = value;
+  }
+  return parsed;
 }
 
 function gitMetadata(): { codeRevision: string; dirty: boolean } {
@@ -150,6 +176,11 @@ async function resumeSweepCommand(
   const plan = await loadPlan(definitionPath);
   const concurrency =
     concurrencyText === undefined ? undefined : Number(concurrencyText);
+  if (
+    concurrencyText !== undefined &&
+    (!Number.isInteger(concurrency) || concurrency! < 1)
+  )
+    throw new Error('--concurrency must be a positive integer.');
   let checkpointWrites = Promise.resolve();
   const outcome = await resumeSweep(plan, value, {
     ...(concurrency === undefined ? {} : { concurrency }),
@@ -175,7 +206,8 @@ async function resumeSweepCommand(
 }
 
 async function handleManifestCommand(command: string): Promise<void> {
-  const manifestPath = option('--manifest', args.slice(1));
+  const options = parseManifestCommandOptions(command, args.slice(1));
+  const manifestPath = options.manifest;
   const controller = command === 'validate' ? undefined : new AbortController();
   const cancel = () => controller?.abort();
   if (controller) process.on('SIGINT', cancel);
@@ -202,13 +234,13 @@ async function handleManifestCommand(command: string): Promise<void> {
         throw new Error('sweep requires --manifest definition.json.');
       await runSweepCommand(
         manifestPath,
-        option('--checkpoint', args.slice(1)),
-        option('--concurrency', args.slice(1)),
+        options.checkpoint,
+        options.concurrency,
         controller?.signal,
       );
       return;
     }
-    const checkpointPath = option('--checkpoint', args.slice(1));
+    const checkpointPath = options.checkpoint;
     if (!manifestPath || !checkpointPath)
       throw new Error(
         'resume requires --manifest definition.json and --checkpoint checkpoint.json.',
@@ -216,7 +248,7 @@ async function handleManifestCommand(command: string): Promise<void> {
     await resumeSweepCommand(
       manifestPath,
       checkpointPath,
-      option('--concurrency', args.slice(1)),
+      options.concurrency,
       controller?.signal,
     );
   } finally {

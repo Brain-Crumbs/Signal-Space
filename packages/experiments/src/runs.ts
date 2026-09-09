@@ -5,6 +5,7 @@ import {
   type EnvelopeOptions,
   type PacketOptions,
   type RunEvent,
+  validateScenarioStructure,
 } from '@signal-space/sim';
 
 export const EXPERIMENT_SCHEMA_VERSION = 'paper-i-experiment-v1' as const;
@@ -111,6 +112,7 @@ export interface ExperimentManifest {
   tolerances: ExperimentDefinition['tolerances'];
   observables: ObservableName[];
   budgets: ExperimentBudgets;
+  rootSeed: string;
   seed?: string;
   provenance: ManifestProvenance;
   continuationOf?: string;
@@ -371,21 +373,29 @@ function validatePacketOptions(value: unknown): void {
   }
 }
 
+function validateDefinitionScenario(value: unknown, label: string): void {
+  const structureErrors = validateScenarioStructure(value);
+  if (structureErrors.length > 0)
+    invalid(
+      `${label} violates the model schema at ${structureErrors[0]?.path ?? '$'}`,
+    );
+  const validation = validateScenario(value);
+  if (!validation.ok)
+    invalid(
+      `${label} violates the model contract at ${validation.errors[0]?.path ?? '$'}`,
+    );
+}
+
 export function validateDefinition(
   definition: unknown,
 ): asserts definition is ExperimentDefinition {
-  if (!definition || typeof definition !== 'object')
-    invalid('definition must be an object');
+  if (!isRecord(definition)) invalid('definition must be an object');
   const value = definition as Partial<ExperimentDefinition>;
   if (value.schemaVersion !== EXPERIMENT_SCHEMA_VERSION)
     invalid('unsupported schemaVersion');
   if (!value.id || typeof value.id !== 'string') invalid('id is required');
   if (!value.scenario) invalid('scenario is required');
-  const scenarioValidation = validateScenario(value.scenario);
-  if (!scenarioValidation.ok)
-    invalid(
-      `scenario violates the model contract at ${scenarioValidation.errors[0]?.path ?? '$'}`,
-    );
+  validateDefinitionScenario(value.scenario, 'scenario');
   if (!value.mode || !['inspect', 'envelope', 'packets'].includes(value.mode))
     invalid('invalid mode');
   const until = value.until;
@@ -407,7 +417,8 @@ export function validateDefinition(
   if (typeof value.seed !== 'string' || value.seed.length === 0)
     invalid('seed is required');
   const windows = value.windows;
-  if (!windows) invalid('windows are required');
+  if (!isRecord(windows) || !isRecord(windows.measurement))
+    invalid('windows are required');
   validateFiniteRange(windows.transient, 'windows.transient');
   validateFiniteRange(windows.measurement.start, 'windows.measurement.start');
   validateFiniteRange(windows.measurement.end, 'windows.measurement.end');
@@ -419,11 +430,30 @@ export function validateDefinition(
     invalid(
       'windows must satisfy transient <= measurement.start <= measurement.end <= until',
     );
-  for (const window of windows.nested ?? []) {
+  if (windows.nested !== undefined && !Array.isArray(windows.nested))
+    invalid('windows.nested must be an array');
+  for (const [index, window] of (windows.nested ?? []).entries()) {
+    if (!isRecord(window)) invalid(`nested window ${index} must be an object`);
     validateFiniteRange(window.start, 'nested window start');
     validateFiniteRange(window.end, 'nested window end');
-    if (window.start > window.end || window.end > until!)
-      invalid('nested windows must be ordered within until');
+    if (
+      window.end <= window.start ||
+      window.start < windows.transient ||
+      window.end > until!
+    )
+      invalid(
+        'nested windows must be positive, post-transient and within until',
+      );
+    const previous = windows.nested?.[index - 1];
+    if (
+      previous &&
+      (window.start > previous.start ||
+        window.end < previous.end ||
+        (window.start === previous.start && window.end === previous.end))
+    )
+      invalid(
+        'nested windows must be ordered shortest to longest and contain the previous window',
+      );
   }
   if (
     !value.tolerances ||
@@ -436,6 +466,7 @@ export function validateDefinition(
   if (!Array.isArray(value.observables))
     invalid('observables must be an array');
   const budgets = value.budgets;
+  if (!isRecord(budgets)) invalid('budgets are required');
   if (
     !budgets ||
     !Number.isInteger(budgets.maxJobs) ||
@@ -443,6 +474,16 @@ export function validateDefinition(
     budgets.maxJobs > 64
   )
     invalid('budgets.maxJobs must be an integer from 1 to 64');
+  const budgetKeys = new Set([
+    'maxJobs',
+    'maxRuns',
+    'maxSteps',
+    'maxEvents',
+    'maxPending',
+    'checkpointEvery',
+  ]);
+  if (Object.keys(budgets).some((name) => !budgetKeys.has(name)))
+    invalid('budgets contain an unknown key');
   for (const [name, limit] of Object.entries(budgets))
     if (
       name !== 'maxJobs' &&
@@ -464,11 +505,25 @@ export function validateDefinition(
       invalid('envelope maxSteps must not exceed 1000000');
   }
   const axes = value.parameters ?? [];
+  if (!Array.isArray(axes)) invalid('parameters must be an array');
   const axisIds = new Set<string>();
+  const axisPaths = new Set<string>();
   for (const axis of axes) {
-    if (!axis.id || axisIds.has(axis.id) || !axis.path || !axis.values.length)
+    if (
+      !isRecord(axis) ||
+      typeof axis.id !== 'string' ||
+      !axis.id ||
+      axisIds.has(axis.id) ||
+      typeof axis.path !== 'string' ||
+      !axis.path ||
+      !Array.isArray(axis.values) ||
+      !axis.values.length
+    )
       invalid('parameter axes need unique ids, paths and values');
     axisIds.add(axis.id);
+    if (axisPaths.has(axis.path))
+      invalid(`parameter axes target the same path ${axis.path}`);
+    axisPaths.add(axis.path);
     if (axis.values.some((entry) => !isPrimitive(entry)))
       invalid(`parameter axis ${axis.id} contains a non-JSON value`);
     const uniqueValues = new Set(
@@ -478,6 +533,7 @@ export function validateDefinition(
       invalid(`parameter axis ${axis.id} contains duplicate values`);
   }
   const variants = value.variants ?? [];
+  if (!Array.isArray(variants)) invalid('variants must be an array');
   const variantIds = new Set<string>();
   for (const variant of variants) {
     if (!variant.id || variantIds.has(variant.id))
@@ -489,9 +545,15 @@ export function validateDefinition(
       nodeById(value.scenario, nodeId);
   }
   const controls = value.controls ?? [];
+  if (!Array.isArray(controls)) invalid('controls must be an array');
   const controlIds = new Set<string>();
   for (const control of controls) {
-    if (!control.id || controlIds.has(control.id))
+    if (
+      !isRecord(control) ||
+      typeof control.id !== 'string' ||
+      !control.id ||
+      controlIds.has(control.id)
+    )
       invalid('controls need unique ids');
     controlIds.add(control.id);
   }
@@ -625,11 +687,7 @@ export async function resolveDefinition(
           applyControl(scenario, control);
           if (definition.interventions)
             scenario.interventions = clone(definition.interventions);
-          const resolvedValidation = validateScenario(scenario);
-          if (!resolvedValidation.ok)
-            invalid(
-              `resolved scenario violates the model contract at ${resolvedValidation.errors[0]?.path ?? '$'}`,
-            );
+          validateDefinitionScenario(scenario, 'resolved scenario');
           const scenarioHash = await sha256(scenario);
           const base: ExperimentManifest = {
             kind: MANIFEST_KIND,
@@ -648,6 +706,7 @@ export async function resolveDefinition(
             tolerances: clone(definition.tolerances),
             observables: [...definition.observables],
             budgets: clone(definition.budgets),
+            rootSeed: definition.seed,
             provenance,
           };
           if (definition.mode === 'packets')
@@ -688,16 +747,34 @@ export async function validateManifest(value: unknown): Promise<void> {
   if (
     value.schemaVersion !== 1 ||
     !value.runId ||
+    !value.experimentId ||
     !value.definitionHash ||
-    !value.scenarioHash
+    !value.scenarioHash ||
+    typeof value.rootSeed !== 'string' ||
+    value.rootSeed.length === 0 ||
+    !value.parameters ||
+    typeof value.replicate !== 'number' ||
+    !Number.isInteger(value.replicate)
   )
     throw new Error('Run manifest is missing its identity fields.');
+  const structureErrors = validateScenarioStructure(value.scenario);
+  if (structureErrors.length > 0)
+    throw new Error('Run manifest contains a structurally invalid scenario.');
   const validation = validateScenario(value.scenario);
   if (!validation.ok)
     throw new Error('Run manifest contains an invalid scenario.');
   const actualScenarioHash = await sha256(value.scenario);
   if (actualScenarioHash !== value.scenarioHash)
     throw new Error('Run manifest scenarioHash does not match its scenario.');
+  const identityHash = await sha256({
+    experimentId: value.experimentId,
+    variantId: value.variantId,
+    controlId: value.controlId,
+    parameters: value.parameters,
+    replicate: value.replicate,
+  });
+  if (value.runId !== `${value.experimentId}:${identityHash.slice(0, 24)}`)
+    throw new Error('Run manifest runId does not match its identity.');
   if (!Number.isFinite(value.execution.until) || value.execution.until < 0)
     throw new Error('Run manifest contains an invalid until time.');
   if (
@@ -707,8 +784,39 @@ export async function validateManifest(value: unknown): Promise<void> {
     throw new Error(
       'Packet manifests require a derived seed and packet options.',
     );
+  if (value.execution.mode === 'packets') {
+    const expectedSeed = await sha256([
+      'physical-run-v1',
+      value.rootSeed,
+      identityHash,
+    ]);
+    if (value.seed !== expectedSeed)
+      throw new Error(
+        'Run manifest seed does not match its root seed and identity.',
+      );
+  }
   if (value.execution.mode !== 'packets' && value.seed !== undefined)
     throw new Error('Only packet manifests may contain a physical seed.');
+}
+
+function resultEventsAreConsistent(result: RunResult): boolean {
+  const terminal = result.events.at(-1);
+  return (
+    Array.isArray(result.events) &&
+    result.events.length > 0 &&
+    result.events.every(
+      (event) =>
+        !!event && typeof event === 'object' && event.runId === result.runId,
+    ) &&
+    statusFor(result.events) === result.status &&
+    (result.status === 'completed'
+      ? terminal?.type === 'completed'
+      : result.status === 'incomplete'
+        ? terminal?.type === 'incomplete'
+        : result.status === 'cancelled'
+          ? terminal?.type === 'cancelled'
+          : terminal?.type === 'failed')
+  );
 }
 
 export async function validateSweepCheckpoint(value: unknown): Promise<void> {
@@ -726,18 +834,19 @@ export async function validateSweepCheckpoint(value: unknown): Promise<void> {
     await validateManifest(result.manifest);
     if (
       result.runId !== result.manifest.runId ||
-      statusFor(result.events) !== result.status
+      !resultEventsAreConsistent(result)
     )
       throw new Error('Sweep checkpoint completed result is inconsistent.');
     completedIds.add(result.runId);
   }
   for (const result of attempts) {
     await validateManifest(result.manifest);
-    if (result.runId !== result.manifest.runId)
-      throw new Error('Sweep checkpoint result and manifest IDs differ.');
-    if (statusFor(result.events) !== result.status)
+    if (
+      result.runId !== result.manifest.runId ||
+      !resultEventsAreConsistent(result)
+    )
       throw new Error(
-        'Sweep checkpoint result status does not match its terminal event.',
+        'Sweep checkpoint result status does not match its terminal event; result and manifest IDs differ or are inconsistent.',
       );
   }
 }
@@ -844,6 +953,14 @@ function checkpointFor(
   };
 }
 
+function manifestPlanIdentity(manifest: ExperimentManifest): unknown {
+  const copy = clone(manifest) as unknown as Record<string, unknown>;
+  delete copy.provenance;
+  delete copy.continuationOf;
+  if (copy.seed === undefined) delete copy.seed;
+  return copy;
+}
+
 export async function runSweep(
   plan: ExperimentPlan,
   options: SweepOptions = {},
@@ -864,11 +981,15 @@ export async function runSweep(
       throw new Error('Checkpoint does not belong to this experiment plan.');
   }
   const priorAttempts = prior ? (prior.attempts ?? prior.completed) : [];
-  const plannedIds = new Set(plan.manifests.map((manifest) => manifest.runId));
+  const plannedById = new Map(
+    plan.manifests.map((manifest) => [manifest.runId, manifest]),
+  );
   for (const result of priorAttempts) {
+    const planned = plannedById.get(result.runId);
     if (
-      !plannedIds.has(result.runId) ||
-      result.manifest.definitionHash !== plan.definitionHash
+      !planned ||
+      canonicalJson(manifestPlanIdentity(result.manifest)) !==
+        canonicalJson(manifestPlanIdentity(planned))
     )
       throw new Error('Checkpoint contains a result outside the current plan.');
   }
