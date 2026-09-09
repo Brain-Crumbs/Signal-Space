@@ -25,6 +25,10 @@ npm run build
 node apps/cli/dist/index.js --sample pair
 node apps/cli/dist/index.js --sample pair --until 1
 npm run preview -w @signal-space/web
+
+# T07 declarative experiment commands
+npm run cli -- validate --manifest definition.json
+npm run cli -- sweep --manifest definition.json --checkpoint sweep.json
 ```
 
 The CLI emits JSON Lines (progress, snapshot, then completed/cancelled/failed); SIGINT requests cancellation. Exit codes: 0 success, 1 invalid input/failure, 130 cancelled. Use `--help` for arguments. For machine-readable output, invoke the built CLI directly (npm itself prints script banners).
@@ -42,7 +46,7 @@ The web build is in `apps/web/dist`; the bundled CLI is in `apps/cli/dist/index.
 | `apps/cli`             | File/sample input, JSONL output and SIGINT adapter                             |
 | `apps/web`             | React shell; typed commands/results across a Web Worker                        |
 
-See [detector records and physical branches](docs/observation.md), [envelope solver](docs/envelope-solver.md), [execution contract](docs/execution-api.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
+See [detector records and physical branches](docs/observation.md), [envelope solver](docs/envelope-solver.md), [execution contract](docs/execution-api.md), [experiment runs](docs/experiment-runs.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
 
 ## Validation
 

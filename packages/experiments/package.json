@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./schema": "./schema/experiment.v1.schema.json"
   },
   "dependencies": {
-    "@signal-space/model": "1.0.0"
+    "@signal-space/model": "1.0.0",
+    "@signal-space/sim": "0.1.0"
   }
 }
