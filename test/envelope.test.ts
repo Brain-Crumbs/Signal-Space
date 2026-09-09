@@ -187,6 +187,14 @@ test('saved complete history resumes identically at an accepted step and rejects
     (c: EnvelopeSnapshot) => {
       c.segments[0]!.d0[0] = 999;
     },
+    (c: EnvelopeSnapshot) => {
+      c.segments[0]!.y1[2]! += 1;
+      for (const segment of c.segments.slice(1)) {
+        segment.y0[2]! += 1;
+        segment.y1[2]! += 1;
+      }
+      c.state[2]! += 1;
+    },
   ]) {
     const invalid = structuredClone(checkpoint);
     mutate(invalid);

@@ -861,6 +861,15 @@ export class EnvelopeSolver {
           fail(
             'Checkpoint derivatives disagree with saved causal inputs and model equations.',
           );
+      const replay = this.rk4(segment.start, segment.y0, segment.end, true);
+      if (
+        segment.y1.some(
+          (value, i) =>
+            Math.abs(value - replay.y1[i]!) >
+            1e-10 * (1 + Math.abs(replay.y1[i]!)),
+        )
+      )
+        fail('Checkpoint state increments disagree with replayed RK4 history.');
       end = segment.end;
       state = segment.y1;
       this.time = end;
