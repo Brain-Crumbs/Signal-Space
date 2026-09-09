@@ -664,6 +664,53 @@ test('unsupported physics and exhausted error control fail structurally without 
   assert.equal(last.error.code, 'NUMERICAL_FAILURE');
 });
 
+test('non-finite envelope option values fail at the request boundary', async () => {
+  const s = createSample('pair'),
+    point = (time: number) => ({
+      time,
+      nodes: Object.fromEntries(
+        s.nodes.map((node) => [
+          node.id,
+          { phi: node.phi + node.omega * time, omega: node.omega },
+        ]),
+      ),
+    }),
+    invalidOptions: EnvelopeOptions[] = [
+      { tickSection: Number.NaN },
+      { maxSteps: Number.POSITIVE_INFINITY },
+      {
+        boundaryInputs: {
+          left: [
+            { time: 0, rate: 1 },
+            { time: Number.NaN, rate: 2 },
+          ],
+        },
+      },
+      {
+        boundaryInputs: { left: [{ time: 0, rate: Number.POSITIVE_INFINITY }] },
+      },
+      {
+        prehistory: [point(s.initialHistory.startTime), point(0)],
+      },
+    ];
+  invalidOptions.at(-1)!.prehistory![0]!.nodes[s.nodes[0]!.id]!.phi =
+    Number.NaN;
+  for (const envelope of invalidOptions) {
+    const events: RunEvent[] = [];
+    for await (const event of execute({
+      runId: 'non-finite-options',
+      mode: 'envelope',
+      scenario: s,
+      until: 0.1,
+      envelope,
+    }))
+      events.push(event);
+    const last = events.at(-1);
+    assert.ok(last?.type === 'failed');
+    assert.equal(last.error.code, 'INVALID_REQUEST');
+  }
+});
+
 test('worker envelope cancellation emits a resumable checkpoint and no completion', async () => {
   const events: RunEvent[] = [];
   const handle = createWorkerHandler((e) => {

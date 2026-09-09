@@ -143,6 +143,13 @@ const validateOptions = ajv.compile({
     },
   },
 });
+function allNumbersFinite(value: unknown): boolean {
+  if (typeof value === 'number') return Number.isFinite(value);
+  if (Array.isArray(value)) return value.every(allNumbersFinite);
+  if (value && typeof value === 'object')
+    return Object.values(value).every(allNumbersFinite);
+  return true;
+}
 function stable(value: unknown): string {
   return JSON.stringify(value, (_key, v: unknown) =>
     v && typeof v === 'object' && !Array.isArray(v)
@@ -268,6 +275,11 @@ export class EnvelopeSolver {
       throw new EnvelopeFailure(
         'INVALID_REQUEST',
         `Invalid envelope options: ${ajv.errorsText(validateOptions.errors)}`,
+      );
+    if (!allNumbersFinite(options))
+      throw new EnvelopeFailure(
+        'INVALID_REQUEST',
+        'All numeric envelope option values must be finite.',
       );
     this.options = options as EnvelopeOptions;
     if (scenario.solver.method !== 'rk4')
