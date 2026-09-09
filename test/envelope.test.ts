@@ -594,6 +594,27 @@ test('segments ending at gain changes use left-limit bounds', () => {
   assert.equal(validSegment(segment), false);
 });
 
+test('dense intensity history cannot decrease between increasing endpoints', () => {
+  const s = isolated(),
+    solver = new EnvelopeSolver(s),
+    validSegment = (
+      solver as unknown as {
+        validSegment(candidate: DenseSegment): boolean;
+      }
+    ).validSegment.bind(solver),
+    segment: DenseSegment = {
+      start: 0,
+      end: 1,
+      y0: [0, 2, 0, 0],
+      y1: [2, 2, 1, 1],
+      d0: [2, 0, 10, 10],
+      d1: [2, 0, 10, 10],
+    };
+  assert.ok(segment.y1[2]! >= segment.y0[2]!);
+  assert.ok(segment.y1[3]! >= segment.y0[3]!);
+  assert.equal(validSegment(segment), false);
+});
+
 test('unsupported physics and exhausted error control fail structurally without clipping', async () => {
   for (const [mutate, code] of [
     [
@@ -714,7 +735,7 @@ test('nonlinear retarded source history converges against independent convolutio
   const expected =
     receiver.omega0 + integrate(0, delay) + integrate(delay, until);
   const errors: number[] = [];
-  for (const step of [0.13, 0.065, 0.0325]) {
+  for (const step of [0.12, 0.06, 0.03]) {
     s.solver = {
       method: 'rk4',
       step,

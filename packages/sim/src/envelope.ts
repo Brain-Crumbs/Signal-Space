@@ -623,12 +623,22 @@ export class EnvelopeSolver {
         s.d1[k]!,
         h,
       );
+      const intensitiesMonotone = [2, 3].every(
+        (offset) =>
+          derivativeRange(
+            s.y0[k + offset]!,
+            s.y1[k + offset]!,
+            s.d0[k + offset]!,
+            s.d1[k + offset]!,
+            h,
+          )[0] >= 0,
+      );
       return (
         lo > 0 &&
         lo >= lower - this.tolerance(lower) &&
         hi <= upper + this.tolerance(upper) &&
         phaseRate > 0 &&
-        [2, 3].every((offset) => s.y1[k + offset]! >= s.y0[k + offset]!)
+        intensitiesMonotone
       );
     });
   }
