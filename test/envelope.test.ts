@@ -387,6 +387,17 @@ test('checkpoint restore replays a genuine rejected adaptive attempt', () => {
   assert.deepEqual(new EnvelopeSolver(s, {}, snapshot).snapshot(), snapshot);
 });
 
+test('checkpoint restore tolerates portable last-bit replay differences', async () => {
+  const s = createSample('pair'),
+    checkpoint = (await run(s, 0.3)).snapshot,
+    difference = 1e-14;
+  for (const segment of checkpoint.segments) {
+    segment.d0[1]! += difference;
+    segment.d1[1]! -= difference;
+  }
+  assert.doesNotThrow(() => new EnvelopeSolver(s, {}, checkpoint));
+});
+
 test('checkpoint restore rejects cumulative sub-threshold RK4 increment changes', async () => {
   const s = createSample('pair'),
     checkpoint = (await run(s, 1.7)).snapshot,

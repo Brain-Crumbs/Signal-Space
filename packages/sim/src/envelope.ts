@@ -159,6 +159,48 @@ function stable(value: unknown): string {
       : v,
   );
 }
+const PORTABLE_REPLAY_TOLERANCE = 1e-12;
+function portableReplayEqual(actual: unknown, expected: unknown): boolean {
+  if (typeof actual === 'number' && typeof expected === 'number')
+    return (
+      Number.isFinite(actual) &&
+      Number.isFinite(expected) &&
+      Math.abs(actual - expected) <=
+        PORTABLE_REPLAY_TOLERANCE *
+          Math.max(1, Math.abs(actual), Math.abs(expected))
+    );
+  if (Array.isArray(actual) || Array.isArray(expected))
+    return (
+      Array.isArray(actual) &&
+      Array.isArray(expected) &&
+      actual.length === expected.length &&
+      actual.every((value, index) =>
+        portableReplayEqual(value, expected[index]),
+      )
+    );
+  if (
+    actual &&
+    expected &&
+    typeof actual === 'object' &&
+    typeof expected === 'object'
+  ) {
+    const actualEntries = Object.entries(actual).sort(([a], [b]) =>
+        a.localeCompare(b),
+      ),
+      expectedEntries = Object.entries(expected).sort(([a], [b]) =>
+        a.localeCompare(b),
+      );
+    return (
+      actualEntries.length === expectedEntries.length &&
+      actualEntries.every(
+        ([key, value], index) =>
+          key === expectedEntries[index]![0] &&
+          portableReplayEqual(value, expectedEntries[index]![1]),
+      )
+    );
+  }
+  return actual === expected;
+}
 export function emission(
   node: ClockNode,
   phi: number,
@@ -928,7 +970,7 @@ export class EnvelopeSolver {
         first.end !== midpoint ||
         second.end !== attempt.end ||
         second.start !== midpoint ||
-        stable(first.y0) !== stable(state) ||
+        !portableReplayEqual(first.y0, state) ||
         stable(second.y0) !== stable(first.y1)
       )
         fail('Checkpoint history must contain contiguous RK4 half-step pairs.');
@@ -969,7 +1011,7 @@ export class EnvelopeSolver {
             fail(
               'Checkpoint derivatives disagree with saved causal inputs and model equations.',
             );
-        if (stable(segment) !== stable(replay))
+        if (!portableReplayEqual(segment, replay))
           fail(
             'Checkpoint state increments disagree with replayed RK4 history.',
           );
@@ -987,9 +1029,9 @@ export class EnvelopeSolver {
       segmentIndex !== s.segments.length
     )
       fail('Checkpoint attempt trace disagrees with saved step counters.');
-    if (end !== s.time || stable(state) !== stable(s.state))
+    if (end !== s.time || !portableReplayEqual(state, s.state))
       fail('Checkpoint endpoint disagrees with complete history.');
-    if (s.nextStep !== proposedStep)
+    if (!portableReplayEqual(s.nextStep, proposedStep))
       fail('Checkpoint next step disagrees with adaptive controller replay.');
     this.time = s.time;
     this.state = s.state;

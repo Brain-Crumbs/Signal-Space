@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { execute } from '@signal-space/sim';
+import type { EnvelopeSnapshot } from '@signal-space/sim';
 import { createSample } from '@signal-space/experiments';
 
 test('production worker renders the same initial snapshot as the shared engine', async ({
@@ -114,4 +115,19 @@ test('production worker integrates the same causal history as Node', async ({
     } else expect(actual).toBe(reference);
   };
   compare(result, expected);
+  const browserSnapshot = (
+    result as Array<{ type: string; snapshot?: EnvelopeSnapshot }>
+  ).find((event) => event.type === 'envelope-snapshot')?.snapshot;
+  expect(browserSnapshot).toBeDefined();
+  if (!browserSnapshot) throw new Error('Browser snapshot missing');
+  const resumed = [];
+  for await (const event of execute({
+    runId: 'node-resume',
+    mode: 'envelope',
+    scenario,
+    until: 0.2,
+    resume: browserSnapshot,
+  }))
+    resumed.push(event);
+  expect(resumed.at(-1)?.type).toBe('completed');
 });
