@@ -62,14 +62,43 @@ const validateStructure = new Ajv2020({ allErrors: true }).compile<Scenario>(
 );
 const ports: Port[] = ['left', 'right'];
 const order = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
-function canonical(value: unknown): string {
-  if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
-  if (value !== null && typeof value === 'object')
+function canonical(
+  value: unknown,
+  ancestors = new Set<object>(),
+  depth = 0,
+): string {
+  const fail = (): never => {
+    throw new EnvelopeFailure(
+      'INVALID_HISTORY',
+      'Checkpoint must contain finite, acyclic JSON data with nesting depth at most 128.',
+    );
+  };
+  if (depth > 128) fail();
+  if (value === null || typeof value === 'string' || typeof value === 'boolean')
+    return JSON.stringify(value);
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) fail();
+    return JSON.stringify(value);
+  }
+  if (typeof value !== 'object') return fail();
+  if (ancestors.has(value)) fail();
+  if (
+    !Array.isArray(value) &&
+    Object.getPrototypeOf(value) !== Object.prototype &&
+    Object.getPrototypeOf(value) !== null
+  )
+    fail();
+  ancestors.add(value);
+  try {
+    const encode = (item: unknown) => canonical(item, ancestors, depth + 1);
+    if (Array.isArray(value)) return `[${Array.from(value, encode).join(',')}]`;
     return `{${Object.entries(value)
       .sort(([a], [b]) => order(a, b))
-      .map(([k, v]) => `${JSON.stringify(k)}:${canonical(v)}`)
+      .map(([k, v]) => `${JSON.stringify(k)}:${encode(v)}`)
       .join(',')}}`;
-  return JSON.stringify(value);
+  } finally {
+    ancestors.delete(value);
+  }
 }
 function invalid(message: string): never {
   throw new EnvelopeFailure('INVALID_REQUEST', message);
@@ -224,9 +253,21 @@ export class PacketSolver {
           l.target === packet.target &&
           l.targetPort === packet.port,
       );
-      if (!route || packet.emissionTime + route.delay !== packet.arrivalTime)
+      // Serialization may round timestamps independently; permit only roundoff,
+      // not a solver-tolerance-sized change in physical transit time.
+      if (
+        !route ||
+        Math.abs(packet.arrivalTime - packet.emissionTime - route.delay) >
+          8 *
+            Number.EPSILON *
+            Math.max(
+              Math.abs(packet.emissionTime),
+              Math.abs(packet.arrivalTime),
+              route.delay,
+            )
+      )
         invalid(
-          'Initial packet must match a declared positive-delay route exactly.',
+          'Initial packet must match a declared positive-delay route within floating-point roundoff.',
         );
       this.records.push({
         time: 0,

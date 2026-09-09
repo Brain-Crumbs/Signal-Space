@@ -153,7 +153,31 @@ test('supplementary Unicode seeds and node IDs retain their complete characters'
   assert.equal(new Set(unicode.streams.map((stream) => stream.rng)).size, 4);
 });
 test('malformed packet checkpoints fail as INVALID_HISTORY in direct and worker execution', async () => {
-  for (const packetResume of [null, false, 0, '', [], {}]) {
+  const cyclic: Record<string, unknown> = {};
+  cyclic.self = cyclic;
+  let deep: unknown = {};
+  for (let i = 0; i < 150; i++) deep = { nested: deep };
+  const checkpoint = new PacketSolver(pair(), options).snapshot();
+  const badFields = [
+    1n,
+    cyclic,
+    deep,
+    NaN,
+    Infinity,
+    new Map(),
+    new Date(),
+    undefined,
+  ];
+  for (const packetResume of [
+    null,
+    false,
+    0,
+    '',
+    [],
+    {},
+    ...badFields.map((scenario) => ({ ...checkpoint, scenario })),
+    ...badFields.map((extra) => ({ ...checkpoint, extra })),
+  ]) {
     const request = {
       runId: 'invalid-checkpoint',
       mode: 'packets',
@@ -179,6 +203,41 @@ test('malformed packet checkpoints fail as INVALID_HISTORY in direct and worker 
           event.type === 'packet-snapshot' || event.type === 'completed',
       ),
     );
+  }
+});
+test('serialized decimal route times allow only representation-scale roundoff', () => {
+  for (const delay of [1, 1e-12]) {
+    const s = pair();
+    s.c0 = 1 / delay;
+    s.links.forEach((link) => {
+      link.delay = delay;
+    });
+    s.initialHistory.pendingPackets = [
+      {
+        id: 'decimal-route',
+        source: 'A',
+        target: 'B',
+        port: 'left',
+        emissionTime: -0.9 * delay,
+        arrivalTime: 0.1 * delay,
+      },
+    ];
+    const packet = s.initialHistory.pendingPackets[0]!;
+    const solver = new PacketSolver(s, options);
+    assert.equal(solver.snapshot().pending[0]!.arrivalTime, packet.arrivalTime);
+    run(solver, packet.arrivalTime);
+    assert.ok(
+      solver
+        .snapshot()
+        .records.some(
+          (r) =>
+            r.kind === 'received' &&
+            r.packetId === packet.id &&
+            r.time === packet.arrivalTime,
+        ),
+    );
+    packet.arrivalTime += delay * 1e-6;
+    assert.throws(() => new PacketSolver(s, options), /route/);
   }
 });
 test('packet accounting, causal support, no retransmission, positive bounded omega', () => {
