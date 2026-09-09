@@ -23,9 +23,25 @@ test('A-B-C and chain topologies are accepted', async () => {
 });
 
 test('explicit positive-delay ring and mirror boundaries are accepted', async () => {
-  const ring=await load('pair'); ring.boundaries={left:{kind:'periodic',closureDelay:2},right:{kind:'periodic',closureDelay:2}};
+  const ring=await load('pair'); ring.boundaries={left:{kind:'periodic',closureDelay:2},right:{kind:'periodic',closureDelay:2}}; ring.initialHistory.startTime=-2;
   const mirror=await load('pair'); mirror.boundaries.left={kind:'mirror',exteriorDistance:0.5};
   assert.equal(validateScenario(ring).ok,true); assert.equal(validateScenario(mirror).ok,true);
+});
+
+test('emission laws, R0 gain, boundary kind, and closure history are enforced', async () => {
+  const base=await load('isolated');
+  for (const mutate of [
+    x => { delete x.nodes[0].emission.nu; },
+    x => { x.nodes[0].response='R0'; x.nodes[0].gain=0.1; },
+    x => { x.boundaries.left={kind:'teleport'}; },
+    x => { x.boundaries.left={kind:'periodic',closureDelay:2}; }
+  ]) { const scenario=clone(base); mutate(scenario); assert.equal(validateScenario(scenario).ok,false); }
+});
+
+test('malformed node and link collections return errors instead of throwing', async () => {
+  const scenario=await load('isolated'); scenario.nodes={}; scenario.links={};
+  const result=validateScenario(scenario);
+  assert.equal(result.ok,false); assert.ok(result.errors.some(e=>e.path==='nodes')); assert.ok(result.errors.some(e=>e.path==='links'));
 });
 
 test('invalid bounds, zero delay, and inconsistent ports return field errors', async () => {

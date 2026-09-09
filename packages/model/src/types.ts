@@ -1,5 +1,8 @@
 /** Paper I model contract v1. SI units are used unless a UnitSystem declares scales. */
 export type Port = "left" | "right";
+export type Emission =
+  | { law: "E0"; nu: number }
+  | { law: "E1"; q: number };
 export type Boundary =
   | { kind: "open" }
   | { kind: "driven"; rate: number }
@@ -8,7 +11,7 @@ export type Boundary =
 
 export interface ClockNode {
   id: string; position: number; omega0: number; omega: number; phi: number;
-  amplitude: number; gain: number; relaxationTime: number; q?: number;
+  amplitude: number; gain: number; relaxationTime: number; emission: Emission;
   response: "R0" | "R1" | "R2";
 }
 export interface DirectedLink {

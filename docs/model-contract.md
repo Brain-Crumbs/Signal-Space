@@ -12,7 +12,7 @@ Phase is stored unwrapped. Display wrapping uses `[-pi, pi)`. The section phase 
 
 ## Equations and variants
 
-Emission is `rho_i^± = nu_i/2 [1 ± a_i cos(phi_i)]`. E0 fixes `nu_i`; E1 uses `nu_i=q_i omega_i/(2pi)`. Feedback is `phi_dot=omega`, `Trel omega_dot=omega_target-omega`, and `omega_target=omega0+g Z(phi)tanh(rSigma/r*)`, where R0 has `g=0`, R1 has `Z=1`, and R2 has `Z=cos(2phi)`. Event filters use `K_h(u)=exp(-u/h)/h` for `u>=0`. Variants (including degree normalization) must receive distinct scenario metadata and must not silently replace these laws.
+Emission is `rho_i^± = nu_i/2 [1 ± a_i cos(phi_i)]`. Every node declares a discriminated `emission`: E0 requires fixed `nu_i`; E1 requires `q_i` and uses `nu_i=q_i omega_i/(2pi)`. Feedback is `phi_dot=omega`, `Trel omega_dot=omega_target-omega`, and `omega_target=omega0+g Z(phi)tanh(rSigma/r*)`, where R0 has `g=0`, R1 has `Z=1`, and R2 has `Z=cos(2phi)`. Event filters use `K_h(u)=exp(-u/h)/h` for `u>=0`. Variants (including degree normalization) must receive distinct scenario metadata and must not silently replace these laws.
 
 Required bounds are `c0,Trel,r*,h,omega0>0`, `0<=a<=1`, `|g|<omega0`, and initial `omega` in `omega0 ± |g|`. Prehistory covers `[-tau_max,0]`. Event preparation serializes finite pending packets, nonnegative receiver filters, pending responses, and RNG algorithm/state.
 
