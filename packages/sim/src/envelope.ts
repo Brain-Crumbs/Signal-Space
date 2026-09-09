@@ -160,23 +160,33 @@ function stable(value: unknown): string {
   );
 }
 const PORTABLE_REPLAY_ABSOLUTE_TOLERANCE = 1e-12;
-const PORTABLE_REPLAY_MAX_ULPS = 32;
-function replayUlp(value: number): number {
-  const magnitude = Math.abs(value);
-  if (magnitude === 0 || magnitude < 2 ** -1022) return Number.MIN_VALUE;
-  return 2 ** (Math.floor(Math.log2(magnitude)) - 52);
+const PORTABLE_REPLAY_MAX_ULPS = 32n;
+const FLOAT64_SIGN_BIT = 1n << 63n;
+const FLOAT64_MASK = (1n << 64n) - 1n;
+const replayBits = new DataView(new ArrayBuffer(8));
+function orderedReplayBits(value: number): bigint {
+  replayBits.setFloat64(0, value);
+  const bits = replayBits.getBigUint64(0);
+  return bits & FLOAT64_SIGN_BIT
+    ? FLOAT64_MASK - bits
+    : FLOAT64_SIGN_BIT + bits;
+}
+function withinPortableReplayUlps(actual: number, expected: number): boolean {
+  const actualBits = orderedReplayBits(actual),
+    expectedBits = orderedReplayBits(expected),
+    distance =
+      actualBits > expectedBits
+        ? actualBits - expectedBits
+        : expectedBits - actualBits;
+  return distance <= PORTABLE_REPLAY_MAX_ULPS;
 }
 function portableReplayEqual(actual: unknown, expected: unknown): boolean {
   if (typeof actual === 'number' && typeof expected === 'number')
     return (
       Number.isFinite(actual) &&
       Number.isFinite(expected) &&
-      Math.abs(actual - expected) <=
-        Math.max(
-          PORTABLE_REPLAY_ABSOLUTE_TOLERANCE,
-          PORTABLE_REPLAY_MAX_ULPS *
-            Math.max(replayUlp(actual), replayUlp(expected)),
-        )
+      (Math.abs(actual - expected) <= PORTABLE_REPLAY_ABSOLUTE_TOLERANCE ||
+        withinPortableReplayUlps(actual, expected))
     );
   if (Array.isArray(actual) || Array.isArray(expected))
     return (
