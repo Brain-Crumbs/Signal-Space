@@ -94,5 +94,24 @@ test('production worker integrates the same causal history as Node', async ({
     until: 0.17,
   }))
     expected.push(event);
-  expect(result).toEqual(expected);
+  // Math transcendental functions may differ in the final bits across V8 builds.
+  // Keep exact event structure and compare every numeric field far more tightly
+  // than the solver tolerance, including the complete restart history.
+  const compare = (actual: unknown, reference: unknown): void => {
+    if (typeof reference === 'number') {
+      expect(typeof actual).toBe('number');
+      expect(actual as number).toBeCloseTo(reference, 12);
+    } else if (Array.isArray(reference)) {
+      expect(Array.isArray(actual)).toBe(true);
+      expect((actual as unknown[]).length).toBe(reference.length);
+      reference.forEach((v, i) => compare((actual as unknown[])[i], v));
+    } else if (reference && typeof reference === 'object') {
+      expect(actual).not.toBeNull();
+      expect(typeof actual).toBe('object');
+      expect(Object.keys(actual as object)).toEqual(Object.keys(reference));
+      for (const [key, value] of Object.entries(reference))
+        compare((actual as Record<string, unknown>)[key], value);
+    } else expect(actual).toBe(reference);
+  };
+  compare(result, expected);
 });

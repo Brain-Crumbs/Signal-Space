@@ -377,3 +377,68 @@ test('worker envelope cancellation emits a resumable checkpoint and no completio
   );
   assert.ok(!events.some((e) => e.type === 'completed'));
 });
+
+test('nonlinear retarded source history converges against independent convolution quadrature', async () => {
+  const s = createSample('pair'),
+    source = s.nodes[0]!,
+    receiver = s.nodes[1]!;
+  source.gain = 0.5;
+  source.response = 'R1';
+  s.boundaries.left = { kind: 'driven', rate: 1.3 };
+  receiver.position = 0.137;
+  s.links = s.links.filter((l) => l.source === source.id);
+  s.links[0]!.delay = 0.137;
+  const until = 1.3,
+    delay = 0.137;
+  const target = source.omega0 + source.gain * Math.tanh(1.3 / s.rateScale);
+  const forcing = (time: number) => {
+    const z = time - delay;
+    const omega =
+      z <= 0
+        ? source.omega
+        : target +
+          (source.omega - target) * Math.exp(-z / source.relaxationTime);
+    const phi =
+      z <= 0
+        ? source.phi + source.omega * z
+        : source.phi +
+          target * z +
+          (source.omega - target) *
+            source.relaxationTime *
+            (1 - Math.exp(-z / source.relaxationTime));
+    const rate = ((3 * omega) / (4 * Math.PI)) * (1 + Math.cos(phi));
+    return (
+      (receiver.gain *
+        Math.tanh(rate / s.rateScale) *
+        Math.exp(-(until - time) / receiver.relaxationTime)) /
+      receiver.relaxationTime
+    );
+  };
+  // Composite Simpson convolution, independently split at the source startup delay.
+  const integrate = (a: number, b: number) => {
+    const count = 4000,
+      h = (b - a) / count;
+    let total = forcing(a) + forcing(b);
+    for (let i = 1; i < count; i++)
+      total += (i % 2 ? 4 : 2) * forcing(a + i * h);
+    return (h * total) / 3;
+  };
+  const expected =
+    receiver.omega0 + integrate(0, delay) + integrate(delay, until);
+  const errors: number[] = [];
+  for (const step of [0.13, 0.065, 0.0325]) {
+    s.solver = {
+      method: 'rk4',
+      step,
+      absoluteTolerance: 1e-3,
+      relativeTolerance: 1e-3,
+    };
+    const result = await run(s, until);
+    errors.push(Math.abs(result.last.nodes[receiver.id]!.omega - expected));
+  }
+  assert.ok(
+    errors[1]! < errors[0]! / 4 && errors[2]! < errors[1]! / 4,
+    `${errors}`,
+  );
+  assert.ok(errors[2]! < 1e-8, `${errors}`);
+});

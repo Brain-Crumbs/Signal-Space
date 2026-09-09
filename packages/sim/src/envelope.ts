@@ -247,6 +247,7 @@ export class EnvelopeSolver {
   nextStep: number;
   readonly options: EnvelopeOptions;
   private readonly minDelay: number;
+  private readonly boundaries: number[];
   private readonly changes: Array<{
     time: number;
     target: string;
@@ -332,6 +333,56 @@ export class EnvelopeSolver {
         return { time: event.time, target: event.target, gain: value.gain };
       })
       .sort((a, b) => a.time - b.time);
+    // Carry derivative discontinuities through four transport generations for RK4.
+    // Each feedback integration raises differentiability by one; data knots and
+    // source startup must still be explicit method-of-steps boundaries.
+    const pending = [
+      ...scenario.nodes.map((n) => ({ time: 0, nodeId: n.id, depth: 0 })),
+      ...this.changes.map((c) => ({
+        time: c.time,
+        nodeId: c.target,
+        depth: 0,
+      })),
+      ...(this.options.boundaryInputs?.left ?? []).map((p) => ({
+        time: p.time,
+        nodeId: scenario.nodes[0]!.id,
+        depth: 0,
+      })),
+      ...(this.options.boundaryInputs?.right ?? []).map((p) => ({
+        time: p.time,
+        nodeId: scenario.nodes.at(-1)!.id,
+        depth: 0,
+      })),
+      ...(this.options.prehistory ?? []).flatMap((p) =>
+        scenario.nodes.map((n) => ({ time: p.time, nodeId: n.id, depth: 0 })),
+      ),
+    ];
+    const boundarySet = new Set<number>();
+    const visited = new Set<string>();
+    for (let index = 0; index < pending.length; index++) {
+      const point = pending[index]!;
+      const key = JSON.stringify(point);
+      if (visited.has(key)) continue;
+      visited.add(key);
+      if (point.time >= 0) boundarySet.add(point.time);
+      if (point.depth < 4)
+        for (const link of scenario.links)
+          if (link.source === point.nodeId) {
+            const time = point.time + link.delay;
+            if (!Number.isFinite(time))
+              throw new EnvelopeFailure(
+                'NUMERICAL_FAILURE',
+                'Delayed discontinuity time overflowed.',
+              );
+            pending.push({ time, nodeId: link.target, depth: point.depth + 1 });
+          }
+      if (pending.length > 1000000)
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'Too many propagated discontinuity boundaries.',
+        );
+    }
+    this.boundaries = [...boundarySet].sort((a, b) => a - b);
     this.minDelay = Math.min(
       Infinity,
       ...envelopeRoutes(scenario).map((l) => l.delay),
@@ -571,20 +622,16 @@ export class EnvelopeSolver {
       );
     });
   }
-  /** Discontinuities in external input, gain, and empty-link arrival are exact step endpoints. */
+  /** Direct and propagated discontinuities are exact step endpoints. */
   private nextBoundary(until: number): number {
-    const times = [
-      until,
-      ...this.changes.map((c) => c.time),
-      ...(this.options.boundaryInputs?.left ?? []).map((p) => p.time),
-      ...(this.options.boundaryInputs?.right ?? []).map((p) => p.time),
-    ];
-    if (this.options.preparation === 'empty-links')
-      times.push(...this.scenario.links.map((l) => l.delay));
-    // Align shifted prehistory knots (retarded derivative changes).
-    for (const p of this.options.prehistory ?? [])
-      for (const l of this.scenario.links) times.push(p.time + l.delay);
-    return Math.min(...times.filter((t) => t > this.time));
+    let lo = 0,
+      hi = this.boundaries.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >>> 1;
+      if (this.boundaries[mid]! <= this.time) lo = mid + 1;
+      else hi = mid;
+    }
+    return Math.min(until, this.boundaries[lo] ?? Infinity);
   }
   advance(until: number): TickCrossing[] {
     if (
