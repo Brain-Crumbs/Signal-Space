@@ -609,7 +609,7 @@ export class EnvelopeSolver {
         s.d1[k + 1]!,
         h,
       );
-      const [lower, upper] = this.bounds(n, s.end);
+      const [lower, upper] = this.bounds(n, s.end, true);
       const [phaseRate] = derivativeRange(
         s.y0[k]!,
         s.y1[k]!,

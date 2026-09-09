@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { execute } from '@signal-space/sim';
+import { EnvelopeSolver } from '../packages/sim/src/envelope.js';
 import type {
   EnvelopeOptions,
   EnvelopeSample,
@@ -8,6 +9,7 @@ import type {
   RunEvent,
   TickCrossing,
 } from '@signal-space/sim';
+import type { DenseSegment } from '../packages/sim/src/envelope.js';
 import { createWorkerHandler } from '@signal-space/sim/worker';
 import { createSample } from '@signal-space/experiments';
 import type { Scenario } from '@signal-space/model';
@@ -357,6 +359,36 @@ test('prehistory uses gain bounds immediately before a time-zero intervention', 
   const last = events.at(-1);
   assert.ok(last?.type === 'failed');
   assert.equal(last.error.code, 'INVALID_HISTORY');
+});
+
+test('segments ending at gain changes use left-limit bounds', () => {
+  const s = createSample('isolated'),
+    node = s.nodes[0]!;
+  node.gain = 0.2;
+  node.response = 'R1';
+  s.interventions = [
+    {
+      time: 1,
+      kind: 'change-parameter',
+      target: node.id,
+      value: { gain: 0.8 },
+    },
+  ];
+  const segment: DenseSegment = {
+    start: 0,
+    end: 1,
+    y0: [0, 2.1, 0, 0],
+    y1: [2.1, 2.1, 1, 1],
+    d0: [2.1, 1, 1, 1],
+    d1: [2.1, -1, 1, 1],
+  };
+  const solver = new EnvelopeSolver(s),
+    validSegment = (
+      solver as unknown as {
+        validSegment(candidate: DenseSegment): boolean;
+      }
+    ).validSegment.bind(solver);
+  assert.equal(validSegment(segment), false);
 });
 
 test('unsupported physics and exhausted error control fail structurally without clipping', async () => {
