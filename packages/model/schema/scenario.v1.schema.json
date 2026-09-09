@@ -96,7 +96,8 @@
                 "type": "number",
                 "exclusiveMinimum": 0
               }
-            }
+            },
+            "additionalProperties": false
           }
         },
         "pendingPackets": {
@@ -119,7 +120,8 @@
                 "type": "number",
                 "minimum": 0
               }
-            }
+            },
+            "additionalProperties": false
           }
         },
         "pendingResponses": {
@@ -137,7 +139,8 @@
                 "minimum": 0
               },
               "payload": {}
-            }
+            },
+            "additionalProperties": false
           }
         },
         "rngState": {
@@ -152,9 +155,11 @@
               "type": "string",
               "minLength": 1
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "interventions": {
       "type": "array",
@@ -174,7 +179,8 @@
             "minLength": 1
           },
           "value": {}
-        }
+        },
+        "additionalProperties": false
       }
     },
     "observation": {
@@ -202,7 +208,8 @@
           "type": "number",
           "minimum": 0
         }
-      }
+      },
+      "additionalProperties": false
     },
     "solver": {
       "type": "object",
@@ -223,7 +230,8 @@
           "type": "number",
           "exclusiveMinimum": 0
         }
-      }
+      },
+      "additionalProperties": false
     },
     "units": {
       "type": "object",
@@ -254,7 +262,8 @@
         "density": {
           "const": "s^-1"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "$defs": {
@@ -316,7 +325,8 @@
         "response": {
           "enum": ["R0", "R1", "R2"]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "emissionE0": {
       "type": "object",
@@ -432,7 +442,8 @@
           "type": "number",
           "exclusiveMinimum": 0
         }
-      }
+      },
+      "additionalProperties": false
     },
     "packet": {
       "type": "object",
@@ -458,15 +469,18 @@
           "minLength": 1
         },
         "emissionTime": {
-          "type": "number"
+          "type": "number",
+          "maximum": 0
         },
         "arrivalTime": {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         },
         "port": {
           "enum": ["left", "right"]
         }
-      }
+      },
+      "additionalProperties": false
     }
   }
 }

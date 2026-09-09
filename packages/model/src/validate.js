@@ -129,14 +129,41 @@ export function validateScenario(value) {
     errors.push(
       issue('initialHistory.startTime', 'must cover at least -tau_max'),
     );
-  for (const id of ids)
-    if (!hist?.nodes?.[id])
-      errors.push(
-        issue(
-          `initialHistory.nodes.${id}`,
-          'history is required for every node',
-        ),
-      );
+  for (const key of ['nodes', 'filters']) {
+    const states = hist?.[key];
+    for (const id of ids)
+      if (!states || !Object.hasOwn(states, id) || !states[id])
+        errors.push(
+          issue(
+            `initialHistory.${key}.${id}`,
+            'state is required for every node',
+          ),
+        );
+    for (const id of Object.keys(states ?? {}))
+      if (!ids.has(id))
+        errors.push(
+          issue(
+            `initialHistory.${key}.${id}`,
+            'must reference a scenario node',
+          ),
+        );
+  }
+  const packets = Array.isArray(hist?.pendingPackets)
+    ? hist.pendingPackets
+    : [];
+  for (const [i, packet] of packets.entries()) {
+    const p = `initialHistory.pendingPackets[${i}]`;
+    if (!finite(packet?.emissionTime) || packet.emissionTime > 0)
+      errors.push(issue(`${p}.emissionTime`, 'must be finite and <= 0'));
+    if (!finite(packet?.arrivalTime) || packet.arrivalTime < 0)
+      errors.push(issue(`${p}.arrivalTime`, 'must be finite and >= 0'));
+    if (
+      finite(packet?.emissionTime) &&
+      finite(packet?.arrivalTime) &&
+      packet.arrivalTime <= packet.emissionTime
+    )
+      errors.push(issue(`${p}.arrivalTime`, 'must be after emissionTime'));
+  }
   for (const side of ['left', 'right']) {
     const b = value.boundaries?.[side];
     if (!b) errors.push(issue(`boundaries.${side}`, 'is required'));
