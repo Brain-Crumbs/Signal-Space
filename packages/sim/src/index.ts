@@ -85,6 +85,15 @@ const validateStructure = new Ajv2020({ allErrors: true }).compile<Scenario>(
 );
 const yieldTask = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
+/** Return the JSON Schema issues without running the numerical engine. */
+export function validateScenarioStructure(value: unknown): ValidationIssue[] {
+  if (validateStructure(value)) return [];
+  return (validateStructure.errors ?? []).map((error) => ({
+    path: error.instancePath || '$',
+    message: error.message ?? 'Invalid field',
+  }));
+}
+
 /** Inspect the clone, whose accessors/custom prototypes have already been removed. */
 function hasSharedMemory(value: unknown, seen = new Set<object>()): boolean {
   if (value === null || typeof value !== 'object') return false;
@@ -167,17 +176,15 @@ export async function* execute(
       yield cancelled();
       return;
     }
-    if (!validateStructure(scenario)) {
+    const structureErrors = validateScenarioStructure(scenario);
+    if (structureErrors.length > 0) {
       yield {
         type: 'failed',
         runId,
         error: {
           code: 'INVALID_SCENARIO',
           message: 'Scenario does not match paper-i-v1.',
-          details: (validateStructure.errors ?? []).map((e) => ({
-            path: e.instancePath || '$',
-            message: e.message ?? 'Invalid field',
-          })),
+          details: structureErrors,
         },
       };
       return;
@@ -195,6 +202,7 @@ export async function* execute(
       };
       return;
     }
+    const validatedScenario = scenario as Scenario;
     yield { type: 'progress', runId, fraction: 0.5, stage: 'preparing' };
     await yieldTask();
     if (options.signal?.aborted) {
@@ -219,7 +227,7 @@ export async function* execute(
           'Provide packet options with a seed and a finite nonnegative until time.',
         );
       const solver = new PacketSolver(
-        scenario,
+        validatedScenario,
         owned.packets,
         owned.packetResume,
       );
@@ -261,7 +269,11 @@ export async function* execute(
           'INVALID_REQUEST',
           'Provide a finite nonnegative until time.',
         );
-      const solver = new EnvelopeSolver(scenario, owned.envelope, owned.resume);
+      const solver = new EnvelopeSolver(
+        validatedScenario,
+        owned.envelope,
+        owned.resume,
+      );
       if (until < solver.time)
         throw new EnvelopeFailure(
           'INVALID_REQUEST',
@@ -322,9 +334,12 @@ export async function* execute(
       schemaVersion: 1,
       time: 0,
       nodeState: Object.fromEntries(
-        scenario.nodes.map((n) => [n.id, { phi: n.phi, omega: n.omega }]),
+        validatedScenario.nodes.map((n) => [
+          n.id,
+          { phi: n.phi, omega: n.omega },
+        ]),
       ),
-      history: structuredClone(scenario.initialHistory),
+      history: structuredClone(validatedScenario.initialHistory),
     };
     yield { type: 'snapshot', runId, snapshot };
     await yieldTask();

@@ -42,6 +42,28 @@ test('CLI rejects invalid flags and file failures with nonzero exit and structur
     assert.equal(result.status, 1);
     assert.equal(JSON.parse(result.stderr).type, 'failed');
   }
+  for (const args of [
+    [
+      'validate',
+      '--manifest',
+      'definition.json',
+      '--checkpoint',
+      'checkpoint.json',
+    ],
+    [
+      'sweep',
+      '--manifest',
+      'definition.json',
+      '--checkpiont',
+      'checkpoint.json',
+    ],
+    ['sweep', '--manifest', 'definition.json', '--manifest', 'other.json'],
+    ['resume', '--manifest', 'definition.json', '--concurrency', '0'],
+  ]) {
+    const result = cli(...args);
+    assert.equal(result.status, 1);
+    assert.equal(JSON.parse(result.stderr).type, 'failed');
+  }
 });
 
 test('CLI --until runs the shared deterministic engine and validates duration', async () => {

@@ -17,6 +17,21 @@
     "observables",
     "budgets"
   ],
+  "allOf": [
+    {
+      "if": {
+        "properties": { "mode": { "const": "packets" } }
+      },
+      "then": { "required": ["packets"] },
+      "else": { "not": { "required": ["packets"] } }
+    },
+    {
+      "if": {
+        "properties": { "mode": { "const": "envelope" } }
+      },
+      "else": { "not": { "required": ["envelope"] } }
+    }
+  ],
   "properties": {
     "schemaVersion": { "const": "paper-i-experiment-v1" },
     "id": { "type": "string", "minLength": 1 },

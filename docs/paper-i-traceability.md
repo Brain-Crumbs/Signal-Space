@@ -18,6 +18,8 @@ Common contracts are owned by #2–#8; UI surfaces by #18–#20; exports and ind
 
 ## T07 declarative runs (#8)
 
+The current run layer also validates resolved scenarios against both JSON Schema and semantic constraints, rechecks root-seed-bound manifest identities, and binds checkpoint resumes to the exact planned manifest. See `docs/experiment-runs.md` for the validation and recovery contract.
+
 Paper I §§11.1 and 11.11 map to `packages/experiments/src/runs.ts` and the `paper-i-experiment-v1` schema. Definitions resolve parameter axes, explicit E/R variants, named controls, interventions, windows, tolerances, observables, replicate seeds and bounded resource budgets into complete `signal-space-run-manifest` records. Canonical SHA-256 identities and hierarchical physical seeds are independent of sweep concurrency. Complete low-level execution events are retained in `RunResult`; `SweepCheckpoint` records partial, cancelled and completed work for hash-checked resume. `continueRun` is explicitly distinct from restarting a manifest and restores the full envelope/packet checkpoint. `createSmokeDefinition` covers inexpensive A–I wiring fixtures; no publication-scale or research manifest is included. See [experiment runs](experiment-runs.md) and `test/runs.test.ts`.
 
 ## Equation and record coverage

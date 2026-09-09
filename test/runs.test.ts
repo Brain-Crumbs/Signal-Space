@@ -12,6 +12,8 @@ import {
   runManifest,
   runSweep,
   resumeSweep,
+  validateDefinition,
+  validateManifest,
   validateSweepCheckpoint,
   type ExperimentDefinition,
 } from '@signal-space/experiments';
@@ -104,6 +106,15 @@ test('resolved manifests reject scenario hash tampering', async () => {
   await assert.rejects(runManifest(tampered), /scenarioHash does not match/);
 });
 
+test('packet manifests reject root-seed tampering', async () => {
+  const plan = await resolveDefinition(
+    definition({ mode: 'packets', packets: {}, replicates: 1 }),
+  );
+  const tampered = structuredClone(plan.manifests[0]!);
+  tampered.rootSeed = 'different-root-seed';
+  await assert.rejects(validateManifest(tampered), /seed does not match/);
+});
+
 test('definition validation rejects invalid resolved values and unbounded plans', async () => {
   await assert.rejects(
     resolveDefinition(
@@ -146,6 +157,48 @@ test('definition validation rejects invalid resolved values and unbounded plans'
       }),
     ),
     /finite positive tolerances/,
+  );
+  assert.throws(
+    () =>
+      validateDefinition(
+        definition({
+          budgets: { maxJobs: 1, maxEvent: 1 } as never,
+        }),
+      ),
+    /unknown key/,
+  );
+  assert.throws(
+    () =>
+      validateDefinition(
+        definition({
+          parameters: [
+            { id: 'first', path: 'c0', values: [1.1] },
+            { id: 'second', path: 'c0', values: [1.2] },
+          ],
+        }),
+      ),
+    /same path/,
+  );
+  assert.throws(
+    () =>
+      validateDefinition(
+        definition({
+          windows: {
+            transient: 0.02,
+            measurement: { start: 0.02, end: 0.04 },
+            nested: [{ start: 0.01, end: 0.03 }],
+          },
+        }),
+      ),
+    /post-transient/,
+  );
+  await assert.rejects(
+    resolveDefinition(
+      definition({
+        variants: [{ id: 'bad-response', response: { A: 'invalid' as never } }],
+      }),
+    ),
+    /resolved scenario violates the model schema/,
   );
 });
 
@@ -293,6 +346,10 @@ test('checkpoint validation checks plan result identity and terminal status', as
     }),
     /scenarioHash|definitionHash|IDs differ|outside the current plan/,
   );
+  const relabeled = structuredClone(outcome.checkpoint);
+  relabeled.attempts[0]!.runId = 'test-sweep:foreign';
+  relabeled.attempts[0]!.manifest.runId = 'test-sweep:foreign';
+  await assert.rejects(resumeSweep(plan, relabeled), /runId does not match/);
 });
 
 test('continuation uses the complete solver checkpoint rather than restarting', async () => {
