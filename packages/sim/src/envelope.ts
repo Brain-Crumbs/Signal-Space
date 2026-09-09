@@ -626,6 +626,28 @@ export class EnvelopeSolver {
       );
     });
   }
+  /** Reproduce the complete acceptance estimate for one retained step pair. */
+  private adaptiveError(
+    coarse: DenseSegment,
+    first: DenseSegment,
+    second: DenseSegment,
+  ): number {
+    let error = Math.max(
+      ...second.y1.map(
+        (v, i) => Math.abs(v - coarse.y1[i]!) / (15 * this.tolerance(v)),
+      ),
+    );
+    for (const s of [first, second]) {
+      const midpoint = this.rk4(s.start, s.y0, (s.start + s.end) / 2, false).y1;
+      error = Math.max(
+        error,
+        ...dense(s, (s.start + s.end) / 2).map(
+          (v, i) => Math.abs(v - midpoint[i]!) / this.tolerance(midpoint[i]!),
+        ),
+      );
+    }
+    return error;
+  }
   /** Direct and propagated discontinuities are exact step endpoints. */
   private nextBoundary(until: number): number {
     let lo = 0,
@@ -667,20 +689,7 @@ export class EnvelopeSolver {
     const first = this.rk4(this.time, this.state, this.time + h / 2, false);
     const second = this.rk4(first.end, first.y1, end, true);
     // Local RK4 error plus midpoint error of the retained cubic dense output.
-    let error = Math.max(
-      ...second.y1.map(
-        (v, i) => Math.abs(v - coarse.y1[i]!) / (15 * this.tolerance(v)),
-      ),
-    );
-    for (const s of [first, second]) {
-      const midpoint = this.rk4(s.start, s.y0, (s.start + s.end) / 2, false).y1;
-      error = Math.max(
-        error,
-        ...dense(s, (s.start + s.end) / 2).map(
-          (v, i) => Math.abs(v - midpoint[i]!) / this.tolerance(midpoint[i]!),
-        ),
-      );
-    }
+    const error = this.adaptiveError(coarse, first, second);
     const valid = this.validSegment(first) && this.validSegment(second);
     const factor =
       !Number.isFinite(error) || !valid
@@ -824,57 +833,75 @@ export class EnvelopeSolver {
       fail('Malformed checkpoint state or step metadata.');
     let end = 0,
       state = this.state;
-    for (const segment of s.segments) {
+    for (let pair = 0; pair < s.segments.length; pair += 2) {
+      const first = s.segments[pair],
+        second = s.segments[pair + 1];
+      if (!first || !second)
+        fail('Checkpoint history must contain complete RK4 half-step pairs.');
+      const midpoint = end + (second.end - end) / 2;
       if (
-        !segment ||
-        !Number.isFinite(segment.start) ||
-        !Number.isFinite(segment.end) ||
-        segment.start !== end ||
-        segment.end <= segment.start ||
-        segment.end - segment.start >
-          (Math.min(this.scenario.solver.step ?? 0.01, this.minDelay) / 2) *
-            (1 + 1e-12) ||
-        ![segment.y0, segment.y1, segment.d0, segment.d1].every(vector) ||
-        stable(segment.y0) !== stable(state) ||
-        !this.validSegment(segment)
+        first.start !== end ||
+        first.end !== midpoint ||
+        second.start !== midpoint ||
+        stable(first.y0) !== stable(state) ||
+        stable(second.y0) !== stable(first.y1)
       )
-        fail(
-          'Checkpoint history is nonfinite, discontinuous, or outside physical bounds.',
-        );
-      for (let i = 0; i < this.scenario.nodes.length; i++)
+        fail('Checkpoint history must contain contiguous RK4 half-step pairs.');
+      const coarse = this.rk4(end, state, second.end, true);
+      for (const segment of [first, second]) {
         if (
-          segment.d0[i * 4] !== segment.y0[i * 4 + 1] ||
-          segment.d1[i * 4] !== segment.y1[i * 4 + 1]
+          !Number.isFinite(segment.start) ||
+          !Number.isFinite(segment.end) ||
+          segment.end <= segment.start ||
+          segment.end - segment.start >
+            (Math.min(this.scenario.solver.step ?? 0.01, this.minDelay) / 2) *
+              (1 + 1e-12) ||
+          ![segment.y0, segment.y1, segment.d0, segment.d1].every(vector) ||
+          !this.validSegment(segment)
         )
-          fail('Saved phase derivatives must equal saved frequency.');
-      for (const [actual, expected] of [
-        [segment.d0, this.rhs(segment.start, segment.y0)],
-        [segment.d1, this.rhs(segment.end, segment.y1, true)],
-      ])
+          fail(
+            'Checkpoint history is nonfinite, discontinuous, or outside physical bounds.',
+          );
+        for (let i = 0; i < this.scenario.nodes.length; i++)
+          if (
+            segment.d0[i * 4] !== segment.y0[i * 4 + 1] ||
+            segment.d1[i * 4] !== segment.y1[i * 4 + 1]
+          )
+            fail('Saved phase derivatives must equal saved frequency.');
+        for (const [actual, expected] of [
+          [segment.d0, this.rhs(segment.start, segment.y0)],
+          [segment.d1, this.rhs(segment.end, segment.y1, true)],
+        ])
+          if (
+            actual!.some(
+              (v, i) =>
+                Math.abs(v - expected![i]!) >
+                1e-10 * (1 + Math.abs(expected![i]!)),
+            )
+          )
+            fail(
+              'Checkpoint derivatives disagree with saved causal inputs and model equations.',
+            );
+        const replay = this.rk4(segment.start, segment.y0, segment.end, true);
         if (
-          actual!.some(
-            (v, i) =>
-              Math.abs(v - expected![i]!) >
-              1e-10 * (1 + Math.abs(expected![i]!)),
+          segment.y1.some(
+            (value, i) =>
+              Math.abs(value - replay.y1[i]!) >
+              1e-10 * (1 + Math.abs(replay.y1[i]!)),
           )
         )
           fail(
-            'Checkpoint derivatives disagree with saved causal inputs and model equations.',
+            'Checkpoint state increments disagree with replayed RK4 history.',
           );
-      const replay = this.rk4(segment.start, segment.y0, segment.end, true);
-      if (
-        segment.y1.some(
-          (value, i) =>
-            Math.abs(value - replay.y1[i]!) >
-            1e-10 * (1 + Math.abs(replay.y1[i]!)),
-        )
-      )
-        fail('Checkpoint state increments disagree with replayed RK4 history.');
-      end = segment.end;
-      state = segment.y1;
+      }
+      const error = this.adaptiveError(coarse, first, second);
+      if (!Number.isFinite(error) || error > 1)
+        fail('Checkpoint RK4 half-step pair violates adaptive error controls.');
+      end = second.end;
+      state = second.y1;
       this.time = end;
       this.state = state;
-      this.segments.push(segment);
+      this.segments.push(first, second);
     }
     if (end !== s.time || stable(state) !== stable(s.state))
       fail('Checkpoint endpoint disagrees with complete history.');

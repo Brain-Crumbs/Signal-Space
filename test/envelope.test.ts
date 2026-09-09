@@ -213,6 +213,34 @@ test('saved complete history resumes identically at an accepted step and rejects
   }
 });
 
+test('checkpoint restore rejects valid RK4 half-steps that fail adaptive acceptance', () => {
+  const s = driven();
+  s.solver.step = 0.2;
+  s.solver.absoluteTolerance = 1e-15;
+  s.solver.relativeTolerance = 1e-15;
+  const solver = new EnvelopeSolver(s),
+    rk4 = (
+      solver as unknown as {
+        rk4(t: number, y: number[], end: number, left: boolean): DenseSegment;
+      }
+    ).rk4.bind(solver),
+    snapshot = solver.snapshot(),
+    first = rk4(0, snapshot.state, 0.1, false),
+    second = rk4(first.end, first.y1, 0.2, true);
+  snapshot.time = second.end;
+  snapshot.state = second.y1;
+  snapshot.segments = [first, second];
+  snapshot.acceptedSteps = 1;
+  assert.throws(
+    () => new EnvelopeSolver(s, {}, snapshot),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('adaptive error controls'),
+  );
+});
+
 test('reflection exchanges ports, adds pi, and preserves R2 histories and total emissions', async () => {
   const s = createSample('pair');
   s.nodes.forEach((n) => {
