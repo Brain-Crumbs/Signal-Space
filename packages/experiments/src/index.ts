@@ -3,6 +3,7 @@ import isolated from '../../../fixtures/scenarios/isolated.json' with { type: 'j
 import pair from '../../../fixtures/scenarios/pair.json' with { type: 'json' };
 export * from './runs.js';
 export * from './setup-a.js';
+export * from './setup-b.js';
 export type SampleId = 'isolated' | 'pair';
 export const sampleIds: readonly SampleId[] = ['isolated', 'pair'];
 /** Contract smoke fixtures, not executed scientific protocols. Return independent state. */

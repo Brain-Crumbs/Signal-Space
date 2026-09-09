@@ -28,6 +28,23 @@ The response-curve dataset preserves pulse phase/amplitude inputs and defers
 scientific interpretation. Event arrivals and physical filters remain T04–T05
 scope; research-scale scans and manuscript conclusions remain deferred.
 
+## T09 Setup B (#10)
+
+Paper I section 11.3 and the facing-lobe caveat in section 3.5 map to
+`packages/experiments/src/setup-b.ts`, `packages/sim/src/envelope.ts`, and
+`docs/setup-b.md`. Reciprocal `A-B`/`B-A`, one-way `A-B`, and prescribed-drive
+controls are distinct protocol IDs. The typed layer crosses E0/E1 with R0/R1/R2,
+saves co-phase and pi-reflection preparations plus explicit link prehistory,
+and supports signed gain sweeps through zero. It records mean-frequency
+mismatch, unwrapped pair drift/slips, simulator-only retarded phase with an
+explicit `chi`, collective modulation, and perturbation recovery evidence using
+shared analysis metrics. The envelope solver's explicit state perturbation
+option preserves pre-jump dense history and post-jump states in replayable
+snapshots; it is an intervention, not an unstated phase reset or synchronization
+rule. Setup B smoke runs are finite deterministic diagnostics, not locking or
+attraction findings. Event statistics, physical filters, boundaries beyond open
+ports, and research-scale scans remain deferred.
+
 ## T07 declarative runs (#8)
 
 The current run layer also validates resolved scenarios against both JSON Schema and semantic constraints, rechecks root-seed-bound manifest identities, and binds checkpoint resumes to the exact planned manifest. See `docs/experiment-runs.md` for the validation and recovery contract.

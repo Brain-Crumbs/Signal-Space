@@ -280,6 +280,7 @@ function validateEnvelopeOptions(value: unknown): void {
     'preparation',
     'prehistory',
     'boundaryInputs',
+    'perturbations',
     'tickSection',
     'maxSteps',
   ]);
@@ -341,6 +342,27 @@ function validateEnvelopeOptions(value: unknown): void {
         )
           invalid(`envelope boundaryInputs.${side} contains an invalid entry`);
       }
+    }
+  }
+  if (value.perturbations !== undefined) {
+    if (!Array.isArray(value.perturbations))
+      invalid('envelope perturbations must be an array');
+    const keys = new Set<string>();
+    for (const perturbation of value.perturbations) {
+      if (
+        !isRecord(perturbation) ||
+        typeof perturbation.nodeId !== 'string' ||
+        !perturbation.nodeId ||
+        !Number.isFinite(perturbation.time) ||
+        (perturbation.time as number) <= 0 ||
+        !Number.isFinite(perturbation.phaseOffset) ||
+        !Number.isFinite(perturbation.frequencyOffset)
+      )
+        invalid('envelope perturbation is invalid');
+      const key = `${perturbation.time}\u0000${perturbation.nodeId}`;
+      if (keys.has(key))
+        invalid('envelope perturbations duplicate a node/time');
+      keys.add(key);
     }
   }
 }

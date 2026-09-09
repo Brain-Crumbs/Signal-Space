@@ -1,0 +1,165 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import {
+  createSetupBDefinition,
+  createSetupBProtocol,
+  createSetupBScenario,
+  createSetupBGainSweep,
+  createSetupBSmokeDefinitions,
+  runSetupB,
+  setupBVariants,
+} from '@signal-space/experiments';
+import { EnvelopeSolver } from '@signal-space/sim';
+import { validateDefinition } from '@signal-space/experiments';
+
+const close = (actual: number, expected: number, tolerance = 1e-8) =>
+  assert.ok(
+    Math.abs(actual - expected) <= tolerance,
+    `${actual} != ${expected} (tol ${tolerance})`,
+  );
+
+test('Setup B runs every E/R variant under both symmetric preparations', () => {
+  for (const preparation of ['co-phase', 'pi-reflection'] as const) {
+    const protocol = createSetupBProtocol('reciprocal', {
+      preparation,
+      duration: 4,
+      preparationDuration: 1,
+      perturbation: null,
+    });
+    for (const variant of setupBVariants) {
+      const result = runSetupB(protocol, variant.id);
+      assert.ok(result.samples.length > 2);
+      assert.equal(result.protocol.preparation.id, preparation);
+      assert.equal(result.protocol.routes.length, 2);
+      assert.equal(
+        result.diagnostics.retardedPhase.aFromB.length,
+        result.samples.length,
+      );
+      assert.equal(
+        result.diagnostics.retardedPhase.bFromA.length,
+        result.samples.length,
+      );
+      assert.ok(Number.isFinite(result.diagnostics.meanFrequencyDifference));
+      assert.ok(Number.isFinite(result.diagnostics.phase.unwrappedDrift));
+    }
+  }
+});
+
+test('Setup B R0 preserves the analytic uncoupled continuation', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    preparation: 'pi-reflection',
+    duration: 3,
+    preparationDuration: 1,
+    perturbation: null,
+  });
+  const result = runSetupB(protocol, 'E0-R0');
+  for (const sample of result.samples) {
+    close(sample.nodes.A!.omega, 2);
+    close(sample.nodes.B!.omega, 2);
+    close(sample.nodes.A!.phi, protocol.preparation.phaseA + 2 * sample.time);
+    close(sample.nodes.B!.phi, protocol.preparation.phaseB + 2 * sample.time);
+  }
+  close(result.diagnostics.meanFrequencyDifference, 0);
+});
+
+test('E0 with zero amplitude and R1 does not manufacture phase restoration', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    preparation: 'small-offset',
+    amplitude: 0,
+    duration: 3,
+    preparationDuration: 1,
+    perturbation: null,
+  });
+  const result = runSetupB(protocol, 'E0-R1');
+  const initial = result.diagnostics.phase.initialUnwrapped;
+  close(result.diagnostics.phase.finalUnwrapped, initial, 2e-7);
+  close(result.diagnostics.meanFrequencyDifference, 0, 2e-7);
+});
+
+test('Setup B keeps reciprocal, one-way, and prescribed controls distinct', () => {
+  const reciprocal = createSetupBProtocol('reciprocal', { perturbation: null });
+  const oneWay = createSetupBProtocol('one-way-a-to-b', { perturbation: null });
+  const prescribed = createSetupBProtocol('prescribed-drive', {
+    perturbation: null,
+  });
+  assert.notEqual(reciprocal.id, oneWay.id);
+  assert.notEqual(oneWay.id, prescribed.id);
+  assert.deepEqual(
+    oneWay.routes.map((route) => route.id),
+    ['A-B'],
+  );
+  assert.deepEqual(prescribed.routes, []);
+  assert.equal(prescribed.prescribedRate, 0.75);
+  assert.equal(
+    runSetupB(oneWay, 'E1-R1').diagnostics.retardedPhase.aFromB.length,
+    0,
+  );
+  assert.equal(
+    runSetupB(prescribed, 'E1-R1').diagnostics.retardedPhase.bFromA.length,
+    0,
+  );
+});
+
+test('Setup B gain sweep records signed values through zero without a locking claim', () => {
+  const sweep = createSetupBGainSweep(
+    createSetupBProtocol('reciprocal', { duration: 3, perturbation: null }),
+    'E1-R1',
+    [-0.4, 0, 0.4],
+  );
+  assert.deepEqual(
+    sweep.points.map((point) => point.gain),
+    [-0.4, 0, 0.4],
+  );
+  assert.equal(sweep.controls.includesZeroGain, true);
+  assert.equal(sweep.controls.signedGain, true);
+  assert.equal(sweep.controls.interpretation, 'deferred');
+  assert.ok(sweep.points.every((point) => Number.isFinite(point.phaseDrift)));
+});
+
+test('Setup B perturbations land at preparation boundaries and replay with history', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    duration: 4,
+    preparationDuration: 1,
+    perturbation: {
+      time: 1.5,
+      nodeId: 'B',
+      phaseOffset: 0.15,
+      frequencyOffset: 0.04,
+    },
+  });
+  const scenario = createSetupBScenario(protocol, 'E1-R1');
+  const result = runSetupB(protocol, 'E1-R1');
+  const solver = new EnvelopeSolver(scenario, result.envelope);
+  while (solver.time < 2) solver.advance(2);
+  const checkpoint = solver.snapshot();
+  assert.equal(checkpoint.jumps.length, 1);
+  const resumed = new EnvelopeSolver(scenario, result.envelope, checkpoint);
+  while (resumed.time < protocol.duration) resumed.advance(protocol.duration);
+  assert.deepEqual(resumed.snapshot().jumps, checkpoint.jumps);
+  assert.ok(
+    Math.abs(
+      result.samples.at(-1)!.nodes.B!.phi -
+        result.referenceSamples.at(-1)!.nodes.B!.phi,
+    ) > 0.1,
+  );
+});
+
+test('Setup B definitions are shared-API schema-compatible', async () => {
+  const definitions = createSetupBSmokeDefinitions();
+  assert.equal(definitions.length, 12);
+  for (const definition of definitions) {
+    assert.doesNotThrow(() => validateDefinition(definition));
+    assert.equal(definition.mode, 'envelope');
+  }
+  const edited = createSetupBDefinition(
+    'prescribed-drive',
+    'E0-R2',
+    'pi-reflection',
+  );
+  assert.equal(
+    edited.scenario.id,
+    'setup-b-prescribed-drive-E0-R2-pi-reflection',
+  );
+  assert.equal(edited.envelope?.boundaryInputs?.right?.[0]?.rate, 0.75);
+  assert.equal(edited.envelope?.perturbations?.[0]?.nodeId, 'B');
+});
