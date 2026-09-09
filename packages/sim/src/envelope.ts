@@ -25,6 +25,10 @@ export interface DenseSegment {
   d0: Vector;
   d1: Vector;
 }
+export interface AdaptiveAttempt {
+  end: number;
+  accepted: boolean;
+}
 export interface EnvelopeSnapshot {
   kind: 'envelope-rk4-v1';
   scenario: Scenario;
@@ -33,6 +37,7 @@ export interface EnvelopeSnapshot {
   state: Vector;
   nextStep: number;
   segments: DenseSegment[];
+  attempts: AdaptiveAttempt[];
   acceptedSteps: number;
   rejectedSteps: number;
 }
@@ -242,6 +247,7 @@ export class EnvelopeSolver {
   time = 0;
   state: Vector;
   segments: DenseSegment[] = [];
+  attempts: AdaptiveAttempt[] = [];
   acceptedSteps = 0;
   rejectedSteps = 0;
   nextStep: number;
@@ -706,7 +712,9 @@ export class EnvelopeSolver {
     const error = this.adaptiveError(coarse, first, second);
     const valid = this.validSegment(first) && this.validSegment(second);
     this.nextStep = this.proposedStep(h, error, valid);
-    if (!Number.isFinite(error) || error > 1 || !valid) {
+    const accepted = Number.isFinite(error) && error <= 1 && valid;
+    this.attempts.push({ end, accepted });
+    if (!accepted) {
       this.rejectedSteps++;
       return [];
     }
@@ -801,6 +809,7 @@ export class EnvelopeSolver {
       state: this.state,
       nextStep: this.nextStep,
       segments: this.segments,
+      attempts: this.attempts,
       acceptedSteps: this.acceptedSteps,
       rejectedSteps: this.rejectedSteps,
     });
@@ -828,40 +837,83 @@ export class EnvelopeSolver {
       s.nextStep > Math.min(this.scenario.solver.step ?? 0.01, this.minDelay) ||
       !vector(s.state) ||
       !Array.isArray(s.segments) ||
+      !Array.isArray(s.attempts) ||
       !Number.isSafeInteger(s.acceptedSteps) ||
       s.acceptedSteps < 0 ||
       !Number.isSafeInteger(s.rejectedSteps) ||
       s.rejectedSteps < 0 ||
       s.acceptedSteps + s.rejectedSteps > (this.options.maxSteps ?? 100000) ||
-      s.segments.length !== s.acceptedSteps * 2
+      s.segments.length !== s.acceptedSteps * 2 ||
+      s.attempts.length !== s.acceptedSteps + s.rejectedSteps ||
+      s.attempts.some(
+        (attempt) =>
+          !attempt ||
+          !Number.isFinite(attempt.end) ||
+          typeof attempt.accepted !== 'boolean',
+      ) ||
+      s.attempts.filter((attempt) => attempt.accepted).length !==
+        s.acceptedSteps
     )
       fail('Malformed checkpoint state, step metadata, or attempt budget.');
     let end = 0,
       state = this.state,
-      proposedStep = this.nextStep;
-    for (let pair = 0; pair < s.segments.length; pair += 2) {
-      const first = s.segments[pair],
-        second = s.segments[pair + 1];
+      proposedStep = this.nextStep,
+      segmentIndex = 0,
+      acceptedSteps = 0,
+      rejectedSteps = 0;
+    for (const attempt of s.attempts) {
+      this.time = end;
+      this.state = state;
+      const step = attempt.end - end,
+        midpoint = end + step / 2;
+      if (
+        step <= 0 ||
+        end + step / 2 === end ||
+        step > Math.min(proposedStep, this.minDelay) * (1 + 1e-12)
+      )
+        fail(
+          'Checkpoint attempt trace violates adaptive step-size growth controls.',
+        );
+      if (this.nextBoundary(attempt.end) !== attempt.end)
+        fail('Checkpoint RK4 attempt crosses a scheduled solver boundary.');
+      const coarse = this.rk4(end, state, attempt.end, true),
+        replayFirst = this.rk4(end, state, midpoint, false),
+        replaySecond = this.rk4(
+          replayFirst.end,
+          replayFirst.y1,
+          attempt.end,
+          true,
+        ),
+        error = this.adaptiveError(coarse, replayFirst, replaySecond),
+        valid =
+          this.validSegment(replayFirst) && this.validSegment(replaySecond),
+        accepted = Number.isFinite(error) && error <= 1 && valid;
+      if (accepted !== attempt.accepted)
+        fail(
+          'Checkpoint attempt outcome disagrees with adaptive controller replay.',
+        );
+      proposedStep = this.proposedStep(step, error, valid);
+      if (!accepted) {
+        rejectedSteps++;
+        continue;
+      }
+      const first = s.segments[segmentIndex++],
+        second = s.segments[segmentIndex++];
       if (!first || !second)
         fail('Checkpoint history must contain complete RK4 half-step pairs.');
-      const step = second.end - end,
-        midpoint = end + step / 2;
       if (
         first.start !== end ||
         first.end !== midpoint ||
+        second.end !== attempt.end ||
         second.start !== midpoint ||
         stable(first.y0) !== stable(state) ||
         stable(second.y0) !== stable(first.y1)
       )
         fail('Checkpoint history must contain contiguous RK4 half-step pairs.');
-      if (step > proposedStep * (1 + 1e-12))
-        fail(
-          'Checkpoint RK4 pair violates adaptive step-size growth controls.',
-        );
-      if (this.nextBoundary(second.end) !== second.end)
-        fail('Checkpoint RK4 step pair crosses a scheduled solver boundary.');
-      const coarse = this.rk4(end, state, second.end, true);
-      for (const segment of [first, second]) {
+      for (const [segment, replay] of [
+        [first, replayFirst],
+        [second, replaySecond],
+      ] as const) {
         if (
           !Number.isFinite(segment.start) ||
           !Number.isFinite(segment.end) ||
@@ -895,36 +947,33 @@ export class EnvelopeSolver {
             fail(
               'Checkpoint derivatives disagree with saved causal inputs and model equations.',
             );
-        const replay = this.rk4(segment.start, segment.y0, segment.end, true);
-        if (
-          segment.y1.some(
-            (value, i) =>
-              Math.abs(value - replay.y1[i]!) >
-              1e-10 * (1 + Math.abs(replay.y1[i]!)),
-          )
-        )
+        if (stable(segment) !== stable(replay))
           fail(
             'Checkpoint state increments disagree with replayed RK4 history.',
           );
       }
-      const error = this.adaptiveError(coarse, first, second);
-      if (!Number.isFinite(error) || error > 1)
-        fail('Checkpoint RK4 half-step pair violates adaptive error controls.');
-      proposedStep = this.proposedStep(step, error, true);
-      end = second.end;
-      state = second.y1;
+      end = replaySecond.end;
+      state = replaySecond.y1;
       this.time = end;
       this.state = state;
-      this.segments.push(first, second);
+      this.segments.push(replayFirst, replaySecond);
+      acceptedSteps++;
     }
+    if (
+      acceptedSteps !== s.acceptedSteps ||
+      rejectedSteps !== s.rejectedSteps ||
+      segmentIndex !== s.segments.length
+    )
+      fail('Checkpoint attempt trace disagrees with saved step counters.');
     if (end !== s.time || stable(state) !== stable(s.state))
       fail('Checkpoint endpoint disagrees with complete history.');
-    if (s.nextStep > proposedStep * (1 + 1e-12))
-      fail('Checkpoint next step violates adaptive step-size growth controls.');
+    if (s.nextStep !== proposedStep)
+      fail('Checkpoint next step disagrees with adaptive controller replay.');
     this.time = s.time;
     this.state = s.state;
     this.nextStep = s.nextStep;
     this.segments = s.segments;
+    this.attempts = s.attempts;
     this.acceptedSteps = s.acceptedSteps;
     this.rejectedSteps = s.rejectedSteps;
   }

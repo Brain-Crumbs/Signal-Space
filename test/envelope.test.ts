@@ -230,6 +230,7 @@ test('checkpoint restore rejects valid RK4 half-steps that fail adaptive accepta
   snapshot.time = second.end;
   snapshot.state = second.y1;
   snapshot.segments = [first, second];
+  snapshot.attempts = [{ end: second.end, accepted: true }];
   snapshot.acceptedSteps = 1;
   assert.throws(
     () => new EnvelopeSolver(s, {}, snapshot),
@@ -237,7 +238,7 @@ test('checkpoint restore rejects valid RK4 half-steps that fail adaptive accepta
       error instanceof Error &&
       'code' in error &&
       error.code === 'INVALID_HISTORY' &&
-      error.message.includes('adaptive error controls'),
+      error.message.includes('adaptive controller replay'),
   );
 });
 
@@ -266,6 +267,7 @@ test('checkpoint restore rejects RK4 pairs that cross scheduled boundaries', () 
   snapshot.time = second.end;
   snapshot.state = second.y1;
   snapshot.segments = [first, second];
+  snapshot.attempts = [{ end: second.end, accepted: true }];
   snapshot.acceptedSteps = 1;
   assert.throws(
     () => new EnvelopeSolver(s, options, snapshot),
@@ -296,6 +298,10 @@ test('checkpoint restore rejects adaptive mesh growth unavailable to the control
   snapshot.time = fourth.end;
   snapshot.state = fourth.y1;
   snapshot.segments = [first, second, third, fourth];
+  snapshot.attempts = [
+    { end: second.end, accepted: true },
+    { end: fourth.end, accepted: true },
+  ];
   snapshot.acceptedSteps = 2;
   assert.throws(
     () => new EnvelopeSolver(s, {}, snapshot),
@@ -324,6 +330,7 @@ test('checkpoint restore rejects an impossible saved next-step proposal', () => 
   snapshot.time = second.end;
   snapshot.state = second.y1;
   snapshot.segments = [first, second];
+  snapshot.attempts = [{ end: second.end, accepted: true }];
   snapshot.acceptedSteps = 1;
   snapshot.nextStep = 0.2;
   assert.throws(
@@ -332,7 +339,7 @@ test('checkpoint restore rejects an impossible saved next-step proposal', () => 
       error instanceof Error &&
       'code' in error &&
       error.code === 'INVALID_HISTORY' &&
-      error.message.includes('adaptive step-size growth'),
+      error.message.includes('adaptive controller replay'),
   );
 });
 
@@ -348,6 +355,56 @@ test('checkpoint restore rejects counters beyond the lifetime attempt budget', (
       'code' in error &&
       error.code === 'INVALID_HISTORY' &&
       error.message.includes('attempt budget'),
+  );
+});
+
+test('checkpoint restore rejects rejection counters without a replayable controller attempt', () => {
+  const s = isolated(),
+    options: EnvelopeOptions = { maxSteps: 1 },
+    snapshot = new EnvelopeSolver(s, options).snapshot();
+  snapshot.rejectedSteps = 1;
+  snapshot.attempts = [{ end: snapshot.nextStep, accepted: false }];
+  assert.throws(
+    () => new EnvelopeSolver(s, options, snapshot),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('next step'),
+  );
+});
+
+test('checkpoint restore replays a genuine rejected adaptive attempt', () => {
+  const s = driven();
+  s.solver.step = 0.2;
+  s.solver.absoluteTolerance = 1e-15;
+  s.solver.relativeTolerance = 1e-15;
+  const solver = new EnvelopeSolver(s);
+  solver.advance(0.2);
+  const snapshot = solver.snapshot();
+  assert.equal(snapshot.acceptedSteps, 0);
+  assert.equal(snapshot.rejectedSteps, 1);
+  assert.deepEqual(new EnvelopeSolver(s, {}, snapshot).snapshot(), snapshot);
+});
+
+test('checkpoint restore rejects cumulative sub-threshold RK4 increment changes', async () => {
+  const s = createSample('pair'),
+    checkpoint = (await run(s, 1.7)).snapshot,
+    increment = 1e-11;
+  let offset = 0;
+  for (const segment of checkpoint.segments) {
+    segment.y0[2]! += offset;
+    offset += increment;
+    segment.y1[2]! += offset;
+  }
+  checkpoint.state[2]! += offset;
+  assert.throws(
+    () => new EnvelopeSolver(s, {}, checkpoint),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY' &&
+      error.message.includes('state increments'),
   );
 });
 

@@ -6,6 +6,7 @@ import type {
   TickCrossing,
 } from './envelope.js';
 export type {
+  AdaptiveAttempt,
   EnvelopeOptions,
   EnvelopeSnapshot,
   EnvelopeSample,
