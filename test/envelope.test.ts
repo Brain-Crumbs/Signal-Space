@@ -306,6 +306,59 @@ test('sampled prehistory uses phase Hermite derivative and rejects hidden betwee
   assert.equal(last.error.code, 'INVALID_HISTORY');
 });
 
+test('prehistory uses gain bounds immediately before a time-zero intervention', async () => {
+  const s = createSample('pair'),
+    changed = s.nodes[0]!,
+    start = s.initialHistory.startTime,
+    duration = -start,
+    historyOmega = changed.omega0 + Math.abs(changed.gain) + 0.1;
+  s.interventions = [
+    {
+      time: 0,
+      kind: 'change-parameter',
+      target: changed.id,
+      value: { gain: Math.abs(changed.gain) + 0.2 },
+    },
+  ];
+  const points = [
+    {
+      time: start,
+      nodes: Object.fromEntries(
+        s.nodes.map((node) => [
+          node.id,
+          node.id === changed.id
+            ? {
+                phi: node.phi - ((historyOmega + node.omega) * duration) / 2,
+                omega: historyOmega,
+              }
+            : {
+                phi: node.phi + node.omega * start,
+                omega: node.omega,
+              },
+        ]),
+      ),
+    },
+    {
+      time: 0,
+      nodes: Object.fromEntries(
+        s.nodes.map((node) => [node.id, { phi: node.phi, omega: node.omega }]),
+      ),
+    },
+  ];
+  const events: RunEvent[] = [];
+  for await (const event of execute({
+    runId: 'time-zero-history-bounds',
+    mode: 'envelope',
+    scenario: s,
+    until: 0.1,
+    envelope: { prehistory: points },
+  }))
+    events.push(event);
+  const last = events.at(-1);
+  assert.ok(last?.type === 'failed');
+  assert.equal(last.error.code, 'INVALID_HISTORY');
+});
+
 test('unsupported physics and exhausted error control fail structurally without clipping', async () => {
   for (const [mutate, code] of [
     [

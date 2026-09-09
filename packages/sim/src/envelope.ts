@@ -415,11 +415,15 @@ export class EnvelopeSolver {
         gain = change.gain;
     return gain;
   }
-  private bounds(node: ClockNode, time: number): [number, number] {
+  private bounds(
+    node: ClockNode,
+    time: number,
+    left = false,
+  ): [number, number] {
     // After a gain decrease, the old state can lie outside the new target interval.
     let radius = Math.abs(node.gain);
     for (const c of this.changes)
-      if (c.target === node.id && c.time <= time)
+      if (c.target === node.id && (c.time < time || (!left && c.time === time)))
         radius = Math.max(radius, Math.abs(c.gain));
     return [node.omega0 - radius, node.omega0 + radius];
   }
@@ -454,7 +458,7 @@ export class EnvelopeSolver {
             v.omega,
             p.time - prior.time,
           );
-          const [lower, upper] = this.bounds(n, 0);
+          const [lower, upper] = this.bounds(n, 0, true);
           if (
             lo < lower - this.tolerance(lower) ||
             hi > upper + this.tolerance(upper) ||
