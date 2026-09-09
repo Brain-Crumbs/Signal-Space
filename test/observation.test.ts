@@ -162,6 +162,41 @@ test('local-phase timestamps need no global time channel; readable source tags r
   assert.ok(tagged.arrivals.every((r) => r.sourceTag === 'A'));
   assert.ok(isObserverDataset(tagged));
 });
+test('observer export enforces UTF-16 bounds for run IDs and readable source tags', () => {
+  const snapshot = finish(new PacketSolver(scenario(), options), 0.75);
+  const data = recordObserver({ runId: 'bounded', snapshot }, detector());
+  const astralRunId = '😀'.repeat(3000);
+  assert.throws(() =>
+    recordObserver({ runId: astralRunId, snapshot }, detector()),
+  );
+  assert.equal(
+    isObserverDataset({ ...data, physicalRunId: astralRunId }),
+    false,
+  );
+
+  for (const source of ['x'.repeat(4097), '😀'.repeat(3000)]) {
+    const renamed = JSON.parse(
+      JSON.stringify(scenario()).replaceAll('"A"', JSON.stringify(source)),
+    );
+    const sourceSnapshot = finish(new PacketSolver(renamed, options), 0.75);
+    assert.throws(() =>
+      recordObserver(
+        { runId: 'bounded', snapshot: sourceSnapshot },
+        {
+          ...detector(),
+          marks: { kind: 'source-tag', channel: 'readable-emitter-labels' },
+        },
+      ),
+    );
+    const imported = structuredClone(data);
+    imported.protocol.marks = {
+      kind: 'source-tag',
+      channel: 'readable-emitter-labels',
+    };
+    imported.arrivals[0]!.sourceTag = source;
+    assert.equal(isObserverDataset(imported), false);
+  }
+});
 test('observer datasets reject hidden fields at type, schema and runtime boundaries', () => {
   const snapshot = finish(new PacketSolver(scenario(), options), 0.75);
   const data = recordObserver({ runId: 'physical-1', snapshot }, detector());

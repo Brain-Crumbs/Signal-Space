@@ -103,12 +103,19 @@ export const observerDatasetSchema = object({
 const ajv = new Ajv2020({ strictNumbers: true });
 const validProtocol = ajv.compile<DetectorProtocol>(protocolSchema);
 const validDataset = ajv.compile<ObserverDataset>(observerDatasetSchema);
+const boundedText = (value: unknown): value is string =>
+  typeof value === 'string' && value.length > 0 && value.length <= 4096;
 function protocolValid(value: unknown): value is DetectorProtocol {
   return validProtocol(value) && value.gate.end > value.gate.start;
 }
 /** Reject excess fields at every layer and undeclared optional channels. */
 export function isObserverDataset(value: unknown): value is ObserverDataset {
-  if (!validDataset(value) || !protocolValid(value.protocol)) return false;
+  if (
+    !validDataset(value) ||
+    !protocolValid(value.protocol) ||
+    !boundedText(value.physicalRunId)
+  )
+    return false;
   const p = value.protocol;
   return (
     value.timestampUnit ===
@@ -119,7 +126,8 @@ export function isObserverDataset(value: unknown): value is ObserverDataset {
         (r.localPhase === undefined || p.readouts.includes('local-phase')) &&
         (r.localFrequency === undefined ||
           p.readouts.includes('local-frequency')) &&
-        (r.sourceTag === undefined || p.marks.kind === 'source-tag'),
+        (r.sourceTag === undefined ||
+          (p.marks.kind === 'source-tag' && boundedText(r.sourceTag))),
     )
   );
 }
@@ -211,7 +219,11 @@ export function recordObserver(
     if (p.readouts.includes('local-phase')) record.localPhase = local.phi;
     if (p.readouts.includes('local-frequency'))
       record.localFrequency = local.omega;
-    if (p.marks.kind === 'source-tag') record.sourceTag = event.source;
+    if (p.marks.kind === 'source-tag') {
+      if (!boundedText(event.source))
+        throw new Error('Readable emitter source tag is not representable.');
+      record.sourceTag = event.source;
+    }
     arrivals.push(record);
   }
   // Canonical tie ordering uses only permitted fields, never hidden physical order.
