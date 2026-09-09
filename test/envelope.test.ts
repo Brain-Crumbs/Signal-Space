@@ -398,6 +398,24 @@ test('checkpoint restore tolerates portable last-bit replay differences', async 
   assert.doesNotThrow(() => new EnvelopeSolver(s, {}, checkpoint));
 });
 
+test('checkpoint restore tolerates a last-bit acceptance-threshold flip', () => {
+  const s = isolated();
+  s.solver.absoluteTolerance = 1000;
+  s.solver.relativeTolerance = 1000;
+  const source = new EnvelopeSolver(s);
+  source.advance(0.001);
+  const checkpoint = source.snapshot(),
+    restorer = new EnvelopeSolver(s),
+    internals = restorer as unknown as {
+      adaptiveError(): number;
+      proposedStep(): number;
+      restore(value: unknown): void;
+    };
+  internals.adaptiveError = () => 1 + 5e-13;
+  internals.proposedStep = () => checkpoint.nextStep;
+  assert.doesNotThrow(() => internals.restore(checkpoint));
+});
+
 test('checkpoint restore rejects cumulative sub-threshold RK4 increment changes', async () => {
   const s = createSample('pair'),
     checkpoint = (await run(s, 1.7)).snapshot,
@@ -720,6 +738,25 @@ test('non-finite envelope option values fail at the request boundary', async () 
     assert.ok(last?.type === 'failed');
     assert.equal(last.error.code, 'INVALID_REQUEST');
   }
+});
+
+test('unrepresentable initial tick indices fail before exposing a sample', async () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.phi = 1e20;
+  s.initialHistory.nodes[node.id]!.phiAtZero = node.phi;
+  const events: RunEvent[] = [];
+  for await (const event of execute({
+    runId: 'unsafe-ticks',
+    mode: 'envelope',
+    scenario: s,
+    until: 0,
+  }))
+    events.push(event);
+  assert.ok(!events.some((event) => event.type === 'envelope-sample'));
+  const last = events.at(-1);
+  assert.ok(last?.type === 'failed');
+  assert.equal(last.error.code, 'NUMERICAL_FAILURE');
 });
 
 test('worker envelope cancellation emits a resumable checkpoint and no completion', async () => {

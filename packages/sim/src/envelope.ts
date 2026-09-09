@@ -458,6 +458,10 @@ export class EnvelopeSolver {
         fail('Checkpoint must contain finite, serializable complete history.');
       }
     }
+    this.scenario.nodes.forEach((node, index) => {
+      this.tickIndex(node.phi);
+      this.tickIndex(this.state[index * 4]!);
+    });
   }
   private tolerance(x: number) {
     return (
@@ -732,6 +736,15 @@ export class EnvelopeSolver {
       h * factor,
     );
   }
+  private tickIndex(phi: number): number {
+    const index = Math.floor((phi - (this.options.tickSection ?? 0)) / TAU);
+    if (!Number.isSafeInteger(index))
+      throw new EnvelopeFailure(
+        'NUMERICAL_FAILURE',
+        'Tick indices exceed representable or per-step output limits.',
+      );
+    return index;
+  }
   /** Direct and propagated discontinuities are exact step endpoints. */
   private nextBoundary(until: number): number {
     let lo = 0,
@@ -785,14 +798,10 @@ export class EnvelopeSolver {
     const ticks: TickCrossing[] = [];
     for (const s of [first, second])
       for (const [i, n] of this.scenario.nodes.entries()) {
-        const section = this.options.tickSection ?? 0;
-        const from = Math.floor((s.y0[i * 4]! - section) / TAU),
-          to = Math.floor((s.y1[i * 4]! - section) / TAU);
-        if (
-          !Number.isSafeInteger(from) ||
-          !Number.isSafeInteger(to) ||
-          to - from > 10000
-        )
+        const section = this.options.tickSection ?? 0,
+          from = this.tickIndex(s.y0[i * 4]!),
+          to = this.tickIndex(s.y1[i * 4]!);
+        if (to - from > 10000)
           throw new EnvelopeFailure(
             'NUMERICAL_FAILURE',
             'Tick indices exceed representable or per-step output limits.',
@@ -839,9 +848,7 @@ export class EnvelopeSolver {
               rhoRight,
               integratedLeft: this.state[i * 4 + 2]!,
               integratedRight: this.state[i * 4 + 3]!,
-              ticks:
-                Math.floor((phi - (this.options.tickSection ?? 0)) / TAU) -
-                Math.floor((n.phi - (this.options.tickSection ?? 0)) / TAU),
+              ticks: this.tickIndex(phi) - this.tickIndex(n.phi),
               boundMargin: Math.min(omega - lower, upper - omega),
               receptionLeft: inputs[i]![0]!,
               receptionRight: inputs[i]![1]!,
@@ -951,13 +958,17 @@ export class EnvelopeSolver {
         error = this.adaptiveError(coarse, replayFirst, replaySecond),
         valid =
           this.validSegment(replayFirst) && this.validSegment(replaySecond),
-        accepted = Number.isFinite(error) && error <= 1 && valid;
-      if (accepted !== attempt.accepted)
+        accepted = Number.isFinite(error) && error <= 1 && valid,
+        portableThresholdDisagreement =
+          valid &&
+          Number.isFinite(error) &&
+          Math.abs(error - 1) <= PORTABLE_REPLAY_TOLERANCE;
+      if (accepted !== attempt.accepted && !portableThresholdDisagreement)
         fail(
           'Checkpoint attempt outcome disagrees with adaptive controller replay.',
         );
       proposedStep = this.proposedStep(step, error, valid);
-      if (!accepted) {
+      if (!attempt.accepted) {
         rejectedSteps++;
         continue;
       }
