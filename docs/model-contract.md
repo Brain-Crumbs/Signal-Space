@@ -33,4 +33,4 @@ Snapshots include unwrapped phase/frequency, prehistory, filters, pending packet
 - Duplicated initial history endpoints must equal each node's unwrapped `phi` and `omega` exactly at t=0; validation does not reconcile or wrap them. Every pending response targets a declared clock.
 - Pending packet source and target IDs must both belong to the declared scenario node set, matching the link and pending-response membership rules.
 - A mirror at `exteriorDistance = d` returns an edge clock's emission after round-trip delay `2d/c0` (instantaneous ideal reflection, no mirror processing latency). The history horizon includes both mirrors, all links and periodic closure delays; `startTime <= -tau_max`.
-- Response payloads and intervention values may contain arbitrary structured-cloneable data. Uncloneable inputs are invalid scenarios at the execution boundary.
+- Response payloads and intervention values may contain arbitrary structured-cloneable data without shared memory. Uncloneable inputs are invalid scenarios at the execution boundary.

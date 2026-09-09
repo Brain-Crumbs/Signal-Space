@@ -34,6 +34,30 @@ const validateStructure = new Ajv2020({ allErrors: true }).compile<Scenario>(
 );
 const yieldTask = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
+/** Inspect the clone, whose accessors/custom prototypes have already been removed. */
+function hasSharedMemory(value: unknown, seen = new Set<object>()): boolean {
+  if (value === null || typeof value !== 'object') return false;
+  if (
+    typeof SharedArrayBuffer !== 'undefined' &&
+    value instanceof SharedArrayBuffer
+  )
+    return true;
+  if (seen.has(value)) return false;
+  seen.add(value);
+  if (ArrayBuffer.isView(value)) return hasSharedMemory(value.buffer, seen);
+  if (typeof WebAssembly !== 'undefined' && value instanceof WebAssembly.Memory)
+    return hasSharedMemory(value.buffer, seen);
+  if (value instanceof Map)
+    for (const [key, entry] of value)
+      if (hasSharedMemory(key, seen) || hasSharedMemory(entry, seen))
+        return true;
+  if (value instanceof Set)
+    for (const entry of value) if (hasSharedMemory(entry, seen)) return true;
+  return Object.getOwnPropertyNames(value).some((key) =>
+    hasSharedMemory(Reflect.get(value, key), seen),
+  );
+}
+
 /** Shared Node/browser execution boundary. T02 only inspects preparation at t=0.
  * It never advances time or claims to integrate the Paper I equations.
  * Exactly one terminal event is yielded; snapshots are detached copies.
@@ -65,14 +89,22 @@ export async function* execute(
     let scenario: unknown;
     try {
       scenario = structuredClone(request.scenario);
+      if (hasSharedMemory(scenario))
+        throw new Error('Shared memory is not owned input.');
     } catch {
       yield {
         type: 'failed',
         runId,
         error: {
           code: 'INVALID_SCENARIO',
-          message: 'Scenario must be structured-cloneable.',
-          details: [{ path: '$', message: 'Input cannot be cloned.' }],
+          message:
+            'Scenario must be structured-cloneable without shared memory.',
+          details: [
+            {
+              path: '$',
+              message: 'Input cannot be cloned into detached state.',
+            },
+          ],
         },
       };
       return;

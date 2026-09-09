@@ -218,3 +218,46 @@ test('uncloneable extension values are invalid scenarios, not internal failures'
     await rejects(intervention);
   }
 });
+
+test('shared memory is rejected even in nested containers and views', async () => {
+  const shared = new SharedArrayBuffer(4);
+  const cyclic: { self?: unknown; data: unknown } = {
+    data: new DataView(shared),
+  };
+  cyclic.self = cyclic;
+  for (const value of [
+    shared,
+    new Uint8Array(shared),
+    cyclic,
+    new Map([[shared, 'key']]),
+    new Map([['value', shared]]),
+    new Set([shared]),
+  ]) {
+    for (const target of ['response', 'intervention']) {
+      const scenario = preparation();
+      if (target === 'response')
+        scenario.initialHistory.pendingResponses[0]!.payload = value;
+      else scenario.interventions[0]!.value = value;
+      await rejects(scenario);
+    }
+  }
+});
+
+test('ordinary buffer payloads are owned before the first progress event', async () => {
+  const scenario = preparation();
+  const bytes = new Uint8Array([1, 2, 3]);
+  scenario.initialHistory.pendingResponses[0]!.payload = bytes;
+  const run = execute({ runId: 'owned-buffer', mode: 'inspect', scenario });
+  assert.equal((await run.next()).value?.type, 'progress');
+  bytes[0] = 99;
+  let completed = false;
+  for await (const event of run) {
+    if (event.type === 'snapshot')
+      assert.deepEqual(
+        event.snapshot.history.pendingResponses[0]!.payload,
+        new Uint8Array([1, 2, 3]),
+      );
+    if (event.type === 'completed') completed = true;
+  }
+  assert.ok(completed);
+});

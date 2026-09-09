@@ -25,3 +25,5 @@ Review hardening: closed scenario objects reject undeclared fields instead of co
 History endpoint phase/frequency must agree exactly with the initial node state, and pending response targets must belong to the scenario. Inspection rejects inconsistent preparations instead of choosing one copy as authoritative.
 
 Failure to clone caller input produces `INVALID_SCENARIO` with a field-level detail, before any snapshot or progress is exposed. `INTERNAL` remains reserved for failures after the input-cloning boundary. Mirror preparation history includes the ideal-reflection round trip `2d/c0`.
+
+SharedArrayBuffer values and views backed by shared memory are rejected, including within nested containers, because structured cloning cannot detach their backing storage. Ordinary ArrayBuffers and typed views remain supported and are owned before the first progress event.
