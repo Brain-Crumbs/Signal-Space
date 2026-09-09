@@ -86,13 +86,44 @@ test('perturbation recovery promotes phase candidate while modulation is allowed
   input.samples.forEach((s, i) => {
     s.nodes.a.omega = 1 + 0.2 * Math.sin(i);
     s.nodes.b.omega = 1 + 0.2 * Math.sin(i);
+    if (i === 6) s.nodes.a.phi += 0.08;
+    if (i === 7) s.nodes.a.phi += 0.04;
   });
   const result = classifyPair(input, 'a', 'b', {
     ...criteria,
     perturbation: { time: 5, recoveryTolerance: 0.05, referenceOffset: 0 },
   });
   assert.equal(result.status, 'candidate-phase-locking');
+  assert.equal(result.perturbationRecovery?.displaced, true);
   assert.ok(result.evidence[0]!.frequencyModulation.a!.maximum > 1);
+});
+test('unchanged offsets do not count as perturbation recovery', () => {
+  const result = classifyPair(series(1, 1, 0.02), 'a', 'b', {
+    ...criteria,
+    perturbation: { time: 5, recoveryTolerance: 0.05, referenceOffset: 0 },
+  });
+  assert.equal(result.status, 'candidate-frequency-locking');
+  assert.equal(result.perturbationRecovery?.demonstrated, false);
+});
+test('uncovered and non-nested windows cannot produce candidates', () => {
+  assert.equal(
+    classifyPair(series(1, 1), 'a', 'b', {
+      ...criteria,
+      windows: [{ start: 0, end: 100 }],
+    }).status,
+    'unresolved',
+  );
+  assert.throws(
+    () =>
+      classifyPair(series(1, 1), 'a', 'b', {
+        ...criteria,
+        windows: [
+          { start: 0, end: 20 },
+          { start: 0, end: 10 },
+        ],
+      }),
+    /ordered shortest to longest/,
+  );
 });
 test('short windows and failures remain unresolved or failed', () => {
   assert.equal(
@@ -132,6 +163,26 @@ test('replicate interval retains runs and treats runs as independent', () => {
   assert.equal(result.sampleCount, 300);
   assert.equal(result.runs.length, 2);
   assert.match(result.dependence, /time-correlated/);
+  assert.throws(
+    () =>
+      aggregateReplicates([
+        {
+          runId: 'duplicate-1',
+          seed: 'same',
+          preparationId: 'p',
+          value: 1,
+          sampleCount: 1,
+        },
+        {
+          runId: 'duplicate-2',
+          seed: 'same',
+          preparationId: 'p',
+          value: 2,
+          sampleCount: 1,
+        },
+      ]),
+    /seeds must be unique/,
+  );
 });
 test('spatial caveat and causal response fronts remain explicit', () => {
   const sample = {
@@ -147,4 +198,24 @@ test('spatial caveat and causal response fronts remain explicit', () => {
   );
   assert.equal(front[0]!.status, 'causality-violation');
   assert.equal(front[0]!.causalBound, 2);
+  assert.throws(
+    () =>
+      responseFront(
+        [{ nodeId: 'b', position: Number.NaN, onsetTime: 1 }],
+        { position: 0, time: 0 },
+        1,
+        0,
+      ),
+    /must be finite/,
+  );
+  assert.throws(
+    () =>
+      responseFront(
+        [{ nodeId: 'b', position: 2, onsetTime: 1 }],
+        { position: 0, time: 0 },
+        Number.POSITIVE_INFINITY,
+        0,
+      ),
+    /finite and positive/,
+  );
 });
