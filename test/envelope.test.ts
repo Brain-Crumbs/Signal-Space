@@ -560,14 +560,14 @@ test('piecewise inputs and gain changes use exact discontinuity boundaries witho
 
 test('numerically coincident propagated and direct boundaries are coalesced', async () => {
   const s = createSample('pair');
-  s.links[0]!.delay = 0.1;
+  s.links[0]!.delay = 0.3;
   s.links[1]!.delay = 0.2;
   s.boundaries.left = { kind: 'driven', rate: 0 };
   const options: EnvelopeOptions = {
       boundaryInputs: {
         left: [
           { time: 0, rate: 0 },
-          { time: 0.3, rate: 1 },
+          { time: 0.1 + 0.2, rate: 1 },
         ],
       },
     },
@@ -576,6 +576,9 @@ test('numerically coincident propagated and direct boundaries are coalesced', as
       solver as unknown as { boundaries: number[] }
     ).boundaries.filter((time) => Math.abs(time - 0.3) < 1e-12);
   assert.deepEqual(boundaries, [0.3]);
+  while (solver.snapshot().time < 0.3) solver.advance(0.31);
+  assert.equal(solver.snapshot().time, 0.3);
+  assert.equal(solver.sample().nodes[s.nodes[0]!.id]!.receptionLeft, 1);
   while (solver.snapshot().time < 0.31) solver.advance(0.31);
   assert.equal(solver.snapshot().time, 0.31);
 });
@@ -656,6 +659,31 @@ test('prehistory bounds permit only representation-scale roundoff', () => {
           { time: 0, nodes: { [node.id]: { phi: 0, omega: 2.2 } } },
         ],
       }),
+  );
+});
+
+test('overflowed prehistory derivative extrema are rejected', () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  s.initialHistory.startTime = -2;
+  assert.throws(
+    () =>
+      new EnvelopeSolver(s, {
+        prehistory: [
+          {
+            time: -2,
+            nodes: { [node.id]: { phi: 1e308, omega: 2 } },
+          },
+          {
+            time: 0,
+            nodes: { [node.id]: { phi: node.phi, omega: node.omega } },
+          },
+        ],
+      }),
+    (error: unknown) =>
+      error instanceof Error &&
+      'code' in error &&
+      error.code === 'INVALID_HISTORY',
   );
 });
 
@@ -884,6 +912,25 @@ test('unrepresentable initial tick indices fail before exposing a sample', async
   const events: RunEvent[] = [];
   for await (const event of execute({
     runId: 'unsafe-ticks',
+    mode: 'envelope',
+    scenario: s,
+    until: 0,
+  }))
+    events.push(event);
+  assert.ok(!events.some((event) => event.type === 'envelope-sample'));
+  const last = events.at(-1);
+  assert.ok(last?.type === 'failed');
+  assert.equal(last.error.code, 'NUMERICAL_FAILURE');
+});
+
+test('phases too coarse to resolve individual tick sections fail before sampling', async () => {
+  const s = isolated(),
+    node = s.nodes[0]!;
+  node.phi = 5e16;
+  s.initialHistory.nodes[node.id]!.phiAtZero = node.phi;
+  const events: RunEvent[] = [];
+  for await (const event of execute({
+    runId: 'coarse-ticks',
     mode: 'envelope',
     scenario: s,
     until: 0,

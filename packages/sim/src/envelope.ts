@@ -283,9 +283,14 @@ function derivativeRange(
 ): [number, number] {
   const A = (6 * (a - b)) / h + 3 * (da + db),
     B = (-6 * (a - b)) / h - 4 * da - 2 * db;
+  if (!Number.isFinite(A) || !Number.isFinite(B)) return [NaN, NaN];
   const values = [da, db];
   const u = -B / (2 * A);
-  if (u > 0 && u < 1) values.push(derivative(a, b, da, db, h, u));
+  if (u > 0 && u < 1) {
+    const value = derivative(a, b, da, db, h, u);
+    if (!Number.isFinite(value)) return [NaN, NaN];
+    values.push(value);
+  }
   return [Math.min(...values), Math.max(...values)];
 }
 function cubicRange(
@@ -327,6 +332,7 @@ export class EnvelopeSolver {
   readonly options: EnvelopeOptions;
   private readonly minDelay: number;
   private readonly boundaries: number[];
+  private readonly canonicalBoundaryTimes = new Map<number, number>();
   private readonly changes: Array<{
     time: number;
     target: string;
@@ -475,6 +481,7 @@ export class EnvelopeSolver {
           8 * Number.EPSILON * Math.max(1, Math.abs(time), Math.abs(previous))
       )
         this.boundaries.push(time);
+      this.canonicalBoundaryTimes.set(time, this.boundaries.at(-1)!);
     }
     this.minDelay = Math.min(
       Infinity,
@@ -507,7 +514,8 @@ export class EnvelopeSolver {
     for (const change of this.changes)
       if (
         change.target === node.id &&
-        (change.time < time || (!left && change.time === time))
+        (this.canonicalBoundaryTimes.get(change.time)! < time ||
+          (!left && this.canonicalBoundaryTimes.get(change.time)! === time))
       )
         gain = change.gain;
     return gain;
@@ -520,7 +528,11 @@ export class EnvelopeSolver {
     // After a gain decrease, the old state can lie outside the new target interval.
     let radius = Math.abs(node.gain);
     for (const c of this.changes)
-      if (c.target === node.id && (c.time < time || (!left && c.time === time)))
+      if (
+        c.target === node.id &&
+        (this.canonicalBoundaryTimes.get(c.time)! < time ||
+          (!left && this.canonicalBoundaryTimes.get(c.time)! === time))
+      )
         radius = Math.max(radius, Math.abs(c.gain));
     return [node.omega0 - radius, node.omega0 + radius];
   }
@@ -557,6 +569,8 @@ export class EnvelopeSolver {
           );
           const [lower, upper] = this.bounds(n, 0, true);
           if (
+            !Number.isFinite(lo) ||
+            !Number.isFinite(hi) ||
             (lo < lower && !withinUlps(lo, lower, PHYSICAL_BOUND_MAX_ULPS)) ||
             (hi > upper && !withinUlps(hi, upper, PHYSICAL_BOUND_MAX_ULPS)) ||
             lo <= 0
@@ -649,7 +663,10 @@ export class EnvelopeSolver {
       if (b.kind !== 'driven') continue;
       let rate = b.rate;
       for (const point of this.options.boundaryInputs?.[side] ?? [])
-        if (point.time < time || (!left && point.time === time))
+        if (
+          this.canonicalBoundaryTimes.get(point.time)! < time ||
+          (!left && this.canonicalBoundaryTimes.get(point.time)! === time)
+        )
           rate = point.rate;
       inputs[side === 'left' ? 0 : inputs.length - 1]![
         side === 'left' ? 0 : 1
@@ -770,8 +787,25 @@ export class EnvelopeSolver {
     );
   }
   private tickIndex(phi: number): number {
-    const index = Math.floor((phi - (this.options.tickSection ?? 0)) / TAU);
-    if (!Number.isSafeInteger(index))
+    const section = this.options.tickSection ?? 0,
+      magnitude = Math.max(Math.abs(phi), Math.abs(section)),
+      spacing =
+        magnitude === 0
+          ? Number.MIN_VALUE
+          : 2 ** (Math.floor(Math.log2(magnitude)) - 52),
+      index = Math.floor((phi - section) / TAU),
+      lower = section + index * TAU,
+      upper = section + (index + 1) * TAU;
+    if (
+      !Number.isSafeInteger(index) ||
+      !Number.isFinite(spacing) ||
+      spacing >= TAU ||
+      !Number.isFinite(lower) ||
+      !Number.isFinite(upper) ||
+      !(upper > lower) ||
+      phi < lower ||
+      phi >= upper
+    )
       throw new EnvelopeFailure(
         'NUMERICAL_FAILURE',
         'Tick indices exceed representable or per-step output limits.',
