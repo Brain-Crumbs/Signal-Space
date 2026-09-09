@@ -847,6 +847,8 @@ export class EnvelopeSolver {
         stable(second.y0) !== stable(first.y1)
       )
         fail('Checkpoint history must contain contiguous RK4 half-step pairs.');
+      if (this.nextBoundary(second.end) !== second.end)
+        fail('Checkpoint RK4 step pair crosses a scheduled solver boundary.');
       const coarse = this.rk4(end, state, second.end, true);
       for (const segment of [first, second]) {
         if (
