@@ -16,6 +16,18 @@ Source: _Directional Signal Clocks: Local Reception Feedback and Causal Networks
 
 Common contracts are owned by #2–#8; UI surfaces by #18–#20; exports and independent validation by #21–#22. The initial `isolated.json` and `pair.json` files are schema smoke fixtures only, not completed protocol fixtures or scientific results.
 
+## T08 Setup A (#9)
+
+Paper I §11.2 maps to `packages/experiments/src/setup-a.ts` and
+`docs/setup-a.md`. The typed presets keep isolated, equal/unequal,
+piecewise-periodic, finite-pulse, and equal-integral temporal-order protocols
+separate. Deterministic envelope runs record R0/R1/R2 signed-gain responses,
+phase displacement, frequency relaxation, next-tick status, physical bounds,
+input integrals, and a declared diagnostic-only exponential filter response.
+The response-curve dataset preserves pulse phase/amplitude inputs and defers
+scientific interpretation. Event arrivals and physical filters remain T04–T05
+scope; research-scale scans and manuscript conclusions remain deferred.
+
 ## T07 declarative runs (#8)
 
 The current run layer also validates resolved scenarios against both JSON Schema and semantic constraints, rechecks root-seed-bound manifest identities, and binds checkpoint resumes to the exact planned manifest. See `docs/experiment-runs.md` for the validation and recovery contract.
