@@ -141,6 +141,21 @@ test('production worker runs and resumes seeded packets using the shared engine'
   await page.getByRole('button', { name: 'Inspect preparation' }).click();
   await expect(page.getByRole('status')).toHaveText('Completed');
   const scenario = createSample('pair');
+  // A declared inventory guarantees reception coverage without requiring a
+  // particular random count from a short low-intensity realization.
+  scenario.initialHistory.pendingPackets = [
+    {
+      id: 'browser-initial',
+      source: 'A',
+      target: 'B',
+      emissionTime: -0.875,
+      arrivalTime: 0.125,
+      port: 'left',
+    },
+  ];
+  scenario.nodes.forEach((node) => {
+    node.emission = { law: 'E1', q: 20 };
+  });
   const result = await page.evaluate(
     async ({ url, scenario }) => {
       const worker = new Worker(url, { type: 'module' });
@@ -206,7 +221,12 @@ test('production worker runs and resumes seeded packets using the shared engine'
     if (event.type === 'packet-snapshot') nodeSnapshot = event.snapshot;
   expect(nodeSnapshot).toBeDefined();
   const browser = result.checkpoint as NonNullable<typeof nodeSnapshot>;
-  expect(browser.records.length).toBeGreaterThan(0);
+  expect(
+    browser.records.some(
+      (record) =>
+        record.packetId === 'browser-initial' && record.kind === 'received',
+    ),
+  ).toBe(true);
   expect(browser.records.length).toBe(nodeSnapshot!.records.length);
   browser.records.forEach((record, i) => {
     const reference = nodeSnapshot!.records[i]!;

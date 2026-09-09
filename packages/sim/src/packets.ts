@@ -24,6 +24,7 @@ export interface PacketRecord {
   time: number;
   packetId: string;
   source: string;
+  /** Outgoing port for emitted/escaped; receiving port for pending/received. */
   port: Port;
   target?: string;
   kind: 'emitted' | 'pending' | 'received' | 'escaped' | 'absorbed';
@@ -516,7 +517,12 @@ export class PacketSolver {
           arrivalTime,
           port: route.targetPort,
         });
-        this.records.push({ ...record, target: route.target, kind: 'pending' });
+        this.records.push({
+          ...record,
+          target: route.target,
+          port: route.targetPort,
+          kind: 'pending',
+        });
       } else this.records.push({ ...record, kind: 'escaped' });
     }
     this.filters = nextFilters;

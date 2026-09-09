@@ -1,0 +1,161 @@
+{
+  "purpose": "T04 technical smoke, not a paper finding",
+  "command": "node --import tsx scripts/packet-smoke.mjs",
+  "repository": "https://github.com/Brain-Crumbs/Signal-Space",
+  "engineVersion": "packet-thinning-rk4-v1",
+  "runtime": "v24.19.0",
+  "sourceSha256": {
+    "packages/sim/src/packets.ts": "59da996ca59d2cf46e513d13919ae59585466ec71877191a117c8fa162e51390",
+    "packages/sim/src/envelope.ts": "985b2d12f7abbfbbd914abc971ae201a75ffad4bdcba3c76dabecabb43ba3dfd",
+    "packages/model/src/validate.js": "3fce218ca6413095fc4772b5200ce3a88f3495a8d5b4532a0449e3b4976ed839",
+    "packages/model/schema/scenario.v1.schema.json": "d501a8c56935c71b75414cd5e3191666516b02e411469c52d41f43180f2b2fc6",
+    "package-lock.json": "e20b6c2f22fe532c3c61334e9881db1b5b749a492bdac71dda1582879ebff8b7"
+  },
+  "scenario": {
+    "modelVersion": "paper-i-v1",
+    "id": "pair",
+    "c0": 1,
+    "rateScale": 1,
+    "filterWidth": 0.1,
+    "nodes": [
+      {
+        "id": "A",
+        "position": 0,
+        "omega0": 2,
+        "omega": 2,
+        "phi": 0,
+        "amplitude": 1,
+        "gain": 0.2,
+        "relaxationTime": 1,
+        "emission": {
+          "law": "E1",
+          "q": 3
+        },
+        "response": "R1"
+      },
+      {
+        "id": "B",
+        "position": 1,
+        "omega0": 2,
+        "omega": 2,
+        "phi": 3.141592653589793,
+        "amplitude": 1,
+        "gain": 0.2,
+        "relaxationTime": 1,
+        "emission": {
+          "law": "E1",
+          "q": 3
+        },
+        "response": "R1"
+      }
+    ],
+    "links": [
+      {
+        "id": "A-B",
+        "source": "A",
+        "target": "B",
+        "sourcePort": "right",
+        "targetPort": "left",
+        "delay": 1
+      },
+      {
+        "id": "B-A",
+        "source": "B",
+        "target": "A",
+        "sourcePort": "left",
+        "targetPort": "right",
+        "delay": 1
+      }
+    ],
+    "boundaries": {
+      "left": {
+        "kind": "open"
+      },
+      "right": {
+        "kind": "open"
+      }
+    },
+    "initialHistory": {
+      "startTime": -1,
+      "endTime": 0,
+      "nodes": {
+        "A": {
+          "phiAtZero": 0,
+          "omega": 2
+        },
+        "B": {
+          "phiAtZero": 3.141592653589793,
+          "omega": 2
+        }
+      },
+      "pendingPackets": [],
+      "filters": {
+        "A": {
+          "left": 0,
+          "right": 0
+        },
+        "B": {
+          "left": 0,
+          "right": 0
+        }
+      },
+      "pendingResponses": [],
+      "rngState": {
+        "algorithm": "xoshiro128**",
+        "state": "00000001"
+      }
+    },
+    "interventions": [],
+    "observation": {
+      "sampleTimes": [0, 1],
+      "visible": ["local-phase", "arrival-time"],
+      "detectorLatency": 0
+    },
+    "solver": {
+      "method": "rk4",
+      "step": 0.01,
+      "absoluteTolerance": 1e-9,
+      "relativeTolerance": 1e-7
+    },
+    "units": {
+      "time": "s",
+      "length": "m",
+      "angle": "rad",
+      "rate": "s^-1",
+      "angularFrequency": "rad s^-1",
+      "density": "s^-1"
+    }
+  },
+  "options": {
+    "seed": "t04-saved-smoke-v1"
+  },
+  "until": 2,
+  "outcome": "completed",
+  "counts": {
+    "emitted": 4,
+    "pending": 3,
+    "received": 3,
+    "escaped": 1,
+    "absorbed": 0
+  },
+  "finalSample": {
+    "time": 2,
+    "nodes": {
+      "A": {
+        "phi": 4.030531621816672,
+        "omega": 2.03185784887551,
+        "left": 0,
+        "right": 0.0018916994777996516
+      },
+      "B": {
+        "phi": 7.1857080428727995,
+        "omega": 2.075952984110147,
+        "left": 0.15938643066661043,
+        "right": 0
+      }
+    }
+  },
+  "pendingInventory": 0,
+  "rawRecordsSha256": "ac22255c5c151fd780097d856f15d4904f97d7c835cb73e192130768d0b8010e",
+  "note": "Exact raw record checksum is a same-runtime diagnostic. Full raw events and restart state are available through packet-snapshot or CLI --seed output."
+}

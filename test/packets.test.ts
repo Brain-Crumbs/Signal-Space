@@ -155,6 +155,11 @@ test('packet accounting, causal support, no retransmission, positive bounded ome
   for (const r of terminal.filter((r) => r.kind === 'received')) {
     const e = emitted.find((e) => e.packetId === r.packetId)!;
     assert.equal(r.time, e.time + 1);
+    const pending = snapshot.records.find(
+      (p) => p.packetId === r.packetId && p.kind === 'pending',
+    )!;
+    assert.equal(pending.port, r.port);
+    assert.notEqual(e.port, r.port);
   }
   for (const sample of snapshot.history)
     for (const n of s.nodes) {
