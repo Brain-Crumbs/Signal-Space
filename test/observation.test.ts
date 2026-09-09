@@ -366,3 +366,33 @@ test('physical intervention execution agrees across the shared direct/worker API
   assert.deepEqual(worker, direct);
   assert.equal(direct.at(-1)!.type, 'completed');
 });
+
+test('branching rejects a future action that changes a previously rejected trial', () => {
+  const s = createSample('pair');
+  s.solver.absoluteTolerance = 1e-30;
+  s.solver.relativeTolerance = 1e-30;
+  s.initialHistory.filters.B!.left = 1;
+  const solver = new PacketSolver(s, { seed: 'branch-rejection' });
+  solver.advance(1);
+  const snapshot = solver.snapshot();
+  assert.equal(snapshot.time, 0);
+  assert.equal(snapshot.steps, 1);
+  assert.throws(
+    () =>
+      branchPacketRun({ runId: 'parent', snapshot }, 'branch', [
+        {
+          time: 0.00001,
+          kind: 'add-probe',
+          target: 'A',
+          value: { linkId: 'A-B' },
+        },
+      ]),
+    /changes a rejected trial/,
+  );
+  // A later action leaves the entire prefix (including the rejected step) intact.
+  const valid = branchPacketRun({ runId: 'parent', snapshot }, 'branch', [
+    { time: 0.1, kind: 'add-probe', target: 'A', value: { linkId: 'A-B' } },
+  ]);
+  assert.equal(valid.solver.time, snapshot.time);
+  assert.equal(valid.solver.snapshot().nextStep, snapshot.nextStep);
+});

@@ -46,6 +46,17 @@ export function branchPacketRun(
   scenario.interventions.push(...structuredClone(interventions));
   const solver = new PacketSolver(scenario, original.options);
   for (const until of original.advances) solver.advance(until);
+  // A new future event can shorten a previously rejected trial that overshot
+  // this checkpoint. Never silently return a branch with a different prefix.
+  const prefix = solver.snapshot();
+  if (
+    JSON.stringify({ ...prefix, scenario: null }) !==
+    JSON.stringify({ ...original, scenario: null })
+  )
+    throw new EnvelopeFailure(
+      'INVALID_HISTORY',
+      'The new action changes a rejected trial in the parent prefix. Choose a later action time or an earlier checkpoint.',
+    );
   return {
     solver,
     lineage: {

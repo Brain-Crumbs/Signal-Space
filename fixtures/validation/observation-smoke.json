@@ -5,7 +5,7 @@
   "repository": "https://github.com/Brain-Crumbs/Signal-Space",
   "sourceSha256": {
     "packages/sim/src/observation.ts": "c95dcb197cf220d57639acc66204f6fac119258cc1d8a1ec04758cf1a84101e3",
-    "packages/sim/src/interventions.ts": "a7fd150bf438a2c8dc60a495930e907cabec3ce5b6a73b04fcfd569010a2ba4a",
+    "packages/sim/src/interventions.ts": "c357e948f88c316665e5f22816b2202bd3f5848f0dc5e5a9c9ee0a819a4767b9",
     "packages/sim/src/packets.ts": "c4d65a8d16adefda06ae4006383120b8ad9f3aed09f3afaf93777434edfa96a3",
     "packages/sim/src/envelope.ts": "985b2d12f7abbfbbd914abc971ae201a75ffad4bdcba3c76dabecabb43ba3dfd",
     "packages/model/src/validate.js": "3fce218ca6413095fc4772b5200ce3a88f3495a8d5b4532a0449e3b4976ed839",
@@ -266,7 +266,7 @@
           "B": {
             "phi": 6.243812346869285,
             "omega": 2.053846705062055,
-            "left": 0.00003726653172078681,
+            "left": 3.726653172078681e-5,
             "right": 0
           }
         }
