@@ -161,6 +161,12 @@ test('local-phase timestamps need no global time channel; readable source tags r
   );
   assert.ok(tagged.arrivals.every((r) => r.sourceTag === 'A'));
   assert.ok(isObserverDataset(tagged));
+
+  for (const readout of ['localPhase', 'localFrequency'] as const) {
+    const missingReadout = structuredClone(local);
+    delete missingReadout.arrivals[0]![readout];
+    assert.equal(isObserverDataset(missingReadout), false);
+  }
 });
 test('observer export enforces UTF-16 bounds for run IDs and readable source tags', () => {
   const snapshot = finish(new PacketSolver(scenario(), options), 0.75);

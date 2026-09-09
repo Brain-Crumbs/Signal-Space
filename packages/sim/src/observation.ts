@@ -123,9 +123,12 @@ export function isObserverDataset(value: unknown): value is ObserverDataset {
     value.arrivals.every(
       (r, i) =>
         (i === 0 || r.timestamp >= value.arrivals[i - 1]!.timestamp) &&
-        (r.localPhase === undefined || p.readouts.includes('local-phase')) &&
-        (r.localFrequency === undefined ||
-          p.readouts.includes('local-frequency')) &&
+        (p.readouts.includes('local-phase')
+          ? r.localPhase !== undefined
+          : r.localPhase === undefined) &&
+        (p.readouts.includes('local-frequency')
+          ? r.localFrequency !== undefined
+          : r.localFrequency === undefined) &&
         (p.marks.kind === 'source-tag'
           ? boundedText(r.sourceTag)
           : r.sourceTag === undefined),
