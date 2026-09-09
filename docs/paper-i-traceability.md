@@ -29,6 +29,7 @@ Common contracts are owned by #2–#8; UI surfaces by #18–#20; exports and ind
 | solver/provenance                              | `SolverSettings`, `RunManifest`                           | #8, #21              |
 | ticks, wrapped/unwrapped phase, retarded phase | documented conventions; unwrapped storage                 | #7                   |
 | interventions and reporting latency            | explicit intervention/protocol types                      | #6                   |
+| finite-window regimes and uncertainty          | pure analysis records and replicate intervals             | #7                   |
 
 Deferred: research-scale runs, classification of regimes, manuscript §§12–13 findings, generated motion/binding, conservation closure, emergent geometry, gravity/electromagnetism, SU(2), and formal chaos claims.
 
@@ -73,3 +74,13 @@ Paper I §3.3 equation (13a), §3.4 and §11.1 map to `packages/sim/src/packets.
 ## T05 detector records and physical branches (#6)
 
 Paper I §§2.7, 7.3, 10 and 11.9 map to `packages/sim/src/observation.ts` (pure local recording, explicit gates/reference channels, retention, latency, jitter, bins, optional readable marks, closed observer dataset), `interventions.ts` (validated parent-prefix branching and paired lineage), and `packets.ts` (physical absorption and positive-delay probe reception). Parent contract items 6 and 11 are controlled by analytic filter jumps/decay and nonzero-feedback trajectory comparisons. `test/observation.test.ts` proves passive detector invariance, independent observations, no deleted-event/remote-truth fields, half-open gates/bins, reporting reorder without physical reorder, causal probes, branch replay and direct/worker parity. `docs/observation.md` records coordinate/operation-order decisions, access assumptions and numerical limits. Intervention scheduling uses one ordered index and a pending cursor; controls cover 10,000 future actions across 10,000 steps, original plan IDs, simultaneous/time-zero batches, and replay across action times. The saved `observation-smoke.json` is reproducible technical QA, not Setup H inference or a paper finding.
+
+## T06 finite-window diagnostics (#7)
+
+Paper I §11.1 equation (66) and §11.11 equation (67) map to
+`packages/analysis/src/index.ts`. Phase-advance frequency, unwrapped pair
+phase/slips, retarded mismatch, reception inventories, spatial coherence,
+response fronts, nested-window classifications, and independent-replicate
+intervals retain their definitions and evidence. Retarded source state defaults
+to simulator-only; phase attraction requires perturbation recovery; numerical
+failure and unresolved evidence remain distinct. See `docs/diagnostics.md`.
