@@ -106,6 +106,7 @@ export interface SetupCCellOptions {
   runId?: string;
   replicate?: number;
   control?: SetupCControlId;
+  continuationFrom?: EnvelopeSnapshot;
 }
 
 export type SetupCVariantId = `${SetupBEmissionId}-${SetupBResponseId}`;
@@ -470,12 +471,16 @@ function runEnvelope(
   envelope: EnvelopeOptions,
   duration: number,
   sampleTimes: number[],
+  continuationFrom?: EnvelopeSnapshot,
 ): { samples: EnvelopeSample[]; snapshot: EnvelopeSnapshot } {
   const solver = new EnvelopeSolver(scenario, envelope);
+  if (continuationFrom) solver.adoptParameterContinuation(continuationFrom);
   const samples = [solver.sample()];
-  for (const target of [...new Set([0, ...sampleTimes, duration])].sort(
+  const end = solver.time + duration;
+  for (const target of [...new Set([solver.time, ...sampleTimes, end])].sort(
     (a, b) => a - b,
   )) {
+    if (target < solver.time) continue;
     while (solver.time < target) {
       const previous = solver.time;
       solver.advance(target);
@@ -581,7 +586,11 @@ export function createSetupCCell(
     options.linkHistory ?? 'established',
   );
   const { scenario, physical } = scenarioFor(effective, variant, prep);
-  const windows = windowsFor(duration, preparationDuration);
+  const continuationTime = options.continuationFrom?.time ?? 0;
+  const windows = windowsFor(duration, preparationDuration).map((window) => ({
+    start: window.start + continuationTime,
+    end: window.end + continuationTime,
+  }));
   const envelope: EnvelopeOptions = {
     preparation: prep.linkHistory,
     prehistory: prehistoryFor(scenario),
@@ -591,6 +600,7 @@ export function createSetupCCell(
     envelope,
     duration,
     windows.flatMap((window) => [window.start, window.end]),
+    options.continuationFrom,
   );
   return {
     schemaVersion: 'setup-c-cell-v1',
@@ -765,6 +775,12 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
             replicate,
             control: 'baseline',
             runId: `setup-c:${variant}:${preparationId}:${key}:${replicate}`,
+            ...(direction === 'independent' ||
+            replicate !== 0 ||
+            preparationId !== preparations[0] ||
+            !previousCell
+              ? {}
+              : { continuationFrom: previousCell.finalSnapshot }),
           });
           cellRuns.push(run);
           runs.push(run);

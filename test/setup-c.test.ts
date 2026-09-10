@@ -106,8 +106,8 @@ test('Setup C maps preserve cell identity and distinguish unrun cells', () => {
 test('Setup C reverse continuation retains complete prior snapshots separately from restarts', () => {
   const scan = runSetupCScan({
     axes: {
-      detuning: [0, 0.01],
-      delay: [0.5],
+      detuning: [0],
+      delay: [0.5, 1],
       gain: [0],
       contrast: [0],
       relaxationTime: [1],
@@ -121,6 +121,14 @@ test('Setup C reverse continuation retains complete prior snapshots separately f
   assert.equal(scan.continuation.orderedCellKeys[0], scan.cells[1]!.key);
   assert.equal(scan.continuation.handoffs.length, 1);
   assert.equal(scan.continuation.handoffs[0]!.snapshot.kind, 'envelope-rk4-v1');
+  assert.equal(
+    scan.runs[1]!.samples[0]!.time,
+    scan.runs[0]!.finalSnapshot.time,
+  );
+  assert.equal(
+    scan.runs[1]!.finalSnapshot.continuation?.kind,
+    'parameter-handoff-v1',
+  );
   assert.equal(scan.continuation.restarts.length, 2);
   assert.notEqual(
     scan.continuation.restarts[0]!.runId,

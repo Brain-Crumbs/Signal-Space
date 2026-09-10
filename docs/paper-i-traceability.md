@@ -55,8 +55,8 @@ classifier for dimensionless detuning, positive delay, signed gain, contrast,
 and relaxation-time coordinates. It records physical conversions, the E0/E1
 baseline matching rule, nested finite-window evidence, irregularity diagnostics,
 replicate uncertainty, trajectory run IDs, and distinct unresolved, numerical
-failure, and unrun masks. Forward and reverse orders preserve complete solver
-snapshots as explicit continuation provenance while independent restarts remain
+failure, and unrun masks. Forward and reverse orders adopt complete solver
+snapshots as parameter-continuation state while independent restarts remain
 separately identifiable. No cell is labeled as locking, coexistence, or chaos;
 publication-scale scans and scientific interpretation remain deferred.
 

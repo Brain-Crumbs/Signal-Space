@@ -21,10 +21,12 @@ E1, so changing detuning does not silently change the comparison rule.
 uncertainty, and separate masks for unresolved, numerical-failure, and unrun
 cells. `maxCells` is an inexpensive way to produce a partial map without
 turning omitted cells into failures. `direction: 'forward'` or `'reverse'`
-records the continuation order and retains the complete prior
-`EnvelopeSnapshot` at each handoff. `direction: 'independent'` records only
-separate restarts. A handoff is provenance for an explicit continuation; it is
-not an observer-visible signal and does not reset phase or infer a regime.
+records the continuation order and adopts the complete prior `EnvelopeSnapshot`
+at each handoff. The prior dense causal segments, unwrapped phase, integrated
+emission state, adaptive history, and perturbation history remain available to
+the next parameter cell. `direction: 'independent'` records only separate
+restarts. A handoff is not an observer-visible signal and does not reset phase
+or infer a regime.
 
 Nested finite windows are saved at exact boundaries and passed to the shared
 pair classifier. A status is evidence from those windows only. Coexistence,
