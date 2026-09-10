@@ -62,6 +62,15 @@ test('Setup B R0 preserves the analytic uncoupled continuation', () => {
   close(result.diagnostics.meanFrequencyDifference, 0);
 });
 
+test('Setup B default phase perturbation is admissible for zero gain', () => {
+  const result = runSetupB(
+    createSetupBProtocol('reciprocal', { duration: 3, preparationDuration: 1 }),
+    'E0-R0',
+  );
+  assert.equal(result.variant.gain, 0);
+  assert.ok(result.diagnostics.recovery);
+});
+
 test('E0 with zero amplitude and R1 does not manufacture phase restoration', () => {
   const protocol = createSetupBProtocol('reciprocal', {
     preparation: 'small-offset',
@@ -98,6 +107,10 @@ test('Setup B keeps reciprocal, one-way, and prescribed controls distinct', () =
     runSetupB(prescribed, 'E1-R1').diagnostics.retardedPhase.bFromA.length,
     0,
   );
+  assert.equal(
+    runSetupB(prescribed, 'E1-R1').diagnostics.classification.evidence.length,
+    1,
+  );
 });
 
 test('Setup B gain sweep records signed values through zero without a locking claim', () => {
@@ -114,7 +127,18 @@ test('Setup B gain sweep records signed values through zero without a locking cl
   assert.equal(sweep.controls.signedGain, true);
   assert.equal(sweep.controls.interpretation, 'deferred');
   assert.ok(sweep.points.every((point) => Number.isFinite(point.phaseDrift)));
+  assert.equal(
+    runSetupB(protocolValueForSweep(), 'E1-R1', { gain: -0.4 }).variant.gain,
+    -0.4,
+  );
 });
+
+function protocolValueForSweep() {
+  return createSetupBProtocol('reciprocal', {
+    duration: 3,
+    perturbation: null,
+  });
+}
 
 test('Setup B perturbations land at preparation boundaries and replay with history', () => {
   const protocol = createSetupBProtocol('reciprocal', {
@@ -144,6 +168,35 @@ test('Setup B perturbations land at preparation boundaries and replay with histo
   );
 });
 
+test('Setup B phase jumps emit directed tick crossings', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    duration: 2,
+    preparationDuration: 0.5,
+    perturbation: {
+      time: 1,
+      nodeId: 'B',
+      phaseOffset: 2 * Math.PI,
+      frequencyOffset: 0,
+    },
+  });
+  const scenario = createSetupBScenario(protocol, 'E0-R1');
+  const solver = new EnvelopeSolver(scenario, {
+    preparation: 'established',
+    perturbations: [protocol.perturbation!],
+  });
+  const crossings = [];
+  while (solver.time < protocol.duration)
+    crossings.push(...solver.advance(protocol.duration));
+  assert.ok(
+    crossings.some(
+      (crossing) =>
+        crossing.nodeId === 'B' &&
+        crossing.time === 1 &&
+        crossing.direction === 1,
+    ),
+  );
+});
+
 test('Setup B definitions are shared-API schema-compatible', async () => {
   const definitions = createSetupBSmokeDefinitions();
   assert.equal(definitions.length, 12);
@@ -162,4 +215,7 @@ test('Setup B definitions are shared-API schema-compatible', async () => {
   );
   assert.equal(edited.envelope?.boundaryInputs?.right?.[0]?.rate, 0.75);
   assert.equal(edited.envelope?.perturbations?.[0]?.nodeId, 'B');
+  const invalid = structuredClone(edited);
+  invalid.envelope!.perturbations![0]!.nodeId = 'missing';
+  assert.throws(() => validateDefinition(invalid), /unknown node/);
 });

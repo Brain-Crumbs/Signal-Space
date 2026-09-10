@@ -30,6 +30,8 @@ export interface PairCriteria {
     time: number;
     recoveryTolerance: number;
     referenceOffset: number;
+    /** Matched continuation used for recovery instead of a fixed offset. */
+    reference?: AnalysisSeries;
   };
 }
 export type RegimeStatus =
@@ -100,6 +102,39 @@ function samplesIn(series: AnalysisSeries, window: MeasurementWindow) {
       'Every window requires saved samples at both declared boundaries.',
     );
   return samples;
+}
+
+function pairPhaseAt(
+  series: AnalysisSeries,
+  a: string,
+  b: string,
+  time: number,
+): number {
+  const samples = series.samples;
+  if (time < samples[0]!.time || time > samples.at(-1)!.time)
+    throw new RangeError(
+      'Reference series does not cover the perturbation window.',
+    );
+  if (time === samples[0]!.time) {
+    const sample = samples[0]!;
+    return requireNode(sample, a).phi - requireNode(sample, b).phi;
+  }
+  for (let index = 1; index < samples.length; index++) {
+    const next = samples[index]!;
+    if (next.time < time) continue;
+    const previous = samples[index - 1]!;
+    if (next.time === time) {
+      return requireNode(next, a).phi - requireNode(next, b).phi;
+    }
+    const previousPhase =
+      requireNode(previous, a).phi - requireNode(previous, b).phi;
+    const nextPhase = requireNode(next, a).phi - requireNode(next, b).phi;
+    const fraction = (time - previous.time) / (next.time - previous.time);
+    return previousPhase + fraction * (nextPhase - previousPhase);
+  }
+  return (
+    requireNode(samples.at(-1)!, a).phi - requireNode(samples.at(-1)!, b).phi
+  );
 }
 
 /** Phase-advance estimator, not an average of correlated instantaneous samples. */
@@ -284,6 +319,13 @@ export function classifyPair(
       throw new RangeError(
         'perturbation.recoveryTolerance must be finite and nonnegative.',
       );
+    if (criteria.perturbation.reference) {
+      if (criteria.perturbation.reference.failed)
+        throw new RangeError(
+          'Perturbation reference series must not have failed.',
+        );
+      assertSeries(criteria.perturbation.reference);
+    }
   }
   let evidence: WindowEvidence[];
   try {
@@ -315,7 +357,9 @@ export function classifyPair(
         Math.abs(
           requireNode(sample, a).phi -
             requireNode(sample, b).phi -
-            perturbation.referenceOffset,
+            (perturbation.reference
+              ? pairPhaseAt(perturbation.reference, a, b, sample.time)
+              : perturbation.referenceOffset),
         ),
       ),
       finalError = errors.at(-1) ?? Infinity,

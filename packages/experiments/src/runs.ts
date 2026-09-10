@@ -273,7 +273,7 @@ function validatePositiveInteger(value: unknown, name: string): void {
     invalid(`${name} must be a positive integer`);
 }
 
-function validateEnvelopeOptions(value: unknown): void {
+function validateEnvelopeOptions(value: unknown, scenario?: Scenario): void {
   if (value === undefined) return;
   if (!isRecord(value)) invalid('envelope options must be an object');
   const allowed = new Set([
@@ -362,6 +362,13 @@ function validateEnvelopeOptions(value: unknown): void {
       const key = `${perturbation.time}\u0000${perturbation.nodeId}`;
       if (keys.has(key))
         invalid('envelope perturbations duplicate a node/time');
+      if (
+        scenario &&
+        !scenario.nodes.some((node) => node.id === perturbation.nodeId)
+      )
+        invalid(
+          `envelope perturbation targets unknown node ${perturbation.nodeId}`,
+        );
       keys.add(key);
     }
   }
@@ -428,7 +435,7 @@ export function validateDefinition(
     invalid('packets options require packet mode');
   if (value.mode !== 'envelope' && value.envelope !== undefined)
     invalid('envelope options require envelope mode');
-  validateEnvelopeOptions(value.envelope);
+  validateEnvelopeOptions(value.envelope, value.scenario);
   if (value.packets !== undefined) validatePacketOptions(value.packets);
   if (
     !Number.isInteger(value.replicates) ||

@@ -81,6 +81,7 @@ export interface TickCrossing {
   nodeId: string;
   time: number;
   sectionIndex: number;
+  direction?: 1 | -1;
 }
 export class EnvelopeFailure extends Error {
   constructor(
@@ -647,7 +648,7 @@ export class EnvelopeSolver {
       }
     });
   }
-  private source(time: number): Vector {
+  private source(time: number, left = false): Vector {
     if (
       time > this.time &&
       withinUlps(time, this.time, UNRESOLVABLE_INTERVAL_MAX_ULPS)
@@ -662,8 +663,10 @@ export class EnvelopeSolver {
       fail('Retarded query is outside saved prehistory.');
     const jump = [...this.jumps]
       .reverse()
-      .find((candidate) =>
-        withinUlps(time, candidate.time, UNRESOLVABLE_INTERVAL_MAX_ULPS),
+      .find(
+        (candidate) =>
+          withinUlps(time, candidate.time, UNRESOLVABLE_INTERVAL_MAX_ULPS) &&
+          !left,
       );
     if (jump) return [...jump.state];
     if (time <= 0) {
@@ -714,7 +717,7 @@ export class EnvelopeSolver {
       const sourceTime = time - l.delay;
       const j = this.scenario.nodes.findIndex((n) => n.id === l.source),
         i = this.scenario.nodes.findIndex((n) => n.id === l.target);
-      const state = this.source(sourceTime),
+      const state = this.source(sourceTime, left),
         phi = state[j * 4]!,
         omega = state[j * 4 + 1]!;
       const suppressed =
@@ -760,7 +763,7 @@ export class EnvelopeSolver {
       return [omega, (target - omega) / n.relaxationTime, l, r];
     });
   }
-  private applyPerturbations(time: number): void {
+  private applyPerturbations(time: number): TickCrossing[] {
     const due = this.perturbations.filter((perturbation) =>
       withinUlps(
         this.canonicalBoundaryTimes.get(perturbation.time) ?? NaN,
@@ -768,7 +771,13 @@ export class EnvelopeSolver {
         UNRESOLVABLE_INTERVAL_MAX_ULPS,
       ),
     );
-    if (!due.length) return;
+    if (!due.length) return [];
+    const before = new Map(
+      this.scenario.nodes.map((node, index) => [
+        node.id,
+        this.state[index * 4]!,
+      ]),
+    );
     this.state = [...this.state];
     for (const perturbation of due) {
       const index = this.scenario.nodes.findIndex(
@@ -792,6 +801,18 @@ export class EnvelopeSolver {
         );
     }
     this.jumps.push({ time, state: [...this.state] });
+    const ticks: TickCrossing[] = [];
+    for (const [index, node] of this.scenario.nodes.entries()) {
+      const from = this.tickIndex(before.get(node.id)!);
+      const to = this.tickIndex(this.state[index * 4]!);
+      if (to > from)
+        for (let sectionIndex = from + 1; sectionIndex <= to; sectionIndex++)
+          ticks.push({ nodeId: node.id, time, sectionIndex, direction: 1 });
+      if (to < from)
+        for (let sectionIndex = to + 1; sectionIndex <= from; sectionIndex++)
+          ticks.push({ nodeId: node.id, time, sectionIndex, direction: -1 });
+    }
+    return ticks;
   }
   private rk4(t: number, y: Vector, end: number, left: boolean): DenseSegment {
     const h = end - t;
@@ -991,9 +1012,9 @@ export class EnvelopeSolver {
     this.segments.push(first, second);
     this.time = end;
     this.state = second.y1;
-    this.applyPerturbations(end);
+    const perturbationTicks = this.applyPerturbations(end);
     this.acceptedSteps++;
-    return ticks.sort((a, b) => a.time - b.time);
+    return [...ticks, ...perturbationTicks].sort((a, b) => a.time - b.time);
   }
   sample(): EnvelopeSample {
     const { inputs, retarded } = this.reception(this.time);

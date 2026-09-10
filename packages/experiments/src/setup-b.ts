@@ -277,7 +277,7 @@ export function createSetupBProtocol(
           time: preparationDuration + 0.5,
           nodeId: NODE_B,
           phaseOffset: 0.15,
-          frequencyOffset: 0.04,
+          frequencyOffset: 0,
         }
       : options.perturbation;
   const amplitude = options.amplitude ?? 1;
@@ -475,13 +475,21 @@ function runEnvelope(
   scenario: Scenario,
   envelope: EnvelopeOptions,
   duration: number,
+  sampleTimes: number[] = [],
 ): EnvelopeSample[] {
   const solver = new EnvelopeSolver(scenario, envelope);
   const samples = [solver.sample()];
-  while (solver.time < duration) {
-    const previous = solver.time;
-    solver.advance(duration);
-    if (solver.time > previous) samples.push(solver.sample());
+  const targets = [...new Set([0, ...sampleTimes, duration])].sort(
+    (a, b) => a - b,
+  );
+  for (const target of targets) {
+    if (target < 0 || target > duration)
+      throw new RangeError('Setup B sample times must lie inside the run.');
+    while (solver.time < target) {
+      const previous = solver.time;
+      solver.advance(target);
+      if (solver.time > previous) samples.push(solver.sample());
+    }
   }
   return samples;
 }
@@ -524,6 +532,7 @@ function retardedFor(
 function diagnosticsFor(
   protocolValue: SetupBProtocol,
   samples: EnvelopeSample[],
+  referenceSamples: EnvelopeSample[],
 ): SetupBDiagnostics {
   const series = analysisSamples(samples);
   const phases = pairPhase(series, NODE_A, NODE_B).map(
@@ -559,6 +568,7 @@ function diagnosticsFor(
             time: perturbation.time,
             recoveryTolerance: 0.2,
             referenceOffset,
+            reference: { samples: analysisSamples(referenceSamples) },
           },
         }
       : {}),
@@ -613,24 +623,43 @@ export function runSetupB(
 ): SetupBRun {
   const variant = setupBVariant(variantId);
   const scenario = createSetupBScenario(protocolValue, variantId, options);
+  const actualGain = options.gain ?? variant.gain;
   const envelope = envelopeFor(protocolValue, scenario, true);
   const referenceEnvelope = envelopeFor(protocolValue, scenario, false);
-  const samples = runEnvelope(scenario, envelope, protocolValue.duration);
+  const sampleTimes = [
+    protocolValue.perturbation?.time,
+    Math.max(protocolValue.perturbation?.time ?? 0, protocolValue.duration / 2),
+  ].filter((time): time is number => time !== undefined);
+  const samples = runEnvelope(
+    scenario,
+    envelope,
+    protocolValue.duration,
+    sampleTimes,
+  );
   const referenceSamples = runEnvelope(
     scenario,
     referenceEnvelope,
     protocolValue.duration,
+    sampleTimes,
   );
+  const actualVariant: SetupBVariant = {
+    ...variant,
+    gain: actualGain,
+    label:
+      actualGain === variant.gain
+        ? variant.label
+        : `${variant.label} (gain ${actualGain})`,
+  };
   return {
     schemaVersion: 'setup-b-diagnostic-v1',
     modelVersion: 'paper-i-v1',
     protocol: clone(protocolValue),
-    variant,
+    variant: actualVariant,
     scenario,
     envelope,
     samples,
     referenceSamples,
-    diagnostics: diagnosticsFor(protocolValue, samples),
+    diagnostics: diagnosticsFor(protocolValue, samples, referenceSamples),
     limitations: [
       'Pair classifications are finite-window evidence and do not claim locking, attraction, or a paper result.',
       'The reference continuation is a matched deterministic run; it is not an observer-accessible signal.',
