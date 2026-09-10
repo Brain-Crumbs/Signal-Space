@@ -20,6 +20,12 @@ export interface EnvelopeOptions {
   prehistory?: HistoryPoint[];
   /** Right-continuous, piecewise constant external rates, starting at t=0. */
   boundaryInputs?: Partial<Record<Port, Array<{ time: number; rate: number }>>>;
+  /**
+   * Explicit response-scale variant by node. Omitted nodes retain the physical
+   * scenario r*. This makes comparison conventions visible at the solver
+   * boundary instead of overloading Scenario.rateScale.
+   */
+  responseRateScales?: Record<string, number>;
   /** Explicit state intervention applied at an exact solver boundary. */
   perturbations?: EnvelopePerturbation[];
   tickSection?: number;
@@ -170,6 +176,10 @@ const validateOptions = ajv.compile({
           frequencyOffset: { type: 'number' },
         },
       },
+    },
+    responseRateScales: {
+      type: 'object',
+      additionalProperties: { type: 'number', exclusiveMinimum: 0 },
     },
   },
 });
@@ -396,6 +406,18 @@ export class EnvelopeSolver {
         'All numeric envelope option values must be finite.',
       );
     this.options = options as EnvelopeOptions;
+    for (const [nodeId, scale] of Object.entries(
+      this.options.responseRateScales ?? {},
+    ))
+      if (
+        !scenario.nodes.some((node) => node.id === nodeId) ||
+        !Number.isFinite(scale) ||
+        scale <= 0
+      )
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'Response-rate scales require existing nodes and finite positive r* values.',
+        );
     if (scenario.solver.method !== 'rk4')
       throw new EnvelopeFailure(
         'UNSUPPORTED_MODEL',
@@ -682,6 +704,11 @@ export class EnvelopeSolver {
         gain = change.gain;
     return gain;
   }
+  private responseRateScale(node: ClockNode): number {
+    return (
+      this.options.responseRateScales?.[node.id] ?? this.scenario.rateScale
+    );
+  }
   private bounds(
     node: ClockNode,
     time: number,
@@ -857,7 +884,7 @@ export class EnvelopeSolver {
         this.gain(n, time, left) *
           (n.response === 'R2' ? Math.cos(2 * phi) : 1) *
           Math.tanh(
-            (inputs[i]![0]! + inputs[i]![1]!) / this.scenario.rateScale,
+            (inputs[i]![0]! + inputs[i]![1]!) / this.responseRateScale(n),
           );
       const [l, r] = emission(n, phi, omega);
       return [omega, (target - omega) / n.relaxationTime, l, r];

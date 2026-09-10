@@ -119,6 +119,32 @@ test('constant-input R1 matches exponential frequency and integrated phase for b
   }
 });
 
+test('explicit per-node response-rate scales are validated and leave physical r-star unchanged', async () => {
+  const s = driven(),
+    n = s.nodes[0]!;
+  const result = await run(s, 3, { responseRateScales: { [n.id]: 2 } });
+  const target = n.omega0 + n.gain * Math.tanh(1.3 / 2);
+  close(
+    result.last.nodes[n.id]!.omega,
+    target + (n.omega - target) * Math.exp(-3 / n.relaxationTime),
+  );
+  assert.equal(s.rateScale, 1);
+  const isolatedScale = isolated(),
+    isolatedNode = isolatedScale.nodes[0]!;
+  isolatedNode.response = 'R1';
+  isolatedNode.gain = 0.2;
+  const isolatedResult = await run(isolatedScale, 1, {
+    responseRateScales: { [isolatedNode.id]: 3 },
+  });
+  assert.equal(isolatedResult.last.nodes[isolatedNode.id]!.receptionLeft, 0);
+  assert.equal(isolatedResult.last.nodes[isolatedNode.id]!.receptionRight, 0);
+  close(isolatedResult.last.nodes[isolatedNode.id]!.omega, isolatedNode.omega0);
+  assert.throws(
+    () => new EnvelopeSolver(s, { responseRateScales: { missing: 1 } }),
+    /Response-rate scales require existing nodes/,
+  );
+});
+
 test('non-grid delay preserves causal onset and refinement converges', async () => {
   const s = createSample('pair');
   s.nodes[1]!.position = 0.137;
