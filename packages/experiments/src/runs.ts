@@ -347,10 +347,19 @@ function validateEnvelopeOptions(value: unknown, scenario?: Scenario): void {
   if (value.perturbations !== undefined) {
     if (!Array.isArray(value.perturbations))
       invalid('envelope perturbations must be an array');
+    const perturbationAllowed = new Set([
+      'time',
+      'nodeId',
+      'phaseOffset',
+      'frequencyOffset',
+    ]);
     const keys = new Set<string>();
     for (const perturbation of value.perturbations) {
       if (
         !isRecord(perturbation) ||
+        Object.keys(perturbation).some(
+          (key) => !perturbationAllowed.has(key),
+        ) ||
         typeof perturbation.nodeId !== 'string' ||
         !perturbation.nodeId ||
         !Number.isFinite(perturbation.time) ||

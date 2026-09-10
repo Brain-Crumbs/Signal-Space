@@ -171,6 +171,25 @@ test('definition validation rejects invalid resolved values and unbounded plans'
     () =>
       validateDefinition(
         definition({
+          envelope: {
+            perturbations: [
+              {
+                time: 0.02,
+                nodeId: 'A',
+                phaseOffset: 0,
+                frequencyOffset: 0,
+                phaseOffest: 0,
+              },
+            ],
+          } as never,
+        }),
+      ),
+    /envelope perturbation is invalid/,
+  );
+  assert.throws(
+    () =>
+      validateDefinition(
+        definition({
           parameters: [
             { id: 'first', path: 'c0', values: [1.1] },
             { id: 'second', path: 'c0', values: [1.2] },
