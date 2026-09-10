@@ -68,7 +68,36 @@ test('Setup B default phase perturbation is admissible for zero gain', () => {
     'E0-R0',
   );
   assert.equal(result.variant.gain, 0);
+  close(result.diagnostics.meanFrequencyDifference, 0);
   assert.ok(result.diagnostics.recovery);
+});
+
+test('Setup B validates finite overrides, durations, and perturbation nodes', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    duration: 3,
+    preparationDuration: 1,
+    perturbation: null,
+  });
+  assert.throws(
+    () => createSetupBScenario(protocol, 'E1-R1', { gain: Number.NaN }),
+    /finite/,
+  );
+  assert.throws(
+    () => createSetupBProtocol('reciprocal', { duration: Infinity }),
+    /finite/,
+  );
+  assert.throws(
+    () =>
+      createSetupBProtocol('reciprocal', {
+        perturbation: {
+          time: 2.5,
+          nodeId: 'missing',
+          phaseOffset: 0,
+          frequencyOffset: 0,
+        },
+      }),
+    /target node A or B/,
+  );
 });
 
 test('E0 with zero amplitude and R1 does not manufacture phase restoration', () => {
@@ -157,6 +186,12 @@ test('Setup B perturbations land at preparation boundaries and replay with histo
   while (solver.time < 2) solver.advance(2);
   const checkpoint = solver.snapshot();
   assert.equal(checkpoint.jumps.length, 1);
+  const shifted = structuredClone(checkpoint);
+  shifted.jumps[0]!.time += 5e-13;
+  assert.throws(
+    () => new EnvelopeSolver(scenario, result.envelope, shifted),
+    /perturbation history/,
+  );
   const resumed = new EnvelopeSolver(scenario, result.envelope, checkpoint);
   while (resumed.time < protocol.duration) resumed.advance(protocol.duration);
   assert.deepEqual(resumed.snapshot().jumps, checkpoint.jumps);
@@ -166,6 +201,26 @@ test('Setup B perturbations land at preparation boundaries and replay with histo
         result.referenceSamples.at(-1)!.nodes.B!.phi,
     ) > 0.1,
   );
+});
+
+test('Setup B rejects phase jumps beyond the tick crossing output cap', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    duration: 2,
+    preparationDuration: 0.5,
+    perturbation: {
+      time: 1,
+      nodeId: 'B',
+      phaseOffset: 1e9,
+      frequencyOffset: 0,
+    },
+  });
+  const solver = new EnvelopeSolver(createSetupBScenario(protocol, 'E0-R1'), {
+    preparation: 'established',
+    perturbations: [protocol.perturbation!],
+  });
+  assert.throws(() => {
+    while (solver.time < protocol.duration) solver.advance(protocol.duration);
+  }, /per-step output limits/);
 });
 
 test('Setup B phase jumps emit directed tick crossings', () => {

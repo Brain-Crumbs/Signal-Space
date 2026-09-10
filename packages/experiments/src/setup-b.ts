@@ -254,7 +254,8 @@ function validatePerturbation(
     throw new RangeError(
       'Setup B perturbations must occur after preparation and before the run ends.',
     );
-  if (!value.nodeId) throw new RangeError('Perturbations require a node ID.');
+  if (value.nodeId !== NODE_A && value.nodeId !== NODE_B)
+    throw new RangeError('Setup B perturbations must target node A or B.');
 }
 
 export function createSetupBProtocol(
@@ -285,6 +286,8 @@ export function createSetupBProtocol(
     id === 'prescribed-drive'
       ? (options.prescribedRate ?? DEFAULT_PRESCRIBED_RATE)
       : null;
+  if (!Number.isFinite(duration) || !Number.isFinite(preparationDuration))
+    throw new RangeError('Setup B durations must be finite.');
   if (!(duration > 0) || !(preparationDuration >= 0))
     throw new RangeError('Setup B durations must be positive and ordered.');
   if (preparationDuration >= duration)
@@ -384,6 +387,7 @@ function scenarioFor(
   variant: SetupBVariant,
   gain: number,
 ): Scenario {
+  finite(gain, 'Setup B gain');
   if (Math.abs(gain) >= 2)
     throw new RangeError(
       'Setup B gain must satisfy |gain| < omega0 (2 rad s^-1).',
@@ -535,12 +539,20 @@ function diagnosticsFor(
   referenceSamples: EnvelopeSample[],
 ): SetupBDiagnostics {
   const series = analysisSamples(samples);
+  const perturbation = protocolValue.perturbation;
+  const measurementStart = Math.max(
+    perturbation?.time ?? 0,
+    protocolValue.duration / 2,
+  );
+  const measurementSeries = series.filter(
+    (sample) => sample.time >= measurementStart,
+  );
   const phases = pairPhase(series, NODE_A, NODE_B).map(
     (point) => point.unwrapped,
   );
   const frequencies = {
-    [NODE_A]: meanFrequency(series, NODE_A),
-    [NODE_B]: meanFrequency(series, NODE_B),
+    [NODE_A]: meanFrequency(measurementSeries, NODE_A),
+    [NODE_B]: meanFrequency(measurementSeries, NODE_B),
   };
   const differences = series.map(
     (sample) => sample.nodes[NODE_A]!.omega - sample.nodes[NODE_B]!.omega,
@@ -550,7 +562,6 @@ function diagnosticsFor(
   );
   const referenceOffset =
     protocolValue.preparation.phaseA - protocolValue.preparation.phaseB;
-  const perturbation = protocolValue.perturbation;
   const criteria = {
     transientEnd: perturbation?.time ?? 0,
     windows: [
@@ -640,7 +651,7 @@ export function runSetupB(
     scenario,
     referenceEnvelope,
     protocolValue.duration,
-    sampleTimes,
+    samples.map((sample) => sample.time),
   );
   const actualVariant: SetupBVariant = {
     ...variant,

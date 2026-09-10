@@ -188,6 +188,7 @@ const PORTABLE_REPLAY_ABSOLUTE_TOLERANCE = 1e-12;
 const PORTABLE_REPLAY_MAX_ULPS = 32n;
 const PHYSICAL_BOUND_MAX_ULPS = 8n;
 const UNRESOLVABLE_INTERVAL_MAX_ULPS = 1n;
+const MAX_TICK_CROSSINGS_PER_STEP = 10000;
 const FLOAT64_SIGN_BIT = 1n << 63n;
 const FLOAT64_MASK = (1n << 64n) - 1n;
 const replayBits = new DataView(new ArrayBuffer(8));
@@ -805,6 +806,11 @@ export class EnvelopeSolver {
     for (const [index, node] of this.scenario.nodes.entries()) {
       const from = this.tickIndex(before.get(node.id)!);
       const to = this.tickIndex(this.state[index * 4]!);
+      if (Math.abs(to - from) > MAX_TICK_CROSSINGS_PER_STEP)
+        throw new EnvelopeFailure(
+          'NUMERICAL_FAILURE',
+          'Tick indices exceed representable or per-step output limits.',
+        );
       if (to > from)
         for (let sectionIndex = from + 1; sectionIndex <= to; sectionIndex++)
           ticks.push({ nodeId: node.id, time, sectionIndex, direction: 1 });
@@ -988,7 +994,7 @@ export class EnvelopeSolver {
         const section = this.options.tickSection ?? 0,
           from = this.tickIndex(s.y0[i * 4]!),
           to = this.tickIndex(s.y1[i * 4]!);
-        if (to - from > 10000)
+        if (Math.abs(to - from) > MAX_TICK_CROSSINGS_PER_STEP)
           throw new EnvelopeFailure(
             'NUMERICAL_FAILURE',
             'Tick indices exceed representable or per-step output limits.',
@@ -1244,6 +1250,9 @@ export class EnvelopeSolver {
           jump.time <= 0 ||
           !Array.isArray(jump.state) ||
           !vector(jump.state),
+      ) ||
+      !savedJumps.every(
+        (jump, index) => jump.time === this.jumps[index]?.time,
       ) ||
       !portableReplayEqual(savedJumps, this.jumps)
     )

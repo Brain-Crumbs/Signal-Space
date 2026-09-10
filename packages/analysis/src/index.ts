@@ -110,31 +110,12 @@ function pairPhaseAt(
   b: string,
   time: number,
 ): number {
-  const samples = series.samples;
-  if (time < samples[0]!.time || time > samples.at(-1)!.time)
+  const sample = series.samples.find((candidate) => candidate.time === time);
+  if (!sample)
     throw new RangeError(
-      'Reference series does not cover the perturbation window.',
+      `Reference series must contain an exact sample at ${time}.`,
     );
-  if (time === samples[0]!.time) {
-    const sample = samples[0]!;
-    return requireNode(sample, a).phi - requireNode(sample, b).phi;
-  }
-  for (let index = 1; index < samples.length; index++) {
-    const next = samples[index]!;
-    if (next.time < time) continue;
-    const previous = samples[index - 1]!;
-    if (next.time === time) {
-      return requireNode(next, a).phi - requireNode(next, b).phi;
-    }
-    const previousPhase =
-      requireNode(previous, a).phi - requireNode(previous, b).phi;
-    const nextPhase = requireNode(next, a).phi - requireNode(next, b).phi;
-    const fraction = (time - previous.time) / (next.time - previous.time);
-    return previousPhase + fraction * (nextPhase - previousPhase);
-  }
-  return (
-    requireNode(samples.at(-1)!, a).phi - requireNode(samples.at(-1)!, b).phi
-  );
+  return requireNode(sample, a).phi - requireNode(sample, b).phi;
 }
 
 /** Phase-advance estimator, not an average of correlated instantaneous samples. */
