@@ -27,12 +27,14 @@ rule, or physical force.
 
 ## Metrics and limits
 
-Runs save phase-advance mean frequencies, mean-frequency mismatch, unwrapped
-pair-phase drift and slips, simulator-only retarded phases with `chi = 0`,
-collective frequency modulation, and recovery evidence from the shared finite-
-window classifier. A reference continuation is saved beside the perturbed run;
-its state is not an observer-readable signal. Classifier status is deliberately
-unresolved/candidate/slipping evidence, never a required locking outcome.
+Runs save post-intervention-window phase-advance mean frequencies,
+mean-frequency mismatch, unwrapped pair-phase drift and slips, and the applied
+pair-phase offset separately. They also save simulator-only retarded phases with
+`chi = 0`, collective frequency modulation, and recovery evidence from the
+shared finite-window classifier. A reference continuation is saved beside the
+perturbed run; its state is not an observer-readable signal. Classifier status is
+deliberately unresolved/candidate/slipping evidence, never a required locking
+outcome.
 
 The checked-in smoke definitions are inexpensive wiring checks, not scientific
 response or regime findings. Event packet statistics and physical receiver

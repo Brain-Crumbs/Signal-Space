@@ -463,6 +463,7 @@ export class EnvelopeSolver {
       .map((perturbation) => ({ ...perturbation }))
       .sort((a, b) => a.time - b.time);
     const perturbationKeys = new Set<string>();
+    const perturbationTimes = new Map<string, number[]>();
     for (const perturbation of this.perturbations) {
       const node = scenario.nodes.find(
         (candidate) => candidate.id === perturbation.nodeId,
@@ -479,12 +480,20 @@ export class EnvelopeSolver {
           'Perturbations require an existing node, positive time, and finite phase/frequency offsets.',
         );
       const key = `${perturbation.time}\u0000${perturbation.nodeId}`;
-      if (perturbationKeys.has(key))
+      const priorTimes = perturbationTimes.get(perturbation.nodeId) ?? [];
+      if (
+        perturbationKeys.has(key) ||
+        priorTimes.some((time) =>
+          withinUlps(time, perturbation.time, UNRESOLVABLE_INTERVAL_MAX_ULPS),
+        )
+      )
         throw new EnvelopeFailure(
           'INVALID_REQUEST',
           'A node may have at most one perturbation at a given time.',
         );
       perturbationKeys.add(key);
+      priorTimes.push(perturbation.time);
+      perturbationTimes.set(perturbation.nodeId, priorTimes);
     }
     // Carry derivative discontinuities through four transport generations for RK4.
     // Each feedback integration raises differentiability by one; data knots and

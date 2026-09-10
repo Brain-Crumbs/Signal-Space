@@ -69,7 +69,26 @@ test('Setup B default phase perturbation is admissible for zero gain', () => {
   );
   assert.equal(result.variant.gain, 0);
   close(result.diagnostics.meanFrequencyDifference, 0);
+  close(result.diagnostics.phase.unwrappedDrift, 0);
+  close(result.diagnostics.phase.appliedPairPhaseOffset, -0.15);
+  assert.equal(result.diagnostics.recovery?.displaced, true);
   assert.ok(result.diagnostics.recovery);
+});
+
+test('Setup B defaults remain valid for short protocols and R0 sweeps', () => {
+  const short = createSetupBProtocol('reciprocal', {
+    duration: 1,
+    preparationDuration: 0.75,
+  });
+  assert.equal(short.perturbation?.time, 5 / 6);
+  const sweep = createSetupBGainSweep(
+    createSetupBProtocol('reciprocal', { perturbation: null }),
+    'E0-R0',
+  );
+  assert.deepEqual(
+    sweep.points.map((point) => point.gain),
+    [0],
+  );
 });
 
 test('Setup B validates finite overrides, durations, and perturbation nodes', () => {
@@ -249,6 +268,28 @@ test('Setup B phase jumps emit directed tick crossings', () => {
         crossing.time === 1 &&
         crossing.direction === 1,
     ),
+  );
+});
+
+test('Setup B rejects perturbations merged by canonical boundary time', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    perturbation: null,
+  });
+  const scenario = createSetupBScenario(protocol, 'E0-R1');
+  assert.throws(
+    () =>
+      new EnvelopeSolver(scenario, {
+        perturbations: [
+          { time: 0.3, nodeId: 'B', phaseOffset: 0, frequencyOffset: 0 },
+          {
+            time: 0.1 + 0.2,
+            nodeId: 'B',
+            phaseOffset: 0,
+            frequencyOffset: 0,
+          },
+        ],
+      }),
+    /at most one perturbation/,
   );
 });
 

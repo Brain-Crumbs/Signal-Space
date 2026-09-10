@@ -92,6 +92,7 @@ export interface SetupBDiagnostics {
     minimum: number;
     maximum: number;
     slipCount: number;
+    appliedPairPhaseOffset: number;
   };
   retardedPhase: {
     aFromB: RetardedPhasePoint[];
@@ -275,7 +276,7 @@ export function createSetupBProtocol(
   const perturbation =
     options.perturbation === undefined
       ? {
-          time: preparationDuration + 0.5,
+          time: preparationDuration + (duration - preparationDuration) / 3,
           nodeId: NODE_B,
           phaseOffset: 0.15,
           frequencyOffset: 0,
@@ -547,7 +548,7 @@ function diagnosticsFor(
   const measurementSeries = series.filter(
     (sample) => sample.time >= measurementStart,
   );
-  const phases = pairPhase(series, NODE_A, NODE_B).map(
+  const phases = pairPhase(measurementSeries, NODE_A, NODE_B).map(
     (point) => point.unwrapped,
   );
   const frequencies = {
@@ -577,7 +578,7 @@ function diagnosticsFor(
       ? {
           perturbation: {
             time: perturbation.time,
-            recoveryTolerance: 0.2,
+            recoveryTolerance: 0.1,
             referenceOffset,
             reference: { samples: analysisSamples(referenceSamples) },
           },
@@ -602,6 +603,12 @@ function diagnosticsFor(
       minimum: Math.min(...phases),
       maximum: Math.max(...phases),
       slipCount: slipCount(phases),
+      appliedPairPhaseOffset:
+        perturbation && perturbation.nodeId === NODE_A
+          ? perturbation.phaseOffset
+          : perturbation?.phaseOffset
+            ? -perturbation.phaseOffset
+            : 0,
     },
     retardedPhase: {
       aFromB: retardedFor(samples, 'B-A', NODE_A, 0),
@@ -683,11 +690,14 @@ export function runSetupB(
 export function createSetupBGainSweep(
   protocolValue: SetupBProtocol,
   variantId: SetupBVariantId,
-  gains = [-DEFAULT_GAIN, 0, DEFAULT_GAIN],
+  gains?: number[],
 ): SetupBGainSweep {
-  if (!gains.length)
+  const sweepGains =
+    gains ??
+    (variantId.endsWith('-R0') ? [0] : [-DEFAULT_GAIN, 0, DEFAULT_GAIN]);
+  if (!sweepGains.length)
     throw new RangeError('Gain sweep needs at least one value.');
-  const points = gains.map((gain) => {
+  const points = sweepGains.map((gain) => {
     finite(gain, 'gain sweep value');
     const run = runSetupB(protocolValue, variantId, { gain });
     return {
