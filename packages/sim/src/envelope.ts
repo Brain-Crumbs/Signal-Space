@@ -673,12 +673,16 @@ export class EnvelopeSolver {
       fail('Retarded query is outside saved prehistory.');
     const jump = [...this.jumps]
       .reverse()
-      .find(
-        (candidate) =>
-          withinUlps(time, candidate.time, UNRESOLVABLE_INTERVAL_MAX_ULPS) &&
-          !left,
+      .find((candidate) =>
+        withinUlps(time, candidate.time, UNRESOLVABLE_INTERVAL_MAX_ULPS),
       );
-    if (jump) return [...jump.state];
+    if (jump) {
+      if (!left) return [...jump.state];
+      // A propagated boundary can reconstruct the source time one ULP away
+      // from the direct jump. Pin left-limit evaluation to the jump boundary
+      // so dense lookup cannot select the post-jump segment.
+      time = jump.time;
+    }
     if (time <= 0) {
       const points = this.options.prehistory;
       if (!points)
