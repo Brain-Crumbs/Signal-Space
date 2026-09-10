@@ -30,6 +30,8 @@ export interface PairCriteria {
     time: number;
     recoveryTolerance: number;
     referenceOffset: number;
+    /** Matched continuation used for recovery instead of a fixed offset. */
+    reference?: AnalysisSeries;
   };
 }
 export type RegimeStatus =
@@ -100,6 +102,20 @@ function samplesIn(series: AnalysisSeries, window: MeasurementWindow) {
       'Every window requires saved samples at both declared boundaries.',
     );
   return samples;
+}
+
+function pairPhaseAt(
+  series: AnalysisSeries,
+  a: string,
+  b: string,
+  time: number,
+): number {
+  const sample = series.samples.find((candidate) => candidate.time === time);
+  if (!sample)
+    throw new RangeError(
+      `Reference series must contain an exact sample at ${time}.`,
+    );
+  return requireNode(sample, a).phi - requireNode(sample, b).phi;
 }
 
 /** Phase-advance estimator, not an average of correlated instantaneous samples. */
@@ -284,6 +300,13 @@ export function classifyPair(
       throw new RangeError(
         'perturbation.recoveryTolerance must be finite and nonnegative.',
       );
+    if (criteria.perturbation.reference) {
+      if (criteria.perturbation.reference.failed)
+        throw new RangeError(
+          'Perturbation reference series must not have failed.',
+        );
+      assertSeries(criteria.perturbation.reference);
+    }
   }
   let evidence: WindowEvidence[];
   try {
@@ -315,7 +338,9 @@ export function classifyPair(
         Math.abs(
           requireNode(sample, a).phi -
             requireNode(sample, b).phi -
-            perturbation.referenceOffset,
+            (perturbation.reference
+              ? pairPhaseAt(perturbation.reference, a, b, sample.time)
+              : perturbation.referenceOffset),
         ),
       ),
       finalError = errors.at(-1) ?? Infinity,

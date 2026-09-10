@@ -19,6 +19,7 @@ export type {
   EnvelopeOptions,
   EnvelopeSnapshot,
   EnvelopeSample,
+  EnvelopePerturbation,
   TickCrossing,
   HistoryPoint,
 } from './envelope.js';

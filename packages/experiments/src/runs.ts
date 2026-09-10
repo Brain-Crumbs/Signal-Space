@@ -273,13 +273,18 @@ function validatePositiveInteger(value: unknown, name: string): void {
     invalid(`${name} must be a positive integer`);
 }
 
-function validateEnvelopeOptions(value: unknown): void {
+function validateEnvelopeOptions(
+  value: unknown,
+  scenario?: Scenario,
+  until?: number,
+): void {
   if (value === undefined) return;
   if (!isRecord(value)) invalid('envelope options must be an object');
   const allowed = new Set([
     'preparation',
     'prehistory',
     'boundaryInputs',
+    'perturbations',
     'tickSection',
     'maxSteps',
   ]);
@@ -341,6 +346,45 @@ function validateEnvelopeOptions(value: unknown): void {
         )
           invalid(`envelope boundaryInputs.${side} contains an invalid entry`);
       }
+    }
+  }
+  if (value.perturbations !== undefined) {
+    if (!Array.isArray(value.perturbations))
+      invalid('envelope perturbations must be an array');
+    const perturbationAllowed = new Set([
+      'time',
+      'nodeId',
+      'phaseOffset',
+      'frequencyOffset',
+    ]);
+    const keys = new Set<string>();
+    for (const perturbation of value.perturbations) {
+      if (
+        !isRecord(perturbation) ||
+        Object.keys(perturbation).some(
+          (key) => !perturbationAllowed.has(key),
+        ) ||
+        typeof perturbation.nodeId !== 'string' ||
+        !perturbation.nodeId ||
+        !Number.isFinite(perturbation.time) ||
+        (perturbation.time as number) <= 0 ||
+        !Number.isFinite(perturbation.phaseOffset) ||
+        !Number.isFinite(perturbation.frequencyOffset)
+      )
+        invalid('envelope perturbation is invalid');
+      const key = `${perturbation.time}\u0000${perturbation.nodeId}`;
+      if (keys.has(key))
+        invalid('envelope perturbations duplicate a node/time');
+      if (
+        scenario &&
+        !scenario.nodes.some((node) => node.id === perturbation.nodeId)
+      )
+        invalid(
+          `envelope perturbation targets unknown node ${perturbation.nodeId}`,
+        );
+      if (until !== undefined && (perturbation.time as number) > until)
+        invalid('envelope perturbation occurs after until');
+      keys.add(key);
     }
   }
 }
@@ -406,7 +450,7 @@ export function validateDefinition(
     invalid('packets options require packet mode');
   if (value.mode !== 'envelope' && value.envelope !== undefined)
     invalid('envelope options require envelope mode');
-  validateEnvelopeOptions(value.envelope);
+  validateEnvelopeOptions(value.envelope, value.scenario, until);
   if (value.packets !== undefined) validatePacketOptions(value.packets);
   if (
     !Number.isInteger(value.replicates) ||

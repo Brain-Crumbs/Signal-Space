@@ -7,6 +7,12 @@ export interface HistoryPoint {
   time: number;
   nodes: Record<string, { phi: number; omega: number }>;
 }
+export interface EnvelopePerturbation {
+  time: number;
+  nodeId: string;
+  phaseOffset: number;
+  frequencyOffset: number;
+}
 export interface EnvelopeOptions {
   /** Suppress pre-zero emissions on links, without deleting source history. */
   preparation?: 'established' | 'empty-links';
@@ -14,6 +20,8 @@ export interface EnvelopeOptions {
   prehistory?: HistoryPoint[];
   /** Right-continuous, piecewise constant external rates, starting at t=0. */
   boundaryInputs?: Partial<Record<Port, Array<{ time: number; rate: number }>>>;
+  /** Explicit state intervention applied at an exact solver boundary. */
+  perturbations?: EnvelopePerturbation[];
   tickSection?: number;
   maxSteps?: number;
 }
@@ -40,6 +48,8 @@ export interface EnvelopeSnapshot {
   attempts: AdaptiveAttempt[];
   acceptedSteps: number;
   rejectedSteps: number;
+  /** Post-intervention states needed for exact retarded-history replay. */
+  jumps: Array<{ time: number; state: Vector }>;
 }
 export interface EnvelopeSample {
   time: number;
@@ -71,6 +81,7 @@ export interface TickCrossing {
   nodeId: string;
   time: number;
   sectionIndex: number;
+  direction?: 1 | -1;
 }
 export class EnvelopeFailure extends Error {
   constructor(
@@ -141,6 +152,20 @@ const validateOptions = ajv.compile({
         ]),
       ),
     },
+    perturbations: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['time', 'nodeId', 'phaseOffset', 'frequencyOffset'],
+        properties: {
+          time: { type: 'number', exclusiveMinimum: 0 },
+          nodeId: { type: 'string', minLength: 1 },
+          phaseOffset: { type: 'number' },
+          frequencyOffset: { type: 'number' },
+        },
+      },
+    },
   },
 });
 function allNumbersFinite(value: unknown): boolean {
@@ -163,6 +188,7 @@ const PORTABLE_REPLAY_ABSOLUTE_TOLERANCE = 1e-12;
 const PORTABLE_REPLAY_MAX_ULPS = 32n;
 const PHYSICAL_BOUND_MAX_ULPS = 8n;
 const UNRESOLVABLE_INTERVAL_MAX_ULPS = 1n;
+const MAX_TICK_CROSSINGS_PER_STEP = 10000;
 const FLOAT64_SIGN_BIT = 1n << 63n;
 const FLOAT64_MASK = (1n << 64n) - 1n;
 const replayBits = new DataView(new ArrayBuffer(8));
@@ -346,6 +372,8 @@ export class EnvelopeSolver {
     target: string;
     gain: number;
   }>;
+  private readonly perturbations: EnvelopePerturbation[];
+  private jumps: Array<{ time: number; state: Vector }> = [];
   constructor(
     readonly scenario: Scenario,
     options: unknown = {},
@@ -431,6 +459,42 @@ export class EnvelopeSolver {
         return { time: event.time, target: event.target, gain: value.gain };
       })
       .sort((a, b) => a.time - b.time);
+    this.perturbations = [...(this.options.perturbations ?? [])]
+      .map((perturbation) => ({ ...perturbation }))
+      .sort((a, b) => a.time - b.time);
+    const perturbationKeys = new Set<string>();
+    const perturbationTimes = new Map<string, number[]>();
+    for (const perturbation of this.perturbations) {
+      const node = scenario.nodes.find(
+        (candidate) => candidate.id === perturbation.nodeId,
+      );
+      if (
+        !node ||
+        !Number.isFinite(perturbation.time) ||
+        perturbation.time <= 0 ||
+        !Number.isFinite(perturbation.phaseOffset) ||
+        !Number.isFinite(perturbation.frequencyOffset)
+      )
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'Perturbations require an existing node, positive time, and finite phase/frequency offsets.',
+        );
+      const key = `${perturbation.time}\u0000${perturbation.nodeId}`;
+      const priorTimes = perturbationTimes.get(perturbation.nodeId) ?? [];
+      if (
+        perturbationKeys.has(key) ||
+        priorTimes.some((time) =>
+          withinUlps(time, perturbation.time, UNRESOLVABLE_INTERVAL_MAX_ULPS),
+        )
+      )
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          'A node may have at most one perturbation at a given time.',
+        );
+      perturbationKeys.add(key);
+      priorTimes.push(perturbation.time);
+      perturbationTimes.set(perturbation.nodeId, priorTimes);
+    }
     // Carry derivative discontinuities through four transport generations for RK4.
     // Each feedback integration raises differentiability by one; data knots and
     // source startup must still be explicit method-of-steps boundaries.
@@ -439,6 +503,11 @@ export class EnvelopeSolver {
       ...this.changes.map((c) => ({
         time: c.time,
         nodeId: c.target,
+        depth: 0,
+      })),
+      ...this.perturbations.map((p) => ({
+        time: p.time,
+        nodeId: p.nodeId,
         depth: 0,
       })),
       ...(this.options.boundaryInputs?.left ?? []).map((p) => ({
@@ -589,7 +658,7 @@ export class EnvelopeSolver {
       }
     });
   }
-  private source(time: number): Vector {
+  private source(time: number, left = false): Vector {
     if (
       time > this.time &&
       withinUlps(time, this.time, UNRESOLVABLE_INTERVAL_MAX_ULPS)
@@ -602,6 +671,14 @@ export class EnvelopeSolver {
       );
     if (time < this.scenario.initialHistory.startTime)
       fail('Retarded query is outside saved prehistory.');
+    const jump = [...this.jumps]
+      .reverse()
+      .find(
+        (candidate) =>
+          withinUlps(time, candidate.time, UNRESOLVABLE_INTERVAL_MAX_ULPS) &&
+          !left,
+      );
+    if (jump) return [...jump.state];
     if (time <= 0) {
       const points = this.options.prehistory;
       if (!points)
@@ -650,7 +727,7 @@ export class EnvelopeSolver {
       const sourceTime = time - l.delay;
       const j = this.scenario.nodes.findIndex((n) => n.id === l.source),
         i = this.scenario.nodes.findIndex((n) => n.id === l.target);
-      const state = this.source(sourceTime),
+      const state = this.source(sourceTime, left),
         phi = state[j * 4]!,
         omega = state[j * 4 + 1]!;
       const suppressed =
@@ -695,6 +772,62 @@ export class EnvelopeSolver {
       const [l, r] = emission(n, phi, omega);
       return [omega, (target - omega) / n.relaxationTime, l, r];
     });
+  }
+  private applyPerturbations(time: number): TickCrossing[] {
+    const due = this.perturbations.filter((perturbation) =>
+      withinUlps(
+        this.canonicalBoundaryTimes.get(perturbation.time) ?? NaN,
+        time,
+        UNRESOLVABLE_INTERVAL_MAX_ULPS,
+      ),
+    );
+    if (!due.length) return [];
+    const before = new Map(
+      this.scenario.nodes.map((node, index) => [
+        node.id,
+        this.state[index * 4]!,
+      ]),
+    );
+    this.state = [...this.state];
+    for (const perturbation of due) {
+      const index = this.scenario.nodes.findIndex(
+        (node) => node.id === perturbation.nodeId,
+      );
+      const node = this.scenario.nodes[index]!;
+      const k = index * 4;
+      this.state[k] = this.state[k]! + perturbation.phaseOffset;
+      this.state[k + 1] = this.state[k + 1]! + perturbation.frequencyOffset;
+      const [lower, upper] = this.bounds(node, time);
+      if (
+        !Number.isFinite(this.state[k]!) ||
+        !Number.isFinite(this.state[k + 1]!) ||
+        this.state[k + 1]! <= 0 ||
+        this.state[k + 1]! < lower ||
+        this.state[k + 1]! > upper
+      )
+        throw new EnvelopeFailure(
+          'INVALID_REQUEST',
+          `Perturbation at ${time} leaves node ${node.id} outside its admissible frequency bounds.`,
+        );
+    }
+    this.jumps.push({ time, state: [...this.state] });
+    const ticks: TickCrossing[] = [];
+    for (const [index, node] of this.scenario.nodes.entries()) {
+      const from = this.tickIndex(before.get(node.id)!);
+      const to = this.tickIndex(this.state[index * 4]!);
+      if (Math.abs(to - from) > MAX_TICK_CROSSINGS_PER_STEP)
+        throw new EnvelopeFailure(
+          'NUMERICAL_FAILURE',
+          'Tick indices exceed representable or per-step output limits.',
+        );
+      if (to > from)
+        for (let sectionIndex = from + 1; sectionIndex <= to; sectionIndex++)
+          ticks.push({ nodeId: node.id, time, sectionIndex, direction: 1 });
+      if (to < from)
+        for (let sectionIndex = to + 1; sectionIndex <= from; sectionIndex++)
+          ticks.push({ nodeId: node.id, time, sectionIndex, direction: -1 });
+    }
+    return ticks;
   }
   private rk4(t: number, y: Vector, end: number, left: boolean): DenseSegment {
     const h = end - t;
@@ -870,7 +1003,7 @@ export class EnvelopeSolver {
         const section = this.options.tickSection ?? 0,
           from = this.tickIndex(s.y0[i * 4]!),
           to = this.tickIndex(s.y1[i * 4]!);
-        if (to - from > 10000)
+        if (Math.abs(to - from) > MAX_TICK_CROSSINGS_PER_STEP)
           throw new EnvelopeFailure(
             'NUMERICAL_FAILURE',
             'Tick indices exceed representable or per-step output limits.',
@@ -894,8 +1027,9 @@ export class EnvelopeSolver {
     this.segments.push(first, second);
     this.time = end;
     this.state = second.y1;
+    const perturbationTicks = this.applyPerturbations(end);
     this.acceptedSteps++;
-    return ticks.sort((a, b) => a.time - b.time);
+    return [...ticks, ...perturbationTicks].sort((a, b) => a.time - b.time);
   }
   sample(): EnvelopeSample {
     const { inputs, retarded } = this.reception(this.time);
@@ -952,6 +1086,7 @@ export class EnvelopeSolver {
       attempts: this.attempts,
       acceptedSteps: this.acceptedSteps,
       rejectedSteps: this.rejectedSteps,
+      jumps: this.jumps,
     });
   }
   private restore(value: unknown) {
@@ -978,6 +1113,7 @@ export class EnvelopeSolver {
       !vector(s.state) ||
       !Array.isArray(s.segments) ||
       !Array.isArray(s.attempts) ||
+      (s.jumps !== undefined && !Array.isArray(s.jumps)) ||
       !Number.isSafeInteger(s.acceptedSteps) ||
       s.acceptedSteps < 0 ||
       !Number.isSafeInteger(s.rejectedSteps) ||
@@ -1101,6 +1237,8 @@ export class EnvelopeSolver {
       this.time = end;
       this.state = state;
       this.segments.push(replayFirst, replaySecond);
+      this.applyPerturbations(end);
+      state = this.state;
       acceptedSteps++;
     }
     if (
@@ -1113,6 +1251,21 @@ export class EnvelopeSolver {
       fail('Checkpoint endpoint disagrees with complete history.');
     if (!portableReplayEqual(s.nextStep, proposedStep))
       fail('Checkpoint next step disagrees with adaptive controller replay.');
+    const savedJumps = s.jumps ?? [];
+    if (
+      savedJumps.some(
+        (jump) =>
+          !Number.isFinite(jump.time) ||
+          jump.time <= 0 ||
+          !Array.isArray(jump.state) ||
+          !vector(jump.state),
+      ) ||
+      !savedJumps.every(
+        (jump, index) => jump.time === this.jumps[index]?.time,
+      ) ||
+      !portableReplayEqual(savedJumps, this.jumps)
+    )
+      fail('Checkpoint perturbation history disagrees with replay.');
     this.time = s.time;
     this.state = s.state;
     this.nextStep = s.nextStep;
@@ -1120,5 +1273,6 @@ export class EnvelopeSolver {
     this.attempts = s.attempts;
     this.acceptedSteps = s.acceptedSteps;
     this.rejectedSteps = s.rejectedSteps;
+    this.jumps = savedJumps;
   }
 }

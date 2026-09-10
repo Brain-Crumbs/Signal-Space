@@ -105,6 +105,25 @@ test('unchanged offsets do not count as perturbation recovery', () => {
   assert.equal(result.status, 'candidate-frequency-locking');
   assert.equal(result.perturbationRecovery?.demonstrated, false);
 });
+test('perturbation recovery requires exact matched reference samples', () => {
+  assert.throws(
+    () =>
+      classifyPair(series(1, 1), 'a', 'b', {
+        ...criteria,
+        perturbation: {
+          time: 5,
+          recoveryTolerance: 0.05,
+          referenceOffset: 0,
+          reference: {
+            samples: series(1, 1).samples.filter((sample) =>
+              [0, 10, 20].includes(sample.time),
+            ),
+          },
+        },
+      }),
+    /exact sample/,
+  );
+});
 test('uncovered and non-nested windows cannot produce candidates', () => {
   assert.equal(
     classifyPair(series(1, 1), 'a', 'b', {
