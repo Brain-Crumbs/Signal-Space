@@ -1,0 +1,292 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import {
+  createSetupCCell,
+  createSetupCDefinition,
+  createSetupCSmokeDefinitions,
+  runSetupCScan,
+} from '@signal-space/experiments';
+import { validateDefinition } from '@signal-space/experiments';
+
+test('Setup C converts dimensionless coordinates into an admissible pair scenario', () => {
+  const run = createSetupCCell({
+    detuning: 0.1,
+    delay: 0.5,
+    gain: -0.05,
+    contrast: 0.4,
+    relaxationTime: 2,
+  });
+  assert.equal(run.parameters.delay, 0.5);
+  assert.equal(run.physical.delay, 0.25);
+  assert.equal(run.scenario.nodes[1]!.omega0, 2.2);
+  assert.equal(run.scenario.nodes[1]!.position, 0.25);
+  assert.equal(run.scenario.links[0]!.delay, 0.25);
+  assert.equal(run.physical.gain.A, -0.1);
+  assert.equal(run.scenario.nodes[0]!.relaxationTime, 1);
+  assert.equal(run.scenario.nodes[0]!.emission.law, 'E1');
+  assert.equal(run.diagnostics.windows.length, 2);
+  assert.ok(
+    run.samples.some(
+      (sample) => sample.time === run.diagnostics.windows[0]!.start,
+    ),
+  );
+  assert.equal(run.finalSnapshot.kind, 'envelope-rk4-v1');
+});
+
+test('Setup C E0 baseline matching follows each detuned clock', () => {
+  const e0 = createSetupCCell(
+    { detuning: 0.25, delay: 1, gain: 0, contrast: 0, relaxationTime: 1 },
+    { variant: 'E0-R0', duration: 2, preparationDuration: 0.5 },
+  );
+  const e1 = createSetupCCell(
+    { detuning: 0.25, delay: 1, gain: 0, contrast: 0, relaxationTime: 1 },
+    { variant: 'E1-R0', duration: 2, preparationDuration: 0.5 },
+  );
+  assert.equal(e0.scenario.nodes[0]!.emission.law, 'E0');
+  assert.equal(e0.scenario.nodes[1]!.emission.law, 'E0');
+  assert.equal(
+    e0.scenario.nodes[0]!.emission.law === 'E0'
+      ? e0.scenario.nodes[0]!.emission.nu
+      : 0,
+    e1.scenario.nodes[0]!.emission.law === 'E1'
+      ? (3 * e1.scenario.nodes[0]!.omega0) / (2 * Math.PI)
+      : 0,
+  );
+  assert.equal(
+    e0.scenario.nodes[1]!.emission.law === 'E0'
+      ? e0.scenario.nodes[1]!.emission.nu
+      : 0,
+    (3 * e0.scenario.nodes[1]!.omega0) / (2 * Math.PI),
+  );
+});
+
+test('Setup C controls expose no-feedback, zero-contrast, and positive-delay controls', () => {
+  const noFeedback = createSetupCCell(
+    { detuning: 0, delay: 1, gain: 0.1, contrast: 1, relaxationTime: 1 },
+    { control: 'no-feedback', duration: 2 },
+  );
+  const zeroContrast = createSetupCCell(
+    { detuning: 0, delay: 1, gain: 0.1, contrast: 1, relaxationTime: 1 },
+    { control: 'zero-contrast', duration: 2 },
+  );
+  const smallDelay = createSetupCCell(
+    { detuning: 0, delay: 1, gain: 0.1, contrast: 1, relaxationTime: 1 },
+    { control: 'small-positive-delay', duration: 2 },
+  );
+  assert.equal(noFeedback.parameters.gain, 0);
+  assert.equal(zeroContrast.parameters.contrast, 0);
+  assert.ok(smallDelay.parameters.delay > 0);
+  assert.equal(smallDelay.scenario.links[0]!.delay, 0.025);
+});
+
+test('Setup C maps preserve cell identity and distinguish unrun cells', () => {
+  const scan = runSetupCScan({
+    axes: {
+      detuning: [0, 0.01],
+      delay: [0.5],
+      gain: [0],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    variant: 'E1-R0',
+    duration: 2,
+    preparationDuration: 0.5,
+    maxCells: 1,
+  });
+  assert.equal(scan.cells.length, 2);
+  assert.equal(scan.runs.length, 1);
+  assert.equal(scan.cells[0]!.status, 'unresolved');
+  assert.equal(scan.cells[1]!.status, 'unrun');
+  assert.deepEqual(scan.masks.unrun, [false, true]);
+  assert.equal(scan.cells[0]!.trajectoryRunIds.length, 1);
+  assert.equal(scan.metadata.varied.detuning.length, 2);
+  assert.equal(scan.metadata.sourceSection, 'Paper I §11.4');
+});
+
+test('Setup C reverse continuation retains complete prior snapshots separately from restarts', () => {
+  const scan = runSetupCScan({
+    axes: {
+      detuning: [0],
+      delay: [0.5, 1],
+      gain: [0],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    variant: 'E1-R0',
+    duration: 2,
+    preparationDuration: 0.5,
+    direction: 'reverse',
+  });
+  assert.equal(scan.continuation.direction, 'reverse');
+  assert.equal(scan.continuation.orderedCellKeys[0], scan.cells[1]!.key);
+  assert.equal(scan.continuation.handoffs.length, 1);
+  assert.equal(scan.continuation.handoffs[0]!.snapshot.kind, 'envelope-rk4-v1');
+  assert.equal(
+    scan.runs[1]!.samples[0]!.time,
+    scan.runs[0]!.finalSnapshot.time,
+  );
+  assert.equal(
+    scan.runs[1]!.finalSnapshot.continuation?.kind,
+    'parameter-handoff-v1',
+  );
+  assert.equal(scan.continuation.restarts.length, 1);
+  assert.equal(scan.continuation.restarts[0]!.runId, scan.runs[0]!.runId);
+});
+
+test('Setup C definitions use the shared manifest contract', () => {
+  for (const definition of createSetupCSmokeDefinitions())
+    assert.doesNotThrow(() => validateDefinition(definition));
+  const definition = createSetupCDefinition({
+    detuning: 0,
+    delay: 1,
+    gain: 0,
+    contrast: 0,
+    relaxationTime: 1,
+  });
+  assert.equal(definition.mode, 'envelope');
+  assert.equal(definition.windows.nested?.length, 1);
+  assert.equal(definition.scenario.modelVersion, 'paper-i-v1');
+});
+
+test('Setup C can compare distinct initial preparations and refine selected cells', () => {
+  const scan = runSetupCScan({
+    axes: {
+      detuning: [0],
+      delay: [0.5],
+      gain: [0],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    variant: 'E1-R0',
+    preparations: ['co-phase', 'pi-reflection'],
+    duration: 2,
+    preparationDuration: 0.5,
+    refineNear: [
+      {
+        detuning: 0.01,
+        delay: 0.5,
+        gain: 0,
+        contrast: 0,
+        relaxationTime: 1,
+      },
+    ],
+  });
+  assert.equal(scan.cells[0]!.preparationIds.length, 2);
+  assert.equal(scan.cells[0]!.replicateUncertainty, null);
+  assert.equal(
+    scan.cells[0]!.replicateUncertaintyByPreparation['co-phase']
+      ?.replicateCount,
+    1,
+  );
+  assert.equal(
+    scan.cells[0]!.replicateUncertaintyByPreparation['pi-reflection']
+      ?.replicateCount,
+    1,
+  );
+  assert.equal(scan.runs.length, 3);
+  assert.equal(scan.refinement.runIds.length, 1);
+  assert.equal(
+    scan.refinement.interpretation,
+    'selective-diagnostic-refinement',
+  );
+});
+
+test('Setup C applies controls before scan validation and preserves scan cells', () => {
+  const scan = runSetupCScan({
+    variant: 'E1-R0',
+    control: 'no-feedback',
+    axes: {
+      detuning: [0, 0.01],
+      delay: [0.5],
+      gain: [-0.9, 0.9],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    duration: 2,
+    preparationDuration: 0.5,
+    maxCells: 1,
+  });
+  assert.equal(scan.cells.length, 2);
+  assert.equal(scan.runs.length, 1);
+  assert.deepEqual(scan.metadata.varied.gain, [0]);
+  assert.deepEqual(scan.metadata.rawVaried.gain, [-0.9, 0.9]);
+});
+
+test('Setup C persists classifier and sampling criteria and honors preparation seeds', () => {
+  const scan = runSetupCScan({
+    variant: 'E1-R0',
+    preparation: 'seeded-random',
+    preparationSeed: 'declared-preparation-seed',
+    axes: {
+      detuning: [0],
+      delay: [0.5],
+      gain: [0],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    duration: 2,
+    preparationDuration: 0.5,
+    sampleCadence: 0.1,
+  });
+  const run = scan.runs[0]!;
+  assert.equal(
+    run.preparation.seed?.startsWith('declared-preparation-seed:'),
+    true,
+  );
+  assert.equal(run.diagnostics.criteria.frequencyTolerance, 1e-3);
+  assert.equal(run.diagnostics.criteria.phaseRangeTolerance, 0.2);
+  assert.equal(run.diagnostics.criteria.sampleCadence, 0.1);
+  assert.ok(run.samples.length > 10);
+  assert.equal(scan.metadata.fixed.frequencyTolerance, 1e-3);
+  assert.equal(scan.metadata.fixed.phaseRangeTolerance, 0.2);
+});
+
+test('Setup C rejects invalid scan configuration before masking it as numerical failure', () => {
+  assert.throws(
+    () => runSetupCScan({ duration: 1, preparationDuration: 1 }),
+    /must exceed/,
+  );
+  assert.throws(
+    () => runSetupCScan({ replicates: Number.MAX_SAFE_INTEGER }),
+    /through 100/,
+  );
+  assert.throws(
+    () =>
+      createSetupCCell(
+        {
+          detuning: 0,
+          delay: 1,
+          gain: 0,
+          contrast: 0,
+          relaxationTime: 1,
+        },
+        { preparation: 'not-a-preparation' as never },
+      ),
+    /Unknown Setup C preparation/,
+  );
+});
+
+test('Setup C rejects nonpositive delay and invalid contrast', () => {
+  assert.throws(
+    () =>
+      createSetupCCell({
+        detuning: 0,
+        delay: 0,
+        gain: 0,
+        contrast: 0,
+        relaxationTime: 1,
+      }),
+    /strictly positive/,
+  );
+  assert.throws(
+    () =>
+      createSetupCCell({
+        detuning: 0,
+        delay: 1,
+        gain: 0,
+        contrast: 2,
+        relaxationTime: 1,
+      }),
+    /contrast must be in/,
+  );
+});

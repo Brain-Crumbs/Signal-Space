@@ -50,6 +50,11 @@ export interface EnvelopeSnapshot {
   rejectedSteps: number;
   /** Post-intervention states needed for exact retarded-history replay. */
   jumps: Array<{ time: number; state: Vector }>;
+  /** Present only when a parameter-continuation run adopted another run's full state. */
+  continuation?: {
+    kind: 'parameter-handoff-v1';
+    sourceScenarioId: string;
+  };
 }
 export interface EnvelopeSample {
   time: number;
@@ -374,6 +379,7 @@ export class EnvelopeSolver {
   }>;
   private readonly perturbations: EnvelopePerturbation[];
   private jumps: Array<{ time: number; state: Vector }> = [];
+  private continuation?: EnvelopeSnapshot['continuation'];
   constructor(
     readonly scenario: Scenario,
     options: unknown = {},
@@ -578,6 +584,86 @@ export class EnvelopeSolver {
       this.tickIndex(node.phi);
       this.tickIndex(this.state[index * 4]!);
     });
+  }
+  /**
+   * Adopt a complete causal state from a finished run while changing model
+   * parameters. Prior dense segments remain the retarded history; the new
+   * scenario is used only for future right-hand-side evaluations.
+   */
+  adoptParameterContinuation(value: unknown): void {
+    const s = value as EnvelopeSnapshot | null;
+    const vector = (v: unknown): v is Vector =>
+      Array.isArray(v) &&
+      v.length === this.state.length &&
+      v.every(Number.isFinite);
+    if (
+      !s ||
+      s.kind !== 'envelope-rk4-v1' ||
+      !Number.isFinite(s.time) ||
+      s.time < this.minDelay ||
+      !Number.isFinite(s.nextStep) ||
+      s.nextStep <= 0 ||
+      !vector(s.state) ||
+      !Array.isArray(s.segments) ||
+      !Array.isArray(s.attempts) ||
+      !Array.isArray(s.jumps) ||
+      !Number.isSafeInteger(s.acceptedSteps) ||
+      s.acceptedSteps < 0 ||
+      !Number.isSafeInteger(s.rejectedSteps) ||
+      s.rejectedSteps < 0 ||
+      s.segments.length !== s.acceptedSteps * 2 ||
+      s.attempts.length !== s.acceptedSteps + s.rejectedSteps ||
+      s.attempts.some(
+        (attempt) =>
+          !attempt ||
+          !Number.isFinite(attempt.end) ||
+          typeof attempt.accepted !== 'boolean',
+      ) ||
+      s.segments.some(
+        (segment) =>
+          !segment ||
+          !Number.isFinite(segment.start) ||
+          !Number.isFinite(segment.end) ||
+          !Array.isArray(segment.y0) ||
+          !Array.isArray(segment.y1) ||
+          !Array.isArray(segment.d0) ||
+          !Array.isArray(segment.d1) ||
+          ![...segment.y0, ...segment.y1, ...segment.d0, ...segment.d1].every(
+            Number.isFinite,
+          ),
+      ) ||
+      s.segments.at(-1)?.end !== s.time ||
+      s.jumps.some(
+        (jump) => !jump || !Number.isFinite(jump.time) || !vector(jump.state),
+      )
+    )
+      fail(
+        'Parameter-continuation handoff must contain a complete finite solver history.',
+      );
+    for (const [index, node] of this.scenario.nodes.entries()) {
+      const omega = s.state[index * 4 + 1]!;
+      const [lower, upper] = this.bounds(node, s.time);
+      if (omega <= 0 || omega < lower || omega > upper)
+        fail(
+          `Parameter-continuation handoff leaves node ${node.id} outside the new admissible frequency bounds.`,
+        );
+    }
+    this.time = s.time;
+    this.state = [...s.state];
+    this.nextStep = Math.min(
+      s.nextStep,
+      this.scenario.solver.step ?? 0.01,
+      this.minDelay,
+    );
+    this.segments = structuredClone(s.segments);
+    this.attempts = structuredClone(s.attempts);
+    this.acceptedSteps = s.acceptedSteps;
+    this.rejectedSteps = s.rejectedSteps;
+    this.jumps = structuredClone(s.jumps);
+    this.continuation = {
+      kind: 'parameter-handoff-v1',
+      sourceScenarioId: s.scenario.id,
+    };
   }
   private tolerance(x: number) {
     return (
@@ -1091,10 +1177,22 @@ export class EnvelopeSolver {
       acceptedSteps: this.acceptedSteps,
       rejectedSteps: this.rejectedSteps,
       jumps: this.jumps,
+      ...(this.continuation ? { continuation: this.continuation } : {}),
     });
   }
   private restore(value: unknown) {
     const s = value as EnvelopeSnapshot | null;
+    if (s?.continuation?.kind === 'parameter-handoff-v1') {
+      if (
+        stable(s.scenario) !== stable(this.scenario) ||
+        stable(s.options) !== stable(this.options)
+      )
+        fail(
+          'Checkpoint must match the scenario and solver options after parameter continuation.',
+        );
+      this.adoptParameterContinuation(s);
+      return;
+    }
     if (
       !s ||
       s.kind !== 'envelope-rk4-v1' ||

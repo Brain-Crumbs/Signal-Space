@@ -47,6 +47,24 @@ runs are finite deterministic diagnostics, not locking or attraction findings.
 Event statistics, physical filters, boundaries beyond open ports, and
 research-scale scans remain deferred.
 
+## T10 Setup C (#11)
+
+Paper I section 11.4 maps to `packages/experiments/src/setup-c.ts` and
+`docs/setup-c.md`. The scan layer uses the shared envelope solver and pair
+classifier for dimensionless detuning, positive delay, signed gain, contrast,
+and relaxation-time coordinates. It records physical conversions, the E0/E1
+baseline matching rule, nested finite-window evidence, irregularity diagnostics,
+replicate uncertainty, trajectory run IDs, and distinct unresolved, numerical
+failure, and unrun masks. Forward and reverse orders adopt complete solver
+snapshots as parameter-continuation state while independent restarts remain
+separately identifiable. Replicate uncertainty remains separated by
+preparation, and classifier thresholds plus diagnostic sampling cadence are
+persisted with each result. Control-fixed axes are removed from the effective
+Cartesian product while raw requested axes remain provenance. Invalid scan
+inputs are rejected before execution and a bounded diagnostic job budget is
+enforced. No cell is labeled as locking, coexistence, or chaos; publication-
+scale scans and scientific interpretation remain deferred.
+
 ## T07 declarative runs (#8)
 
 The current run layer also validates resolved scenarios against both JSON Schema and semantic constraints, rechecks root-seed-bound manifest identities, and binds checkpoint resumes to the exact planned manifest. See `docs/experiment-runs.md` for the validation and recovery contract.
