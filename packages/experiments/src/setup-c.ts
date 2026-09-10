@@ -1,5 +1,6 @@
 import type { Scenario } from '@signal-space/model';
 import {
+  EnvelopeFailure,
   EnvelopeSolver,
   type EnvelopeOptions,
   type EnvelopeSample,
@@ -27,6 +28,12 @@ const DEFAULT_DURATION = 4;
 const DEFAULT_PREPARATION_DURATION = 1;
 const DEFAULT_MINIMUM_CYCLES = 1;
 const DEFAULT_SMALL_DELAY = 0.05;
+const DEFAULT_FREQUENCY_TOLERANCE = 1e-3;
+const DEFAULT_PHASE_RANGE_TOLERANCE = 0.2;
+const DEFAULT_SAMPLE_CADENCE = 0.1;
+const MAX_REPLICATES = 100;
+const MAX_SCAN_RUNS = 10_000;
+const MAX_DIAGNOSTIC_SAMPLES = 10_000;
 const NODE_A = 'A';
 const NODE_B = 'B';
 
@@ -91,6 +98,8 @@ export interface SetupCScanOptions {
   replicates?: number;
   maxCells?: number;
   seed?: string;
+  /** Declared spacing for finite-window diagnostic samples. */
+  sampleCadence?: number;
   /** Explicit extra cells selected after inspecting a coarse map. */
   refineNear?: SetupCParameters[];
 }
@@ -107,6 +116,8 @@ export interface SetupCCellOptions {
   replicate?: number;
   control?: SetupCControlId;
   continuationFrom?: EnvelopeSnapshot;
+  /** Declared spacing for finite-window diagnostic samples. */
+  sampleCadence?: number;
 }
 
 export type SetupCVariantId = `${SetupBEmissionId}-${SetupBResponseId}`;
@@ -123,6 +134,12 @@ export interface SetupCDiagnostics {
   phaseRange: number;
   frequencyModulation: Record<string, { minimum: number; maximum: number }>;
   windows: SetupCWindow[];
+  criteria: {
+    frequencyTolerance: number;
+    phaseRangeTolerance: number;
+    minimumCycles: number;
+    sampleCadence: number;
+  };
   irregularity: {
     phaseIncrementRange: number;
     frequencyIncrementRange: number;
@@ -166,7 +183,16 @@ export interface SetupCScanCell {
   classificationStatuses: PairClassification['status'][];
   preparationIds: SetupBPreparationId[];
   replicateUncertainty: SetupCReplicateUncertainty | null;
-  criteria: { windows: SetupCWindow[]; minimumCycles: number };
+  replicateUncertaintyByPreparation: Partial<
+    Record<SetupBPreparationId, SetupCReplicateUncertainty>
+  >;
+  criteria: {
+    windows: SetupCWindow[];
+    minimumCycles: number;
+    frequencyTolerance: number;
+    phaseRangeTolerance: number;
+    sampleCadence: number;
+  };
   failure?: { message: string };
 }
 
@@ -190,6 +216,7 @@ export interface SetupCScan {
   control: SetupCControl;
   metadata: {
     varied: Record<SetupCParameterId, number[]>;
+    rawVaried: Record<SetupCParameterId, number[]>;
     fixed: Record<string, number | string>;
     dimensionlessDefinitions: Record<SetupCParameterId, string>;
     baselineMatchingRule: string;
@@ -278,11 +305,24 @@ function phaseFromSeed(seed: string): number {
   return ((hash >>> 0) / 2 ** 32) * TAU;
 }
 
+const setupCPreparationIds: readonly SetupBPreparationId[] = [
+  'co-phase',
+  'pi-reflection',
+  'small-offset',
+  'seeded-random',
+];
+
+function validatePreparationId(id: string): asserts id is SetupBPreparationId {
+  if (!setupCPreparationIds.includes(id as SetupBPreparationId))
+    throw new RangeError(`Unknown Setup C preparation ${id}.`);
+}
+
 function preparation(
   id: SetupBPreparationId,
   seed: string,
   linkHistory: 'established' | 'empty-links',
 ): SetupCPreparation {
+  validatePreparationId(id);
   const phaseB =
     id === 'co-phase'
       ? 0
@@ -471,15 +511,20 @@ function runEnvelope(
   envelope: EnvelopeOptions,
   duration: number,
   sampleTimes: number[],
+  sampleCadence: number,
   continuationFrom?: EnvelopeSnapshot,
 ): { samples: EnvelopeSample[]; snapshot: EnvelopeSnapshot } {
   const solver = new EnvelopeSolver(scenario, envelope);
   if (continuationFrom) solver.adoptParameterContinuation(continuationFrom);
   const samples = [solver.sample()];
   const end = solver.time + duration;
-  for (const target of [...new Set([solver.time, ...sampleTimes, end])].sort(
-    (a, b) => a - b,
-  )) {
+  const cadenceTargets: number[] = [];
+  const cadenceCount = Math.ceil(duration / sampleCadence);
+  for (let index = 1; index <= cadenceCount; index++)
+    cadenceTargets.push(Math.min(end, solver.time + index * sampleCadence));
+  for (const target of [
+    ...new Set([solver.time, ...sampleTimes, ...cadenceTargets, end]),
+  ].sort((a, b) => a - b)) {
     if (target < solver.time) continue;
     while (solver.time < target) {
       const previous = solver.time;
@@ -498,13 +543,14 @@ function diagnosticsFor(
   samples: EnvelopeSample[],
   windows: SetupCWindow[],
   minimumCycles: number,
+  sampleCadence: number,
 ): SetupCDiagnostics {
   const series = analysisSamples(samples);
   const criteria = {
     transientEnd: windows[0]!.start,
     windows,
-    frequencyTolerance: 1e-3,
-    phaseRangeTolerance: 0.2,
+    frequencyTolerance: DEFAULT_FREQUENCY_TOLERANCE,
+    phaseRangeTolerance: DEFAULT_PHASE_RANGE_TOLERANCE,
     minimumCycles,
   };
   const classification = classifyPair(
@@ -545,6 +591,12 @@ function diagnosticsFor(
     phaseRange: Math.max(...phases) - Math.min(...phases),
     frequencyModulation: frequencies,
     windows,
+    criteria: {
+      frequencyTolerance: DEFAULT_FREQUENCY_TOLERANCE,
+      phaseRangeTolerance: DEFAULT_PHASE_RANGE_TOLERANCE,
+      minimumCycles,
+      sampleCadence,
+    },
     irregularity: {
       phaseIncrementRange: phaseIncrements.length
         ? Math.max(...phaseIncrements) - Math.min(...phaseIncrements)
@@ -580,6 +632,12 @@ export function createSetupCCell(
   const preparationDuration =
     options.preparationDuration ?? DEFAULT_PREPARATION_DURATION;
   validatePreparationDuration(duration, preparationDuration);
+  const sampleCadence = options.sampleCadence ?? DEFAULT_SAMPLE_CADENCE;
+  finite(sampleCadence, 'Setup C sampleCadence');
+  if (!(sampleCadence > 0) || duration / sampleCadence > MAX_DIAGNOSTIC_SAMPLES)
+    throw new RangeError(
+      `Setup C sampleCadence must be positive and produce at most ${MAX_DIAGNOSTIC_SAMPLES} samples.`,
+    );
   const prep = preparation(
     options.preparation ?? 'co-phase',
     options.preparationSeed ?? `signal-space-setup-c-${keyFor(effective)}`,
@@ -600,6 +658,7 @@ export function createSetupCCell(
     envelope,
     duration,
     windows.flatMap((window) => [window.start, window.end]),
+    sampleCadence,
     options.continuationFrom,
   );
   return {
@@ -622,11 +681,12 @@ export function createSetupCCell(
       run.samples,
       windows,
       options.minimumCycles ?? DEFAULT_MINIMUM_CYCLES,
+      sampleCadence,
     ),
     limitations: [
       'Setup C classifications are finite-window evidence and never assert locking, coexistence, or chaos.',
       'Irregularity values are descriptive diagnostics; no chaos classifier is implemented.',
-      'Each cell is an independent restart. Full solver snapshots are retained for an explicit continuation handoff.',
+      'Independent mode uses separate restarts; forward/reverse mode adopts the predecessor full solver state for the first replicate of each successor cell.',
     ],
   };
 }
@@ -678,15 +738,37 @@ function replicateUncertainty(values: number[]): SetupCReplicateUncertainty {
   };
 }
 
+function uncertaintyByPreparation(
+  runs: SetupCCellRun[],
+): Partial<Record<SetupBPreparationId, SetupCReplicateUncertainty>> {
+  const result: Partial<
+    Record<SetupBPreparationId, SetupCReplicateUncertainty>
+  > = {};
+  for (const preparationId of new Set(runs.map((run) => run.preparation.id))) {
+    result[preparationId] = replicateUncertainty(
+      runs
+        .filter((run) => run.preparation.id === preparationId)
+        .map((run) => run.diagnostics.meanFrequencyDifference),
+    );
+  }
+  return result;
+}
+
 function classifyCell(
   runs: SetupCCellRun[],
   parameters: SetupCParameters,
   minimumCycles: number,
+  sampleCadence: number,
 ): SetupCScanCell {
   const statuses = runs.map((run) => run.diagnostics.classification.status);
   const failed = statuses.includes('numerically-failed');
   const unresolved = statuses.includes('unresolved');
-  const values = runs.map((run) => run.diagnostics.meanFrequencyDifference);
+  const valuesByPreparation = uncertaintyByPreparation(runs);
+  const values =
+    Object.keys(valuesByPreparation).length === 1
+      ? Object.values(valuesByPreparation)[0]!
+      : null;
+  const firstDiagnostics = runs[0]?.diagnostics;
   return {
     key: keyFor(parameters),
     parameters,
@@ -699,8 +781,19 @@ function classifyCell(
     trajectoryRunIds: runs.map((run) => run.runId),
     classificationStatuses: statuses,
     preparationIds: [...new Set(runs.map((run) => run.preparation.id))],
-    replicateUncertainty: values.length ? replicateUncertainty(values) : null,
-    criteria: { windows: runs[0]?.diagnostics.windows ?? [], minimumCycles },
+    replicateUncertainty: values,
+    replicateUncertaintyByPreparation: valuesByPreparation,
+    criteria: {
+      windows: firstDiagnostics?.windows ?? [],
+      minimumCycles,
+      frequencyTolerance:
+        firstDiagnostics?.criteria.frequencyTolerance ??
+        DEFAULT_FREQUENCY_TOLERANCE,
+      phaseRangeTolerance:
+        firstDiagnostics?.criteria.phaseRangeTolerance ??
+        DEFAULT_PHASE_RANGE_TOLERANCE,
+      sampleCadence: firstDiagnostics?.criteria.sampleCadence ?? sampleCadence,
+    },
     ...(failed
       ? { failure: { message: 'At least one replicate failed numerically.' } }
       : {}),
@@ -708,8 +801,14 @@ function classifyCell(
 }
 
 export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
-  const axes = valuesFor(options.axes);
+  const rawAxes = valuesFor(options.axes);
   const control = controlFor(options.control ?? 'baseline');
+  const axes = {
+    ...rawAxes,
+    ...(control.fixedParameter
+      ? { [control.fixedParameter]: [control.fixedValue!] }
+      : {}),
+  } as Record<SetupCParameterId, number[]>;
   const variant = options.variant ?? 'E1-R1';
   if (!setupBVariants.some((candidate) => candidate.id === variant))
     throw new RangeError(`Unknown Setup C variant ${variant}.`);
@@ -719,8 +818,14 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
   if (minimumCycles < 0)
     throw new RangeError('Setup C minimumCycles must be nonnegative.');
   const replicateCount = options.replicates ?? 1;
-  if (!Number.isInteger(replicateCount) || replicateCount < 1)
-    throw new RangeError('Setup C replicates must be a positive integer.');
+  if (
+    !Number.isInteger(replicateCount) ||
+    replicateCount < 1 ||
+    replicateCount > MAX_REPLICATES
+  )
+    throw new RangeError(
+      `Setup C replicates must be an integer from 1 through ${MAX_REPLICATES}.`,
+    );
   const cells = combinations(axes);
   if (variant.endsWith('-R0') && axes.gain.some((gain) => gain !== 0))
     throw new RangeError('Setup C R0 scans require a zero gain axis.');
@@ -731,10 +836,37 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
     throw new RangeError('Setup C needs at least one preparation.');
   if (new Set(preparations).size !== preparations.length)
     throw new RangeError('Setup C preparations must be unique.');
+  preparations.forEach(validatePreparationId);
   const ordered = direction === 'reverse' ? [...cells].reverse() : cells;
   const maxCells = options.maxCells ?? ordered.length;
   if (!Number.isInteger(maxCells) || maxCells < 0)
     throw new RangeError('Setup C maxCells must be a nonnegative integer.');
+  const sampleCadence = options.sampleCadence ?? DEFAULT_SAMPLE_CADENCE;
+  finite(sampleCadence, 'Setup C sampleCadence');
+  if (!(sampleCadence > 0))
+    throw new RangeError('Setup C sampleCadence must be positive.');
+  const duration = options.duration ?? DEFAULT_DURATION;
+  const preparationDuration =
+    options.preparationDuration ?? DEFAULT_PREPARATION_DURATION;
+  validatePreparationDuration(duration, preparationDuration);
+  if (duration / sampleCadence > MAX_DIAGNOSTIC_SAMPLES)
+    throw new RangeError(
+      `Setup C sampleCadence must produce at most ${MAX_DIAGNOSTIC_SAMPLES} samples.`,
+    );
+  const plannedCellCount = Math.min(maxCells, ordered.length);
+  const plannedRuns =
+    plannedCellCount * preparations.length * replicateCount +
+    (options.refineNear?.length ?? 0);
+  if (plannedRuns > MAX_SCAN_RUNS)
+    throw new RangeError(
+      `Setup C scan exceeds the ${MAX_SCAN_RUNS}-run diagnostic budget.`,
+    );
+  for (const parameters of cells)
+    scenarioFor(
+      effectiveParameters(parameters, control),
+      variant,
+      preparation('co-phase', 'setup-c-validation', 'established'),
+    );
   const runs: SetupCCellRun[] = [];
   const scanCells: SetupCScanCell[] = [];
   const handoffs: SetupCContinuationRecord['handoffs'] = [];
@@ -753,7 +885,14 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
         classificationStatuses: [],
         preparationIds: preparations,
         replicateUncertainty: null,
-        criteria: { windows: [], minimumCycles },
+        replicateUncertaintyByPreparation: {},
+        criteria: {
+          windows: [],
+          minimumCycles,
+          frequencyTolerance: DEFAULT_FREQUENCY_TOLERANCE,
+          phaseRangeTolerance: DEFAULT_PHASE_RANGE_TOLERANCE,
+          sampleCadence,
+        },
       });
       continue;
     }
@@ -762,7 +901,7 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
     try {
       for (const preparationId of preparations)
         for (let replicate = 0; replicate < replicateCount; replicate++) {
-          const seed = `${options.seed ?? 'signal-space-setup-c-v1'}:${key}:${preparationId}:${replicate}`;
+          const seed = `${options.preparationSeed ?? options.seed ?? 'signal-space-setup-c-v1'}:${key}:${preparationId}:${replicate}`;
           const run = createSetupCCell(parameters, {
             variant,
             preparation: preparationId,
@@ -771,6 +910,7 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
             duration: options.duration ?? DEFAULT_DURATION,
             preparationDuration:
               options.preparationDuration ?? DEFAULT_PREPARATION_DURATION,
+            sampleCadence,
             minimumCycles,
             replicate,
             control: 'baseline',
@@ -784,27 +924,38 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
           });
           cellRuns.push(run);
           runs.push(run);
-          restarts.push({
-            runId: run.runId,
-            cellKey: key,
-            preparationId: run.preparation.id,
-          });
-          if (
+          const isHandoff =
             direction !== 'independent' &&
             preparationId === preparations[0] &&
             replicate === 0 &&
-            previousCell
-          )
+            previousCell !== undefined;
+          if (isHandoff) {
             handoffs.push({
               fromRunId: previousCell.runId,
               toRunId: run.runId,
               kind: 'full-state-snapshot',
               snapshot: clone(previousCell.finalSnapshot),
             });
+          } else {
+            restarts.push({
+              runId: run.runId,
+              cellKey: key,
+              preparationId: run.preparation.id,
+            });
+          }
         }
-      previous = cellRuns.at(-1);
-      scanCells.push(classifyCell(cellRuns, parameters, minimumCycles));
+      previous = cellRuns.find(
+        (run) => run.preparation.id === preparations[0] && run.replicate === 0,
+      );
+      scanCells.push(
+        classifyCell(cellRuns, parameters, minimumCycles, sampleCadence),
+      );
     } catch (error) {
+      if (
+        !(error instanceof EnvelopeFailure) ||
+        error.code !== 'NUMERICAL_FAILURE'
+      )
+        throw error;
       scanCells.push({
         key,
         parameters,
@@ -815,14 +966,24 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
           (run) => run.diagnostics.classification.status,
         ),
         preparationIds: [...new Set(cellRuns.map((run) => run.preparation.id))],
-        replicateUncertainty: cellRuns.length
-          ? replicateUncertainty(
-              cellRuns.map((run) => run.diagnostics.meanFrequencyDifference),
-            )
-          : null,
+        replicateUncertainty:
+          preparations.length === 1 && cellRuns.length
+            ? replicateUncertainty(
+                cellRuns.map((run) => run.diagnostics.meanFrequencyDifference),
+              )
+            : null,
+        replicateUncertaintyByPreparation: uncertaintyByPreparation(cellRuns),
         criteria: {
           windows: cellRuns[0]?.diagnostics.windows ?? [],
           minimumCycles,
+          frequencyTolerance:
+            cellRuns[0]?.diagnostics.criteria.frequencyTolerance ??
+            DEFAULT_FREQUENCY_TOLERANCE,
+          phaseRangeTolerance:
+            cellRuns[0]?.diagnostics.criteria.phaseRangeTolerance ??
+            DEFAULT_PHASE_RANGE_TOLERANCE,
+          sampleCadence:
+            cellRuns[0]?.diagnostics.criteria.sampleCadence ?? sampleCadence,
         },
         failure: {
           message:
@@ -837,11 +998,12 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
     const run = createSetupCCell(parameters, {
       variant,
       preparation: preparations[0]!,
-      preparationSeed: `${options.seed ?? 'signal-space-setup-c-v1'}:refined:${index}`,
       linkHistory: options.linkHistory ?? 'established',
       duration: options.duration ?? DEFAULT_DURATION,
       preparationDuration:
         options.preparationDuration ?? DEFAULT_PREPARATION_DURATION,
+      sampleCadence,
+      preparationSeed: `${options.preparationSeed ?? options.seed ?? 'signal-space-setup-c-v1'}:refined:${index}`,
       minimumCycles,
       replicate: 0,
       control: 'baseline',
@@ -861,6 +1023,7 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
     control,
     metadata: {
       varied: axes,
+      rawVaried: rawAxes,
       fixed: {
         omegaReference: OMEGA_REFERENCE,
         q: DEFAULT_Q,
@@ -870,6 +1033,11 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
         preparationDuration:
           options.preparationDuration ?? DEFAULT_PREPARATION_DURATION,
         control: control.id,
+        sampleCadence,
+        preparationSeed:
+          options.preparationSeed ?? options.seed ?? 'signal-space-setup-c-v1',
+        frequencyTolerance: DEFAULT_FREQUENCY_TOLERANCE,
+        phaseRangeTolerance: DEFAULT_PHASE_RANGE_TOLERANCE,
       },
       dimensionlessDefinitions,
       baselineMatchingRule:
@@ -895,7 +1063,7 @@ export function runSetupCScan(options: SetupCScanOptions = {}): SetupCScan {
       interpretation:
         direction === 'independent'
           ? 'Every cell is a separate restart; no continuation state is implied.'
-          : 'The complete prior solver snapshot is retained as the explicit handoff record. Cells remain separately identifiable restarts; no phase reset or hidden observer state is introduced.',
+          : 'The first replicate of each successor cell adopts the predecessor complete solver snapshot; other preparations and replicates remain separate restarts. No phase reset or hidden observer state is introduced.',
     },
     refinement: {
       requested: clone(options.refineNear ?? []),

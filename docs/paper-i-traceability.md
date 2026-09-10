@@ -57,8 +57,13 @@ baseline matching rule, nested finite-window evidence, irregularity diagnostics,
 replicate uncertainty, trajectory run IDs, and distinct unresolved, numerical
 failure, and unrun masks. Forward and reverse orders adopt complete solver
 snapshots as parameter-continuation state while independent restarts remain
-separately identifiable. No cell is labeled as locking, coexistence, or chaos;
-publication-scale scans and scientific interpretation remain deferred.
+separately identifiable. Replicate uncertainty remains separated by
+preparation, and classifier thresholds plus diagnostic sampling cadence are
+persisted with each result. Control-fixed axes are removed from the effective
+Cartesian product while raw requested axes remain provenance. Invalid scan
+inputs are rejected before execution and a bounded diagnostic job budget is
+enforced. No cell is labeled as locking, coexistence, or chaos; publication-
+scale scans and scientific interpretation remain deferred.
 
 ## T07 declarative runs (#8)
 

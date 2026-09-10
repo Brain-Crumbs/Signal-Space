@@ -129,11 +129,8 @@ test('Setup C reverse continuation retains complete prior snapshots separately f
     scan.runs[1]!.finalSnapshot.continuation?.kind,
     'parameter-handoff-v1',
   );
-  assert.equal(scan.continuation.restarts.length, 2);
-  assert.notEqual(
-    scan.continuation.restarts[0]!.runId,
-    scan.continuation.restarts[1]!.runId,
-  );
+  assert.equal(scan.continuation.restarts.length, 1);
+  assert.equal(scan.continuation.restarts[0]!.runId, scan.runs[0]!.runId);
 });
 
 test('Setup C definitions use the shared manifest contract', () => {
@@ -175,11 +172,97 @@ test('Setup C can compare distinct initial preparations and refine selected cell
     ],
   });
   assert.equal(scan.cells[0]!.preparationIds.length, 2);
+  assert.equal(scan.cells[0]!.replicateUncertainty, null);
+  assert.equal(
+    scan.cells[0]!.replicateUncertaintyByPreparation['co-phase']
+      ?.replicateCount,
+    1,
+  );
+  assert.equal(
+    scan.cells[0]!.replicateUncertaintyByPreparation['pi-reflection']
+      ?.replicateCount,
+    1,
+  );
   assert.equal(scan.runs.length, 3);
   assert.equal(scan.refinement.runIds.length, 1);
   assert.equal(
     scan.refinement.interpretation,
     'selective-diagnostic-refinement',
+  );
+});
+
+test('Setup C applies controls before scan validation and preserves scan cells', () => {
+  const scan = runSetupCScan({
+    variant: 'E1-R0',
+    control: 'no-feedback',
+    axes: {
+      detuning: [0, 0.01],
+      delay: [0.5],
+      gain: [-0.9, 0.9],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    duration: 2,
+    preparationDuration: 0.5,
+    maxCells: 1,
+  });
+  assert.equal(scan.cells.length, 2);
+  assert.equal(scan.runs.length, 1);
+  assert.deepEqual(scan.metadata.varied.gain, [0]);
+  assert.deepEqual(scan.metadata.rawVaried.gain, [-0.9, 0.9]);
+});
+
+test('Setup C persists classifier and sampling criteria and honors preparation seeds', () => {
+  const scan = runSetupCScan({
+    variant: 'E1-R0',
+    preparation: 'seeded-random',
+    preparationSeed: 'declared-preparation-seed',
+    axes: {
+      detuning: [0],
+      delay: [0.5],
+      gain: [0],
+      contrast: [0],
+      relaxationTime: [1],
+    },
+    duration: 2,
+    preparationDuration: 0.5,
+    sampleCadence: 0.1,
+  });
+  const run = scan.runs[0]!;
+  assert.equal(
+    run.preparation.seed?.startsWith('declared-preparation-seed:'),
+    true,
+  );
+  assert.equal(run.diagnostics.criteria.frequencyTolerance, 1e-3);
+  assert.equal(run.diagnostics.criteria.phaseRangeTolerance, 0.2);
+  assert.equal(run.diagnostics.criteria.sampleCadence, 0.1);
+  assert.ok(run.samples.length > 10);
+  assert.equal(scan.metadata.fixed.frequencyTolerance, 1e-3);
+  assert.equal(scan.metadata.fixed.phaseRangeTolerance, 0.2);
+});
+
+test('Setup C rejects invalid scan configuration before masking it as numerical failure', () => {
+  assert.throws(
+    () => runSetupCScan({ duration: 1, preparationDuration: 1 }),
+    /must exceed/,
+  );
+  assert.throws(
+    () => runSetupCScan({ replicates: Number.MAX_SAFE_INTEGER }),
+    /through 100/,
+  );
+  assert.throws(
+    () =>
+      createSetupCCell(
+        {
+          detuning: 0,
+          delay: 1,
+          gain: 0,
+          contrast: 0,
+          relaxationTime: 1,
+        },
+        { preparation: 'not-a-preparation' as never },
+      ),
+    /Unknown Setup C preparation/,
   );
 });
 

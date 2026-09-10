@@ -23,7 +23,12 @@ export type {
   TickCrossing,
   HistoryPoint,
 } from './envelope.js';
-export { EnvelopeSolver, emission, envelopeRoutes } from './envelope.js';
+export {
+  EnvelopeFailure,
+  EnvelopeSolver,
+  emission,
+  envelopeRoutes,
+} from './envelope.js';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import schema from '@signal-space/model/schema' with { type: 'json' };
 import { validateScenario } from '@signal-space/model';
