@@ -583,6 +583,45 @@ test('numerically coincident propagated and direct boundaries are coalesced', as
   assert.equal(solver.snapshot().time, 0.31);
 });
 
+test('retarded left limits preserve pre-jump source state at propagated boundaries', () => {
+  const s = createSample('pair'),
+    source = s.nodes[0]!,
+    receiver = s.nodes[1]!,
+    perturbation = {
+      time: 0.3,
+      nodeId: source.id,
+      phaseOffset: 0.4,
+      frequencyOffset: 0,
+    };
+  source.gain = 0;
+  source.response = 'R0';
+  source.emission = { law: 'E1', q: 3 };
+  receiver.gain = 0.5;
+  receiver.response = 'R1';
+  s.links = [s.links[0]!];
+  s.solver.step = 0.2;
+  const solver = new EnvelopeSolver(s, { perturbations: [perturbation] });
+  while (solver.time < 1.3) solver.advance(1.3);
+  const segment = solver
+    .snapshot()
+    .segments.find((candidate) => candidate.end === 1.3);
+  assert.ok(segment);
+  const sourcePhiBeforeJump = source.phi + source.omega * perturbation.time;
+  assert.equal(source.emission.law, 'E1');
+  const sourceRateBeforeJump =
+    ((source.emission.q * source.omega) / (2 * Math.PI) / 2) *
+    (1 + Math.cos(sourcePhiBeforeJump));
+  const expectedTarget =
+    receiver.omega0 +
+    receiver.gain * Math.tanh(sourceRateBeforeJump / s.rateScale);
+  const receiverOmega = segment.y1[5]!;
+  close(
+    segment.d1[5]!,
+    (expectedTarget - receiverOmega) / receiver.relaxationTime,
+    1e-10,
+  );
+});
+
 test('representable event intervals near zero are not coalesced', () => {
   const s = driven(),
     node = s.nodes[0]!;

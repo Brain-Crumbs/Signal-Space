@@ -15,13 +15,20 @@ with `R0`/`R1`/`R2`).
 - signed gain sweeps through zero;
 - matched no-perturbation continuations and finite-window pair diagnostics.
 
+Runs always save an exact sample at the declared finite-window measurement
+start, including controls without a perturbation. This keeps the shared
+classifier's boundary requirement explicit rather than relying on the
+adaptive step mesh.
+
 ## Perturbation decision
 
 The Setup B phase/frequency perturbation is an explicit deterministic state
 intervention. It is stored in `EnvelopeOptions.perturbations`, lands at an exact
 solver boundary after the declared preparation duration, and records a post-jump
 state in `EnvelopeSnapshot.jumps`. The solver retains the pre-jump dense history
-and uses the post-jump state for exact retarded queries at the intervention time.
+and uses the post-jump state for right-limit retarded queries at the
+intervention time. Left-limit RK endpoint evaluations pin ULP-equivalent
+retarded source times to the pre-jump history.
 This is a comparison intervention, not an implied phase reset, synchronization
 rule, or physical force.
 

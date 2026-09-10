@@ -644,9 +644,13 @@ export function runSetupB(
   const actualGain = options.gain ?? variant.gain;
   const envelope = envelopeFor(protocolValue, scenario, true);
   const referenceEnvelope = envelopeFor(protocolValue, scenario, false);
+  const measurementStart = Math.max(
+    protocolValue.perturbation?.time ?? 0,
+    protocolValue.duration / 2,
+  );
   const sampleTimes = [
     protocolValue.perturbation?.time,
-    Math.max(protocolValue.perturbation?.time ?? 0, protocolValue.duration / 2),
+    measurementStart,
   ].filter((time): time is number => time !== undefined);
   const samples = runEnvelope(
     scenario,

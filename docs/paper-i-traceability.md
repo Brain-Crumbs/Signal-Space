@@ -40,10 +40,12 @@ mismatch, unwrapped pair drift/slips, simulator-only retarded phase with an
 explicit `chi`, collective modulation, and perturbation recovery evidence using
 shared analysis metrics. The envelope solver's explicit state perturbation
 option preserves pre-jump dense history and post-jump states in replayable
-snapshots; it is an intervention, not an unstated phase reset or synchronization
-rule. Setup B smoke runs are finite deterministic diagnostics, not locking or
-attraction findings. Event statistics, physical filters, boundaries beyond open
-ports, and research-scale scans remain deferred.
+snapshots; ULP-equivalent propagated source queries retain the pre-jump left
+limit, and Setup B runs save exact finite-window start samples. It is an
+intervention, not an unstated phase reset or synchronization rule. Setup B smoke
+runs are finite deterministic diagnostics, not locking or attraction findings.
+Event statistics, physical filters, boundaries beyond open ports, and
+research-scale scans remain deferred.
 
 ## T07 declarative runs (#8)
 

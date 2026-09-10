@@ -161,6 +161,17 @@ test('Setup B keeps reciprocal, one-way, and prescribed controls distinct', () =
   );
 });
 
+test('Setup B saves the exact classification window start without a perturbation', () => {
+  const protocol = createSetupBProtocol('reciprocal', {
+    duration: 3.17,
+    preparationDuration: 1,
+    perturbation: null,
+  });
+  const result = runSetupB(protocol, 'E0-R0');
+  assert.ok(result.samples.some((sample) => sample.time === 1.585));
+  assert.equal(result.diagnostics.classification.evidence.length, 1);
+});
+
 test('Setup B gain sweep records signed values through zero without a locking claim', () => {
   const sweep = createSetupBGainSweep(
     createSetupBProtocol('reciprocal', { duration: 3, perturbation: null }),
