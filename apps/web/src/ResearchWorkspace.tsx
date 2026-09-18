@@ -43,8 +43,20 @@ function displayTime(value: string) {
   return Number.isNaN(date.valueOf()) ? value : date.toLocaleString();
 }
 
-function same(left: unknown, right: unknown) {
-  return JSON.stringify(left) === JSON.stringify(right);
+function same(left: unknown, right: unknown): boolean {
+  if (Object.is(left, right)) return true;
+  if (!left || !right || typeof left !== 'object' || typeof right !== 'object')
+    return false;
+  if (Array.isArray(left) !== Array.isArray(right)) return false;
+  const a = Object.entries(left).sort(([x], [y]) => x.localeCompare(y));
+  const b = Object.entries(right).sort(([x], [y]) => x.localeCompare(y));
+  return (
+    a.length === b.length &&
+    a.every(
+      ([key, value], index) =>
+        key === b[index]?.[0] && same(value, b[index]?.[1]),
+    )
+  );
 }
 
 interface ConfigDimension {
@@ -247,6 +259,10 @@ export function ResearchWorkspace() {
     runId: string;
     attemptCount: number;
   }>();
+  const selectionRef = useRef(selectedRunId);
+  selectionRef.current = selectedRunId;
+  const clientRef = useRef(api);
+  clientRef.current = api;
   const cursorRef = useRef('');
   const eventKeysRef = useRef(new Set<string>());
 
@@ -357,6 +373,8 @@ export function ResearchWorkspace() {
         client.run(runId),
         client.events(runId, cursorRef.current),
       ]);
+      if (selectionRef.current !== runId || clientRef.current !== client)
+        return manifest;
       setRuns((current) => {
         const next = current.filter((run) => run.run_id !== manifest.run_id);
         return [manifest, ...next].sort((a, b) =>
@@ -401,6 +419,7 @@ export function ResearchWorkspace() {
         )
           timer = window.setTimeout(poll, 500);
       } catch (error) {
+        if (disposed) return;
         if (
           error instanceof ResearchApiError &&
           error.code === 'INVALID_CURSOR'
@@ -566,24 +585,42 @@ export function ResearchWorkspace() {
         selectedRun,
         (path) => path === `${reportPath}/report.md`,
       );
-      const plot = artifactFor(
-        selectedRun,
-        (path) => path === `${reportPath}/plot-data/recurrence.csv`,
-      );
-      const spec = artifactFor(
-        selectedRun,
-        (path) => path === `${reportPath}/figures/recurrence.figure.json`,
-      );
-      if (!markdown || !plot || !spec)
-        throw new Error('The selected run has no complete generated report.');
-      const [markdownText, plotText, specText] = await Promise.all([
-        fetchArtifactText(selectedRun, markdown),
-        fetchArtifactText(selectedRun, plot),
-        fetchArtifactText(selectedRun, spec),
-      ]);
+      if (!markdown)
+        throw new Error('The selected run has no generated Markdown report.');
+      const markdownText = await fetchArtifactText(selectedRun, markdown);
+      if (
+        selectionRef.current !== selectedRun.run_id ||
+        clientRef.current !== api
+      )
+        return;
       setReportText(markdownText);
-      setPlotRows(parsePlotCsv(plotText));
-      setFigureSpec(JSON.parse(specText) as FigureSpec);
+      setPlotRows([]);
+      setFigureSpec(undefined);
+      // The interactive overlay is specific to E00. Other experiments retain
+      // their report and downloadable saved figures without invented axes.
+      if (selectedRun.experiment_id === 'fixture.synthetic.v1') {
+        const plot = artifactFor(
+          selectedRun,
+          (path) => path === `${reportPath}/plot-data/recurrence.csv`,
+        );
+        const spec = artifactFor(
+          selectedRun,
+          (path) => path === `${reportPath}/figures/recurrence.figure.json`,
+        );
+        if (plot && spec) {
+          const [plotText, specText] = await Promise.all([
+            fetchArtifactText(selectedRun, plot),
+            fetchArtifactText(selectedRun, spec),
+          ]);
+          if (
+            selectionRef.current !== selectedRun.run_id ||
+            clientRef.current !== api
+          )
+            return;
+          setPlotRows(parsePlotCsv(plotText));
+          setFigureSpec(JSON.parse(specText) as FigureSpec);
+        }
+      }
     } catch (error) {
       handleError(error);
     } finally {

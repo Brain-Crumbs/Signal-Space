@@ -39,6 +39,7 @@ function setAtPath(
   const copy = structuredClone(source) as unknown as Record<string, unknown>;
   let target = copy;
   path.slice(0, -1).forEach((part) => {
+    if (target[part] === undefined) target[part] = {};
     target = target[part] as Record<string, unknown>;
   });
   const final = path.at(-1);
@@ -49,7 +50,8 @@ function setAtPath(
 function fieldValue(source: ResearchConfig, path: string[]) {
   let value: unknown = source;
   path.forEach((part) => {
-    value = (value as Record<string, unknown>)[part];
+    value =
+      value == null ? undefined : (value as Record<string, unknown>)[part];
   });
   return value;
 }
@@ -80,6 +82,75 @@ function Field({
   ]
     .filter(Boolean)
     .join(' · ');
+
+  if (schema.properties) {
+    return (
+      <fieldset>
+        <legend>{title(name)}</legend>
+        {Object.entries(schema.properties).map(([child, childSchema]) => (
+          <Field
+            key={child}
+            name={child}
+            path={[...path, child]}
+            schema={childSchema}
+            value={(value as Record<string, unknown> | undefined)?.[child]}
+            disabled={disabled}
+            config={config}
+            onChange={onChange}
+          />
+        ))}
+      </fieldset>
+    );
+  }
+
+  if (types.includes('array') || types.includes('object')) {
+    return (
+      <div className="schema-field">
+        <label htmlFor={id}>{title(name)} (JSON)</label>
+        <textarea
+          id={id}
+          key={JSON.stringify(value)}
+          defaultValue={JSON.stringify(
+            value ?? (types.includes('array') ? [] : {}),
+          )}
+          disabled={disabled || schema.const !== undefined}
+          onBlur={(event) => {
+            try {
+              const parsed: unknown = JSON.parse(event.target.value);
+              event.target.setCustomValidity('');
+              onChange(setAtPath(config, path, parsed));
+            } catch {
+              event.target.setCustomValidity('Enter valid JSON.');
+              event.target.reportValidity();
+              onChange(setAtPath(config, path, event.target.value));
+            }
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (schema.enum) {
+    return (
+      <div className="schema-field">
+        <label htmlFor={id}>{title(name)}</label>
+        <select
+          id={id}
+          value={JSON.stringify(value)}
+          disabled={disabled || schema.const !== undefined}
+          onChange={(event) =>
+            onChange(setAtPath(config, path, JSON.parse(event.target.value)))
+          }
+        >
+          {schema.enum.map((option) => (
+            <option key={JSON.stringify(option)} value={JSON.stringify(option)}>
+              {String(option)}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  }
 
   if (types.includes('boolean')) {
     return (
@@ -116,7 +187,8 @@ function Field({
           let next: unknown = event.target.value;
           if (event.target.value === '' && types.includes('null')) next = null;
           else if (inputType(schema) === 'number')
-            next = Number(event.target.value);
+            next =
+              event.target.value === '' ? null : Number(event.target.value);
           onChange(setAtPath(config, path, next));
         }}
       />

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import math
 from pathlib import Path
 from typing import Any
 
@@ -13,12 +14,18 @@ def analyze_series(raw_path: Path, output_path: Path, config: dict[str, Any]) ->
         rows = list(csv.DictReader(stream))
     observed = [(int(row["step"]), float(row["value"])) for row in rows]
     parameters = config["parameters"]
+    if not observed or [step for step, _ in observed] != list(range(len(observed))) or observed[-1][0] > int(parameters["steps"]):
+        raise ValueError("raw series must be a nonempty contiguous prefix starting at step zero")
+    if any(not math.isfinite(value) for _, value in observed):
+        raise ValueError("raw series contains non-finite observations")
     expected = recurrence(
         float(parameters["initial_value"]),
         float(parameters["gain"]),
         float(parameters["forcing"]),
         int(parameters["steps"]),
     )
+    if any(not math.isfinite(value) for value in expected):
+        raise ValueError("independent reference exceeds finite arithmetic")
     output_path.mkdir(parents=True, exist_ok=True)
     derived_path = output_path / "derived/series.csv"
     derived_path.parent.mkdir(parents=True, exist_ok=True)

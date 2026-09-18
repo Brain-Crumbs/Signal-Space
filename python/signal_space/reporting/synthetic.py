@@ -144,4 +144,4 @@ Passing E00 verifies lifecycle and traceability behavior only. It does not estab
         axis.legend()
         pdf.savefig(figure)
         plt.close(figure)
-    return {"figure_spec": "figures/recurrence.figure.json", "plot_data": ["plot-data/recurrence.csv", "plot-data/recurrence.json"]}
+    return {"required_inputs": [analysis["raw_source"], f"{analysis['path']}/derived/series.csv", f"{analysis['path']}/checks.json"], "figure_spec": "figures/recurrence.figure.json", "plot_data": ["plot-data/recurrence.csv", "plot-data/recurrence.json"]}

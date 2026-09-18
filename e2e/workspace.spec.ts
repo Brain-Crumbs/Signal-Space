@@ -834,3 +834,74 @@ test('production worker runs and resumes seeded packets using the shared engine'
     expect(value).toBeCloseTo(nodeSnapshot!.state[i]!, 12),
   );
 });
+
+test('preparation retains nested solver settings and angular-sector arrays', async ({
+  page,
+}) => {
+  await installResearchMock(page);
+  const schema = structuredClone(researchSchema) as unknown as Record<
+    string,
+    unknown
+  >;
+  const config = {
+    ...structuredClone(researchConfig),
+    solver: { tolerance: 1e-7, sectors: [0, 1, 2] },
+  };
+  schema.default = config;
+  (schema.properties as Record<string, unknown>).solver = {
+    type: 'object',
+    properties: {
+      tolerance: { type: 'number' },
+      sectors: { type: 'array', items: { type: 'integer' } },
+      continuation: {
+        type: 'object',
+        properties: { step: { type: 'number' } },
+      },
+    },
+  };
+  await page.route('**/v1/experiments/*/schema', (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fallback();
+    return route.fulfill({
+      json: { experiment_id: researchConfig.experiment_id, schema },
+      headers: { 'access-control-allow-origin': 'http://127.0.0.1:4173' },
+    });
+  });
+  await page.goto('/');
+  await page.getByLabel('Ephemeral bearer token').fill('browser-token');
+  await page.getByRole('button', { name: 'Connect runtime' }).click();
+  await page.getByLabel('Sectors (JSON)').fill('[0,1,2,3]');
+  await page.locator('#config-solver-continuation-step').fill('0.002');
+  const submitted = page.waitForRequest(
+    (request) =>
+      request.url().endsWith('/v1/validate') && request.method() === 'POST',
+  );
+  await page.getByRole('button', { name: 'Validate & estimate' }).click();
+  expect((await submitted).postDataJSON().solver).toEqual({
+    tolerance: 1e-7,
+    sectors: [0, 1, 2, 3],
+    continuation: { step: 0.002 },
+  });
+});
+
+test('report preview does not require synthetic recurrence files', async ({
+  page,
+}) => {
+  const manifest = await installResearchMock(page);
+  manifest.experiment_id = 'test.profile.v1';
+  await page.goto('/');
+  await page.getByLabel('Ephemeral bearer token').fill('browser-token');
+  await page.getByRole('button', { name: 'Connect runtime' }).click();
+  await page.getByRole('button', { name: 'Validate & start run' }).click();
+  await page.getByRole('button', { name: 'Analyze saved output' }).click();
+  await page.getByRole('button', { name: 'Regenerate report' }).click();
+  manifest.artifacts = manifest.artifacts.filter(
+    (artifact) => !['plot', 'spec'].includes(artifact.id),
+  );
+  await page.getByRole('button', { name: 'Preview latest report' }).click();
+  await expect(
+    page.getByText('Synthetic fixture only; no physics claim.'),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('img', { name: 'Saved recurrence output' }),
+  ).toHaveCount(0);
+});

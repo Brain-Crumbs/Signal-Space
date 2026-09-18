@@ -10,9 +10,9 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 from signal_space.runtime.archive import archive_run
-from signal_space.runtime.errors import InvalidState
+from signal_space.runtime.errors import IntegrityError, InvalidState
 from signal_space.runtime.events import read_events
-from signal_space.runtime.io import safe_child
+from signal_space.runtime.io import safe_child, sha256_bytes
 from signal_space.runtime.runner import ResearchRuntime
 
 
@@ -213,6 +213,11 @@ class ResearchHandler(BaseHTTPRequestHandler):
                 run_path = self.server.workspace / manifest["experiment_id"] / run_id
                 path = safe_child(run_path, artifact["path"])
                 body = path.read_bytes()
+                mutable = any(entry["state"] in {"prepared", "running"} and artifact["path"].startswith(entry["path"] + "/") for entry in manifest["attempts"])
+                if mutable:
+                    raise InvalidState("artifact is still being written; inspect events until the attempt terminates")
+                if len(body) != artifact["size"] or sha256_bytes(body) != artifact["sha256"]:
+                    raise IntegrityError("artifact bytes do not match the saved evidence identity")
                 self.send_response(200)
                 self.send_header("Content-Type", artifact["media_type"])
                 self.send_header("Content-Length", str(len(body)))

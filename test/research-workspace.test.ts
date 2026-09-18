@@ -69,3 +69,22 @@ test('million-row plots use iterative bounds and bounded browser rendering', () 
   assert.equal(sampled[0], rows[0]);
   assert.equal(sampled.at(-1), rows.at(-1));
 });
+
+test('configuration identity ignores JSON key ordering but preserves array order', () => {
+  const right = structuredClone(config);
+  right.units = { value: 'dimensionless', step: 'index' };
+  assert.equal(compareResearchConfigs(config, right).exactMatch, true);
+  right.parameters = { sectors: [0, 1, 2] };
+  const left = { ...right, parameters: { sectors: [2, 1, 0] } };
+  assert.equal(compareResearchConfigs(left, right).exactMatch, false);
+});
+
+test('plot parser rejects missing and nonfinite evidence instead of dropping it', async () => {
+  const { parsePlotCsv } = await import('../apps/web/src/ResearchPlot.js');
+  for (const csv of [
+    'step,observed,expected\n0,1,1',
+    'step,observed,expected,absolute_error\n0,NaN,1,0',
+    'step,observed,expected,absolute_error\n0,,1,0',
+  ])
+    assert.throws(() => parsePlotCsv(csv));
+});

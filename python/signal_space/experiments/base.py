@@ -21,6 +21,14 @@ class ExperimentPlugin(ABC):
         ...
 
     @abstractmethod
+    def acceptance_criteria(self, config: dict[str, Any]) -> list[dict[str, Any]]:
+        """Preregistered criterion IDs/descriptions with initially null evidence."""
+        ...
+
+    @abstractmethod
+    def known_gaps(self, config: dict[str, Any]) -> list[str]: ...
+
+    @abstractmethod
     def validate(self, config: Any) -> dict[str, Any]: ...
 
     @abstractmethod

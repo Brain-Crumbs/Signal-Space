@@ -13,12 +13,12 @@ Use sections 2–10, 14–15, and 23 of `research/papers/charged-recurrence-wind
 In units `c = ħ = 1`, use
 
 \[
-\mathcal L = \partial_\mu\Phi^*\partial^\mu\Phi-U(|\Phi|^2),
+\mathcal L = \lambda^{-1}\left[\partial_\mu\Phi^*\partial^\mu\Phi-U(|\Phi|^2)\right],
 \qquad
 U(s)=m^2s-gs^2+hs^3,
 \]
 
-with `m = g = h = 1`, `λ = 0.01`, and `ε = 0.1` retained in the complete source-model ledger. On this invariant stationary branch set the neutral field to exactly zero and omit the orientation field; neutral parameters cannot influence the solution.
+with `m = g = h = 1`, `λ = 0.01`, and `ε = 0.1` retained in the complete source-model ledger. On this invariant stationary branch set the neutral field to exactly zero and omit the orientation field; neutral parameters cannot influence the solution. The overall `1/λ` does not change the classical profile equation, but it must be retained in energy and Noether charge. With `λ = 0.01`, omitting it changes both by a factor of 100. See `e01-analytic-controls.md` for the normalization and spectral-sign ledger.
 
 Use the ansatz
 
