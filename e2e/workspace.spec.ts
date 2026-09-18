@@ -19,7 +19,9 @@ test('research collection is searchable and exposes source evidence', async ({
   await expect(
     page.getByRole('heading', { name: 'Charged-clock radiation milestone' }),
   ).toBeVisible();
-  await expect(page.getByText(/Frequency-resolved fields/)).toBeVisible();
+  await expect(
+    page.getByRole('article').getByText(/Frequency-resolved fields/),
+  ).toBeVisible();
   await expect(
     page.getByRole('link', { name: 'Open source file' }),
   ).toHaveAttribute('href', /\.md$/);
@@ -50,7 +52,9 @@ test('production worker renders the same initial snapshot as the shared engine',
   }))
     if (e.type === 'snapshot') expected.push(e.snapshot);
   const actual = JSON.parse(
-    (await page.locator('pre').textContent()) ?? 'null',
+    (await page
+      .locator('section[aria-label="Preparation result"] pre')
+      .textContent()) ?? 'null',
   );
   expect(actual).toEqual(expected[0]);
   await expect(page.getByRole('progressbar')).toHaveAttribute('value', '1');
