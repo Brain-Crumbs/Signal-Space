@@ -3,6 +3,16 @@
   "updated": "2026-09-18",
   "entries": [
     {
+      "id": "e00-runtime-guide",
+      "title": "E00 research runtime guide",
+      "kind": "guide",
+      "status": "implemented framework",
+      "date": "2026-09-18",
+      "path": "docs/research/runtime.md",
+      "summary": "Installation, lifecycle CLI and loopback API, recovery, resource controls, extension workflow, and reproducibility limits for the synthetic E00 framework fixture.",
+      "tags": ["E00", "runtime", "reproducibility", "reports"]
+    },
+    {
       "id": "program-architecture",
       "title": "Research architecture",
       "kind": "plan",

@@ -1,0 +1,1 @@
+"""Versioned mathematical model definitions."""

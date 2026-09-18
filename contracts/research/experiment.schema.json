@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/contracts/research/experiment.schema.json",
+  "title": "Signal Space research experiment configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": { "const": "research-experiment-v1" },
+    "experiment_id": { "const": "fixture.synthetic.v1" },
+    "model_id": { "const": "fixture.deterministic-recurrence.v1" },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "steps",
+        "checkpoint_interval",
+        "initial_value",
+        "gain",
+        "forcing"
+      ],
+      "properties": {
+        "steps": { "type": "integer", "minimum": 2, "maximum": 1000000 },
+        "checkpoint_interval": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "initial_value": { "type": "number" },
+        "gain": { "type": "number", "minimum": -2.0, "maximum": 2.0 },
+        "forcing": { "type": "number" },
+        "step_delay_ms": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step", "value"],
+      "properties": {
+        "step": { "const": "index" },
+        "value": { "const": "dimensionless" }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root"],
+      "properties": {
+        "root": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_memory_mb",
+        "max_output_mb",
+        "max_wall_seconds"
+      ],
+      "properties": {
+        "max_cpu_seconds": { "type": "integer", "minimum": 1, "maximum": 300 },
+        "max_memory_mb": { "type": "integer", "minimum": 64, "maximum": 2048 },
+        "max_output_mb": { "type": "integer", "minimum": 1, "maximum": 256 },
+        "max_wall_seconds": { "type": "number", "minimum": 0.1, "maximum": 600 }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_abs_error", "require_complete"],
+      "properties": {
+        "max_abs_error": { "type": "number", "minimum": 0 },
+        "require_complete": { "type": "boolean" }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    },
+    "fixture_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "interrupt_at_step": { "type": ["integer", "null"], "minimum": 1 },
+        "fail_at_step": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    }
+  }
+}

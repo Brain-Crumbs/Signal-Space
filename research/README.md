@@ -8,7 +8,7 @@ This directory is the versioned evidence and source collection for the Signal Sp
 - `milestones/`: reports produced from executed calculations.
 - `figures/`: curated diagnostic images used by those reports.
 - `source/`: reproducibility code, configurations, provenance, manifests, and compact derived results imported from the original calculation bundles.
-- `experiments/`: future accepted immutable run packages following `docs/research/artifact-contract.md`.
+- `experiments/`: accepted immutable run packages following `docs/research/artifact-contract.md`.
 
 `catalog.json` drives the local research explorer. `archive-manifest.json` records every tracked research file and SHA-256 digest. Run `npm run verify:research` to detect missing, changed, or uncatalogued top-level evidence.
 

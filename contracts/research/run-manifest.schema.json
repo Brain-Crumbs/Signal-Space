@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/contracts/research/run-manifest.schema.json",
+  "title": "Signal Space research run manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_version",
+    "experiment_id",
+    "experiment_version",
+    "model_id",
+    "run_id",
+    "created_at",
+    "updated_at",
+    "technical_state",
+    "scientific_classification",
+    "config_hash",
+    "config_path",
+    "code_identity",
+    "seed_algorithm",
+    "seed_ledger",
+    "attempts",
+    "analyses",
+    "reports",
+    "artifacts",
+    "acceptance_criteria",
+    "completeness",
+    "known_gaps",
+    "checksum_algorithm",
+    "checksum_path"
+  ],
+  "properties": {
+    "schema_version": { "const": "research-run-manifest-v1" },
+    "package_version": { "const": 1 },
+    "experiment_id": { "type": "string" },
+    "experiment_version": { "type": "string" },
+    "model_id": { "type": "string" },
+    "run_id": { "type": "string", "pattern": "^run-[a-f0-9]{16}$" },
+    "parent_run_id": { "type": ["string", "null"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "technical_state": {
+      "enum": [
+        "draft",
+        "validated",
+        "prepared",
+        "running",
+        "completed",
+        "cancelled",
+        "interrupted",
+        "failed",
+        "analyzed",
+        "archived"
+      ]
+    },
+    "scientific_classification": {
+      "enum": ["pass", "fail", "unresolved", "not-evaluated"]
+    },
+    "config_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "config_path": { "const": "resolved-config.json" },
+    "code_identity": { "type": "object" },
+    "seed_algorithm": { "const": "sha256-stream-v1" },
+    "seed_ledger": { "type": "object" },
+    "attempts": { "type": "array", "items": { "type": "object" } },
+    "analyses": { "type": "array", "items": { "type": "object" } },
+    "reports": { "type": "array", "items": { "type": "object" } },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "artifact.schema.json" }
+    },
+    "acceptance_criteria": { "type": "array", "items": { "type": "object" } },
+    "completeness": { "type": "object" },
+    "known_gaps": { "type": "array", "items": { "type": "string" } },
+    "checksum_algorithm": { "const": "sha256" },
+    "checksum_path": { "const": "checksums.sha256" }
+  }
+}
