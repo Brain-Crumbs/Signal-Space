@@ -168,7 +168,10 @@ class RunPackage:
             self._verify_indexed(manifest, mutable)
             change(manifest)
             manifest["updated_at"] = now()
-            write_json(self.manifest_path, manifest)
+            # Publish the changed manifest only after resealing has discovered
+            # every newly created artifact.  Writing here would expose a brief
+            # terminal-state manifest with the previous artifact catalog to
+            # concurrent status/API readers.
             self._seal_locked(manifest, mutable)
             return manifest
 

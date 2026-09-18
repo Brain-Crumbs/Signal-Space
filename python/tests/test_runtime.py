@@ -25,7 +25,7 @@ from signal_space.numerics.synthetic import recurrence
 from signal_space.runtime.archive import archive_run
 from signal_space.runtime.errors import CheckpointMismatch, IntegrityError
 from signal_space.runtime.io import read_json, sha256_file, write_json
-from signal_space.runtime.package import run_identity
+from signal_space.runtime.package import RunPackage, run_identity
 from signal_space.runtime.runner import (
     ResearchRuntime,
     _monitor_process,
@@ -125,6 +125,39 @@ class RuntimeTest(unittest.TestCase):
             run_identity(config, code, first)[0],
             run_identity(config, code, second)[0],
         )
+
+    def test_manifest_update_is_not_visible_before_artifact_reseal(self) -> None:
+        created = self.runtime.create_run(fixture(), self.workspace)
+        package = self.runtime._package(self.workspace, created["run_id"])
+        entered_seal = threading.Event()
+        release_seal = threading.Event()
+        original_seal = RunPackage._seal_locked
+
+        def delayed_seal(
+            current: RunPackage,
+            manifest: dict,
+            mutable_prefixes: tuple[str, ...],
+        ) -> None:
+            entered_seal.set()
+            self.assertTrue(release_seal.wait(timeout=5))
+            original_seal(current, manifest, mutable_prefixes)
+
+        with mock.patch.object(RunPackage, "_seal_locked", delayed_seal):
+            update = threading.Thread(
+                target=lambda: package.update(
+                    lambda manifest: manifest.update(
+                        {"technical_state": "prepared"}
+                    )
+                )
+            )
+            update.start()
+            self.assertTrue(entered_seal.wait(timeout=5))
+            self.assertEqual(package.manifest["technical_state"], "validated")
+            release_seal.set()
+            update.join(timeout=5)
+
+        self.assertFalse(update.is_alive())
+        self.assertEqual(package.manifest["technical_state"], "prepared")
 
     def test_manifest_rejects_open_or_empty_child_records(self) -> None:
         result = self.runtime.run(fixture(), self.workspace)
