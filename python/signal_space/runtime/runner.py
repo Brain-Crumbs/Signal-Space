@@ -98,10 +98,9 @@ class ResearchRuntime:
         package = self._package(workspace, run_id)
         self._reconcile_orphaned_attempts(package)
         manifest = package.manifest
-        candidates = [entry for entry in manifest["attempts"] if entry["state"] in {"cancelled", "interrupted", "failed"} and entry.get("checkpoint")]
-        if not candidates:
-            raise InvalidState("no resumable terminal attempt with a checkpoint")
-        parent = candidates[-1]
+        parent = manifest["attempts"][-1] if manifest["attempts"] else None
+        if manifest["technical_state"] == "archived" or not parent or parent["state"] not in {"cancelled", "interrupted", "failed"} or not parent.get("checkpoint"):
+            raise InvalidState("latest attempt is not a resumable terminal attempt with a checkpoint")
         checkpoint_path = package.path / parent["checkpoint"]["path"]
         if not checkpoint_path.is_file() or sha256_file(checkpoint_path) != parent["checkpoint"]["sha256"]:
             raise CheckpointMismatch("checkpoint bytes do not match the recorded hash")
@@ -111,6 +110,9 @@ class ResearchRuntime:
             raise CheckpointMismatch("checkpoint config/code identity is incompatible")
         if sha256_bytes(canonical_bytes(code_identity())) != code_hash:
             raise CheckpointMismatch("current code identity differs from the checkpoint producer")
+        if execution_identity() != manifest["execution_identity"]:
+            raise CheckpointMismatch("current execution environment differs from the checkpoint producer")
+        package.verify_immutable()
         config = read_json(package.path / "resolved-config.json")
         plugin = get_experiment(manifest["experiment_id"])
         return self._attempt(
@@ -131,8 +133,13 @@ class ResearchRuntime:
     ) -> dict[str, Any]:
         with package.locked():
             manifest = package.manifest
+            package.verify_immutable()
             if any(item["state"] in {"prepared", "running"} for item in manifest["attempts"]):
                 raise InvalidState("run already has an active attempt")
+            if resume is None and manifest["attempts"]:
+                raise InvalidState("initial execution has already been created")
+            if resume is not None and manifest["attempts"][-1]["attempt_id"] != resume["parent"]["attempt_id"]:
+                raise InvalidState("resume parent is no longer the latest attempt")
             number = len(manifest["attempts"]) + 1
             while True:
                 attempt_id = f"attempt-{number:04d}"
@@ -144,7 +151,6 @@ class ResearchRuntime:
                 except FileExistsError:
                     number += 1
             parent = resume["parent"] if resume else None
-            plugin.prepare(config, package.path, attempt_path, resume["checkpoint"] if resume else None)
             attempt = {
                 "schema_version": "research-attempt-v1",
                 "attempt_id": attempt_id,
@@ -164,7 +170,15 @@ class ResearchRuntime:
             def add(manifest: dict[str, Any]) -> None:
                 manifest["attempts"].append({key: attempt[key] for key in ("attempt_id", "parent_attempt_id", "state", "path", "created_at", "updated_at", "exit_code", "checkpoint", "failure")})
                 manifest["technical_state"] = "prepared"
+                manifest["scientific_classification"] = "not-evaluated"
+                manifest["completeness"].update({"attempts_terminal": False, "analysis": False, "report": False})
+                for criterion in manifest["acceptance_criteria"]:
+                    criterion["evidence"] = None
             package.update(add)
+            try:
+                plugin.prepare(config, package.path, attempt_path, resume["checkpoint"] if resume else None)
+            except Exception as error:
+                return self._setup_failure(package, attempt, "PREPARATION_FAILED", error)
 
         manifest = package.manifest
 
@@ -178,7 +192,7 @@ class ResearchRuntime:
             "parent_attempt_id": attempt["parent_attempt_id"],
             "attempt_path": str(attempt_path.resolve()),
             "resume_checkpoint": resume["checkpoint"] if resume else None,
-            "prior_raw": str((package.path / parent["path"] / "raw/series.csv").resolve()) if parent else None,
+            "prior_attempt_path": str((package.path / parent["path"]).resolve()) if parent else None,
         }
         request_path = attempt_path / "request.json"
         write_json(request_path, request, canonical=True)
@@ -191,17 +205,19 @@ class ResearchRuntime:
         python_root = str(Path(__file__).resolve().parents[2])
         environment["PYTHONPATH"] = python_root + (os.pathsep + environment["PYTHONPATH"] if environment.get("PYTHONPATH") else "")
         with log_path.open("wb") as log:
-            process = subprocess.Popen(
-                [sys.executable, "-m", "signal_space.runtime.worker", "--request", str(request_path)],
-                stdout=log,
-                stderr=subprocess.STDOUT,
-                env=environment,
-                start_new_session=os.name == "posix",
-                preexec_fn=_resource_limiter(config["resources"]) if os.name == "posix" else None,
-                creationflags=getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
-                if os.name == "nt"
-                else 0,
-            )
+            try:
+                process = subprocess.Popen(
+                    [sys.executable, "-m", "signal_space.runtime.worker", "--request", str(request_path)],
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    env=environment,
+                    start_new_session=os.name == "posix",
+                    creationflags=getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+                    if os.name == "nt"
+                    else 0,
+                )
+            except Exception as error:
+                return self._setup_failure(package, attempt, "WORKER_START_FAILED", error)
             attempt["worker_pid"] = process.pid
             write_json(attempt_path / "attempt.json", attempt)
             self._update_attempt(package, attempt, "running")
@@ -218,7 +234,11 @@ class ResearchRuntime:
                 reason, exit_code = _monitor_process(
                     process, attempt_path, config["resources"]
                 )
-                if reason == "wall":
+                if reason == "cancel":
+                    append_event(events, "cancellation-timeout", "runtime", {"grace_seconds": 2})
+                    _terminate_process(process, cooperative_seconds=0)
+                    exit_code = 130
+                elif reason == "wall":
                     (attempt_path / "cancel.request").touch()
                     append_event(events, "wall-limit-exceeded", "runtime", {"limit_seconds": config["resources"]["max_wall_seconds"]})
                     _terminate_process(process)
@@ -260,6 +280,15 @@ class ResearchRuntime:
         self._update_attempt(package, attempt, state)
         result = {"run_id": manifest["run_id"], "attempt_id": attempt_id, "state": state, "exit_code": exit_code, "resumable": bool(checkpoint_record) and state != "completed", "path": str(package.path)}
         return result
+
+    def _setup_failure(self, package: RunPackage, attempt: dict[str, Any], code: str, error: Exception) -> dict[str, Any]:
+        attempt.update({"state": "failed", "updated_at": now(), "exit_code": 1,
+                        "failure": {"code": code, "recoverable": False, "message": f"{type(error).__name__}: {error}"}})
+        path = package.path / attempt["path"]
+        write_json(path / "attempt.json", attempt)
+        append_event(path / "events.jsonl", "attempt-failed", "runtime", attempt["failure"])
+        self._update_attempt(package, attempt, "failed")
+        return {"run_id": package.manifest["run_id"], "attempt_id": attempt["attempt_id"], "state": "failed", "exit_code": 1, "resumable": False, "path": str(package.path)}
 
     def _reconcile_orphaned_attempts(self, package: RunPackage) -> None:
         with package.locked():
@@ -314,15 +343,16 @@ class ResearchRuntime:
 
     def cancel(self, workspace: Path, run_id: str) -> dict[str, Any]:
         package = self._package(workspace, run_id)
-        manifest = package.manifest
-        running = [entry for entry in manifest["attempts"] if entry["state"] == "running"]
-        if not running:
-            raise InvalidState("run has no active attempt")
-        attempt = running[-1]
-        path = package.path / attempt["path"]
-        (path / "cancel.request").touch()
-        append_event(path / "events.jsonl", "cancellation-requested", "runtime", {"source": "command"})
-        return {"run_id": run_id, "attempt_id": attempt["attempt_id"], "state": "cancellation-requested"}
+        with package.locked():
+            manifest = package.manifest
+            running = [entry for entry in manifest["attempts"] if entry["state"] == "running"]
+            if not running:
+                raise InvalidState("run has no active attempt")
+            attempt = running[-1]
+            path = package.path / attempt["path"]
+            (path / "cancel.request").touch()
+            append_event(path / "events.jsonl", "cancellation-requested", "runtime", {"source": "command"})
+            return {"run_id": run_id, "attempt_id": attempt["attempt_id"], "state": "cancellation-requested"}
 
     def analyze(self, workspace: Path, run_id: str) -> dict[str, Any]:
         package = self._package(workspace, run_id)
@@ -351,14 +381,22 @@ class ResearchRuntime:
                 if before != after:
                     raise RuntimeError("analysis mutated raw artifacts")
                 classification = plugin.classify(result["checks"], config)
-                raw_candidates = sorted(artifact["path"] for artifact in manifest["artifacts"] if artifact["kind"] == "raw" and artifact["path"].endswith("series.csv"))
+                raw_source = result["raw_source"]
+                if raw_source not in before:
+                    raise IntegrityError("analysis raw_source must name indexed raw evidence")
+                check_ids = {check["id"] for check in result["checks"]["checks"]}
+                required_ids = {criterion["id"] for criterion in manifest["acceptance_criteria"]}
+                if not required_ids.issubset(check_ids):
+                    raise IntegrityError("analysis omitted preregistered acceptance checks")
+                if classification not in {"pass", "fail", "unresolved", "not-evaluated"}:
+                    raise IntegrityError("invalid scientific classification")
                 record = {
                     "schema_version": "research-analysis-v1",
                     "analysis_id": analysis_id,
                     "path": relative,
                     "created_at": now(),
                     "input_artifacts": before,
-                    "raw_source": raw_candidates[-1] if raw_candidates else "",
+                    "raw_source": raw_source,
                     "parameters": config["analysis"],
                     "code_identity": code_identity(),
                     "classification": classification,
@@ -412,13 +450,18 @@ class ResearchRuntime:
                     analysis,
                     render_provenance,
                 )
+                output = dict(output)
+                required_inputs = output.pop("required_inputs")
+                indexed_paths = {artifact["path"] for artifact in manifest["artifacts"]}
+                if not isinstance(required_inputs, list) or not required_inputs or any(not isinstance(item, str) or item not in indexed_paths for item in required_inputs):
+                    raise IntegrityError("report required_inputs must name indexed evidence")
                 record = {
                     "schema_version": "research-report-v1",
                     "report_id": report_id,
                     "analysis_id": analysis["analysis_id"],
                     "path": relative,
                     "created_at": now(),
-                    "required_inputs": [analysis["raw_source"], f"{analysis['path']}/derived/series.csv", f"{analysis['path']}/checks.json"],
+                    "required_inputs": required_inputs,
                     "outputs": output,
                     "render_provenance": render_provenance,
                 }
@@ -434,24 +477,15 @@ class ResearchRuntime:
                 raise
 
     def verify(self, workspace: Path, run_id: str) -> dict[str, Any]:
-        return verify_package(self._package(workspace, run_id).path)
+        package = self._package(workspace, run_id)
+        with package.locked():
+            return verify_package(package.path)
 
     def _package(self, workspace: Path, run_id: str) -> RunPackage:
         matches = list(workspace.glob(f"*/{run_id}"))
         if len(matches) != 1 or not (matches[0] / "manifest.json").is_file():
             raise RunNotFound(f"run not found: {run_id}")
         return RunPackage(matches[0])
-
-
-def _resource_limiter(resources: dict[str, Any]):
-    def limit() -> None:
-        import resource
-        resource.setrlimit(resource.RLIMIT_CPU, (int(resources["max_cpu_seconds"]), int(resources["max_cpu_seconds"])))
-        bytes_limit = int(resources["max_memory_mb"]) * 1024 * 1024
-        resource.setrlimit(resource.RLIMIT_AS, (bytes_limit, bytes_limit))
-        file_limit = int(resources["max_output_mb"]) * 1024 * 1024
-        resource.setrlimit(resource.RLIMIT_FSIZE, (file_limit, file_limit))
-    return limit
 
 
 def _directory_size(path: Path) -> int:
@@ -472,7 +506,13 @@ def _monitor_process(
 ) -> tuple[str, int | None]:
     deadline = time.monotonic() + float(resources["max_wall_seconds"])
     output_limit = int(resources["max_output_mb"]) * 1024 * 1024
+    cancellation_deadline = None
     while True:
+        if (attempt_path / "cancel.request").exists():
+            if cancellation_deadline is None:
+                cancellation_deadline = time.monotonic() + 2
+            elif time.monotonic() >= cancellation_deadline:
+                return "cancel", process.poll()
         if _directory_size(attempt_path) > output_limit:
             return "output", None
         remaining = deadline - time.monotonic()

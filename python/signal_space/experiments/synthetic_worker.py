@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import math
 import os
 import time
 from pathlib import Path
@@ -68,7 +69,7 @@ def execute(request_path: Path) -> int:
         states = {
             key: int(item) for key, item in resume["rng_states"].items()
         }
-        prior_raw = Path(request["prior_raw"])
+        prior_raw = Path(request["prior_attempt_path"]) / "raw/series.csv"
         with prior_raw.open(newline="") as source, raw.open(
             "w", newline=""
         ) as target:
@@ -122,6 +123,9 @@ def execute(request_path: Path) -> int:
                 float(parameters["gain"]),
                 float(parameters["forcing"]),
             )
+            if not math.isfinite(value):
+                append_event(events, "non-finite-output", "run", {"step": step})
+                return 2
             for name in states:
                 states[name] = next_state(states[name])
             writer.writerow([step, format(value, ".17g")])

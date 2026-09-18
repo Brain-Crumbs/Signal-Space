@@ -97,7 +97,7 @@ For the browser workflow, including token handling, event-gap recovery, compatib
 
 ## Resource controls
 
-Validation rejects unknown fields, missing units, non-finite values, and out-of-domain values. `estimate` runs before package creation and compares estimated CPU, memory, disk, and wall time with the declared limits. The worker runs in its own process group. On POSIX, the parent also applies CPU, address-space, and per-file limits. On every platform the parent monitors aggregate attempt bytes and wall time while the worker is running. Cooperative cancellation and soft termination are followed by a guaranteed hard-kill fallback; terminal manifest recording runs even when shutdown handling fails.
+Validation rejects unknown fields, missing units, non-finite values, and out-of-domain values. `estimate` runs before package creation and compares estimated CPU, memory, disk, and wall time with the declared limits. The worker runs in its own process group. On POSIX, the child applies CPU, address-space, and per-file limits before importing registered plugins. This avoids `preexec_fn` in the threaded service. On every platform the parent monitors aggregate attempt bytes and wall time while the worker is running. Cooperative cancellation and soft termination are followed by a guaranteed hard-kill fallback; terminal manifest recording runs even when shutdown handling fails.
 
 These controls bound accidental local workloads; they are not a hostile multi-tenant sandbox. Do not run untrusted experiment plugins.
 
@@ -125,3 +125,13 @@ Future scientific plugins must not overstate that guarantee. Bitwise identity ca
 - Resource enforcement is strongest on POSIX; Windows retains wall-time, aggregate-output monitoring, and process-tree termination but lacks the POSIX pre-exec limits.
 - The archive command requires a verified package, explicit scientific classification, and generated report. It does not upload large artifacts to external storage.
 - The synthetic fixture is not the E01 charged-recurrence solver.
+
+## Evidence contract for additional plugins
+
+The plugin declares `acceptance_criteria(config)` (ID, description, initially null evidence) and `known_gaps(config)`. Shared manifests and archive labels no longer assume E00. An analysis result must contain `raw_source`, a package-relative indexed raw artifact, as well as `checks` and `summary`. All preregistered criteria must occur in the checks. Checks name their evidence relative to the analysis directory. The runtime retains hashes of raw input artifacts; `verify` checks those hashes, configuration/run identity, producer/progress links, saved analysis records, and criterion evidence.
+
+A report result must provide a nonempty `required_inputs` list of indexed package-relative paths. Other result fields become `outputs`. Reports can therefore depend on profiles or spectra rather than `derived/series.csv`. The UI previews the common `report.md` and exposes indexed downloads; the optional interactive recurrence overlay remains explicitly E00-specific.
+
+Worker requests provide `prior_attempt_path`, not an assumed CSV filename. The common checkpoint envelope still records `solver_state.step` as a nonnegative progress ordinal; plugins own the remaining solver, continuation, mesh and RNG payload. The new plugin must validate its checkpoint format and all numerical state before use.
+
+Resume uses only the latest unsuccessful attempt, requires matching code and execution identities, and verifies immutable evidence before creating a new attempt. A new attempt clears the current classification/analysis/report completeness flags while preserving all previous analysis and report records. Preparation and process-launch exceptions produce terminal failed attempts with explicit failure events. Uncooperative cancellation escalates after a two-second grace period. Package mutations use reentrant thread locks plus operating-system file locks so CLI and service processes cannot overwrite one another's manifest updates.

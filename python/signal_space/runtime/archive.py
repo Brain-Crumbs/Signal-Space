@@ -35,13 +35,13 @@ def archive_run(run_path: Path, archive_root: Path, catalog_path: Path | None = 
             relative = destination.as_posix()
         catalog["entries"].append({
             "id": entry_id,
-            "title": f"Archived E00 fixture {manifest['run_id']}",
+            "title": f"{manifest['experiment_id']} — {manifest['run_id']}",
             "kind": "experiment-run",
             "status": f"scientific {classification}",
             "date": now()[:10],
             "path": f"{relative}/reports/{manifest['reports'][-1]['report_id']}/report.md",
-            "summary": f"Verified synthetic lifecycle fixture classified {classification}; no physics claim.",
-            "tags": ["E00", "fixture", "runtime", "reproducibility"],
+            "summary": f"Verified run package for {manifest['model_id']}; classified {classification}. See the linked analysis for scope and limitations.",
+            "tags": [manifest["experiment_id"], manifest["model_id"], "reproducibility"],
         })
         catalog["updated"] = now()[:10]
         write_json(catalog_path, catalog)

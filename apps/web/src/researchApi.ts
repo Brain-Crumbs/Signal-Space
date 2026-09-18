@@ -1,9 +1,21 @@
 import type {
   ArtifactRecord,
-  ResearchConfig,
+  ResearchConfig as SyntheticConfig,
   ScientificClassification,
   TechnicalState,
 } from '@signal-space/research-contracts';
+
+// The generated E00 type describes its closed fixture schema. The workspace
+// transports other registered plugins through their own server-validated schemas.
+export interface ResearchConfig extends Omit<
+  SyntheticConfig,
+  'schema_version' | 'experiment_id' | 'model_id' | 'analysis'
+> {
+  schema_version: string;
+  experiment_id: string;
+  model_id: string;
+  analysis: Record<string, unknown>;
+}
 
 export interface ExperimentDescription {
   experiment_id: string;
@@ -28,6 +40,9 @@ export interface JsonSchema {
   default?: unknown;
   minimum?: number;
   maximum?: number;
+  enum?: unknown[];
+  description?: string;
+  items?: JsonSchema;
   minLength?: number;
   maxLength?: number;
   required?: string[];
@@ -249,4 +264,4 @@ export class ResearchApi {
   }
 }
 
-export type { ArtifactRecord, ResearchConfig };
+export type { ArtifactRecord };

@@ -50,6 +50,15 @@ class SyntheticExperiment(ExperimentPlugin):
         )
         return schema
 
+    def acceptance_criteria(self, config: dict[str, Any]) -> list[dict[str, Any]]:
+        return [
+            {"id": "fixture-complete", "description": "all declared fixture steps are present", "evidence": None},
+            {"id": "fixture-recurrence-error", "description": "saved output matches the independent recurrence within the declared threshold", "evidence": None},
+        ]
+
+    def known_gaps(self, config: dict[str, Any]) -> list[str]:
+        return ["Synthetic E00 fixture only; no physical solver or scientific claim."]
+
     def validate(self, config: Any) -> dict[str, Any]:
         return validate_config(config)
 
@@ -86,7 +95,9 @@ class SyntheticExperiment(ExperimentPlugin):
         attempts = sorted((run_path / "attempts").glob("*/raw/series.csv"))
         if not attempts:
             raise ValueError("no raw series is available for analysis")
-        return analyze_series(attempts[-1], analysis_path, config)
+        result = analyze_series(attempts[-1], analysis_path, config)
+        result["raw_source"] = attempts[-1].relative_to(run_path).as_posix()
+        return result
 
     def classify(self, checks: dict[str, Any], config: dict[str, Any]) -> str:
         statuses = {entry["id"]: entry["status"] for entry in checks["checks"]}

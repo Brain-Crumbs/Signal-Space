@@ -25,15 +25,30 @@ export function parsePlotCsv(source: string): PlotRow[] {
   const lines = source.trim().split(/\r?\n/);
   const header = lines.shift()?.split(',') ?? [];
   const column = (name: string) => header.indexOf(name);
-  return lines
+  if (
+    ['step', 'observed', 'expected', 'absolute_error'].some(
+      (name) => column(name) < 0,
+    )
+  )
+    throw new Error('Plot data is missing required columns.');
+  const rows = lines
     .map((line) => line.split(','))
     .map((values) => ({
       step: Number(values[column('step')]),
       observed: Number(values[column('observed')]),
       expected: Number(values[column('expected')]),
       absolute_error: Number(values[column('absolute_error')]),
-    }))
-    .filter((row) => Object.values(row).every(Number.isFinite));
+    }));
+  if (
+    lines.some((line) =>
+      line.split(',').some((value) => value.trim() === ''),
+    ) ||
+    rows.some((row) => !Object.values(row).every(Number.isFinite))
+  )
+    throw new Error(
+      'Plot data contains missing or non-finite values; rows were not discarded.',
+    );
+  return rows;
 }
 
 export function samplePlotRows(

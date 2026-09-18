@@ -19,6 +19,7 @@ from signal_space.runtime.seeds import seed_ledger
 ROOT = Path(__file__).resolve().parents[3]
 _LOCKS_GUARD = threading.Lock()
 _LOCKS: dict[Path, threading.RLock] = {}
+_LOCK_DEPTH = threading.local()
 
 
 def code_identity() -> dict[str, Any]:
@@ -106,10 +107,43 @@ class RunPackage:
     @contextmanager
     def locked(self) -> Iterator[None]:
         with self._lock:
-            yield
+            key = self.path.resolve()
+            depths = getattr(_LOCK_DEPTH, "paths", {})
+            _LOCK_DEPTH.paths = depths
+            if depths.get(key, 0):
+                depths[key] += 1
+                try:
+                    yield
+                finally:
+                    depths[key] -= 1
+                return
+            # Kernel locks are released even if a CLI or service process dies.
+            with (self.path / ".package.lock").open("a+b") as stream:
+                if os.name == "posix":
+                    import fcntl
+                    fcntl.flock(stream.fileno(), fcntl.LOCK_EX)
+                else:
+                    import msvcrt
+                    stream.write(b"0")
+                    stream.flush()
+                    stream.seek(0)
+                    msvcrt.locking(stream.fileno(), msvcrt.LK_LOCK, 1)
+                depths[key] = 1
+                try:
+                    yield
+                finally:
+                    depths.pop(key)
+                    if os.name == "posix":
+                        fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+                    else:
+                        stream.seek(0)
+                        msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
 
     @classmethod
     def create(cls, workspace: Path, config: dict[str, Any], experiment_version: str) -> "RunPackage":
+        from signal_space.experiments.registry import get_experiment
+
+        plugin = get_experiment(config["experiment_id"])
         identity = code_identity()
         execution = execution_identity()
         run_id, config_hash = run_identity(config, identity, execution)
@@ -148,12 +182,9 @@ class RunPackage:
             "analyses": [],
             "reports": [],
             "artifacts": [],
-            "acceptance_criteria": [
-                {"id": "fixture-complete", "description": "all declared fixture steps are present", "evidence": None},
-                {"id": "fixture-recurrence-error", "description": "saved output matches the independent recurrence within the declared threshold", "evidence": None},
-            ],
+            "acceptance_criteria": plugin.acceptance_criteria(config),
             "completeness": {"config": True, "provenance": True, "attempts_terminal": False, "analysis": False, "report": False},
-            "known_gaps": ["Synthetic E00 fixture only; no physical solver or scientific claim."],
+            "known_gaps": plugin.known_gaps(config),
             "checksum_algorithm": "sha256",
             "checksum_path": "checksums.sha256",
         }
@@ -162,7 +193,7 @@ class RunPackage:
         return package
 
     def update(self, change: Callable[[dict[str, Any]], None]) -> dict[str, Any]:
-        with self._lock:
+        with self.locked():
             manifest = self.manifest
             mutable = _mutable_attempt_prefixes(manifest)
             self._verify_indexed(manifest, mutable)
@@ -176,12 +207,12 @@ class RunPackage:
             return manifest
 
     def verify_immutable(self) -> None:
-        with self._lock:
+        with self.locked():
             manifest = self.manifest
             self._verify_indexed(manifest, _mutable_attempt_prefixes(manifest))
 
     def seal(self) -> None:
-        with self._lock:
+        with self.locked():
             manifest = self.manifest
             mutable = _mutable_attempt_prefixes(manifest)
             self._verify_indexed(manifest, mutable)
