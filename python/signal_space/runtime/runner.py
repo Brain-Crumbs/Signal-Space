@@ -25,6 +25,23 @@ class ResearchRuntime:
     def list(self) -> list[dict[str, object]]:
         return list_experiments()
 
+    def schema(self, experiment_id: str) -> dict[str, Any]:
+        return get_experiment(experiment_id).schema()
+
+    def list_runs(self, workspace: Path) -> list[dict[str, Any]]:
+        manifests: list[dict[str, Any]] = []
+        if workspace.exists():
+            for path in workspace.glob("*/run-*/manifest.json"):
+                try:
+                    manifests.append(read_json(path))
+                except (OSError, ValueError):
+                    continue
+        return sorted(
+            manifests,
+            key=lambda value: str(value.get("updated_at", "")),
+            reverse=True,
+        )
+
     def validate(self, value: Any) -> dict[str, Any]:
         if not isinstance(value, dict) or not isinstance(value.get("experiment_id"), str):
             raise ValueError("configuration must name a registered experiment_id")

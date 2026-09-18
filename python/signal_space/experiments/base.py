@@ -16,6 +16,11 @@ class ExperimentPlugin(ABC):
     def describe(self) -> dict[str, Any]: ...
 
     @abstractmethod
+    def schema(self) -> dict[str, Any]:
+        """Return the authoritative closed configuration schema."""
+        ...
+
+    @abstractmethod
     def validate(self, config: Any) -> dict[str, Any]: ...
 
     @abstractmethod

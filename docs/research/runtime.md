@@ -91,6 +91,10 @@ Startup prints an ephemeral bearer token and the selected loopback port. Every A
 
 `GET /v1/runs/{run_id}/events?cursor={attempt_id}:{sequence}` supports resumable polling over append-only attempt logs. A missing cursor is an explicit conflict rather than a silent gap.
 
+`GET /v1/experiments/{experiment_id}/schema` returns the authoritative closed configuration schema and its preparation template. `GET /v1/runs` lists saved manifests from the configured workspace in last-updated order. These endpoints let the local UI generate forms and reconnect to durable packages after reload without accepting arbitrary filesystem paths.
+
+For the browser workflow, including token handling, event-gap recovery, compatibility checks, and saved-data report preview, see [the local research workspace](ui.md).
+
 ## Resource controls
 
 Validation rejects unknown fields, missing units, non-finite values, and out-of-domain values. `estimate` runs before package creation and compares estimated CPU, memory, disk, and wall time with the declared limits. The worker runs in its own process group. On POSIX, the parent also applies CPU, address-space, and per-file limits. On every platform the parent monitors aggregate attempt bytes and wall time while the worker is running. Cooperative cancellation and soft termination are followed by a guaranteed hard-kill fallback; terminal manifest recording runs even when shutdown handling fails.

@@ -318,6 +318,13 @@ class RuntimeTest(unittest.TestCase):
         try:
             service = request("/v1/validate", fixture())["config"]
             self.assertEqual(service, self.runtime.validate(fixture()))
+            description = request("/v1/experiments")["experiments"][0]
+            self.assertEqual(description["experiment_id"], "fixture.synthetic.v1")
+            schema = request(
+                "/v1/experiments/fixture.synthetic.v1/schema"
+            )["schema"]
+            self.assertEqual(schema["properties"]["parameters"]["type"], "object")
+            self.assertEqual(request("/v1/runs")["runs"], [])
             with self.assertRaises(urllib.error.HTTPError) as forbidden:
                 request("/v1/experiments", request_origin="http://attacker.invalid")
             self.assertEqual(forbidden.exception.code, 403)
@@ -339,6 +346,7 @@ class RuntimeTest(unittest.TestCase):
             after = request(f"/v1/runs/{result['run_id']}/events?cursor={events[0]['cursor']}")["events"]
             self.assertEqual(len(after), len(events) - 1)
             manifest = request(f"/v1/runs/{result['run_id']}")
+            self.assertEqual(request("/v1/runs")["runs"][0]["run_id"], result["run_id"])
             artifact = next(item for item in manifest["artifacts"] if item["kind"] == "raw")
             value = urllib.request.Request(
                 base + f"/v1/runs/{result['run_id']}/artifacts/{artifact['id']}",

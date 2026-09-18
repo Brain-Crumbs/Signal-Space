@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import catalog from '../../../research/catalog.json';
 
-type CatalogEntry = (typeof catalog.entries)[number];
+type CatalogEntry = (typeof catalog.entries)[number] & { related?: string[] };
 
 const rawDocuments = {
   ...import.meta.glob('../../../research/papers/*.md', {
@@ -102,6 +102,9 @@ export function ResearchExplorer() {
   const document = selected ? rawDocuments[selectedKey] : undefined;
   const assetUrl = selected ? assetUrls[selectedKey] : undefined;
   const isImage = selected?.path.endsWith('.png');
+  const related = (selected?.related ?? [])
+    .map((id) => catalog.entries.find((entry) => entry.id === id))
+    .filter((entry): entry is CatalogEntry => Boolean(entry));
 
   return (
     <section className="research-shell" aria-labelledby="research-heading">
@@ -154,6 +157,7 @@ export function ResearchExplorer() {
             <button
               className={`catalog-card${selected?.id === entry.id ? ' selected' : ''}`}
               key={entry.id}
+              id={`catalog-${entry.id}`}
               onClick={() => setSelectedId(entry.id)}
               aria-pressed={selected?.id === entry.id}
             >
@@ -182,6 +186,20 @@ export function ResearchExplorer() {
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+              {related.length > 0 && (
+                <div className="related-materials">
+                  <strong>Related evidence</strong>
+                  {related.map((entry) => (
+                    <button
+                      key={entry.id}
+                      className="relation-link"
+                      onClick={() => setSelectedId(entry.id)}
+                    >
+                      {entry.kind} · {entry.title}
+                    </button>
+                  ))}
+                </div>
+              )}
               {assetUrl && (
                 <a
                   className="open-file"
@@ -199,7 +217,7 @@ export function ResearchExplorer() {
                   alt={`${selected.title} preview`}
                 />
               ) : document ? (
-                <pre className="document-preview">{document}</pre>
+                <DocumentPreview source={document} />
               ) : (
                 <p className="preview-unavailable">
                   Preview unavailable. Open the source file to inspect it.
@@ -212,5 +230,43 @@ export function ResearchExplorer() {
         </article>
       </div>
     </section>
+  );
+}
+
+function DocumentPreview({ source }: { source: string }) {
+  const blocks = source.split(/\n{2,}/).slice(0, 80);
+  return (
+    <div className="document-preview rendered-document">
+      {blocks.map((block, index) => {
+        const text = block.trim();
+        if (!text) return null;
+        const heading = /^(#{1,4})\s+(.+)$/s.exec(text);
+        if (heading) {
+          const value = heading[2] ?? '';
+          if (heading[1]?.length === 1) return <h3 key={index}>{value}</h3>;
+          return <h4 key={index}>{value}</h4>;
+        }
+        if (text.startsWith('$$') && text.endsWith('$$'))
+          return (
+            <pre className="equation-block" key={index}>
+              {text.slice(2, -2).trim()}
+            </pre>
+          );
+        if (text.split('\n').every((line) => /^[-*]\s/.test(line)))
+          return (
+            <ul key={index}>
+              {text.split('\n').map((line) => (
+                <li key={line}>{line.replace(/^[-*]\s/, '')}</li>
+              ))}
+            </ul>
+          );
+        return <p key={index}>{text.replaceAll(/\*\*|__/g, '')}</p>;
+      })}
+      {blocks.length >= 80 && (
+        <p>
+          Preview truncated. Open the source file for the complete document.
+        </p>
+      )}
+    </div>
   );
 }

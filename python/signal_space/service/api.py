@@ -130,6 +130,22 @@ class ResearchHandler(BaseHTTPRequestHandler):
             if parts == ["v1", "experiments"]:
                 self._json(200, {"experiments": self.server.runtime.list()})
                 return
+            if (
+                len(parts) == 4
+                and parts[:2] == ["v1", "experiments"]
+                and parts[3] == "schema"
+            ):
+                self._json(
+                    200,
+                    {
+                        "experiment_id": self._run_id(parts[2]),
+                        "schema": self.server.runtime.schema(self._run_id(parts[2])),
+                    },
+                )
+                return
+            if parts == ["v1", "runs"]:
+                self._json(200, {"runs": self.server.runtime.list_runs(self.server.workspace)})
+                return
             if len(parts) == 3 and parts[:2] == ["v1", "runs"]:
                 self._json(200, self.server.runtime.status(self.server.workspace, self._run_id(parts[2])))
                 return
