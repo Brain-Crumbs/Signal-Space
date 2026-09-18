@@ -428,11 +428,13 @@ test('research workspace completes prepare, audit, analysis and report journey',
   await expect(page.getByText('physical-field solver')).toBeVisible();
 
   await page.getByLabel('Gain (dimensionless)').fill('0.9');
-  await expect(page.getByRole('status')).toHaveText(
-    'Edited · creates a new run',
-  );
+  await expect(
+    page.getByLabel('Experiment preparation').getByRole('status'),
+  ).toHaveText('Edited · creates a new run');
   await page.getByRole('button', { name: 'Validate & estimate' }).click();
-  await expect(page.getByRole('status')).toHaveText('Validated');
+  await expect(
+    page.getByLabel('Experiment preparation').getByRole('status'),
+  ).toHaveText('Validated');
   await expect(page.getByText('within limits')).toBeVisible();
 
   await page.getByRole('button', { name: 'Validate & start run' }).click();
@@ -527,7 +529,10 @@ test('research collection is searchable and exposes source evidence', async ({
     .getByRole('button', { name: /Charged-clock radiation milestone/ })
     .click();
   await expect(
-    page.getByRole('heading', { name: 'Charged-clock radiation milestone' }),
+    page.getByRole('heading', {
+      name: 'Charged-clock radiation milestone',
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(
     page.getByRole('article').getByText(/Frequency-resolved fields/),
@@ -548,7 +553,7 @@ test('production worker renders the same initial snapshot as the shared engine',
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
   await expect(
-    page.getByRole('heading', { name: 'Signal Space' }),
+    page.getByRole('heading', { name: 'Signal Space', exact: true }),
   ).toBeVisible();
   await expect(page.getByText('Workspace smoke check')).toBeVisible();
   await page.getByLabel('Sample network').selectOption('pair');
