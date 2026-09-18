@@ -1,0 +1,176 @@
+[
+  {
+    "name": "kick_coarse",
+    "energy_drift": 2.824615989771573e-06,
+    "charge_drift": 1.6653345369377348e-14,
+    "closed_component_fraction_of_noncarrier_norm": 0.9995191102547502,
+    "closed_open_norm_ratio": 2121.360679423183,
+    "closed_decay_fitted": 0.5594795711255381,
+    "closed_decay_predicted": 0.5598946384337327,
+    "harmonic_energy_flux": 3.810182140713461e-05,
+    "harmonic_charge_flux": 1.134957745714883e-05,
+    "mean_excess_energy": 12.266559658025296,
+    "branch_omega_mean": 0.9034743644075025,
+    "measured_excess_decay_rate": 2.792230240017383e-05,
+    "predicted_excess_decay_rate": 2.7847769127743353e-05,
+    "rate_scale_measured": 439310.4652411805,
+    "rate_scale_predicted": 440486.25948298065,
+    "rate_scale_clock_cycles": 62921.2616064961,
+    "parseval_error": 6.776263578034403e-21,
+    "fft_bands": [
+      {
+        "n": -2,
+        "fft_band_power": 4.077285797699305e-06,
+        "harmonic_fit_power": 4.077315170925211e-06
+      },
+      {
+        "n": 1,
+        "fft_band_power": 3.402358613118148e-05,
+        "harmonic_fit_power": 3.402376260285881e-05
+      },
+      {
+        "n": 2,
+        "fft_band_power": 6.448544732259765e-10,
+        "harmonic_fit_power": 6.448572866715024e-10
+      }
+    ],
+    "source_window_checks": [
+      {
+        "half_width": 5,
+        "integral_magnitude": 0.0009765404985631994
+      },
+      {
+        "half_width": 8,
+        "integral_magnitude": 0.0005598825230899402
+      },
+      {
+        "half_width": 12,
+        "integral_magnitude": 0.0005604404930954997
+      },
+      {
+        "half_width": 20,
+        "integral_magnitude": 0.0005604314385357833
+      },
+      {
+        "half_width": 30,
+        "integral_magnitude": 0.0005604314664065549
+      }
+    ]
+  },
+  {
+    "name": "kick_fine",
+    "energy_drift": 7.061420008724895e-07,
+    "charge_drift": 2.2648549702353193e-14,
+    "closed_component_fraction_of_noncarrier_norm": 0.9995190613970919,
+    "closed_open_norm_ratio": 2121.1598652450407,
+    "closed_decay_fitted": 0.55949399231542,
+    "closed_decay_predicted": 0.5599092341133532,
+    "harmonic_energy_flux": 3.84135524366233e-05,
+    "harmonic_charge_flux": 1.1446164293627189e-05,
+    "mean_excess_energy": 12.26662173680749,
+    "branch_omega_mean": 0.9034743879157499,
+    "measured_excess_decay_rate": 2.81476353118335e-05,
+    "predicted_excess_decay_rate": 2.8072236157455365e-05,
+    "rate_scale_measured": 435795.8173364034,
+    "rate_scale_predicted": 436966.32031751226,
+    "rate_scale_clock_cycles": 62417.82611595461,
+    "parseval_error": 2.710505431213761e-20,
+    "fft_bands": [
+      {
+        "n": -2,
+        "fft_band_power": 4.106468030582856e-06,
+        "harmonic_fit_power": 4.106497821877536e-06
+      },
+      {
+        "n": 1,
+        "fft_band_power": 3.430610567884633e-05,
+        "harmonic_fit_power": 3.4306284638993304e-05
+      },
+      {
+        "n": 2,
+        "fft_band_power": 6.679039527186033e-10,
+        "harmonic_fit_power": 6.679068976333892e-10
+      }
+    ],
+    "source_window_checks": [
+      {
+        "half_width": 5,
+        "integral_magnitude": 0.0009812386371921005
+      },
+      {
+        "half_width": 8,
+        "integral_magnitude": 0.0005626492007036579
+      },
+      {
+        "half_width": 12,
+        "integral_magnitude": 0.0005631355543090257
+      },
+      {
+        "half_width": 20,
+        "integral_magnitude": 0.0005631267025553704
+      },
+      {
+        "half_width": 30,
+        "integral_magnitude": 0.0005631267327535009
+      }
+    ]
+  },
+  {
+    "name": "kick_timefine",
+    "energy_drift": 1.765347130699979e-07,
+    "charge_drift": 2.653433028854124e-14,
+    "closed_component_fraction_of_noncarrier_norm": 0.9995190722971196,
+    "closed_open_norm_ratio": 2121.20680194359,
+    "closed_decay_fitted": 0.5594939463832529,
+    "closed_decay_predicted": 0.5599091891556105,
+    "harmonic_energy_flux": 3.8409706435093424e-05,
+    "harmonic_charge_flux": 1.1445113036641594e-05,
+    "mean_excess_energy": 12.26662358871819,
+    "branch_omega_mean": 0.9034743876301081,
+    "measured_excess_decay_rate": 2.814495164405788e-05,
+    "predicted_excess_decay_rate": 2.8069339942956294e-05,
+    "rate_scale_measured": 435837.43698873924,
+    "rate_scale_predicted": 437011.4727901313,
+    "rate_scale_clock_cycles": 62423.757272465875,
+    "parseval_error": 6.776263578034403e-21,
+    "fft_bands": [
+      {
+        "n": -2,
+        "fft_band_power": 4.10610265444226e-06,
+        "harmonic_fit_power": 4.106132470728506e-06
+      },
+      {
+        "n": 1,
+        "fft_band_power": 3.4302625255187006e-05,
+        "harmonic_fit_power": 3.430280432170048e-05
+      },
+      {
+        "n": 2,
+        "fft_band_power": 6.676126595647668e-10,
+        "harmonic_fit_power": 6.676156059881203e-10
+      }
+    ],
+    "source_window_checks": [
+      {
+        "half_width": 5,
+        "integral_magnitude": 0.0009811797522597918
+      },
+      {
+        "half_width": 8,
+        "integral_magnitude": 0.0005626153695562015
+      },
+      {
+        "half_width": 12,
+        "integral_magnitude": 0.0005631026654767505
+      },
+      {
+        "half_width": 20,
+        "integral_magnitude": 0.0005630938110037983
+      },
+      {
+        "half_width": 30,
+        "integral_magnitude": 0.000563093841169591
+      }
+    ]
+  }
+]

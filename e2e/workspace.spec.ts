@@ -3,6 +3,34 @@ import { execute } from '@signal-space/sim';
 import type { EnvelopeSnapshot } from '@signal-space/sim';
 import { createSample } from '@signal-space/experiments';
 
+test('research collection is searchable and exposes source evidence', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(
+    page.getByRole('heading', { name: 'Trace theory to evidence' }),
+  ).toBeVisible();
+  await expect(page.getByText('21 records')).toBeVisible();
+  await page.getByLabel('Search collection').fill('radiation');
+  await expect(page.getByText('4 results')).toBeVisible();
+  await page
+    .getByRole('button', { name: /Charged-clock radiation milestone/ })
+    .click();
+  await expect(
+    page.getByRole('heading', { name: 'Charged-clock radiation milestone' }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('article').getByText(/Frequency-resolved fields/),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Open source file' }),
+  ).toHaveAttribute('href', /\.md$/);
+  await page.getByLabel('Material type').selectOption('figure');
+  await expect(page.getByText('1 result')).toBeVisible();
+  await page.getByLabel('Search collection').fill('');
+  await expect(page.getByText('5 results')).toBeVisible();
+});
+
 test('production worker renders the same initial snapshot as the shared engine', async ({
   page,
 }) => {
@@ -24,7 +52,9 @@ test('production worker renders the same initial snapshot as the shared engine',
   }))
     if (e.type === 'snapshot') expected.push(e.snapshot);
   const actual = JSON.parse(
-    (await page.locator('pre').textContent()) ?? 'null',
+    (await page
+      .locator('section[aria-label="Preparation result"] pre')
+      .textContent()) ?? 'null',
   );
   expect(actual).toEqual(expected[0]);
   await expect(page.getByRole('progressbar')).toHaveAttribute('value', '1');

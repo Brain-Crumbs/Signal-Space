@@ -22,7 +22,9 @@
     "test": "node --import tsx --test test/*.test.js test/*.test.ts",
     "test:browser": "playwright test",
     "build": "npm run build -w @signal-space/cli && npm run build -w @signal-space/web",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build"
+    "research:manifest": "node scripts/research-archive.mjs --write",
+    "verify:research": "node scripts/research-archive.mjs",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run verify:research && npm test && npm run build"
   },
   "devDependencies": {
     "typescript": "5.9.3",

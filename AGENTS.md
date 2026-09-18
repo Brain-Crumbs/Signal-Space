@@ -2,6 +2,15 @@
 
 Read parent issue #1, your assigned child, its dependencies and this file before editing. Work on an issue-focused branch and PR; preserve others' changes. Do not merge or deploy unless separately authorized.
 
+## Active research program
+
+- Signal Space is the sole active program name in new documentation, code, schemas, and UI copy. Historical artifacts may be preserved, but do not extend superseded names into new work.
+- Read `docs/research/architecture.md`, `docs/research/artifact-contract.md`, and the relevant experiment protocol before changing the new research framework.
+- The historical delay-network implementation and its Paper I task tree remain separate from the charged-recurrence, winding, and knot program. Do not silently reuse its equations or close its issues from new-model work.
+- Treat the research catalog as evidence, not as established truth. Preserve each source's status and distinguish executed results, proposed models, assessments, and conjectures.
+- New experiments use registered model and experiment IDs, immutable run packages, append-only attempts/events, independent analyses, and reports regenerated from saved outputs.
+- Never infer gauge structure, particle identity, stability, topology, or a continuum limit from visual resemblance. Link every scientific classification to preregistered checks and uncertainty.
+
 ## Scientific scope
 
 - Use the `paper-i-v1` contract and the source provenance in `docs/paper-i-traceability.md`. The current Paper I manuscript is not committed. Paper III and the original galaxy-rotation paper are different scopes.
