@@ -34,4 +34,11 @@ class ExperimentPlugin(ABC):
     def classify(self, checks: dict[str, Any], config: dict[str, Any]) -> str: ...
 
     @abstractmethod
-    def report(self, run_path: Path, report_path: Path, manifest: dict[str, Any], analysis: dict[str, Any]) -> dict[str, Any]: ...
+    def report(
+        self,
+        run_path: Path,
+        report_path: Path,
+        manifest: dict[str, Any],
+        analysis: dict[str, Any],
+        render_provenance: dict[str, Any],
+    ) -> dict[str, Any]: ...

@@ -18,6 +18,7 @@
     "config_hash",
     "config_path",
     "code_identity",
+    "execution_identity",
     "seed_algorithm",
     "seed_ledger",
     "attempts",
@@ -33,14 +34,48 @@
   "properties": {
     "schema_version": { "const": "research-run-manifest-v1" },
     "package_version": { "const": 1 },
-    "experiment_id": { "type": "string" },
-    "experiment_version": { "type": "string" },
-    "model_id": { "type": "string" },
+    "experiment_id": { "type": "string", "minLength": 1 },
+    "experiment_version": { "type": "string", "minLength": 1 },
+    "model_id": { "type": "string", "minLength": 1 },
     "run_id": { "type": "string", "pattern": "^run-[a-f0-9]{16}$" },
     "parent_run_id": { "type": ["string", "null"] },
     "created_at": { "type": "string", "format": "date-time" },
     "updated_at": { "type": "string", "format": "date-time" },
-    "technical_state": {
+    "technical_state": { "$ref": "#/$defs/technicalState" },
+    "scientific_classification": { "$ref": "#/$defs/scientificClassification" },
+    "config_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "config_path": { "const": "resolved-config.json" },
+    "code_identity": { "$ref": "#/$defs/codeIdentity" },
+    "execution_identity": { "$ref": "#/$defs/executionIdentity" },
+    "seed_algorithm": { "const": "sha256-stream-v1" },
+    "seed_ledger": { "$ref": "#/$defs/seedLedger" },
+    "attempts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/attempt" }
+    },
+    "analyses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/analysis" }
+    },
+    "reports": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/report" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "artifact.schema.json" }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/acceptanceCriterion" }
+    },
+    "completeness": { "$ref": "#/$defs/completeness" },
+    "known_gaps": { "type": "array", "items": { "type": "string" } },
+    "checksum_algorithm": { "const": "sha256" },
+    "checksum_path": { "const": "checksums.sha256" }
+  },
+  "$defs": {
+    "technicalState": {
       "enum": [
         "draft",
         "validated",
@@ -54,25 +89,240 @@
         "archived"
       ]
     },
-    "scientific_classification": {
+    "scientificClassification": {
       "enum": ["pass", "fail", "unresolved", "not-evaluated"]
     },
-    "config_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "config_path": { "const": "resolved-config.json" },
-    "code_identity": { "type": "object" },
-    "seed_algorithm": { "const": "sha256-stream-v1" },
-    "seed_ledger": { "type": "object" },
-    "attempts": { "type": "array", "items": { "type": "object" } },
-    "analyses": { "type": "array", "items": { "type": "object" } },
-    "reports": { "type": "array", "items": { "type": "object" } },
-    "artifacts": {
-      "type": "array",
-      "items": { "$ref": "artifact.schema.json" }
+    "codeIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "tree_state",
+        "dirty_patch_hash",
+        "runtime_version"
+      ],
+      "properties": {
+        "revision": { "type": "string" },
+        "tree_state": { "enum": ["clean", "dirty", "unknown"] },
+        "dirty_patch_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "runtime_version": { "type": "string" }
+      }
     },
-    "acceptance_criteria": { "type": "array", "items": { "type": "object" } },
-    "completeness": { "type": "object" },
-    "known_gaps": { "type": "array", "items": { "type": "string" } },
-    "checksum_algorithm": { "const": "sha256" },
-    "checksum_path": { "const": "checksums.sha256" }
+    "executionIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "dependencies"],
+      "properties": {
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "python",
+            "implementation",
+            "os",
+            "architecture",
+            "numeric_libraries",
+            "accelerator"
+          ],
+          "properties": {
+            "python": { "type": "string" },
+            "implementation": { "type": "string" },
+            "os": { "type": "string" },
+            "architecture": { "type": "string" },
+            "numeric_libraries": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["numpy", "matplotlib"],
+              "properties": {
+                "numpy": { "type": "string" },
+                "matplotlib": { "type": "string" }
+              }
+            },
+            "accelerator": { "type": "string" }
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "type": "string" },
+            "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+          }
+        }
+      }
+    },
+    "seedLedger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initialization", "perturbations", "sampling", "analysis"],
+      "properties": {
+        "initialization": { "type": "integer", "minimum": 0 },
+        "perturbations": { "type": "integer", "minimum": 0 },
+        "sampling": { "type": "integer", "minimum": 0 },
+        "analysis": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "step"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "step": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "recoverable", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "recoverable": { "type": "boolean" },
+        "message": { "type": ["string", "null"] }
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attempt_id",
+        "parent_attempt_id",
+        "state",
+        "path",
+        "created_at",
+        "updated_at",
+        "exit_code",
+        "checkpoint",
+        "failure"
+      ],
+      "properties": {
+        "attempt_id": { "type": "string", "pattern": "^attempt-[0-9]{4,}$" },
+        "parent_attempt_id": { "type": ["string", "null"] },
+        "state": {
+          "enum": [
+            "prepared",
+            "running",
+            "completed",
+            "cancelled",
+            "interrupted",
+            "failed"
+          ]
+        },
+        "path": { "type": "string", "pattern": "^attempts/attempt-[0-9]{4,}$" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "exit_code": { "type": ["integer", "null"] },
+        "checkpoint": {
+          "anyOf": [{ "$ref": "#/$defs/checkpoint" }, { "type": "null" }]
+        },
+        "failure": {
+          "anyOf": [{ "$ref": "#/$defs/failure" }, { "type": "null" }]
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "analysis_id",
+        "path",
+        "created_at",
+        "input_artifacts",
+        "raw_source",
+        "parameters",
+        "code_identity",
+        "classification",
+        "summary",
+        "supersedes"
+      ],
+      "properties": {
+        "schema_version": { "const": "research-analysis-v1" },
+        "analysis_id": {
+          "type": "string",
+          "pattern": "^analysis-[a-zA-Z0-9._-]+$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^analyses/analysis-[a-zA-Z0-9._-]+$"
+        },
+        "created_at": { "type": "string", "format": "date-time" },
+        "input_artifacts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "raw_source": { "type": "string" },
+        "parameters": { "type": "object" },
+        "code_identity": { "$ref": "#/$defs/codeIdentity" },
+        "classification": { "$ref": "#/$defs/scientificClassification" },
+        "summary": { "type": "object" },
+        "supersedes": { "type": ["string", "null"] }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "report_id",
+        "analysis_id",
+        "path",
+        "created_at",
+        "required_inputs",
+        "outputs",
+        "render_provenance"
+      ],
+      "properties": {
+        "schema_version": { "const": "research-report-v1" },
+        "report_id": { "type": "string", "pattern": "^report-[0-9]{4,}$" },
+        "analysis_id": { "type": "string" },
+        "path": { "type": "string", "pattern": "^reports/report-[0-9]{4,}$" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "required_inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "object" },
+        "render_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code_identity", "execution_identity"],
+          "properties": {
+            "code_identity": { "$ref": "#/$defs/codeIdentity" },
+            "execution_identity": { "$ref": "#/$defs/executionIdentity" }
+          }
+        }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "evidence"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "evidence": { "type": ["string", "null"] }
+      }
+    },
+    "completeness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "config",
+        "provenance",
+        "attempts_terminal",
+        "analysis",
+        "report"
+      ],
+      "properties": {
+        "config": { "type": "boolean" },
+        "provenance": { "type": "boolean" },
+        "attempts_terminal": { "type": "boolean" },
+        "analysis": { "type": "boolean" },
+        "report": { "type": "boolean" }
+      }
+    }
   }
 }

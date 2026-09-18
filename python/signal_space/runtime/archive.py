@@ -14,8 +14,9 @@ from signal_space.runtime.verify import verify_package
 def archive_run(run_path: Path, archive_root: Path, catalog_path: Path | None = None) -> dict[str, Any]:
     verify_package(run_path)
     manifest = json.loads((run_path / "manifest.json").read_text())
-    if manifest["scientific_classification"] != "pass" or not manifest["completeness"].get("report"):
-        raise InvalidState("only verified, scientifically explicit passing runs with reports may be accepted into the archive")
+    classification = manifest["scientific_classification"]
+    if classification not in {"pass", "fail", "unresolved"} or not manifest["completeness"].get("report"):
+        raise InvalidState("only verified runs with an explicit scientific classification and report may be archived")
     destination = archive_root / manifest["experiment_id"] / manifest["run_id"]
     if destination.exists():
         raise FileExistsError(f"archive destination already exists: {destination}")
@@ -34,12 +35,12 @@ def archive_run(run_path: Path, archive_root: Path, catalog_path: Path | None = 
             relative = destination.as_posix()
         catalog["entries"].append({
             "id": entry_id,
-            "title": f"Accepted E00 fixture {manifest['run_id']}",
+            "title": f"Archived E00 fixture {manifest['run_id']}",
             "kind": "experiment-run",
-            "status": "accepted synthetic fixture",
+            "status": f"scientific {classification}",
             "date": now()[:10],
             "path": f"{relative}/reports/{manifest['reports'][-1]['report_id']}/report.md",
-            "summary": "Verified synthetic lifecycle fixture; no physics claim.",
+            "summary": f"Verified synthetic lifecycle fixture classified {classification}; no physics claim.",
             "tags": ["E00", "fixture", "runtime", "reproducibility"],
         })
         catalog["updated"] = now()[:10]

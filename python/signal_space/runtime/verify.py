@@ -41,6 +41,8 @@ def verify_package(run_path: Path) -> dict[str, Any]:
         errors.append(f"could not verify checksums: {error}")
 
     artifact_paths = {item["path"] for item in manifest["artifacts"]}
+    if len(artifact_paths) != len(manifest["artifacts"]):
+        errors.append("duplicate artifact path")
     for item in manifest["artifacts"]:
         try:
             path = safe_child(run_path, item["path"])
@@ -50,6 +52,8 @@ def verify_package(run_path: Path) -> dict[str, Any]:
             errors.append(f"invalid artifact path: {item['path']}")
 
     attempt_ids = {entry["attempt_id"] for entry in manifest["attempts"]}
+    if len(attempt_ids) != len(manifest["attempts"]):
+        errors.append("duplicate attempt ID")
     terminal = {"completed", "cancelled", "interrupted", "failed"}
     for attempt in manifest["attempts"]:
         if attempt["state"] not in terminal and manifest["technical_state"] not in {"prepared", "running"}:
@@ -80,6 +84,14 @@ def verify_package(run_path: Path) -> dict[str, Any]:
                 errors.append(f"invalid checkpoint record: {error}")
 
     analysis_ids = {entry["analysis_id"] for entry in manifest["analyses"]}
+    if len(analysis_ids) != len(manifest["analyses"]):
+        errors.append("duplicate analysis ID")
+    report_ids = {entry["report_id"] for entry in manifest["reports"]}
+    if len(report_ids) != len(manifest["reports"]):
+        errors.append("duplicate report ID")
+    artifact_ids = {entry["id"] for entry in manifest["artifacts"]}
+    if len(artifact_ids) != len(manifest["artifacts"]):
+        errors.append("duplicate artifact ID")
     if manifest["scientific_classification"] != "not-evaluated":
         latest = manifest["analyses"][-1] if manifest["analyses"] else None
         if latest is None or "checks.json" not in artifact_paths and f"{latest['path']}/checks.json" not in artifact_paths:

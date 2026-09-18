@@ -71,5 +71,14 @@ class SyntheticExperiment(ExperimentPlugin):
             return "unresolved"
         return "pass" if all(value == "pass" for value in statuses.values()) else "fail"
 
-    def report(self, run_path: Path, report_path: Path, manifest: dict[str, Any], analysis: dict[str, Any]) -> dict[str, Any]:
-        return render_report(run_path, report_path, manifest, analysis)
+    def report(
+        self,
+        run_path: Path,
+        report_path: Path,
+        manifest: dict[str, Any],
+        analysis: dict[str, Any],
+        render_provenance: dict[str, Any],
+    ) -> dict[str, Any]:
+        return render_report(
+            run_path, report_path, manifest, analysis, render_provenance
+        )

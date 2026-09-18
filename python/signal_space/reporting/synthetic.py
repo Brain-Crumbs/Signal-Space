@@ -9,7 +9,13 @@ from typing import Any
 from signal_space.runtime.io import write_json
 
 
-def render_report(run_path: Path, report_path: Path, manifest: dict[str, Any], analysis: dict[str, Any]) -> dict[str, Any]:
+def render_report(
+    run_path: Path,
+    report_path: Path,
+    manifest: dict[str, Any],
+    analysis: dict[str, Any],
+    render_provenance: dict[str, Any],
+) -> dict[str, Any]:
     import matplotlib
 
     matplotlib.use("Agg")
@@ -60,7 +66,9 @@ def render_report(run_path: Path, report_path: Path, manifest: dict[str, Any], a
 
     checks = json.loads((analysis_path / "checks.json").read_text())
     failed = [entry["id"] for entry in checks["checks"] if entry["status"] != "pass"]
-    provenance = manifest["code_identity"]
+    solver_provenance = manifest["code_identity"]
+    analysis_provenance = analysis["code_identity"]
+    reporting_provenance = render_provenance["code_identity"]
     title = json.loads((run_path / "resolved-config.json").read_text())["report"]["title"]
     markdown = f"""# {title}
 
@@ -101,8 +109,13 @@ Passing E00 verifies lifecycle and traceability behavior only. It does not estab
 - Run: `{manifest['run_id']}`
 - Analysis: `{analysis['analysis_id']}`
 - Configuration hash: `{manifest['config_hash']}`
-- Code revision: `{provenance['revision']}`
-- Dirty patch hash: `{provenance['dirty_patch_hash']}`
+- Solver revision: `{solver_provenance['revision']}`
+- Solver dirty patch hash: `{solver_provenance['dirty_patch_hash']}`
+- Analysis revision: `{analysis_provenance['revision']}`
+- Analysis dirty patch hash: `{analysis_provenance['dirty_patch_hash']}`
+- Reporting revision: `{reporting_provenance['revision']}`
+- Reporting dirty patch hash: `{reporting_provenance['dirty_patch_hash']}`
+- Reporting environment: `{render_provenance['execution_identity']['environment']['python']}` on `{render_provenance['execution_identity']['environment']['os']}`
 - Raw input: `{analysis['raw_source']}`
 - Figure specification: `figures/recurrence.figure.json`
 - Plot data: `plot-data/recurrence.csv` and `plot-data/recurrence.json`

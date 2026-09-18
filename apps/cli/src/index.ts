@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { delimiter, resolve } from 'node:path';
+import { delimiter } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execute } from '@signal-space/sim';
 import { createSample, sampleIds } from '@signal-space/experiments';
 import {
@@ -19,7 +20,7 @@ const args = process.argv.slice(2);
 const commands = new Set(['validate', 'run', 'sweep', 'resume']);
 
 function research(): void {
-  const pythonRoot = resolve(process.cwd(), 'python');
+  const pythonRoot = fileURLToPath(new URL('../../../python', import.meta.url));
   const environment = {
     ...process.env,
     PYTHONPATH: process.env.PYTHONPATH

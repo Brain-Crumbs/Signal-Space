@@ -87,10 +87,20 @@ def _sweep(runtime: ResearchRuntime, config: dict[str, Any], axes: list[str], wo
     results = []
     for member in members:
         try:
-            results.append({"status": "executed", "result": runtime.run(member, workspace)})
+            run_result = runtime.run(member, workspace)
+            results.append({"status": run_result["state"], "result": run_result})
         except Exception as error:
             results.append({"status": "failed", "error": {"code": getattr(error, "code", "SWEEP_MEMBER_FAILED"), "message": str(error)}})
-    sweep_record = {"schema_version": "research-sweep-v1", "axes": declarations, "planned": len(members), "executed": len(results), "members": results}
+    member_states = [entry["status"] for entry in results]
+    if "failed" in member_states:
+        state = "failed"
+    elif "interrupted" in member_states:
+        state = "interrupted"
+    elif "cancelled" in member_states:
+        state = "cancelled"
+    else:
+        state = "completed"
+    sweep_record = {"schema_version": "research-sweep-v1", "state": state, "axes": declarations, "planned": len(members), "executed": len(results), "members": results}
     sweep_root = workspace / "sweeps"
     sweep_root.mkdir(parents=True, exist_ok=True)
     path = sweep_root / f"sweep-{len(list(sweep_root.glob('sweep-*.json'))) + 1:04d}.json"

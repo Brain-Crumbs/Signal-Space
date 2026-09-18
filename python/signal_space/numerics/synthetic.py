@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from signal_space.models.synthetic import advance
-
-
 def recurrence(initial: float, gain: float, forcing: float, steps: int) -> list[float]:
-    values = [initial]
-    for _ in range(steps):
-        values.append(advance(values[-1], gain, forcing))
-    return values
+    """Evaluate the recurrence from its closed form, independently of the worker."""
+    if gain == 1.0:
+        return [initial + forcing * step for step in range(steps + 1)]
+    return [
+        (gain**step) * initial
+        + forcing * (1.0 - gain**step) / (1.0 - gain)
+        for step in range(steps + 1)
+    ]

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import secrets
+import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
@@ -26,6 +27,27 @@ class ResearchAPI(ThreadingHTTPServer):
         self.token = secrets.token_urlsafe(32)
         self.archive_root = archive_root
         self.catalog_path = catalog_path
+        self.jobs: dict[str, threading.Thread] = {}
+        self.jobs_lock = threading.Lock()
+
+    def start_run(self, value: Any) -> dict[str, Any]:
+        created = self.runtime.create_run(value, self.workspace)
+        run_id = created["run_id"]
+
+        def execute() -> None:
+            try:
+                self.runtime.execute(self.workspace, run_id)
+            finally:
+                with self.jobs_lock:
+                    self.jobs.pop(run_id, None)
+
+        thread = threading.Thread(
+            target=execute, name=f"research-run-{run_id}", daemon=True
+        )
+        with self.jobs_lock:
+            self.jobs[run_id] = thread
+        thread.start()
+        return {**created, "state": "queued"}
 
 
 class ResearchHandler(BaseHTTPRequestHandler):
@@ -46,8 +68,48 @@ class ResearchHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("X-Content-Type-Options", "nosniff")
+        self._cors_headers()
         self.end_headers()
         self.wfile.write(body)
+
+    def _cors_headers(self) -> None:
+        if self.headers.get("Origin") == self.server.origin:
+            self.send_header("Access-Control-Allow-Origin", self.server.origin)
+            self.send_header("Vary", "Origin")
+
+    def do_OPTIONS(self) -> None:
+        origin = self.headers.get("Origin")
+        method = self.headers.get("Access-Control-Request-Method", "").upper()
+        requested = {
+            value.strip().lower()
+            for value in self.headers.get(
+                "Access-Control-Request-Headers", ""
+            ).split(",")
+            if value.strip()
+        }
+        if (
+            origin != self.server.origin
+            or method not in {"GET", "POST"}
+            or "authorization" not in requested
+            or not requested.issubset({"authorization", "content-type"})
+        ):
+            self._json(
+                403,
+                {
+                    "error": {
+                        "code": "FORBIDDEN",
+                        "message": "CORS preflight validation failed",
+                    }
+                },
+            )
+            return
+        self.send_response(204)
+        self._cors_headers()
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type")
+        self.send_header("Access-Control-Max-Age", "600")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     def _body(self) -> Any:
         length = int(self.headers.get("Content-Length", "0"))
@@ -103,6 +165,7 @@ class ResearchHandler(BaseHTTPRequestHandler):
                 self.send_header("Content-Type", artifact["media_type"])
                 self.send_header("Content-Length", str(len(body)))
                 self.send_header("X-Content-Type-Options", "nosniff")
+                self._cors_headers()
                 self.end_headers()
                 self.wfile.write(body)
                 return
@@ -122,7 +185,7 @@ class ResearchHandler(BaseHTTPRequestHandler):
                 self._json(200, self.server.runtime.estimate(self._body()))
                 return
             if parts == ["v1", "runs"]:
-                self._json(201, self.server.runtime.run(self._body(), self.server.workspace))
+                self._json(202, self.server.start_run(self._body()))
                 return
             if len(parts) == 4 and parts[:2] == ["v1", "runs"]:
                 run_id, action = self._run_id(parts[2]), parts[3]

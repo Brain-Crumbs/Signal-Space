@@ -20,7 +20,7 @@ python -m pip install -e python --no-deps
 npm run check
 ```
 
-The direct scientific dependencies are pinned in `python/requirements-lock.txt`. The package records the active Python, OS, architecture, NumPy, Matplotlib, dependency lock, Git revision, tree state, and dirty-patch hash in every run.
+The direct scientific dependencies are pinned in `python/requirements-lock.txt`. The package records the active Python, OS, architecture, NumPy, Matplotlib, dependency-lock digest, Git revision, tree state, and dirty-patch hash in every run. The canonical run ID includes both code and execution-environment identities, so the same configuration executed under materially different recorded environments cannot collide.
 
 ## CLI lifecycle
 
@@ -61,7 +61,7 @@ npm run research -- --workspace .research-work cancel --run-id RUN_ID
 npm run research -- --workspace .research-work resume --run-id RUN_ID
 ```
 
-The worker checks the attempt-local cancellation record, writes a full checkpoint, and exits in the distinct `cancelled` state. A wall-time kill or injected process loss is `interrupted`; a controlled worker error is `failed`. Resume creates a new linked attempt and never edits its parent. It rejects modified checkpoint bytes, configuration mismatches, and code-identity mismatches.
+The worker checks the attempt-local cancellation record, writes a full checkpoint, and exits in the distinct `cancelled` state. A wall-time kill or injected process loss is `interrupted`; a controlled worker error is `failed`. Resume creates a new linked attempt and never edits its parent. It rejects modified checkpoint bytes, configuration mismatches, and code-identity mismatches. Before selecting a checkpoint, resume also detects a recorded `running` attempt whose worker no longer exists, terminalizes it as an explicit orphaned interruption, and links the new attempt to it.
 
 ### Sweeps
 
@@ -74,6 +74,7 @@ npm run research -- --workspace .research-work sweep \
 ```
 
 Every planned member remains visible in the sweep record, including invalid or failed members. Each executed member still receives an independent immutable run package.
+The sweep's top-level state and process exit code propagate failed, interrupted, or cancelled member states; a terminal member is never reported merely as `executed`.
 
 ## Loopback API
 
@@ -84,13 +85,15 @@ npm run research -- --workspace .research-work serve \
   --origin http://127.0.0.1:5173
 ```
 
-Startup prints an ephemeral bearer token and the selected loopback port. Every API request must present that token and the exact `Origin`. The server refuses non-loopback binding. Operations accept registered experiment/run IDs and configuration documents; there is no shell-command endpoint and no browser-supplied filesystem path. Artifacts are fetched only through IDs from the manifest catalog.
+Startup prints an ephemeral bearer token and the selected loopback port. Every API request must present that token and the exact `Origin`. Exact-origin CORS headers and strict `OPTIONS` handling permit only `GET`/`POST` with `Authorization` and `Content-Type`. The server refuses non-loopback binding. Operations accept registered experiment/run IDs and configuration documents; there is no shell-command endpoint and no browser-supplied filesystem path. Artifacts are fetched only through IDs from the manifest catalog.
+
+`POST /v1/runs` validates and creates the package, starts execution in a background job, and immediately returns HTTP 202 with the run ID. Clients can then poll status/events or request cancellation while the attempt is active. The foreground CLI remains blocking.
 
 `GET /v1/runs/{run_id}/events?cursor={attempt_id}:{sequence}` supports resumable polling over append-only attempt logs. A missing cursor is an explicit conflict rather than a silent gap.
 
 ## Resource controls
 
-Validation rejects unknown fields, missing units, non-finite values, and out-of-domain values. `estimate` runs before package creation and compares estimated CPU, memory, disk, and wall time with the declared limits. The worker runs in its own process group. On POSIX, the parent applies CPU, address-space, and file-size limits; every platform applies a wall timeout and a post-run package-size check. Cooperative cancellation precedes process-group termination.
+Validation rejects unknown fields, missing units, non-finite values, and out-of-domain values. `estimate` runs before package creation and compares estimated CPU, memory, disk, and wall time with the declared limits. The worker runs in its own process group. On POSIX, the parent also applies CPU, address-space, and per-file limits. On every platform the parent monitors aggregate attempt bytes and wall time while the worker is running. Cooperative cancellation and soft termination are followed by a guaranteed hard-kill fallback; terminal manifest recording runs even when shutdown handling fails.
 
 These controls bound accidental local workloads; they are not a hostile multi-tenant sandbox. Do not run untrusted experiment plugins.
 
@@ -109,12 +112,12 @@ Future scientific plugins must not overstate that guarantee. Bitwise identity ca
 5. Add an inexpensive deterministic fixture and fault-injection tests for cancellation, interruption, corruption, and resume mismatch.
 6. Generate reports from saved outputs, export exact plot data, and link every classification to checks and artifact IDs.
 7. Verify CLI/service parity and schema/type generation with `npm run check`.
-8. Archive only a verified accepted run. Failures and incomplete sweep members remain visible in their original packages and sweep records.
+8. Archive any verified, explicitly classified (`pass`, `fail`, or `unresolved`) run with a report. Preserve its classification, failures, and limitations in the catalog.
 
 ## Known limitations
 
 - E00 is local and single-host; it does not provide distributed scheduling or hostile-code isolation.
 - The service uses resumable polling rather than a long-lived push transport.
-- Resource enforcement is strongest on POSIX; Windows retains wall-time and output checks but lacks the POSIX pre-exec limits.
-- The archive command accepts only a verified `pass` package with a generated report. It does not upload large artifacts to external storage.
+- Resource enforcement is strongest on POSIX; Windows retains wall-time, aggregate-output monitoring, and process-tree termination but lacks the POSIX pre-exec limits.
+- The archive command requires a verified package, explicit scientific classification, and generated report. It does not upload large artifacts to external storage.
 - The synthetic fixture is not the E01 charged-recurrence solver.
