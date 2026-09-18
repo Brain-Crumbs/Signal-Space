@@ -5,6 +5,8 @@ interface PlotRow {
   absolute_error: number;
 }
 
+export const MAX_DISPLAY_POINTS = 2000;
+
 export interface FigureSpec {
   id: string;
   source_datasets: string[];
@@ -34,18 +36,41 @@ export function parsePlotCsv(source: string): PlotRow[] {
     .filter((row) => Object.values(row).every(Number.isFinite));
 }
 
+export function samplePlotRows(
+  rows: PlotRow[],
+  limit = MAX_DISPLAY_POINTS,
+): PlotRow[] {
+  if (rows.length <= limit) return rows;
+  if (limit < 2) return [rows[0]!];
+  const last = rows.length - 1;
+  return Array.from({ length: limit }, (_, index) => {
+    const sourceIndex = Math.round((index * last) / (limit - 1));
+    return rows[sourceIndex]!;
+  });
+}
+
+export function plotBounds(rows: PlotRow[]) {
+  let xMin = Number.POSITIVE_INFINITY;
+  let xMax = Number.NEGATIVE_INFINITY;
+  let yMin = Number.POSITIVE_INFINITY;
+  let yMax = Number.NEGATIVE_INFINITY;
+  for (const row of rows) {
+    xMin = Math.min(xMin, row.step);
+    xMax = Math.max(xMax, row.step);
+    yMin = Math.min(yMin, row.observed, row.expected);
+    yMax = Math.max(yMax, row.observed, row.expected);
+  }
+  return { xMin, xMax, yMin, yMax };
+}
+
 function points(
   rows: PlotRow[],
   field: 'observed' | 'expected',
   width: number,
   height: number,
+  bounds: ReturnType<typeof plotBounds>,
 ) {
-  const xs = rows.map((row) => row.step);
-  const ys = rows.flatMap((row) => [row.observed, row.expected]);
-  const xMin = Math.min(...xs);
-  const xMax = Math.max(...xs);
-  const yMin = Math.min(...ys);
-  const yMax = Math.max(...ys);
+  const { xMin, xMax, yMin, yMax } = bounds;
   return rows
     .map((row) => {
       const x = 48 + ((row.step - xMin) / Math.max(1, xMax - xMin)) * width;
@@ -68,6 +93,8 @@ export function ResearchPlot({
   if (rows.length === 0) return <p className="empty compact">No plot rows.</p>;
   const plotWidth = 690;
   const plotHeight = 250;
+  const displayRows = samplePlotRows(rows);
+  const bounds = plotBounds(rows);
   return (
     <figure className="research-plot">
       <svg
@@ -83,11 +110,23 @@ export function ResearchPlot({
         <line x1="48" y1="268" x2="738" y2="268" className="plot-axis" />
         <line x1="48" y1="18" x2="48" y2="268" className="plot-axis" />
         <polyline
-          points={points(rows, 'observed', plotWidth, plotHeight)}
+          points={points(
+            displayRows,
+            'observed',
+            plotWidth,
+            plotHeight,
+            bounds,
+          )}
           className="plot-observed"
         />
         <polyline
-          points={points(rows, 'expected', plotWidth, plotHeight)}
+          points={points(
+            displayRows,
+            'expected',
+            plotWidth,
+            plotHeight,
+            bounds,
+          )}
           className="plot-expected"
         />
         <text x="393" y="310" textAnchor="middle">
@@ -107,8 +146,16 @@ export function ResearchPlot({
       </figcaption>
       <dl className="plot-provenance">
         <div>
-          <dt>Downsampling</dt>
+          <dt>Saved-data downsampling</dt>
           <dd>{spec.downsampling}</dd>
+        </div>
+        <div>
+          <dt>Browser display</dt>
+          <dd>
+            {displayRows.length === rows.length
+              ? `all ${rows.length} rows`
+              : `${displayRows.length} of ${rows.length} rows (deterministic stride; saved data unchanged)`}
+          </dd>
         </div>
         <div>
           <dt>Normalization</dt>

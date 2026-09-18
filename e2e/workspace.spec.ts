@@ -183,26 +183,27 @@ function mockManifest(state = 'completed') {
 async function installResearchMock(
   page: import('@playwright/test').Page,
   initialState = 'completed',
+  firstEventSequence = 1,
 ) {
   const manifest = mockManifest(initialState);
   const events = [
     {
-      sequence: 1,
+      sequence: firstEventSequence,
       timestamp: '2026-09-18T12:00:00Z',
       type: 'attempt-prepared',
       stage: 'prepare',
       payload: {},
       attempt_id: 'attempt-0001',
-      cursor: 'attempt-0001:1',
+      cursor: `attempt-0001:${firstEventSequence}`,
     },
     {
-      sequence: 2,
+      sequence: firstEventSequence + 1,
       timestamp: '2026-09-18T12:00:01Z',
       type: `attempt-${initialState}`,
       stage: 'runtime',
       payload: {},
       attempt_id: 'attempt-0001',
-      cursor: 'attempt-0001:2',
+      cursor: `attempt-0001:${firstEventSequence + 1}`,
     },
   ];
   await page.route('http://127.0.0.1:8765/**', async (route) => {
@@ -316,14 +317,50 @@ async function installResearchMock(
     }
     if (path.endsWith('/report')) {
       manifest.technical_state = 'analyzed';
-      manifest.reports.push({
-        report_id: 'report-0001',
-        analysis_id: 'analysis-0001',
-        path: 'reports/report-0001',
-        created_at: '2026-09-18T12:02:00Z',
-        outputs: {},
-      });
+      manifest.reports.push(
+        {
+          report_id: 'report-0000',
+          analysis_id: 'analysis-0001',
+          path: 'reports/report-0000',
+          created_at: '2026-09-18T12:01:30Z',
+          outputs: {},
+        },
+        {
+          report_id: 'report-0001',
+          analysis_id: 'analysis-0001',
+          path: 'reports/report-0001',
+          created_at: '2026-09-18T12:02:00Z',
+          outputs: {},
+        },
+      );
       manifest.artifacts.push(
+        {
+          id: 'old-report-md',
+          kind: 'report',
+          path: 'reports/report-0000/report.md',
+          sha256: '2'.repeat(64),
+          size: 200,
+          media_type: 'text/markdown',
+          source_ids: [],
+        },
+        {
+          id: 'old-plot',
+          kind: 'plot-data',
+          path: 'reports/report-0000/plot-data/recurrence.csv',
+          sha256: '3'.repeat(64),
+          size: 200,
+          media_type: 'text/csv',
+          source_ids: [],
+        },
+        {
+          id: 'old-spec',
+          kind: 'figure',
+          path: 'reports/report-0000/figures/recurrence.figure.json',
+          sha256: '4'.repeat(64),
+          size: 200,
+          media_type: 'application/json',
+          source_ids: [],
+        },
         {
           id: 'report-md',
           kind: 'report',
@@ -352,7 +389,7 @@ async function installResearchMock(
           source_ids: [],
         },
       );
-      return json(manifest.reports[0]);
+      return json(manifest.reports.at(-1));
     }
     if (path.includes('/artifacts/')) {
       const id = path.split('/').at(-1);
@@ -400,6 +437,12 @@ async function installResearchMock(
           status: 200,
           headers: artifactHeaders,
           body: '# Fixture report\n\nSynthetic fixture only; no physics claim.',
+        });
+      if (id === 'old-report-md')
+        return route.fulfill({
+          status: 200,
+          headers: artifactHeaders,
+          body: '# Superseded report\n\nThis content must not be previewed.',
         });
       return route.fulfill({
         status: 200,
@@ -513,6 +556,15 @@ test('research runtime disconnect is explicit and retryable', async ({
   await page.getByRole('button', { name: 'Retry connection' }).click();
   await expect(page.getByText('Active experiment')).toBeVisible();
   await expect(page.getByText('connected', { exact: true })).toBeVisible();
+});
+
+test('event streams report a missing first sequence', async ({ page }) => {
+  await installResearchMock(page, 'completed', 2);
+  await page.goto('/');
+  await page.getByLabel('Ephemeral bearer token').fill('browser-token');
+  await page.getByRole('button', { name: 'Connect runtime' }).click();
+  await page.getByRole('button', { name: 'Validate & start run' }).click();
+  await expect(page.getByRole('alert')).toContainText('expected 1, received 2');
 });
 
 test('research collection is searchable and exposes source evidence', async ({

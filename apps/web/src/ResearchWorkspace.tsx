@@ -47,6 +47,97 @@ function same(left: unknown, right: unknown) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
+interface ConfigDimension {
+  label: string;
+  left: unknown;
+  right: unknown;
+  matches: boolean;
+  structural: boolean;
+}
+
+const KNOWN_CONFIG_FIELDS = new Set([
+  'schema_version',
+  'experiment_id',
+  'model_id',
+  'units',
+  'geometry',
+  'boundary',
+  'parameters',
+  'seeds',
+  'resources',
+  'analysis',
+  'report',
+  'fixture_controls',
+]);
+
+function extraConfig(config: ResearchConfig) {
+  return Object.fromEntries(
+    Object.entries(config as unknown as Record<string, unknown>).filter(
+      ([key]) => !KNOWN_CONFIG_FIELDS.has(key),
+    ),
+  );
+}
+
+export function compareResearchConfigs(
+  left: ResearchConfig,
+  right: ResearchConfig,
+) {
+  const leftRecord = left as unknown as Record<string, unknown>;
+  const rightRecord = right as unknown as Record<string, unknown>;
+  const dimension = (
+    label: string,
+    leftValue: unknown,
+    rightValue: unknown,
+    structural = false,
+  ): ConfigDimension => ({
+    label,
+    left: leftValue,
+    right: rightValue,
+    matches: same(leftValue, rightValue),
+    structural,
+  });
+  const dimensions = [
+    dimension('Schema', left.schema_version, right.schema_version, true),
+    dimension('Experiment', left.experiment_id, right.experiment_id, true),
+    dimension('Model', left.model_id, right.model_id, true),
+    dimension('Units', left.units, right.units, true),
+    dimension(
+      'Geometry',
+      leftRecord.geometry ?? 'not declared',
+      rightRecord.geometry ?? 'not declared',
+      true,
+    ),
+    dimension(
+      'Boundary',
+      leftRecord.boundary ?? 'not declared',
+      rightRecord.boundary ?? 'not declared',
+      true,
+    ),
+    dimension('Parameters', left.parameters, right.parameters),
+    dimension('Seeds', left.seeds, right.seeds),
+    dimension('Resources', left.resources, right.resources),
+    dimension('Analysis', left.analysis, right.analysis),
+    dimension('Report', left.report, right.report),
+    dimension(
+      'Fixture controls',
+      left.fixture_controls ?? 'not declared',
+      right.fixture_controls ?? 'not declared',
+    ),
+    dimension(
+      'Additional configuration',
+      extraConfig(left),
+      extraConfig(right),
+    ),
+  ];
+  return {
+    dimensions,
+    structuralCompatible: dimensions
+      .filter((item) => item.structural)
+      .every((item) => item.matches),
+    exactMatch: dimensions.every((item) => item.matches),
+  };
+}
+
 function ConfigDiff({
   left,
   right,
@@ -62,44 +153,19 @@ function ConfigDiff({
         Choose two runs to load their exact configurations.
       </p>
     );
-  const dimensions: Array<[string, unknown, unknown, boolean]> = [
-    ['Model', left.model_id, right.model_id, left.model_id === right.model_id],
-    ['Units', left.units, right.units, same(left.units, right.units)],
-    [
-      'Geometry',
-      (left as unknown as Record<string, unknown>).geometry ?? 'not declared',
-      (right as unknown as Record<string, unknown>).geometry ?? 'not declared',
-      same(
-        (left as unknown as Record<string, unknown>).geometry,
-        (right as unknown as Record<string, unknown>).geometry,
-      ),
-    ],
-    [
-      'Boundary',
-      (left as unknown as Record<string, unknown>).boundary ?? 'not declared',
-      (right as unknown as Record<string, unknown>).boundary ?? 'not declared',
-      same(
-        (left as unknown as Record<string, unknown>).boundary,
-        (right as unknown as Record<string, unknown>).boundary,
-      ),
-    ],
-    [
-      'Parameters',
-      left.parameters,
-      right.parameters,
-      same(left.parameters, right.parameters),
-    ],
-  ];
-  const compatible = dimensions.slice(0, 4).every((row) => row[3]);
+  const { dimensions, structuralCompatible, exactMatch } =
+    compareResearchConfigs(left, right);
   return (
     <div>
       <p
-        className={`comparison-verdict ${compatible ? 'compatible' : 'incompatible'}`}
+        className={`comparison-verdict ${structuralCompatible ? 'compatible' : 'incompatible'}`}
         role="status"
       >
-        {compatible
-          ? 'Compatible for side-by-side inspection. Values are not combined.'
-          : 'Incompatible comparison. Differences are preserved and no aggregate is computed.'}
+        {exactMatch
+          ? 'Exact resolved-configuration match. Values are not combined.'
+          : structuralCompatible
+            ? 'Structurally compatible, with material configuration differences. Values are not combined.'
+            : 'Incompatible comparison. Differences are preserved and no aggregate is computed.'}
       </p>
       <div className="table-wrap">
         <table>
@@ -118,16 +184,24 @@ function ConfigDiff({
               <td>{runs[1]?.technical_state}</td>
               <td>retained</td>
             </tr>
-            {dimensions.map(([label, a, b, matches]) => (
-              <tr key={label}>
-                <th>{label}</th>
+            {dimensions.map((dimension) => (
+              <tr key={dimension.label}>
+                <th>{dimension.label}</th>
                 <td>
-                  <code>{typeof a === 'string' ? a : JSON.stringify(a)}</code>
+                  <code>
+                    {typeof dimension.left === 'string'
+                      ? dimension.left
+                      : JSON.stringify(dimension.left)}
+                  </code>
                 </td>
                 <td>
-                  <code>{typeof b === 'string' ? b : JSON.stringify(b)}</code>
+                  <code>
+                    {typeof dimension.right === 'string'
+                      ? dimension.right
+                      : JSON.stringify(dimension.right)}
+                  </code>
                 </td>
-                <td>{matches ? 'same' : 'different'}</td>
+                <td>{dimension.matches ? 'same' : 'different'}</td>
               </tr>
             ))}
           </tbody>
@@ -169,6 +243,10 @@ export function ResearchWorkspace() {
   const [plotRows, setPlotRows] = useState<PlotRow[]>([]);
   const [figureSpec, setFigureSpec] = useState<FigureSpec>();
   const [reportLoading, setReportLoading] = useState(false);
+  const [queuedResume, setQueuedResume] = useState<{
+    runId: string;
+    attemptCount: number;
+  }>();
   const cursorRef = useRef('');
   const eventKeysRef = useRef(new Set<string>());
 
@@ -258,9 +336,10 @@ export function ResearchWorkspace() {
         const key = `${event.attempt_id}:${event.sequence}`;
         if (eventKeysRef.current.has(key)) return;
         const previous = lastByAttempt.get(event.attempt_id);
-        if (previous !== undefined && event.sequence !== previous + 1)
+        const expected = previous === undefined ? 1 : previous + 1;
+        if (event.sequence !== expected)
           setStreamWarning(
-            `Event gap detected for ${event.attempt_id}: expected ${previous + 1}, received ${event.sequence}.`,
+            `Event gap detected for ${event.attempt_id}: expected ${expected}, received ${event.sequence}.`,
           );
         eventKeysRef.current.add(key);
         lastByAttempt.set(event.attempt_id, event.sequence);
@@ -308,7 +387,18 @@ export function ResearchWorkspace() {
     const poll = async () => {
       try {
         const manifest = await refreshRun(api, selectedRunId);
-        if (!disposed && !TERMINAL.has(manifest.technical_state))
+        const waitingForResume =
+          queuedResume?.runId === manifest.run_id &&
+          manifest.attempts.length <= queuedResume.attemptCount;
+        if (
+          queuedResume?.runId === manifest.run_id &&
+          manifest.attempts.length > queuedResume.attemptCount
+        )
+          setQueuedResume(undefined);
+        if (
+          !disposed &&
+          (!TERMINAL.has(manifest.technical_state) || waitingForResume)
+        )
           timer = window.setTimeout(poll, 500);
       } catch (error) {
         if (
@@ -330,7 +420,7 @@ export function ResearchWorkspace() {
       disposed = true;
       if (timer !== undefined) window.clearTimeout(timer);
     };
-  }, [api, connection, handleError, refreshRun, selectedRunId]);
+  }, [api, connection, handleError, queuedResume, refreshRun, selectedRunId]);
 
   const fetchArtifactText = useCallback(
     async (run: RunManifest, artifact: ArtifactRecord) => {
@@ -343,18 +433,29 @@ export function ResearchWorkspace() {
 
   useEffect(() => {
     if (!selectedRun || !api) return;
+    let disposed = false;
     const artifact = artifactFor(
       selectedRun,
       (path) => path === selectedRun.config_path,
     );
     if (!artifact) return;
     fetchArtifactText(selectedRun, artifact)
-      .then((text) => setRunConfig(JSON.parse(text) as ResearchConfig))
-      .catch(handleError);
+      .then((text) => {
+        if (!disposed) setRunConfig(JSON.parse(text) as ResearchConfig);
+      })
+      .catch((error: unknown) => {
+        if (!disposed) handleError(error);
+      });
+    return () => {
+      disposed = true;
+    };
   }, [api, fetchArtifactText, handleError, selectedRun]);
 
   useEffect(() => {
-    if (!api || compareIds.some((id) => !id)) return;
+    if (!api || compareIds.some((id) => !id)) {
+      setCompareConfigs([undefined, undefined]);
+      return;
+    }
     let disposed = false;
     Promise.all(
       compareIds.map(async (id) => {
@@ -425,13 +526,27 @@ export function ResearchWorkspace() {
 
   async function runAction(action: 'cancel' | 'resume' | 'analyze' | 'report') {
     if (!api || !selectedRun) return;
+    const resumeRequest =
+      action === 'resume'
+        ? {
+            runId: selectedRun.run_id,
+            attemptCount: selectedRun.attempts.length,
+          }
+        : undefined;
+    if (resumeRequest) setQueuedResume(resumeRequest);
     setBusy(true);
     setMessage('');
     try {
       await api.action(selectedRun.run_id, action);
-      await refreshRun(api, selectedRun.run_id);
+      const manifest = await refreshRun(api, selectedRun.run_id);
+      if (
+        resumeRequest &&
+        manifest.attempts.length > resumeRequest.attemptCount
+      )
+        setQueuedResume(undefined);
       if (action === 'report') setTab('reports');
     } catch (error) {
+      if (resumeRequest) setQueuedResume(undefined);
       handleError(error);
     } finally {
       setBusy(false);
@@ -443,14 +558,21 @@ export function ResearchWorkspace() {
     setReportLoading(true);
     setMessage('');
     try {
-      const markdown = artifactFor(selectedRun, (path) =>
-        path.endsWith('/report.md'),
+      const latestReport = selectedRun.reports.at(-1);
+      if (!latestReport)
+        throw new Error('The selected run has no generated report.');
+      const reportPath = latestReport.path.replace(/\/$/, '');
+      const markdown = artifactFor(
+        selectedRun,
+        (path) => path === `${reportPath}/report.md`,
       );
-      const plot = artifactFor(selectedRun, (path) =>
-        path.endsWith('/plot-data/recurrence.csv'),
+      const plot = artifactFor(
+        selectedRun,
+        (path) => path === `${reportPath}/plot-data/recurrence.csv`,
       );
-      const spec = artifactFor(selectedRun, (path) =>
-        path.endsWith('/figures/recurrence.figure.json'),
+      const spec = artifactFor(
+        selectedRun,
+        (path) => path === `${reportPath}/figures/recurrence.figure.json`,
       );
       if (!markdown || !plot || !spec)
         throw new Error('The selected run has no complete generated report.');
@@ -788,7 +910,9 @@ export function ResearchWorkspace() {
                   disabled={
                     busy ||
                     !latestAttempt(selectedRun)?.checkpoint ||
-                    latestAttempt(selectedRun)?.state === 'completed'
+                    !['cancelled', 'interrupted', 'failed'].includes(
+                      latestAttempt(selectedRun)?.state ?? '',
+                    )
                   }
                 >
                   Resume attempt

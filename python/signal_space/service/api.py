@@ -10,6 +10,7 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 from signal_space.runtime.archive import archive_run
+from signal_space.runtime.errors import InvalidState
 from signal_space.runtime.events import read_events
 from signal_space.runtime.io import safe_child
 from signal_space.runtime.runner import ResearchRuntime
@@ -48,6 +49,41 @@ class ResearchAPI(ThreadingHTTPServer):
             self.jobs[run_id] = thread
         thread.start()
         return {**created, "state": "queued"}
+
+    def start_resume(self, run_id: str) -> dict[str, Any]:
+        ready = threading.Event()
+        started: dict[str, Any] = {}
+        failures: list[Exception] = []
+
+        def mark_started(result: dict[str, Any]) -> None:
+            started.update(result)
+            ready.set()
+
+        def execute() -> None:
+            try:
+                self.runtime.resume(self.workspace, run_id, mark_started)
+            except Exception as error:
+                failures.append(error)
+                ready.set()
+            finally:
+                with self.jobs_lock:
+                    self.jobs.pop(run_id, None)
+
+        thread = threading.Thread(
+            target=execute, name=f"research-resume-{run_id}", daemon=True
+        )
+        with self.jobs_lock:
+            if run_id in self.jobs:
+                raise InvalidState("run already has an active service job")
+            self.jobs[run_id] = thread
+        thread.start()
+        # Preparation and process creation are bounded setup. Waiting for that
+        # transition makes the response immediately observable to API polling,
+        # while the resumed scientific workload continues in the background.
+        ready.wait(timeout=5)
+        if failures:
+            raise failures[0]
+        return started or {"run_id": run_id, "state": "queued"}
 
 
 class ResearchHandler(BaseHTTPRequestHandler):
@@ -206,7 +242,7 @@ class ResearchHandler(BaseHTTPRequestHandler):
             if len(parts) == 4 and parts[:2] == ["v1", "runs"]:
                 run_id, action = self._run_id(parts[2]), parts[3]
                 if action == "cancel": result = self.server.runtime.cancel(self.server.workspace, run_id)
-                elif action == "resume": result = self.server.runtime.resume(self.server.workspace, run_id)
+                elif action == "resume": result = self.server.start_resume(run_id)
                 elif action == "analyze": result = self.server.runtime.analyze(self.server.workspace, run_id)
                 elif action == "report": result = self.server.runtime.report(self.server.workspace, run_id)
                 elif action == "verify": result = self.server.runtime.verify(self.server.workspace, run_id)
@@ -214,7 +250,7 @@ class ResearchHandler(BaseHTTPRequestHandler):
                 else:
                     self._json(404, {"error": {"code": "NOT_FOUND", "message": "unknown or unavailable action"}})
                     return
-                self._json(200, result)
+                self._json(202 if action == "resume" else 200, result)
                 return
             self._json(404, {"error": {"code": "NOT_FOUND", "message": "unknown API route"}})
         except Exception as error:
