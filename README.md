@@ -19,15 +19,15 @@ Stable three-dimensional charged branches, charged–Hopf binding, fermionic qua
 
 ## Program map
 
-| Area                  | Purpose                                                                              | Start here                                                                 |
-| --------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| Research architecture | Shared runtime, model plugins, audit trail, analysis, reports, and UI boundaries     | [`docs/research/architecture.md`](docs/research/architecture.md)           |
-| E00 runtime guide     | Install, lifecycle CLI/API, recovery, extension workflow, and reproducibility limits | [`docs/research/runtime.md`](docs/research/runtime.md)                     |
-| Artifact contract     | Immutable run packages, provenance, checksums, figures, reports, and claims          | [`docs/research/artifact-contract.md`](docs/research/artifact-contract.md) |
-| Experiment sequence   | Ordered gates from synthetic fixture through integrated theory tests                 | [`docs/research/experiment-plan.md`](docs/research/experiment-plan.md)     |
-| First experiment      | Three-dimensional charged recurrence branch and constrained stability protocol       | [`docs/research/first-experiment.md`](docs/research/first-experiment.md)   |
-| Theory and evidence   | Papers, milestones, figures, source code, configurations, and compact results        | [`research/README.md`](research/README.md)                                 |
-| Local UI              | Search and inspect the research collection; retain the separate historical workspace | `npm run dev`                                                              |
+| Area                  | Purpose                                                                                | Start here                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Research architecture | Shared runtime, model plugins, audit trail, analysis, reports, and UI boundaries       | [`docs/research/architecture.md`](docs/research/architecture.md)           |
+| E00 runtime guide     | Install, lifecycle CLI/API, recovery, extension workflow, and reproducibility limits   | [`docs/research/runtime.md`](docs/research/runtime.md)                     |
+| Artifact contract     | Immutable run packages, provenance, checksums, figures, reports, and claims            | [`docs/research/artifact-contract.md`](docs/research/artifact-contract.md) |
+| Experiment sequence   | Ordered gates from synthetic fixture through integrated theory tests                   | [`docs/research/experiment-plan.md`](docs/research/experiment-plan.md)     |
+| First experiment      | Three-dimensional charged recurrence branch and constrained stability protocol         | [`docs/research/first-experiment.md`](docs/research/first-experiment.md)   |
+| Theory and evidence   | Papers, milestones, figures, source code, configurations, and compact results          | [`research/README.md`](research/README.md)                                 |
+| Local UI              | Prepare, run, audit, compare, report, and browse evidence through the loopback runtime | [`docs/research/ui.md`](docs/research/ui.md)                               |
 
 The first implementation issues are [#37 common framework](https://github.com/Brain-Crumbs/Signal-Space/issues/37), [#38 research UI](https://github.com/Brain-Crumbs/Signal-Space/issues/38), and [#39 E01 charged branch](https://github.com/Brain-Crumbs/Signal-Space/issues/39).
 
@@ -63,10 +63,18 @@ python -m pip install -r python/requirements-lock.txt
 python -m pip install -e python --no-deps
 npm run verify:research
 npm run check
-npm run dev
+npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Open the local Vite URL to search papers, milestones, figures, and source collections. The explorer remains read-only until issue #38 connects it to the loopback API. The runtime, lifecycle CLI, report generator, and origin-bound local service are implemented by issue #37; see the [E00 runtime guide](docs/research/runtime.md).
+In a second terminal, start the origin-bound runtime with a stable local port:
+
+```sh
+npm run research -- --workspace .research-work serve \
+  --origin http://127.0.0.1:5173 \
+  --port 8765
+```
+
+Open the local Vite URL, enter the printed ephemeral bearer token, and connect to `http://127.0.0.1:8765`. The UI can prepare, validate, execute, cancel, resume, audit, compare, analyze, and regenerate reports for registered framework experiments. It also searches papers, milestones, figures, source collections, and their cataloged relationships. See the [local workspace guide](docs/research/ui.md) and [E00 runtime guide](docs/research/runtime.md).
 
 Run the synthetic framework fixture, which makes no physics claim:
 
@@ -107,7 +115,7 @@ npm run test:browser
 git diff --check
 ```
 
-`verify:research` checks the catalog and byte-level archive manifest. `check` runs formatting, lint, strict type checking, generated contract checks, historical and E00 lifecycle tests, and production builds. Browser tests exercise the built worker and research explorer.
+`verify:research` checks the catalog and byte-level archive manifest. `check` runs formatting, lint, strict type checking, generated contract checks, historical and E00 lifecycle tests, and production builds. Browser tests exercise the built worker, schema-driven research journey, interruption/resume audit, reports, narrow screens, keyboard access, and research explorer.
 
 ## Data policy
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 from typing import Any
 
 from signal_space.analysis.synthetic import analyze_series
@@ -24,8 +25,30 @@ class SyntheticExperiment(ExperimentPlugin):
             "name": "Deterministic synthetic lifecycle fixture",
             "claims": "none",
             "equations": [EQUATION_REFERENCE],
+            "equation_sources": [
+                {
+                    "label": "E00 recurrence and runtime boundary",
+                    "path": "docs/research/runtime.md",
+                    "catalog_id": "e00-runtime-guide",
+                }
+            ],
             "capabilities": ["checkpoint", "resume", "analysis", "report", "fault-injection"],
+            "unavailable_capabilities": [
+                "physical-field solver",
+                "research-scale sweep",
+                "scientific inference",
+            ],
         }
+
+    def schema(self) -> dict[str, Any]:
+        root = Path(__file__).resolve().parents[3]
+        schema = json.loads(
+            (root / "contracts/research/experiment.schema.json").read_text()
+        )
+        schema["default"] = json.loads(
+            (root / "fixtures/research/synthetic.json").read_text()
+        )
+        return schema
 
     def validate(self, config: Any) -> dict[str, Any]:
         return validate_config(config)

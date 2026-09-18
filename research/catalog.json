@@ -10,7 +10,12 @@
       "date": "2026-09-18",
       "path": "docs/research/runtime.md",
       "summary": "Installation, lifecycle CLI and loopback API, recovery, resource controls, extension workflow, and reproducibility limits for the synthetic E00 framework fixture.",
-      "tags": ["E00", "runtime", "reproducibility", "reports"]
+      "tags": ["E00", "runtime", "reproducibility", "reports"],
+      "related": [
+        "program-architecture",
+        "artifact-contract",
+        "experiment-plan"
+      ]
     },
     {
       "id": "program-architecture",
@@ -21,6 +26,17 @@
       "path": "docs/research/architecture.md",
       "summary": "Plugin boundaries, immutable execution lifecycle, local service, analysis, reporting, and UI plan.",
       "tags": ["architecture", "runtime", "reports", "UI"]
+    },
+    {
+      "id": "research-ui-guide",
+      "title": "Local research workspace guide",
+      "kind": "guide",
+      "status": "implemented interface",
+      "date": "2026-09-18",
+      "path": "docs/research/ui.md",
+      "summary": "Schema-driven preparation, durable run audit, recovery, compatibility comparison, report preview, artifact export, and UI limitations.",
+      "tags": ["UI", "runtime", "audit", "reports"],
+      "related": ["e00-runtime-guide", "artifact-contract"]
     },
     {
       "id": "artifact-contract",
@@ -100,7 +116,13 @@
       "date": "2026-09-16",
       "path": "research/milestones/charged-clock-formation.md",
       "summary": "Conservative formation scan, settled configuration, controls, neutral packets, recoil, and causal phase readout.",
-      "tags": ["formation", "1+1D", "recoil", "readout"]
+      "tags": ["formation", "1+1D", "recoil", "readout"],
+      "related": [
+        "formation-figure",
+        "formation-scan-figure",
+        "formation-readout-figure",
+        "formation-source"
+      ]
     },
     {
       "id": "radiation-milestone",
@@ -110,7 +132,8 @@
       "date": "2026-09-17",
       "path": "research/milestones/charged-clock-radiation.md",
       "summary": "Frequency-resolved fields, energy and charge flux, nonlinear source overlap, and persistence interpretation.",
-      "tags": ["radiation", "spectrum", "flux", "1+1D"]
+      "tags": ["radiation", "spectrum", "flux", "1+1D"],
+      "related": ["radiation-figure", "radiation-source"]
     },
     {
       "id": "damping-milestone",
@@ -120,7 +143,8 @@
       "date": "2026-09-17",
       "path": "research/milestones/charged-clock-damping.md",
       "summary": "Amplitude scan, resonance checks, damping fits, refinement, and limits of the persistence result.",
-      "tags": ["damping", "resonance", "refinement", "1+1D"]
+      "tags": ["damping", "resonance", "refinement", "1+1D"],
+      "related": ["damping-figure", "damping-source"]
     },
     {
       "id": "formation-figure",
@@ -130,7 +154,8 @@
       "date": "2026-09-16",
       "path": "research/figures/formation-diagnostics.png",
       "summary": "Diagnostic panels for the selected conservative formation calculation.",
-      "tags": ["formation", "diagnostics"]
+      "tags": ["formation", "diagnostics"],
+      "related": ["formation-milestone", "formation-source"]
     },
     {
       "id": "formation-scan-figure",
@@ -140,7 +165,8 @@
       "date": "2026-09-16",
       "path": "research/figures/formation-scan.png",
       "summary": "Parameter-scan overview for the formation milestone.",
-      "tags": ["formation", "scan"]
+      "tags": ["formation", "scan"],
+      "related": ["formation-milestone", "formation-source"]
     },
     {
       "id": "formation-readout-figure",
@@ -150,7 +176,8 @@
       "date": "2026-09-16",
       "path": "research/figures/formation-readout.png",
       "summary": "Causal phase-readout diagnostics after formation.",
-      "tags": ["formation", "phase", "readout"]
+      "tags": ["formation", "phase", "readout"],
+      "related": ["formation-milestone", "formation-source"]
     },
     {
       "id": "radiation-figure",
@@ -160,7 +187,8 @@
       "date": "2026-09-17",
       "path": "research/figures/charged-clock-radiation-diagnostics.png",
       "summary": "Spectral and flux diagnostics supporting the radiation milestone.",
-      "tags": ["radiation", "spectrum", "flux"]
+      "tags": ["radiation", "spectrum", "flux"],
+      "related": ["radiation-milestone", "radiation-source"]
     },
     {
       "id": "damping-figure",
@@ -170,7 +198,8 @@
       "date": "2026-09-17",
       "path": "research/figures/charged-clock-damping-diagnostics.png",
       "summary": "Amplitude, rate, and refinement diagnostics supporting the damping milestone.",
-      "tags": ["damping", "resonance", "fits"]
+      "tags": ["damping", "resonance", "fits"],
+      "related": ["damping-milestone", "damping-source"]
     },
     {
       "id": "part-ii-source",
@@ -190,7 +219,13 @@
       "date": "2026-09-16",
       "path": "research/source/formation/README.md",
       "summary": "Evolution and analysis code, configs, metadata, compact analysis, report generator, and deliverables; large raw trajectories omitted.",
-      "tags": ["source", "formation", "C++", "Python"]
+      "tags": ["source", "formation", "C++", "Python"],
+      "related": [
+        "formation-milestone",
+        "formation-figure",
+        "formation-scan-figure",
+        "formation-readout-figure"
+      ]
     },
     {
       "id": "radiation-source",
@@ -200,7 +235,8 @@
       "date": "2026-09-17",
       "path": "research/source/radiation/README.md",
       "summary": "Evolution, spectrum and diagnostic code, compact spectral outputs, report generator, manifest, and deliverables.",
-      "tags": ["source", "radiation", "C++", "Python"]
+      "tags": ["source", "radiation", "C++", "Python"],
+      "related": ["radiation-milestone", "radiation-figure"]
     },
     {
       "id": "damping-source",
@@ -210,7 +246,8 @@
       "date": "2026-09-17",
       "path": "research/source/damping/README.md",
       "summary": "Scan, resonance, fit and report code, input configurations, compact analyses, summary, manifest, and deliverables.",
-      "tags": ["source", "damping", "resonance", "Python"]
+      "tags": ["source", "damping", "resonance", "Python"],
+      "related": ["damping-milestone", "damping-figure"]
     },
     {
       "id": "research-coach",

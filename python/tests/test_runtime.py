@@ -107,6 +107,16 @@ class RuntimeTest(unittest.TestCase):
         with self.assertRaisesRegex(IntegrityError, "checksum mismatch"):
             self.runtime.verify(self.workspace, result["run_id"])
 
+    def test_unreadable_manifest_fails_catalog_listing_explicitly(self) -> None:
+        manifest = self.workspace / "fixture.synthetic.v1/run-corrupt/manifest.json"
+        manifest.parent.mkdir(parents=True)
+        manifest.write_text("{")
+        with self.assertRaisesRegex(
+            IntegrityError,
+            r"unreadable run manifest: fixture\.synthetic\.v1/run-corrupt/manifest\.json",
+        ):
+            self.runtime.list_runs(self.workspace)
+
     def test_run_identity_includes_execution_provenance(self) -> None:
         config = self.runtime.validate(fixture())
         code = {
@@ -222,6 +232,11 @@ class RuntimeTest(unittest.TestCase):
         )
         manifest["technical_state"] = "running"
         write_json(package.manifest_path, manifest)
+        visible = self.runtime.status(self.workspace, result["run_id"])
+        repaired = visible["attempts"][0]
+        self.assertEqual(repaired["state"], "interrupted")
+        self.assertEqual(repaired["failure"]["code"], "ORPHANED_WORKER")
+        self.assertIsNotNone(repaired["checkpoint"])
         resumed = self.runtime.resume(self.workspace, result["run_id"])
         self.assertEqual(resumed["state"], "completed")
         repaired = package.manifest["attempts"][0]
@@ -318,6 +333,13 @@ class RuntimeTest(unittest.TestCase):
         try:
             service = request("/v1/validate", fixture())["config"]
             self.assertEqual(service, self.runtime.validate(fixture()))
+            description = request("/v1/experiments")["experiments"][0]
+            self.assertEqual(description["experiment_id"], "fixture.synthetic.v1")
+            schema = request(
+                "/v1/experiments/fixture.synthetic.v1/schema"
+            )["schema"]
+            self.assertEqual(schema["properties"]["parameters"]["type"], "object")
+            self.assertEqual(request("/v1/runs")["runs"], [])
             with self.assertRaises(urllib.error.HTTPError) as forbidden:
                 request("/v1/experiments", request_origin="http://attacker.invalid")
             self.assertEqual(forbidden.exception.code, 403)
@@ -339,6 +361,7 @@ class RuntimeTest(unittest.TestCase):
             after = request(f"/v1/runs/{result['run_id']}/events?cursor={events[0]['cursor']}")["events"]
             self.assertEqual(len(after), len(events) - 1)
             manifest = request(f"/v1/runs/{result['run_id']}")
+            self.assertEqual(request("/v1/runs")["runs"][0]["run_id"], result["run_id"])
             artifact = next(item for item in manifest["artifacts"] if item["kind"] == "raw")
             value = urllib.request.Request(
                 base + f"/v1/runs/{result['run_id']}/artifacts/{artifact['id']}",
@@ -402,6 +425,59 @@ class RuntimeTest(unittest.TestCase):
                     break
                 time.sleep(0.02)
             self.assertEqual(manifest["technical_state"], "completed")
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
+
+    def test_service_queues_resume_without_blocking_on_resumed_work(self) -> None:
+        config = fixture()
+        config["parameters"].update(
+            {"steps": 300, "checkpoint_interval": 10, "step_delay_ms": 5}
+        )
+        config["fixture_controls"]["interrupt_at_step"] = 10
+        interrupted = self.runtime.run(config, self.workspace)
+        self.assertEqual(interrupted["state"], "interrupted")
+
+        origin = "http://127.0.0.1:4173"
+        server = ResearchAPI(("127.0.0.1", 0), self.workspace, origin)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        base = f"http://127.0.0.1:{server.server_port}"
+
+        def post(action: str) -> tuple[int, dict]:
+            request = urllib.request.Request(
+                f"{base}/v1/runs/{interrupted['run_id']}/{action}",
+                data=b"{}",
+                method="POST",
+                headers={
+                    "Origin": origin,
+                    "Authorization": f"Bearer {server.token}",
+                    "Content-Type": "application/json",
+                },
+            )
+            with urllib.request.urlopen(request, timeout=5) as response:
+                return response.status, json.loads(response.read())
+
+        try:
+            started = time.monotonic()
+            status, result = post("resume")
+            elapsed = time.monotonic() - started
+            self.assertEqual(status, 202)
+            self.assertIn(result["state"], {"queued", "running"})
+            self.assertLess(elapsed, 0.5)
+            manifest = self.runtime.status(self.workspace, interrupted["run_id"])
+            self.assertEqual(manifest["attempts"][-1]["state"], "running")
+            post("cancel")
+            deadline = time.time() + 10
+            while time.time() < deadline:
+                manifest = self.runtime.status(
+                    self.workspace, interrupted["run_id"]
+                )
+                if manifest["attempts"][-1]["state"] == "cancelled":
+                    break
+                time.sleep(0.02)
+            self.assertEqual(manifest["attempts"][-1]["state"], "cancelled")
         finally:
             server.shutdown()
             server.server_close()

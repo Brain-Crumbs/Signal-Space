@@ -13,6 +13,7 @@
     "@signal-space/sim": "0.1.0",
     "@signal-space/analysis": "0.1.0",
     "@signal-space/experiments": "0.1.0",
+    "@signal-space/research-contracts": "0.1.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

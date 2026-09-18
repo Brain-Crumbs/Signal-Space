@@ -7,10 +7,10 @@ import subprocess
 import sys
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from signal_space.experiments.registry import get_experiment, list_experiments
-from signal_space.runtime.errors import CheckpointMismatch, InvalidState, ResourceRejected, RunNotFound
+from signal_space.runtime.errors import CheckpointMismatch, IntegrityError, InvalidState, ResourceRejected, RunNotFound
 from signal_space.runtime.events import append_event
 from signal_space.runtime.io import canonical_bytes, now, read_json, sha256_bytes, sha256_file, write_json
 from signal_space.runtime.package import (
@@ -24,6 +24,28 @@ from signal_space.runtime.verify import verify_package
 class ResearchRuntime:
     def list(self) -> list[dict[str, object]]:
         return list_experiments()
+
+    def schema(self, experiment_id: str) -> dict[str, Any]:
+        return get_experiment(experiment_id).schema()
+
+    def list_runs(self, workspace: Path) -> list[dict[str, Any]]:
+        manifests: list[dict[str, Any]] = []
+        if workspace.exists():
+            for path in workspace.glob("*/run-*/manifest.json"):
+                package = RunPackage(path.parent)
+                try:
+                    self._reconcile_orphaned_attempts(package)
+                    manifests.append(package.manifest)
+                except (OSError, ValueError, KeyError, TypeError) as error:
+                    relative = path.relative_to(workspace).as_posix()
+                    raise IntegrityError(
+                        f"unreadable run manifest: {relative}: {error}"
+                    ) from error
+        return sorted(
+            manifests,
+            key=lambda value: str(value.get("updated_at", "")),
+            reverse=True,
+        )
 
     def validate(self, value: Any) -> dict[str, Any]:
         if not isinstance(value, dict) or not isinstance(value.get("experiment_id"), str):
@@ -67,7 +89,12 @@ class ResearchRuntime:
         plugin = get_experiment(manifest["experiment_id"])
         return self._attempt(package, plugin, config, None)
 
-    def resume(self, workspace: Path, run_id: str) -> dict[str, Any]:
+    def resume(
+        self,
+        workspace: Path,
+        run_id: str,
+        on_started: Callable[[dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
         package = self._package(workspace, run_id)
         self._reconcile_orphaned_attempts(package)
         manifest = package.manifest
@@ -86,9 +113,22 @@ class ResearchRuntime:
             raise CheckpointMismatch("current code identity differs from the checkpoint producer")
         config = read_json(package.path / "resolved-config.json")
         plugin = get_experiment(manifest["experiment_id"])
-        return self._attempt(package, plugin, config, {"checkpoint": checkpoint, "parent": parent})
+        return self._attempt(
+            package,
+            plugin,
+            config,
+            {"checkpoint": checkpoint, "parent": parent},
+            on_started,
+        )
 
-    def _attempt(self, package: RunPackage, plugin: Any, config: dict[str, Any], resume: dict[str, Any] | None) -> dict[str, Any]:
+    def _attempt(
+        self,
+        package: RunPackage,
+        plugin: Any,
+        config: dict[str, Any],
+        resume: dict[str, Any] | None,
+        on_started: Callable[[dict[str, Any]], None] | None = None,
+    ) -> dict[str, Any]:
         with package.locked():
             manifest = package.manifest
             if any(item["state"] in {"prepared", "running"} for item in manifest["attempts"]):
@@ -147,8 +187,6 @@ class ResearchRuntime:
         append_event(events, "attempt-running", "runtime", {"limits": config["resources"]})
         attempt["state"] = "running"
         attempt["updated_at"] = now()
-        write_json(attempt_path / "attempt.json", attempt)
-        self._update_attempt(package, attempt, "running")
         environment = os.environ.copy()
         python_root = str(Path(__file__).resolve().parents[2])
         environment["PYTHONPATH"] = python_root + (os.pathsep + environment["PYTHONPATH"] if environment.get("PYTHONPATH") else "")
@@ -166,6 +204,15 @@ class ResearchRuntime:
             )
             attempt["worker_pid"] = process.pid
             write_json(attempt_path / "attempt.json", attempt)
+            self._update_attempt(package, attempt, "running")
+            if on_started is not None:
+                on_started(
+                    {
+                        "run_id": manifest["run_id"],
+                        "attempt_id": attempt_id,
+                        "state": "running",
+                    }
+                )
             terminal_error: str | None = None
             try:
                 reason, exit_code = _monitor_process(
@@ -261,7 +308,9 @@ class ResearchRuntime:
         package.update(change)
 
     def status(self, workspace: Path, run_id: str) -> dict[str, Any]:
-        return self._package(workspace, run_id).manifest
+        package = self._package(workspace, run_id)
+        self._reconcile_orphaned_attempts(package)
+        return package.manifest
 
     def cancel(self, workspace: Path, run_id: str) -> dict[str, Any]:
         package = self._package(workspace, run_id)

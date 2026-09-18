@@ -5,6 +5,7 @@ import { summarizeSnapshot } from '@signal-space/analysis';
 import type { Snapshot } from '@signal-space/model';
 import type { RunEvent, WorkerCommand } from '@signal-space/sim';
 import { ResearchExplorer } from './ResearchExplorer.js';
+import { ResearchWorkspace } from './ResearchWorkspace.js';
 
 export function App() {
   const [sample, setSample] = useState<SampleId>('isolated');
@@ -86,6 +87,7 @@ export function App() {
           particles, gauge sectors, and geometry.
         </p>
       </header>
+      <ResearchWorkspace />
       <ResearchExplorer />
       <section
         className="historical-workspace"
@@ -181,8 +183,8 @@ export function App() {
           <strong>Workspace smoke check</strong>
           <p>
             This checks the supplied preparation at t = 0. The displayed state
-            is simulator truth. New-model execution, audit, and reporting remain
-            tracked in issues #37 and #38.
+            is simulator truth. It remains isolated from the research runtime
+            and its run packages.
           </p>
         </aside>
       </section>
