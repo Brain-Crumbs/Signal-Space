@@ -574,7 +574,11 @@ test('research collection is searchable and exposes source evidence', async ({
   await expect(
     page.getByRole('heading', { name: 'Trace theory to evidence' }),
   ).toBeVisible();
-  await expect(page.getByText('23 records')).toBeVisible();
+  const { readFile } = await import('node:fs/promises');
+  const catalog = JSON.parse(await readFile('research/catalog.json', 'utf8'));
+  await expect(
+    page.getByText(`${catalog.entries.length} records`),
+  ).toBeVisible();
   await page.getByLabel('Search collection').fill('radiation');
   await expect(page.getByText('4 results')).toBeVisible();
   await page
