@@ -34,11 +34,13 @@ export interface ExperimentDescription {
 }
 
 export interface JsonSchema {
+  'x-presets'?: Array<{ name: string; config: ResearchConfig }>;
   title?: string;
   type?: string | string[];
   const?: unknown;
   default?: unknown;
   minimum?: number;
+  exclusiveMinimum?: number;
   maximum?: number;
   enum?: unknown[];
   description?: string;

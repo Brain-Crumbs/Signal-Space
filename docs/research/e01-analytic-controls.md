@@ -57,6 +57,6 @@ where `L₊=−∇²+m²−ω²−6gf²+15hf⁴` and `L₋=−∇²+m²−ω²�
 
 In the vacuum, with spatial wavenumber p, the coupled determinant has roots `σ=±i(√(p²+m²)±ω)`. This is a useful sign control, not a soliton stability test. A negative unconstrained L₊ eigenvalue, a virial pass, or the sign of `dQ/dω` is insufficient to claim stability.
 
-## Scope remaining in #39
+## Implementation in #39
 
-Implement radial seeding/continuation, independent residuals and quadratures, constrained angular spectra, breakup allocation, refinement/error budgets, and criterion-linked candidate/no-candidate/unresolved classification. Pin the numerical solver dependencies and record them in execution identity before using them. The existing NumPy/Matplotlib closure does not yet supply a pinned SciPy solver. No production solver or experiment is registered by this bug bash.
+The registered `e01-charged-branch` plugin implements radial seeding/continuation, independent residuals and quadratures, constrained angular spectra, breakup allocation, refinements, and criterion-linked classification. SciPy 1.17.0 is pinned and recorded in execution identity. See [Running E01](e01-running.md) for equation mapping, controls, author launch instructions, and explicit numerical limits. This implementation does not include a research-scale finding.

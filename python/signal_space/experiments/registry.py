@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from signal_space.experiments.base import ExperimentPlugin
 from signal_space.experiments.synthetic import SyntheticExperiment
+from signal_space.experiments.charged import ChargedExperiment
 
 _PLUGINS: dict[str, ExperimentPlugin] = {
     SyntheticExperiment.experiment_id: SyntheticExperiment(),
+    ChargedExperiment.experiment_id: ChargedExperiment(),
 }
 
 

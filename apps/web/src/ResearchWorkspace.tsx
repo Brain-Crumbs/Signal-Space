@@ -797,10 +797,34 @@ export function ResearchWorkspace() {
                   </div>
                   {!!selectedExperiment.unavailable_capabilities?.length && (
                     <p className="unavailable">
-                      <strong>Unavailable in this fixture:</strong>{' '}
+                      <strong>Unavailable for this experiment:</strong>{' '}
                       {selectedExperiment.unavailable_capabilities.join(', ')}.
                     </p>
                   )}
+                </div>
+              )}
+              {!!schema['x-presets']?.length && (
+                <div
+                  className="workspace-toolbar"
+                  aria-label="Configuration presets"
+                >
+                  <span>Load configuration (does not start a run):</span>
+                  {schema['x-presets'].map((preset) => (
+                    <button
+                      key={preset.name}
+                      disabled={busy}
+                      onClick={() => {
+                        setConfig(structuredClone(preset.config));
+                        setResolvedConfig(undefined);
+                        setEstimate(undefined);
+                        setPrepareState(
+                          'Preset loaded · validate before running',
+                        );
+                      }}
+                    >
+                      {preset.name}
+                    </button>
+                  ))}
                 </div>
               )}
               <SchemaForm

@@ -333,6 +333,11 @@ class RuntimeTest(unittest.TestCase):
         try:
             service = request("/v1/validate", fixture())["config"]
             self.assertEqual(service, self.runtime.validate(fixture()))
+            e01_config = json.loads((ROOT / "fixtures/research/e01-smoke.json").read_text())
+            self.assertEqual(request("/v1/validate", e01_config)["config"], self.runtime.validate(e01_config))
+            e01_schema = request("/v1/experiments/e01-charged-branch/schema")["schema"]
+            self.assertFalse(e01_schema["default"]["parameters"]["research_run"])
+            self.assertTrue(e01_schema["x-presets"][1]["config"]["parameters"]["research_run"])
             description = request("/v1/experiments")["experiments"][0]
             self.assertEqual(description["experiment_id"], "fixture.synthetic.v1")
             schema = request(

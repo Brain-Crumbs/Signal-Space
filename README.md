@@ -84,6 +84,8 @@ npm run research -- estimate --config fixtures/research/synthetic.json
 npm run research -- --workspace .research-work run --config fixtures/research/synthetic.json
 ```
 
+The first physical experiment is implemented and ready for an author-launched run. See [Running E01](docs/research/e01-running.md) for the opt-in research preset, headless commands, numerical decisions and unresolved-result interpretation. No research-scale E01 scan is included in this implementation.
+
 The historical workspace remains available on the same page. Its direct CLI commands are unchanged:
 
 ```sh

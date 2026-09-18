@@ -286,8 +286,8 @@ def _validate_execution_identity(value: Any, path: str) -> None:
     environment = _object(identity["environment"], f"{path}.environment", {"python", "implementation", "os", "architecture", "numeric_libraries", "accelerator"})
     for name in ("python", "implementation", "os", "architecture", "accelerator"):
         _require_string(environment[name], f"{path}.environment.{name}")
-    libraries = _object(environment["numeric_libraries"], f"{path}.environment.numeric_libraries", {"numpy", "matplotlib"})
-    for name in ("numpy", "matplotlib"):
+    libraries = _object(environment["numeric_libraries"], f"{path}.environment.numeric_libraries", {"numpy", "matplotlib"}, {"scipy"})
+    for name in libraries:
         _require_string(libraries[name], f"{path}.environment.numeric_libraries.{name}")
     dependencies = _object(identity["dependencies"], f"{path}.dependencies", {"path", "sha256"})
     _require_string(dependencies["path"], f"{path}.dependencies.path")

@@ -135,7 +135,8 @@
               "required": ["numpy", "matplotlib"],
               "properties": {
                 "numpy": { "type": "string" },
-                "matplotlib": { "type": "string" }
+                "matplotlib": { "type": "string" },
+                "scipy": { "type": "string" }
               }
             },
             "accelerator": { "type": "string" }

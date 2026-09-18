@@ -574,7 +574,11 @@ test('research collection is searchable and exposes source evidence', async ({
   await expect(
     page.getByRole('heading', { name: 'Trace theory to evidence' }),
   ).toBeVisible();
-  await expect(page.getByText('23 records')).toBeVisible();
+  const { readFile } = await import('node:fs/promises');
+  const catalog = JSON.parse(await readFile('research/catalog.json', 'utf8'));
+  await expect(
+    page.getByText(`${catalog.entries.length} records`),
+  ).toBeVisible();
   await page.getByLabel('Search collection').fill('radiation');
   await expect(page.getByText('4 results')).toBeVisible();
   await page
@@ -904,4 +908,94 @@ test('report preview does not require synthetic recurrence files', async ({
   await expect(
     page.getByRole('img', { name: 'Saved recurrence output' }),
   ).toHaveCount(0);
+});
+
+test('E01 research preset is explicit and loading it never launches a run', async ({
+  page,
+}) => {
+  const { readFile } = await import('node:fs/promises');
+  const smoke = JSON.parse(
+    await readFile('fixtures/research/e01-smoke.json', 'utf8'),
+  );
+  const research = JSON.parse(
+    await readFile('fixtures/research/e01-research.json', 'utf8'),
+  );
+  const schema = JSON.parse(
+    await readFile('contracts/research/e01.schema.json', 'utf8'),
+  );
+  schema.default = smoke;
+  schema['x-presets'] = [
+    { name: 'Small validation fixture', config: smoke },
+    { name: 'Author research run (opt-in)', config: research },
+  ];
+  await installResearchMock(page);
+  let launched = 0;
+  page.on('request', (request) => {
+    if (request.url().endsWith('/v1/runs') && request.method() === 'POST')
+      launched += 1;
+  });
+  const headers = {
+    'access-control-allow-origin': 'http://127.0.0.1:4173',
+    'content-type': 'application/json',
+  };
+  await page.route('http://127.0.0.1:8765/v1/experiments', async (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fallback();
+    await route.fulfill({
+      headers,
+      json: {
+        experiments: [
+          {
+            experiment_id: 'e01-charged-branch',
+            version: '1.0.0',
+            model_id: 'charged-scalar-3d-v1',
+            name: 'E01 · 3D charged recurrence branch and stability',
+            claims: 'conditional',
+            equations: [
+              'charged-recurrence-winding-hopf.md sections 2–10,14–15,23',
+            ],
+            capabilities: ['radial-continuation', 'constrained-spectra'],
+            unavailable_capabilities: ['particle identification'],
+          },
+        ],
+      },
+    });
+  });
+  await page.route(
+    'http://127.0.0.1:8765/v1/experiments/e01-charged-branch/schema',
+    async (route) => {
+      if (route.request().method() === 'OPTIONS') return route.fallback();
+      await route.fulfill({
+        headers,
+        json: { experiment_id: 'e01-charged-branch', schema },
+      });
+    },
+  );
+  await page.goto('/');
+  await page.getByLabel('Ephemeral bearer token').fill('browser-token');
+  await page.getByRole('button', { name: 'Connect runtime' }).click();
+  await expect(
+    page.getByLabel('Research Run', { exact: true }),
+  ).not.toBeChecked();
+  await page
+    .getByRole('button', { name: 'Author research run (opt-in)' })
+    .click();
+  await expect(page.getByLabel('Research Run', { exact: true })).toBeChecked();
+  await expect(page.getByLabel('Omega Start (m)', { exact: true })).toHaveValue(
+    '0.875',
+  );
+  await expect(page.getByLabel('Omega End (m)', { exact: true })).toHaveValue(
+    '0.995',
+  );
+  await expect(
+    page.getByLabel('Lambda (dimensionless)', { exact: true }),
+  ).toBeDisabled();
+  await page.getByRole('button', { name: 'Validate & estimate' }).click();
+  await expect(
+    page.getByLabel('Experiment preparation').getByRole('status'),
+  ).toHaveText('Validated');
+  expect(launched).toBe(0);
+  await page.screenshot({
+    path: 'test-results/screenshots/e01-author-preset.png',
+    fullPage: true,
+  });
 });

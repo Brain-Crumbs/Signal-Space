@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Signal Space E01 configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "research-experiment-v1",
+      "type": "string"
+    },
+    "experiment_id": {
+      "const": "e01-charged-branch",
+      "type": "string"
+    },
+    "model_id": {
+      "const": "charged-scalar-3d-v1",
+      "type": "string"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "m",
+        "g",
+        "h",
+        "lambda",
+        "epsilon",
+        "omega_start",
+        "omega_end",
+        "omega_step",
+        "min_omega_step",
+        "max_points",
+        "seed_radii",
+        "radius",
+        "nodes",
+        "max_nodes",
+        "sample_points",
+        "solver_tolerance",
+        "spectral_nodes",
+        "ell_max",
+        "refinements",
+        "volume_factor",
+        "breakup_samples",
+        "max_fragments",
+        "research_run",
+        "omega_seed"
+      ],
+      "properties": {
+        "m": {
+          "const": 1,
+          "type": "number"
+        },
+        "g": {
+          "const": 1,
+          "type": "number"
+        },
+        "h": {
+          "const": 1,
+          "type": "number"
+        },
+        "lambda": {
+          "const": 0.01,
+          "type": "number"
+        },
+        "epsilon": {
+          "const": 0.1,
+          "type": "number"
+        },
+        "omega_start": {
+          "type": "number",
+          "exclusiveMinimum": 0.8660254037844387,
+          "maximum": 0.999999
+        },
+        "omega_end": {
+          "type": "number",
+          "exclusiveMinimum": 0.8660254037844387,
+          "maximum": 0.999999
+        },
+        "omega_step": {
+          "type": "number",
+          "minimum": 1e-5,
+          "maximum": 0.04
+        },
+        "min_omega_step": {
+          "type": "number",
+          "minimum": 1e-6,
+          "maximum": 0.01
+        },
+        "max_points": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 10000
+        },
+        "seed_radii": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 200
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 10,
+          "maximum": 500
+        },
+        "nodes": {
+          "type": "integer",
+          "minimum": 32,
+          "maximum": 4096
+        },
+        "max_nodes": {
+          "type": "integer",
+          "minimum": 128,
+          "maximum": 100000
+        },
+        "sample_points": {
+          "type": "integer",
+          "minimum": 129,
+          "maximum": 65537
+        },
+        "solver_tolerance": {
+          "type": "number",
+          "minimum": 1e-12,
+          "maximum": 0.0001
+        },
+        "spectral_nodes": {
+          "type": "integer",
+          "minimum": 12,
+          "maximum": 512
+        },
+        "ell_max": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 40
+        },
+        "refinements": {
+          "type": "boolean"
+        },
+        "volume_factor": {
+          "type": "number",
+          "minimum": 1.1,
+          "maximum": 2
+        },
+        "breakup_samples": {
+          "type": "integer",
+          "minimum": 17,
+          "maximum": 4097
+        },
+        "max_fragments": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 8
+        },
+        "research_run": {
+          "type": "boolean"
+        },
+        "omega_seed": {
+          "type": "number",
+          "exclusiveMinimum": 0.8660254037844387,
+          "maximum": 0.999999
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "convention",
+        "frequency",
+        "radius",
+        "field",
+        "energy",
+        "charge",
+        "g",
+        "h",
+        "epsilon",
+        "lambda"
+      ],
+      "properties": {
+        "convention": {
+          "const": "c=hbar=1; m sets mass unit",
+          "type": "string"
+        },
+        "frequency": {
+          "const": "m",
+          "type": "string"
+        },
+        "radius": {
+          "const": "1/m",
+          "type": "string"
+        },
+        "field": {
+          "const": "m/sqrt(g)",
+          "type": "string"
+        },
+        "energy": {
+          "const": "m (includes 1/lambda_4)",
+          "type": "string"
+        },
+        "charge": {
+          "const": "dimensionless (includes 1/lambda_4)",
+          "type": "string"
+        },
+        "g": {
+          "const": "dimensionless",
+          "type": "string"
+        },
+        "h": {
+          "const": "1/m^2",
+          "type": "string"
+        },
+        "epsilon": {
+          "const": "1/m^2",
+          "type": "string"
+        },
+        "lambda": {
+          "const": "dimensionless",
+          "type": "string"
+        }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root"],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "max_wall_seconds": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 172800
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 128,
+          "maximum": 16384
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32768
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field_residual",
+        "virial_defect",
+        "derivative_error",
+        "refinement_relative",
+        "eigenpair_residual",
+        "binding_error_multiplier"
+      ],
+      "properties": {
+        "field_residual": {
+          "const": 1e-7,
+          "type": "number"
+        },
+        "virial_defect": {
+          "const": 1e-5,
+          "type": "number"
+        },
+        "derivative_error": {
+          "const": 0.001,
+          "type": "number"
+        },
+        "refinement_relative": {
+          "const": 0.005,
+          "type": "number"
+        },
+        "eigenpair_residual": {
+          "const": 1e-7,
+          "type": "number"
+        },
+        "binding_error_multiplier": {
+          "const": 3,
+          "type": "number"
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    }
+  }
+}
