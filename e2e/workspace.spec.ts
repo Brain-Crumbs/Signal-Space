@@ -459,6 +459,10 @@ test('research workspace completes prepare, audit, analysis and report journey',
   await expect(
     page.getByRole('button', { name: 'Download' }).first(),
   ).toBeVisible();
+  await page.screenshot({
+    path: 'test-results/screenshots/research-workspace-report.png',
+    fullPage: true,
+  });
 });
 
 test('interrupted run stays visible and resumes as a linked attempt on a narrow screen', async ({
@@ -483,6 +487,10 @@ test('interrupted run stays visible and resumes as a linked attempt on a narrow 
   ).toBeVisible();
   await page.keyboard.press('Tab');
   await expect(page.locator(':focus')).toBeVisible();
+  await page.screenshot({
+    path: 'test-results/screenshots/research-workspace-mobile.png',
+    fullPage: true,
+  });
 });
 
 test('research runtime disconnect is explicit and retryable', async ({
