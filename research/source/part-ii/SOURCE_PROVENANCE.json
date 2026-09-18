@@ -1,0 +1,20 @@
+[
+  {
+    "role": "preceding_foundations_part",
+    "source_name": "Signal_Space_Part_I_Composition_of_Signal_Histories.md",
+    "bytes": 50497,
+    "sha256": "898e413d16d6c93b2e1380b74858f8e98b79faa608fc1b2c682f614b3b1d9f82"
+  },
+  {
+    "role": "architecture",
+    "source_name": "02-Signal_Space_Full_Theory_Research_Architecture-1.md",
+    "bytes": 32501,
+    "sha256": "3c047a5bc1be0e760b6954c397a9f07ba7f6ee3c6643a114e2325e5ff0476ae8"
+  },
+  {
+    "role": "earlier_clock_source",
+    "source_name": "01-Signal_Space_Paper_III_Full_Draft.md",
+    "bytes": 72199,
+    "sha256": "030154b0194fd6722a3ae128a100accca29bdf5081d2a05a4a99b899ca5f1bc1"
+  }
+]

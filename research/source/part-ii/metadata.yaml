@@ -1,0 +1,28 @@
+---
+title: 'Signal States, Lorentz Cones and Operational Clocks'
+subtitle: 'Signal Space Foundations, Part II: From Reception Records to Conditional Geometry'
+date: '11 September 2026 | Version 0.1.0'
+lang: en-US
+documentclass: article
+fontsize: 11pt
+geometry: margin=1in
+colorlinks: true
+linkcolor: NavyBlue
+urlcolor: NavyBlue
+toc: false
+header-includes:
+  - '\usepackage{amsmath,amssymb,mathtools}'
+  - '\usepackage{microtype}'
+  - '\usepackage{float}'
+  - '\usepackage{needspace}'
+  - '\usepackage{fancyhdr}'
+  - '\pagestyle{fancy}'
+  - '\fancyhf{}'
+  - '\fancyhead[L]{\small Signal States and Operational Clocks}'
+  - '\fancyhead[R]{\small Signal Space Foundations II}'
+  - '\fancyfoot[C]{\thepage}'
+  - '\setlength{\headheight}{14pt}'
+  - '\setlength{\emergencystretch}{3em}'
+  - '\allowdisplaybreaks[1]'
+  - '\floatplacement{figure}{H}'
+---

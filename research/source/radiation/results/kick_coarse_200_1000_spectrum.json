@@ -1,0 +1,494 @@
+{
+  "name": "kick_coarse",
+  "dx": 0.05,
+  "dt": 0.010000000000000002,
+  "window": [
+    200,
+    1000
+  ],
+  "center_time": 600.0,
+  "carrier": 0.8999238072284375,
+  "modulation": 1.7284776362338987,
+  "carrier_chirp": 1.0245869784099843e-08,
+  "modulation_chirp": 3.270346812789616e-09,
+  "center_fit_relative_rms": 0.0002207144703120101,
+  "lines": [
+    {
+      "n": -4,
+      "sigma": -6.013986737707158,
+      "open": true,
+      "core_norm2": 8.556573722788615e-14,
+      "core_peak_amplitude": 2.3873171978059577e-07,
+      "k": 5.951277410030825,
+      "source_integral_abs": 4.0401684614991415e-09,
+      "source_abs_integral": 2.0493354649931196e-05,
+      "coherence_ratio": 0.00019714529565869324,
+      "coherence_ratio3": 8.487310401975934e-05,
+      "coherence_ratio5": 0.00020165860004161146,
+      "cubic_quintic_cancel": 0.5156194951265043,
+      "predicted_right_amplitude": 3.4449851482650766e-10,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 3.4453958287309396e-10,
+          "in_amplitude": 1.4709651846961124e-14,
+          "power_right": 8.367570955317484e-16,
+          "charge_right": -1.3909054790223777e-16,
+          "predicted_ratio": 0.9998808031105052,
+          "phase_difference": -3.4706831961287666e-05
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 3.445475234633301e-10,
+          "in_amplitude": 1.994443632656388e-14,
+          "power_right": 8.36757230418367e-16,
+          "charge_right": -1.3909695899236404e-16,
+          "predicted_ratio": 0.9998577594279889,
+          "phase_difference": -1.1342404904927786e-05
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 3.4452729209120727e-10,
+          "in_amplitude": 1.3549276061902236e-14,
+          "power_right": 8.366721857786956e-16,
+          "charge_right": -1.390806245461771e-16,
+          "predicted_ratio": 0.9999164731928059,
+          "phase_difference": 1.6425092826463106e-05
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 3.4460766872586167e-10,
+          "in_amplitude": 6.347382684796688e-14,
+          "power_right": 8.367799619113176e-16,
+          "charge_right": -1.3914552135203957e-16,
+          "predicted_ratio": 0.999683251682246,
+          "phase_difference": -9.721101538651253e-05
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 3.4476693363786414e-10,
+          "in_amplitude": 1.913569180567186e-13,
+          "power_right": 8.369270320069761e-16,
+          "charge_right": -1.3927412871444075e-16,
+          "predicted_ratio": 0.9992214485057362,
+          "phase_difference": -0.00013447164029988196
+        }
+      ]
+    },
+    {
+      "n": -3,
+      "sigma": -4.2855091014732585,
+      "open": true,
+      "core_norm2": 2.240189683568703e-09,
+      "core_peak_amplitude": 3.2490782050412495e-05,
+      "k": 4.174439976196034,
+      "source_integral_abs": 9.77340144715626e-07,
+      "source_abs_integral": 0.0017548858430479688,
+      "coherence_ratio": 0.0005569251974921261,
+      "coherence_ratio3": 0.0031571969173277013,
+      "coherence_ratio5": 0.000986945596503657,
+      "cubic_quintic_cancel": 0.38010403637851004,
+      "predicted_right_amplitude": 1.1791673461282544e-07,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 1.1792279379438833e-07,
+          "in_amplitude": 1.2372975406037366e-13,
+          "power_right": 4.937812507793532e-11,
+          "charge_right": -1.1520369175373407e-11,
+          "predicted_ratio": 0.9999486173845791,
+          "phase_difference": 9.375002484172154e-06
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 1.1792493881436578e-07,
+          "in_amplitude": 1.5876557808172522e-13,
+          "power_right": 4.938010025703316e-11,
+          "charge_right": -1.1520788291059206e-11,
+          "predicted_ratio": 0.9999304286131261,
+          "phase_difference": 1.5699761001349562e-05
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 1.1792812280669331e-07,
+          "in_amplitude": 2.009312596415189e-13,
+          "power_right": 4.938263985448081e-11,
+          "charge_right": -1.152141042572156e-11,
+          "predicted_ratio": 0.999903431059557,
+          "phase_difference": 1.868131721389775e-05
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 1.1793391761071465e-07,
+          "in_amplitude": 1.652128445334658e-13,
+          "power_right": 4.93875542137206e-11,
+          "charge_right": -1.1522542741828419e-11,
+          "predicted_ratio": 0.9998542997787462,
+          "phase_difference": 3.2889909064441545e-05
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 1.1793932211303099e-07,
+          "in_amplitude": 2.509583851841868e-13,
+          "power_right": 4.9392255069086506e-11,
+          "charge_right": -1.1523598842318395e-11,
+          "predicted_ratio": 0.9998084820244778,
+          "phase_difference": 5.536537211987071e-05
+        }
+      ]
+    },
+    {
+      "n": -2,
+      "sigma": -2.55703146523936,
+      "open": true,
+      "core_norm2": 3.462855848985435e-07,
+      "core_peak_amplitude": 0.0003277874635719141,
+      "k": 2.354666659684682,
+      "source_integral_abs": 0.0001935430439004988,
+      "source_abs_integral": 0.006314672245604043,
+      "coherence_ratio": 0.03064973705250241,
+      "coherence_ratio3": 0.011363650624776253,
+      "coherence_ratio5": 0.017814337745418872,
+      "cubic_quintic_cancel": 0.21149529609894419,
+      "predicted_right_amplitude": 4.119285597079515e-05,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 4.1194263886078996e-05,
+          "in_amplitude": 7.787175932782368e-12,
+          "power_right": 2.0385337171435258e-06,
+          "charge_right": -7.971832505543524e-07,
+          "predicted_ratio": 0.9999658225405424,
+          "phase_difference": 5.974785729698987e-06
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 4.119488348093548e-05,
+          "in_amplitude": 1.8832589220089018e-11,
+          "power_right": 2.0385950613939504e-06,
+          "charge_right": -7.972072312888937e-07,
+          "predicted_ratio": 0.9999507824766327,
+          "phase_difference": 9.414773583227447e-06
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 4.119551325681381e-05,
+          "in_amplitude": 1.2861877406989997e-11,
+          "power_right": 2.0386575854626056e-06,
+          "charge_right": -7.972316064384943e-07,
+          "predicted_ratio": 0.9999354957419248,
+          "phase_difference": 1.5041052341582024e-05
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 4.1196796673060424e-05,
+          "in_amplitude": 1.3033058948438665e-11,
+          "power_right": 2.038784504023566e-06,
+          "charge_right": -7.972812815537335e-07,
+          "predicted_ratio": 0.9999043444494835,
+          "phase_difference": 3.524286457846443e-05
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 4.119803789895489e-05,
+          "in_amplitude": 1.904595608957995e-11,
+          "power_right": 2.038907580892948e-06,
+          "charge_right": -7.973293251473089e-07,
+          "predicted_ratio": 0.9998742190544984,
+          "phase_difference": 7.09247155700754e-05
+        }
+      ]
+    },
+    {
+      "n": -1,
+      "sigma": -0.8285538290054613,
+      "open": false,
+      "core_norm2": 0.04276203942576527,
+      "core_peak_amplitude": 0.09114539415894579,
+      "kappa": 0.5598946384337327
+    },
+    {
+      "n": 0,
+      "sigma": 0.8999238072284375,
+      "open": false,
+      "core_norm2": 1.3272919057204597,
+      "core_peak_amplitude": 0.4977224713781814,
+      "kappa": 0.4360448086694185
+    },
+    {
+      "n": 1,
+      "sigma": 2.6284014434623364,
+      "open": true,
+      "core_norm2": 2.015783541221885e-05,
+      "core_peak_amplitude": 0.0022697136640215548,
+      "k": 2.4321559953569687,
+      "source_integral_abs": 0.0005604314664065549,
+      "source_abs_integral": 0.072039244420329,
+      "coherence_ratio": 0.007779530045270781,
+      "coherence_ratio3": 0.0032806880099796633,
+      "coherence_ratio5": 0.009335191523233376,
+      "cubic_quintic_cancel": 0.339566220167111,
+      "predicted_right_amplitude": 0.0001154973558143514,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 0.00011549853672639512,
+          "in_amplitude": 3.451808991402193e-12,
+          "power_right": 1.7011596152998064e-05,
+          "charge_right": 6.4718497161305404e-06,
+          "predicted_ratio": 0.9999897755237668,
+          "phase_difference": 3.539970574591683e-07
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 0.00011549899941395381,
+          "in_amplitude": 1.8442673010744125e-11,
+          "power_right": 1.701173287089398e-05,
+          "charge_right": 6.471901568741302e-06,
+          "predicted_ratio": 0.9999857695771326,
+          "phase_difference": 1.7467295358976352e-06
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 0.000115499501728065,
+          "in_amplitude": 2.5315874640183458e-11,
+          "power_right": 1.7011881301429404e-05,
+          "charge_right": 6.471957862467852e-06,
+          "predicted_ratio": 0.9999814205803358,
+          "phase_difference": 3.0244714552827526e-06
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 0.00011550059208605137,
+          "in_amplitude": 1.8039763262783482e-11,
+          "power_right": 1.7012197555956717e-05,
+          "charge_right": 6.472080058393466e-06,
+          "predicted_ratio": 0.999971980475238,
+          "phase_difference": 3.0068025436691863e-06
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 0.00011550155344404185,
+          "in_amplitude": 4.086018872730487e-11,
+          "power_right": 1.7012477562842837e-05,
+          "charge_right": 6.472187798304114e-06,
+          "predicted_ratio": 0.9999636573745955,
+          "phase_difference": -4.3280934726005245e-06
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "sigma": 4.356879079696235,
+      "open": true,
+      "core_norm2": 6.735599126238294e-08,
+      "core_peak_amplitude": 0.0001694345612580586,
+      "k": 4.248193125055237,
+      "source_integral_abs": 2.4983583441629265e-06,
+      "source_abs_integral": 0.010151448170634788,
+      "coherence_ratio": 0.00024610856521830617,
+      "coherence_ratio3": 0.0011470543344132386,
+      "coherence_ratio5": 0.00039558448379063753,
+      "cubic_quintic_cancel": 0.5003104161468821,
+      "predicted_right_amplitude": 2.9627236757648274e-07,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 2.9628038284005113e-07,
+          "in_amplitude": 9.800332301541338e-13,
+          "power_right": 3.2241050817373593e-10,
+          "charge_right": 7.398833621382879e-11,
+          "predicted_ratio": 0.9999729470324982,
+          "phase_difference": -5.641576052751434e-06
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 2.962840975154261e-07,
+          "in_amplitude": 1.1063342589006345e-12,
+          "power_right": 3.224181615761421e-10,
+          "charge_right": 7.39901915127722e-11,
+          "predicted_ratio": 0.9999604098261037,
+          "phase_difference": -2.3337194430258477e-06
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 2.9629041468424384e-07,
+          "in_amplitude": 1.4892579348234234e-12,
+          "power_right": 3.224286433357512e-10,
+          "charge_right": 7.399334668305199e-11,
+          "predicted_ratio": 0.999939089802212,
+          "phase_difference": -2.7048386011242742e-06
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 2.962958091065798e-07,
+          "in_amplitude": 2.2040723389248877e-12,
+          "power_right": 3.224463560355527e-10,
+          "charge_right": 7.399604103053148e-11,
+          "predicted_ratio": 0.999920884705836,
+          "phase_difference": -1.7280448275246006e-06
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 2.9630925206368134e-07,
+          "in_amplitude": 2.725701068958371e-12,
+          "power_right": 3.224674852625913e-10,
+          "charge_right": 7.400275558955671e-11,
+          "predicted_ratio": 0.9998755202986687,
+          "phase_difference": 4.451278303291783e-07
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "sigma": 6.085356715930133,
+      "open": true,
+      "core_norm2": 2.659957170838321e-12,
+      "core_peak_amplitude": 1.0856201510365475e-06,
+      "k": 6.024428215366938,
+      "source_integral_abs": 9.428169143370747e-09,
+      "source_abs_integral": 0.00012212578974808442,
+      "coherence_ratio": 7.720047635162686e-05,
+      "coherence_ratio3": 2.8853757489624224e-05,
+      "coherence_ratio5": 0.00011680706122236719,
+      "cubic_quintic_cancel": 0.5982451948966677,
+      "predicted_right_amplitude": 7.944546014865765e-10,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 7.946989262346857e-10,
+          "in_amplitude": 2.8418270983506707e-13,
+          "power_right": 4.557754180344969e-15,
+          "charge_right": 7.487922661259885e-16,
+          "predicted_ratio": 0.9996925568412848,
+          "phase_difference": 0.000528126213695228
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 7.946166664028818e-10,
+          "in_amplitude": 3.5726589155147213e-13,
+          "power_right": 4.5560856153094996e-15,
+          "charge_right": 7.486372025431506e-16,
+          "predicted_ratio": 0.9997960464168982,
+          "phase_difference": -0.0004387309387346677
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 7.942110780779328e-10,
+          "in_amplitude": 4.588266927019604e-13,
+          "power_right": 4.5553726037707686e-15,
+          "charge_right": 7.478730601959502e-16,
+          "predicted_ratio": 1.000306623031793,
+          "phase_difference": 0.00042292314031159954
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 7.938945308483355e-10,
+          "in_amplitude": 6.600449875124301e-13,
+          "power_right": 4.555092862642755e-15,
+          "charge_right": 7.4727675512326275e-16,
+          "predicted_ratio": 1.000705472347369,
+          "phase_difference": 0.00010202597011566887
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 7.938071135058953e-10,
+          "in_amplitude": 8.67301149330201e-13,
+          "power_right": 4.555430504236249e-15,
+          "charge_right": 7.47111820421971e-16,
+          "predicted_ratio": 1.000815674198007,
+          "phase_difference": -0.0004900021237890501
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "sigma": 7.813834352164032,
+      "open": true,
+      "core_norm2": 1.3175947051420883e-14,
+      "core_peak_amplitude": 8.726649981674672e-08,
+      "k": 7.796855969926194,
+      "source_integral_abs": 3.541409421212666e-11,
+      "source_abs_integral": 1.3235124183059656e-05,
+      "coherence_ratio": 2.6757659181962987e-06,
+      "coherence_ratio3": 9.453047860006781e-06,
+      "coherence_ratio5": 3.143810350712136e-06,
+      "cubic_quintic_cancel": 0.7191790316160886,
+      "predicted_right_amplitude": 2.3296109236241037e-12,
+      "detectors": [
+        {
+          "x": 20.0,
+          "out_amplitude": 2.385252954123151e-12,
+          "in_amplitude": 1.0433773284820654e-13,
+          "power_right": 6.406658047511318e-20,
+          "charge_right": 8.619196115429722e-21,
+          "predicted_ratio": 0.9766724823030344,
+          "phase_difference": -0.005654573362605424
+        },
+        {
+          "x": 30.0,
+          "out_amplitude": 2.316070144635598e-12,
+          "in_amplitude": 1.4366655051066062e-13,
+          "power_right": 6.402561861961185e-20,
+          "charge_right": 8.110708650267058e-21,
+          "predicted_ratio": 1.005846445980865,
+          "phase_difference": 0.06167810171837821
+        },
+        {
+          "x": 40.0,
+          "out_amplitude": 2.2092218807756396e-12,
+          "in_amplitude": 1.8586252926303674e-13,
+          "power_right": 6.249658098935208e-20,
+          "charge_right": 7.355691613042628e-21,
+          "predicted_ratio": 1.0544938667754804,
+          "phase_difference": -0.09660862128458021
+        },
+        {
+          "x": 60.0,
+          "out_amplitude": 1.9768417038932112e-12,
+          "in_amplitude": 2.7095630886378686e-13,
+          "power_right": 5.60327912921837e-20,
+          "charge_right": 5.820185173631324e-21,
+          "predicted_ratio": 1.1784509194823973,
+          "phase_difference": 0.017068156171578818
+        },
+        {
+          "x": 80.0,
+          "out_amplitude": 2.3457370777846668e-12,
+          "in_amplitude": 3.67574295382848e-13,
+          "power_right": 5.346018020252632e-20,
+          "charge_right": 8.146880204188527e-21,
+          "predicted_ratio": 0.9931253360347645,
+          "phase_difference": 0.0950483001982911
+        }
+      ]
+    }
+  ],
+  "total_flux": [
+    {
+      "x": 20.0,
+      "mean_power_both_sides": 3.858869092489857e-05,
+      "mean_charge_both_sides": 1.182069624093656e-05
+    },
+    {
+      "x": 30.0,
+      "mean_power_both_sides": 3.993457291329121e-05,
+      "mean_charge_both_sides": 1.3129648262013644e-05
+    },
+    {
+      "x": 40.0,
+      "mean_power_both_sides": 4.209291516872376e-05,
+      "mean_charge_both_sides": 1.5185433345850058e-05
+    },
+    {
+      "x": 60.0,
+      "mean_power_both_sides": 4.962086563017137e-05,
+      "mean_charge_both_sides": 2.245888244198113e-05
+    },
+    {
+      "x": 80.0,
+      "mean_power_both_sides": 6.341928397385857e-05,
+      "mean_charge_both_sides": 3.5669050910413316e-05
+    }
+  ]
+}

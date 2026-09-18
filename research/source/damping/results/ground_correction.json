@@ -1,0 +1,110 @@
+[
+  {
+    "dx": 0.05,
+    "dt": 0.01,
+    "width": 20,
+    "charge": 231.83286284984447,
+    "energy": 222.38492628163522,
+    "continuum_mass_offset": -0.00025781229066978995,
+    "offset_derivative": -1.961142367915072e-06
+  },
+  {
+    "dx": 0.05,
+    "dt": 0.01,
+    "width": 40,
+    "charge": 231.8328839247061,
+    "energy": 222.38494960862747,
+    "continuum_mass_offset": -0.00025352589582894325,
+    "offset_derivative": -2.0529043354046937e-06
+  },
+  {
+    "dx": 0.05,
+    "dt": 0.01,
+    "width": 60,
+    "charge": 231.8328839247061,
+    "energy": 222.38494960862747,
+    "continuum_mass_offset": -0.00025352589582894325,
+    "offset_derivative": -2.0529043354046937e-06
+  },
+  {
+    "dx": 0.025,
+    "dt": 0.005,
+    "width": 20,
+    "charge": 231.83286261997043,
+    "energy": 222.38511617444,
+    "continuum_mass_offset": -6.771180051146075e-05,
+    "offset_derivative": -4.205344891065447e-07
+  },
+  {
+    "dx": 0.025,
+    "dt": 0.005,
+    "width": 40,
+    "charge": 231.83288392470587,
+    "energy": 222.3851397554732,
+    "continuum_mass_offset": -6.337905008990674e-05,
+    "offset_derivative": -5.132164915577896e-07
+  },
+  {
+    "dx": 0.025,
+    "dt": 0.005,
+    "width": 60,
+    "charge": 231.83288392470587,
+    "energy": 222.3851397554732,
+    "continuum_mass_offset": -6.337905008990674e-05,
+    "offset_derivative": -5.132164915577896e-07
+  },
+  {
+    "dx": 0.025,
+    "dt": 0.0025,
+    "width": 20,
+    "charge": 231.83286261968678,
+    "energy": 222.3851161736344,
+    "continuum_mass_offset": -6.771234959046524e-05,
+    "offset_derivative": -4.2053733122514203e-07
+  },
+  {
+    "dx": 0.025,
+    "dt": 0.0025,
+    "width": 40,
+    "charge": 231.8328839247046,
+    "energy": 222.38513975498407,
+    "continuum_mass_offset": -6.337953794854911e-05,
+    "offset_derivative": -5.132108071582872e-07
+  },
+  {
+    "dx": 0.025,
+    "dt": 0.0025,
+    "width": 60,
+    "charge": 231.8328839247046,
+    "energy": 222.38513975498407,
+    "continuum_mass_offset": -6.337953794854911e-05,
+    "offset_derivative": -5.132108071582872e-07
+  },
+  {
+    "dx": 0.0125,
+    "dt": 0.0025,
+    "width": 20,
+    "charge": 231.83286250480285,
+    "energy": 222.38516358150676,
+    "continuum_mass_offset": -2.020068254182661e-05,
+    "offset_derivative": -3.51761094215944e-08
+  },
+  {
+    "dx": 0.0125,
+    "dt": 0.0025,
+    "width": 40,
+    "charge": 231.83288392470516,
+    "energy": 222.3851872899118,
+    "continuum_mass_offset": -1.584461077186461e-05,
+    "offset_derivative": -1.2830980723461595e-07
+  },
+  {
+    "dx": 0.0125,
+    "dt": 0.0025,
+    "width": 60,
+    "charge": 231.83288392470516,
+    "energy": 222.3851872899118,
+    "continuum_mass_offset": -1.584461077186461e-05,
+    "offset_derivative": -1.2830980723461595e-07
+  }
+]

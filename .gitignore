@@ -2,4 +2,6 @@ node_modules/
 dist/
 playwright-report/
 test-results/
+.research-work/
+research/experiments/*/runs/
 *.tsbuildinfo

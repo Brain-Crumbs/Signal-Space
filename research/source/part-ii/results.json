@@ -1,0 +1,71 @@
+{
+  "seed": 20260911,
+  "matrix_trials": 200,
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "max_errors": {
+    "tomography": 1.7763568394002505e-15,
+    "determinant": 6.9545126181492296e-15,
+    "lorentz_metric": 1.2212453270876722e-15,
+    "lorentz_action": 3.552713678800501e-15,
+    "filter_completeness": 1.1102231410346932e-15,
+    "filter_probability": 3.3306690738754696e-16,
+    "clock_ode": 1.2975731600306517e-15,
+    "clock_identity": 3.3306690738754696e-16,
+    "echo_recovery": 1.1102230246251565e-15,
+    "cavity_integral": 0.0,
+    "marker_fringe": 2.220446049250313e-16
+  },
+  "nonaffinity_witness": 0.4273525535301862,
+  "noncommuting_boost_norm": 0.21757838812888317,
+  "pure_frame_loop_error": 6.504073309903029e-16,
+  "clock": {
+    "c0": 1.0,
+    "gamma": 1.0,
+    "proper_acceleration": 0.4,
+    "cavity_length": 0.2,
+    "reference_duration": 5.0,
+    "epsilon": 0.04000000000000001,
+    "phase_rate_ratio": 0.9994664389201998,
+    "proper_duration": 3.609088687947026,
+    "expected_count_reading": 3.6416595057512833,
+    "phase_reading": 3.60716301868959,
+    "count_excess": 0.03257081780425741,
+    "phase_deficit": 0.001925669257435638,
+    "initial_statistical_rapidity": 0.19869011034924142,
+    "initial_echo_rapidity": 0.0,
+    "final_statistical_rapidity": 1.4836248161848373,
+    "final_echo_rapidity": 1.4436354751788103,
+    "ode_max_error": 2.2015722578316854e-12
+  },
+  "length_refinement": [
+    {
+      "L": 0.4,
+      "epsilon": 0.08000000000000002,
+      "phase_rate_ratio": 0.9978630135212389,
+      "phase_deficit": 0.007712573726792611
+    },
+    {
+      "L": 0.2,
+      "epsilon": 0.04000000000000001,
+      "phase_rate_ratio": 0.9994664389201998,
+      "phase_deficit": 0.001925669257435638
+    },
+    {
+      "L": 0.1,
+      "epsilon": 0.020000000000000004,
+      "phase_rate_ratio": 0.9998666524414638,
+      "phase_deficit": 0.00048126316507843687
+    },
+    {
+      "L": 0.05,
+      "epsilon": 0.010000000000000002,
+      "phase_rate_ratio": 0.9999666657777312,
+      "phase_deficit": 0.00012030616451187561
+    }
+  ],
+  "status": "passed"
+}

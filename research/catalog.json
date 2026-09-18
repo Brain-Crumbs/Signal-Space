@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "updated": "2026-09-18",
+  "entries": [
+    {
+      "id": "program-architecture",
+      "title": "Research architecture",
+      "kind": "plan",
+      "status": "active design",
+      "date": "2026-09-18",
+      "path": "docs/research/architecture.md",
+      "summary": "Plugin boundaries, immutable execution lifecycle, local service, analysis, reporting, and UI plan.",
+      "tags": ["architecture", "runtime", "reports", "UI"]
+    },
+    {
+      "id": "artifact-contract",
+      "title": "Research artifact contract",
+      "kind": "plan",
+      "status": "active design",
+      "date": "2026-09-18",
+      "path": "docs/research/artifact-contract.md",
+      "summary": "Run identity, attempts, checkpoints, analysis lineage, figure provenance, claims, and archive verification.",
+      "tags": ["artifacts", "provenance", "reproducibility"]
+    },
+    {
+      "id": "experiment-plan",
+      "title": "Experiment execution plan",
+      "kind": "plan",
+      "status": "active design",
+      "date": "2026-09-18",
+      "path": "docs/research/experiment-plan.md",
+      "summary": "Ordered E00–E11 derivation gates from the framework fixture to a shared coexistence test.",
+      "tags": ["roadmap", "experiments", "derivation gates"]
+    },
+    {
+      "id": "e01-protocol",
+      "title": "E01 charged recurrence protocol",
+      "kind": "protocol",
+      "status": "planned",
+      "date": "2026-09-18",
+      "path": "docs/research/first-experiment.md",
+      "summary": "Predeclared radial continuation, constrained stability, threshold, convergence, and classification tests.",
+      "tags": ["E01", "3D", "stability", "continuation"]
+    },
+    {
+      "id": "knot-grid",
+      "title": "Knot topology to Standard Model research grid",
+      "kind": "assessment",
+      "status": "hypothesis and derivation targets",
+      "date": "2026-09-17",
+      "path": "research/papers/knot-to-standard-model-research-grid.md",
+      "summary": "Critical map from winding and internal responses to the exact gauge, chiral, anomaly, and phenomenology gates still required.",
+      "tags": ["knots", "Standard Model", "winding", "gauge"]
+    },
+    {
+      "id": "charged-hopf-model",
+      "title": "3+1D charged recurrence, winding, and Hopf model",
+      "kind": "model",
+      "status": "specified; key branches untested",
+      "date": "2026-09-17",
+      "path": "research/papers/charged-recurrence-winding-hopf.md",
+      "summary": "Action, currents, stationary branch, stability problem, radiation, winding, regulator, and explicit Hopf extension.",
+      "tags": ["3+1D", "charged recurrence", "Hopf", "action"]
+    },
+    {
+      "id": "full-theory-architecture",
+      "title": "Full theory research architecture",
+      "kind": "assessment",
+      "status": "research program",
+      "date": "2026-09-11",
+      "path": "research/papers/full-theory-research-architecture.md",
+      "summary": "Composition, Lorentz cone, clocks, autonomous vacuum, gravity, gauge sectors, gaps, constants, and coexistence tests.",
+      "tags": ["foundations", "geometry", "gravity", "gauge"]
+    },
+    {
+      "id": "signal-states-paper",
+      "title": "Signal states, Lorentz cones, and operational clocks",
+      "kind": "paper",
+      "status": "manuscript and benchmark",
+      "date": "2026-09-11",
+      "path": "research/papers/signal-states-lorentz-cones-operational-clocks.md",
+      "summary": "Positive signal operators, cone structure, calibration obstructions, phase clocks, benchmark, and modular boundary.",
+      "tags": ["Lorentz cone", "clocks", "calibration", "entropy"]
+    },
+    {
+      "id": "formation-milestone",
+      "title": "Charged-clock formation milestone",
+      "kind": "milestone",
+      "status": "executed 1+1D result",
+      "date": "2026-09-16",
+      "path": "research/milestones/charged-clock-formation.md",
+      "summary": "Conservative formation scan, settled configuration, controls, neutral packets, recoil, and causal phase readout.",
+      "tags": ["formation", "1+1D", "recoil", "readout"]
+    },
+    {
+      "id": "radiation-milestone",
+      "title": "Charged-clock radiation milestone",
+      "kind": "milestone",
+      "status": "executed 1+1D result",
+      "date": "2026-09-17",
+      "path": "research/milestones/charged-clock-radiation.md",
+      "summary": "Frequency-resolved fields, energy and charge flux, nonlinear source overlap, and persistence interpretation.",
+      "tags": ["radiation", "spectrum", "flux", "1+1D"]
+    },
+    {
+      "id": "damping-milestone",
+      "title": "Charged-clock damping milestone",
+      "kind": "milestone",
+      "status": "executed 1+1D result",
+      "date": "2026-09-17",
+      "path": "research/milestones/charged-clock-damping.md",
+      "summary": "Amplitude scan, resonance checks, damping fits, refinement, and limits of the persistence result.",
+      "tags": ["damping", "resonance", "refinement", "1+1D"]
+    },
+    {
+      "id": "formation-figure",
+      "title": "Formation diagnostics",
+      "kind": "figure",
+      "status": "imported evidence",
+      "date": "2026-09-16",
+      "path": "research/figures/formation-diagnostics.png",
+      "summary": "Diagnostic panels for the selected conservative formation calculation.",
+      "tags": ["formation", "diagnostics"]
+    },
+    {
+      "id": "formation-scan-figure",
+      "title": "Formation scan",
+      "kind": "figure",
+      "status": "imported evidence",
+      "date": "2026-09-16",
+      "path": "research/figures/formation-scan.png",
+      "summary": "Parameter-scan overview for the formation milestone.",
+      "tags": ["formation", "scan"]
+    },
+    {
+      "id": "formation-readout-figure",
+      "title": "Formation phase readout",
+      "kind": "figure",
+      "status": "imported evidence",
+      "date": "2026-09-16",
+      "path": "research/figures/formation-readout.png",
+      "summary": "Causal phase-readout diagnostics after formation.",
+      "tags": ["formation", "phase", "readout"]
+    },
+    {
+      "id": "radiation-figure",
+      "title": "Radiation diagnostics",
+      "kind": "figure",
+      "status": "imported evidence",
+      "date": "2026-09-17",
+      "path": "research/figures/charged-clock-radiation-diagnostics.png",
+      "summary": "Spectral and flux diagnostics supporting the radiation milestone.",
+      "tags": ["radiation", "spectrum", "flux"]
+    },
+    {
+      "id": "damping-figure",
+      "title": "Damping diagnostics",
+      "kind": "figure",
+      "status": "imported evidence",
+      "date": "2026-09-17",
+      "path": "research/figures/charged-clock-damping-diagnostics.png",
+      "summary": "Amplitude, rate, and refinement diagnostics supporting the damping milestone.",
+      "tags": ["damping", "resonance", "fits"]
+    },
+    {
+      "id": "part-ii-source",
+      "title": "Operational clocks paper source",
+      "kind": "source",
+      "status": "imported reproducibility bundle",
+      "date": "2026-09-11",
+      "path": "research/source/part-ii/README.md",
+      "summary": "Section sources, builder, benchmark results, claim ledger, validation, and figure-generation inputs.",
+      "tags": ["source", "paper", "benchmark"]
+    },
+    {
+      "id": "formation-source",
+      "title": "Formation calculation source",
+      "kind": "source",
+      "status": "curated import",
+      "date": "2026-09-16",
+      "path": "research/source/formation/README.md",
+      "summary": "Evolution and analysis code, configs, metadata, compact analysis, report generator, and deliverables; large raw trajectories omitted.",
+      "tags": ["source", "formation", "C++", "Python"]
+    },
+    {
+      "id": "radiation-source",
+      "title": "Radiation calculation source",
+      "kind": "source",
+      "status": "curated import",
+      "date": "2026-09-17",
+      "path": "research/source/radiation/README.md",
+      "summary": "Evolution, spectrum and diagnostic code, compact spectral outputs, report generator, manifest, and deliverables.",
+      "tags": ["source", "radiation", "C++", "Python"]
+    },
+    {
+      "id": "damping-source",
+      "title": "Damping calculation source",
+      "kind": "source",
+      "status": "curated import",
+      "date": "2026-09-17",
+      "path": "research/source/damping/README.md",
+      "summary": "Scan, resonance, fit and report code, input configurations, compact analyses, summary, manifest, and deliverables.",
+      "tags": ["source", "damping", "resonance", "Python"]
+    },
+    {
+      "id": "research-coach",
+      "title": "Research professor and coach persona",
+      "kind": "guide",
+      "status": "working guidance",
+      "date": "2026-09-17",
+      "path": "research/research-coach-persona.md",
+      "summary": "Reasoning, rigor, interpretation, and communication guidance for collaborative research sessions.",
+      "tags": ["workflow", "review", "communication"]
+    }
+  ]
+}

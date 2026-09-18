@@ -4,6 +4,7 @@ import type { SampleId } from '@signal-space/experiments';
 import { summarizeSnapshot } from '@signal-space/analysis';
 import type { Snapshot } from '@signal-space/model';
 import type { RunEvent, WorkerCommand } from '@signal-space/sim';
+import { ResearchExplorer } from './ResearchExplorer.js';
 
 export function App() {
   const [sample, setSample] = useState<SampleId>('isolated');
@@ -78,92 +79,113 @@ export function App() {
   return (
     <main>
       <header>
-        <p className="eyebrow">PAPER I / LOCAL MATHEMATICS WORKSPACE</p>
+        <p className="eyebrow">COMPUTATIONAL RESEARCH PROGRAM</p>
         <h1>Signal Space</h1>
-        <p>Inspect a clock network’s initial preparation.</p>
-      </header>
-      <section className="controls" aria-label="Run controls">
-        <div>
-          <label htmlFor="sample">Sample network</label>
-          <select
-            id="sample"
-            value={sample}
-            disabled={running}
-            onChange={(e) => {
-              setSample(e.target.value as SampleId);
-              setSnapshot(undefined);
-              setProgress(0);
-              setStatus('Ready');
-              setError('');
-            }}
-          >
-            {sampleIds.map((id) => (
-              <option key={id} value={id}>
-                {id === 'isolated' ? 'Isolated clock' : 'Reciprocal pair'}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button onClick={run} disabled={running}>
-          Inspect preparation
-        </button>
-        <button className="secondary" onClick={cancel} disabled={!running}>
-          Cancel
-        </button>
-      </section>
-      <section className="results" aria-label="Preparation result">
-        <div className="status">
-          <h2>Initial state</h2>
-          <span role="status">{status}</span>
-        </div>
-        <progress aria-label="Run progress" max={1} value={progress} />
-        {error && <p role="alert">{error}</p>}
-        {snapshot && summary ? (
-          <>
-            <p>
-              {summary.nodeCount} clock{summary.nodeCount === 1 ? '' : 's'} · t
-              = {summary.time} s · {summary.pendingPacketCount} pending packets
-            </p>
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Clock</th>
-                    <th>Phase (rad, unwrapped)</th>
-                    <th>Frequency (rad s⁻¹)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.entries(snapshot.nodeState).map(([id, node]) => (
-                    <tr key={id}>
-                      <th>{id}</th>
-                      <td>{node.phi}</td>
-                      <td>{node.omega}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <details>
-              <summary>Complete initial snapshot</summary>
-              <pre>{JSON.stringify(snapshot, null, 2)}</pre>
-            </details>
-          </>
-        ) : (
-          <p className="empty">
-            Choose a sample and inspect its preparation to see the supplied
-            clock state.
-          </p>
-        )}
-      </section>
-      <aside>
-        <strong>Workspace smoke check</strong>
         <p>
-          This checks the supplied preparation at t = 0. Envelope evolution is
-          available through the CLI and shared worker API; interactive evolution
-          controls follow in T17. The displayed state is simulator truth.
+          Build an auditable path from reception dynamics to topology,
+          particles, gauge sectors, and geometry.
         </p>
-      </aside>
+      </header>
+      <ResearchExplorer />
+      <section
+        className="historical-workspace"
+        aria-labelledby="historical-heading"
+      >
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">SEPARATE HISTORICAL MODEL</p>
+            <h2 id="historical-heading">Delay-network workspace</h2>
+          </div>
+          <span className="status-chip historical">Preserved</span>
+        </div>
+        <p className="section-intro">
+          Inspect a supplied clock-network preparation using the existing shared
+          TypeScript engine. This is not the new charged-recurrence runtime.
+        </p>
+        <section className="controls" aria-label="Run controls">
+          <div>
+            <label htmlFor="sample">Sample network</label>
+            <select
+              id="sample"
+              value={sample}
+              disabled={running}
+              onChange={(e) => {
+                setSample(e.target.value as SampleId);
+                setSnapshot(undefined);
+                setProgress(0);
+                setStatus('Ready');
+                setError('');
+              }}
+            >
+              {sampleIds.map((id) => (
+                <option key={id} value={id}>
+                  {id === 'isolated' ? 'Isolated clock' : 'Reciprocal pair'}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button onClick={run} disabled={running}>
+            Inspect preparation
+          </button>
+          <button className="secondary" onClick={cancel} disabled={!running}>
+            Cancel
+          </button>
+        </section>
+        <section className="results" aria-label="Preparation result">
+          <div className="status">
+            <h3>Initial state</h3>
+            <span role="status">{status}</span>
+          </div>
+          <progress aria-label="Run progress" max={1} value={progress} />
+          {error && <p role="alert">{error}</p>}
+          {snapshot && summary ? (
+            <>
+              <p>
+                {summary.nodeCount} clock{summary.nodeCount === 1 ? '' : 's'} ·
+                t = {summary.time} s · {summary.pendingPacketCount} pending
+                packets
+              </p>
+              <div className="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Clock</th>
+                      <th>Phase (rad, unwrapped)</th>
+                      <th>Frequency (rad s⁻¹)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(snapshot.nodeState).map(([id, node]) => (
+                      <tr key={id}>
+                        <th>{id}</th>
+                        <td>{node.phi}</td>
+                        <td>{node.omega}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <details>
+                <summary>Complete initial snapshot</summary>
+                <pre>{JSON.stringify(snapshot, null, 2)}</pre>
+              </details>
+            </>
+          ) : (
+            <p className="empty">
+              Choose a sample and inspect its preparation to see the supplied
+              clock state.
+            </p>
+          )}
+        </section>
+        <aside>
+          <strong>Workspace smoke check</strong>
+          <p>
+            This checks the supplied preparation at t = 0. The displayed state
+            is simulator truth. New-model execution, audit, and reporting remain
+            tracked in issues #37 and #38.
+          </p>
+        </aside>
+      </section>
     </main>
   );
 }

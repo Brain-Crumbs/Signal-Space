@@ -1,63 +1,101 @@
 # Signal Space
 
-A local mathematics workspace and reproducible toolkit for the Paper I directional signal-clock model.
+Signal Space is a computational research program testing whether local, finite-speed reception dynamics can support stable recurrence structures, topology-constrained matter states, and—only after explicit derivation gates—the gauge and gravitational limits of known physics.
 
-**Current capability:** validate scenarios, inspect their initial preparation, and evolve deterministic Paper I envelopes with causal delay history, error controls, ticks and complete restart snapshots. Seeded stochastic packets, pure observer recording and physical intervention branches are also available through the shared engine. The CLI and typed Web Worker share the numerical implementation. The React shell still displays preparation only; interactive evolution controls and A–I protocols follow in later tasks.
+The project is deliberately organized around questions and falsifiable experiments rather than particle-name correspondences. Knot or winding topology may constrain a state space; it does not, by itself, produce a gauge theory, fermions, or the Standard Model.
+
+## Current research position
+
+The working hypothesis is that a complete finite-energy recurrence can carry protected winding and coherent internal response modes. In the hadronic branch, effective quark labels are treated as responses of the complete object, not as three independently postulated classical knots.
+
+What is established in the imported record is narrower:
+
+- selected 1+1-dimensional charged formation and phase-sensitive interaction results;
+- weak structural radiation and damping diagnostics for that model family;
+- an operational positive-signal construction, Lorentz-cone representation, and clock-calibration analysis;
+- explicit 3+1-dimensional charged and Hopf model proposals that still require independent numerical tests.
+
+Stable three-dimensional charged branches, charged–Hopf binding, fermionic quantization, emergent gauge fields, chiral matter, and a common gravitational limit remain open. The repository must preserve that boundary between result, proposal, and conjecture.
+
+## Program map
+
+| Area                  | Purpose                                                                              | Start here                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Research architecture | Shared runtime, model plugins, audit trail, analysis, reports, and UI boundaries     | [`docs/research/architecture.md`](docs/research/architecture.md)           |
+| Artifact contract     | Immutable run packages, provenance, checksums, figures, reports, and claims          | [`docs/research/artifact-contract.md`](docs/research/artifact-contract.md) |
+| Experiment sequence   | Ordered gates from synthetic fixture through integrated theory tests                 | [`docs/research/experiment-plan.md`](docs/research/experiment-plan.md)     |
+| First experiment      | Three-dimensional charged recurrence branch and constrained stability protocol       | [`docs/research/first-experiment.md`](docs/research/first-experiment.md)   |
+| Theory and evidence   | Papers, milestones, figures, source code, configurations, and compact results        | [`research/README.md`](research/README.md)                                 |
+| Local UI              | Search and inspect the research collection; retain the separate historical workspace | `npm run dev`                                                              |
+
+The first implementation issues are [#37 common framework](https://github.com/Brain-Crumbs/Signal-Space/issues/37), [#38 research UI](https://github.com/Brain-Crumbs/Signal-Space/issues/38), and [#39 E01 charged branch](https://github.com/Brain-Crumbs/Signal-Space/issues/39).
+
+## Repository layout
+
+```text
+apps/
+  cli/                 Historical TypeScript CLI
+  web/                 Local research browser and historical workspace
+contracts/research/    Future versioned runtime and artifact schemas
+docs/research/         Architecture and experiment protocols
+packages/              Historical delay-network model and shared UI engine
+python/signal_space/   Planned scientific runtime and model plugins
+research/
+  papers/              Theory manuscripts and research assessments
+  milestones/          Executed-result reports
+  figures/             Curated diagnostic figures
+  source/              Reproducibility code, configs, manifests, compact outputs
+  experiments/         Accepted immutable run packages
+```
+
+The existing TypeScript delay-network implementation is preserved as a separately labeled historical workspace. It is not the numerical foundation for the new charged-recurrence and knot program.
 
 ## Quick start
 
-Install Node **24.19.0** (see `.nvmrc`; `nvm install && nvm use` if using nvm) and npm **11.9.0** (`npm install --global npm@11.9.0`). Then, from the repository root:
+Install Node **24.19.0** (see `.nvmrc`) and npm **11.9.0**, then:
 
 ```sh
 npm ci
-npm run cli -- --sample isolated
-npm run cli -- --sample pair
+npm run verify:research
+npm run check
 npm run dev
 ```
 
-Open the local URL printed by Vite, select a sample, and choose **Inspect preparation**. Cancel requests are sent to the worker; these small samples can finish before a user clicks Cancel. The UI displays simulator truth and the raw initial snapshot with history; it is not an observer inference view.
+Open the local Vite URL to search papers, milestones, figures, and source collections. The explorer is read-only in this foundation change. Run preparation, cancellation, resume, report generation, and audit views are designed in the architecture and tracked in issues #37 and #38; the UI does not claim those capabilities are already implemented.
 
-To inspect a JSON scenario or build both applications:
+The historical workspace remains available on the same page. Its direct CLI commands are unchanged:
 
 ```sh
-npm run cli -- --file fixtures/scenarios/pair.json
-npm run build
-node apps/cli/dist/index.js --sample pair
-node apps/cli/dist/index.js --sample pair --until 1
-npm run preview -w @signal-space/web
-
-# T07 declarative experiment commands
-npm run cli -- validate --manifest definition.json
-npm run cli -- sweep --manifest definition.json --checkpoint sweep.json
+npm run cli -- --sample isolated
+npm run cli -- --sample pair --until 1
 ```
 
-The CLI emits JSON Lines (progress, snapshot, then completed/cancelled/failed); SIGINT requests cancellation. Exit codes: 0 success, 1 invalid input/failure, 130 cancelled. Use `--help` for arguments. For machine-readable output, invoke the built CLI directly (npm itself prints script banners).
+## Research discipline
 
-The web build is in `apps/web/dist`; the bundled CLI is in `apps/cli/dist/index.js`. Shared packages expose TypeScript workspace source, consumed by tsx, Vite and the CLI bundler; they are private packages, not separately published Node libraries. No server, database, authentication, secrets or cloud compute is needed. Hosting is outside this epic.
+Every experiment must:
 
-## Workspace
+1. begin with a declared model/action, units, boundary conditions, and input ledger;
+2. define success, failure, and unresolved outcomes before the expensive run;
+3. use independent analytic, convergence, conservation, and negative controls;
+4. preserve seeds, solver state, failures, and incomplete sweep coverage;
+5. separate raw outputs, derived analysis, figures, and scientific claims;
+6. regenerate reports without rerunning the physical simulation;
+7. compare against held-out observables only after calibrations are frozen.
 
-| Path                   | Responsibility                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------ |
-| `packages/model`       | Versioned TypeScript contracts, JSON Schema, semantic validation               |
-| `packages/sim`         | Shared execution API, causal envelope solver and cancellable worker adapter    |
-| `packages/analysis`    | Initial-state inventory; numerical diagnostics follow in T06                   |
-| `packages/experiments` | Independent copies of isolated/pair smoke fixtures; A–I protocols follow later |
-| `apps/cli`             | File/sample input, JSONL output and SIGINT adapter                             |
-| `apps/web`             | React shell; typed commands/results across a Web Worker                        |
-
-See [detector records and physical branches](docs/observation.md), [envelope solver](docs/envelope-solver.md), [execution contract](docs/execution-api.md), [experiment runs](docs/experiment-runs.md), [model contract](docs/model-contract.md), [paper traceability](docs/paper-i-traceability.md), and [contributor instructions](AGENTS.md).
+Negative and unresolved results are valid completed experiments. A visual resemblance, fitted particle label, or post-hoc numerical coincidence is not a derivation.
 
 ## Validation
 
 ```sh
+npm run verify:research
 npm run check
 npx playwright install --with-deps chromium
 npm run test:browser
+git diff --check
 ```
 
-The browser suite uses the **production build**, including its emitted worker, and compares its snapshot to the shared engine. Run `npm run build` after source changes before running it separately. CI installs from the lockfile and runs these checks on pull requests and main. Browser installation needs network access and Linux system dependencies; this is test tooling, not an application runtime requirement.
+`verify:research` checks the catalog and byte-level archive manifest. `check` runs formatting, lint, strict type checking, unit tests, and production builds. Browser tests exercise the built worker and research explorer.
 
-Use `npm run format` to format code and docs. The original dependency-free model tests can also be run with `node --test test/model-contract.test.js`.
+## Data policy
 
-Stochastic packets (T04): `node apps/cli/dist/index.js --sample pair --until 2 --seed pair-smoke-v1`. This runs the same seeded engine exposed to the production Web Worker and exports complete physical checkpoints in JSON Lines. See [packet engine](docs/packet-engine.md) for numerical controls, replay and resource limits; these smoke runs are not paper findings.
+Git stores manuscripts, source, configurations, compact tabular/JSON results, report code, and curated figures. Large field arrays, probe streams, and transient binaries belong in immutable external run packages identified by hashes; accepted run summaries and manifests are archived under `research/experiments/`. This prevents Git history from becoming the raw-data backend while keeping every accepted claim traceable.
