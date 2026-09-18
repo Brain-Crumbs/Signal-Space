@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
   createSetupDDefinition,
+  createSetupDReplayDefinition,
   createSetupDSmokeDefinitions,
+  resolveDefinition,
   runSetupD,
   runSetupDPreparationEnsemble,
   validateDefinition,
@@ -111,6 +113,99 @@ test('Setup D endpoint replay is a non-responsive receiver-only control preservi
   );
 });
 
+test('Setup D empty-link replay keeps all prehistory arrivals empty', () => {
+  const run = runSetupD({
+    duration: 1,
+    sampleCadence: 0.1,
+    variant: 'E1-R0',
+    gain: 0,
+    linkHistory: 'empty-links',
+  });
+  assert.equal(
+    run.replayControl.sources.every((source) =>
+      source.output
+        .filter((point) => point.time < source.delay)
+        .every((point) => point.rate === 0),
+    ),
+    true,
+  );
+});
+
+test('Setup D separates prepared asymmetry from a positive-time disturbance', () => {
+  const run = runSetupD({
+    duration: 2,
+    sampleCadence: 0.1,
+    variant: 'E1-R0',
+    gain: 0,
+    disturbanceTime: 0.5,
+  });
+  assert.equal(run.asymmetry.kind, 'prepared-intrinsic-frequency-asymmetry');
+  assert.equal(run.disturbance.time, 0.5);
+  assert.deepEqual(
+    run.samples.filter((sample) => sample.time < run.disturbance.time),
+    run.referenceSamples.filter((sample) => sample.time < run.disturbance.time),
+  );
+  assert.equal(
+    run.diagnostics.disturbancePropagation.every(
+      (point) => point.status !== 'causality-violation',
+    ),
+    true,
+  );
+  assert.deepEqual(run.diagnostics.criteria.causalTimeTolerance, {
+    value: 1e-9,
+    unit: 's',
+  });
+  assert.deepEqual(run.diagnostics.criteria.frequencyOnsetTolerance, {
+    value: 1e-6,
+    unit: 'rad s^-1',
+  });
+});
+
+test('Setup D E0 preparation changes intrinsic frequency without changing fixed emission rate', () => {
+  const run = runSetupD({
+    duration: 1,
+    sampleCadence: 0.1,
+    variant: 'E0-R0',
+    gain: 0,
+  });
+  const rates = run.scenario.nodes.map((clock) =>
+    clock.emission.law === 'E0' ? clock.emission.nu : NaN,
+  );
+  assert.equal(new Set(rates).size, 1);
+});
+
+test('Setup D replay has its own executable definition and behavior-complete identity', async () => {
+  const primary = createSetupDDefinition({
+    duration: 1,
+    sampleCadence: 0.1,
+    variant: 'E1-R0',
+    gain: 0,
+  });
+  const replay = createSetupDReplayDefinition({
+    duration: 1,
+    sampleCadence: 0.1,
+    variant: 'E1-R0',
+    gain: 0,
+  });
+  assert.notEqual(primary.id, replay.id);
+  assert.equal(
+    primary.controls?.some((control) => control.id.includes('replay')),
+    false,
+  );
+  assert.equal(replay.scenario.nodes.length, 1);
+  assert.deepEqual(replay.scenario.links, []);
+  assert.equal((await resolveDefinition(replay)).manifests.length, 1);
+
+  const changed = createSetupDDefinition({
+    duration: 1,
+    sampleCadence: 0.1,
+    variant: 'E1-R0',
+    gain: 0,
+    linkHistory: 'empty-links',
+  });
+  assert.notEqual(primary.id, changed.id);
+});
+
 test('Setup D preparation ensemble keeps independent declared phase preparations', () => {
   const ensemble = runSetupDPreparationEnsemble({
     duration: 1,
@@ -168,4 +263,8 @@ test('Setup D exposes local metrics, retarded mismatches, propagation records, a
 
 test('Setup D rejects non-admissible baseline gain before evolution', () => {
   assert.throws(() => runSetupD({ gain: 2 }), /must satisfy/);
+  assert.throws(
+    () => runSetupD({ normalization: 'unknown' as never }),
+    /Unknown Setup D normalization/,
+  );
 });

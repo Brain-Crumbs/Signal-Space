@@ -27,11 +27,18 @@ const DEFAULT_CADENCE = 0.05;
 const DEFAULT_GAIN = 0.2;
 const DEFAULT_BOOST = 0.1;
 const DEFAULT_Q = 3;
-const ONSET_TOLERANCE = 1e-6;
+const DEFAULT_DISTURBANCE_PHASE_OFFSET = 0.05;
+const FREQUENCY_ONSET_TOLERANCE = 1e-6;
+const PHASE_ONSET_TOLERANCE = 1e-6;
+const CAUSAL_TIME_TOLERANCE = 1e-9;
 
 export type SetupDInterventionId = (typeof NODE_IDS)[number];
 export type SetupDNormalizationId =
   'fixed-physical-r-star' | 'degree-normalized-r-star';
+export const setupDNormalizationIds: readonly SetupDNormalizationId[] = [
+  'fixed-physical-r-star',
+  'degree-normalized-r-star',
+];
 export type SetupDReplayProtocolId = 'recorded-endpoint-replay';
 
 export const setupDPreparationIds: readonly SetupBPreparationId[] = [
@@ -96,19 +103,31 @@ export interface SetupDDiagnostics {
   perNode: Record<SetupDInterventionId, SetupDNodeMetrics>;
   retardedMismatch: Record<string, RetardedPhasePoint[]>;
   disturbancePropagation: ReturnType<typeof responseFront>;
+  criteria: {
+    frequencyOnsetTolerance: { value: number; unit: 'rad s^-1' };
+    phaseOnsetTolerance: { value: number; unit: 'rad' };
+    causalTimeTolerance: { value: number; unit: 's' };
+  };
 }
 
 export interface SetupDRun {
   schemaVersion: 'setup-d-diagnostic-v1';
   modelVersion: 'paper-i-v1';
   sourceSection: 'Paper I §11.5';
-  intervention: {
-    kind: 'intrinsic-frequency-increase';
+  variant: SetupBVariantId;
+  asymmetry: {
+    kind: 'prepared-intrinsic-frequency-asymmetry';
     target: SetupDInterventionId;
     baselineOmega0: number;
     boostedOmega0: number;
     fraction: number;
-    time: 0;
+  };
+  disturbance: {
+    kind: 'phase-offset';
+    target: SetupDInterventionId;
+    time: number;
+    phaseOffset: number;
+    frequencyOffset: 0;
   };
   preparation: SetupDPreparation;
   normalization: SetupDNormalization;
@@ -133,6 +152,8 @@ export interface SetupDOptions {
   sampleCadence?: number;
   intrinsicFrequencyIncrease?: number;
   gain?: number;
+  disturbanceTime?: number;
+  disturbancePhaseOffset?: number;
 }
 
 export interface SetupDPreparationEnsemble {
@@ -222,7 +243,12 @@ function validateOptions(
   options: Required<
     Pick<
       SetupDOptions,
-      'duration' | 'sampleCadence' | 'intrinsicFrequencyIncrease' | 'gain'
+      | 'duration'
+      | 'sampleCadence'
+      | 'intrinsicFrequencyIncrease'
+      | 'gain'
+      | 'disturbanceTime'
+      | 'disturbancePhaseOffset'
     >
   >,
 ): void {
@@ -233,6 +259,8 @@ function validateOptions(
     'Setup D intrinsicFrequencyIncrease',
   );
   finite(options.gain, 'Setup D gain');
+  finite(options.disturbanceTime, 'Setup D disturbanceTime');
+  finite(options.disturbancePhaseOffset, 'Setup D disturbancePhaseOffset');
   if (!(options.duration > 0))
     throw new RangeError('Setup D duration must be positive.');
   if (
@@ -250,6 +278,14 @@ function validateOptions(
     throw new RangeError(
       'Setup D gain must satisfy |gain| < the baseline omega0.',
     );
+  if (!(
+    options.disturbanceTime > 0 && options.disturbanceTime < options.duration
+  ))
+    throw new RangeError(
+      'Setup D disturbanceTime must occur after preparation and before the run ends.',
+    );
+  if (options.disturbancePhaseOffset === 0)
+    throw new RangeError('Setup D disturbancePhaseOffset must be nonzero.');
 }
 
 function scenarioFor(
@@ -277,7 +313,9 @@ function scenarioFor(
       variant.emission === 'E0'
         ? {
             law: 'E0' as const,
-            nu: (DEFAULT_Q * (id === intervention ? 2 * (1 + boost) : 2)) / TAU,
+            // E0 is a fixed-rate control; intrinsic-frequency preparation must
+            // not silently introduce a second emission-rate intervention.
+            nu: (DEFAULT_Q * 2) / TAU,
           }
         : { law: 'E1' as const, q: DEFAULT_Q },
   }));
@@ -334,6 +372,8 @@ function degreeNormalization(
   scenario: Scenario,
   id: SetupDNormalizationId,
 ): SetupDNormalization {
+  if (!setupDNormalizationIds.includes(id))
+    throw new RangeError(`Unknown Setup D normalization ${id}.`);
   const incomingDegrees = Object.fromEntries(
     NODE_IDS.map((nodeId) => [
       nodeId,
@@ -399,11 +439,21 @@ function envelopeFor(
   scenario: Scenario,
   prep: SetupDPreparation,
   normalization: SetupDNormalization,
+  perturbation?: {
+    time: number;
+    nodeId: SetupDInterventionId;
+    phaseOffset: number;
+  },
 ): EnvelopeOptions {
   return {
     preparation: prep.linkHistory,
     prehistory: prehistoryFor(scenario),
     responseRateScales: clone(normalization.responseRateScales),
+    ...(perturbation === undefined
+      ? {}
+      : {
+          perturbations: [{ ...perturbation, frequencyOffset: 0 }],
+        }),
   };
 }
 
@@ -421,17 +471,16 @@ function runEnvelope(
   cadence: number,
 ) {
   const solver = new EnvelopeSolver(scenario, envelope);
-  const samples: EnvelopeSample[] = [solver.sample()];
+  const samples: EnvelopeSample[] = [];
   for (const target of sampleTargets(duration, cadence)) {
     while (solver.time < target) {
-      const previous = solver.time;
       solver.advance(target);
-      if (solver.time > previous) samples.push(solver.sample());
       // Adaptive integration can land within a few representable values of a
       // decimal diagnostic target. Do not retry an unresolvable remainder.
       if (target - solver.time <= 16 * Number.EPSILON * Math.max(1, target))
         break;
     }
+    samples.push(solver.sample());
   }
   return { samples, finalSnapshot: solver.snapshot() };
 }
@@ -440,8 +489,20 @@ function analysisSamples(samples: EnvelopeSample[]): AnalysisSample[] {
   return samples.map((sample) => ({ time: sample.time, nodes: sample.nodes }));
 }
 
-function average(values: number[]): number {
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
+function timeMean(
+  samples: EnvelopeSample[],
+  value: (sample: EnvelopeSample) => number,
+): number {
+  if (samples.length === 1) return value(samples[0]!);
+  let integral = 0;
+  for (let index = 1; index < samples.length; index++) {
+    const previous = samples[index - 1]!;
+    const current = samples[index]!;
+    integral +=
+      ((value(previous) + value(current)) / 2) * (current.time - previous.time);
+  }
+  const elapsed = samples.at(-1)!.time - samples[0]!.time;
+  return elapsed > 0 ? integral / elapsed : value(samples[0]!);
 }
 
 function retardedMismatches(
@@ -476,26 +537,30 @@ function diagnosticsFor(
   samples: EnvelopeSample[],
   referenceSamples: EnvelopeSample[],
   intervention: SetupDInterventionId,
+  disturbanceTime: number,
 ): SetupDDiagnostics {
   const series = analysisSamples(samples);
-  const reference = new Map(
-    referenceSamples.map((sample) => [sample.time, sample]),
-  );
+  if (samples.length !== referenceSamples.length)
+    throw new Error('Setup D paired diagnostics require a shared sample grid.');
   const perNode = Object.fromEntries(
     NODE_IDS.map((id) => {
       const source = node(scenario, id);
-      const metrics = samples.map((sample) => sample.nodes[id]!);
       return [
         id,
         {
           meanFrequency: meanFrequency(series, id),
-          meanRhoLeft: average(metrics.map((entry) => entry.rhoLeft)),
-          meanRhoRight: average(metrics.map((entry) => entry.rhoRight)),
-          meanReceptionLeft: average(
-            metrics.map((entry) => entry.receptionLeft),
+          meanRhoLeft: timeMean(samples, (sample) => sample.nodes[id]!.rhoLeft),
+          meanRhoRight: timeMean(
+            samples,
+            (sample) => sample.nodes[id]!.rhoRight,
           ),
-          meanReceptionRight: average(
-            metrics.map((entry) => entry.receptionRight),
+          meanReceptionLeft: timeMean(
+            samples,
+            (sample) => sample.nodes[id]!.receptionLeft,
+          ),
+          meanReceptionRight: timeMean(
+            samples,
+            (sample) => sample.nodes[id]!.receptionRight,
           ),
           responseLag: samples.map((sample) => {
             const current = sample.nodes[id]!;
@@ -518,14 +583,21 @@ function diagnosticsFor(
   ) as Record<SetupDInterventionId, SetupDNodeMetrics>;
   const sourceNode = node(scenario, intervention);
   const onsets = scenario.nodes.map((entry) => {
-    const onsetTime = samples.find((sample) => {
-      const baseline = reference.get(sample.time)?.nodes[entry.id];
+    const onsetIndex = samples.findIndex((sample, index) => {
+      const baseline = referenceSamples[index]!;
+      if (Math.abs(sample.time - baseline.time) > CAUSAL_TIME_TOLERANCE)
+        throw new Error(
+          'Setup D paired diagnostics require aligned sample times.',
+        );
       return (
-        baseline !== undefined &&
-        Math.abs(sample.nodes[entry.id]!.omega - baseline.omega) >
-          ONSET_TOLERANCE
+        Math.abs(
+          sample.nodes[entry.id]!.omega - baseline.nodes[entry.id]!.omega,
+        ) > FREQUENCY_ONSET_TOLERANCE ||
+        Math.abs(sample.nodes[entry.id]!.phi - baseline.nodes[entry.id]!.phi) >
+          PHASE_ONSET_TOLERANCE
       );
-    })?.time;
+    });
+    const onsetTime = onsetIndex < 0 ? undefined : samples[onsetIndex]!.time;
     return {
       nodeId: entry.id,
       position: entry.position,
@@ -537,10 +609,18 @@ function diagnosticsFor(
     retardedMismatch: retardedMismatches(samples),
     disturbancePropagation: responseFront(
       onsets,
-      { position: sourceNode.position, time: 0 },
+      { position: sourceNode.position, time: disturbanceTime },
       scenario.c0,
-      ONSET_TOLERANCE,
+      CAUSAL_TIME_TOLERANCE,
     ),
+    criteria: {
+      frequencyOnsetTolerance: {
+        value: FREQUENCY_ONSET_TOLERANCE,
+        unit: 'rad s^-1',
+      },
+      phaseOnsetTolerance: { value: PHASE_ONSET_TOLERANCE, unit: 'rad' },
+      causalTimeTolerance: { value: CAUSAL_TIME_TOLERANCE, unit: 's' },
+    },
   };
 }
 
@@ -551,11 +631,13 @@ function sourceSchedule(
   port: Port,
   duration: number,
   cadence: number,
+  preparation: SetupDPreparation['linkHistory'],
 ): Array<{ time: number; rate: number }> {
   const source = node(scenario, endpoint);
   return sampleTargets(duration, cadence).map((arrivalTime) => {
     const sourceTime = arrivalTime - 1;
-    if (sourceTime < 0)
+    if (sourceTime < 0) {
+      if (preparation === 'empty-links') return { time: arrivalTime, rate: 0 };
       return {
         time: arrivalTime,
         rate: emissionRate(
@@ -565,6 +647,7 @@ function sourceSchedule(
           port,
         ),
       };
+    }
     const recorded = samples.reduce((closest, candidate) =>
       Math.abs(candidate.time - sourceTime) <
       Math.abs(closest.time - sourceTime)
@@ -612,6 +695,7 @@ function replayControlFor(
     'right',
     duration,
     cadence,
+    sourceEnvelope.preparation ?? 'established',
   );
   const right = sourceSchedule(
     sourceScenario,
@@ -620,6 +704,7 @@ function replayControlFor(
     'left',
     duration,
     cadence,
+    sourceEnvelope.preparation ?? 'established',
   );
   const envelope: EnvelopeOptions = {
     preparation: sourceEnvelope.preparation ?? 'established',
@@ -669,6 +754,10 @@ export function runSetupD(options: SetupDOptions = {}): SetupDRun {
     intrinsicFrequencyIncrease:
       options.intrinsicFrequencyIncrease ?? DEFAULT_BOOST,
     gain: options.gain ?? DEFAULT_GAIN,
+    disturbanceTime:
+      options.disturbanceTime ?? (options.duration ?? DEFAULT_DURATION) / 3,
+    disturbancePhaseOffset:
+      options.disturbancePhaseOffset ?? DEFAULT_DISTURBANCE_PHASE_OFFSET,
   };
   validateOptions(resolved);
   const intervention = options.intervention ?? 'A';
@@ -688,20 +777,21 @@ export function runSetupD(options: SetupDOptions = {}): SetupDRun {
     resolved.gain,
   );
   const normalization = degreeNormalization(scenario, normalizationId);
-  const envelope = envelopeFor(scenario, prep, normalization);
+  const perturbation = {
+    time: resolved.disturbanceTime,
+    nodeId: intervention,
+    phaseOffset: resolved.disturbancePhaseOffset,
+  };
+  const envelope = envelopeFor(scenario, prep, normalization, perturbation);
   const primary = runEnvelope(
     scenario,
     envelope,
     resolved.duration,
     resolved.sampleCadence,
   );
-  const referenceScenario = scenarioFor(
-    intervention,
-    variantId,
-    prep,
-    0,
-    resolved.gain,
-  );
+  // The reference shares the prepared intrinsic-frequency asymmetry and
+  // differs only by the explicit positive-time disturbance.
+  const referenceScenario = clone(scenario);
   const referenceNormalization = degreeNormalization(
     referenceScenario,
     normalizationId,
@@ -723,13 +813,20 @@ export function runSetupD(options: SetupDOptions = {}): SetupDRun {
     schemaVersion: 'setup-d-diagnostic-v1',
     modelVersion: 'paper-i-v1',
     sourceSection: 'Paper I §11.5',
-    intervention: {
-      kind: 'intrinsic-frequency-increase',
+    variant: variantId,
+    asymmetry: {
+      kind: 'prepared-intrinsic-frequency-asymmetry',
       target: intervention,
       baselineOmega0: 2,
       boostedOmega0: 2 * (1 + resolved.intrinsicFrequencyIncrease),
       fraction: resolved.intrinsicFrequencyIncrease,
-      time: 0,
+    },
+    disturbance: {
+      kind: 'phase-offset',
+      target: intervention,
+      time: resolved.disturbanceTime,
+      phaseOffset: resolved.disturbancePhaseOffset,
+      frequencyOffset: 0,
     },
     preparation: prep,
     normalization,
@@ -745,9 +842,11 @@ export function runSetupD(options: SetupDOptions = {}): SetupDRun {
       primary.samples,
       reference.samples,
       intervention,
+      resolved.disturbanceTime,
     ),
     limitations: [
-      'The intrinsic-frequency change is a declared t=0 comparison intervention, not a derived force or binding law.',
+      'The intrinsic-frequency difference is a prepared asymmetry present throughout prehistory, not a t=0 causal intervention or derived force.',
+      'Disturbance propagation compares the prepared system with and without one explicit positive-time phase offset.',
       'Recorded endpoint replay is a deterministic envelope-rate control; it is not a physical packet record or an observer-readable source label.',
       'Degree normalization is an explicitly named response-scale variant. The fixed physical r* convention remains the default.',
       'Finite diagnostics record propagation and mismatch without claiming synchronization, attraction, gravity, electromagnetism, or a paper result.',
@@ -759,9 +858,10 @@ export function createSetupDDefinition(
   options: SetupDOptions = {},
 ): ExperimentDefinition {
   const run = runSetupD(options);
+  const identity = setupDIdentity(run, options);
   return {
     schemaVersion: 'paper-i-experiment-v1',
-    id: `setup-d-${run.intervention.target}-${run.normalization.id}`,
+    id: `setup-d-${identity}`,
     description:
       'Setup D A-B-C three-clock diagnostic; technical wiring check, not a paper result.',
     scenario: run.scenario,
@@ -773,11 +873,6 @@ export function createSetupDDefinition(
         id: run.normalization.id,
         kind: 'analytic',
         description: run.normalization.label,
-      },
-      {
-        id: run.replayControl.id,
-        kind: 'causal',
-        description: run.replayControl.description,
       },
     ],
     windows: {
@@ -791,6 +886,64 @@ export function createSetupDDefinition(
     replicates: 1,
     seed: options.preparationSeed ?? 'signal-space-setup-d-v1',
     observables: ['phase', 'frequency', 'rates', 'retarded-phase'],
+    budgets: { maxJobs: 1, maxSteps: 10000, checkpointEvery: 1 },
+  };
+}
+
+function idNumber(value: number): string {
+  return String(value)
+    .replaceAll('-', 'm')
+    .replaceAll('.', 'p')
+    .replaceAll('+', '');
+}
+
+function setupDIdentity(run: SetupDRun, options: SetupDOptions): string {
+  const gain = node(run.scenario, 'A').gain;
+  return [
+    run.asymmetry.target,
+    run.variant,
+    run.normalization.id,
+    run.preparation.id,
+    run.preparation.linkHistory,
+    `g${idNumber(gain)}`,
+    `b${idNumber(run.asymmetry.fraction)}`,
+    `t${idNumber(run.disturbance.time)}`,
+    `p${idNumber(run.disturbance.phaseOffset)}`,
+    `d${idNumber(options.duration ?? DEFAULT_DURATION)}`,
+    `c${idNumber(options.sampleCadence ?? DEFAULT_CADENCE)}`,
+  ].join('-');
+}
+
+/** Executable receiver-only definition for the recorded endpoint replay. */
+export function createSetupDReplayDefinition(
+  options: SetupDOptions = {},
+): ExperimentDefinition {
+  const run = runSetupD(options);
+  const replay = run.replayControl;
+  const duration = options.duration ?? DEFAULT_DURATION;
+  return {
+    schemaVersion: 'paper-i-experiment-v1',
+    id: `setup-d-${setupDIdentity(run, options)}-replay`,
+    description: replay.description,
+    scenario: replay.receiverScenario,
+    mode: 'envelope',
+    until: duration,
+    envelope: replay.envelope,
+    controls: [
+      {
+        id: replay.id,
+        kind: 'causal',
+        description: replay.description,
+      },
+    ],
+    windows: { transient: 0, measurement: { start: 0, end: duration } },
+    tolerances: {
+      absolute: replay.receiverScenario.solver.absoluteTolerance,
+      relative: replay.receiverScenario.solver.relativeTolerance,
+    },
+    replicates: 1,
+    seed: options.preparationSeed ?? 'signal-space-setup-d-v1',
+    observables: ['phase', 'frequency', 'rates'],
     budgets: { maxJobs: 1, maxSteps: 10000, checkpointEvery: 1 },
   };
 }
@@ -834,6 +987,12 @@ export function runSetupDPreparationEnsemble(
       ? {}
       : { intrinsicFrequencyIncrease: options.intrinsicFrequencyIncrease }),
     ...(options.gain === undefined ? {} : { gain: options.gain }),
+    ...(options.disturbanceTime === undefined
+      ? {}
+      : { disturbanceTime: options.disturbanceTime }),
+    ...(options.disturbancePhaseOffset === undefined
+      ? {}
+      : { disturbancePhaseOffset: options.disturbancePhaseOffset }),
   };
   return {
     schemaVersion: 'setup-d-preparation-ensemble-v1',
@@ -865,6 +1024,12 @@ export function createSetupDSmokeDefinitions(): ExperimentDefinition[] {
       variant: 'E1-R1',
       normalization: 'degree-normalized-r-star',
       preparation: 'pi-reflection',
+    }),
+    createSetupDReplayDefinition({
+      intervention: 'A',
+      variant: 'E1-R0',
+      gain: 0,
+      normalization: 'fixed-physical-r-star',
     }),
   ];
 }

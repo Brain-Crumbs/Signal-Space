@@ -69,13 +69,15 @@ scale scans and scientific interpretation remain deferred.
 
 Paper I section 11.5 maps to `packages/experiments/src/setup-d.ts`, the shared
 per-node envelope response-scale option, and `docs/setup-d.md`. The A-B-C
-preset records an explicit A/C reflection map, phase lobe shift, asymmetric
-intrinsic-frequency comparison, per-node rate and response-lag metrics,
-retarded mismatches, and causal onset evidence against a matched unboosted
-reference. Fixed physical `r*` remains the default; `d_i r*` is an explicit
+preset records an explicit A/C reflection map, phase lobe shift, prepared
+intrinsic-frequency asymmetry, time-weighted per-node rate and response-lag
+metrics, retarded mismatches, and causal onset evidence from a separate
+positive-time phase disturbance against a matched undisturbed reference.
+Fixed physical `r*` remains the default; `d_i r*` is an explicit
 named option saved in both metadata and solver options. The recorded-endpoint
-replay control uses fixed delayed source-output schedules and a receiver-only
-scenario, so it has no reciprocal source response. These are technical
+replay control has its own executable definition and uses fixed delayed
+source-output schedules and a receiver-only scenario, so it has no reciprocal
+source response. Empty-link prehistory contributes zero replay input. These are technical
 diagnostics rather than a network, binding, or regime conclusion.
 
 ## T07 declarative runs (#8)
