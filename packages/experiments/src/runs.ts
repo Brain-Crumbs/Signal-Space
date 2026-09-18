@@ -284,6 +284,7 @@ function validateEnvelopeOptions(
     'preparation',
     'prehistory',
     'boundaryInputs',
+    'responseRateScales',
     'perturbations',
     'tickSection',
     'maxSteps',
@@ -300,6 +301,19 @@ function validateEnvelopeOptions(
     invalid('envelope tickSection must be finite');
   if (value.maxSteps !== undefined)
     validatePositiveInteger(value.maxSteps, 'envelope.maxSteps');
+  if (value.responseRateScales !== undefined) {
+    if (!isRecord(value.responseRateScales))
+      invalid('envelope responseRateScales must be an object');
+    for (const [nodeId, scale] of Object.entries(value.responseRateScales))
+      if (
+        !scenario?.nodes.some((node) => node.id === nodeId) ||
+        !Number.isFinite(scale) ||
+        (scale as number) <= 0
+      )
+        invalid(
+          'envelope responseRateScales require existing nodes and finite positive values',
+        );
+  }
   if (value.prehistory !== undefined) {
     if (!Array.isArray(value.prehistory) || value.prehistory.length < 2)
       invalid('envelope prehistory needs at least two points');

@@ -65,6 +65,19 @@ inputs are rejected before execution and a bounded diagnostic job budget is
 enforced. No cell is labeled as locking, coexistence, or chaos; publication-
 scale scans and scientific interpretation remain deferred.
 
+## T11 Setup D (#12)
+
+Paper I section 11.5 maps to `packages/experiments/src/setup-d.ts`, the shared
+per-node envelope response-scale option, and `docs/setup-d.md`. The A-B-C
+preset records an explicit A/C reflection map, phase lobe shift, asymmetric
+intrinsic-frequency comparison, per-node rate and response-lag metrics,
+retarded mismatches, and causal onset evidence against a matched unboosted
+reference. Fixed physical `r*` remains the default; `d_i r*` is an explicit
+named option saved in both metadata and solver options. The recorded-endpoint
+replay control uses fixed delayed source-output schedules and a receiver-only
+scenario, so it has no reciprocal source response. These are technical
+diagnostics rather than a network, binding, or regime conclusion.
+
 ## T07 declarative runs (#8)
 
 The current run layer also validates resolved scenarios against both JSON Schema and semantic constraints, rechecks root-seed-bound manifest identities, and binds checkpoint resumes to the exact planned manifest. See `docs/experiment-runs.md` for the validation and recovery contract.
