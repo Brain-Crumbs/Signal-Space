@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "signal-space-research"
 version = "0.1.0"
 description = "Auditable local runtime for Signal Space research experiments"
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.12"
 dependencies = [
   "matplotlib==3.10.8",
   "numpy==2.3.5",
