@@ -59,6 +59,7 @@ def environment_identity() -> dict[str, Any]:
         "architecture": platform.machine(),
         "numeric_libraries": {
             "numpy": _module_version("numpy"),
+            "scipy": _module_version("scipy"),
             "matplotlib": _module_version("matplotlib"),
         },
         "accelerator": "none",

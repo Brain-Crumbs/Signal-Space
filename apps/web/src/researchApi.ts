@@ -34,6 +34,7 @@ export interface ExperimentDescription {
 }
 
 export interface JsonSchema {
+  'x-presets'?: Array<{ name: string; config: ResearchConfig }>;
   title?: string;
   type?: string | string[];
   const?: unknown;

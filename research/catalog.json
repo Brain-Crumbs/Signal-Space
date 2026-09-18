@@ -55,7 +55,7 @@
       "status": "active design",
       "date": "2026-09-18",
       "path": "docs/research/experiment-plan.md",
-      "summary": "Ordered E00–E11 derivation gates from the framework fixture to a shared coexistence test.",
+      "summary": "Ordered E00\u2013E11 derivation gates from the framework fixture to a shared coexistence test.",
       "tags": ["roadmap", "experiments", "derivation gates"]
     },
     {
@@ -258,6 +258,16 @@
       "path": "research/research-coach-persona.md",
       "summary": "Reasoning, rigor, interpretation, and communication guidance for collaborative research sessions.",
       "tags": ["workflow", "review", "communication"]
+    },
+    {
+      "id": "e01-running-guide",
+      "title": "E01 author launch and numerical implementation",
+      "kind": "protocol",
+      "status": "implemented; research run pending",
+      "date": "2026-09-18",
+      "path": "docs/research/e01-running.md",
+      "summary": "Author-controlled launch, equation mapping, numerical methods, refinements, artifact interpretation and limits.",
+      "tags": ["E01", "runtime", "reproducibility"]
     }
   ]
 }

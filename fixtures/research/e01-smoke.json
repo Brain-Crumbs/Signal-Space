@@ -1,0 +1,63 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "e01-charged-branch",
+  "model_id": "charged-scalar-3d-v1",
+  "parameters": {
+    "m": 1,
+    "g": 1,
+    "h": 1,
+    "lambda": 0.01,
+    "epsilon": 0.1,
+    "omega_start": 0.94,
+    "omega_end": 0.95,
+    "omega_step": 0.005,
+    "min_omega_step": 0.0001,
+    "max_points": 12,
+    "seed_radii": [4.0],
+    "radius": 30,
+    "nodes": 120,
+    "max_nodes": 4000,
+    "sample_points": 1025,
+    "solver_tolerance": 1e-8,
+    "spectral_nodes": 16,
+    "ell_max": 2,
+    "refinements": false,
+    "volume_factor": 1.25,
+    "breakup_samples": 33,
+    "max_fragments": 2,
+    "research_run": false,
+    "omega_seed": 0.94
+  },
+  "units": {
+    "convention": "c=hbar=1; m sets mass unit",
+    "frequency": "m",
+    "radius": "1/m",
+    "field": "m/sqrt(g)",
+    "energy": "m (includes 1/lambda_4)",
+    "charge": "dimensionless (includes 1/lambda_4)",
+    "g": "dimensionless",
+    "h": "1/m^2",
+    "epsilon": "1/m^2",
+    "lambda": "dimensionless"
+  },
+  "seeds": {
+    "root": 39
+  },
+  "resources": {
+    "max_cpu_seconds": 60,
+    "max_wall_seconds": 90,
+    "max_memory_mb": 1024,
+    "max_output_mb": 64
+  },
+  "analysis": {
+    "field_residual": 1e-7,
+    "virial_defect": 1e-5,
+    "derivative_error": 0.001,
+    "refinement_relative": 0.005,
+    "eigenpair_residual": 1e-7,
+    "binding_error_multiplier": 3
+  },
+  "report": {
+    "title": "E01 small validation fixture \u2014 not a research finding"
+  }
+}

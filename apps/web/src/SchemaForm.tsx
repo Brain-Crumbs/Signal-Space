@@ -25,6 +25,12 @@ function unitFor(path: string, config: ResearchConfig) {
     return config.units.step;
   if (['initial_value', 'gain', 'forcing', 'max_abs_error'].includes(name))
     return config.units.value;
+  if (name.startsWith('omega_') || name === 'min_omega_step')
+    return config.units.frequency ?? '';
+  if (name === 'radius' || name === 'seed_radii')
+    return config.units.radius ?? '';
+  if (['m', 'g', 'h', 'epsilon', 'lambda'].includes(name))
+    return config.units[name] ?? (name === 'm' ? 'mass unit' : '');
   if (name.endsWith('_seconds')) return 's';
   if (name.endsWith('_mb')) return 'MB';
   if (name === 'step_delay_ms') return 'ms';
