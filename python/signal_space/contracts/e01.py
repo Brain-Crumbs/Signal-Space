@@ -39,8 +39,10 @@ def check(value, spec, path="config"):
             raise ContractError(f"{path} must be finite numeric")
         if kind == "integer" and not isinstance(value, int):
             raise ContractError(f"{path} must be integer")
-        if value < spec.get("minimum", -math.inf) or value > spec.get(
-            "maximum", math.inf
+        if (
+            value < spec.get("minimum", -math.inf)
+            or value > spec.get("maximum", math.inf)
+            or value <= spec.get("exclusiveMinimum", -math.inf)
         ):
             raise ContractError(f"{path} outside admissible range")
     elif kind == "boolean":

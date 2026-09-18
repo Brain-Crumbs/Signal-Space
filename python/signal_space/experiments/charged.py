@@ -11,6 +11,7 @@ CRITERIA = {
     "spectrum": "Charge-constrained coupled eigenpairs, symmetry modes and spectral refinement",
     "angular": "All declared angular sectors and a bound on remaining sectors",
     "binding": "Free-charge and computed fragmentation margins exceed 3 combined numerical errors",
+    "selection": "At least one resolved candidate within the preregistered domain; fail only when every point has a resolved disqualifier",
     "coverage": "Preregistered seed/endpoint coverage and all pending work completed",
 }
 

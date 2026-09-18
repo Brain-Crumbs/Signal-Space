@@ -40,6 +40,7 @@ export interface JsonSchema {
   const?: unknown;
   default?: unknown;
   minimum?: number;
+  exclusiveMinimum?: number;
   maximum?: number;
   enum?: unknown[];
   description?: string;

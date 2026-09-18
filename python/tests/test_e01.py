@@ -153,7 +153,9 @@ class E01NumericalTest(unittest.TestCase):
         self.assertTrue(any(x["channel"] == "discrete-two-plus-free" for x in rows))
         rows, covered = breakup_thresholds([target], [a, other], 65, 2)
         self.assertFalse(covered)
-        self.assertEqual([row["channel"] for row in rows], ["free-charge"])
+        self.assertTrue(any(row["channel"] == "free-charge" for row in rows))
+        self.assertTrue(any(row["channel"] == "discrete-one-plus-free" for row in rows))
+        self.assertFalse(any("resolved-fragment" in row["channel"] for row in rows))
 
 
 class E01RuntimeTest(unittest.TestCase):

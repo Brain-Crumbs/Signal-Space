@@ -22,17 +22,134 @@ def table(path, rows):
 
 
 def spectral_comparison(base, refined):
-    values = []
+    """One-to-one matching with errors indexed by the original base mode."""
+    matches = []
+    unmatched_growth = []
     for a, b in zip(base["sectors"], refined["sectors"], strict=True):
+        if a["ell"] != b["ell"]:
+            raise ValueError("spectral sectors do not match")
         av = np.array(a["sigma_real"]) + 1j * np.array(a["sigma_imag"])
         bv = np.array(b["sigma_real"]) + 1j * np.array(b["sigma_imag"])
-        # Pair low modes one-to-one; include every mode with positive growth.
         indices = set(np.argsort(abs(av))[: min(16, len(av))].tolist())
-        indices.update(np.flatnonzero(av.real > 1e-8).tolist())
-        av = av[sorted(indices)]
-        i, j = linear_sum_assignment(abs(av[:, None] - bv[None, :]))
-        values.append(float(np.max(abs(av[i] - bv[j]))))
-    return max(values, default=0.0)
+        indices.update(np.flatnonzero(av.real > 3e-12).tolist())
+        if a["symmetry_mode_index"] is not None:
+            indices.add(a["symmetry_mode_index"])
+        indices = sorted(indices)
+        i, j = linear_sum_assignment(abs(av[indices, None] - bv[None, :]))
+        for left, right in zip(i, j, strict=True):
+            mode = indices[left]
+            matches.append(
+                {
+                    "ell": a["ell"],
+                    "mode": mode,
+                    "refined_mode": int(right),
+                    "error": float(abs(av[mode] - bv[right])),
+                    "growth": float(max(av[mode].real, bv[right].real)),
+                    "symmetry_splitting": (
+                        float(max(abs(av[mode]), abs(bv[right])))
+                        if mode == a["symmetry_mode_index"]
+                        else None
+                    ),
+                }
+            )
+        for mode in set(np.flatnonzero(bv.real > 3e-12)) - set(j):
+            unmatched_growth.append({"ell": b["ell"], "mode": int(mode)})
+        # Too few refined eigenpairs cannot establish convergence either.
+        for left in set(range(len(indices))) - set(i):
+            unmatched_growth.append({"ell": a["ell"], "base_mode": indices[left]})
+    return matches, unmatched_growth
+
+
+def spectral_assessment(base, partners, limits):
+    """An unrelated mode's drift must never mask a resolved instability."""
+    modes = {}
+    unmatched = []
+    for axis, refined in partners.items():
+        matches, missing = spectral_comparison(base, refined)
+        unmatched.extend({"axis": axis, **item} for item in missing)
+        for match in matches:
+            key = (match["ell"], match["mode"])
+            row = modes.setdefault(key, {"ell": key[0], "mode": key[1], "axes": {}})
+            row["axes"][axis] = match
+    for row in modes.values():
+        values = list(row["axes"].values())
+        row["error"] = max(x["error"] for x in values)
+        row["growth"] = max(x["growth"] for x in values)
+        row["resolved_growth"] = set(row["axes"]) == {"spectral", "volume"} and row[
+            "growth"
+        ] > 3 * max(row["error"], 1e-12)
+        row["symmetry_resolved"] = all(
+            x["symmetry_splitting"] is None
+            or x["symmetry_splitting"] <= 3 * max(row["error"], 1e-12)
+            for x in values
+        )
+    numerical = all(
+        s["max_residual"] < limits["eigenpair_residual"]
+        and s["max_charge_defect"] < limits["eigenpair_residual"]
+        for v in (base, *partners.values())
+        for s in v["sectors"]
+    ) and all(
+        v["background_relative_error"] < limits["refinement_relative"]
+        for v in (base, *partners.values())
+    )
+    complete = set(partners) == {"spectral", "volume"} and bool(modes)
+    growth = (
+        complete and numerical and any(x["resolved_growth"] for x in modes.values())
+    )
+    error = max((x["error"] for x in modes.values()), default=0.0)
+    return {
+        "modes": list(modes.values()),
+        "unmatched_growth": unmatched,
+        "error": error,
+        "resolved_growth": growth,
+        "pass": complete
+        and numerical
+        and not unmatched
+        and not growth
+        and error < limits["refinement_relative"]
+        and all(x["symmetry_resolved"] for x in modes.values()),
+    }
+
+
+def selection_checks(selections, coverage, outcome):
+    """Pointwise checks retain failures; selection is an existential criterion."""
+    checks = []
+    for key, description in CRITERIA.items():
+        evidence = {"pass": [], "fail": [], "unresolved": []}
+        if key == "coverage":
+            status = "pass" if coverage else "unresolved"
+            scope = "preregistered domain"
+        elif key == "selection":
+            status = {
+                "candidate": "pass",
+                "no-candidate": "fail",
+                "unresolved": "unresolved",
+            }[outcome]
+            scope = "at least one candidate in the preregistered domain"
+        else:
+            for point in selections:
+                evidence[point["criteria"][key]["status"]].append(point["point"])
+            status = (
+                "fail"
+                if evidence["fail"]
+                else (
+                    "pass"
+                    if selections and not evidence["unresolved"]
+                    else "unresolved"
+                )
+            )
+            scope = "all sampled base points; any resolved failure takes precedence"
+        checks.append(
+            {
+                "id": key,
+                "status": status,
+                "description": description,
+                "evidence": "derived/selection.json",
+                "scope": scope,
+                "points_by_status": evidence,
+            }
+        )
+    return {"outcome": outcome, "checks": checks}
 
 
 def branch_segments(points):
@@ -52,6 +169,73 @@ def branch_segments(points):
     return edges
 
 
+def one_fragment_thresholds(points, all_points, edges):
+    """Exact finite extrema of each piecewise-linear E(q) + |Q - q|.
+
+    Extrema occur at sampled endpoints or the free-remainder kink. Only the
+    parent itself (same record, positive sign) is the identity channel. On an
+    edge incident to that endpoint the affine margin has no further extrema;
+    its gapless endpoint is checked separately through the soft-emission slope.
+    Distinct branches at equal charge are retained, as are all finite jumps.
+    """
+    rows = []
+    for point in points:
+        o = point["observables"]
+        parent_error = point["errors"]["E"] + point["errors"]["Q"]
+        for fragment in all_points:
+            f = fragment["observables"]
+            for sign in (-1, 1):
+                if sign == 1 and fragment["id"] == point["id"]:
+                    continue
+                remainder = o["Q"] - sign * f["Q"]
+                threshold = f["E"] + abs(remainder)
+                rows.append(
+                    {
+                        "point": point["id"],
+                        "channel": "discrete-one-plus-free",
+                        "fragment_a": fragment["id"],
+                        "sign_a": sign,
+                        "threshold": threshold,
+                        "margin": threshold - o["E"],
+                        "error": parent_error
+                        + fragment["errors"]["E"]
+                        + fragment["errors"]["Q"],
+                        "free_charge": remainder,
+                    }
+                )
+        for a, b in edges:
+            qa, qb = a["observables"]["Q"], b["observables"]["Q"]
+            # Endpoints are already present above; the kink must be interior.
+            for sign in (-1, 1):
+                q = sign * o["Q"]
+                if not min(qa, qb) < q < max(qa, qb):
+                    continue
+                fraction = (q - qa) / (qb - qa)
+                energy = (1 - fraction) * a["observables"]["E"] + fraction * b[
+                    "observables"
+                ]["E"]
+                slope = abs((b["observables"]["E"] - a["observables"]["E"]) / (qb - qa))
+                rows.append(
+                    {
+                        "point": point["id"],
+                        "channel": "one-resolved-fragment-plus-free",
+                        "fragment_a": a["id"],
+                        "fragment_b": b["id"],
+                        "sign_a": sign,
+                        "threshold": energy,
+                        "margin": energy - o["E"],
+                        "error": parent_error
+                        + slope * point["errors"]["Q"]
+                        + max(
+                            x["errors"]["E"] + (1 + slope) * x["errors"]["Q"]
+                            for x in (a, b)
+                        ),
+                        "free_charge": 0.0,
+                    }
+                )
+    return rows
+
+
 def breakup_thresholds(points, all_points, samples, max_fragments):
     """Min-plus allocation on signed charge grid, all resolved connected edges.
 
@@ -60,25 +244,16 @@ def breakup_thresholds(points, all_points, samples, max_fragments):
     piecewise-linear slopes. No interpolation is performed across missing edges.
     """
     edges = branch_segments(all_points)
-    if not edges:
-        return [
-            {
-                "point": p["id"],
-                "channel": "free-charge",
-                "threshold": abs(p["observables"]["Q"]),
-                "margin": abs(p["observables"]["Q"]) - p["observables"]["E"],
-                "error": p["errors"]["E"] + p["errors"]["Q"],
-            }
-            for p in points
-        ], False
-    qmax = max(p["observables"]["Q"] for p in all_points)
+    qmax = max((p["observables"]["Q"] for p in all_points), default=1.0)
     grid = np.linspace(-qmax, qmax, 2 * samples + 1)
     dq = qmax / samples
     energy = np.full(len(grid), np.inf)
     errors = np.zeros(len(grid))
     slopes = []
-    allocation_covered = True
-    fragment_error = max(p["errors"]["E"] + p["errors"]["Q"] for p in all_points)
+    allocation_covered = bool(edges)
+    fragment_error = max(
+        (p["errors"]["E"] + p["errors"]["Q"] for p in all_points), default=0.0
+    )
     for a, b in edges:
         qa, qb = a["observables"]["Q"], b["observables"]["Q"]
         ea, eb = a["observables"]["E"], b["observables"]["E"]
@@ -97,13 +272,13 @@ def breakup_thresholds(points, all_points, samples, max_fragments):
     dp = energy.copy()
     dp_error = errors.copy()
     dp_grid = grid.copy()
-    rows = []
+    rows = one_fragment_thresholds(points, all_points, edges)
     for count in range(1, max_fragments + 1):
         for point in points:
             o = point["observables"]
             cost = dp + abs(o["Q"] - dp_grid)
             if count == 1:
-                continue  # No positive gap exists against arbitrarily soft emission.
+                continue  # Single-fragment extrema are evaluated exactly above.
             idx = int(np.argmin(cost))
             if np.isfinite(cost[idx]):
                 interpolation_error = count * dq * (1 + max(slopes, default=1.0))
@@ -400,7 +575,8 @@ def analyze(run_path, analysis_path, config):
         data = point["data"]
         spec = data.get("spectrum")
         spectral_ok = False
-        numerical_spectrum = False
+        resolved_growth = False
+        assessment = None
         angular = False
         growth = None
         spec_error = None
@@ -414,35 +590,10 @@ def analyze(run_path, analysis_path, config):
         if spec:
             growth = max(s["max_growth"] for s in spec["sectors"])
             if partners.get("spectral") and partners.get("volume"):
-                spec_error = max(
-                    spectral_comparison(spec, partners["spectral"]),
-                    spectral_comparison(spec, partners["volume"]),
-                )
-                spectral_ok = all(
-                    s["max_residual"] < limits["eigenpair_residual"]
-                    and s["max_charge_defect"] < limits["eigenpair_residual"]
-                    for v in (spec, *partners.values())
-                    for s in v["sectors"]
-                )
-                numerical_spectrum = spectral_ok
-                spectral_ok = (
-                    spectral_ok
-                    and spec_error < limits["refinement_relative"]
-                    and growth <= 3 * max(spec_error, 1e-12)
-                )
-                spectral_ok = (
-                    spectral_ok
-                    and max(
-                        v["background_relative_error"]
-                        for v in (spec, *partners.values())
-                    )
-                    < limits["refinement_relative"]
-                )
-                spectral_ok = spectral_ok and all(
-                    s["symmetry_splitting"] is None
-                    or s["symmetry_splitting"] <= 3 * max(spec_error, 1e-12)
-                    for s in spec["sectors"]
-                )
+                assessment = spectral_assessment(spec, partners, limits)
+                spec_error = assessment["error"]
+                resolved_growth = assessment["resolved_growth"]
+                spectral_ok = assessment["pass"]
             angular = spec["higher_sectors_bounded"] and all(
                 v["higher_sectors_bounded"] for v in partners.values() if v
             )
@@ -518,12 +669,7 @@ def analyze(run_path, analysis_path, config):
             stationary(point)
             and converged(point)
             and (
-                any(x["margin"] < -3 * x["error"] for x in channels)
-                or (
-                    spec_error is not None
-                    and growth > 3 * max(spec_error, 1e-12)
-                    and numerical_spectrum
-                )
+                any(x["margin"] < -3 * x["error"] for x in channels) or resolved_growth
             )
         )
         selections.append(
@@ -552,12 +698,7 @@ def analyze(run_path, analysis_path, config):
                                             for x in channels
                                         )
                                     )
-                                    or (
-                                        key == "spectrum"
-                                        and numerical_spectrum
-                                        and spec_error is not None
-                                        and growth > 3 * max(spec_error, 1e-12)
-                                    )
+                                    or (key == "spectrum" and resolved_growth)
                                 )
                                 else "unresolved"
                             )
@@ -566,7 +707,7 @@ def analyze(run_path, analysis_path, config):
                             "stationary": "branch.csv",
                             "continuation": "derivatives.csv",
                             "convergence": "convergence.csv",
-                            "spectrum": "spectra.csv",
+                            "spectrum": "spectral-budgets.json",
                             "angular": "spectral-budgets.json",
                             "binding": "breakup.csv",
                         }[key],
@@ -580,6 +721,7 @@ def analyze(run_path, analysis_path, config):
                 "point": point["id"],
                 "errors": point["errors"],
                 "spectral_error": spec_error,
+                "spectral_assessment": assessment,
                 "growth": growth,
                 "background_error": (
                     spec.get("background_relative_error") if spec else None
@@ -638,7 +780,7 @@ def analyze(run_path, analysis_path, config):
         "scope": {
             "max_fragments": p["max_fragments"],
             "charge_conjugates": True,
-            "radiation": "free-charge remainder on two-or-more soliton channels; soft emission via dE/dQ<m (no asserted positive soft gap)",
+            "radiation": "free-charge remainder on finite one-or-more soliton channels; exact identity excluded; soft self-limit via dE/dQ<m (no asserted positive soft gap)",
             "frequency": [p["omega_start"], p["omega_end"]],
             "seeds": p["seed_radii"],
         },
@@ -649,22 +791,7 @@ def analyze(run_path, analysis_path, config):
         ],
     }
     write_json(derived / "selection.json", selection)
-    checks = {
-        "outcome": outcome,
-        "checks": [
-            {
-                "id": key,
-                "status": (
-                    ("pass" if coverage else "unresolved")
-                    if key == "coverage"
-                    else "pass" if outcome == "candidate" else "unresolved"
-                ),
-                "evidence": f"derived/selection.json",
-                "description": description,
-            }
-            for key, description in CRITERIA.items()
-        ],
-    }
+    checks = selection_checks(selections, coverage, outcome)
     write_json(analysis_path / "checks.json", checks)
     return {
         "raw_source": source.relative_to(run_path).as_posix(),

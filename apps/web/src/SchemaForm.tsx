@@ -84,6 +84,7 @@ function Field({
   const unit = unitFor(path.join('.'), config);
   const constraint = [
     schema.minimum === undefined ? '' : `min ${schema.minimum}`,
+    schema.exclusiveMinimum === undefined ? '' : `> ${schema.exclusiveMinimum}`,
     schema.maximum === undefined ? '' : `max ${schema.maximum}`,
   ]
     .filter(Boolean)

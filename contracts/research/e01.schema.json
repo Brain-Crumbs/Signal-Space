@@ -79,12 +79,12 @@
         },
         "omega_start": {
           "type": "number",
-          "minimum": 0.8660254037844387,
+          "exclusiveMinimum": 0.8660254037844387,
           "maximum": 0.999999
         },
         "omega_end": {
           "type": "number",
-          "minimum": 0.8660254037844387,
+          "exclusiveMinimum": 0.8660254037844387,
           "maximum": 0.999999
         },
         "omega_step": {
@@ -170,7 +170,7 @@
         },
         "omega_seed": {
           "type": "number",
-          "minimum": 0.8660254037844387,
+          "exclusiveMinimum": 0.8660254037844387,
           "maximum": 0.999999
         }
       }
