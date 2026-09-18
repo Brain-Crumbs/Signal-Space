@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 8883,
-      "sha256": "7d8f6db25f644ce781b9309bad99e2ec81edf0f7cf8c8c15c6a10ecfccfcf2ea"
+      "size": 9354,
+      "sha256": "f3f72460bce91a89a1a261953ee1753d7187ab3022f51b0d6ed9bcde696c427b"
     },
     {
       "path": "research/experiments/README.md",
@@ -75,8 +75,8 @@
     },
     {
       "path": "research/README.md",
-      "size": 2023,
-      "sha256": "5280459d9f0b78eeae6fea90ad4ed25c0ef8a7826dc42d2e7a555b4fe0b70fea"
+      "size": 2016,
+      "sha256": "8c1055ac39b37ac66c9b01f3929091ddec7193c0d474d876ad3151308b127686"
     },
     {
       "path": "research/research-coach-persona.md",

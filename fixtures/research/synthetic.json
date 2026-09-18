@@ -1,0 +1,37 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "fixture.synthetic.v1",
+  "model_id": "fixture.deterministic-recurrence.v1",
+  "parameters": {
+    "steps": 24,
+    "checkpoint_interval": 6,
+    "initial_value": 1.0,
+    "gain": 0.875,
+    "forcing": 0.125,
+    "step_delay_ms": 0
+  },
+  "units": {
+    "step": "index",
+    "value": "dimensionless"
+  },
+  "seeds": {
+    "root": 37
+  },
+  "resources": {
+    "max_cpu_seconds": 30,
+    "max_memory_mb": 256,
+    "max_output_mb": 16,
+    "max_wall_seconds": 30
+  },
+  "analysis": {
+    "max_abs_error": 1e-14,
+    "require_complete": true
+  },
+  "report": {
+    "title": "Signal Space E00 Synthetic Runtime Fixture"
+  },
+  "fixture_controls": {
+    "interrupt_at_step": null,
+    "fail_at_step": null
+  }
+}

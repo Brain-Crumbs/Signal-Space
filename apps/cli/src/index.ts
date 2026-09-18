@@ -1,5 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { delimiter } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execute } from '@signal-space/sim';
 import { createSample, sampleIds } from '@signal-space/experiments';
 import {
@@ -16,6 +18,23 @@ import type { SampleId } from '@signal-space/experiments';
 
 const args = process.argv.slice(2);
 const commands = new Set(['validate', 'run', 'sweep', 'resume']);
+
+function research(): void {
+  const pythonRoot = fileURLToPath(new URL('../../../python', import.meta.url));
+  const environment = {
+    ...process.env,
+    PYTHONPATH: process.env.PYTHONPATH
+      ? `${pythonRoot}${delimiter}${process.env.PYTHONPATH}`
+      : pythonRoot,
+  };
+  const result = spawnSync(
+    process.env.PYTHON ?? 'python3',
+    ['-m', 'signal_space', ...args.slice(1)],
+    { stdio: 'inherit', env: environment },
+  );
+  if (result.error) throw result.error;
+  process.exitCode = result.status ?? 1;
+}
 
 interface ManifestCommandOptions {
   manifest?: string;
@@ -278,7 +297,7 @@ async function legacy(): Promise<void> {
     seedIndex < 0
   ) {
     console.log(
-      'Usage: npm run cli -- [--sample isolated|pair | --file scenario.json] [--until seconds] [--seed physical-seed]\nNew runs: validate|run|sweep|resume --manifest definition.json [--checkpoint file]. Emits JSON Lines. SIGINT cancels.',
+      'Usage: npm run cli -- [--sample isolated|pair | --file scenario.json] [--until seconds] [--seed physical-seed]\nHistorical runs: validate|run|sweep|resume --manifest definition.json [--checkpoint file].\nResearch runtime: research list|validate|estimate|run|sweep|status|cancel|resume|analyze|report|verify|archive|serve. Emits JSON Lines.',
     );
     return;
   }
@@ -354,7 +373,8 @@ async function legacy(): Promise<void> {
 }
 
 try {
-  if (commands.has(args[0] ?? '')) await handleManifestCommand(args[0]!);
+  if (args[0] === 'research') research();
+  else if (commands.has(args[0] ?? '')) await handleManifestCommand(args[0]!);
   else await legacy();
 } catch (error) {
   console.error(

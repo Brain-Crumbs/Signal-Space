@@ -10,7 +10,7 @@ test('research collection is searchable and exposes source evidence', async ({
   await expect(
     page.getByRole('heading', { name: 'Trace theory to evidence' }),
   ).toBeVisible();
-  await expect(page.getByText('21 records')).toBeVisible();
+  await expect(page.getByText('22 records')).toBeVisible();
   await page.getByLabel('Search collection').fill('radiation');
   await expect(page.getByText('4 results')).toBeVisible();
   await page
