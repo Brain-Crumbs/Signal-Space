@@ -66,6 +66,20 @@ test('CLI rejects invalid flags and file failures with nonzero exit and structur
   }
 });
 
+test('research CLI resolves the Python package from the repository root', () => {
+  const result = spawnSync(
+    process.execPath,
+    ['--import', 'tsx', 'src/index.ts', 'research', 'list'],
+    {
+      cwd: 'apps/cli',
+      encoding: 'utf8',
+    },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  const output = JSON.parse(result.stdout) as { experiments: unknown[] };
+  assert.ok(output.experiments.length > 0);
+});
+
 test('CLI --until runs the shared deterministic engine and validates duration', async () => {
   const result = cli('--sample', 'pair', '--until', '0.13');
   assert.equal(result.status, 0, result.stderr);

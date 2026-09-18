@@ -16,7 +16,7 @@ This document specifies boundaries. It does not implement a new physical solver 
 - **Claims are downstream artifacts.** A report statement links to analysis, checks, data, configuration, and code provenance.
 - **Historical separation.** The existing delay-network packages remain available but do not define new-model equations or contracts.
 
-## 3. Proposed workspace
+## 3. Implemented E00 workspace
 
 ```text
 contracts/research/
@@ -109,7 +109,7 @@ The run key hashes the canonical resolved configuration plus relevant code/envir
 
 ## 7. Execution surfaces
 
-The CLI eventually exposes:
+The E00 CLI exposes:
 
 ```text
 list  validate  estimate  run  sweep  status  cancel  resume

@@ -15,16 +15,19 @@
   "scripts": {
     "dev": "npm run dev -w @signal-space/web",
     "cli": "npm run cli -w @signal-space/cli --",
+    "research": "PYTHONPATH=python python3 -m signal_space",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "node --import tsx --test test/*.test.js test/*.test.ts",
+    "test:research": "PYTHONPATH=python python3 -m unittest discover -s python/tests -v",
+    "contracts:check": "python3 scripts/generate-research-contracts.py --check",
     "test:browser": "playwright test",
     "build": "npm run build -w @signal-space/cli && npm run build -w @signal-space/web",
     "research:manifest": "node scripts/research-archive.mjs --write",
     "verify:research": "node scripts/research-archive.mjs",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run verify:research && npm test && npm run build"
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run contracts:check && npm run verify:research && npm test && npm run test:research && npm run build"
   },
   "devDependencies": {
     "typescript": "5.9.3",

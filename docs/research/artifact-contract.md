@@ -39,12 +39,12 @@ Large packages may live in external artifact storage. The Git archive keeps the 
 ## 3. Identity and immutability
 
 - `experiment_id` and `model_id` identify versioned registered definitions.
-- `run_id` identifies the canonical resolved configuration and provenance key.
+- `run_id` identifies the canonical resolved configuration plus code, environment, numerical-library, architecture, and dependency-lock provenance key.
 - `attempt_id` identifies one execution or resume chain member.
 - `analysis_id` identifies code, parameters, and immutable input artifacts.
 - `report_id` identifies an analysis selection and rendering specification.
 
-Raw attempt bytes are append-only until the attempt reaches a terminal technical state, then immutable. Resume never edits the previous attempt. Reanalysis never edits raw data. Regeneration may reproduce an identical report ID only when all inputs and renderer identities match.
+Raw attempt bytes are append-only until the attempt reaches a terminal technical state, then immutable. Every package update verifies previously indexed immutable bytes before adding new artifacts; changed or missing evidence cannot be made trusted by resealing. Resume never edits the previous attempt. Reanalysis never edits raw data. Report creation is serialized per run and reserves a unique report directory before rendering.
 
 ## 4. Required manifest fields
 
@@ -59,11 +59,12 @@ The versioned manifest records:
 - runtime, OS, architecture, dependencies, numeric libraries, and accelerator identity;
 - seed algorithm and independent seed-stream ledger;
 - attempts, checkpoints, analyses, reports, and artifact index;
+- distinct solver/run, analysis, and report-renderer code and execution identities;
 - acceptance criteria and evidence links;
 - completeness flags and known gaps;
 - checksum algorithm and checksum file.
 
-Unknown fields are rejected within a major schema version. Migrations create a new manifest while preserving the source manifest and recording the migration tool.
+Unknown fields are rejected within a major schema version, including within attempt, analysis, report, failure, checkpoint, acceptance, and completeness records. Migrations create a new manifest while preserving the source manifest and recording the migration tool.
 
 ## 5. Events and logs
 

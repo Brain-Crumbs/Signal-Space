@@ -19,12 +19,25 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm install --global npm@11.9.0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: python/requirements-lock.txt
+      - run: python -m pip install -r python/requirements-lock.txt
+      - run: python -m pip install -e python --no-deps
       - run: npm ci
       - run: npm run check
       - name: Run built CLI sample
         run: node apps/cli/dist/index.js --sample pair
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-ui-screenshots
+          path: test-results/screenshots/
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
