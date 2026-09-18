@@ -859,12 +859,13 @@ test('preparation retains nested solver settings and angular-sector arrays', asy
       },
     },
   };
-  await page.route('**/v1/experiments/*/schema', (route) =>
-    route.fulfill({
+  await page.route('**/v1/experiments/*/schema', (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fallback();
+    return route.fulfill({
       json: { experiment_id: researchConfig.experiment_id, schema },
       headers: { 'access-control-allow-origin': 'http://127.0.0.1:4173' },
-    }),
-  );
+    });
+  });
   await page.goto('/');
   await page.getByLabel('Ephemeral bearer token').fill('browser-token');
   await page.getByRole('button', { name: 'Connect runtime' }).click();
