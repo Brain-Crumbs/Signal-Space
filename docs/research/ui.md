@@ -19,6 +19,8 @@ npm run research -- --workspace .research-work serve \
 
 The service prints a JSON object containing its loopback port and ephemeral bearer token. In the browser, enter `http://127.0.0.1:8765` and that token, then choose **Connect runtime**. The token is retained only in the browser session so a reload can reconnect; it is never written into a run package.
 
+`npm run dev` starts only the browser application; it does not start the research runtime. Do not enter the Vite URL (normally port 5173) as the loopback runtime URL. If an endpoint returns an HTML page rather than the runtime JSON protocol, the workspace reports the endpoint mismatch directly instead of displaying the browser's low-level JSON/`DOCTYPE` parse error.
+
 ## Views
 
 ### Prepare
