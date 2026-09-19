@@ -674,10 +674,15 @@ export function ResearchWorkspace() {
           <label htmlFor="runtime-endpoint">Loopback runtime URL</label>
           <input
             id="runtime-endpoint"
+            aria-describedby="runtime-endpoint-help"
             value={endpoint}
             onChange={(event) => setEndpoint(event.target.value)}
             disabled={connection === 'connecting'}
           />
+          <small id="runtime-endpoint-help">
+            Start the research runtime in a second terminal; this is not the
+            Vite dev-server URL.
+          </small>
         </div>
         <div>
           <label htmlFor="runtime-token">Ephemeral bearer token</label>
