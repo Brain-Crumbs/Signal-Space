@@ -558,6 +558,31 @@ test('research runtime disconnect is explicit and retryable', async ({
   await expect(page.getByText('connected', { exact: true })).toBeVisible();
 });
 
+test('research runtime explains HTML responses without exposing a JSON parse error', async ({
+  page,
+}) => {
+  await page.route('http://127.0.0.1:8765/**', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: '<!doctype html><title>Vite application</title>',
+    }),
+  );
+  await page.goto('/');
+  await page.getByLabel('Ephemeral bearer token').fill('browser-token');
+  await page.getByRole('button', { name: 'Connect runtime' }).click();
+
+  await expect(page.getByRole('alert')).toContainText(
+    'returned a web page instead of JSON',
+  );
+  await expect(page.getByRole('alert')).toContainText('not the Vite URL');
+  await expect(page.getByRole('alert')).not.toContainText('Unexpected token');
+  await page.screenshot({
+    path: 'test-results/screenshots/research-workspace-runtime-url-error.png',
+    fullPage: true,
+  });
+});
+
 test('event streams report a missing first sequence', async ({ page }) => {
   await installResearchMock(page, 'completed', 2);
   await page.goto('/');
