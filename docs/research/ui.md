@@ -41,7 +41,7 @@ Report preview reads only generated artifacts from the selected run. The linked 
 
 ## Research collection
 
-The collection browser remains usable without the runtime. Markdown sources render as structured headings, paragraphs, lists, and equation blocks. Catalog relationship IDs connect milestones to their figures and reproducibility source bundles. Adding a conforming catalog entry or accepted archived run does not require a React component change.
+The collection browser remains usable without the runtime. Markdown sources are parsed with GitHub-flavored Markdown support, and inline and display LaTeX are rendered with KaTeX rather than exposed as source text. Wide display equations scroll within their highlighted block instead of widening the page. Catalog relationship IDs connect milestones to their figures and reproducibility source bundles. Adding a conforming catalog entry or accepted archived run does not require a React component change.
 
 ## Validation and limitations
 
