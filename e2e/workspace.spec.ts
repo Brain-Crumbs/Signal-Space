@@ -596,20 +596,28 @@ test('research collection is searchable and exposes source evidence', async ({
   await expect(
     page.getByRole('link', { name: 'Open source file' }),
   ).toHaveAttribute('href', /\.md$/);
-  await page.getByLabel('Search collection').fill('knot topology');
+  await page.getByLabel('Material type').selectOption('figure');
+  await expect(page.getByText('1 result')).toBeVisible();
+  await page.getByLabel('Search collection').fill('');
+  await expect(page.getByText('5 results')).toBeVisible();
+});
+
+test('research collection renders inline and display mathematics', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.getByLabel('Search collection').fill('full theory research');
   await page
     .getByRole('button', {
-      name: /Knot topology to Standard Model research grid/,
+      name: /Full theory research architecture/,
     })
     .click();
   await expect(
     page.locator('.rendered-document .katex-display .katex-html').first(),
   ).toBeVisible();
-  await page.getByLabel('Search collection').fill('radiation');
-  await page.getByLabel('Material type').selectOption('figure');
-  await expect(page.getByText('1 result')).toBeVisible();
-  await page.getByLabel('Search collection').fill('');
-  await expect(page.getByText('5 results')).toBeVisible();
+  await expect(
+    page.locator('.rendered-document p > .katex .katex-html').first(),
+  ).toBeVisible();
 });
 
 test('production worker renders the same initial snapshot as the shared engine', async ({
