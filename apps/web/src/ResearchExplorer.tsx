@@ -1,4 +1,8 @@
 import { useMemo, useState } from 'react';
+import Markdown from 'react-markdown';
+import rehypeKatex from 'rehype-katex';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import catalog from '../../../research/catalog.json';
 
 type CatalogEntry = (typeof catalog.entries)[number] & { related?: string[] };
@@ -237,31 +241,12 @@ function DocumentPreview({ source }: { source: string }) {
   const blocks = source.split(/\n{2,}/).slice(0, 80);
   return (
     <div className="document-preview rendered-document">
-      {blocks.map((block, index) => {
-        const text = block.trim();
-        if (!text) return null;
-        const heading = /^(#{1,4})\s+(.+)$/s.exec(text);
-        if (heading) {
-          const value = heading[2] ?? '';
-          if (heading[1]?.length === 1) return <h3 key={index}>{value}</h3>;
-          return <h4 key={index}>{value}</h4>;
-        }
-        if (text.startsWith('$$') && text.endsWith('$$'))
-          return (
-            <pre className="equation-block" key={index}>
-              {text.slice(2, -2).trim()}
-            </pre>
-          );
-        if (text.split('\n').every((line) => /^[-*]\s/.test(line)))
-          return (
-            <ul key={index}>
-              {text.split('\n').map((line) => (
-                <li key={line}>{line.replace(/^[-*]\s/, '')}</li>
-              ))}
-            </ul>
-          );
-        return <p key={index}>{text.replaceAll(/\*\*|__/g, '')}</p>;
-      })}
+      <Markdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+      >
+        {blocks.join('\n\n')}
+      </Markdown>
       {blocks.length >= 80 && (
         <p>
           Preview truncated. Open the source file for the complete document.

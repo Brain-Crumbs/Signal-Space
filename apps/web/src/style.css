@@ -699,12 +699,19 @@ dd {
   color: #cad6de;
 }
 
-.equation-block {
+.rendered-document .katex-display {
   overflow-x: auto;
+  overflow-y: hidden;
+  margin: 16px 0;
   border-left: 3px solid var(--warm);
   padding: 12px;
   color: #f4dfbb;
   background: #171c20;
+  text-align: left;
+}
+
+.rendered-document .katex-display > .katex {
+  text-align: left;
 }
 
 button:disabled {

@@ -596,6 +596,16 @@ test('research collection is searchable and exposes source evidence', async ({
   await expect(
     page.getByRole('link', { name: 'Open source file' }),
   ).toHaveAttribute('href', /\.md$/);
+  await page.getByLabel('Search collection').fill('knot topology');
+  await page
+    .getByRole('button', {
+      name: /Knot topology to Standard Model research grid/,
+    })
+    .click();
+  await expect(
+    page.locator('.rendered-document .katex-display .katex-html').first(),
+  ).toBeVisible();
+  await page.getByLabel('Search collection').fill('radiation');
   await page.getByLabel('Material type').selectOption('figure');
   await expect(page.getByText('1 result')).toBeVisible();
   await page.getByLabel('Search collection').fill('');
