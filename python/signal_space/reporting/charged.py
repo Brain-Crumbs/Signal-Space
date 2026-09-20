@@ -46,6 +46,10 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
     table(plot / "profiles.csv", profiles)
     write_json(plot / "profiles.json", profiles)
 
+    from signal_space.reporting.exploration import write_exploration
+
+    write_exploration(plot, branch, selection, config)
+
     def rows(name):
         with (plot / name).open() as stream:
             return list(csv.DictReader(stream))

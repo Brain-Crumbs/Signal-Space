@@ -1020,3 +1020,93 @@ aside p {
     padding: 16px;
   }
 }
+
+/* Research views share data identities and remain usable on narrow screens. */
+.research-visuals {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+.visual-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 1rem;
+}
+.visual-chart-grid > *,
+.scientific-chart {
+  min-width: 0;
+  margin: 0;
+}
+.scientific-chart {
+  padding: 1rem;
+  background: #101d30;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  color: #dbeafe;
+}
+.scientific-chart svg,
+.visual-chart-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.scientific-chart h4 {
+  margin: 0 0 0.75rem;
+}
+.chart-tools,
+.visual-summary,
+.criterion-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.chart-tools label {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+  max-width: 100%;
+}
+.chart-tools input {
+  width: 110px;
+}
+.chart-tools select {
+  max-width: 100%;
+}
+.chart-tools button {
+  min-height: 36px;
+}
+.chart-table {
+  overflow: auto;
+  max-height: 360px;
+}
+.chart-table td {
+  max-width: 300px;
+  overflow-wrap: anywhere;
+}
+.research-visuals pre {
+  overflow: auto;
+  max-height: 400px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.criterion-grid > div {
+  flex: 1 1 160px;
+  padding: 0.75rem;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+.visual-summary > span {
+  padding: 0.6rem;
+  border-left: 3px solid #38bdf8;
+}
+.scientific-chart details,
+.research-visuals details {
+  margin: 0.75rem 0;
+}
+.research-visuals small {
+  overflow-wrap: anywhere;
+}

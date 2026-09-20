@@ -110,6 +110,7 @@ def execute(request_path):
             samples += 1
         tol = p["solver_tolerance"] / (10 if task["kind"] == "tolerance" else 1)
         row = {"id": f"point-{number:06d}", "file": name, "files": [name], **task}
+        data = {}
         try:
             profile = solve_profile(
                 task["omega"],
@@ -237,6 +238,15 @@ def execute(request_path):
             "run",
             {
                 "step": number,
+                "snapshot_version": "e01-progress-v1",
+                "point_id": row["id"],
+                "lane": task["lane"],
+                "parent": task["parent"],
+                "observables": {
+                    key: data["observables"][key]
+                    for key in ("E", "Q", "radius")
+                } if row["status"] == "accepted" and "observables" in data else {},
+                "provisional": True,
                 "status": row["status"],
                 "omega": task["omega"],
                 "kind": task["kind"],

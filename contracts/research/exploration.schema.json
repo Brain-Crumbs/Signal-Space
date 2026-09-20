@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/contracts/research/exploration.schema.json",
+  "title": "Saved research exploration and declarative chart mappings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tables",
+    "views",
+    "selection",
+    "spectral_budgets",
+    "failures",
+    "sources",
+    "normalization",
+    "downsampling",
+    "renderer"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "research-exploration-v1"
+    },
+    "tables": {
+      "type": "object",
+      "required": [
+        "branch",
+        "profiles",
+        "spectra",
+        "convergence",
+        "breakup",
+        "derivatives"
+      ],
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "number", "boolean", "null"]
+          }
+        }
+      }
+    },
+    "views": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "dataset",
+          "x",
+          "y",
+          "x_label",
+          "y_label",
+          "x_unit",
+          "y_unit"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dataset": {
+            "type": "string",
+            "minLength": 1
+          },
+          "x": {
+            "type": "string",
+            "minLength": 1
+          },
+          "y": {
+            "type": "string",
+            "minLength": 1
+          },
+          "x_label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "y_label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "x_unit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "y_unit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "point_key": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "parent_key": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "line": {
+            "type": "boolean"
+          },
+          "filters": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          },
+          "error_multiplier": {
+            "type": "number",
+            "minimum": 0
+          },
+          "threshold": {
+            "type": "number"
+          },
+          "reference": {
+            "const": "identity"
+          }
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "required": ["outcome", "coverage", "points", "limitations"],
+      "properties": {
+        "outcome": {
+          "enum": ["candidate", "no-candidate", "unresolved"]
+        },
+        "coverage": {
+          "type": "boolean"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["point", "status", "criteria"]
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "spectral_budgets": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "failures": {
+      "type": "object"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "normalization": {
+      "type": "string"
+    },
+    "downsampling": {
+      "type": "string"
+    },
+    "renderer": {
+      "type": "string"
+    }
+  }
+}

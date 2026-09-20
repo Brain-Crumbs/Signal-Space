@@ -1,3 +1,10 @@
+import {
+  ResearchVisualWorkspace,
+  LiveResearchProgress,
+  SavedFigureGallery,
+  RenderedResearchReport,
+  ResearchComparison,
+} from './ResearchVisualWorkspace.js';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ResearchPlot, parsePlotCsv } from './ResearchPlot.js';
 import type { FigureSpec, PlotRow } from './ResearchPlot.js';
@@ -252,6 +259,7 @@ export function ResearchWorkspace() {
   const [compareConfigs, setCompareConfigs] = useState<
     [ResearchConfig | undefined, ResearchConfig | undefined]
   >([undefined, undefined]);
+  const [compareConfigKey, setCompareConfigKey] = useState('');
   const [reportText, setReportText] = useState('');
   const [plotRows, setPlotRows] = useState<PlotRow[]>([]);
   const [figureSpec, setFigureSpec] = useState<FigureSpec>();
@@ -489,7 +497,10 @@ export function ResearchWorkspace() {
       }),
     )
       .then((values) => {
-        if (!disposed) setCompareConfigs([values[0], values[1]]);
+        if (!disposed) {
+          setCompareConfigs([values[0], values[1]]);
+          setCompareConfigKey(compareIds.join(':'));
+        }
       })
       .catch(handleError);
     return () => {
@@ -931,6 +942,14 @@ export function ResearchWorkspace() {
             <p className="empty">No saved run selected.</p>
           ) : (
             <>
+              <LiveResearchProgress events={events} />
+              {api && selectedRun.experiment_id === 'e01-charged-branch' && (
+                <ResearchVisualWorkspace
+                  key={`${selectedRun.run_id}:${selectedRun.reports.at(-1)?.report_id}`}
+                  api={api}
+                  run={selectedRun}
+                />
+              )}
               <div className="run-identity-grid">
                 <div>
                   <span>Run ID</span>
@@ -1137,6 +1156,26 @@ export function ResearchWorkspace() {
               </div>
             ))}
           </div>
+          {api &&
+            compareConfigKey === compareIds.join(':') &&
+            compareConfigs[0] &&
+            compareConfigs[1] &&
+            compareResearchConfigs(compareConfigs[0], compareConfigs[1])
+              .structuralCompatible &&
+            (() => {
+              const left = runs.find((r) => r.run_id === compareIds[0]);
+              const right = runs.find((r) => r.run_id === compareIds[1]);
+              return left &&
+                right &&
+                left.experiment_id === 'e01-charged-branch' ? (
+                <ResearchComparison
+                  key={`${left.run_id}:${right.run_id}:${left.reports.at(-1)?.report_id}:${right.reports.at(-1)?.report_id}`}
+                  api={api}
+                  left={left}
+                  right={right}
+                />
+              ) : null;
+            })()}
           <ConfigDiff
             left={compareConfigs[0]}
             right={compareConfigs[1]}
@@ -1179,11 +1218,18 @@ export function ResearchWorkspace() {
             </p>
           ) : (
             <>
+              {api && (
+                <SavedFigureGallery
+                  key={`${selectedRun.run_id}:${selectedRun.reports.at(-1)?.report_id}`}
+                  api={api}
+                  run={selectedRun}
+                />
+              )}
               {figureSpec && <ResearchPlot rows={plotRows} spec={figureSpec} />}
               {reportText && (
                 <article className="report-preview">
-                  <h3>Regenerated report source</h3>
-                  <pre>{reportText}</pre>
+                  <h3>Regenerated report</h3>
+                  <RenderedResearchReport source={reportText} />
                 </article>
               )}
               <section className="audit-section">
