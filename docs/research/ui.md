@@ -21,6 +21,8 @@ The service prints a JSON object containing its loopback port and ephemeral bear
 
 `npm run dev` starts only the browser application; it does not start the research runtime. The proxy defaults to runtime port 8765 and declares the documented `http://127.0.0.1:5173` origin to the origin-bound service. Custom ports or origins can be supplied to Vite with `SIGNAL_SPACE_RUNTIME_TARGET` and `SIGNAL_SPACE_RUNTIME_ORIGIN`, with matching values passed to `serve`. If an endpoint returns an HTML page rather than the runtime JSON protocol, the workspace reports the endpoint mismatch directly instead of displaying the browser's low-level JSON/`DOCTYPE` parse error.
 
+`npm run dev` starts only the browser application; it does not start the research runtime. Do not enter the Vite URL (normally port 5173) as the loopback runtime URL. If an endpoint returns an HTML page rather than the runtime JSON protocol, the workspace reports the endpoint mismatch directly instead of displaying the browser's low-level JSON/`DOCTYPE` parse error.
+
 ## Views
 
 ### Prepare
@@ -43,7 +45,7 @@ Report preview reads only generated artifacts from the selected run. The linked 
 
 ## Research collection
 
-The collection browser remains usable without the runtime. Markdown sources render as structured headings, paragraphs, lists, and equation blocks. Catalog relationship IDs connect milestones to their figures and reproducibility source bundles. Adding a conforming catalog entry or accepted archived run does not require a React component change.
+The collection browser remains usable without the runtime. Markdown sources are parsed with GitHub-flavored Markdown support, and inline and display LaTeX are rendered with KaTeX rather than exposed as source text. Wide display equations scroll within their highlighted block instead of widening the page. Catalog relationship IDs connect milestones to their figures and reproducibility source bundles. Adding a conforming catalog entry or accepted archived run does not require a React component change.
 
 ## Validation and limitations
 
