@@ -224,9 +224,10 @@ function ConfigDiff({
 }
 
 export function ResearchWorkspace() {
-  const [endpoint, setEndpoint] = useState(() =>
-    sessionValue('signal-space-runtime-endpoint', 'http://127.0.0.1:8765'),
-  );
+  const [endpoint, setEndpoint] = useState(() => {
+    const saved = sessionValue('signal-space-runtime-endpoint', '/runtime');
+    return saved === 'http://127.0.0.1:8765' ? '/runtime' : saved;
+  });
   const [token, setToken] = useState(() =>
     sessionValue('signal-space-runtime-token', ''),
   );
@@ -671,7 +672,7 @@ export function ResearchWorkspace() {
 
       <div className="runtime-connection" aria-label="Runtime connection">
         <div>
-          <label htmlFor="runtime-endpoint">Loopback runtime URL</label>
+          <label htmlFor="runtime-endpoint">Runtime API path or URL</label>
           <input
             id="runtime-endpoint"
             aria-describedby="runtime-endpoint-help"
@@ -680,8 +681,8 @@ export function ResearchWorkspace() {
             disabled={connection === 'connecting'}
           />
           <small id="runtime-endpoint-help">
-            Start the research runtime in a second terminal; this is not the
-            Vite dev-server URL.
+            Use /runtime through the dev-server proxy. Start the research
+            runtime in a second terminal.
           </small>
         </div>
         <div>

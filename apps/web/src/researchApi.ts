@@ -193,7 +193,7 @@ export class ResearchApi {
         throw new ResearchApiError(
           receivedHtml
             ? `The runtime URL returned a web page instead of JSON for ${path}. ` +
-                'Use the loopback research runtime URL (usually http://127.0.0.1:8765), not the Vite URL, and start the runtime in a second terminal.'
+                'Use the /runtime proxy path and start the research runtime in a second terminal.'
             : `The runtime returned invalid JSON for ${path}. Check the runtime URL and restart the research service.`,
           'INVALID_RESPONSE',
           response.status,

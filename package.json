@@ -13,7 +13,7 @@
   },
   "packageManager": "npm@11.9.0",
   "scripts": {
-    "dev": "npm run dev -w @signal-space/web",
+    "dev": "npm run dev -w @signal-space/web --",
     "cli": "npm run cli -w @signal-space/cli --",
     "research": "PYTHONPATH=python python3 -m signal_space",
     "typecheck": "tsc --noEmit",
