@@ -180,20 +180,36 @@ export class ResearchApi {
         0,
       );
     }
-    if (!response.ok) {
-      let parsed: ApiErrorBody = {};
-      try {
-        parsed = (await response.json()) as ApiErrorBody;
-      } catch {
-        // Keep the status fallback for non-JSON proxy/network responses.
+    const responseText = await response.text();
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(responseText) as unknown;
+    } catch {
+      if (response.ok) {
+        const contentType = response.headers.get('content-type') ?? '';
+        const receivedHtml =
+          contentType.toLowerCase().includes('text/html') ||
+          responseText.trimStart().startsWith('<');
+        throw new ResearchApiError(
+          receivedHtml
+            ? `The runtime URL returned a web page instead of JSON for ${path}. ` +
+                'Use the /runtime proxy path and start the research runtime in a second terminal.'
+            : `The runtime returned invalid JSON for ${path}. Check the runtime URL and restart the research service.`,
+          'INVALID_RESPONSE',
+          response.status,
+        );
       }
+    }
+    if (!response.ok) {
+      const errorBody = (parsed ?? {}) as ApiErrorBody;
       throw new ResearchApiError(
-        parsed.error?.message ?? `Runtime request failed (${response.status}).`,
-        parsed.error?.code ?? 'REQUEST_FAILED',
+        errorBody.error?.message ??
+          `Runtime request failed (${response.status}).`,
+        errorBody.error?.code ?? 'REQUEST_FAILED',
         response.status,
       );
     }
-    return (await response.json()) as T;
+    return parsed as T;
   }
 
   experiments() {

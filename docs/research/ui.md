@@ -17,7 +17,9 @@ npm run research -- --workspace .research-work serve \
   --port 8765
 ```
 
-The service prints a JSON object containing its loopback port and ephemeral bearer token. In the browser, enter `http://127.0.0.1:8765` and that token, then choose **Connect runtime**. The token is retained only in the browser session so a reload can reconnect; it is never written into a run package.
+The service prints a JSON object containing its loopback port and ephemeral bearer token. Leave **Runtime API path or URL** set to `/runtime`, enter the printed token, then choose **Connect runtime**. Vite proxies that same-origin path to the loopback service, including when the web port is forwarded by Codespaces or another remote-development environment. Only the web port needs to be opened in the browser; do not use the separately forwarded runtime-port URL. The token is retained only in the browser session so a reload can reconnect; it is never written into a run package.
+
+`npm run dev` starts only the browser application; it does not start the research runtime. The proxy defaults to runtime port 8765 and declares the documented `http://127.0.0.1:5173` origin to the origin-bound service. Custom ports or origins can be supplied to Vite with `SIGNAL_SPACE_RUNTIME_TARGET` and `SIGNAL_SPACE_RUNTIME_ORIGIN`, with matching values passed to `serve`. If an endpoint returns an HTML page rather than the runtime JSON protocol, the workspace reports the endpoint mismatch directly instead of displaying the browser's low-level JSON/`DOCTYPE` parse error.
 
 ## Views
 

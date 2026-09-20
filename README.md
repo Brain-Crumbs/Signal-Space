@@ -74,7 +74,7 @@ npm run research -- --workspace .research-work serve \
   --port 8765
 ```
 
-Open the local Vite URL, enter the printed ephemeral bearer token, and connect to `http://127.0.0.1:8765`. The UI can prepare, validate, execute, cancel, resume, audit, compare, analyze, and regenerate reports for registered framework experiments. It also searches papers, milestones, figures, source collections, and their cataloged relationships. See the [local workspace guide](docs/research/ui.md) and [E00 runtime guide](docs/research/runtime.md).
+Open the Vite URL, leave the runtime API field set to `/runtime`, and enter the printed ephemeral bearer token. The same-origin Vite proxy also supports forwarded development URLs such as Codespaces; do not connect through a separately forwarded port 8765 URL. The UI can prepare, validate, execute, cancel, resume, audit, compare, analyze, and regenerate reports for registered framework experiments. It also searches papers, milestones, figures, source collections, and their cataloged relationships. See the [local workspace guide](docs/research/ui.md) and [E00 runtime guide](docs/research/runtime.md).
 
 Run the synthetic framework fixture, which makes no physics claim:
 

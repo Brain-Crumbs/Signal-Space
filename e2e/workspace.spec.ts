@@ -206,10 +206,10 @@ async function installResearchMock(
       cursor: `attempt-0001:${firstEventSequence + 1}`,
     },
   ];
-  await page.route('http://127.0.0.1:8765/**', async (route) => {
+  await page.route('**/runtime/**', async (route) => {
     const request = route.request();
     const url = new URL(request.url());
-    const path = url.pathname;
+    const path = url.pathname.replace(/^\/runtime/, '');
     const headers = {
       'access-control-allow-origin': 'http://127.0.0.1:4173',
       'content-type': 'application/json',
@@ -465,6 +465,9 @@ test('research workspace completes prepare, audit, analysis and report journey',
 }) => {
   await installResearchMock(page);
   await page.goto('/');
+  await expect(page.getByLabel('Runtime API path or URL')).toHaveValue(
+    '/runtime',
+  );
   await page.getByLabel('Ephemeral bearer token').fill('browser-token');
   await page.getByRole('button', { name: 'Connect runtime' }).click();
   await expect(page.getByText('Active experiment')).toBeVisible();
@@ -543,7 +546,7 @@ test('research runtime disconnect is explicit and retryable', async ({
 }) => {
   await installResearchMock(page);
   let disconnect = true;
-  await page.route('http://127.0.0.1:8765/v1/experiments', async (route) => {
+  await page.route('**/runtime/v1/experiments', async (route) => {
     if (disconnect) {
       disconnect = false;
       await route.abort('connectionrefused');
@@ -556,6 +559,33 @@ test('research runtime disconnect is explicit and retryable', async ({
   await page.getByRole('button', { name: 'Retry connection' }).click();
   await expect(page.getByText('Active experiment')).toBeVisible();
   await expect(page.getByText('connected', { exact: true })).toBeVisible();
+});
+
+test('research runtime explains HTML responses without exposing a JSON parse error', async ({
+  page,
+}) => {
+  await page.route('**/runtime/**', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: '<!doctype html><title>Vite application</title>',
+    }),
+  );
+  await page.goto('/');
+  await page.getByLabel('Ephemeral bearer token').fill('browser-token');
+  await page.getByRole('button', { name: 'Connect runtime' }).click();
+
+  await expect(page.getByRole('alert')).toContainText(
+    'returned a web page instead of JSON',
+  );
+  await expect(page.getByRole('alert')).toContainText(
+    'Use the /runtime proxy path',
+  );
+  await expect(page.getByRole('alert')).not.toContainText('Unexpected token');
+  await page.screenshot({
+    path: 'test-results/screenshots/research-workspace-runtime-url-error.png',
+    fullPage: true,
+  });
 });
 
 test('event streams report a missing first sequence', async ({ page }) => {
@@ -938,7 +968,7 @@ test('E01 research preset is explicit and loading it never launches a run', asyn
     'access-control-allow-origin': 'http://127.0.0.1:4173',
     'content-type': 'application/json',
   };
-  await page.route('http://127.0.0.1:8765/v1/experiments', async (route) => {
+  await page.route('**/runtime/v1/experiments', async (route) => {
     if (route.request().method() === 'OPTIONS') return route.fallback();
     await route.fulfill({
       headers,
@@ -961,7 +991,7 @@ test('E01 research preset is explicit and loading it never launches a run', asyn
     });
   });
   await page.route(
-    'http://127.0.0.1:8765/v1/experiments/e01-charged-branch/schema',
+    '**/runtime/v1/experiments/e01-charged-branch/schema',
     async (route) => {
       if (route.request().method() === 'OPTIONS') return route.fallback();
       await route.fulfill({
