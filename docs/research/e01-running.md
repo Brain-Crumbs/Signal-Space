@@ -13,7 +13,7 @@ Follow the [README setup](../../README.md#quick-start), start Vite and the loopb
 5. Follow point events and attempts in Run audit. Cancel/resume retains completed tasks and pending continuation work.
 6. Analyze saved output, regenerate the report, and download the reports, figures and data from the artifact catalog.
 
-The initial selection uses a **Small validation fixture** instead. It executes three nearby frequencies with a deliberately coarse spectrum and no refinement; its scientific outcome is always `unresolved`. The E00 interactive recurrence overlay is not used for E01; E01 plots are the saved PNG/SVG/PDF artifacts accompanying the report.
+The initial selection uses a **Small validation fixture** instead. It executes three nearby frequencies with a deliberately coarse spectrum and no refinement; its scientific outcome is always `unresolved`. The E00 interactive recurrence overlay is not used for E01; E01 has its own linked visual explorer in Run audit and a saved figure gallery in Reports. Analyze and regenerate a report to enable the explorer for older runs. See [Visual research workspace](visual-exploration.md).
 
 ## Headless launch and reproduction
 

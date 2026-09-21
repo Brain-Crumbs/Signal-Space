@@ -2,7 +2,7 @@
 
 ## Purpose and boundary
 
-The React research workspace is an audit client for the local E00 runtime. It does not contain a solver, derive physics, or infer a scientific result. Configuration validation, resource estimates, execution, cancellation, resume, analysis, and report generation all cross the origin-bound loopback API and invoke the same `ResearchRuntime` used by the CLI.
+The React research workspace is a visual research and audit client for the local runtime. It does not contain a solver, derive physics, or infer a scientific result. Configuration validation, resource estimates, execution, cancellation, resume, analysis, and report generation all cross the origin-bound loopback API and invoke the same `ResearchRuntime` used by the CLI.
 
 The separately labeled delay-network panel still uses the historical TypeScript engine. Its preparation inspection is not a run in the charged-recurrence research framework.
 
@@ -52,3 +52,7 @@ The collection browser remains usable without the runtime. Markdown sources are 
 Browser tests cover the schema-driven preparation, resource estimate, run/audit journey, interrupted resume lineage, report regeneration, saved-data plot metadata, keyboard focus, and narrow viewport. API tests cover authoritative schemas, saved-run discovery, origin/token enforcement, resumable events, and artifact access.
 
 The E00 fixture is intentionally non-physical. It has no field-slice, branch-continuation, or research-scale sweep output, so the UI truthfully labels those capabilities unavailable instead of presenting placeholder controls. Future experiment plugins can add those artifact types through the same schema, manifest, figure-specification, and artifact catalog contracts.
+
+## Interactive E01 exploration
+
+See [Visual research workspace](visual-exploration.md) for linked branch/profile/spectrum/binding/convergence charts, provisional execution views, compatible comparisons, saved figure galleries and reproducible exports.

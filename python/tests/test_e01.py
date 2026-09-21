@@ -213,6 +213,25 @@ class E01RuntimeTest(unittest.TestCase):
                 len(list((report_path / "figures").glob("*.figure.json"))), 5
             )
             self.assertIn("unresolved", (report_path / "report.md").read_text())
+            exploration = read_json(report_path / "plot-data/exploration.json")
+            self.assertEqual(exploration["selection"]["outcome"], "unresolved")
+            self.assertEqual(len(exploration["views"]), 8)
+            self.assertEqual(len(exploration["tables"]["branch"]), 3)
+            self.assertEqual(len(exploration["tables"]["profiles"]), 3 * 1025)
+            raw = read_json(Path(result["path"]) / analysis["raw_source"])
+            for row in exploration["tables"]["branch"]:
+                source = next(x for x in raw["records"] if x["id"] == row["id"])
+                parent = next((x for x in raw["records"] if x["file"] == source["parent"]), None)
+                self.assertEqual(row["parent_id"], parent["id"] if parent else None)
+            events = [json.loads(line) for line in (Path(result["path"]) / "attempts/attempt-0001/events.jsonl").read_text().splitlines()]
+            progress = [e["payload"] for e in events if e["type"] == "point-completed"]
+            self.assertEqual(len(progress), 3)
+            self.assertTrue(all(p["provisional"] for p in progress))
+            for point in progress:
+                saved = next(r for r in exploration["tables"]["branch"] if r["id"] == point["point_id"])
+                self.assertEqual(point["observables"]["E"], saved["E"])
+                self.assertLess(len(json.dumps(point)), 1500)
+                self.assertNotIn("profile", point)
 
     def test_checkpoint_resumes_same_pending_continuation(self):
         with tempfile.TemporaryDirectory() as directory:

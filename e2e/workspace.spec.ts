@@ -507,6 +507,14 @@ test('research workspace completes prepare, audit, analysis and report journey',
   await expect(
     page.getByRole('button', { name: 'Download' }).first(),
   ).toBeVisible();
+  // A new immutable report must clear this preview before its new bytes are
+  // fetched; otherwise the old narrative could be shown with new figures.
+  await page.getByRole('button', { name: '2 · Run audit' }).click();
+  await page.getByRole('button', { name: 'Regenerate report' }).click();
+  await page.getByRole('button', { name: '4 · Reports' }).click();
+  await expect(
+    page.getByText('Synthetic fixture only; no physics claim.'),
+  ).not.toBeVisible();
   await page.screenshot({
     path: 'test-results/screenshots/research-workspace-report.png',
     fullPage: true,

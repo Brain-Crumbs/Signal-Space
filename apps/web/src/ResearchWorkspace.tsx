@@ -1,3 +1,10 @@
+import {
+  ResearchVisualWorkspace,
+  LiveResearchProgress,
+  SavedFigureGallery,
+  RenderedResearchReport,
+  ResearchComparison,
+} from './ResearchVisualWorkspace.js';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ResearchPlot, parsePlotCsv } from './ResearchPlot.js';
 import type { FigureSpec, PlotRow } from './ResearchPlot.js';
@@ -252,7 +259,9 @@ export function ResearchWorkspace() {
   const [compareConfigs, setCompareConfigs] = useState<
     [ResearchConfig | undefined, ResearchConfig | undefined]
   >([undefined, undefined]);
+  const [compareConfigKey, setCompareConfigKey] = useState('');
   const [reportText, setReportText] = useState('');
+  const [previewedReportId, setPreviewedReportId] = useState('');
   const [plotRows, setPlotRows] = useState<PlotRow[]>([]);
   const [figureSpec, setFigureSpec] = useState<FigureSpec>();
   const [reportLoading, setReportLoading] = useState(false);
@@ -274,6 +283,10 @@ export function ResearchWorkspace() {
   const runActive = selectedRun
     ? !TERMINAL.has(selectedRun.technical_state)
     : false;
+  const previewedReport = selectedRun?.reports.find(
+    (report) => report.report_id === previewedReportId,
+  );
+  const displayedReport = previewedReport ?? selectedRun?.reports.at(-1);
 
   const handleError = useCallback((error: unknown) => {
     const problem =
@@ -395,6 +408,7 @@ export function ResearchWorkspace() {
     setStreamWarning('');
     setRunConfig(undefined);
     setReportText('');
+    setPreviewedReportId('');
     setPlotRows([]);
     setFigureSpec(undefined);
   }, [selectedRunId]);
@@ -489,7 +503,10 @@ export function ResearchWorkspace() {
       }),
     )
       .then((values) => {
-        if (!disposed) setCompareConfigs([values[0], values[1]]);
+        if (!disposed) {
+          setCompareConfigs([values[0], values[1]]);
+          setCompareConfigKey(compareIds.join(':'));
+        }
       })
       .catch(handleError);
     return () => {
@@ -557,6 +574,14 @@ export function ResearchWorkspace() {
     setBusy(true);
     setMessage('');
     try {
+      if (action === 'report') {
+        // A regenerated report gets a new immutable identity. Do not combine its
+        // figures with a preview that was fetched from an earlier report.
+        setReportText('');
+        setPreviewedReportId('');
+        setPlotRows([]);
+        setFigureSpec(undefined);
+      }
       await api.action(selectedRun.run_id, action);
       const manifest = await refreshRun(api, selectedRun.run_id);
       if (
@@ -595,6 +620,7 @@ export function ResearchWorkspace() {
       )
         return;
       setReportText(markdownText);
+      setPreviewedReportId(latestReport.report_id);
       setPlotRows([]);
       setFigureSpec(undefined);
       // The interactive overlay is specific to E00. Other experiments retain
@@ -931,6 +957,14 @@ export function ResearchWorkspace() {
             <p className="empty">No saved run selected.</p>
           ) : (
             <>
+              <LiveResearchProgress events={events} />
+              {api && selectedRun.experiment_id === 'e01-charged-branch' && (
+                <ResearchVisualWorkspace
+                  key={`${selectedRun.run_id}:${selectedRun.reports.at(-1)?.report_id}`}
+                  api={api}
+                  run={selectedRun}
+                />
+              )}
               <div className="run-identity-grid">
                 <div>
                   <span>Run ID</span>
@@ -1137,6 +1171,26 @@ export function ResearchWorkspace() {
               </div>
             ))}
           </div>
+          {api &&
+            compareConfigKey === compareIds.join(':') &&
+            compareConfigs[0] &&
+            compareConfigs[1] &&
+            compareResearchConfigs(compareConfigs[0], compareConfigs[1])
+              .structuralCompatible &&
+            (() => {
+              const left = runs.find((r) => r.run_id === compareIds[0]);
+              const right = runs.find((r) => r.run_id === compareIds[1]);
+              return left &&
+                right &&
+                left.experiment_id === 'e01-charged-branch' ? (
+                <ResearchComparison
+                  key={`${left.run_id}:${right.run_id}:${left.reports.at(-1)?.report_id}:${right.reports.at(-1)?.report_id}`}
+                  api={api}
+                  left={left}
+                  right={right}
+                />
+              ) : null;
+            })()}
           <ConfigDiff
             left={compareConfigs[0]}
             right={compareConfigs[1]}
@@ -1179,11 +1233,19 @@ export function ResearchWorkspace() {
             </p>
           ) : (
             <>
+              {api && displayedReport && (
+                <SavedFigureGallery
+                  key={`${selectedRun.run_id}:${displayedReport.report_id}`}
+                  api={api}
+                  run={selectedRun}
+                  report={displayedReport}
+                />
+              )}
               {figureSpec && <ResearchPlot rows={plotRows} spec={figureSpec} />}
               {reportText && (
                 <article className="report-preview">
-                  <h3>Regenerated report source</h3>
-                  <pre>{reportText}</pre>
+                  <h3>Regenerated report</h3>
+                  <RenderedResearchReport source={reportText} />
                 </article>
               )}
               <section className="audit-section">
