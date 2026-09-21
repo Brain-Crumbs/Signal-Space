@@ -13,7 +13,12 @@ import {
   type Exploration,
   type ChartPoint,
 } from './researchVisuals.js';
-import type { ResearchApi, RunManifest, RuntimeEvent } from './researchApi.js';
+import type {
+  ResearchApi,
+  ReportRecord,
+  RunManifest,
+  RuntimeEvent,
+} from './researchApi.js';
 
 function useExploration(api: ResearchApi, run: RunManifest) {
   const [data, setData] = useState<Exploration>();
@@ -371,20 +376,23 @@ export function LiveResearchProgress({ events }: { events: RuntimeEvent[] }) {
 export function SavedFigureGallery({
   api,
   run,
+  report,
 }: {
   api: ResearchApi;
   run: RunManifest;
+  report: ReportRecord;
 }) {
   const [images, setImages] = useState<
     Array<{ path: string; url: string; hash: string }>
   >([]);
   const [error, setError] = useState('');
-  const report = run.reports.at(-1);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     let disposed = false;
     const urls: string[] = [];
     setImages([]);
     setError('');
+    setLoading(true);
     const figures = run.artifacts.filter(
       (a) =>
         a.kind === 'figure' &&
@@ -406,6 +414,9 @@ export function SavedFigureGallery({
       })
       .catch((e) => {
         if (!disposed) setError(String(e));
+      })
+      .finally(() => {
+        if (!disposed) setLoading(false);
       });
     return () => {
       disposed = true;
@@ -415,7 +426,11 @@ export function SavedFigureGallery({
   return (
     <section aria-label="Saved figure gallery">
       <h3>Saved figures</h3>
+      {loading && <p role="status">Loading saved figures…</p>}
       {error && <p role="alert">{error}</p>}
+      {!loading && !error && images.length === 0 && (
+        <p className="empty">This report has no saved PNG figures.</p>
+      )}
       <div className="visual-chart-grid">
         {images.map((img) => (
           <figure key={img.path}>

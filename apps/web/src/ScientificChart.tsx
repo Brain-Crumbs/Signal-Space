@@ -236,7 +236,23 @@ export function ScientificChart({
               r={p.id === selected ? 5 : 3}
               fill={color(p)}
               stroke={p.id === selected ? 'white' : 'none'}
-              onClick={() => onSelect?.(p.id)}
+              {...(onSelect
+                ? {
+                    role: 'button',
+                    tabIndex: 0,
+                    'aria-label': `Select ${p.id}: ${p.label}`,
+                    onClick: () => onSelect(p.id),
+                    onKeyDown: (
+                      event: React.KeyboardEvent<SVGCircleElement>,
+                    ) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        onSelect(p.id);
+                      }
+                    },
+                    className: 'chart-point-button',
+                  }
+                : {})}
               style={{ cursor: onSelect ? 'pointer' : 'default' }}
             >
               <title>{p.label}</title>

@@ -97,6 +97,15 @@ test('real E01 reports support linked selection, progress, exports and compatibl
     .locator('option')
     .evaluateAll((nodes) => nodes.map((n) => (n as HTMLOptionElement).value));
   expect(options.length).toBe(3);
+  const energyChart = explorer.locator('figure').filter({
+    has: page.getByRole('heading', { name: 'Energy and charge', exact: true }),
+  });
+  const selectablePoints = energyChart.locator('circle[role="button"]');
+  await expect(selectablePoints).toHaveCount(3);
+  await selectablePoints.nth(1).press('Enter');
+  await expect(
+    explorer.getByRole('heading', { name: `Solution ${options[1]}` }),
+  ).toBeVisible();
   await picker.selectOption(options[1]!);
   await expect(
     explorer.getByRole('heading', { name: `Solution ${options[1]}` }),

@@ -261,6 +261,7 @@ export function ResearchWorkspace() {
   >([undefined, undefined]);
   const [compareConfigKey, setCompareConfigKey] = useState('');
   const [reportText, setReportText] = useState('');
+  const [previewedReportId, setPreviewedReportId] = useState('');
   const [plotRows, setPlotRows] = useState<PlotRow[]>([]);
   const [figureSpec, setFigureSpec] = useState<FigureSpec>();
   const [reportLoading, setReportLoading] = useState(false);
@@ -282,6 +283,10 @@ export function ResearchWorkspace() {
   const runActive = selectedRun
     ? !TERMINAL.has(selectedRun.technical_state)
     : false;
+  const previewedReport = selectedRun?.reports.find(
+    (report) => report.report_id === previewedReportId,
+  );
+  const displayedReport = previewedReport ?? selectedRun?.reports.at(-1);
 
   const handleError = useCallback((error: unknown) => {
     const problem =
@@ -403,6 +408,7 @@ export function ResearchWorkspace() {
     setStreamWarning('');
     setRunConfig(undefined);
     setReportText('');
+    setPreviewedReportId('');
     setPlotRows([]);
     setFigureSpec(undefined);
   }, [selectedRunId]);
@@ -568,6 +574,14 @@ export function ResearchWorkspace() {
     setBusy(true);
     setMessage('');
     try {
+      if (action === 'report') {
+        // A regenerated report gets a new immutable identity. Do not combine its
+        // figures with a preview that was fetched from an earlier report.
+        setReportText('');
+        setPreviewedReportId('');
+        setPlotRows([]);
+        setFigureSpec(undefined);
+      }
       await api.action(selectedRun.run_id, action);
       const manifest = await refreshRun(api, selectedRun.run_id);
       if (
@@ -606,6 +620,7 @@ export function ResearchWorkspace() {
       )
         return;
       setReportText(markdownText);
+      setPreviewedReportId(latestReport.report_id);
       setPlotRows([]);
       setFigureSpec(undefined);
       // The interactive overlay is specific to E00. Other experiments retain
@@ -1218,11 +1233,12 @@ export function ResearchWorkspace() {
             </p>
           ) : (
             <>
-              {api && (
+              {api && displayedReport && (
                 <SavedFigureGallery
-                  key={`${selectedRun.run_id}:${selectedRun.reports.at(-1)?.report_id}`}
+                  key={`${selectedRun.run_id}:${displayedReport.report_id}`}
                   api={api}
                   run={selectedRun}
+                  report={displayedReport}
                 />
               )}
               {figureSpec && <ResearchPlot rows={plotRows} spec={figureSpec} />}
