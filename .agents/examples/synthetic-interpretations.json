@@ -1,0 +1,8 @@
+{
+  "fixture-recurrence": {
+    "question": "Does the saved trace follow the independent recurrence over all 24 steps?",
+    "reading": "The saved and independent synthetic recurrence traces overlap; inspect the saved absolute-error column and the locked threshold for the numerical verdict.",
+    "significance": "This checks that the runtime carries an independently reproducible fixture through execution, analysis, and report generation.",
+    "limitation": "A deterministic recurrence fixture makes no claim about physical fields, operational geometry, or interactions."
+  }
+}

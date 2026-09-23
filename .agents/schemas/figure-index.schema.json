@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/agents/figure-index.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "figures"],
+  "properties": {
+    "schema_version": { "const": "signal-space-figure-index-v1" },
+    "figures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "figure_id",
+          "role",
+          "question",
+          "reading",
+          "significance",
+          "limitation",
+          "source_data",
+          "spec_file",
+          "transformations",
+          "files"
+        ],
+        "properties": {
+          "figure_id": { "type": "string", "minLength": 1 },
+          "role": { "enum": ["illustrative", "diagnostic", "evidentiary"] },
+          "question": { "type": "string", "minLength": 1 },
+          "reading": { "type": "string", "minLength": 1 },
+          "significance": { "type": "string", "minLength": 1 },
+          "limitation": { "type": "string", "minLength": 1 },
+          "source_data": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" }
+          },
+          "spec_file": { "type": "string", "minLength": 1 },
+          "transformations": { "type": "array", "items": { "type": "string" } },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

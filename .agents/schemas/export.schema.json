@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/agents/experiment-export.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_run",
+    "classification",
+    "files",
+    "known_gaps"
+  ],
+  "properties": {
+    "schema_version": { "const": "signal-space-export-v1" },
+    "source_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "experiment_id",
+        "model_id",
+        "run_id",
+        "analysis_id",
+        "report_id",
+        "manifest_sha256",
+        "locator"
+      ],
+      "properties": {
+        "experiment_id": { "type": "string", "minLength": 1 },
+        "model_id": { "type": "string", "minLength": 1 },
+        "run_id": { "type": "string", "minLength": 1 },
+        "analysis_id": { "type": "string", "minLength": 1 },
+        "report_id": { "type": "string", "minLength": 1 },
+        "manifest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "locator": { "type": "string", "minLength": 1 }
+      }
+    },
+    "classification": {
+      "enum": ["pass", "fail", "unresolved", "not-evaluated"]
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "known_gaps": { "type": "array", "items": { "type": "string" } }
+  }
+}

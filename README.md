@@ -24,6 +24,7 @@ Stable three-dimensional charged branches, charged–Hopf binding, fermionic qua
 | Research architecture | Shared runtime, model plugins, audit trail, analysis, reports, and UI boundaries       | [`docs/research/architecture.md`](docs/research/architecture.md)           |
 | E00 runtime guide     | Install, lifecycle CLI/API, recovery, extension workflow, and reproducibility limits   | [`docs/research/runtime.md`](docs/research/runtime.md)                     |
 | Artifact contract     | Immutable run packages, provenance, checksums, figures, reports, and claims            | [`docs/research/artifact-contract.md`](docs/research/artifact-contract.md) |
+| Experiment workflow   | Locked plans, question-driven visuals, and standard reader exports                     | [`.agents/output-contract.md`](.agents/output-contract.md)                 |
 | Experiment sequence   | Ordered gates from synthetic fixture through integrated theory tests                   | [`docs/research/experiment-plan.md`](docs/research/experiment-plan.md)     |
 | First experiment      | Three-dimensional charged recurrence branch and constrained stability protocol         | [`docs/research/first-experiment.md`](docs/research/first-experiment.md)   |
 | Theory and evidence   | Papers, milestones, figures, source code, configurations, and compact results          | [`research/README.md`](research/README.md)                                 |
