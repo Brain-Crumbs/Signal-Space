@@ -1,0 +1,76 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "fixture.synthetic.v1",
+  "model_id": "fixture.deterministic-recurrence.v1",
+  "question": "Can the E00 saved recurrence be independently regenerated within the declared absolute error?",
+  "source_equations": [
+    "python/signal_space/numerics/synthetic.py: recurrence definition"
+  ],
+  "runtime_config": "fixtures/research/synthetic.json",
+  "runtime_config_sha256": "401e8dd06a9672bf288ca91e68e1fe8ff93d8f72bb36c09fe4de6756793081a5",
+  "method": {
+    "action": "Deterministic synthetic recurrence only; no physical action or spacetime claim",
+    "units": "step=index, value=dimensionless",
+    "domain": "24 recurrence steps",
+    "boundaries": "initial value at step 0",
+    "initial_data": "value=1; independent expected recurrence",
+    "solver": "registered fixture.synthetic.v1 plugin",
+    "tolerances": "absolute discrepancy at most 1e-14"
+  },
+  "hypotheses": [
+    {
+      "id": "agreement",
+      "prediction": "Observed and independently regenerated values agree within the declared tolerance."
+    },
+    {
+      "id": "disagreement",
+      "prediction": "At least one value differs by more than the declared tolerance."
+    }
+  ],
+  "controls": [
+    {
+      "id": "independent-recurrence",
+      "purpose": "Detect output corruption or a changed recurrence",
+      "method": "Regenerate expected values independently from the saved configuration."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "absolute-error",
+      "observable": "max absolute observed-minus-expected error",
+      "pass_if": "all 24 saved samples and maximum error <= 1e-14",
+      "fail_if": "complete saved sequence has maximum error > 1e-14",
+      "unresolved_if": "sequence incomplete, unverified, or comparison unavailable",
+      "uncertainty": "floating-point arithmetic and 1e-14 comparison threshold"
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "fixture-recurrence",
+      "question": "Does the saved trace follow the independent recurrence over all 24 steps?",
+      "role": "evidentiary",
+      "observables": ["observed", "expected", "absolute_error"],
+      "representation": "line overlay with numerical residual summary",
+      "competing_signatures": {
+        "agreement": "overlapping traces and bounded residuals",
+        "disagreement": "separated traces or residual over tolerance"
+      },
+      "controls": ["independent-recurrence"],
+      "uncertainty": "display the maximum absolute error against the locked tolerance",
+      "source_data": ["reports/<report-id>/plot-data/recurrence.csv"],
+      "transformations": [
+        "no smoothing; plot saved observed and expected columns"
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 30,
+    "max_memory_mb": 256,
+    "max_output_mb": 16
+  },
+  "prohibited_inferences": [
+    "E00 is a technical fixture; it cannot establish physical propagation or geometry."
+  ],
+  "locked_sha256": "7cd3ee83d02a8f4b2cf5ea6a8b3a84b4bdf9b600ab6800a1cc727f56c87f6ef0"
+}

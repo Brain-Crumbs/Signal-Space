@@ -27,7 +27,8 @@
     "build": "npm run build -w @signal-space/cli && npm run build -w @signal-space/web",
     "research:manifest": "node scripts/research-archive.mjs --write",
     "verify:research": "node scripts/research-archive.mjs",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run contracts:check && npm run verify:research && npm test && npm run test:research && npm run build"
+    "verify:experiments": "python3 .agents/scripts/experiment_contract.py plan .agents/examples/synthetic-plan.json && python3 -m unittest discover -s .agents/tests && python3 .agents/scripts/experiment_contract.py scan research/experiments",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run contracts:check && npm run verify:research && npm run verify:experiments && npm test && npm run test:research && npm run build"
   },
   "devDependencies": {
     "typescript": "5.9.3",
