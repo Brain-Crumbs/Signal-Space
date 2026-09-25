@@ -1,0 +1,11 @@
+{
+  "model": "signal-space.ss-ocf-1.action-audit.v1",
+  "parameters": {
+    "directions": 20,
+    "epsilon": 0.1,
+    "orientation_kappa": 0.4,
+    "orientation_p": 0.6,
+    "samples": 200
+  },
+  "source": "docs/research/gross-test-05.md"
+}

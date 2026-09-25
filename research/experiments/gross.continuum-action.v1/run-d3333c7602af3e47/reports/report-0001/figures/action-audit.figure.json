@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "dimensionless, as labeled"
+    },
+    "y": {
+      "unit": "dimensionless, as labeled"
+    }
+  },
+  "downsampling": "first four of 200 samples for root overlays; all 200 samples for residuals",
+  "fit_window": null,
+  "id": "action-audit",
+  "normalization": "c=hbar=m=M0=1; local covectors normalized to |k|=1",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/samples.csv"
+  ],
+  "transformations": [
+    "scale-normalized maximum tensor/equation residual per sample",
+    "log display floor only; exact zeros retained"
+  ]
+}

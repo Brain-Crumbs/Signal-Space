@@ -12,6 +12,7 @@ on:
           - gross-test-02
           - gross-test-03
           - gross-test-04
+          - gross-test-05
         default: gross-test-01
         required: true
       retention_days:

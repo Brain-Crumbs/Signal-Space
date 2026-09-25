@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "coverage",
+      "status": "pass",
+      "value": 48000
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "hessian",
+      "status": "pass",
+      "value": 8.881784197001252e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "equations",
+      "status": "pass",
+      "value": 4.88386164074601e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "characteristics",
+      "status": "pass",
+      "value": 1.7663431662366935e-15
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "positive-kinetic",
+      "status": "pass",
+      "value": 1.0
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "orientation-control",
+      "status": "pass",
+      "value": 0.06505300999154295
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "gravity-symbol",
+      "status": "pass",
+      "value": 3.430452712773149e-16
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

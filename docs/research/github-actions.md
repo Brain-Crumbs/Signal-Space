@@ -114,3 +114,5 @@ Local equivalent: `python3 .agents/scripts/run_experiment.py --experiment gross-
 ## Test 4 full spectrum
 
 Select `gross-test-04` to run the locked six-gate reciprocal-circuit spectrum audit. This tests three exact backgrounds and all physical memory modes. A scientifically failed common-cone hypothesis remains a technically successful workflow and produces both artifacts. No invariant clock record or generic nonzero-background verdict follows.
+
+Select `gross-test-05` to run the locked SS OCF 1 local action and characteristic audit. It samples 200 coframes, compares derivative Hessians and written matter equations, and checks flat linearized harmonic-gauge gravity identities. The quartic orientation term is a separately versioned control. Neither the local jets nor the control constitute a nonlinear Einstein evolution or a bound-clock result.

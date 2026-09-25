@@ -1,0 +1,588 @@
+{
+  "acceptance_criteria": [
+    {
+      "description": "200 smooth local samples, 20 directions, all six matter fields, all controls complete",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "coverage"
+    },
+    {
+      "description": "Action derivative Hessian versus written principal equations <1e-10 normalized",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "hessian"
+    },
+    {
+      "description": "Euler-Lagrange jet coefficients, including nonzero a and core gradients and chi, agree with written equations <1e-10",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "equations"
+    },
+    {
+      "description": "All six characteristic roots agree with the coframe null cone within 1e-10 normalized",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "characteristics"
+    },
+    {
+      "description": "Valid Z and timelike kinetic eigenvalues strictly positive; artificial Z<0 detected",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "positive-kinetic"
+    },
+    {
+      "description": "Separate quartic orientation model exhibits additional cone >1e-3 from metric cone",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "orientation-control"
+    },
+    {
+      "description": "Harmonic-gauge linearized TT symbol, gauge and flat linearized Hamiltonian/momentum constraints <1e-10",
+      "evidence": "analyses/analysis-0001-b014dca8/checks.json",
+      "id": "gravity-symbol"
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "analysis-0001-b014dca8",
+      "classification": "pass",
+      "code_identity": {
+        "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "revision": "07f0f1a47d752e730d4bc97cbf748351ca966dc0",
+        "runtime_version": "0.1.0",
+        "tree_state": "clean"
+      },
+      "created_at": "2026-09-25T17:32:55.906718Z",
+      "input_artifacts": {
+        "attempts/attempt-0001/raw/continuum.npz": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2",
+        "attempts/attempt-0001/raw/controls.json": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce",
+        "attempts/attempt-0001/raw/execution.json": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0",
+        "attempts/attempt-0001/raw/rng-end.json": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b",
+        "attempts/attempt-0001/raw/rng-start.json": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374"
+      },
+      "parameters": {
+        "max_residual": 1e-10
+      },
+      "path": "analyses/analysis-0001-b014dca8",
+      "raw_source": "attempts/attempt-0001/raw/continuum.npz",
+      "schema_version": "research-analysis-v1",
+      "summary": {
+        "directions": 20,
+        "gravity_scope": "flat linearized harmonic gauge TT symbol and constraints; nonlinear Einstein evolution/constraints not evaluated",
+        "gravity_symbol_constraint_residual": 3.430452712773149e-16,
+        "max_equation_residual": 4.88386164074601e-16,
+        "max_hessian_residual": 7.43048673107928e-16,
+        "max_operator_metric_residual": 8.881784197001252e-16,
+        "max_root_residual": 1.7663431662366935e-15,
+        "min_valid_field_kinetic_eigenvalue": 1.0,
+        "negative_z_control_eigenvalue": -0.5,
+        "orientation_control_reference_error": 1.1102230246251565e-16,
+        "orientation_control_space_coefficient": 0.9999999999999999,
+        "orientation_control_speed": 0.934946990008457,
+        "orientation_control_time_coefficient": 1.1440000000000001,
+        "physical_scope": "common characteristic is chosen in SS OCF 1; local algebra is implementation evidence, not emergence",
+        "samples": 200,
+        "sectors": 6
+      },
+      "supersedes": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-f331b495d73a101b",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-b014dca8/analysis.json",
+      "sha256": "956851856b8cf2138494f439ba5879d952c8238cc2dc83e4ec52191ae84b265d",
+      "size": 2133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5b9347ae3ef87753",
+      "kind": "check",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-b014dca8/checks.json",
+      "sha256": "3d5c0affa4fb8feda922f52722a56b88b637e4fb002ce4cbfdf566751229602e",
+      "size": 1039,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-e5ff3ffa5a82cb9f",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-b014dca8/derived/characteristics.csv",
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0",
+      "size": 67873,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ad49d029f950b824",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-b014dca8/derived/controls.json",
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce",
+      "size": 405,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-143cb54e616c1ad8",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-b014dca8/derived/samples.csv",
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7",
+      "size": 25005,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-98ddf8b2a74ed8d6",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-b014dca8/derived/summary.json",
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b",
+      "size": 906,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-65496636f09a3c8c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/attempt.json",
+      "sha256": "ec21cd6ed6e90ee1f00450684790e9483579c8d2dffe20635af77d6bfdd50861",
+      "size": 319,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9f89b66be863885e",
+      "kind": "event-log",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/events.jsonl",
+      "sha256": "37bbab11884133401b324e143ec57493bf391978d959bf83d746ec10a41cb827",
+      "size": 1639,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4df3f1e2a897a91c",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/logs/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e43501766c2f319",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/preparation.json",
+      "sha256": "9859b571fb72b7ca1edb08c2002935ba593eee4e5788d6aa9a80301026895591",
+      "size": 241,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c6849b000c28d235",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/continuum.npz",
+      "sha256": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2",
+      "size": 311166,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f580b4ff192e5858",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/controls.json",
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce",
+      "size": 405,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-24941a1527ae3d69",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/execution.json",
+      "sha256": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0",
+      "size": 460,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d39f9babcb642ab9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-end.json",
+      "sha256": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b",
+      "size": 189,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d85fce8df2903b9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-start.json",
+      "sha256": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374",
+      "size": 189,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1c68737da8c0aaf8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/request.json",
+      "sha256": "a8e95149b0d501b27a8be9c90f0a55e624cf4967671254c4551853c1170a7ada",
+      "size": 1193,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5d26b47089e4bf8f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/code.json",
+      "sha256": "d4f3e62914c086b62e4e4b643945e857aadf4e1ee8f156110513defa50f5b864",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3219b9326cc4f407",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "provenance/dependencies.lock",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091",
+      "size": 294,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1ee42f15d42867c3",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/environment.json",
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219",
+      "size": 305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19b18d73cfa234f8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/inputs.json",
+      "sha256": "7f8fd89816e5d02b0baa62855fe9770e31344ed456899d4076d437ddbf0b3576",
+      "size": 133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-fcefb7ffbd7bd15d",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/action-audit.figure.json",
+      "sha256": "2f179b7bf981461f145e824349f791e72a0c0d0d124f14d9dc2ae44fd18cf313",
+      "size": 668,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-cdb9edf446d8b778",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/action-audit.pdf",
+      "sha256": "16606fa3a61874c8738166ad959faa49731ad69bf8ecd0cf9ea84c257fb64d1a",
+      "size": 22616,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-78f7c29520649c54",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/action-audit.png",
+      "sha256": "074ffee639bd1bfc6935b4e6adcb76f4ac6b66aff0a20e748662f2fab05a4d8a",
+      "size": 100360,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d50a0e8407fdaff6",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/action-audit.svg",
+      "sha256": "42d69e1a3141bf2265b0304e5119b65192335b9262d8dfcdb1c4b181574933f4",
+      "size": 104201,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-090e67dfb60585f8",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/characteristic-surfaces.figure.json",
+      "sha256": "a19ecb181db30c276b8d1995b0cb5d5659e2ee0a605db21427f87f417862db34",
+      "size": 695,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1d13f6c9e1e93da5",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/characteristic-surfaces.pdf",
+      "sha256": "c9d91a0b38139665eb359a5de29ffb9169def79ee14a1c7a21a6302f42a56849",
+      "size": 21060,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a6405d1c1a1ce4c2",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/characteristic-surfaces.png",
+      "sha256": "03ed7d19a9e5e132e34f03adf2b757612a214f2f2ebf1541802db544df877bd0",
+      "size": 209689,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d9a19ab24dc0f97a",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/characteristic-surfaces.svg",
+      "sha256": "591b7aae532efb70accadc317f01e5c135ca606e64536a6069532ec949ed13cb",
+      "size": 72541,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4bc6791565b0b6b4",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/failure-controls.figure.json",
+      "sha256": "1b4e5e8e05db1765d28c1ef6846797f6d8b0aba6db1124424e648a64c39104e6",
+      "size": 715,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-57f301ab4b33d7c7",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/failure-controls.pdf",
+      "sha256": "1754ef30f37dcc8730544b73c0f01357f1860719b04c1da10c2a91fb9eaf6ce3",
+      "size": 16744,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8fed94a23e99169a",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/failure-controls.png",
+      "sha256": "1c8c1980a5ecb887e0976cb5a95e8bed3ed7120fd180696fb11df03db01a76c8",
+      "size": 69650,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a541a0a37001886e",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/failure-controls.svg",
+      "sha256": "d47317e4356366763e6fe186045372272415c81a28cf5e6d0c67e62c6b6528f4",
+      "size": 47694,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f6b0a9108a4e88cc",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/interpretations.json",
+      "sha256": "f35806470abcee52554b4a53123efffdfc2b66613f32ae55a9cb89a4cb01b0c2",
+      "size": 1848,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6d56517df7864ccb",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/characteristics.csv",
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0",
+      "size": 67873,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7aa281e995db288c",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/controls.json",
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce",
+      "size": 405,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b9021711022e6f80",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/samples.csv",
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7",
+      "size": 25005,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-84f35ebd9171570e",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/summary.json",
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b",
+      "size": 906,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4a674077cdd7d824",
+      "kind": "report",
+      "media_type": "text/html",
+      "path": "reports/report-0001/report.html",
+      "sha256": "43b3bbd47bd9dcf1fd8e78e0f14567181c507f4fe043916cd80fcf26e3d7acd6",
+      "size": 3612,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-96574ae459a5971c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/report.json",
+      "sha256": "91cd990342771f7ba7f9ef843e4da165430d4c08bfd409a0203c523fb0e7e1d1",
+      "size": 1675,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a43e0e8d6c28cbac",
+      "kind": "report",
+      "media_type": "text/markdown",
+      "path": "reports/report-0001/report.md",
+      "sha256": "028e75f13ba4c74f932a154f15f012236c6156532b917fdaa658194f7e59dfd2",
+      "size": 3035,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-99fe6a106a397456",
+      "kind": "report",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/report.pdf",
+      "sha256": "314aafca9e6afd56e5a23109d16dd8f00a85d0b2542534dcfd24522950e696ba",
+      "size": 47298,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-76b2f4524bba093b",
+      "kind": "config",
+      "media_type": "application/json",
+      "path": "resolved-config.json",
+      "sha256": "ce27155a30ca7e6a230397cd21fb00bd442f98e7249ec7bffd58dfe98d797c50",
+      "size": 600,
+      "source_ids": []
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt-0001",
+      "checkpoint": null,
+      "created_at": "2026-09-25T17:32:54.611142Z",
+      "exit_code": 0,
+      "failure": null,
+      "parent_attempt_id": null,
+      "path": "attempts/attempt-0001",
+      "state": "completed",
+      "updated_at": "2026-09-25T17:32:55.422650Z"
+    }
+  ],
+  "checksum_algorithm": "sha256",
+  "checksum_path": "checksums.sha256",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "07f0f1a47d752e730d4bc97cbf748351ca966dc0",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "completeness": {
+    "analysis": true,
+    "attempts_terminal": true,
+    "config": true,
+    "provenance": true,
+    "report": true
+  },
+  "config_hash": "ce27155a30ca7e6a230397cd21fb00bd442f98e7249ec7bffd58dfe98d797c50",
+  "config_path": "resolved-config.json",
+  "created_at": "2026-09-25T17:32:54.605893Z",
+  "execution_identity": {
+    "dependencies": {
+      "path": "python/requirements-lock.txt",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    "environment": {
+      "accelerator": "none",
+      "architecture": "x86_64",
+      "implementation": "CPython",
+      "numeric_libraries": {
+        "matplotlib": "3.10.8",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    }
+  },
+  "experiment_id": "gross.continuum-action.v1",
+  "experiment_version": "1.0.0",
+  "known_gaps": [
+    "Frozen local jets, not solutions to nonlinear matter/Einstein equations.",
+    "Harmonic-gauge gravitational symbol and linearized flat TT constraints only; nonlinear Einstein constraints and propagation not evaluated.",
+    "No spatial discretization, boundaries, conservation evolution or bound clock.",
+    "The flat internal connection is set to zero locally; general bundle holonomy is not tested.",
+    "Quartic orientation term is a separate versioned failure control, not SS OCF 1."
+  ],
+  "model_id": "signal-space.ss-ocf-1.action-audit.v1",
+  "package_version": 1,
+  "parent_run_id": null,
+  "reports": [
+    {
+      "analysis_id": "analysis-0001-b014dca8",
+      "created_at": "2026-09-25T17:32:57.818078Z",
+      "outputs": {
+        "figure_specs": [
+          "figures/characteristic-surfaces.figure.json",
+          "figures/action-audit.figure.json",
+          "figures/failure-controls.figure.json"
+        ],
+        "interpretations": "interpretations.json"
+      },
+      "path": "reports/report-0001",
+      "render_provenance": {
+        "code_identity": {
+          "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "revision": "07f0f1a47d752e730d4bc97cbf748351ca966dc0",
+          "runtime_version": "0.1.0",
+          "tree_state": "clean"
+        },
+        "execution_identity": {
+          "dependencies": {
+            "path": "python/requirements-lock.txt",
+            "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+          },
+          "environment": {
+            "accelerator": "none",
+            "architecture": "x86_64",
+            "implementation": "CPython",
+            "numeric_libraries": {
+              "matplotlib": "3.10.8",
+              "numpy": "2.3.5",
+              "scipy": "1.17.0"
+            },
+            "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+            "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+          }
+        }
+      },
+      "report_id": "report-0001",
+      "required_inputs": [
+        "attempts/attempt-0001/raw/continuum.npz",
+        "analyses/analysis-0001-b014dca8/derived/samples.csv",
+        "analyses/analysis-0001-b014dca8/derived/characteristics.csv",
+        "analyses/analysis-0001-b014dca8/derived/controls.json",
+        "analyses/analysis-0001-b014dca8/derived/summary.json",
+        "analyses/analysis-0001-b014dca8/checks.json"
+      ],
+      "schema_version": "research-report-v1"
+    }
+  ],
+  "run_id": "run-249e8dbffbce02b4",
+  "schema_version": "research-run-manifest-v1",
+  "scientific_classification": "pass",
+  "seed_algorithm": "sha256-stream-v1",
+  "seed_ledger": {
+    "analysis": 2902276857211058846,
+    "initialization": 16504163436082981785,
+    "perturbations": 12802441880086052540,
+    "sampling": 11124409799146443319
+  },
+  "technical_state": "analyzed",
+  "updated_at": "2026-09-25T17:32:57.819442Z"
+}

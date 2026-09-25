@@ -1,0 +1,10 @@
+{
+  "experiment": "gross-test-05",
+  "technical_status": "failed",
+  "scientific_classification": "pass",
+  "stage": "report",
+  "source_commit": "07f0f1a47d752e730d4bc97cbf748351ca966dc0",
+  "run_id": "run-249e8dbffbce02b4",
+  "error": "RuntimeError: report exited 2; see logs/report.stderr.log and .stdout.log",
+  "elapsed_seconds": 5.022
+}

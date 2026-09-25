@@ -1,0 +1,13 @@
+{
+  "algorithm": "local-action-polarization-v1",
+  "backgrounds": "arbitrary smooth local jets, not on-shell Einstein solutions",
+  "connection": "flat A=0 local trivialization",
+  "gravity": "linearized flat harmonic TT symbol and constraints only",
+  "sample_count": 200,
+  "seed_ledger": {
+    "analysis": 2902276857211058846,
+    "initialization": 16504163436082981785,
+    "perturbations": 12802441880086052540,
+    "sampling": 11124409799146443319
+  }
+}

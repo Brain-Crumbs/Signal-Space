@@ -1,0 +1,33 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.continuum-action.v1",
+  "model_id": "signal-space.ss-ocf-1.action-audit.v1",
+  "parameters": {
+    "samples": 200,
+    "directions": 20,
+    "epsilon": 0.1,
+    "orientation_p": 0.6,
+    "orientation_kappa": 0.4
+  },
+  "units": {
+    "length": "m^-1",
+    "mass": "m=1",
+    "signal": "c=hbar=1",
+    "coordinate": "local chart; covector spatial norm=1"
+  },
+  "seeds": {
+    "root": 2026092505
+  },
+  "resources": {
+    "max_cpu_seconds": 120,
+    "max_wall_seconds": 150,
+    "max_memory_mb": 512,
+    "max_output_mb": 24
+  },
+  "analysis": {
+    "max_residual": 1e-10
+  },
+  "report": {
+    "title": "Signal Space / GROSS Test 5: Continuum Action and Characteristics"
+  }
+}

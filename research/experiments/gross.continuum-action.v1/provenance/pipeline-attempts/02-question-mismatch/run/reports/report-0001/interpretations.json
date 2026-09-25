@@ -1,0 +1,20 @@
+{
+  "action-audit": {
+    "limitation": "Finite smooth local jets; no on-shell solution, spatial grid, long-time conservation test or nonlinear gravity constraint solution.",
+    "question": "Do action derivatives agree with the written field equations on nonzero local jets?",
+    "reading": "Maximum Hessian residual 7.43e-16; equation residual 4.88e-16; operator metric residual 8.88e-16 against 1e-10.",
+    "significance": "Independent action polarization and complex-step force distinguish the written equations from a copied principal matrix."
+  },
+  "characteristic-surfaces": {
+    "limitation": "Only four coframes and two of six fields are displayed; all saved sectors enter the check. Local frozen coefficients do not establish a metric derived from microscopic reception.",
+    "question": "Do all six matter perturbations share the same coframe null roots in a drifting frame?",
+    "reading": "The six saved roots coincide across 20 directions on 200 coframes; maximum null-polynomial/root residual 1.77e-15. Coordinate drift differs across coframes.",
+    "significance": "The action implementation retains the selected common matter principal cone even in shifted coordinate frames."
+  },
+  "failure-controls": {
+    "limitation": "The quartic term is excluded from SS OCF 1 and tested on one flat static gradient. It neither proves topology protection nor exhausts all constitutive alternatives.",
+    "question": "Do a negative neutral kinetic coefficient and a quartic orientation term reveal different failure modes?",
+    "reading": "Negative Z=-0.5 fails kinetic positivity; separately versioned quartic orientation action gives speed 0.934947 versus metric speed 1.",
+    "significance": "The audit can detect both a bad kinetic sign and an extra material characteristic that a common coordinate shift cannot remove."
+  }
+}

@@ -20,6 +20,7 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-02": "docs/research/plans/gross-test-02.json",
            "gross-test-03": "docs/research/plans/gross-test-03.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
+RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 
 
 def write_json(path: Path, value: object) -> None:
@@ -32,6 +33,15 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
         return router_assessment(manifest, analysis, checks)
     if manifest.get("experiment_id") == "gross.full-spectrum.v1":
         return floquet_assessment(manifest, analysis, checks)
+    if manifest.get("experiment_id") == "gross.continuum-action.v1":
+        lines = ["# Test 5 continuum action: automated assessment", "",
+                 "Scientific interpretation and visual review remain pending.", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; bounded classification {analysis['classification']}.", "",
+                 "| Check | Status | Value |", "| --- | --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} | {c.get('value')} |" for c in checks['checks']]
+        lines += ["", "The common matter cone is selected by the action. Frozen local jets do not establish emergence, a bound clock, nonlinear Einstein evolution or constraint-satisfying initial data.",
+                  "", "Next: Test 6 core profile and independently resolved bound clock eigenmode; require branch and finite-domain convergence before reception work."]
+        return "\n".join(lines) + "\n"
     classification = manifest["scientific_classification"]
     reciprocal = manifest.get("experiment_id") == "gross.reciprocal-events.v1"
     next_step = (

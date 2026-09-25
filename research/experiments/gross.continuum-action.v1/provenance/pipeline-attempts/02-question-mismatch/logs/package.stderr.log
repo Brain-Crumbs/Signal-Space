@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/e51d87fe7355/Signal-Space/.agents/scripts/package_experiment.py", line 201, in <module>
+    package(args.run, args.plan, args.interpretations, args.mentor, args.output, args.source_dir, args.source_locator)
+  File "/workspace/scratch/e51d87fe7355/Signal-Space/.agents/scripts/package_experiment.py", line 117, in package
+    raise ValueError(f"interpretation question differs from locked plan: {key}")
+ValueError: interpretation question differs from locked plan: characteristic-surfaces
