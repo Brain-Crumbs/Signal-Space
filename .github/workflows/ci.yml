@@ -29,6 +29,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run contracts:check
       - run: npm run verify:research
+      - run: python scripts/check-experiment-math.py
       - name: Validate experiment plans and saved exports
         run: |
           python .agents/scripts/experiment_contract.py plan .agents/examples/synthetic-plan.json
