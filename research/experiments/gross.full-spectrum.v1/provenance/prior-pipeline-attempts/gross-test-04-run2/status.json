@@ -1,0 +1,10 @@
+{
+  "experiment": "gross-test-04",
+  "technical_status": "failed",
+  "scientific_classification": "not-evaluated",
+  "stage": "analyze",
+  "source_commit": "f8b72594ac4fe7e3e7007fe2233889a997dfd512",
+  "run_id": "run-b30bcdd21e9d9091",
+  "error": "RuntimeError: analyze exited 1; see logs/analyze.stderr.log and .stdout.log",
+  "elapsed_seconds": 6.187
+}

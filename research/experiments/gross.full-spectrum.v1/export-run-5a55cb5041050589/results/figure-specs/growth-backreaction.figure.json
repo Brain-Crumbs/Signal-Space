@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "dimensionless, as labeled"
+    },
+    "y": {
+      "unit": "dimensionless, as labeled"
+    }
+  },
+  "downsampling": "specified slices only; no smoothing",
+  "fit_window": null,
+  "id": "growth-backreaction",
+  "normalization": "ell=tau_c=1; tangent norm is not energy",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/spectrum.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "maximum growth over all 26 directions and 20 modes per radius",
+    "symlog linear core 1e-5; difference display floor 1e-16"
+  ]
+}

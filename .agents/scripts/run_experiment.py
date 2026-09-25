@@ -18,7 +18,8 @@ ROOT = Path(__file__).resolve().parents[2]
 # A new experiment requires a reviewed, locked plan and its report/assessment adapter.
 RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-02": "docs/research/plans/gross-test-02.json",
-           "gross-test-03": "docs/research/plans/gross-test-03.json"}
+           "gross-test-03": "docs/research/plans/gross-test-03.json",
+           "gross-test-04": "docs/research/plans/gross-test-04.json"}
 
 
 def write_json(path: Path, value: object) -> None:
@@ -29,6 +30,8 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
     if manifest.get("experiment_id") == "gross.router-propagation.v1":
         return router_assessment(manifest, analysis, checks)
+    if manifest.get("experiment_id") == "gross.full-spectrum.v1":
+        return floquet_assessment(manifest, analysis, checks)
     classification = manifest["scientific_classification"]
     reciprocal = manifest.get("experiment_id") == "gross.reciprocal-events.v1"
     next_step = (
@@ -69,6 +72,20 @@ def router_assessment(manifest: dict, analysis: dict, checks: dict) -> str:
               ('Next: Test 4 complete zero-wave tangent spectrum, retaining stationary memory variations. A common-cone claim predicts all physical sectors; the known zero-wave obstruction instead predicts propagating waves plus physical stationary memory. A nonzero periodic background requires its own self-consistent full-circuit solution and a separately locked plan.'
                if status == 'pass' else 'Resolve the failed or incomplete checks before drawing a wave-cone conclusion; preserve this run and its thresholds.'), '',
               'Test 11 spectral diagnostics are preliminary here; operational drift tests still require an accepted clock and description-invariant local record.']
+    return '\n'.join(lines) + '\n'
+
+
+def floquet_assessment(manifest, analysis, checks):
+    lines = ['# Full reciprocal spectrum: analysis and next calculation', '',
+             'Automated assessment; visual and scientific review remain pending.', '',
+             f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.", '',
+             '| Check | Status | Value |', '| --- | --- | --- |']
+    lines += [f"| {c['id']} | {c['status']} | {c.get('value')} |" for c in checks['checks']]
+    lines += ['', 'Evidence: results/tables/checks.json and results/data/plot-data/summary.json.', '',
+              'Twenty physical real tangent dimensions include twelve memory orientations. Only unobservable memory spinor phases are removed. Vacuum and equal-port backgrounds have physical stationary memories; the opposing-port background tests genuine backreaction. Failures of the strong cone criterion are scientific outcomes, not pipeline failures.', '',
+              'The six-gate routing is an explicit additional incidence assumption, not a nonlinear extension proven equivalent to the Test 3 reduced stencil. Floquet growth and tangent norms are not kinetic energy or a nonlinear stability theorem. Degenerate eigenspaces have basis-dependent mode participation.', '',
+              'Test 11: paired spectral sectors exhibit routing-derived drift. They are not invariant clock records; a common coordinate drift cannot eliminate a difference between port-sector drift vectors.', '',
+              'Next: derive a non-collinear, unequal-port periodic background with active memory response, then preregister its complete tangent and stability tests. A shared-cone candidate must predict withheld memory and port sectors; the alternative requires a derived material response and autonomous clock, not a new label for unexplained modes. Generic backgrounds, clocks and emergent spacetime remain unresolved.']
     return '\n'.join(lines) + '\n'
 
 

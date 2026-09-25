@@ -1,0 +1,15 @@
+{
+  "algorithm": "exact-gate-centered-physical-ray-v1",
+  "backgrounds": [
+    "vacuum",
+    "equal",
+    "counter"
+  ],
+  "memory_phase_quotient": true,
+  "seed_ledger": {
+    "analysis": 6060137651779513479,
+    "initialization": 17650488549050903437,
+    "perturbations": 15879836509965867992,
+    "sampling": 16910000495915957996
+  }
+}

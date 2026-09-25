@@ -1,0 +1,19 @@
+{
+  "source_commit": "f8b72594ac4fe7e3e7007fe2233889a997dfd512",
+  "source_tree": "74fa247173732d958c74d37e443405030be3f6ac",
+  "source_archive_sha256": "b2311b237d8a74405c26650398fb49ddf6499ee605b211a1b012113c040a5ccd",
+  "github": {
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_SHA": null,
+    "GITHUB_REF": null,
+    "GITHUB_WORKFLOW_REF": null,
+    "GITHUB_WORKFLOW_SHA": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_SERVER_URL": null,
+    "RUNNER_OS": null,
+    "RUNNER_ARCH": null
+  },
+  "plan_path": "docs/research/plans/gross-test-04.json",
+  "plan_lock": "8ae4badcb81f956f753711092bdbaf0ee38e330365edb93357eb78e13f797f0a"
+}

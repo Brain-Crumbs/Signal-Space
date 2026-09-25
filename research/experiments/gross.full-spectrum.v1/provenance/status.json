@@ -1,0 +1,75 @@
+{
+  "experiment": "gross-test-04",
+  "technical_status": "completed",
+  "scientific_classification": "fail",
+  "stage": "complete",
+  "source_commit": "2e0a17228d380421248fabf46bf17de5c9e5fbd7",
+  "run_id": "run-5a55cb5041050589",
+  "analysis_id": "analysis-0001-bceef551",
+  "report_id": "report-0001",
+  "canonical_path": "runs/gross.full-spectrum.v1/run-5a55cb5041050589",
+  "repository_destination": "research/experiments/gross.full-spectrum.v1/run-5a55cb5041050589",
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "coverage",
+      "status": "pass",
+      "value": 17940
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "periodicity",
+      "status": "pass",
+      "value": 3.673940397442059e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "conservation",
+      "status": "pass",
+      "value": 1.9842042680358083e-15
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "linearization",
+      "status": "pass",
+      "value": 4.712388037457356e-10
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "vacuum-reference",
+      "status": "pass",
+      "value": 1.5708068441136224e-10
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "phase-quotient",
+      "status": "pass",
+      "value": 1.6690549615570372e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "causal-domain",
+      "status": "pass",
+      "value": 1.3897676904923465e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "backreaction",
+      "status": "pass",
+      "value": 0.44444444447793086
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "vacuum-common-cone",
+      "status": "fail",
+      "value": 1.1220524509525376e-10
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "counter-stability",
+      "status": "unresolved",
+      "value": 3.9307668230686044e-11
+    }
+  ],
+  "elapsed_seconds": 22.774
+}

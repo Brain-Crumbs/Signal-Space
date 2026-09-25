@@ -1,0 +1,5 @@
+{"type":"progress","runId":"cli-inspect","fraction":0,"stage":"validating"}
+{"type":"progress","runId":"cli-inspect","fraction":0.5,"stage":"preparing"}
+{"type":"snapshot","runId":"cli-inspect","snapshot":{"schemaVersion":1,"time":0,"nodeState":{"A":{"phi":0,"omega":2},"B":{"phi":3.141592653589793,"omega":2}},"history":{"startTime":-1,"endTime":0,"nodes":{"A":{"phiAtZero":0,"omega":2},"B":{"phiAtZero":3.141592653589793,"omega":2}},"pendingPackets":[],"filters":{"A":{"left":0,"right":0},"B":{"left":0,"right":0}},"pendingResponses":[],"rngState":{"algorithm":"xoshiro128**","state":"00000001"}}}}
+{"type":"progress","runId":"cli-inspect","fraction":1,"stage":"preparing"}
+{"type":"completed","runId":"cli-inspect","mode":"inspect"}
