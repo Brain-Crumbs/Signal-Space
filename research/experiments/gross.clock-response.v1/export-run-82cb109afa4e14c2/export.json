@@ -1,0 +1,533 @@
+{
+  "schema_version": "signal-space-export-v1",
+  "source_run": {
+    "experiment_id": "gross.clock-response.v1",
+    "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+    "run_id": "run-82cb109afa4e14c2",
+    "analysis_id": "analysis-0001-6a931d18",
+    "report_id": "report-0001",
+    "manifest_sha256": "a0666588a1bb92193cf0ef735b7dd7e6e25b52349db92e26cbe17a07c459f651",
+    "locator": "research/experiments/gross.clock-response.v1/run-82cb109afa4e14c2"
+  },
+  "classification": "pass",
+  "files": [
+    {
+      "path": "Experiment_Analysis_and_Next.md",
+      "sha256": "2b25fb665de3813aa34d692c98549ddaed97577500b8db2c277c00ee83422eac"
+    },
+    {
+      "path": "Experiment_Results.pdf",
+      "sha256": "f890588e34d600645046130445059a89d97a8fcc44d39516c142f88b83de5857"
+    },
+    {
+      "path": "Experimental_Setup.pdf",
+      "sha256": "daba8752c0d4e2b8afc45fb7d21150c903109abdde97b39b3e7b7f6e5d5e4cdb"
+    },
+    {
+      "path": "README.md",
+      "sha256": "6e3bad8072f6394c9f013a52415b850d675cf53e5f03983d445afc0aba7dfd4a"
+    },
+    {
+      "path": "figures/figure_index.json",
+      "sha256": "89a95f3aa2970900d89413851aa4891ca47d2fae315622c81144ab7aa07d198c"
+    },
+    {
+      "path": "figures/static/marker-convergence.pdf",
+      "sha256": "e6deabd8d7a8c4080ed1921940cfd8a7a1ffa2c752f38725e30e39663e052d73"
+    },
+    {
+      "path": "figures/static/marker-convergence.png",
+      "sha256": "82f982bb2bb10899e4e10dca560fa4182bd4684893f925abb1c7e9ad38135a71"
+    },
+    {
+      "path": "figures/static/marker-convergence.svg",
+      "sha256": "26c7bca320ab4164cd93ac708899e68521173ac16409ff16fd840f62a3806bc5"
+    },
+    {
+      "path": "figures/static/packet-history.pdf",
+      "sha256": "8f7bbcf4a41ae48f0b66272b3c6f85c72efaafa6ef50a550be69c2e6b8e49d60"
+    },
+    {
+      "path": "figures/static/packet-history.png",
+      "sha256": "caa99145da27156b26c27072f4c11d7989f7f7fc6bbe3fa0621827b49bffe94a"
+    },
+    {
+      "path": "figures/static/packet-history.svg",
+      "sha256": "288d9afad1b84ebec11cc03bc62e06cf46a9bf45990f6cceaab2feb131eb3d79"
+    },
+    {
+      "path": "figures/static/parity-scaling.pdf",
+      "sha256": "981d1509a0f251d84d6ce5565b017454ae3f97dbcf737269a34955d964e4a6f4"
+    },
+    {
+      "path": "figures/static/parity-scaling.png",
+      "sha256": "2d00c5f477fd0b8cc98ea95cdb6786c713d049d9e325cec4afee0554dffa8cc9"
+    },
+    {
+      "path": "figures/static/parity-scaling.svg",
+      "sha256": "0008eac49ea33bc2469b32892fd05ad012c1c3ec52e74c424c4233add3490ead"
+    },
+    {
+      "path": "figures/static/prediction-response.pdf",
+      "sha256": "97a3e2aa96daed12d4857195a4660d2170d2bb996758910cfb5390dcef9c5a37"
+    },
+    {
+      "path": "figures/static/prediction-response.png",
+      "sha256": "00e2f4f89b43f16178ff0f97c8a3f7ee6d376fbb78d055c7e9e253af14065def"
+    },
+    {
+      "path": "figures/static/prediction-response.svg",
+      "sha256": "24125c29fc444a12f55629bb82dc0b44665de539dbe0500896b11bd59c8f5de9"
+    },
+    {
+      "path": "figures/static/upstream-waveform.pdf",
+      "sha256": "321e181eaaf03e670f1c9c7255e417ae4e89ded861860a5cd98808d11c1ee65e"
+    },
+    {
+      "path": "figures/static/upstream-waveform.png",
+      "sha256": "a14e13f2486216b109df305c7c32db73e917e68ca68ef5c163e09978fa2c5a96"
+    },
+    {
+      "path": "figures/static/upstream-waveform.svg",
+      "sha256": "3be7e744f541f72f08285e32d6ba9d791eeef51da9bed2bead83da0c287b7d14"
+    },
+    {
+      "path": "plan.json",
+      "sha256": "fe82be7151f518627a031e76453b44293af808873430fdf1c8ca91fb2f88b7a3"
+    },
+    {
+      "path": "results/data/derived/markers.csv",
+      "sha256": "4b8395cd6a1ed71e7e2f2f5c56a4307c3c83243c552ff8c520ce35863aeb4997"
+    },
+    {
+      "path": "results/data/derived/spacetime.csv",
+      "sha256": "e7284dbce1d7b5c07704a6a85446bb034624c407d7656dc2c1531a3ba8e280da"
+    },
+    {
+      "path": "results/data/derived/summary.json",
+      "sha256": "18addb977967a7d244a9a04b9ff38b9bfda51aa9c6e5336a8bb3f1ddfebe5e3d"
+    },
+    {
+      "path": "results/data/derived/traces.csv",
+      "sha256": "8f639e0a2800f2f7b7e7be821ba57c728dc2d0d87bf1f1d912e7e128d1b59922"
+    },
+    {
+      "path": "results/data/plot-data/markers.csv",
+      "sha256": "4b8395cd6a1ed71e7e2f2f5c56a4307c3c83243c552ff8c520ce35863aeb4997"
+    },
+    {
+      "path": "results/data/plot-data/spacetime.csv",
+      "sha256": "e7284dbce1d7b5c07704a6a85446bb034624c407d7656dc2c1531a3ba8e280da"
+    },
+    {
+      "path": "results/data/plot-data/summary.json",
+      "sha256": "18addb977967a7d244a9a04b9ff38b9bfda51aa9c6e5336a8bb3f1ddfebe5e3d"
+    },
+    {
+      "path": "results/data/plot-data/traces.csv",
+      "sha256": "8f639e0a2800f2f7b7e7be821ba57c728dc2d0d87bf1f1d912e7e128d1b59922"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/execution.json",
+      "sha256": "549d9fdd93f8be1ac7cad34b4e479fd469204362ea7b3599f28f0f8c9361debb"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/frozen-inputs.json",
+      "sha256": "22da1c445cd803569c9deef8179b0d403b6a2e61583f6bb7f93100f30b0afd79"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/prediction-base.npz",
+      "sha256": "9a2497d5296e9667fe14f70763af0bb77e48a60ba17a3c407ba8cf8fa54cef2d"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/prediction-fine.npz",
+      "sha256": "f7c19a94078a736be8bed1644d98035980be5dd1ff350c6859591c97c95b66d8"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/prediction-lock.json",
+      "sha256": "13d19e41a71474190297c49a6d4c4b24f00b5eb65fac8d595e22f7675c3acdd7"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/prediction-time.npz",
+      "sha256": "a3ce7a3d76566907d3ea7c88684ff10490ae5356e7be9b38c55bb56e491534ad"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/prediction-wide.npz",
+      "sha256": "5cd9101cb77148a347981a3a1cdab0d306c764ed5f42a7012212605dc880891f"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/receiver-base.npz",
+      "sha256": "28f3e3248120eac8c5e23e13f4c316544d74f3cb52477a02296f1431838bc819"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/receiver-fine.npz",
+      "sha256": "05f37eb77f9ef4bbcc848b889ab274130c2a1f51b7e5ed92f3f83ad8e20b298d"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/receiver-time.npz",
+      "sha256": "da60be152d39cd8fd4aa63c43e33dbda2f4c89af747591055773fa7deeac75a7"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/receiver-wide.npz",
+      "sha256": "958a39120528a5e9e8c77d52c3003230fb529499ac92d619888cbdf18f889b4c"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/rng-end.json",
+      "sha256": "8786c573be446273eee17ac4a43ebc006c2ac2cc1a5e90a1361a951b3aae190c"
+    },
+    {
+      "path": "results/data/raw/attempt-0001/rng-start.json",
+      "sha256": "8786c573be446273eee17ac4a43ebc006c2ac2cc1a5e90a1361a951b3aae190c"
+    },
+    {
+      "path": "results/figure-specs/marker-convergence.figure.json",
+      "sha256": "2915dfbb438ad05852017c450d988c8d35a78a8a7ec99a353364cc9e55df2c69"
+    },
+    {
+      "path": "results/figure-specs/packet-history.figure.json",
+      "sha256": "28473f2cacf437460d6303d15d4d5fc96e261f7530d1c25a380bc5ad798e618a"
+    },
+    {
+      "path": "results/figure-specs/parity-scaling.figure.json",
+      "sha256": "ae6d4ae561fc7e719d6822f89d98733fcf3a802ef107a4150f39e5ba6d7fae91"
+    },
+    {
+      "path": "results/figure-specs/prediction-response.figure.json",
+      "sha256": "e2a6f4ff0d526bb28cb29033a5694dba8418dcc3a17b6989050424e462115547"
+    },
+    {
+      "path": "results/figure-specs/upstream-waveform.figure.json",
+      "sha256": "7319c2aeadd0f4d8fce194e0629c2ab4ee1f558bb680960d22bddac74158e7da"
+    },
+    {
+      "path": "results/source/__init__.py",
+      "sha256": "773a483c668342f54b2d252d1418c6b0ad5ba434f55a147b9e5e3fe429814c43"
+    },
+    {
+      "path": "results/source/__main__.py",
+      "sha256": "6e40041537e992294f93ec2fddf9a77c4a3bc98c1a78f44458d19e64e1cc4cfb"
+    },
+    {
+      "path": "results/source/analysis/__init__.py",
+      "sha256": "c8a3e4a6b22fd75658eaa738367271a5eed3cde4e3600f25e437be88f64a2833"
+    },
+    {
+      "path": "results/source/analysis/charged.py",
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b"
+    },
+    {
+      "path": "results/source/analysis/clock.py",
+      "sha256": "335dad586208c14678e1e7dfda59fdce9c99dfe6e4f6a0f648cf0ca7b5728219"
+    },
+    {
+      "path": "results/source/analysis/continuum.py",
+      "sha256": "d4a4104faba7e715400498e19a1d1e8d0b6099acd457d29a78f3510aefe12ca1"
+    },
+    {
+      "path": "results/source/analysis/floquet.py",
+      "sha256": "7e628affa1e66eef0707524abb1b64afadb0b6746f5d2656f25c94f994f9eb66"
+    },
+    {
+      "path": "results/source/analysis/operators.py",
+      "sha256": "d6f59ddd93a3f8e7da5b11e511a30e9100981569978b4fc275d96a6ba7f7e906"
+    },
+    {
+      "path": "results/source/analysis/prereception.py",
+      "sha256": "daab2d92241efd11ce6b4f69f8936b9ad2303a83f2d2bf104ec7e561df208e95"
+    },
+    {
+      "path": "results/source/analysis/reciprocal.py",
+      "sha256": "dac3004d873845a5edde65ce520cda26d181637dc7c6f5f0c6f4ddd864efb1df"
+    },
+    {
+      "path": "results/source/analysis/router.py",
+      "sha256": "9c929c8e316ff3c4412e0092b1f413fbd4d23ff11ebd257db00f59c8a6922ea0"
+    },
+    {
+      "path": "results/source/analysis/synthetic.py",
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe"
+    },
+    {
+      "path": "results/source/cli.py",
+      "sha256": "41333857805258154ba44dfa47059741546c387edc2a39e15ed94e7e6dc59df2"
+    },
+    {
+      "path": "results/source/contracts/__init__.py",
+      "sha256": "088648491bc037ec067e6b066f72289445407db07c56404d200e6ca612e00b38"
+    },
+    {
+      "path": "results/source/contracts/e01.py",
+      "sha256": "cbde6313d7eb5bf1c5c6bd6df92bb4e0d47390ebbb1be5b2010b3b669dd89b54"
+    },
+    {
+      "path": "results/source/contracts/generated.py",
+      "sha256": "c050a45fa317f5b90cec3f7d7a78c4ee4897f4d320add1e7d416cdaeebf2dd79"
+    },
+    {
+      "path": "results/source/contracts/validation.py",
+      "sha256": "01041254107be4fc49ee1175669ed980e1d0e0344686bb507ae1eae183e4c16d"
+    },
+    {
+      "path": "results/source/experiments/__init__.py",
+      "sha256": "3d2a64b92f34435007b230d7d8e680ca4e5b37946d93b9e6a410ac2617b7774f"
+    },
+    {
+      "path": "results/source/experiments/base.py",
+      "sha256": "41ab6e8b770368c6a373e1f2429702fd9c3aee35891cf93faaa2f091b2dfc6c6"
+    },
+    {
+      "path": "results/source/experiments/charged.py",
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683"
+    },
+    {
+      "path": "results/source/experiments/charged_worker.py",
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011"
+    },
+    {
+      "path": "results/source/experiments/clock.py",
+      "sha256": "067e9313875016e80d8d8517a18147dadedcf3b6b32dd7cb27eb8414280f2679"
+    },
+    {
+      "path": "results/source/experiments/continuum.py",
+      "sha256": "eb6aa17d0bb2208f7a231a2dda0462db0342a1c7714cea2ae5c32abb4284b929"
+    },
+    {
+      "path": "results/source/experiments/floquet.py",
+      "sha256": "4f5f2f24b0bec958a53451c99fe35783666e029b516054ea9dc20802bce0c246"
+    },
+    {
+      "path": "results/source/experiments/operators.py",
+      "sha256": "0bcb0ea43bbfbfdb7ce2a1db4156692bc51e55ac0e161219791b44dc0077f6c8"
+    },
+    {
+      "path": "results/source/experiments/prereception.py",
+      "sha256": "3be52f0215c72f0ba8e1b2f8665468ae9f44bddfec48f99363b5bd6dc54978d7"
+    },
+    {
+      "path": "results/source/experiments/reciprocal.py",
+      "sha256": "93e41839832e27374158968213567d0dada8d920a387272192981678d18dec63"
+    },
+    {
+      "path": "results/source/experiments/registry.py",
+      "sha256": "1aa10700c4fe7da51644216da9c17ddf4a22a41cc1603ad9268de4c8f10e2ec8"
+    },
+    {
+      "path": "results/source/experiments/router.py",
+      "sha256": "32bbccac7ee3cf9d9d98be5e10fa50c521b2a6950f8d78a04e6029e4986945c3"
+    },
+    {
+      "path": "results/source/experiments/synthetic.py",
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90"
+    },
+    {
+      "path": "results/source/experiments/synthetic_worker.py",
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c"
+    },
+    {
+      "path": "results/source/models/__init__.py",
+      "sha256": "f1c1bc09905be0aadc69485581ca35c071641d896df665b743a0830fc483be3e"
+    },
+    {
+      "path": "results/source/models/charged_scalar.py",
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc"
+    },
+    {
+      "path": "results/source/models/clock.py",
+      "sha256": "b3981591e2fdbf47d565348f37010e9c9b7c264d234b278cbdf3000e46368d86"
+    },
+    {
+      "path": "results/source/models/continuum.py",
+      "sha256": "760b0bb875749412f3f9473285dd1d65946ed78ace81a1c3c12cd3a138c32e61"
+    },
+    {
+      "path": "results/source/models/floquet.py",
+      "sha256": "47eeeab1c910ba04386bd3a29d5121424fed9843dae87bd2dd49ac250a4baa52"
+    },
+    {
+      "path": "results/source/models/operators.py",
+      "sha256": "7f7cac1968e78ed5da8c8bd6b7aacd25911d4dd924302b4c96a6a34fa8b87714"
+    },
+    {
+      "path": "results/source/models/reciprocal.py",
+      "sha256": "e74cb8c10f1a1d3e13d71b6d44a3535dc7597c26cfc21f7e649ed1984d698e82"
+    },
+    {
+      "path": "results/source/models/router.py",
+      "sha256": "3b6f49b929b52d58df5dd93eb79e0037edf92c83511aa21940a410619aff16a9"
+    },
+    {
+      "path": "results/source/models/synthetic.py",
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6"
+    },
+    {
+      "path": "results/source/numerics/__init__.py",
+      "sha256": "0995e134f9ee087f13047a806677ebd0de56fc0245e54b8058bf06a4d4bdb164"
+    },
+    {
+      "path": "results/source/numerics/charged_radial.py",
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711"
+    },
+    {
+      "path": "results/source/numerics/charged_spectrum.py",
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83"
+    },
+    {
+      "path": "results/source/numerics/clock.py",
+      "sha256": "a90e001f5fe1730d230d293ee0d5137a3b85ce8d3edde8fcc1edcf955b7103e9"
+    },
+    {
+      "path": "results/source/numerics/continuum.py",
+      "sha256": "e3e10708a35b62a04e757efb6311cb0620b7f40829593de2b6dab6802bfd4cfc"
+    },
+    {
+      "path": "results/source/numerics/floquet.py",
+      "sha256": "fbf8719014bdb2be9e8cf1fd8ce245e08d2ac323413b30444f41c33250ad5bcb"
+    },
+    {
+      "path": "results/source/numerics/operators.py",
+      "sha256": "9c022b82344eebd75dcd8a5f89e7a261b0883098debbf69c9104fa6691d0334f"
+    },
+    {
+      "path": "results/source/numerics/prereception.py",
+      "sha256": "bcfe0077f4ff9f36a13fdf28262cf169df4fcf5b1ae848165de95c05aca1a59e"
+    },
+    {
+      "path": "results/source/numerics/reciprocal.py",
+      "sha256": "1226766200701c610fda50c22141fa517cccb89befa6d86e8af3b8a9f5f17d41"
+    },
+    {
+      "path": "results/source/numerics/router.py",
+      "sha256": "173dcf35b3770ceb07bbbfa2da347f7366eae0c605bfd202abe4089fda2f80f6"
+    },
+    {
+      "path": "results/source/numerics/synthetic.py",
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126"
+    },
+    {
+      "path": "results/source/reporting/__init__.py",
+      "sha256": "4833796dbf6c1a61eeb9bce5bb5af0f2a5176b975dcf80dc7a8d4a476a87a03b"
+    },
+    {
+      "path": "results/source/reporting/charged.py",
+      "sha256": "c919726353ca552ce5eaea956253ec6945a5aa22dcdbdcd779f2c2e03e7dc269"
+    },
+    {
+      "path": "results/source/reporting/clock.py",
+      "sha256": "0e446a2d4ebb39eef573d8f3a18a45dae2fee6267e9927ad19e8c5933e727dae"
+    },
+    {
+      "path": "results/source/reporting/continuum.py",
+      "sha256": "75311ae3001c4fe57349e85de47956b35253e5d884483067b513a0b318880aa6"
+    },
+    {
+      "path": "results/source/reporting/exploration.py",
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef"
+    },
+    {
+      "path": "results/source/reporting/floquet.py",
+      "sha256": "ce66b759c1edad56a2f9b1aafa75e5db705a37b85109b1c78c1b96be86228cc1"
+    },
+    {
+      "path": "results/source/reporting/operators.py",
+      "sha256": "2b13860c05869b50388b36bc0a30e3489ebe2142a389d2eacd4a4a27e0d1ed8c"
+    },
+    {
+      "path": "results/source/reporting/prereception.py",
+      "sha256": "90fc72ba37605dee52cb0513c4c54df0dd00003c1f48c16c975f0e3263883cdb"
+    },
+    {
+      "path": "results/source/reporting/reciprocal.py",
+      "sha256": "cbaa8032826478a6794f2358d5ece61ceffbaf97f0d3dbaaf4e0ae8cfe6c4124"
+    },
+    {
+      "path": "results/source/reporting/router.py",
+      "sha256": "e3bc20c7a6c74d8ee049002bf8b327a58ade2b5dee8160a1588b7f7060a01227"
+    },
+    {
+      "path": "results/source/reporting/synthetic.py",
+      "sha256": "4c3ef0fb2d6466a8c02f3398f1e3e4cbb0c2ad1d3efe49c7211361f0fe7d49c6"
+    },
+    {
+      "path": "results/source/runtime/__init__.py",
+      "sha256": "9e5f034118112842072a8ef1dd1ed96e7cfe8453e57b64b4d63f408cee25656d"
+    },
+    {
+      "path": "results/source/runtime/archive.py",
+      "sha256": "73894d51459075b0ff80d037ed62fb6bbd1b5ea7de7861e17156df8fb2fd32b4"
+    },
+    {
+      "path": "results/source/runtime/errors.py",
+      "sha256": "9a9f0f8f57af38bfeeb1504dade9844435f163167a343804339d6cbc5bf8239c"
+    },
+    {
+      "path": "results/source/runtime/events.py",
+      "sha256": "47b8ee842b04002f80ec094bd860d7596092140fdd267afdc45f6dae417f71e3"
+    },
+    {
+      "path": "results/source/runtime/io.py",
+      "sha256": "9f5cf2ab67969e348b61d879f6f5fc166278a606fd02c462373d2eb01a928d72"
+    },
+    {
+      "path": "results/source/runtime/limits.py",
+      "sha256": "8685bb2ba64ae5339f17262d2cf7be59ed618a1f60169a698fb3cd65f8850215"
+    },
+    {
+      "path": "results/source/runtime/package.py",
+      "sha256": "450d75eec92261121daf7a32ab57514fba510ec3c7a134d2f02fbafa6f5319ac"
+    },
+    {
+      "path": "results/source/runtime/runner.py",
+      "sha256": "84bd02824c56ee64634d0c2c5da971155ab11029d0afff89840c9edec9059b6e"
+    },
+    {
+      "path": "results/source/runtime/seeds.py",
+      "sha256": "fb4f68b4bbd732e08952b2154b1f793bbb9211e0ffae70e621e3000005b18057"
+    },
+    {
+      "path": "results/source/runtime/verify.py",
+      "sha256": "6fed68498b61f14886d6a836dc4052cc384a304ba8ed78b31ee7dc588d961e22"
+    },
+    {
+      "path": "results/source/runtime/worker.py",
+      "sha256": "a279541fa4e4d557030bc9797b4c46de0cd0fa805fc41b6bd93e4aad70769721"
+    },
+    {
+      "path": "results/source/service/__init__.py",
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608"
+    },
+    {
+      "path": "results/source/service/api.py",
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67"
+    },
+    {
+      "path": "results/tables/analysis.json",
+      "sha256": "c05d6570e9ae180e251e82a6eaa15d0e0c17d09142c3ba7c378f13402aa0927a"
+    },
+    {
+      "path": "results/tables/checks.json",
+      "sha256": "71ff24445bb19b25465ab8d55033fd6bb2a3590a1ab61102cdce676f2f4e4ac6"
+    },
+    {
+      "path": "results/tables/resolved-config.json",
+      "sha256": "a5272024bec3d0fd77951a54e74056d9989227b2d3b884a62e642f62ccf81a36"
+    }
+  ],
+  "known_gaps": [
+    "Flat spherical sector only; no recoil or observer transformations.",
+    "Clock radiation is not isolated by the historical total-energy diagnostic.",
+    "Concentric counterpropagating shells are not opposing planar beams.",
+    "Marker pairing is ideal local field readout; physical trigger hardware not modeled."
+  ]
+}

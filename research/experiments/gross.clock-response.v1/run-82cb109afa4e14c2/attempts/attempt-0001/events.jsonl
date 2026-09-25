@@ -1,0 +1,14 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T20:51:24.339616Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":1700,"max_memory_mb":1024,"max_output_mb":100,"max_wall_seconds":1800}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T20:51:24.341672Z","type":"attempt-running"}
+{"payload":{"algorithm":"frozen-profile-prereception-v1","kind":"response"},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T20:51:24.726799Z","type":"worker-started"}
+{"payload":{"label":"base","sha256":"9a2497d5296e9667fe14f70763af0bb77e48a60ba17a3c407ba8cf8fa54cef2d"},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T20:51:30.252483Z","type":"prediction-saved"}
+{"payload":{"label":"fine","sha256":"f7c19a94078a736be8bed1644d98035980be5dd1ff350c6859591c97c95b66d8"},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T20:51:45.748363Z","type":"prediction-saved"}
+{"payload":{"label":"time","sha256":"a3ce7a3d76566907d3ea7c88684ff10490ae5356e7be9b38c55bb56e491534ad"},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T20:51:55.717348Z","type":"prediction-saved"}
+{"payload":{"label":"wide","sha256":"5cd9101cb77148a347981a3a1cdab0d306c764ed5f42a7012212605dc880891f"},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T20:52:03.932232Z","type":"prediction-saved"}
+{"payload":{"sha256":"13d19e41a71474190297c49a6d4c4b24f00b5eb65fac8d595e22f7675c3acdd7"},"schema_version":"research-event-v1","sequence":8,"stage":"run","timestamp":"2026-09-25T20:52:03.932596Z","type":"all-predictions-locked"}
+{"payload":{"label":"base"},"schema_version":"research-event-v1","sequence":9,"stage":"run","timestamp":"2026-09-25T20:52:12.357304Z","type":"receiver-completed"}
+{"payload":{"label":"fine"},"schema_version":"research-event-v1","sequence":10,"stage":"run","timestamp":"2026-09-25T20:52:41.432981Z","type":"receiver-completed"}
+{"payload":{"label":"time"},"schema_version":"research-event-v1","sequence":11,"stage":"run","timestamp":"2026-09-25T20:52:56.906590Z","type":"receiver-completed"}
+{"payload":{"label":"wide"},"schema_version":"research-event-v1","sequence":12,"stage":"run","timestamp":"2026-09-25T20:53:12.127589Z","type":"receiver-completed"}
+{"payload":{"kind":"response"},"schema_version":"research-event-v1","sequence":13,"stage":"run","timestamp":"2026-09-25T20:53:12.128004Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":14,"stage":"runtime","timestamp":"2026-09-25T20:53:12.191209Z","type":"attempt-completed"}

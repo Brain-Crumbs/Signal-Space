@@ -1,0 +1,93 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "frozen-inputs",
+      "status": "pass",
+      "value": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "local-record",
+      "status": "pass",
+      "value": {
+        "base": {
+          "charge_error": 1.5982512640237356e-15,
+          "core_peak_shift": 0.0001554609792198125,
+          "crossings": 100,
+          "duration": 1522.28,
+          "early_frequency": 0.4127472302278215,
+          "energy_residual_over_mode": 13.403952926346646,
+          "frequency": 0.41274728031965086,
+          "last_crossing": 1518.478303444559,
+          "late_frequency": 0.4127469563361288,
+          "measured_intervals": 99,
+          "mode_energy_change": -2.52638749344003e-05,
+          "signed_cycles": 99.99974521952126
+        },
+        "fine": {
+          "charge_error": 3.1961097432762973e-15,
+          "core_peak_shift": 3.890484353519241e-05,
+          "crossings": 100,
+          "duration": 1522.28,
+          "early_frequency": 0.4127482629233781,
+          "energy_residual_over_mode": 0.8064169308654024,
+          "frequency": 0.41274828954698994,
+          "last_crossing": 1518.4746374965894,
+          "late_frequency": 0.4127482900750195,
+          "measured_intervals": 99,
+          "mode_energy_change": -6.2296111823512135e-06,
+          "signed_cycles": 99.99998973349287
+        },
+        "time": {
+          "charge_error": 1.5982512640237356e-15,
+          "core_peak_shift": 3.884548530563858e-05,
+          "crossings": 100,
+          "duration": 1522.28,
+          "early_frequency": 0.41274929992597237,
+          "energy_residual_over_mode": 0.6838323122109303,
+          "frequency": 0.41274931048448305,
+          "last_crossing": 1518.4708636340918,
+          "late_frequency": 0.41274932501003864,
+          "measured_intervals": 99,
+          "mode_energy_change": -6.2294274800756e-06,
+          "signed_cycles": 100.0002370845817
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "lifetime",
+      "status": "pass",
+      "value": {
+        "base": -2.52638749344003e-05,
+        "fine": -6.2296111823512135e-06,
+        "time": -6.2294274800756e-06
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "convergence",
+      "status": "pass",
+      "value": {
+        "frequency_relative": 4.918663135899948e-06,
+        "mode_absolute": 1.90344474543247e-05
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "charge-ledger",
+      "status": "pass",
+      "value": {
+        "base": 1.5982512640237356e-15,
+        "fine": 3.1961097432762973e-15,
+        "time": 1.5982512640237356e-15
+      }
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

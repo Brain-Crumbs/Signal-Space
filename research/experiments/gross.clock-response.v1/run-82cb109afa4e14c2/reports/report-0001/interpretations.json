@@ -1,0 +1,32 @@
+{
+  "marker-convergence": {
+    "limitation": "Tick ordinals are anchored to the common preparation in one flat frame. Physical emission/reception marker invariance and two-object recoil are still untested. Values below 1e-16 are plotted at that floor.",
+    "question": "Are corresponding local tick shifts reproducible under mesh, time and box controls?",
+    "reading": "Every base preparation has 6 baseline ticks available for pairing. Largest base tick shift 5.32e-07 cycles; largest predicted tick-shift error 8.42e-09 cycles.",
+    "significance": "The measured response reaches an identifiable local clock record, with numerical sensitivity displayed independently."
+  },
+  "packet-history": {
+    "limitation": "Spherical focusing is physical in this restricted preparation; it is not an opposing-beam or recoil experiment. Color scales are independent.",
+    "question": "Where do the compact neutral packets travel relative to the clock core?",
+    "reading": "Saved radial neutral-field histories show incoming propagation, central reflection and the separately prepared outgoing control. The upstream sphere is r=14.",
+    "significance": "This locates the forcing in space and time and makes the concentric-shell geometry explicit."
+  },
+  "parity-scaling": {
+    "limitation": "Exact numerical sign parity is strongly enforced by this deterministic action. It alone does not validate the magnitude or operational meaning of the clock response.",
+    "question": "Is the clock difference even in packet sign and quadratic in amplitude?",
+    "reading": "Weak amplitude exponent 1.9993540; normalized ladder difference 0.00728; sign-odd/even norm ratio 0.",
+    "significance": "The amplitude ladder discriminates second-order forcing from a linear response, while sign parity checks the exact action symmetry."
+  },
+  "prediction-response": {
+    "limitation": "The Taylor predictor and nonlinear solver share the discrete Hamiltonian; independent Hamiltonian and Taylor checks plus numerical refinements constrain, but do not eliminate, shared implementation error.",
+    "question": "Does the precomputed second-order response predict the local clock difference?",
+    "reading": "Base relative L2 prediction error is 0.00194 for one packet and 0.00193 for counterpropagating shells. Prediction files were locked before receiver runs.",
+    "significance": "Agreement tests the derived neutral-to-core-to-clock response coefficient, beyond the symmetry-enforced sign parity."
+  },
+  "upstream-waveform": {
+    "limitation": "A single scalar waveform does not separate incoming/outgoing characteristics; this run predicts from full registered initial data, not waveform-only inversion.",
+    "question": "What neutral waveform actually reaches the upstream recording sphere?",
+    "reading": "The saved trace includes both initial passage and later returning radiation. Dividing by signed A overlays the weak single-packet waveforms.",
+    "significance": "Reception is compared against a recorded input field, with compact preparations and sign controls available for audit."
+  }
+}

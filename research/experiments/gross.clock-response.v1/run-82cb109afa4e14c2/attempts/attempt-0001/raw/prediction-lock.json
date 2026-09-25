@@ -1,0 +1,22 @@
+[
+  {
+    "dt": 0.02,
+    "label": "base",
+    "prediction_sha256": "9a2497d5296e9667fe14f70763af0bb77e48a60ba17a3c407ba8cf8fa54cef2d"
+  },
+  {
+    "dt": 0.01,
+    "label": "fine",
+    "prediction_sha256": "f7c19a94078a736be8bed1644d98035980be5dd1ff350c6859591c97c95b66d8"
+  },
+  {
+    "dt": 0.01,
+    "label": "time",
+    "prediction_sha256": "a3ce7a3d76566907d3ea7c88684ff10490ae5356e7be9b38c55bb56e491534ad"
+  },
+  {
+    "dt": 0.02,
+    "label": "wide",
+    "prediction_sha256": "5cd9101cb77148a347981a3a1cdab0d306c764ed5f42a7012212605dc880891f"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.clock-longevity.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-clock.v1",
+  "parameters": {
+    "kind": "longevity",
+    "omega_Q": 0.9,
+    "omega_chi": 0.41274991,
+    "clock_amplitude": 0.001,
+    "local_radius": 0.1,
+    "frozen_inputs": [
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+        "name": "profile-0.900.npz",
+        "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+        "name": "profile-fine.npz",
+        "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+        "name": "profile-wide.npz",
+        "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+      }
+    ],
+    "cycles": 100,
+    "grids": [
+      "base",
+      "fine",
+      "time"
+    ]
+  },
+  "units": {
+    "mass": "m=1",
+    "length": "m^-1",
+    "time": "m^-1",
+    "signal": "c=hbar=1"
+  },
+  "seeds": {
+    "root": 2026092561
+  },
+  "resources": {
+    "max_cpu_seconds": 1700,
+    "max_wall_seconds": 1800,
+    "max_memory_mb": 1024,
+    "max_output_mb": 100
+  },
+  "analysis": {
+    "frozen-inputs": "All input SHA-256 values match the frozen Test 6 profiles and modes.",
+    "local-record": "Each 100-period trace has at least 99 positive-going crossings and frequency within 2% of frozen Omega.",
+    "lifetime": "Absolute final projected mode-energy change <1% on base, h/2 and dt/2 over 100 nominal periods.",
+    "convergence": "Local frequencies differ by <1%; absolute final mode-energy fractions differ by <0.01 on mesh/time controls.",
+    "charge-ledger": "Maximum charge-plus-sink relative residual <1% on every 100-period trace."
+  },
+  "report": {
+    "title": "Signal Space Test 6 prerequisite: longevity"
+  }
+}

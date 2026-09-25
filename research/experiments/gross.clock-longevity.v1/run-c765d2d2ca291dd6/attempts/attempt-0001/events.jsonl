@@ -1,0 +1,8 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T20:49:31.947818Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":1700,"max_memory_mb":1024,"max_output_mb":100,"max_wall_seconds":1800}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T20:49:31.949847Z","type":"attempt-running"}
+{"payload":{"algorithm":"frozen-profile-prereception-v1","kind":"longevity"},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T20:49:32.329929Z","type":"worker-started"}
+{"payload":{"label":"base","steps":38057},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T20:49:38.105216Z","type":"longevity-completed"}
+{"payload":{"label":"fine","steps":76114},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T20:49:51.172908Z","type":"longevity-completed"}
+{"payload":{"label":"time","steps":76114},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T20:50:01.455598Z","type":"longevity-completed"}
+{"payload":{"kind":"longevity"},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T20:50:01.456228Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":8,"stage":"runtime","timestamp":"2026-09-25T20:50:01.503776Z","type":"attempt-completed"}

@@ -1,0 +1,50 @@
+{
+  "M0": 1.0,
+  "amplitudes": [
+    0,
+    0.002,
+    0.004,
+    0.008,
+    -0.004,
+    0.004,
+    -0.004
+  ],
+  "clock_amplitude": 0.001,
+  "duration": 100.0,
+  "epsilon": 0.2,
+  "frozen_inputs": [
+    {
+      "name": "profile-0.900.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "name": "profile-fine.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "name": "profile-wide.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    }
+  ],
+  "incoming_center": 18.0,
+  "incoming_width": 3.0,
+  "kind": "response",
+  "local_radius": 0.1,
+  "omega_Q": 0.9,
+  "omega_chi": 0.41274991,
+  "outgoing_center": 4.0,
+  "outgoing_width": 2.0,
+  "patterns": [
+    "single",
+    "single",
+    "single",
+    "single",
+    "single",
+    "counter",
+    "counter"
+  ],
+  "upstream_radius": 14.0
+}
