@@ -1,0 +1,81 @@
+name: Run experiment
+run-name: '${{ inputs.experiment }} · ${{ github.ref_name }} · attempt ${{ github.run_attempt }}'
+
+on:
+  workflow_dispatch:
+    inputs:
+      experiment:
+        description: Locked experiment to execute
+        type: choice
+        options:
+          - gross-test-01
+        default: gross-test-01
+        required: true
+      retention_days:
+        description: Days to retain downloads (subject to repository policy)
+        type: choice
+        options: ['7', '30', '90']
+        default: '30'
+        required: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+# Independent manual runs must not cancel one another or overwrite their artifacts.
+concurrency:
+  group: experiment-${{ github.run_id }}-${{ github.run_attempt }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+      PYTHONUNBUFFERED: '1'
+      EXPERIMENT: ${{ inputs.experiment }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: python/requirements-lock.txt
+      - name: Install locked scientific dependencies
+        run: python -m pip install -r python/requirements-lock.txt 2>&1 | tee "$RUNNER_TEMP/experiment-install.log"
+      - name: Execute, analyze, report and verify
+        run: python .agents/scripts/run_experiment.py --experiment "$EXPERIMENT" --output "$RUNNER_TEMP/experiment-output"
+      - name: Upload evidence and diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-${{ inputs.experiment }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/experiment-output/evidence/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: ${{ fromJSON(inputs.retention_days) }}
+      - name: Upload setup diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: setup-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/experiment-install.log
+          if-no-files-found: warn
+          retention-days: ${{ fromJSON(inputs.retention_days) }}
+      - name: Upload verified reader package
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reader-${{ inputs.experiment }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/experiment-output/reader/
+          if-no-files-found: error
+          retention-days: ${{ fromJSON(inputs.retention_days) }}

@@ -38,6 +38,8 @@ Missing inputs or interrupted execution leave this experiment unresolved/pending
 
 ## Reproduce
 
+For an on-demand hosted run with downloadable evidence and reader packages, use [Run experiment on GitHub](github-actions.md). The `gross-test-01` recipe uses this exact locked configuration. Results are not automatically committed.
+
 Use the pinned Python environment, and set OPENBLAS_NUM_THREADS, OMP_NUM_THREADS and MKL_NUM_THREADS to 1. Run from the checkout:
 
 ```sh

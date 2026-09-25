@@ -33,6 +33,7 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
     controls = read_json(plots / "controls.json")
     near = read_json(plots / "conditioning.json")
     summary = analysis["summary"]
+    check_status = {item["id"]: item["status"] for item in read_json(run_path / analysis["path"] / "checks.json")["checks"]}
     plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False})
     made = []
     specs = []
@@ -99,12 +100,12 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
             "significance": "Tests consistent determinant, observer norm, positive form and weighted-ray transformations on saved inputs, with an independent component audit.",
             "limitation": "Finite moderate-conditioning samples; no propagation, clock or emergent metric is measured."},
         "tetrahedral-gram": {"question": QUESTIONS["tetrahedral-gram"],
-            "reading": f"Each projector has a null diagonal. The sorted spectrum matches (-1/3,-1/3,-1/3,1) with maximum error {summary['gram_error']:.3g}.",
-            "significance": "Four null projector directions can span the four-dimensional Hermitian operator space with Lorentzian signature.",
+            "reading": f"The expected null diagonals and sorted spectrum (-1/3,-1/3,-1/3,1) are compared with saved measurements. Maximum spectrum error {summary['gram_error']:.3g}; tetrahedral check: {check_status['tetrahedral']}.",
+            "significance": "Tests whether the four null projector directions reproduce the predicted Lorentzian signature of Hermitian operator space.",
             "limitation": "This is internal algebra. The tetrahedron supplies neither physical spatial axes nor a dynamical spacetime."},
         "observer-domain": {"question": QUESTIONS["observer-domain"],
-            "reading": f"Collinearity is rejected and ill-conditioned aggregates are marked separately. Omitting a boost-transformed weight gives error {summary['omitted_weight_error']:.6f}.",
-            "significance": "The test distinguishes valid observer construction from a singular ray, and detects inconsistent transformation of physical weights.",
+            "reading": f"Singular-domain check: {check_status['singular-domain']}. Ill-conditioned aggregates are marked separately. Omitted-weight error: {summary['omitted_weight_error']:.6f}; weight-control check: {check_status['weight-control']}.",
+            "significance": "Tests the distinction between valid observer construction and a singular ray, and the detection of inconsistent ray-weight transformations.",
             "limitation": "A domain rejection is not a physical instability. The deliberately broken control is not an alternative dynamics."},
     }
     write_json(report_path / "interpretations.json", interpretations)
