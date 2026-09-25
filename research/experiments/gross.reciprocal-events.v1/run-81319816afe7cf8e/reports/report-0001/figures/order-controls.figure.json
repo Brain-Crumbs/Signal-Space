@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "event index, gate parameter, input wire or category"
+    },
+    "y": {
+      "unit": "dimensionless"
+    }
+  },
+  "downsampling": "none",
+  "fit_window": null,
+  "id": "order-controls",
+  "normalization": "see locked protocol; max(1, initial norm)",
+  "ranges": "explicit log display floors where stated",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/controls.csv"
+  ],
+  "transformations": [
+    "every preparation and both lambdas; no fit or smoothing",
+    "physical interventions, not equivalent descriptions"
+  ]
+}

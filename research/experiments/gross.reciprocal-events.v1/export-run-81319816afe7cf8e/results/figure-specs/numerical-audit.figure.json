@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "event index, gate parameter, input wire or category"
+    },
+    "y": {
+      "unit": "dimensionless"
+    }
+  },
+  "downsampling": "none",
+  "fit_window": null,
+  "id": "numerical-audit",
+  "normalization": "see locked protocol; max(1, initial norm)",
+  "ranges": "explicit log display floors where stated",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/residuals.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "max across all samples, lambdas, gates and saved times; half tolerance compared with baseline",
+    "log display max(value,1e-18); exact zeros retained"
+  ]
+}

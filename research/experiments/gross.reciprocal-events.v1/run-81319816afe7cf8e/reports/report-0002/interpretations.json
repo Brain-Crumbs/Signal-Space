@@ -1,0 +1,26 @@
+{
+  "causal-incidence": {
+    "limitation": "Incidence is supplied, not derived space. Jacobians cover one preparation, both couplings and physical memory tangents; no universal metric is inferred.",
+    "question": "Do event outputs depend only on their causal ancestors?",
+    "reading": "Green events descend from initial wave 0. Gray heatmap cells are nonancestors; their largest response is 0. Step-halving Jacobian difference is 4.24e-08.",
+    "significance": "Tests participant-only causal dependence and includes a disconnected branch as a null. Memory-response and intervention checks separately verify nontrivial dynamics."
+  },
+  "matrix-balance": {
+    "limitation": "Displayed trajectory is the first gate of preparation 0. The Pauli component is basis dependent; the full Frobenius residual is the acceptance observable. This is not mechanical recoil.",
+    "question": "Does reciprocal memory exchange close the matrix-charge ledger?",
+    "reading": "Wave and memory charge components exchange with opposite signs. The smallest frozen-memory relative charge defect across all cases is 0.198.",
+    "significance": "Tests whether reciprocal memory dynamics closes the conserved matrix ledger; a prescribed frozen projector is an externally driven control."
+  },
+  "numerical-audit": {
+    "limitation": "Finite circuit and finite states. U(2) covariance is not Lorentz covariance; numerical tolerance refinement is not a continuum limit. Exact zeros use a display floor.",
+    "question": "Do conservation and equivalent descriptions survive numerical refinement?",
+    "reading": "Largest event conservation residual 3.51e-10; exact-solution difference 2.45e-11; tolerance-halving difference 2.14e-11. Compare with 1e-9.",
+    "significance": "Checks integrated dynamics against a closed solution and tests description invariance under legal schedules and local frames."
+  },
+  "order-controls": {
+    "limitation": "Generic noncommutativity is expected, not guaranteed for all states. These fixed controls do not define new candidate models or test propagation.",
+    "question": "Can the audit distinguish physical interventions from rescheduling?",
+    "reading": "Smallest shared-memory projector change 0.0673; smallest frozen-memory defect 0.198. Every preparation is compared with 1e-4.",
+    "significance": "Distinguishes changes to physical event ordering and reciprocal feedback from permissible rescheduling of independent events."
+  }
+}

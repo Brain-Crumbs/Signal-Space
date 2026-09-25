@@ -1,0 +1,210 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "type": "string",
+      "const": "gross.reciprocal-events.v1"
+    },
+    "model_id": {
+      "type": "string",
+      "const": "signal-space.ss-ops-1.v1"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "samples",
+        "kappa",
+        "lambdas",
+        "rtol",
+        "atol",
+        "jacobian_steps",
+        "events",
+        "alternate_schedule"
+      ],
+      "properties": {
+        "samples": {
+          "type": "integer",
+          "const": 4
+        },
+        "kappa": {
+          "type": "number",
+          "const": 1.5707963267948966
+        },
+        "lambdas": {
+          "type": "array",
+          "const": [0, 0.1],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "rtol": {
+          "type": "number",
+          "const": 2e-12
+        },
+        "atol": {
+          "type": "number",
+          "const": 2e-14
+        },
+        "jacobian_steps": {
+          "type": "array",
+          "const": [1e-5, 5e-6],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "events": {
+          "type": "array",
+          "const": [
+            [0, 1, 8],
+            [2, 3, 9],
+            [4, 5, 10],
+            [6, 7, 11],
+            [1, 2, 8],
+            [3, 4, 9],
+            [0, 5, 10],
+            [6, 7, 11],
+            [0, 3, 8],
+            [2, 5, 9],
+            [1, 4, 10],
+            [6, 7, 11]
+          ],
+          "minItems": 12,
+          "maxItems": 12,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "alternate_schedule": {
+          "type": "array",
+          "const": [3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8],
+          "minItems": 12,
+          "maxItems": 12,
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "gate_parameter", "couplings"],
+      "properties": {
+        "state": {
+          "type": "string",
+          "const": "dimensionless"
+        },
+        "gate_parameter": {
+          "type": "string",
+          "const": "dimensionless"
+        },
+        "couplings": {
+          "type": "string",
+          "const": "dimensionless"
+        }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root"],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "const": 2026092502
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "const": 120
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "const": 120
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "const": 512
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "const": 32
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_residual",
+        "min_control_signal",
+        "max_jacobian_difference"
+      ],
+      "properties": {
+        "max_residual": {
+          "type": "number",
+          "const": 1e-9
+        },
+        "min_control_signal": {
+          "type": "number",
+          "const": 0.0001
+        },
+        "max_jacobian_difference": {
+          "type": "number",
+          "const": 1e-6
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "const": "Signal Space / GROSS Test 2: Reciprocal Events and Rescheduling"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/research/reciprocal.v1.schema.json",
+  "title": "SS OPS 1 bounded reciprocal event audit"
+}

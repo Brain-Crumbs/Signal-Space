@@ -11,10 +11,19 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / ".agents/scripts"))
-from run_experiment import Pipeline, assessment
+from run_experiment import Pipeline, assessment, RECIPES
 
 
 class RunExperimentTests(unittest.TestCase):
+    def test_test2_recipe_and_assessment_are_model_specific(self):
+        self.assertIn("gross-test-02", RECIPES)
+        for status in ("pass", "fail", "unresolved", "not-evaluated"):
+            text = assessment({"experiment_id": "gross.reciprocal-events.v1", "scientific_classification": status, "run_id": "run-fixture"},
+                              {"analysis_id": "analysis-fixture"}, {"checks": []})
+            self.assertIn("finite reciprocal circuit", text)
+            self.assertNotIn("locked conditioning domain", text)
+            self.assertEqual("Proceed to Test 3" in text, status == "pass")
+
     def test_output_cannot_dirty_checkout_or_overwrite_prior_attempt(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary) / "repo"

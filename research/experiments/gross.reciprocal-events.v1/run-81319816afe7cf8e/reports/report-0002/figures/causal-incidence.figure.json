@@ -1,0 +1,26 @@
+{
+  "axes": {
+    "x": {
+      "unit": "event index, gate parameter, input wire or category"
+    },
+    "y": {
+      "unit": "dimensionless"
+    }
+  },
+  "downsampling": "none",
+  "fit_window": null,
+  "id": "causal-incidence",
+  "normalization": "see locked protocol; max(1, initial norm)",
+  "ranges": "explicit log display floors where stated",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/incidence.json",
+    "plot-data/jacobian.csv"
+  ],
+  "transformations": [
+    "max Jacobian norm over both lambdas and finite-difference steps",
+    "nonancestors gray; causal entries log10, color range clipped below -3; exact data retained",
+    "layout is incidence, not physical space or time"
+  ]
+}

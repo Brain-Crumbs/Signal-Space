@@ -300,6 +300,30 @@
         "reproducibility"
       ],
       "title": "gross.operator-identities.v1 \u2014 run-2ae9c65dbd171851"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "gross-test-02",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-02.md",
+      "status": "registered bounded experiment",
+      "summary": "SS OPS 1 reciprocal event audit; exact integration control, conservation, causal Jacobians, local frames and ordered memory wires.",
+      "tags": ["GROSS", "reciprocal-events", "test-02"],
+      "title": "Signal Space reciprocal event protocol"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "run-run-81319816afe7cf8e",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/README.md",
+      "status": "scientific pass",
+      "summary": "Test 2 passed ten locked checks on four preparations, both lambdas and twelve events. Largest conservation residual 3.51e-10; legal-schedule and outside-ancestor responses zero. Exact plot data, four figures, PDFs and raw evidence preserved. No metric or clock claim.",
+      "tags": [
+        "gross.reciprocal-events.v1",
+        "signal-space.ss-ops-1.v1",
+        "reproducibility"
+      ],
+      "title": "gross.reciprocal-events.v1 - run-81319816afe7cf8e"
     }
   ],
   "schema_version": 1,

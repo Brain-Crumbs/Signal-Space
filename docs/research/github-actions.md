@@ -1,12 +1,12 @@
 # Run an experiment on GitHub
 
-Tracking: #52; runtime dependency: #37. The workflow executes registered experiments with the same locked-plan gate used locally. Test 1 maps to operator program sections 2–4 and 15.1; this infrastructure adds no physical model or acceptance criteria.
+Tracking: #52 and #56; runtime dependency: #37. The workflow executes registered experiments with the same locked-plan gate used locally. Test 1 maps to operator program sections 2–4 and 15.1; this infrastructure adds no physical model or acceptance criteria.
 
 ## First run
 
 1. Merge the PR containing `.github/workflows/run-experiment.yml` when ready. GitHub requires a manual workflow to exist on the default branch before it can be dispatched. This PR does not merge itself.
 2. Open **Actions → Run experiment → Run workflow**.
-3. Choose the branch containing the experiment implementation, select **gross-test-01**, and choose artifact retention (7, 30, or 90 days; repository policy also applies).
+3. Choose the branch containing the experiment implementation, select **gross-test-01** or **gross-test-02**, and choose artifact retention (7, 30, or 90 days; repository policy also applies).
 4. Run the workflow. The selected branch is resolved to a source commit; that exact checked-out commit and tree are saved with the results.
 5. Read the job summary, then download both **evidence-gross-test-01-RUN-ATTEMPT** and **reader-gross-test-01-RUN-ATTEMPT** from that run's Artifacts section.
 
@@ -27,7 +27,15 @@ The workflow installs Python 3.12 and the pinned scientific dependencies on Ubun
 
 The initial recipe is the existing 1,000-sample Test 1 with seed 2026092501, three figures, and six locked algebra/implementation checks. Worker ceilings remain 60 seconds CPU/wall, 512 MiB memory and 16 MiB output. The workflow has a separate 15-minute total ceiling for dependency installation, analysis, reporting and uploads. End-to-end runtime is expected to be a few minutes; this is an estimate until measured on Actions.
 
-Inputs intentionally select a reviewed recipe rather than override samples, tolerances, seeds or arbitrary shell commands. To add an experiment or change its scientific configuration, register its implementation and locked plan in a branch and extend `RECIPES` in `.agents/scripts/run_experiment.py` and the workflow's choice list. Each recipe must produce compatible figure interpretations and have an appropriate assessment adapter; the current assessment is specifically for Test 1.
+Inputs intentionally select a reviewed recipe rather than override samples, tolerances, seeds or arbitrary shell commands. To add an experiment or change its scientific configuration, register its implementation and locked plan in a branch and extend `RECIPES` in `.agents/scripts/run_experiment.py` and the workflow's choice list. Each recipe must produce compatible figure interpretations and have an appropriate assessment adapter; the assessment selects Test 1 or Test 2 wording from the registered experiment identity.
+
+Test 2 uses four preparations, both lambda=0 and 0.1, twelve reciprocal events per circuit, four figures and ten locked checks. It includes exact-solution and half-tolerance comparisons, causal Jacobians, local frames, legal rescheduling, shared-memory reversal and frozen-memory controls. Solver ceilings are 120 seconds CPU/wall, 512 MiB memory and 32 MiB output. See [Test 2 protocol](gross-test-02.md). To run it after merge, choose **gross-test-02**, or use:
+
+```sh
+gh workflow run run-experiment.yml --repo Brain-Crumbs/Signal-Space --ref main -f experiment=gross-test-02 -f retention_days=30
+```
+
+Artifact names use the selected recipe, for example `reader-gross-test-02-RUN-ATTEMPT`. Normal CI still omits npm tests; this manual research execution is separate.
 
 ## Downloads and interpretation
 

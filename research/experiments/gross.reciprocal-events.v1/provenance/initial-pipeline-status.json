@@ -1,0 +1,75 @@
+{
+  "experiment": "gross-test-02",
+  "technical_status": "completed",
+  "scientific_classification": "pass",
+  "stage": "complete",
+  "source_commit": "183b95feeae1cc1d4bd79ad3b3cd506f4952fba0",
+  "run_id": "run-81319816afe7cf8e",
+  "analysis_id": "analysis-0001-8c6b8920",
+  "report_id": "report-0001",
+  "canonical_path": "runs/gross.reciprocal-events.v1/run-81319816afe7cf8e",
+  "repository_destination": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e",
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "coverage",
+      "status": "pass",
+      "value": 192
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "conservation",
+      "status": "pass",
+      "value": 3.508120358461398e-10
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "exact-reference",
+      "status": "pass",
+      "value": 2.4540123709184297e-11
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "tolerance-refinement",
+      "status": "pass",
+      "value": 2.1421741378024786e-11
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "rescheduling",
+      "status": "pass",
+      "value": 0.0
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "local-frames",
+      "status": "pass",
+      "value": 2.0724724511686208e-11
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "causal-jacobian",
+      "status": "pass",
+      "value": 0.0
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "jacobian-refinement",
+      "status": "pass",
+      "value": 4.2364298758655135e-08
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "shared-memory-order",
+      "status": "pass",
+      "value": 0.06727864634082695
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "frozen-memory",
+      "status": "pass",
+      "value": 0.19840400830538618
+    }
+  ],
+  "elapsed_seconds": 31.671
+}

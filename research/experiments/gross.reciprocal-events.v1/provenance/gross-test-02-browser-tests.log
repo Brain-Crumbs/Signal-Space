@@ -1,0 +1,55 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 test:browser
+> playwright test
+
+[WebServer] (node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:44) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 15 tests using 4 workers
+
+(node:78) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:80) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:79) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:86) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 [chromium] › e2e/workspace.spec.ts:524:1 › interrupted run stays visible and resumes as a linked attempt on a narrow screen (4ms)
+  ✘   3 [chromium] › e2e/workspace.spec.ts:463:1 › research workspace completes prepare, audit, analysis and report journey (3ms)
+  ✘   4 [chromium] › e2e/workspace.spec.ts:552:1 › research runtime disconnect is explicit and retryable (3ms)
+(node:124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 [chromium] › e2e/workspace.spec.ts:572:1 › research runtime explains HTML responses without exposing a JSON parse error (3ms)
+  ✘   6 [chromium] › e2e/workspace.spec.ts:599:1 › event streams report a missing first sequence (2ms)
+  ✘   7 [chromium] › e2e/workspace.spec.ts:608:1 › research collection is searchable and exposes source evidence (3ms)
+(node:163) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 [chromium] › e2e/workspace.spec.ts:643:1 › research collection renders inline and display mathematics (2ms)
+  ✘   9 [chromium] › e2e/workspace.spec.ts:661:1 › production worker renders the same initial snapshot as the shared engine (2ms)
+  ✘  10 [chromium] › e2e/workspace.spec.ts:697:1 › worker startup failure is visible and allows retry (2ms)
+(node:202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:214) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:226) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 [chromium] › e2e/workspace.spec.ts:708:1 › production worker integrates the same causal history as Node (4ms)
+  ✘  12 [chromium] › e2e/workspace.spec.ts:792:1 › production worker runs and resumes seeded packets using the shared engine (2ms)
+  ✘  13 [chromium] › e2e/workspace.spec.ts:898:1 › preparation retains nested solver settings and angular-sector arrays (3ms)
+(node:238) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:250) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

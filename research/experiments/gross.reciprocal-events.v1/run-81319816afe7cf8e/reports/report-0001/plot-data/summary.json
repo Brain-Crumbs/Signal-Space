@@ -1,0 +1,24 @@
+{
+  "circuits": 8,
+  "events_per_circuit": 12,
+  "maxima": {
+    "conservation": 3.508120358461398e-10,
+    "cut_charge": 1.4954098014556455e-12,
+    "exact": 2.4540123709184297e-11,
+    "frame": 2.0724724511686208e-11,
+    "frozen_exact": 6.201361750012477e-13,
+    "jacobian_outside": 0.0,
+    "jacobian_refinement": 4.2364298758655135e-08,
+    "projector": 6.029898220217553e-11,
+    "refinement": 2.1421741378024786e-11,
+    "rescheduling": 0.0
+  },
+  "minima": {
+    "frozen_charge": 0.19840400830538618,
+    "jacobian_inside": 16.015397722028933,
+    "memory_response": 0.33652957630371255,
+    "order_signal": 0.06727864634082695
+  },
+  "samples": 4,
+  "threshold": 1e-09
+}

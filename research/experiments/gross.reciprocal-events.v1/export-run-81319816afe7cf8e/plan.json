@@ -1,0 +1,246 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.reciprocal-events.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "question": "Does SS OPS 1 conserve its reciprocal event ledger and respect causal rescheduling?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 5 and 15.2",
+    "docs/research/gross-test-02.md exact gate derivation and locked apparatus"
+  ],
+  "runtime_config": "fixtures/research/gross-test-02.json",
+  "runtime_config_sha256": "2ffc96907b253aaa1d81cbfb58a60566cd51a4deb1a2bdb948f9bca19113f2c4",
+  "method": {
+    "action": "H=kappa d-dagger P d + lambda N^2/2; d=z1-z2, P=ww-dagger, N=|z1|^2+|z2|^2; canonical complex Hamiltonian flow, no frozen memory in primary model.",
+    "units": "All states, couplings and gate parameter s dimensionless. A gate spans s=0 to 1; s is not proper time.",
+    "domain": "12 directed events; 8 complex wave wires, 4 unit memory wires; explicit ordered reuse, identity physical transport. Four preparations at lambda=0 and 0.1, kappa=pi/2.",
+    "boundaries": "Finite acyclic incidence, including a disconnected branch. No spatial mesh, boundary condition or continuum limit. Complete-cut charge accounts for every wire; event H is not asserted to be circuit energy.",
+    "initial_data": "PCG64 runtime initialization stream from root 2026092502; normalized independent complex normal directions; wave norms uniform [0.35,0.85], memories unit norm; independent U(2) event frames.",
+    "solver": "DOP853 rtol=2e-12 atol=2e-14 max_step=0.125, repeated at half both tolerances. Nine saved samples per gate. Exact constant-S solution is an independent control, not the numerical solver.",
+    "tolerances": "Residuals <1e-9. Controls >1e-4 in every preparation. Complete real input Jacobian on preparation 0 for both lambdas; memory tangent directions preserve unit norm; central steps 1e-5 and 5e-6, agreement <1e-6."
+  },
+  "hypotheses": [
+    {
+      "id": "reciprocal-local",
+      "prediction": "Conservation and permissible schedules pass; no outside-ancestor response; independent frames agree; physical interventions are detected."
+    },
+    {
+      "id": "inconsistent",
+      "prediction": "Missing backreaction, forbidden causal response or dependence on arbitrary event scheduling exceeds the frozen tolerances."
+    }
+  ],
+  "controls": [
+    {
+      "id": "exact-and-refined",
+      "purpose": "Discriminate integration error from event-law failure",
+      "method": "Compare all saved circuit trajectories to closed constant-S solution; halve both numerical tolerances."
+    },
+    {
+      "id": "causal-and-frame",
+      "purpose": "Distinguish physical routing from description",
+      "method": "Compare two topological schedules and independent U(2) event frames with transformed wire transports; full central-difference input directions at two steps."
+    },
+    {
+      "id": "physical-interventions",
+      "purpose": "Expose noncommutativity and missing reciprocal response",
+      "method": "Reverse two otherwise disjoint wave-pair events sharing one memory; separately freeze driven memory and compare with its exact external-memory solution."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "coverage",
+      "observable": "All 4 preparations, both lambdas, 12 events and all declared comparisons are saved",
+      "pass_if": "All 4 preparations, both lambdas, 12 events and all declared comparisons are saved",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "conservation",
+      "observable": "N, memory norm, J, event H, projector and complete-cut charge residuals below 1e-9 at both tolerances",
+      "pass_if": "N, memory norm, J, event H, projector and complete-cut charge residuals below 1e-9 at both tolerances",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "exact-reference",
+      "observable": "Reciprocal and frozen numerical trajectories agree with independent closed solutions below 1e-9",
+      "pass_if": "Reciprocal and frozen numerical trajectories agree with independent closed solutions below 1e-9",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "tolerance-refinement",
+      "observable": "Halving rtol and atol changes the circuit state and overlap records by less than 1e-9",
+      "pass_if": "Halving rtol and atol changes the circuit state and overlap records by less than 1e-9",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "rescheduling",
+      "observable": "Permissible schedules agree on states and event overlap records below 1e-9",
+      "pass_if": "Permissible schedules agree on states and event overlap records below 1e-9",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "local-frames",
+      "observable": "Independent U(2) event frames with transformed wire transport agree below 1e-9",
+      "pass_if": "Independent U(2) event frames with transformed wire transport agree below 1e-9",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "causal-jacobian",
+      "observable": "Outside-ancestor response below 1e-9; nonzero inside response above 1e-4 at both difference steps",
+      "pass_if": "Outside-ancestor response below 1e-9; nonzero inside response above 1e-4 at both difference steps",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "jacobian-refinement",
+      "observable": "Halving the central-difference step changes the Jacobian by less than 1e-6",
+      "pass_if": "Halving the central-difference step changes the Jacobian by less than 1e-6",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "shared-memory-order",
+      "observable": "Reversing the shared-memory control changes its final projector by more than 1e-4 in each preparation",
+      "pass_if": "Reversing the shared-memory control changes its final projector by more than 1e-4 in each preparation",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    },
+    {
+      "id": "frozen-memory",
+      "observable": "Freezing driven memory exposes matrix-charge error above 1e-4; reciprocal memory responds above 1e-4",
+      "pass_if": "Freezing driven memory exposes matrix-charge error above 1e-4; reciprocal memory responds above 1e-4",
+      "fail_if": "Complete evidence violates the declared threshold.",
+      "unresolved_if": "Incomplete evidence or numerical failure; no pass.",
+      "uncertainty": "Tolerance halving, exact solution and finite-difference step comparison; engineering error bounds, not statistical confidence."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "causal-incidence",
+      "question": "Do event outputs depend only on their causal ancestors?",
+      "role": "evidentiary",
+      "observables": ["response", "ancestor"],
+      "representation": "Directed incidence and measured Jacobian heatmap; nonancestors remain visible.",
+      "competing_signatures": {
+        "reciprocal-local": "Residuals below locked tolerances; causal support follows incidence; physical controls remain nonzero.",
+        "inconsistent": "Forbidden response, ledger defect, description dependence or undetected intervention."
+      },
+      "controls": [
+        "exact-and-refined",
+        "causal-and-frame",
+        "physical-interventions"
+      ],
+      "uncertainty": "Numerical refinement and exact reference; finite preparations. Zeros retained; no smoothing.",
+      "source_data": [
+        "reports/<report-id>/plot-data/incidence.json",
+        "reports/<report-id>/plot-data/jacobian.csv"
+      ],
+      "transformations": [
+        "No fitting or downsampling; log values display max(value,1e-18), exact zeros retained; Jacobian uses central differences and norm across output participants."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "matrix-balance",
+      "question": "Does reciprocal memory exchange close the matrix-charge ledger?",
+      "role": "evidentiary",
+      "observables": ["wave_z_change", "memory_z_change", "total_change"],
+      "representation": "Signed wave/memory exchange and reciprocal versus frozen total drift through a gate.",
+      "competing_signatures": {
+        "reciprocal-local": "Residuals below locked tolerances; causal support follows incidence; physical controls remain nonzero.",
+        "inconsistent": "Forbidden response, ledger defect, description dependence or undetected intervention."
+      },
+      "controls": [
+        "exact-and-refined",
+        "causal-and-frame",
+        "physical-interventions"
+      ],
+      "uncertainty": "Numerical refinement and exact reference; finite preparations. Zeros retained; no smoothing.",
+      "source_data": ["reports/<report-id>/plot-data/balance.csv"],
+      "transformations": [
+        "No fitting or downsampling; log values display max(value,1e-18), exact zeros retained; Jacobian uses central differences and norm across output participants."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "numerical-audit",
+      "question": "Do conservation and equivalent descriptions survive numerical refinement?",
+      "role": "evidentiary",
+      "observables": [
+        "N_error",
+        "memory_norm_error",
+        "J_error",
+        "H_error",
+        "exact",
+        "refinement",
+        "rescheduling",
+        "frame"
+      ],
+      "representation": "Baseline/refined conservation residuals and independent state/record equivalence checks.",
+      "competing_signatures": {
+        "reciprocal-local": "Residuals below locked tolerances; causal support follows incidence; physical controls remain nonzero.",
+        "inconsistent": "Forbidden response, ledger defect, description dependence or undetected intervention."
+      },
+      "controls": [
+        "exact-and-refined",
+        "causal-and-frame",
+        "physical-interventions"
+      ],
+      "uncertainty": "Numerical refinement and exact reference; finite preparations. Zeros retained; no smoothing.",
+      "source_data": [
+        "reports/<report-id>/plot-data/residuals.csv",
+        "reports/<report-id>/plot-data/summary.json"
+      ],
+      "transformations": [
+        "No fitting or downsampling; log values display max(value,1e-18), exact zeros retained; Jacobian uses central differences and norm across output participants."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "order-controls",
+      "question": "Can the audit distinguish physical interventions from rescheduling?",
+      "role": "evidentiary",
+      "observables": ["order_signal", "frozen_charge", "memory_response"],
+      "representation": "Control response for every preparation and both lambdas with fixed detection threshold.",
+      "competing_signatures": {
+        "reciprocal-local": "Residuals below locked tolerances; causal support follows incidence; physical controls remain nonzero.",
+        "inconsistent": "Forbidden response, ledger defect, description dependence or undetected intervention."
+      },
+      "controls": [
+        "exact-and-refined",
+        "causal-and-frame",
+        "physical-interventions"
+      ],
+      "uncertainty": "Numerical refinement and exact reference; finite preparations. Zeros retained; no smoothing.",
+      "source_data": ["reports/<report-id>/plot-data/controls.csv"],
+      "transformations": [
+        "No fitting or downsampling; log values display max(value,1e-18), exact zeros retained; Jacobian uses central differences and norm across output participants."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 120,
+    "max_memory_mb": 512,
+    "max_output_mb": 32
+  },
+  "prohibited_inferences": [
+    "No metric, propagation spectrum, clock, mechanical recoil or energy-momentum interpretation follows from this event audit.",
+    "Finite-difference causal checks and four preparations are not a global proof. Local U(2) covariance is not Lorentz covariance.",
+    "Drift, anisotropy and all-sector propagation are not evaluated here; keep Tests 3,4,11 open."
+  ],
+  "locked_sha256": "fa05c1715458702d004240a27a60d9313427db2061a40b98037e7cbe66bd7c4f"
+}
