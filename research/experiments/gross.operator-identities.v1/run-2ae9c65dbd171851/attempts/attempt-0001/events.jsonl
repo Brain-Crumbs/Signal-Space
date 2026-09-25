@@ -1,0 +1,5 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T00:31:45.638979Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":60,"max_memory_mb":512,"max_output_mb":16,"max_wall_seconds":60}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T00:31:45.641127Z","type":"attempt-running"}
+{"payload":{"algorithm":"direct-matrix-v1","pid":13},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T00:31:45.711563Z","type":"worker-started"}
+{"payload":{"controls":12,"samples":1000},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T00:31:46.452388Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":5,"stage":"runtime","timestamp":"2026-09-25T00:31:46.483480Z","type":"attempt-completed"}

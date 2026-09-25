@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/residuals.csv",
+      "id": "coverage",
+      "status": "pass",
+      "value": 1000
+    },
+    {
+      "evidence": "derived/residuals.csv",
+      "id": "identities",
+      "status": "pass",
+      "value": 3.963119603223247e-14
+    },
+    {
+      "evidence": "derived/residuals.csv",
+      "id": "positive-observer",
+      "status": "pass",
+      "value": 0.010339055007300693
+    },
+    {
+      "evidence": "derived/controls.json",
+      "id": "tetrahedral",
+      "status": "pass",
+      "value": 4.440892098500626e-16
+    },
+    {
+      "evidence": "derived/controls.json",
+      "id": "weight-control",
+      "status": "pass",
+      "value": 0.6321205588285577
+    },
+    {
+      "evidence": "derived/conditioning.json",
+      "id": "singular-domain",
+      "status": "pass",
+      "value": 10
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

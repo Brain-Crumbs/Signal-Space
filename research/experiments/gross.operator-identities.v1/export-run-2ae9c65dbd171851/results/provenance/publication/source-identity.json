@@ -1,0 +1,12 @@
+{
+  "source_local_commit": "adbe7584dbd8b13b34432cbd88b5a6c8f7e39709",
+  "source_published_commit": "b6dde397c2bf63d4f9e454793335fe49740cc453",
+  "source_tree": "ab4dc6c5d8ae855974d45fe4d9ae416273dd3cfa",
+  "source_tree_match": true,
+  "source_bundle": "solver-source.bundle",
+  "report_local_commit": "b99885fdc5967ebe7625d5efcbd5aa6c04830b92",
+  "report_bundle": "report-source.bundle",
+  "bundle_prerequisite": "f6b9b5315f2a101604075f517bf26f64d0d1a069",
+  "publication": "Authenticated GitHub connector mirrors exact Git trees; Git commit metadata differs from the local commit. Bundles retain the original recorded commits.",
+  "report_dirty_tree_note": "Report 2 was generated after committing its presentation-only source change. Its dirty-tree flag includes untracked archived evidence, not an uncommitted implementation change."
+}

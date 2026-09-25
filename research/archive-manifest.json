@@ -1,12 +1,972 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 249,
+  "file_count": 441,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 12219,
-      "sha256": "b0dd33b91fae5a1cd571ebe1c81457de9643af3a6576f6ec804383636284ca76"
+      "size": 12931,
+      "sha256": "b277dfb90b03dc7e1747453d207b8b787fcf7f174f1b9cba28a5b315ce9568a0"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/Experiment_Analysis_and_Next.md",
+      "size": 4312,
+      "sha256": "f2163a59033cac0a0e2eb69f477ea50534a8820f90970777c3301ee6ae5f2e6d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/Experiment_Results.pdf",
+      "size": 291198,
+      "sha256": "67109ac95598dfec19df12cdd078faf31f6876029df14e79c7ada10c9c3b541c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/Experimental_Setup.pdf",
+      "size": 34360,
+      "sha256": "21a904463f4dd2c3ba5bfa2d90393a3cf73bd89e491b933bfbeb8ba0954c680b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/export.json",
+      "size": 17196,
+      "sha256": "487c3016004f3467f7fe04121297bdf370c27e66556e10f6ada363832923cc62"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/figure_index.json",
+      "size": 3319,
+      "sha256": "a8346c135695e7acb06899d1b2cafa0043e33ace4cfc09663be1d709d792464c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/observer-domain.pdf",
+      "size": 20097,
+      "sha256": "12bf94a991d5fc52d62859b9f5d0b00b59ae26d10d01138bc1203686b17ee4f1"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/observer-domain.png",
+      "size": 110500,
+      "sha256": "2e032fec7f0621ea30d3811a2845c5f8402fe97c7bfce3cb9d3c18d3d236c87c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/observer-domain.svg",
+      "size": 77108,
+      "sha256": "cf3960dce47570edee85e62caf795cc0927efca6c0cd965304b590f70eadd107"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/operator-residuals.pdf",
+      "size": 48799,
+      "sha256": "c85b8971e01b1d02efc9b1f684e626ace86ac634b414f7f7c8ce57a98920f267"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/operator-residuals.png",
+      "size": 212586,
+      "sha256": "6b73d25bf43acc58d49da96dd152e49e23eb3c72de5a407c5e856c1c14142cf5"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/operator-residuals.svg",
+      "size": 340393,
+      "sha256": "0cb8b7fa2d09bddea3f66ac200921f745988d257abed404a9c46ebd6a4b6c55c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/tetrahedral-gram.pdf",
+      "size": 20182,
+      "sha256": "3735ccf5c1760b1d540a45ac8e3672f0bddd4a13a9d0af0a4f5e820faf74d861"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/tetrahedral-gram.png",
+      "size": 92798,
+      "sha256": "e344c5348aff062164cbf20cb4369675b4b36d28404bfbdf54a934344d0751f5"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/figures/static/tetrahedral-gram.svg",
+      "size": 64215,
+      "sha256": "d3b93b5b6148348b6766a22b70e394d2a323c4cef555a9ac4c7b3f5459a6636c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/plan.json",
+      "size": 9623,
+      "sha256": "b12e8695cb1594fd4f57820c5b7339b7b834f7cbe3d878632345f3568efb7fa7"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/README.md",
+      "size": 1450,
+      "sha256": "6c4092d9eae5ee5155df0a57281c0eb414233dc64147e92ae68b74e75e96fd9d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/derived/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/derived/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/derived/residuals.csv",
+      "size": 436540,
+      "sha256": "538d2874365629cf449eb647452a9d557ed352e2ab593da7d3b7226515ef9103"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/derived/summary.json",
+      "size": 279,
+      "sha256": "cd6a9306389a43d7378f370d4f10f434b72b1571311afd475a27672161fda071"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/plot-data/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/plot-data/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/plot-data/residuals.csv",
+      "size": 436540,
+      "sha256": "538d2874365629cf449eb647452a9d557ed352e2ab593da7d3b7226515ef9103"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/execution.json",
+      "size": 257,
+      "sha256": "bcb55354013de059ebe5e96158cbab523fb0e6670558f91038193d2e4b16c166"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/inputs.npz",
+      "size": 274514,
+      "sha256": "d25b9f7f1041cb4f5a8305ea611fc4186f728826c6c2e0ecdedc281b3c67da8c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/measurements.csv",
+      "size": 318130,
+      "sha256": "3969f0de61f00fb26706ff2c08464cf49680835dc5e0c39749156239a980dd7c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/rng-end.json",
+      "size": 190,
+      "sha256": "c567c30ea038b96ce4f4766fc610b3f5969f7f02218693066f8c5665db28153c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/data/raw/attempt-0001/rng-start.json",
+      "size": 190,
+      "sha256": "30de91d2e730b3f96ad73a35590ff39723eafcb1287fd468c842465647ee88a8"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/figure-specs/observer-domain.figure.json",
+      "size": 645,
+      "sha256": "507a5921f56de05b69179df295f13c657de1b56bea99c1a17df3e49228ee230d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/figure-specs/operator-residuals.figure.json",
+      "size": 579,
+      "sha256": "30600a337fd7589927c586c50c9ed2a6f3fbb63bf33effc064f1cbadba8cf964"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/figure-specs/tetrahedral-gram.figure.json",
+      "size": 534,
+      "sha256": "3e9d3670e90a66860e4fd5c857aff908c2d00f0b706ec60916c67fb89d8e1f39"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/attempt.json",
+      "size": 319,
+      "sha256": "7021c77160e5aebd5c00ebcde7170633e2f67dbea3946dbd701b67d4f01c4878"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/checksums.sha256",
+      "size": 6972,
+      "sha256": "716a70bdc89ddbe1501f33d5a4615a457d4f9a473602b76d7d99d0c079f0eefa"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/events.jsonl",
+      "size": 989,
+      "sha256": "697bb4291e7273c114ecc4a5311f59a3cc1ea664eaeccf508f8113f2cc2fdfee"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/manifest.json",
+      "size": 28721,
+      "sha256": "3e40753272e8be1d211d796279c55f5d0cac3f8494a151335d873ac263fcb9c9"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/preparation.json",
+      "size": 418,
+      "sha256": "3c04b746fe1c2dd9e2d96bd50196f2cd8238dc7760119af99495490c21a4e0dd"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-browser-install.log",
+      "size": 1224,
+      "sha256": "41526a846314d5e410df1544aa4b4fba0964c7f76dbd72fab73ba637ee7580f3"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-browser-tests.log",
+      "size": 36424,
+      "sha256": "7c3ca0a0b4229c32be3eb8751a94a586fd57fcb62a872ebf2eea973c19527177"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-check.log",
+      "size": 34690,
+      "sha256": "6e1b182ebba9ebc377ee6df9ba551b315f575ab8dfb203fc54f876448eb861b4"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-chromium.log",
+      "size": 5084,
+      "sha256": "469552da48ac574fe76098c4f7f0979080cf53bb9a77f3794af484e871c1d6a3"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-analysis.json",
+      "size": 1636,
+      "sha256": "c21b24623792859a221e76f9bdac0ac9f2d5644790b893a7971e32a404e266ed"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-archive-verify.json",
+      "size": 124,
+      "sha256": "b5dafe94e77c940d1c017a838228d7b2148f613b8a3933f13c4d4622e21fbe99"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-archive.json",
+      "size": 190,
+      "sha256": "f02a43f7366cc2f7e693f77f77e35620d93c176ce880b824d55f86bee2ee8da2"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-report-02.json",
+      "size": 1414,
+      "sha256": "8184309322a16df7714a0a4e9bc3ffd68910c89dfa307ea21878ea2475bbe041"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-report.json",
+      "size": 1414,
+      "sha256": "1ddae4f5a3ceb3735f21d230c784427639b3fa2ac5195bec9028503ce675a19a"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-run.jsonl",
+      "size": 1214,
+      "sha256": "02b0ffde99f6db8ca4d0708e8c1dc64f4e33bd2a259b5318d654e623b0ba57d0"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-run.stderr",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/gross-test-01-verify.json",
+      "size": 124,
+      "sha256": "bd2d9353a5b40fa567ceae4664cbde6bad427272fd2022d1931187b852f32b81"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/report-source.bundle",
+      "size": 672,
+      "sha256": "9bfcd5bf32ccb50e52e1a7681b94fa6c57e6613f46ab7da1efb34374e73a775b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/solver-source.bundle",
+      "size": 61230,
+      "sha256": "4728f679e88bcbf9940d8c51de4daf91543b82a9c69b802cab84043a6f4504f9"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/source-identity.json",
+      "size": 840,
+      "sha256": "d38e43d4bb7f59ad8cbd351cb518d83d2cf3fdb4593cc9637e821c21a90d0e14"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/publication/validation.json",
+      "size": 550,
+      "sha256": "a1524074ac2d596644c45858c6e1dfa6828cbcfb8ade7d0075a6c20c1bc400d1"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/request.json",
+      "size": 1145,
+      "sha256": "9506125a7f935a5851131b594153ab985889610a544ac05257285cc5acc0740e"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/runtime/code.json",
+      "size": 206,
+      "sha256": "3801bf8319fa76d9e3ffcdebed147ab705fbd438de617202206758f3791aba7b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/runtime/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/runtime/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/provenance/runtime/inputs.json",
+      "size": 133,
+      "sha256": "2699cf9d79a823d575f65d2223e4f4eadd21ca0698ce95bf496ab90024657f6e"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/__init__.py",
+      "size": 70,
+      "sha256": "773a483c668342f54b2d252d1418c6b0ad5ba434f55a147b9e5e3fe429814c43"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/__main__.py",
+      "size": 60,
+      "sha256": "6e40041537e992294f93ec2fddf9a77c4a3bc98c1a78f44458d19e64e1cc4cfb"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/analysis/__init__.py",
+      "size": 69,
+      "sha256": "c8a3e4a6b22fd75658eaa738367271a5eed3cde4e3600f25e437be88f64a2833"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/analysis/charged.py",
+      "size": 32935,
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/analysis/operators.py",
+      "size": 6386,
+      "sha256": "d6f59ddd93a3f8e7da5b11e511a30e9100981569978b4fc275d96a6ba7f7e906"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/analysis/synthetic.py",
+      "size": 2935,
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/cli.py",
+      "size": 6896,
+      "sha256": "41333857805258154ba44dfa47059741546c387edc2a39e15ed94e7e6dc59df2"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/contracts/__init__.py",
+      "size": 149,
+      "sha256": "088648491bc037ec067e6b066f72289445407db07c56404d200e6ca612e00b38"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/contracts/e01.py",
+      "size": 3216,
+      "sha256": "cbde6313d7eb5bf1c5c6bd6df92bb4e0d47390ebbb1be5b2010b3b669dd89b54"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/contracts/generated.py",
+      "size": 1456,
+      "sha256": "c050a45fa317f5b90cec3f7d7a78c4ee4897f4d320add1e7d416cdaeebf2dd79"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/contracts/validation.py",
+      "size": 16015,
+      "sha256": "01041254107be4fc49ee1175669ed980e1d0e0344686bb507ae1eae183e4c16d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/__init__.py",
+      "size": 308,
+      "sha256": "3d2a64b92f34435007b230d7d8e680ca4e5b37946d93b9e6a410ac2617b7774f"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/base.py",
+      "size": 1653,
+      "sha256": "41ab6e8b770368c6a373e1f2429702fd9c3aee35891cf93faaa2f091b2dfc6c6"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/charged_worker.py",
+      "size": 11310,
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/charged.py",
+      "size": 6082,
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/operators.py",
+      "size": 4248,
+      "sha256": "0bcb0ea43bbfbfdb7ce2a1db4156692bc51e55ac0e161219791b44dc0077f6c8"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/registry.py",
+      "size": 856,
+      "sha256": "eb160762371ed65fd0b5f5ea04d01625f6d04534b801eec6b9b22d00122e1c61"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/synthetic_worker.py",
+      "size": 5684,
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/experiments/synthetic.py",
+      "size": 5004,
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/models/__init__.py",
+      "size": 48,
+      "sha256": "f1c1bc09905be0aadc69485581ca35c071641d896df665b743a0830fc483be3e"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/models/charged_scalar.py",
+      "size": 944,
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/models/operators.py",
+      "size": 1324,
+      "sha256": "7f7cac1968e78ed5da8c8bd6b7aacd25911d4dd924302b4c96a6a34fa8b87714"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/models/synthetic.py",
+      "size": 326,
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/numerics/__init__.py",
+      "size": 68,
+      "sha256": "0995e134f9ee087f13047a806677ebd0de56fc0245e54b8058bf06a4d4bdb164"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/numerics/charged_radial.py",
+      "size": 5115,
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/numerics/charged_spectrum.py",
+      "size": 7228,
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/numerics/operators.py",
+      "size": 6855,
+      "sha256": "9c022b82344eebd75dcd8a5f89e7a261b0883098debbf69c9104fa6691d0334f"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/numerics/synthetic.py",
+      "size": 692,
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/reporting/__init__.py",
+      "size": 70,
+      "sha256": "4833796dbf6c1a61eeb9bce5bb5af0f2a5176b975dcf80dc7a8d4a476a87a03b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/reporting/charged.py",
+      "size": 11784,
+      "sha256": "c919726353ca552ce5eaea956253ec6945a5aa22dcdbdcd779f2c2e03e7dc269"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/reporting/exploration.py",
+      "size": 4065,
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/reporting/operators.py",
+      "size": 11496,
+      "sha256": "1f95a79ed1ac5a812adb5e1188248cd394c734ed1a22ab52f588e2a11704faf9"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/reporting/synthetic.py",
+      "size": 7412,
+      "sha256": "4c3ef0fb2d6466a8c02f3398f1e3e4cbb0c2ad1d3efe49c7211361f0fe7d49c6"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/__init__.py",
+      "size": 294,
+      "sha256": "9e5f034118112842072a8ef1dd1ed96e7cfe8453e57b64b4d63f408cee25656d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/archive.py",
+      "size": 2430,
+      "sha256": "73894d51459075b0ff80d037ed62fb6bbd1b5ea7de7861e17156df8fb2fd32b4"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/errors.py",
+      "size": 448,
+      "sha256": "9a9f0f8f57af38bfeeb1504dade9844435f163167a343804339d6cbc5bf8239c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/events.py",
+      "size": 1982,
+      "sha256": "47b8ee842b04002f80ec094bd860d7596092140fdd267afdc45f6dae417f71e3"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/io.py",
+      "size": 1986,
+      "sha256": "9f5cf2ab67969e348b61d879f6f5fc166278a606fd02c462373d2eb01a928d72"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/limits.py",
+      "size": 626,
+      "sha256": "8685bb2ba64ae5339f17262d2cf7be59ed618a1f60169a698fb3cd65f8850215"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/package.py",
+      "size": 12980,
+      "sha256": "450d75eec92261121daf7a32ab57514fba510ec3c7a134d2f02fbafa6f5319ac"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/runner.py",
+      "size": 28240,
+      "sha256": "84bd02824c56ee64634d0c2c5da971155ab11029d0afff89840c9edec9059b6e"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/seeds.py",
+      "size": 647,
+      "sha256": "fb4f68b4bbd732e08952b2154b1f793bbb9211e0ffae70e621e3000005b18057"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/verify.py",
+      "size": 9683,
+      "sha256": "6fed68498b61f14886d6a836dc4052cc384a304ba8ed78b31ee7dc588d961e22"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/runtime/worker.py",
+      "size": 812,
+      "sha256": "a279541fa4e4d557030bc9797b4c46de0cd0fa805fc41b6bd93e4aad70769721"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/service/__init__.py",
+      "size": 74,
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/source/service/api.py",
+      "size": 12687,
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/tables/analysis.json",
+      "size": 1760,
+      "sha256": "90d1183cc3e1e58d895f9d431b039f67a77e69d1994f1b215fb6397567c9b4a0"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/tables/checks.json",
+      "size": 900,
+      "sha256": "19cf7c957f9d614f6bda672342d176012b27c81ab6efa0631ae70c388ee43acb"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/results/tables/resolved-config.json",
+      "size": 558,
+      "sha256": "b40ef9c9fa4f0f03640acfe953270e3241c425f72438bcb5983112c33f01f21b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/final-check.log",
+      "size": 35042,
+      "sha256": "1a5449aea56ffbe590ec2b19c3b78eb1945a05eba1ae00f789643cd55bbd4bae"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-browser-install.log",
+      "size": 1224,
+      "sha256": "41526a846314d5e410df1544aa4b4fba0964c7f76dbd72fab73ba637ee7580f3"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-browser-tests.log",
+      "size": 36424,
+      "sha256": "7c3ca0a0b4229c32be3eb8751a94a586fd57fcb62a872ebf2eea973c19527177"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-check.log",
+      "size": 34690,
+      "sha256": "6e1b182ebba9ebc377ee6df9ba551b315f575ab8dfb203fc54f876448eb861b4"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-chromium.log",
+      "size": 5084,
+      "sha256": "469552da48ac574fe76098c4f7f0979080cf53bb9a77f3794af484e871c1d6a3"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-analysis.json",
+      "size": 1636,
+      "sha256": "c21b24623792859a221e76f9bdac0ac9f2d5644790b893a7971e32a404e266ed"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-archive-verify.json",
+      "size": 124,
+      "sha256": "b5dafe94e77c940d1c017a838228d7b2148f613b8a3933f13c4d4622e21fbe99"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-archive.json",
+      "size": 190,
+      "sha256": "f02a43f7366cc2f7e693f77f77e35620d93c176ce880b824d55f86bee2ee8da2"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-report-02.json",
+      "size": 1414,
+      "sha256": "8184309322a16df7714a0a4e9bc3ffd68910c89dfa307ea21878ea2475bbe041"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-report.json",
+      "size": 1414,
+      "sha256": "1ddae4f5a3ceb3735f21d230c784427639b3fa2ac5195bec9028503ce675a19a"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-run.jsonl",
+      "size": 1214,
+      "sha256": "02b0ffde99f6db8ca4d0708e8c1dc64f4e33bd2a259b5318d654e623b0ba57d0"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-run.stderr",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/gross-test-01-verify.json",
+      "size": 124,
+      "sha256": "bd2d9353a5b40fa567ceae4664cbde6bad427272fd2022d1931187b852f32b81"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/report-source.bundle",
+      "size": 672,
+      "sha256": "9bfcd5bf32ccb50e52e1a7681b94fa6c57e6613f46ab7da1efb34374e73a775b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/solver-source.bundle",
+      "size": 61230,
+      "sha256": "4728f679e88bcbf9940d8c51de4daf91543b82a9c69b802cab84043a6f4504f9"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/source-identity.json",
+      "size": 840,
+      "sha256": "d38e43d4bb7f59ad8cbd351cb518d83d2cf3fdb4593cc9637e821c21a90d0e14"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/provenance/validation.json",
+      "size": 550,
+      "sha256": "a1524074ac2d596644c45858c6e1dfa6828cbcfb8ade7d0075a6c20c1bc400d1"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/README.md",
+      "size": 1533,
+      "sha256": "e1efd1573d73f3bd9df1cfc30771a234a3331fc6cfddb329db919b329d59df28"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/analyses/analysis-0001-d3c876ea/analysis.json",
+      "size": 1760,
+      "sha256": "90d1183cc3e1e58d895f9d431b039f67a77e69d1994f1b215fb6397567c9b4a0"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/analyses/analysis-0001-d3c876ea/checks.json",
+      "size": 900,
+      "sha256": "19cf7c957f9d614f6bda672342d176012b27c81ab6efa0631ae70c388ee43acb"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/analyses/analysis-0001-d3c876ea/derived/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/analyses/analysis-0001-d3c876ea/derived/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/analyses/analysis-0001-d3c876ea/derived/residuals.csv",
+      "size": 436540,
+      "sha256": "538d2874365629cf449eb647452a9d557ed352e2ab593da7d3b7226515ef9103"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/analyses/analysis-0001-d3c876ea/derived/summary.json",
+      "size": 279,
+      "sha256": "cd6a9306389a43d7378f370d4f10f434b72b1571311afd475a27672161fda071"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "7021c77160e5aebd5c00ebcde7170633e2f67dbea3946dbd701b67d4f01c4878"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/events.jsonl",
+      "size": 989,
+      "sha256": "697bb4291e7273c114ecc4a5311f59a3cc1ea664eaeccf508f8113f2cc2fdfee"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/preparation.json",
+      "size": 418,
+      "sha256": "3c04b746fe1c2dd9e2d96bd50196f2cd8238dc7760119af99495490c21a4e0dd"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/execution.json",
+      "size": 257,
+      "sha256": "bcb55354013de059ebe5e96158cbab523fb0e6670558f91038193d2e4b16c166"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/inputs.npz",
+      "size": 274514,
+      "sha256": "d25b9f7f1041cb4f5a8305ea611fc4186f728826c6c2e0ecdedc281b3c67da8c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/measurements.csv",
+      "size": 318130,
+      "sha256": "3969f0de61f00fb26706ff2c08464cf49680835dc5e0c39749156239a980dd7c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/rng-end.json",
+      "size": 190,
+      "sha256": "c567c30ea038b96ce4f4766fc610b3f5969f7f02218693066f8c5665db28153c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/raw/rng-start.json",
+      "size": 190,
+      "sha256": "30de91d2e730b3f96ad73a35590ff39723eafcb1287fd468c842465647ee88a8"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/attempts/attempt-0001/request.json",
+      "size": 1145,
+      "sha256": "9506125a7f935a5851131b594153ab985889610a544ac05257285cc5acc0740e"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/checksums.sha256",
+      "size": 6972,
+      "sha256": "716a70bdc89ddbe1501f33d5a4615a457d4f9a473602b76d7d99d0c079f0eefa"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/manifest.json",
+      "size": 28721,
+      "sha256": "3e40753272e8be1d211d796279c55f5d0cac3f8494a151335d873ac263fcb9c9"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/provenance/code.json",
+      "size": 206,
+      "sha256": "3801bf8319fa76d9e3ffcdebed147ab705fbd438de617202206758f3791aba7b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/provenance/inputs.json",
+      "size": 133,
+      "sha256": "2699cf9d79a823d575f65d2223e4f4eadd21ca0698ce95bf496ab90024657f6e"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/observer-domain.figure.json",
+      "size": 645,
+      "sha256": "507a5921f56de05b69179df295f13c657de1b56bea99c1a17df3e49228ee230d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/observer-domain.pdf",
+      "size": 20098,
+      "sha256": "c2ebd223a1da052f60c88f8ba0103e46863e17411c738155fa1fa5459f706bb6"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/observer-domain.png",
+      "size": 110479,
+      "sha256": "c33c144d5dca70189176fd43fc836e8177ca01e6b866d5720e00ccf9d07f575b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/observer-domain.svg",
+      "size": 77106,
+      "sha256": "a999ce6f82f0cdd85e20f80473a876140c07729d4df91f775780c34f6c3b1936"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/operator-residuals.figure.json",
+      "size": 579,
+      "sha256": "30600a337fd7589927c586c50c9ed2a6f3fbb63bf33effc064f1cbadba8cf964"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/operator-residuals.pdf",
+      "size": 48799,
+      "sha256": "8f9b6695b6bc2e639b8fabb6955d27fd5d837c1774166119151350f8251243ed"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/operator-residuals.png",
+      "size": 212586,
+      "sha256": "6b73d25bf43acc58d49da96dd152e49e23eb3c72de5a407c5e856c1c14142cf5"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/operator-residuals.svg",
+      "size": 340393,
+      "sha256": "feb81ee65c357333a76a5e04753dbfc044b99e7e052b88eb0144d203e49f8446"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/tetrahedral-gram.figure.json",
+      "size": 534,
+      "sha256": "3e9d3670e90a66860e4fd5c857aff908c2d00f0b706ec60916c67fb89d8e1f39"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/tetrahedral-gram.pdf",
+      "size": 20182,
+      "sha256": "b0776ce9dd87b4338a850ab37bdb6c05c1a306266c9a4d134c16629873ab3793"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/tetrahedral-gram.png",
+      "size": 92798,
+      "sha256": "e344c5348aff062164cbf20cb4369675b4b36d28404bfbdf54a934344d0751f5"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/figures/tetrahedral-gram.svg",
+      "size": 64215,
+      "sha256": "b2a7c952baa130fb5648db4fd1a2fd1a8ff7ccf9f5b5708ed838c184f7994542"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/interpretations.json",
+      "size": 1660,
+      "sha256": "9606209c94cb3daf8d8de081294e91d85e365e55327a6eae5ae7acbbac1d7bf7"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/plot-data/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/plot-data/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/plot-data/residuals.csv",
+      "size": 436540,
+      "sha256": "538d2874365629cf449eb647452a9d557ed352e2ab593da7d3b7226515ef9103"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/report.html",
+      "size": 3736,
+      "sha256": "10485ff037c6cb10b729915cceedc1b04e781efa759899848ce6328d717d24dd"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/report.json",
+      "size": 1676,
+      "sha256": "107eceb1c2d3ded019341cf5852d303f422129b87e74d2746ad37a4e7d826647"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/report.md",
+      "size": 3166,
+      "sha256": "c639d9cf8e5e1f5bbc225050d86df5ad216f0ee7bf4ffb84a43bde6dadcff2d4"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0001/report.pdf",
+      "size": 74819,
+      "sha256": "6cc6a0127e31d707646d5a19bd29ff2befba53b44c870be4b8d435a74b7b24b9"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/observer-domain.figure.json",
+      "size": 645,
+      "sha256": "507a5921f56de05b69179df295f13c657de1b56bea99c1a17df3e49228ee230d"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/observer-domain.pdf",
+      "size": 20097,
+      "sha256": "12bf94a991d5fc52d62859b9f5d0b00b59ae26d10d01138bc1203686b17ee4f1"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/observer-domain.png",
+      "size": 110500,
+      "sha256": "2e032fec7f0621ea30d3811a2845c5f8402fe97c7bfce3cb9d3c18d3d236c87c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/observer-domain.svg",
+      "size": 77108,
+      "sha256": "cf3960dce47570edee85e62caf795cc0927efca6c0cd965304b590f70eadd107"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/operator-residuals.figure.json",
+      "size": 579,
+      "sha256": "30600a337fd7589927c586c50c9ed2a6f3fbb63bf33effc064f1cbadba8cf964"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/operator-residuals.pdf",
+      "size": 48799,
+      "sha256": "c85b8971e01b1d02efc9b1f684e626ace86ac634b414f7f7c8ce57a98920f267"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/operator-residuals.png",
+      "size": 212586,
+      "sha256": "6b73d25bf43acc58d49da96dd152e49e23eb3c72de5a407c5e856c1c14142cf5"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/operator-residuals.svg",
+      "size": 340393,
+      "sha256": "0cb8b7fa2d09bddea3f66ac200921f745988d257abed404a9c46ebd6a4b6c55c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/tetrahedral-gram.figure.json",
+      "size": 534,
+      "sha256": "3e9d3670e90a66860e4fd5c857aff908c2d00f0b706ec60916c67fb89d8e1f39"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/tetrahedral-gram.pdf",
+      "size": 20182,
+      "sha256": "3735ccf5c1760b1d540a45ac8e3672f0bddd4a13a9d0af0a4f5e820faf74d861"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/tetrahedral-gram.png",
+      "size": 92798,
+      "sha256": "e344c5348aff062164cbf20cb4369675b4b36d28404bfbdf54a934344d0751f5"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/figures/tetrahedral-gram.svg",
+      "size": 64215,
+      "sha256": "d3b93b5b6148348b6766a22b70e394d2a323c4cef555a9ac4c7b3f5459a6636c"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/interpretations.json",
+      "size": 1660,
+      "sha256": "9606209c94cb3daf8d8de081294e91d85e365e55327a6eae5ae7acbbac1d7bf7"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/plot-data/conditioning.json",
+      "size": 2042,
+      "sha256": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/plot-data/controls.json",
+      "size": 696,
+      "sha256": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/plot-data/residuals.csv",
+      "size": 436540,
+      "sha256": "538d2874365629cf449eb647452a9d557ed352e2ab593da7d3b7226515ef9103"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/report.html",
+      "size": 3736,
+      "sha256": "b796a2211628f79b127c39b72442ae80befccaffd79a0172eda4e80881309a55"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/report.json",
+      "size": 1676,
+      "sha256": "d6dc02347afba47e5246a4ccd9958554a55f3ab95aa26e2c3ce1415dce12320a"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/report.md",
+      "size": 3166,
+      "sha256": "4515ef957a5fe9665743f8531ae49d2504405b7deaebed30a848766ff9f0cc19"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/reports/report-0002/report.pdf",
+      "size": 74845,
+      "sha256": "868eec6a1c133236728d8d1d7f1ff3ff8ce4b5d069f4ce8e22860cfb71bd912b"
+    },
+    {
+      "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/resolved-config.json",
+      "size": 558,
+      "sha256": "b40ef9c9fa4f0f03640acfe953270e3241c425f72438bcb5983112c33f01f21b"
     },
     {
       "path": "research/experiments/README.md",

@@ -1,0 +1,24 @@
+{
+  "method": "direct-matrix-v1",
+  "model": "signal-space.operator-constitution.v1",
+  "parameters": {
+    "near_angles": [
+      0.5,
+      0.1,
+      0.01,
+      0.001,
+      0.0001,
+      1e-05,
+      1e-06,
+      1e-07,
+      1e-08
+    ],
+    "samples": 1000
+  },
+  "physical_evolution": false,
+  "source": "docs/research/gross-test-01.md",
+  "units": {
+    "angle": "radian",
+    "matrix": "dimensionless"
+  }
+}

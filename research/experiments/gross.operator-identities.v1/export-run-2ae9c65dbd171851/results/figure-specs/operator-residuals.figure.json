@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "dimensionless"
+    },
+    "y": {
+      "unit": "dimensionless"
+    }
+  },
+  "downsampling": "none",
+  "fit_window": null,
+  "id": "operator-residuals",
+  "normalization": "residuals divided by declared max(1, scale)",
+  "ranges": "automatic except declared log display floor",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/residuals.csv"
+  ],
+  "transformations": [
+    "display max(residual,1e-18) on log axis; raw zeros retained",
+    "no fit or smoothing"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "radian or category"
+    },
+    "y": {
+      "unit": "dimensionless"
+    }
+  },
+  "downsampling": "none",
+  "fit_window": null,
+  "id": "observer-domain",
+  "normalization": "residuals divided by declared max(1, scale)",
+  "ranges": "automatic except declared log display floor",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/conditioning.json",
+    "plot-data/controls.json"
+  ],
+  "transformations": [
+    "angle zero shown as annotation, not placed on log axis",
+    "display max(error,1e-18); exact zero retained in data"
+  ]
+}

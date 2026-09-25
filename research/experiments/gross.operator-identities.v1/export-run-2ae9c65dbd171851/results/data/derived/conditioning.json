@@ -1,0 +1,82 @@
+[
+  {
+    "angle": 0.0,
+    "condition_j": null,
+    "det_j": 0.0,
+    "expected_det": 0.0,
+    "observer_det_error": null,
+    "status": "singular"
+  },
+  {
+    "angle": 0.5,
+    "condition_j": 15.337541700627318,
+    "det_j": 0.22984884706593012,
+    "expected_det": 0.22984884706593015,
+    "observer_det_error": 6.661338147750939e-16,
+    "status": "valid"
+  },
+  {
+    "angle": 0.1,
+    "condition_j": 399.3335000661609,
+    "det_j": 0.009966711079379187,
+    "expected_det": 0.009966711079379185,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 0.01,
+    "condition_j": 39999.333335,
+    "det_j": 9.999666671111066e-05,
+    "expected_det": 9.99966667111108e-05,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 0.001,
+    "condition_j": 3999999.33333335,
+    "det_j": 9.99999666666711e-07,
+    "expected_det": 9.99999666666711e-07,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 0.0001,
+    "condition_j": 399999999.33333325,
+    "det_j": 9.999999966666683e-09,
+    "expected_det": 9.999999966666668e-09,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 1e-05,
+    "condition_j": 39999999999.333336,
+    "det_j": 9.99999999966668e-11,
+    "expected_det": 9.999999999666667e-11,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 1e-06,
+    "condition_j": 3999999999999.3354,
+    "det_j": 9.99999999999667e-13,
+    "expected_det": 9.999999999996666e-13,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 1e-07,
+    "condition_j": 399999999999999.25,
+    "det_j": 9.999999999999987e-15,
+    "expected_det": 9.999999999999965e-15,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  },
+  {
+    "angle": 1e-08,
+    "condition_j": 3.999999999999999e+16,
+    "det_j": 1.0000000000000037e-16,
+    "expected_det": 1.0000000000000001e-16,
+    "observer_det_error": null,
+    "status": "ill-conditioned"
+  }
+]

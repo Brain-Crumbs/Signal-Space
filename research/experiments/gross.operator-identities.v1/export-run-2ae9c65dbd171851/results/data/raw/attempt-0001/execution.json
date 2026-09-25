@@ -1,0 +1,12 @@
+{
+  "blas_threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "physical_evolution": false,
+  "rng": "numpy.PCG64",
+  "root_seed": 2026092501,
+  "samples": 1000,
+  "sampling_seed": 4316937195768137969
+}
