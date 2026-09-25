@@ -4,7 +4,7 @@
 
 ## Physical question
 
-In the SS OCF 1 continuum candidate, an invertible Hermitian coframe $E_\mu=e^a{}_{\mu}\sigma_a$ defines $g_{\mu\nu}=e^a{}_{\mu}\eta_{ab}e^b{}_{\nu}$. Here $\eta=\mathrm{diag}(1,-1,-1,-1)$. The six real matter fields are four real components of a complex core doublet $\Phi$, a neutral field $a$, and a clock candidate $\chi$. The proposed action gives $Z(s)=1+0.1s$, where $s=\Phi^\dagger\Phi=\sum_Iq_I^2/2$. Its two-derivative matter Hessian should be
+In the SS OCF 1 continuum candidate, an invertible Hermitian coframe $E_\mu=e^a_{\mu}\sigma_a$ defines $g_{\mu\nu}=e^a_{\mu}\eta_{ab}e^b_{\nu}$. Here $\eta=\mathrm{diag}(1,-1,-1,-1)$. The six real matter fields are four real components of a complex core doublet $\Phi$, a neutral field $a$, and a clock candidate $\chi$. The proposed action gives $Z(s)=1+0.1s$, where $s=\Phi^\dagger\Phi=\sum_Iq_I^2/2$. Its two-derivative matter Hessian should be
 
 $$
 \frac{\partial^2\mathcal L_m}{\partial(\partial_\mu\varphi_A)\partial(\partial_\nu\varphi_B)}=H_{AB}g^{\mu\nu},\qquad H=\mathrm{diag}(1,1,1,1,Z,1).
