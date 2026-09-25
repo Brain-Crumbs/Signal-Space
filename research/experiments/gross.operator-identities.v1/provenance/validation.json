@@ -1,0 +1,14 @@
+{
+  "npm_check": "pass",
+  "javascript_typescript_tests": 172,
+  "python_tests": 59,
+  "agent_contract_tests": "pass",
+  "historical_pair_cli": "pass",
+  "canonical_verify": "pass",
+  "reader_bundle": "pass",
+  "pdf_visual_review": "all 8 setup/results pages rendered and inspected; no clipped content",
+  "browser_tests": "blocked: missing Chromium; OS dependency installation denied and browser download invalid",
+  "scientific_attempts": 1,
+  "scientific_classification": "pass",
+  "scientific_scope": "operator algebra and implementation only"
+}

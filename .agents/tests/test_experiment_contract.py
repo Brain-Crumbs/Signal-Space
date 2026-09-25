@@ -73,8 +73,11 @@ class ExperimentContractTests(unittest.TestCase):
                             "--run", run["path"], "--plan", str(ROOT / ".agents/examples/synthetic-plan.json"),
                             "--interpretations", str(ROOT / ".agents/examples/synthetic-interpretations.json"),
                             "--mentor", str(ROOT / ".agents/examples/synthetic-mentor.md"),
-                            "--output", str(output)], cwd=ROOT, check=True, capture_output=True)
+                            "--output", str(output), "--source-locator", "research/experiments/portable-fixture"], cwd=ROOT, check=True, capture_output=True)
             contract.validate_bundle(output)
+            export = json.loads((output / "export.json").read_text())
+            self.assertEqual(export["source_run"]["locator"], "research/experiments/portable-fixture")
+            self.assertEqual(export["source_run"]["manifest_sha256"], contract.digest((Path(run["path"]) / "manifest.json").read_bytes()))
             plot = output / "results/data/plot-data/recurrence.csv"
             plot.write_text(plot.read_text() + "0,corrupted\n")
             with self.assertRaisesRegex(ValueError, "checksum mismatch"):

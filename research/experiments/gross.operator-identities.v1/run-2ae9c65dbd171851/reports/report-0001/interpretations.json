@@ -1,0 +1,20 @@
+{
+  "observer-domain": {
+    "limitation": "A domain rejection is not a physical instability. The deliberately broken control is not an alternative dynamics.",
+    "question": "Do singular aggregates and omitted ray weights expose the intended failure controls?",
+    "reading": "Collinearity is rejected and ill-conditioned aggregates are marked separately. Omitting a boost-transformed weight gives error 0.632121.",
+    "significance": "The test distinguishes valid observer construction from a singular ray, and detects inconsistent transformation of physical weights."
+  },
+  "operator-residuals": {
+    "limitation": "Finite moderate-conditioning samples; no propagation, clock or emergent metric is measured.",
+    "question": "Do operator and observer identities remain accurate across the declared conditioning domain?",
+    "reading": "Maximum residual 3.96e-14; compare all points with the locked 1e-10 line. Log plotting floors exact zeros at 1e-18.",
+    "significance": "Tests consistent determinant, observer norm, positive form and weighted-ray transformations on saved inputs, with an independent component audit."
+  },
+  "tetrahedral-gram": {
+    "limitation": "This is internal algebra. The tetrahedron supplies neither physical spatial axes nor a dynamical spacetime.",
+    "question": "Do four null projector directions span the predicted Lorentzian operator space?",
+    "reading": "Each projector has a null diagonal. The sorted spectrum matches (-1/3,-1/3,-1/3,1) with maximum error 4.44e-16.",
+    "significance": "Four null projector directions can span the four-dimensional Hermitian operator space with Lorentzian signature."
+  }
+}

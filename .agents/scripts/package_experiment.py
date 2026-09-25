@@ -83,7 +83,7 @@ def setup_summary(plan: dict) -> str:
     return "\n".join(lines)
 
 
-def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file: Path, destination: Path, source_dir: Path | None) -> None:
+def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file: Path, destination: Path, source_dir: Path | None, source_locator: str | None = None) -> None:
     if destination.exists():
         raise ValueError("destination exists; exports are immutable, choose a new path")
     plan = json.loads(plan_file.read_text(encoding="utf-8"))
@@ -173,14 +173,15 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
             for item in index:
                 png = next(path for path in item["files"] if path.endswith(".png"))
                 figure_page(pdf, destination / png, {**item, "question": item["question"]})
-        readme = f"# {plan['question']}\n\nModel: `{plan['model_id']}`. Run: `{manifest['run_id']}`. Analysis: `{analysis['analysis_id']}`. Report: `{report['report_id']}`. Scientific classification: `{manifest['scientific_classification']}`.\n\nThe original immutable run package is at `{run}`. See `plan.json` for the locked protocol, `Experimental_Setup.pdf` for the setup, `Experiment_Results.pdf` for all saved figures and interpretations, `Experiment_Analysis_and_Next.md` for assessment, `results/` for data and code, and `figures/figure_index.json` for figure provenance.\n\nKnown gaps: {', '.join(manifest['known_gaps']) or 'none recorded'}.\n"
+        locator = source_locator or str(run.resolve())
+        readme = f"# {plan['question']}\n\nModel: `{plan['model_id']}`. Run: `{manifest['run_id']}`. Analysis: `{analysis['analysis_id']}`. Report: `{report['report_id']}`. Scientific classification: `{manifest['scientific_classification']}`.\n\nCanonical source locator: `{locator}`. For an Actions download, the canonical package is also in the companion evidence artifact under `runs/<experiment-id>/<run-id>/`; a repository locator is the intended check-in destination. See `plan.json` for the locked protocol, `Experimental_Setup.pdf` for the setup, `Experiment_Results.pdf` for all saved figures and interpretations, `Experiment_Analysis_and_Next.md` for assessment, `results/` for data and code, and `figures/figure_index.json` for figure provenance.\n\nKnown gaps: {', '.join(manifest['known_gaps']) or 'none recorded'}.\n"
         (destination / "README.md").write_text(readme, encoding="utf-8")
         listing = [{"path": p.relative_to(destination).as_posix(), "sha256": digest(p.read_bytes())}
                    for p in sorted(destination.rglob("*")) if p.is_file()]
         export = {"schema_version": "signal-space-export-v1", "source_run": {
             "experiment_id": plan["experiment_id"], "model_id": plan["model_id"], "run_id": manifest["run_id"],
             "analysis_id": analysis["analysis_id"], "report_id": report["report_id"],
-            "manifest_sha256": digest(manifest_path.read_bytes()), "locator": str(run.resolve())},
+            "manifest_sha256": digest(manifest_path.read_bytes()), "locator": locator},
             "classification": manifest["scientific_classification"], "files": listing,
             "known_gaps": manifest["known_gaps"]}
         (destination / "export.json").write_text(json.dumps(export, indent=2) + "\n")
@@ -195,6 +196,7 @@ if __name__ == "__main__":
     for name in ("run", "plan", "interpretations", "mentor", "output"):
         parser.add_argument(f"--{name}", required=True, type=Path)
     parser.add_argument("--source-dir", type=Path)
+    parser.add_argument("--source-locator", help="portable canonical locator; defaults to the local absolute path")
     args = parser.parse_args()
-    package(args.run, args.plan, args.interpretations, args.mentor, args.output, args.source_dir)
+    package(args.run, args.plan, args.interpretations, args.mentor, args.output, args.source_dir, args.source_locator)
     print(f"validated export: {args.output}")

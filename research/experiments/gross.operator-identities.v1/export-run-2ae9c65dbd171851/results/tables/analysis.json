@@ -1,0 +1,38 @@
+{
+  "analysis_id": "analysis-0001-d3c876ea",
+  "classification": "pass",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "adbe7584dbd8b13b34432cbd88b5a6c8f7e39709",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "created_at": "2026-09-25T00:32:35.850437Z",
+  "input_artifacts": {
+    "attempts/attempt-0001/raw/conditioning.json": "aee5f6b8aa4bf29a21f86775f4985de74756e8d62c5aac113703851c0b969c08",
+    "attempts/attempt-0001/raw/controls.json": "1adc5454ba24d28622382b3650f0e72e56e29087e31a1bdda86715917a7a5c73",
+    "attempts/attempt-0001/raw/execution.json": "bcb55354013de059ebe5e96158cbab523fb0e6670558f91038193d2e4b16c166",
+    "attempts/attempt-0001/raw/inputs.npz": "d25b9f7f1041cb4f5a8305ea611fc4186f728826c6c2e0ecdedc281b3c67da8c",
+    "attempts/attempt-0001/raw/measurements.csv": "3969f0de61f00fb26706ff2c08464cf49680835dc5e0c39749156239a980dd7c",
+    "attempts/attempt-0001/raw/rng-end.json": "c567c30ea038b96ce4f4766fc610b3f5969f7f02218693066f8c5665db28153c",
+    "attempts/attempt-0001/raw/rng-start.json": "30de91d2e730b3f96ad73a35590ff39723eafcb1287fd468c842465647ee88a8"
+  },
+  "parameters": {
+    "max_residual": 1e-10,
+    "min_negative_error": 0.001
+  },
+  "path": "analyses/analysis-0001-d3c876ea",
+  "raw_source": "attempts/attempt-0001/raw/measurements.csv",
+  "schema_version": "research-analysis-v1",
+  "summary": {
+    "gram_error": 4.440892098500626e-16,
+    "max_residual": 3.963119603223247e-14,
+    "minimum_positive_value": 0.010339055007300693,
+    "near_control_count": 10,
+    "omitted_weight_error": 0.6321205588285577,
+    "physical_evolution": false,
+    "samples": 1000,
+    "threshold": 1e-10
+  },
+  "supersedes": null
+}

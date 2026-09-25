@@ -1,0 +1,174 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.operator-identities.v1",
+  "model_id": "signal-space.operator-constitution.v1",
+  "question": "Are the operator and observer identities consistent under weighted nonunitary frame transformations?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 2-4 and 15.1",
+    "docs/research/gross-test-01.md: bounded sampling and residual definitions"
+  ],
+  "runtime_config": "fixtures/research/gross-test-01.json",
+  "runtime_config_sha256": "27563186e7ffe9f887eeb15648beeb6484d1ed6307ee894bce72ec5f09aefbe0",
+  "method": {
+    "action": "No evolution action; Hermitian operator constitution only, prerequisite shared by SS OPS 1 and SS OCF 1.",
+    "units": "Matrices, state weights and residuals dimensionless; near-collinearity angles radians.",
+    "domain": "1000 random moderate-condition samples, tetrahedral projectors, fixed boost control and 10 near/singular aggregates.",
+    "boundaries": "No spatial domain or time integration. Conditioning, not mesh/domain/timestep, is the numerical control.",
+    "initial_data": "Root seed 2026092501; PCG64 with runtime sampling stream. Standard-normal Pauli coefficients and complex constituents; condition <=100; independent SU(2)-boost-SU(2), rapidity in [-1,1].",
+    "solver": "Registered direct-matrix-v1 batch with independent saved-input Pauli-component analysis; single-thread BLAS.",
+    "tolerances": "Scale-normalized valid-domain residual <1e-10; positivity >0; negative omitted-weight error >1e-3. No hidden singular-value regularization."
+  },
+  "hypotheses": [
+    {
+      "id": "consistent",
+      "prediction": "Valid samples obey identities, exact Gram spectrum and observer positivity; singular and broken-weight controls are detected."
+    },
+    {
+      "id": "inconsistent",
+      "prediction": "One or more valid-domain identities exceed threshold, positivity fails, or invalid-domain/weight controls escape detection."
+    }
+  ],
+  "controls": [
+    {
+      "id": "independent-components",
+      "purpose": "Detect matrix-algebra and saved-output errors",
+      "method": "Read all raw matrices and compare worker scalars with independent real component formulas."
+    },
+    {
+      "id": "tetrahedron",
+      "purpose": "Check the exact algebraic Lorentzian signature",
+      "method": "Compare computed Gram matrix eigenvalues to (-1/3,-1/3,-1/3,1)."
+    },
+    {
+      "id": "singular-and-weight",
+      "purpose": "Expose invalid observer domains and omitted boost weights",
+      "method": "Rank-one and near-collinear aggregates plus a deterministic rapidity-one boost with and without weight transformation."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "coverage",
+      "observable": "All seeded samples and declared controls are saved and independently checked",
+      "pass_if": "All seeded samples and declared controls are saved and independently checked",
+      "fail_if": "Complete valid evidence violates the specified condition.",
+      "unresolved_if": "Required raw evidence is incomplete or unavailable; no scientific pass may be issued.",
+      "uncertainty": "Floating-point arithmetic and declared condition domain, not a statistical confidence level."
+    },
+    {
+      "id": "identities",
+      "observable": "All scale-normalized well-conditioned residuals are strictly below 1e-10",
+      "pass_if": "All scale-normalized well-conditioned residuals are strictly below 1e-10",
+      "fail_if": "Complete valid evidence violates the specified condition.",
+      "unresolved_if": "Required raw evidence is incomplete or unavailable; no scientific pass may be issued.",
+      "uncertainty": "Floating-point arithmetic and declared condition domain, not a statistical confidence level."
+    },
+    {
+      "id": "positive-observer",
+      "observable": "All valid observer forms and norms are positive",
+      "pass_if": "All valid observer forms and norms are positive",
+      "fail_if": "Complete valid evidence violates the specified condition.",
+      "unresolved_if": "Required raw evidence is incomplete or unavailable; no scientific pass may be issued.",
+      "uncertainty": "Floating-point arithmetic and declared condition domain, not a statistical confidence level."
+    },
+    {
+      "id": "tetrahedral",
+      "observable": "Gram spectrum is (-1/3,-1/3,-1/3,1) within 1e-10",
+      "pass_if": "Gram spectrum is (-1/3,-1/3,-1/3,1) within 1e-10",
+      "fail_if": "Complete valid evidence violates the specified condition.",
+      "unresolved_if": "Required raw evidence is incomplete or unavailable; no scientific pass may be issued.",
+      "uncertainty": "Floating-point arithmetic and declared condition domain, not a statistical confidence level."
+    },
+    {
+      "id": "weight-control",
+      "observable": "Correct weights pass; deliberately omitted weights give error above 1e-3",
+      "pass_if": "Correct weights pass; deliberately omitted weights give error above 1e-3",
+      "fail_if": "Complete valid evidence violates the specified condition.",
+      "unresolved_if": "Required raw evidence is incomplete or unavailable; no scientific pass may be issued.",
+      "uncertainty": "Floating-point arithmetic and declared condition domain, not a statistical confidence level."
+    },
+    {
+      "id": "singular-domain",
+      "observable": "Rank-one aggregate is rejected, near-collinear samples classified without regularization",
+      "pass_if": "Rank-one aggregate is rejected, near-collinear samples classified without regularization",
+      "fail_if": "Complete valid evidence violates the specified condition.",
+      "unresolved_if": "Required raw evidence is incomplete or unavailable; no scientific pass may be issued.",
+      "uncertainty": "Floating-point arithmetic and declared condition domain, not a statistical confidence level."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "operator-residuals",
+      "question": "Do operator and observer identities remain accurate across the declared conditioning domain?",
+      "role": "evidentiary",
+      "observables": ["condition_j", "max_residual", "norm_transform_error"],
+      "representation": "log residual versus conditioning scatter with frozen threshold",
+      "competing_signatures": {
+        "consistent": "Valid residuals below threshold, exact signature and correctly detected failure controls.",
+        "inconsistent": "Threshold violation, wrong signature or an undetected failure control."
+      },
+      "controls": ["independent-components"],
+      "uncertainty": "Finite precision; no fitted error bars. Singular cases outside the accepted domain remain visible.",
+      "source_data": ["reports/<report-id>/plot-data/residuals.csv"],
+      "transformations": [
+        "No smoothing or fitting; log residual plots display max(error,1e-18), retaining original zeros."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "tetrahedral-gram",
+      "question": "Do four null projector directions span the predicted Lorentzian operator space?",
+      "role": "evidentiary",
+      "observables": ["gram", "gram_eigenvalues"],
+      "representation": "Gram heatmap and computed/exact eigenvalues",
+      "competing_signatures": {
+        "consistent": "Valid residuals below threshold, exact signature and correctly detected failure controls.",
+        "inconsistent": "Threshold violation, wrong signature or an undetected failure control."
+      },
+      "controls": ["tetrahedron"],
+      "uncertainty": "Finite precision; no fitted error bars. Singular cases outside the accepted domain remain visible.",
+      "source_data": ["reports/<report-id>/plot-data/controls.json"],
+      "transformations": [
+        "No smoothing or fitting; log residual plots display max(error,1e-18), retaining original zeros."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "observer-domain",
+      "question": "Do singular aggregates and omitted ray weights expose the intended failure controls?",
+      "role": "evidentiary",
+      "observables": [
+        "angle",
+        "condition_j",
+        "status",
+        "correct_weight_error",
+        "omitted_weight_error"
+      ],
+      "representation": "conditioning by angle, explicit singular rejection and correct/broken weight comparison",
+      "competing_signatures": {
+        "consistent": "Valid residuals below threshold, exact signature and correctly detected failure controls.",
+        "inconsistent": "Threshold violation, wrong signature or an undetected failure control."
+      },
+      "controls": ["singular-and-weight"],
+      "uncertainty": "Finite precision; no fitted error bars. Singular cases outside the accepted domain remain visible.",
+      "source_data": [
+        "reports/<report-id>/plot-data/conditioning.json",
+        "reports/<report-id>/plot-data/controls.json"
+      ],
+      "transformations": [
+        "No smoothing or fitting; log residual plots display max(error,1e-18), retaining original zeros."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 60,
+    "max_memory_mb": 512,
+    "max_output_mb": 16
+  },
+  "prohibited_inferences": [
+    "This is algebra/implementation validation, not physical Lorentz covariance, propagation, emergent spacetime or a clock.",
+    "No dynamics means conservation, boundary sensitivity and discretization convergence are not evaluated.",
+    "Finite seeds do not prove identities or justify ill-conditioned observer normalization."
+  ],
+  "locked_sha256": "16b1f2c194709efcbeae9427f137d388014e940239965b4fd8ac2689876218ae"
+}

@@ -39,8 +39,8 @@ class ArtifactRecord(TypedDict, total=False):
 
 class ResearchConfig(TypedDict):
     schema_version: Literal["research-experiment-v1"]
-    experiment_id: Literal["fixture.synthetic.v1", "e01-charged-branch"]
-    model_id: Literal["fixture.deterministic-recurrence.v1", "charged-scalar-3d-v1"]
+    experiment_id: Literal["fixture.synthetic.v1", "e01-charged-branch", "gross.operator-identities.v1"]
+    model_id: Literal["fixture.deterministic-recurrence.v1", "charged-scalar-3d-v1", "signal-space.operator-constitution.v1"]
     parameters: dict[str, object]
     units: dict[str, str]
     seeds: dict[str, int]
@@ -85,8 +85,14 @@ export interface ArtifactRecord {
 }
 export interface ResearchConfig {
   schema_version: 'research-experiment-v1';
-  experiment_id: 'fixture.synthetic.v1' | 'e01-charged-branch';
-  model_id: 'fixture.deterministic-recurrence.v1' | 'charged-scalar-3d-v1';
+  experiment_id:
+    | 'fixture.synthetic.v1'
+    | 'e01-charged-branch'
+    | 'gross.operator-identities.v1';
+  model_id:
+    | 'fixture.deterministic-recurrence.v1'
+    | 'charged-scalar-3d-v1'
+    | 'signal-space.operator-constitution.v1';
   parameters: Record<string, unknown>;
   units: Record<string, string>;
   seeds: { root: number };
@@ -114,6 +120,7 @@ def main() -> int:
     expected = {
         "experiment.schema.json": "Signal Space research experiment configuration",
         "e01.schema.json": "Signal Space E01 configuration",
+        "operators.schema.json": "Signal Space operator identity configuration",
         "run-manifest.schema.json": "Signal Space research run manifest",
         "event.schema.json": "Signal Space research event",
         "artifact.schema.json": "Signal Space research artifact",

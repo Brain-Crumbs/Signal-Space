@@ -1,0 +1,68 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "observer-domain",
+      "role": "evidentiary",
+      "question": "Do singular aggregates and omitted ray weights expose the intended failure controls?",
+      "reading": "Collinearity is rejected and ill-conditioned aggregates are marked separately. Omitting a boost-transformed weight gives error 0.632121.",
+      "significance": "The test distinguishes valid observer construction from a singular ray, and detects inconsistent transformation of physical weights.",
+      "limitation": "A domain rejection is not a physical instability. The deliberately broken control is not an alternative dynamics.",
+      "source_data": [
+        "results/data/plot-data/conditioning.json",
+        "results/data/plot-data/controls.json"
+      ],
+      "spec_file": "results/figure-specs/observer-domain.figure.json",
+      "transformations": [
+        "angle zero shown as annotation, not placed on log axis",
+        "display max(error,1e-18); exact zero retained in data"
+      ],
+      "files": [
+        "figures/static/observer-domain.png",
+        "figures/static/observer-domain.svg",
+        "figures/static/observer-domain.pdf"
+      ]
+    },
+    {
+      "figure_id": "tetrahedral-gram",
+      "role": "evidentiary",
+      "question": "Do four null projector directions span the predicted Lorentzian operator space?",
+      "reading": "Each projector has a null diagonal. The sorted spectrum matches (-1/3,-1/3,-1/3,1) with maximum error 4.44e-16.",
+      "significance": "Four null projector directions can span the four-dimensional Hermitian operator space with Lorentzian signature.",
+      "limitation": "This is internal algebra. The tetrahedron supplies neither physical spatial axes nor a dynamical spacetime.",
+      "source_data": [
+        "results/data/plot-data/controls.json"
+      ],
+      "spec_file": "results/figure-specs/tetrahedral-gram.figure.json",
+      "transformations": [
+        "sorted eigenvalues compared with (-1/3,-1/3,-1/3,1)"
+      ],
+      "files": [
+        "figures/static/tetrahedral-gram.png",
+        "figures/static/tetrahedral-gram.svg",
+        "figures/static/tetrahedral-gram.pdf"
+      ]
+    },
+    {
+      "figure_id": "operator-residuals",
+      "role": "evidentiary",
+      "question": "Do operator and observer identities remain accurate across the declared conditioning domain?",
+      "reading": "Maximum residual 3.96e-14; compare all points with the locked 1e-10 line. Log plotting floors exact zeros at 1e-18.",
+      "significance": "Tests consistent determinant, observer norm, positive form and weighted-ray transformations on saved inputs, with an independent component audit.",
+      "limitation": "Finite moderate-conditioning samples; no propagation, clock or emergent metric is measured.",
+      "source_data": [
+        "results/data/plot-data/residuals.csv"
+      ],
+      "spec_file": "results/figure-specs/operator-residuals.figure.json",
+      "transformations": [
+        "display max(residual,1e-18) on log axis; raw zeros retained",
+        "no fit or smoothing"
+      ],
+      "files": [
+        "figures/static/operator-residuals.png",
+        "figures/static/operator-residuals.svg",
+        "figures/static/operator-residuals.pdf"
+      ]
+    }
+  ]
+}

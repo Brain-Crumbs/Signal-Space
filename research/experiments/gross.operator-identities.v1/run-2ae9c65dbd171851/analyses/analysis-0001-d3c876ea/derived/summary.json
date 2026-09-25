@@ -1,0 +1,10 @@
+{
+  "gram_error": 4.440892098500626e-16,
+  "max_residual": 3.963119603223247e-14,
+  "minimum_positive_value": 0.010339055007300693,
+  "near_control_count": 10,
+  "omitted_weight_error": 0.6321205588285577,
+  "physical_evolution": false,
+  "samples": 1000,
+  "threshold": 1e-10
+}
