@@ -17,7 +17,8 @@ from experiment_contract import digest, validate_bundle, validate_plan, verify_r
 ROOT = Path(__file__).resolve().parents[2]
 # A new experiment requires a reviewed, locked plan and its report/assessment adapter.
 RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
-           "gross-test-02": "docs/research/plans/gross-test-02.json"}
+           "gross-test-02": "docs/research/plans/gross-test-02.json",
+           "gross-test-03": "docs/research/plans/gross-test-03.json"}
 
 
 def write_json(path: Path, value: object) -> None:
@@ -26,6 +27,8 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.router-propagation.v1":
+        return router_assessment(manifest, analysis, checks)
     classification = manifest["scientific_classification"]
     reciprocal = manifest.get("experiment_id") == "gross.reciprocal-events.v1"
     next_step = (
@@ -50,6 +53,23 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
                if reciprocal else "The next discrimination is whether the specified reciprocal update conserves its declared aggregate under permissible event rescheduling. Derive the invariant and ordering assumptions before coding that dynamics."),
               "", "Review every figure and its limitations before promoting the result to a research conclusion."]
     return "\n".join(lines) + "\n"
+
+
+def router_assessment(manifest: dict, analysis: dict, checks: dict) -> str:
+    status = manifest['scientific_classification']
+    lines = ['# Router propagation: analysis and next calculation', '',
+             'Automated assessment; scientific interpretation and visual review remain pending.', '',
+             f"Run: {manifest['run_id']}. Analysis: {analysis['analysis_id']}. Classification: **{status}**.", '',
+             '| Check | Status | Value |', '| --- | --- | --- |']
+    lines += [f"| {r['id']} | {r['status']} | {r.get('value')} |" for r in checks['checks']]
+    lines += ['', 'Evidence: results/tables/checks.json and results/data/plot-data/.', '',
+              'This audits the homogeneous zero-wave linear router: supplied incidence, frozen background projectors, two wave bands. The Gram cone is predicted before execution; no metric fit is used. Collinear rank loss and order reversal are physical controls.', '',
+              'Conservation means total wave amplitude norm. Periodic boxes check the explicit shifts; exact blocks have no PDE timestep or outgoing boundary. Group derivatives exclude band touchings, which remain in the saved spectrum. Extra full-zone nodes are detections, not a completeness or particle-species claim.', '',
+              'No autonomous clock, invariant detector record, full-sector metric or emergent spacetime is established. Stationary physical memory modes are not removed from the full model. Finite-band directional asymmetry is not a leading identity drift.', '',
+              ('Next: Test 4 complete zero-wave tangent spectrum, retaining stationary memory variations. A common-cone claim predicts all physical sectors; the known zero-wave obstruction instead predicts propagating waves plus physical stationary memory. A nonzero periodic background requires its own self-consistent full-circuit solution and a separately locked plan.'
+               if status == 'pass' else 'Resolve the failed or incomplete checks before drawing a wave-cone conclusion; preserve this run and its thresholds.'), '',
+              'Test 11 spectral diagnostics are preliminary here; operational drift tests still require an accepted clock and description-invariant local record.']
+    return '\n'.join(lines) + '\n'
 
 
 class Pipeline:

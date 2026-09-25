@@ -33,6 +33,7 @@ jobs:
         run: |
           python .agents/scripts/experiment_contract.py plan .agents/examples/synthetic-plan.json
           python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-02.json
+          python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-03.json
           python .agents/scripts/experiment_contract.py scan research/experiments
       - run: npm run build
       - name: Run built CLI sample

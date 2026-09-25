@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "coverage",
+      "status": "pass",
+      "value": 624
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "fourier-circuit",
+      "status": "pass",
+      "value": 6.778545366739879e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "conservation",
+      "status": "pass",
+      "value": 6.661343625597994e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "continuum",
+      "status": "pass",
+      "value": 0.007742446435048791
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "triad-rank",
+      "status": "pass",
+      "value": [
+        3,
+        3,
+        1
+      ]
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "order-control",
+      "status": "pass",
+      "value": 0.00987207275809493
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "rotation",
+      "status": "pass",
+      "value": 5.551115123125783e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "group-refinement",
+      "status": "pass",
+      "value": 1.1180240583330558e-07
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "full-zone",
+      "status": "pass",
+      "value": 1.3322676295501878e-15
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

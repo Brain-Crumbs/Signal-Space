@@ -104,3 +104,9 @@ python .agents/scripts/run_experiment.py \
 This executes the same orchestration as Actions, including failure handling, source snapshot, report packaging and verification. It does not test GitHub dispatch or artifact upload. Existing historical Test 1 results remain unchanged; a rehearsal or hosted execution is a separate invocation.
 
 GitHub references: [manual dispatch](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow), [artifact download and retention](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts).
+
+## Test 3 router propagation
+
+Select `gross-test-03` for the locked homogeneous SS OPS 1 wave-sector audit. It compares orthogonal, oblique and collinear triads, both gate orders, norm conservation, group derivatives and full-zone extra nodes. Six interpreted figures and exact plot data accompany the setup/results PDFs. This does not certify the full microscopic spectrum or a clock.
+
+Local equivalent: `python3 .agents/scripts/run_experiment.py --experiment gross-test-03 --output ../gross-test-03-output`. The output must be a new directory outside the checkout. Scientific failure and technical completion remain distinct.
