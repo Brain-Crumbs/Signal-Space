@@ -8,3 +8,9 @@ research/figures
 # Byte-preserved source and immutable, checksummed experiment evidence.
 research/papers/gross-operator-program-v0.2.md
 research/experiments
+
+# Exact prerequisite config and plan bytes were locked before execution.
+fixtures/research/gross-test-06-longevity.json
+fixtures/research/gross-test-06-response.json
+docs/research/plans/gross-test-06-longevity.json
+docs/research/plans/gross-test-06-response.json

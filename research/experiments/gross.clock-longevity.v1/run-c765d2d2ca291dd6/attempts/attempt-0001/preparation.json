@@ -1,0 +1,30 @@
+{
+  "clock_amplitude": 0.001,
+  "cycles": 100,
+  "frozen_inputs": [
+    {
+      "name": "profile-0.900.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "name": "profile-fine.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "name": "profile-wide.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    }
+  ],
+  "grids": [
+    "base",
+    "fine",
+    "time"
+  ],
+  "kind": "longevity",
+  "local_radius": 0.1,
+  "omega_Q": 0.9,
+  "omega_chi": 0.41274991
+}

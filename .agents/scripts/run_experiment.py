@@ -22,6 +22,8 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
+for kind in ("longevity", "response"):
+    RECIPES[f"gross-test-06-{kind}"] = f"docs/research/plans/gross-test-06-{kind}.json"
 
 
 def write_json(path: Path, value: object) -> None:
@@ -51,6 +53,16 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
         lines += [f"| {c['id']} | {c['status']} | {c.get('value')} |" for c in checks['checks']]
         lines += ["", "This is a spherical flat decoupling calculation. An accepted radial lifetime does not establish nonspherical stability, gravity, reception or emergent geometry.",
                   "", "Next: if accepted, freeze the local clock calibration and preregister Test 7 incident neutral pulses and predicted local response before measuring reception; otherwise resolve the failing branch, mode or lifetime gate."]
+        return "\n".join(lines) + "\n"
+    if manifest.get("experiment_id") in ("gross.clock-longevity.v1", "gross.clock-response.v1"):
+        lines = ["# Test 6 prerequisite: automated assessment", "",
+                 "Scientific interpretation and visual review remain pending.", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.", "",
+                 "| Check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks["checks"]]
+        lines += ["", "Frozen radial profiles; no nonspherical beam, recoil, gravity or emergent spacetime claim.",
+                  "The concentric-shell response uses an ideal local clock probe. Historical energy diagnostics do not resolve tiny clock radiation.",
+                  "Next: inspect numerical and tick-shift errors, then specify upstream-characteristic-only prediction and physical marker events before a two-object link."]
         return "\n".join(lines) + "\n"
     classification = manifest["scientific_classification"]
     reciprocal = manifest.get("experiment_id") == "gross.reciprocal-events.v1"
@@ -160,7 +172,8 @@ class Pipeline:
                    "github": github, "plan_path": RECIPES[self.experiment], "plan_lock": plan["locked_sha256"]})
         output = self.command("run-plan", [sys.executable, str(self.repo / ".agents/scripts/run_plan.py"),
                               "--plan", str(plan_path), "--repo-root", str(self.repo),
-                              "--workspace", str(self.workspace), "--execute"])
+                              "--workspace", str(self.workspace), "--execute"],
+                              timeout=plan["resources"]["max_wall_seconds"] + 60)
         stages = [json.loads(line) for line in output.splitlines() if line.strip()]
         run = next(item["result"] for item in stages if item["stage"] == "run")
         if run["state"] != "completed":

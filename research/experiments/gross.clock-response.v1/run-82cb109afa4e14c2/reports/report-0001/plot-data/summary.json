@@ -1,0 +1,110 @@
+{
+  "calibration": {
+    "omega_Q": 0.9,
+    "omega_chi": 0.41274991,
+    "readout_radius": 0.1
+  },
+  "checks": {
+    "amplitude-square": "pass",
+    "common-markers": "pass",
+    "conservation": "pass",
+    "counter-match": "pass",
+    "frozen-inputs": "pass",
+    "numerical-controls": "pass",
+    "prediction-first": "pass",
+    "response-match": "pass",
+    "sign-even": "pass"
+  },
+  "kind": "response",
+  "metrics": {
+    "base": {
+      "baseline_crossings": 6,
+      "charge_error": 2.3620602140894675e-09,
+      "counter_sign_odd_fraction": 0.0,
+      "markers_valid": true,
+      "matched_energy_residual_over_incident": 1.3809817652156652e-07,
+      "maximum_tick_prediction_error_cycles": 8.421747582921248e-09,
+      "maximum_tick_shift_cycles": 5.320906845029211e-07,
+      "prediction_relative": {
+        "1": 0.0004854745212783213,
+        "2": 0.0019428441345762403,
+        "3": 0.007786341447273422,
+        "5": 0.0019291185194228227
+      },
+      "scaling_difference": 0.007283585004827084,
+      "sign_odd_fraction": 0.0,
+      "signal_rms": 1.3050761315826394e-09,
+      "weak_slope": 1.999353988548703
+    },
+    "fine": {
+      "baseline_crossings": 6,
+      "charge_error": 7.381273370299368e-11,
+      "counter_sign_odd_fraction": 0.0,
+      "markers_valid": true,
+      "matched_energy_residual_over_incident": 4.424405145303162e-09,
+      "maximum_tick_prediction_error_cycles": 8.384783610808917e-09,
+      "maximum_tick_shift_cycles": 5.32567398944655e-07,
+      "prediction_relative": {
+        "1": 0.0004791305186468266,
+        "2": 0.001917428118995196,
+        "3": 0.007684135800663849,
+        "5": 0.0019038260357577576
+      },
+      "scaling_difference": 0.007188279924925762,
+      "sign_odd_fraction": 0.0,
+      "signal_rms": 1.3136974942980994e-09,
+      "weak_slope": 1.9993665065485484
+    },
+    "time": {
+      "baseline_crossings": 6,
+      "charge_error": 7.381295574759861e-11,
+      "counter_sign_odd_fraction": 0.0,
+      "markers_valid": true,
+      "matched_energy_residual_over_incident": 4.238644468536622e-09,
+      "maximum_tick_prediction_error_cycles": 8.42174851644907e-09,
+      "maximum_tick_shift_cycles": 5.320907321128458e-07,
+      "prediction_relative": {
+        "1": 0.00048547529251085015,
+        "2": 0.0019428439215128592,
+        "3": 0.007786339902281122,
+        "5": 0.0019291178897895141
+      },
+      "scaling_difference": 0.007283582703371185,
+      "sign_odd_fraction": 0.0,
+      "signal_rms": 1.3050764188510362e-09,
+      "weak_slope": 1.999353988803436
+    },
+    "wide": {
+      "baseline_crossings": 6,
+      "charge_error": 2.3620602140894675e-09,
+      "counter_sign_odd_fraction": 0.0,
+      "markers_valid": true,
+      "matched_energy_residual_over_incident": 1.381232944147134e-07,
+      "maximum_tick_prediction_error_cycles": 8.421749449977052e-09,
+      "maximum_tick_shift_cycles": 5.320906789017535e-07,
+      "prediction_relative": {
+        "1": 0.0004854756496307257,
+        "2": 0.0019428443231726653,
+        "3": 0.0077863414722986425,
+        "5": 0.0019291183897422117
+      },
+      "scaling_difference": 0.007283583903477435,
+      "sign_odd_fraction": 0.0,
+      "signal_rms": 1.305076131409327e-09,
+      "weak_slope": 1.9993539888129501
+    }
+  },
+  "numerical_errors": {
+    "2": {
+      "fine": 0.02149276687460785,
+      "time": 4.845605911699559e-07,
+      "wide": 2.3487024664987963e-08
+    },
+    "5": {
+      "fine": 0.021353432665323507,
+      "time": 4.846728284701128e-07,
+      "wide": 2.4010675661480224e-08
+    }
+  },
+  "source_run": "run-080a63d117abd84d"
+}

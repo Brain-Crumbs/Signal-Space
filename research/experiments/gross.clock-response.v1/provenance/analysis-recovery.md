@@ -1,0 +1,1 @@
+Two initial longevity analysis calls failed before producing a sealed analysis: missing parent directory for derived output; then incorrect Path indexing. Corrected with mkdir(parents=True) and Path / filename. No raw solver data changed; all physical attempts completed. Final analysis IDs are recorded in manifests. These are tooling failures, not scientific classifications.

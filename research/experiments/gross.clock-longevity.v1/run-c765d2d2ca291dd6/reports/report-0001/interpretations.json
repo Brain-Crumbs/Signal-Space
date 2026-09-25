@@ -1,0 +1,14 @@
+{
+  "local-ticks": {
+    "limitation": "The ideal probe samples r=0.1 in the fixed flat rest frame; no remote marker or nonspherical stability is established.",
+    "question": "Does the same local radius keep ticking over 100 periods on each grid?",
+    "reading": "All grids have 100 positive-going ticks. Fine frequency 0.412748290; largest relative grid/time difference 4.92e-06.",
+    "significance": "The full refined duration now supports using this radial core as a finite-duration local clock."
+  },
+  "long-baseline": {
+    "limitation": "Near-constant projection does not measure a tiny radiation spectrum. A 100-period wide-box run and angular stability remain untested.",
+    "question": "Do mode energy and charge remain controlled for the full refined baseline?",
+    "reading": "Final fine-grid mode change -6.23e-06; fine energy residual 0.806 initial mode energies.",
+    "significance": "Refined and time-step controls close the missing 100-period usability check. The energy diagnostic improves with time refinement."
+  }
+}

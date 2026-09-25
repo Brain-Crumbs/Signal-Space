@@ -1,0 +1,602 @@
+{
+  "acceptance_criteria": [
+    {
+      "description": "All input SHA-256 values match the frozen Test 6 profiles and modes.",
+      "evidence": "analyses/analysis-0001-22d5199b/checks.json",
+      "id": "frozen-inputs"
+    },
+    {
+      "description": "Each 100-period trace has at least 99 positive-going crossings and frequency within 2% of frozen Omega.",
+      "evidence": "analyses/analysis-0001-22d5199b/checks.json",
+      "id": "local-record"
+    },
+    {
+      "description": "Absolute final projected mode-energy change <1% on base, h/2 and dt/2 over 100 nominal periods.",
+      "evidence": "analyses/analysis-0001-22d5199b/checks.json",
+      "id": "lifetime"
+    },
+    {
+      "description": "Local frequencies differ by <1%; absolute final mode-energy fractions differ by <0.01 on mesh/time controls.",
+      "evidence": "analyses/analysis-0001-22d5199b/checks.json",
+      "id": "convergence"
+    },
+    {
+      "description": "Maximum charge-plus-sink relative residual <1% on every 100-period trace.",
+      "evidence": "analyses/analysis-0001-22d5199b/checks.json",
+      "id": "charge-ledger"
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "analysis-0001-22d5199b",
+      "classification": "pass",
+      "code_identity": {
+        "dirty_patch_hash": "febdb716d3259b0a079fdaaa5e8cb9abaab405c171bd3185832c404c7de7ce19",
+        "revision": "852a0ccec691d8a3bc6ac62bdf40730f848b5b4d",
+        "runtime_version": "0.1.0",
+        "tree_state": "dirty"
+      },
+      "created_at": "2026-09-25T20:51:44.887842Z",
+      "input_artifacts": {
+        "attempts/attempt-0001/raw/execution.json": "ae17b6f71d5691c24e4d9a30e5e8e223a5dfe918b3763cf2e9e6497edac50076",
+        "attempts/attempt-0001/raw/frozen-inputs.json": "22da1c445cd803569c9deef8179b0d403b6a2e61583f6bb7f93100f30b0afd79",
+        "attempts/attempt-0001/raw/longevity-base.npz": "330ff04fe48a586f9c513d05b62df70b09de5bb06a3c60cbf66dfdd5d89240a6",
+        "attempts/attempt-0001/raw/longevity-fine.npz": "080025bf2db712cf72a0409847641b6931260f416dfcadc1e23038fe79eaf036",
+        "attempts/attempt-0001/raw/longevity-time.npz": "64f5b21ff50dd9eb587343f223d27b962e2851dbd60bd5d588b72769cc3b8f99",
+        "attempts/attempt-0001/raw/profile-0.900.npz": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+        "attempts/attempt-0001/raw/profile-fine.npz": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+        "attempts/attempt-0001/raw/profile-wide.npz": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+        "attempts/attempt-0001/raw/rng-end.json": "416400675d6b90d27ddbc0162b40c8ac7f1456d13b504886ad3151f3093ee5e2",
+        "attempts/attempt-0001/raw/rng-start.json": "416400675d6b90d27ddbc0162b40c8ac7f1456d13b504886ad3151f3093ee5e2"
+      },
+      "parameters": {
+        "charge-ledger": "Maximum charge-plus-sink relative residual <1% on every 100-period trace.",
+        "convergence": "Local frequencies differ by <1%; absolute final mode-energy fractions differ by <0.01 on mesh/time controls.",
+        "frozen-inputs": "All input SHA-256 values match the frozen Test 6 profiles and modes.",
+        "lifetime": "Absolute final projected mode-energy change <1% on base, h/2 and dt/2 over 100 nominal periods.",
+        "local-record": "Each 100-period trace has at least 99 positive-going crossings and frequency within 2% of frozen Omega."
+      },
+      "path": "analyses/analysis-0001-22d5199b",
+      "raw_source": "attempts/attempt-0001/raw/execution.json",
+      "schema_version": "research-analysis-v1",
+      "summary": {
+        "calibration": {
+          "omega_Q": 0.9,
+          "omega_chi": 0.41274991,
+          "readout_radius": 0.1
+        },
+        "checks": {
+          "charge-ledger": "pass",
+          "convergence": "pass",
+          "frozen-inputs": "pass",
+          "lifetime": "pass",
+          "local-record": "pass"
+        },
+        "kind": "longevity",
+        "metrics": {
+          "frequency_difference": 4.918663135899948e-06,
+          "mode_difference": 1.90344474543247e-05
+        },
+        "observations": {
+          "base": {
+            "charge_error": 1.5982512640237356e-15,
+            "core_peak_shift": 0.0001554609792198125,
+            "crossings": 100,
+            "duration": 1522.28,
+            "early_frequency": 0.4127472302278215,
+            "energy_residual_over_mode": 13.403952926346646,
+            "frequency": 0.41274728031965086,
+            "last_crossing": 1518.478303444559,
+            "late_frequency": 0.4127469563361288,
+            "measured_intervals": 99,
+            "mode_energy_change": -2.52638749344003e-05,
+            "signed_cycles": 99.99974521952126
+          },
+          "fine": {
+            "charge_error": 3.1961097432762973e-15,
+            "core_peak_shift": 3.890484353519241e-05,
+            "crossings": 100,
+            "duration": 1522.28,
+            "early_frequency": 0.4127482629233781,
+            "energy_residual_over_mode": 0.8064169308654024,
+            "frequency": 0.41274828954698994,
+            "last_crossing": 1518.4746374965894,
+            "late_frequency": 0.4127482900750195,
+            "measured_intervals": 99,
+            "mode_energy_change": -6.2296111823512135e-06,
+            "signed_cycles": 99.99998973349287
+          },
+          "time": {
+            "charge_error": 1.5982512640237356e-15,
+            "core_peak_shift": 3.884548530563858e-05,
+            "crossings": 100,
+            "duration": 1522.28,
+            "early_frequency": 0.41274929992597237,
+            "energy_residual_over_mode": 0.6838323122109303,
+            "frequency": 0.41274931048448305,
+            "last_crossing": 1518.4708636340918,
+            "late_frequency": 0.41274932501003864,
+            "measured_intervals": 99,
+            "mode_energy_change": -6.2294274800756e-06,
+            "signed_cycles": 100.0002370845817
+          }
+        },
+        "source_run": "run-080a63d117abd84d"
+      },
+      "supersedes": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-9f31f118493bf2af",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-22d5199b/analysis.json",
+      "sha256": "c26886a54f9625f06b94205d613fad4ea8511d8c2976f3bf1095a4f163491fb1",
+      "size": 4474,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-44460f74648d7f13",
+      "kind": "check",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-22d5199b/checks.json",
+      "sha256": "3c7dbce7bda07d4cdf414ba5217a4f558c0e39d9312a2c6514cb8e5d2cd4f373",
+      "size": 2816,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-410e59e2d6edcbf8",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-22d5199b/derived/summary.json",
+      "sha256": "93a559a9daf53122ac6d0ee75498bb20a2bd2e7eb57d463491a3b41315b60b32",
+      "size": 2012,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ea3d3d51a12a596b",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-22d5199b/derived/traces.csv",
+      "sha256": "f62a01d9789ad13917af98ce42aecdcc363812408e319099debee3b230a701d6",
+      "size": 4601242,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-65496636f09a3c8c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/attempt.json",
+      "sha256": "d47f9816422179f49eeed7c78aeaf0efa43adf9d3d6585752a09f9fa01e57efa",
+      "size": 319,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9f89b66be863885e",
+      "kind": "event-log",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/events.jsonl",
+      "sha256": "ec382343a6ffa60505373db4030de5a41ced50a896c17e0834baa4dd1d3ba3fa",
+      "size": 1543,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4df3f1e2a897a91c",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/logs/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e43501766c2f319",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/preparation.json",
+      "sha256": "0b8103f77b82ec457cce8ac3a1587483d07d517d940c61c64f6c0e59c13c2c85",
+      "size": 978,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-24941a1527ae3d69",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/execution.json",
+      "sha256": "ae17b6f71d5691c24e4d9a30e5e8e223a5dfe918b3763cf2e9e6497edac50076",
+      "size": 1413,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-84ea49d9aa5adb0c",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/frozen-inputs.json",
+      "sha256": "22da1c445cd803569c9deef8179b0d403b6a2e61583f6bb7f93100f30b0afd79",
+      "size": 734,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-43654761ef15f4e6",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/longevity-base.npz",
+      "sha256": "330ff04fe48a586f9c513d05b62df70b09de5bb06a3c60cbf66dfdd5d89240a6",
+      "size": 422832,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-2198432bc0ca2f0c",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/longevity-fine.npz",
+      "sha256": "080025bf2db712cf72a0409847641b6931260f416dfcadc1e23038fe79eaf036",
+      "size": 415224,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7e4681acfedf6b0a",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/longevity-time.npz",
+      "sha256": "64f5b21ff50dd9eb587343f223d27b962e2851dbd60bd5d588b72769cc3b8f99",
+      "size": 408338,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b582d9fe2ef5151a",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+      "size": 17390,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3eeccd1c73ac8bf8",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+      "size": 33432,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-150fb7b2b63c96be",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+      "size": 31518,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d39f9babcb642ab9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-end.json",
+      "sha256": "416400675d6b90d27ddbc0162b40c8ac7f1456d13b504886ad3151f3093ee5e2",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d85fce8df2903b9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-start.json",
+      "sha256": "416400675d6b90d27ddbc0162b40c8ac7f1456d13b504886ad3151f3093ee5e2",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1c68737da8c0aaf8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/request.json",
+      "sha256": "7869e0104fe7f71b445fabb855a4d54a1937fd5804d1251d20627f5304485899",
+      "size": 2372,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5d26b47089e4bf8f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/code.json",
+      "sha256": "0aff690513461940c4d6e677b43879c0368d302728cb779799bc845b4945b1ff",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3219b9326cc4f407",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "provenance/dependencies.lock",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091",
+      "size": 294,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1ee42f15d42867c3",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/environment.json",
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219",
+      "size": 305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19b18d73cfa234f8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/inputs.json",
+      "sha256": "e70e532acda07483a91f3c8e563d6b74d9235c1cfc24b7ccc60285d3806ac3b5",
+      "size": 133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b10676bafb2b87a3",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/local-ticks.figure.json",
+      "sha256": "55e585cb68c41aeb9c7441265735bd14c6c9cf1564d4b1c0d19c170a36725789",
+      "size": 756,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b15ebcc511160d39",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/local-ticks.pdf",
+      "sha256": "6e007d9df427f874156ba517e41348ffce1a4e786316c100e396eb60c6c30d27",
+      "size": 25845,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-25487a8e564f2dde",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/local-ticks.png",
+      "sha256": "046252702c4c9fa3d5ea0a512e5c1c2d1e589d929e7c4c6a333c4bde0ea8afd0",
+      "size": 150396,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ee893208e66e6720",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/local-ticks.svg",
+      "sha256": "ce8cc1355f79c828762fc5768f8c0c13f472ec61c917134cb24be536b7589a8d",
+      "size": 81777,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d4fdb04b18271b4c",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/long-baseline.figure.json",
+      "sha256": "617fcb06866a858a1a676324f3b6fab50ba862a8aaf421f452f36cb89a3ccbef",
+      "size": 771,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8f0bd539bb053454",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/long-baseline.pdf",
+      "sha256": "329a2d345291a5dd8121f213b28f8091f55a3a950f696152a70b1c1c9cdefac1",
+      "size": 204231,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-717e718c2dba43f2",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/long-baseline.png",
+      "sha256": "a394b806e57c68e2683b474e281cd7d723c4b37cd613b2826bce47b458529b54",
+      "size": 197305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1cba58a9a59ff742",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/long-baseline.svg",
+      "sha256": "08bf76121f479fe76c9df118899834f1049e1144449a31a677f54b1f4aba594e",
+      "size": 670795,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f6b0a9108a4e88cc",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/interpretations.json",
+      "sha256": "12e09d89c9ea8c6de8192fbe5367adb5c2f913260b4153d2b401438ceddc0608",
+      "size": 1044,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-84f35ebd9171570e",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/summary.json",
+      "sha256": "93a559a9daf53122ac6d0ee75498bb20a2bd2e7eb57d463491a3b41315b60b32",
+      "size": 2012,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d35b9755f1ef95d1",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/traces.csv",
+      "sha256": "f62a01d9789ad13917af98ce42aecdcc363812408e319099debee3b230a701d6",
+      "size": 4601242,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4a674077cdd7d824",
+      "kind": "report",
+      "media_type": "text/html",
+      "path": "reports/report-0001/report.html",
+      "sha256": "71cf7ff5f5b5803dfdbe72f334693b73bbca80b87a1c3544593e9371ac6d1a82",
+      "size": 1847,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-96574ae459a5971c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/report.json",
+      "sha256": "008f22975c197f94753e8ef367501e285fd768c61d9c29dbc71e51eef4a63466",
+      "size": 1490,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a43e0e8d6c28cbac",
+      "kind": "report",
+      "media_type": "text/markdown",
+      "path": "reports/report-0001/report.md",
+      "sha256": "71631480e91f4b0c2280f67c8c567462a2d780581c81c4031cf989ce72629fb4",
+      "size": 1610,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-99fe6a106a397456",
+      "kind": "report",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/report.pdf",
+      "sha256": "98cfc0a798fc2c5f4f3c3ea0c95500e7ab1fbaca8e0fefdc8cd50ccf3e7de5f3",
+      "size": 228276,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-76b2f4524bba093b",
+      "kind": "config",
+      "media_type": "application/json",
+      "path": "resolved-config.json",
+      "sha256": "e5546ac0549ae5ab0ffbd04901346fd354a49357e62f4f8f811759311f14bf53",
+      "size": 1786,
+      "source_ids": []
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt-0001",
+      "checkpoint": null,
+      "created_at": "2026-09-25T20:49:31.947663Z",
+      "exit_code": 0,
+      "failure": null,
+      "parent_attempt_id": null,
+      "path": "attempts/attempt-0001",
+      "state": "completed",
+      "updated_at": "2026-09-25T20:50:01.503296Z"
+    }
+  ],
+  "checksum_algorithm": "sha256",
+  "checksum_path": "checksums.sha256",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "867220030e89c2b8924f575c818be3393c911e38",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "completeness": {
+    "analysis": true,
+    "attempts_terminal": true,
+    "config": true,
+    "provenance": true,
+    "report": true
+  },
+  "config_hash": "e5546ac0549ae5ab0ffbd04901346fd354a49357e62f4f8f811759311f14bf53",
+  "config_path": "resolved-config.json",
+  "created_at": "2026-09-25T20:49:31.942901Z",
+  "execution_identity": {
+    "dependencies": {
+      "path": "python/requirements-lock.txt",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    "environment": {
+      "accelerator": "none",
+      "architecture": "x86_64",
+      "implementation": "CPython",
+      "numeric_libraries": {
+        "matplotlib": "3.10.8",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    }
+  },
+  "experiment_id": "gross.clock-longevity.v1",
+  "experiment_version": "1.0.0",
+  "known_gaps": [
+    "Flat spherical sector only; no recoil or observer transformations.",
+    "Clock radiation is not isolated by the historical total-energy diagnostic.",
+    "Concentric counterpropagating shells are not opposing planar beams.",
+    "Marker pairing is ideal local field readout; physical trigger hardware not modeled."
+  ],
+  "model_id": "signal-space.ss-ocf-1.flat-clock.v1",
+  "package_version": 1,
+  "parent_run_id": null,
+  "reports": [
+    {
+      "analysis_id": "analysis-0001-22d5199b",
+      "created_at": "2026-09-25T20:54:23.604100Z",
+      "outputs": {
+        "figure_specs": [
+          "figures/local-ticks.figure.json",
+          "figures/long-baseline.figure.json"
+        ],
+        "interpretations": "interpretations.json"
+      },
+      "path": "reports/report-0001",
+      "render_provenance": {
+        "code_identity": {
+          "dirty_patch_hash": "0d38f3f358be88728f7cce4c3bb63b9c1c5a4282955ff098873d499adf2391f0",
+          "revision": "852a0ccec691d8a3bc6ac62bdf40730f848b5b4d",
+          "runtime_version": "0.1.0",
+          "tree_state": "dirty"
+        },
+        "execution_identity": {
+          "dependencies": {
+            "path": "python/requirements-lock.txt",
+            "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+          },
+          "environment": {
+            "accelerator": "none",
+            "architecture": "x86_64",
+            "implementation": "CPython",
+            "numeric_libraries": {
+              "matplotlib": "3.10.8",
+              "numpy": "2.3.5",
+              "scipy": "1.17.0"
+            },
+            "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+            "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+          }
+        }
+      },
+      "report_id": "report-0001",
+      "required_inputs": [
+        "attempts/attempt-0001/raw/execution.json",
+        "analyses/analysis-0001-22d5199b/derived/summary.json",
+        "analyses/analysis-0001-22d5199b/derived/traces.csv",
+        "analyses/analysis-0001-22d5199b/checks.json"
+      ],
+      "schema_version": "research-report-v1"
+    }
+  ],
+  "run_id": "run-c765d2d2ca291dd6",
+  "schema_version": "research-run-manifest-v1",
+  "scientific_classification": "pass",
+  "seed_algorithm": "sha256-stream-v1",
+  "seed_ledger": {
+    "analysis": 1801386903769931355,
+    "initialization": 8432704519683318122,
+    "perturbations": 941042884509205493,
+    "sampling": 13602089346405323548
+  },
+  "technical_state": "analyzed",
+  "updated_at": "2026-09-25T20:54:23.610215Z"
+}

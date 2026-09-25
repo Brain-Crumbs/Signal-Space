@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "as labeled: m^-1, eigenperiods or amplitude"
+    },
+    "y": {
+      "unit": "as labeled: m, dimensionless or cycles"
+    }
+  },
+  "downsampling": "all saved samples within labeled windows; physical snapshots every 2 time units and every fourth grid point",
+  "fit_window": null,
+  "id": "long-baseline",
+  "normalization": "c=hbar=m=1; signed local matched differences; explicit amplitude divisions",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/traces.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "subtract initial normalized quantities; historical energy residual divided by initial mode energy"
+  ]
+}

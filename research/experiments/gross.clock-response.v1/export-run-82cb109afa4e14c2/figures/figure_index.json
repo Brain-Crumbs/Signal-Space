@@ -1,0 +1,108 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "marker-convergence",
+      "role": "evidentiary",
+      "question": "Are corresponding local tick shifts reproducible under mesh, time and box controls?",
+      "reading": "Every base preparation has 6 baseline ticks available for pairing. Largest base tick shift 5.32e-07 cycles; largest predicted tick-shift error 8.42e-09 cycles.",
+      "significance": "The measured response reaches an identifiable local clock record, with numerical sensitivity displayed independently.",
+      "limitation": "Tick ordinals are anchored to the common preparation in one flat frame. Physical emission/reception marker invariance and two-object recoil are still untested. Values below 1e-16 are plotted at that floor.",
+      "source_data": [
+        "results/data/plot-data/markers.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/marker-convergence.figure.json",
+      "transformations": [
+        "linearly interpolate positive-going local zeros; delta_N=-Omega*delta_t/(2*pi); ordinal pairing; direct grid/time/box differences"
+      ],
+      "files": [
+        "figures/static/marker-convergence.png",
+        "figures/static/marker-convergence.svg",
+        "figures/static/marker-convergence.pdf"
+      ]
+    },
+    {
+      "figure_id": "parity-scaling",
+      "role": "evidentiary",
+      "question": "Is the clock difference even in packet sign and quadratic in amplitude?",
+      "reading": "Weak amplitude exponent 1.9993540; normalized ladder difference 0.00728; sign-odd/even norm ratio 0.",
+      "significance": "The amplitude ladder discriminates second-order forcing from a linear response, while sign parity checks the exact action symmetry.",
+      "limitation": "Exact numerical sign parity is strongly enforced by this deterministic action. It alone does not validate the magnitude or operational meaning of the clock response.",
+      "source_data": [
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/parity-scaling.figure.json",
+      "transformations": [
+        "divide matched difference by A squared; compute half-sum and half-difference of +/-A responses; no fitted curves"
+      ],
+      "files": [
+        "figures/static/parity-scaling.png",
+        "figures/static/parity-scaling.svg",
+        "figures/static/parity-scaling.pdf"
+      ]
+    },
+    {
+      "figure_id": "prediction-response",
+      "role": "evidentiary",
+      "question": "Does the precomputed second-order response predict the local clock difference?",
+      "reading": "Base relative L2 prediction error is 0.00194 for one packet and 0.00193 for counterpropagating shells. Prediction files were locked before receiver runs.",
+      "significance": "Agreement tests the derived neutral-to-core-to-clock response coefficient, beyond the symmetry-enforced sign parity.",
+      "limitation": "The Taylor predictor and nonlinear solver share the discrete Hamiltonian; independent Hamiltonian and Taylor checks plus numerical refinements constrain, but do not eliminate, shared implementation error.",
+      "source_data": [
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/prediction-response.figure.json",
+      "transformations": [
+        "matched no-pulse subtraction at the same radius and time; subtract saved A\u00b2 prediction; no fitting"
+      ],
+      "files": [
+        "figures/static/prediction-response.png",
+        "figures/static/prediction-response.svg",
+        "figures/static/prediction-response.pdf"
+      ]
+    },
+    {
+      "figure_id": "upstream-waveform",
+      "role": "evidentiary",
+      "question": "What neutral waveform actually reaches the upstream recording sphere?",
+      "reading": "The saved trace includes both initial passage and later returning radiation. Dividing by signed A overlays the weak single-packet waveforms.",
+      "significance": "Reception is compared against a recorded input field, with compact preparations and sign controls available for audit.",
+      "limitation": "A single scalar waveform does not separate incoming/outgoing characteristics; this run predicts from full registered initial data, not waveform-only inversion.",
+      "source_data": [
+        "results/data/plot-data/traces.csv"
+      ],
+      "spec_file": "results/figure-specs/upstream-waveform.figure.json",
+      "transformations": [
+        "select base grid cases 1-5; divide each waveform by its signed input coefficient"
+      ],
+      "files": [
+        "figures/static/upstream-waveform.png",
+        "figures/static/upstream-waveform.svg",
+        "figures/static/upstream-waveform.pdf"
+      ]
+    },
+    {
+      "figure_id": "packet-history",
+      "role": "evidentiary",
+      "question": "Where do the compact neutral packets travel relative to the clock core?",
+      "reading": "Saved radial neutral-field histories show incoming propagation, central reflection and the separately prepared outgoing control. The upstream sphere is r=14.",
+      "significance": "This locates the forcing in space and time and makes the concentric-shell geometry explicit.",
+      "limitation": "Spherical focusing is physical in this restricted preparation; it is not an opposing-beam or recoil experiment. Color scales are independent.",
+      "source_data": [
+        "results/data/plot-data/spacetime.csv"
+      ],
+      "spec_file": "results/figure-specs/packet-history.figure.json",
+      "transformations": [
+        "reshape saved t,r rows into heatmaps; independent symmetric color scales; approximate core band 0<r<10"
+      ],
+      "files": [
+        "figures/static/packet-history.png",
+        "figures/static/packet-history.svg",
+        "figures/static/packet-history.pdf"
+      ]
+    }
+  ]
+}
