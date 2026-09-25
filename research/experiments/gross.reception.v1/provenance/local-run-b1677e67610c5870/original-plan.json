@@ -1,0 +1,333 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.reception.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "question": "Can upstream characteristic records predict held-out local clock reception, including local interaction markers and pulse overlap?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7-10 and 15.7",
+    "docs/research/gross-test-06-prerequisite-results.md",
+    "docs/research/gross-test-07.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-07.json",
+  "runtime_config_sha256": "6b28640b4221bd9d1522f4123ba0a140732e9c46e990c623cbee32db0f080409",
+  "method": {
+    "action": "SS OCF 1 flat action, U=s-s²+s³, V=0.25-0.4s+0.2s², zeta=0.1. Neutral response extension Z=1+0.2s (M0=m=1); same underlying action, separate registered active-neutral sector.",
+    "units": "c=hbar=m=1; r,t in m^-1; fields in m; frequencies in m; dimensionless tick shift Omega*delta_t/(2*pi).",
+    "domain": "R=80 at h=.1,.05,.025; R=160 at h=.1. Frozen profiles/modes; h=.025 interpolates frozen .05 calibration. Local probe r=.1; upstream R_s=14.",
+    "boundaries": "Regular origin and zero radial fields at finite R. Longevity uses original logged sponge beyond r=60. Response uses no sponge; earliest outer reflection cannot reach core by t=100.",
+    "initial_data": "Frozen omega_Q=.9 and Omega=.41274991, clock peak .001, phases 0 and pi/3. Two compact b=r*a pulses centered 18 and 26, width3, coefficient A=.002,.004,.008 and negative nominal. Both start exterior to the upstream sphere. First reflected pulse meets second inward pulse around r=4. Regular-origin reflection, not an independently prepared inner shell or two distant beams.",
+    "solver": "Unchanged discrete reciprocal Hamiltonian and RK4; dt=.02,.01,.005 plus independent .01 at h=.1. Surface acquisition: first-order neutral field on frozen core, records a,a_t,a_r at R_s through t55, no interior histories. Reconstruct I=(R_s*a_t+a+R_s*a_r)/2=F_prime on t0..16, integrate cubic spline with F(0)=0 and linear endpoint-closure correction, set b(r,0)=F(r-R_s), b_t=F_prime. Vacuum exterior is an explicit approximation. Evolve full time-dependent Taylor response on matched evolving quiet background; no adiabatic approximation, no fit. Save all predictions before ANY nonlinear receiver evolution. Sample local fields/derivatives .1, spatial fields every1.",
+    "tolerances": "Direct difference error budgets; no Richardson extrapolation. Cycle floor1e-11, field floor1e-13. Local markers first rising and last falling |a|=1e-4 in local acquisition t0..100. Local phase theta=unwrap atan2(-chi_dot/Omega,chi). delta_N is pulse minus quiet phase accumulated between those events divided by2pi. Quiet evaluated at the same marker proper times is explicitly counterfactual, no quiet reception claimed. Forecast both marker times and phase before nonlinear evolution; compare standalone interval forecasts. Frozen-core response is also executed. See locked inequalities."
+  },
+  "hypotheses": [
+    {
+      "id": "usable",
+      "prediction": "The frozen calibration survives full refined longevity and predicts an even, amplitude-squared local response within registered error controls."
+    },
+    {
+      "id": "inadequate",
+      "prediction": "Unstable clock, sign-odd response, persistent prediction residual or ambiguous local ticks invalidates the tested approximation."
+    }
+  ],
+  "controls": [
+    {
+      "id": "frozen",
+      "purpose": "Prevent calibration retuning and interior information leakage",
+      "method": "Frozen hashes; predictor consumes only surface records and quiet calibration; prediction locks precede receiver-start events."
+    },
+    {
+      "id": "numerics",
+      "purpose": "Bound grid, integration, boundary and small-record errors",
+      "method": "h=.1,.05,.025; independent dt/2 and R*2; direct differences plus absolute noise floors."
+    },
+    {
+      "id": "pulse-controls",
+      "purpose": "Separate quadratic forcing, overlap and clock phase dependence",
+      "method": "Quiet, each pulse, both pulses, +/-A, A/2,A,2A; pi/3 clock phase and its quiet baseline; executed frozen-core replay."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "frozen-inputs",
+      "observable": "frozen-inputs",
+      "pass_if": "Saved Test 6 profile/eigenmode hashes match exactly; finer h=.025 uses documented natural cubic interpolation of the frozen h=.05 data, no calibration fit.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "prediction-first",
+      "observable": "prediction-first",
+      "pass_if": "Surface, reconstructed inputs, calibration and all prediction hashes verify; all prediction locks precede the first nonlinear receiver-start event.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "record-resolution",
+      "observable": "record-resolution",
+      "pass_if": "For nominal single, second, both and changed-phase interval records on h=.025, |delta_N| > 5*(|finer-fine|+|base-time|+|base-wide|+1e-11 cycles). Otherwise unresolved.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "surface-prediction",
+      "observable": "surface-prediction",
+      "pass_if": "Fine-grid (h=.025) local chi trace prediction relative L2 error <= max(5%, direct mesh+time+box L2 error plus 1e-13 m/sample floor, divided by signal norm), for single, second, both and phase controls.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "marker-prediction",
+      "observable": "marker-prediction",
+      "pass_if": "For each selected local interval, standalone precomputed marker/phase record differs by <= max(5% of actual interval record, its registered absolute error budget). If interval not resolved, unresolved.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "local-markers",
+      "observable": "local-markers",
+      "pass_if": "Every nonquiet case on every grid has a first rising and subsequent last falling |a|=1e-4 local crossing in t=0..100; predicted marker times within 0.1 m^-1 of observed events. Quiet has no neutral markers and is only a matched counterfactual reference.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "sign-even",
+      "observable": "sign-even",
+      "pass_if": "Single and pair sign-odd/even local trace norm ratio <1e-5 on every grid.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "amplitude-square",
+      "observable": "amplitude-square",
+      "pass_if": "A=.002,.004,.008 amplitude-normalized single-pulse trace differences <5%; weak log slope within 0.1 of two on every grid.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "pulse-overlap",
+      "observable": "pulse-overlap",
+      "pass_if": "Both-minus-each-alone chi trace is >5 times direct mesh+time+box+1e-13 m/sample budget and its predicted residual <=max(5%, inverse signal/error ratio); otherwise unresolved.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "frozen-core-control",
+      "observable": "frozen-core-control",
+      "pass_if": "Executed incomplete Taylor replay gives max absolute delta_chi2 and delta_chi_dot2 <1e-15, while full single response RMS >5e-13 m.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "numerical-controls",
+      "observable": "numerical-controls",
+      "pass_if": "Each relative chi response L2 difference (fine/base, time/base, wide/base, finer/fine) <5% in single, second, both and phase controls.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    },
+    {
+      "id": "conservation",
+      "observable": "conservation",
+      "pass_if": "Maximum charge relative error <1e-5 and matched discrete energy residual/initial incident energy <1% for every grid and nonquiet case.",
+      "fail_if": "Resolved finite evidence violates the preregistered inequality.",
+      "unresolved_if": "Required signal or markers missing or below five-error resolution requirement; no scientific promotion.",
+      "uncertainty": "Direct finer/fine + base/time + base/wide differences and the locked absolute noise floors."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "surface-characteristics",
+      "question": "Can the upstream record distinguish incoming drive from returning radiation?",
+      "role": "evidentiary",
+      "observables": [
+        "local fields",
+        "local phase record",
+        "numerical controls"
+      ],
+      "representation": "Question-driven PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "usable": "resolved predicted even quadratic response",
+        "inadequate": "prediction mismatch or unresolved local interval"
+      },
+      "controls": [
+        "frozen",
+        "numerics",
+        "pulse-controls"
+      ],
+      "uncertainty": "Grid/time/box differences; radial restriction; counterfactual quiet reference",
+      "source_data": [
+        "plot-data/surface.csv"
+      ],
+      "transformations": [
+        "Saved samples, matched subtraction, prescribed amplitude normalization and local atan2 phase; no fitted response."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "packet-overlap",
+      "question": "Where do the reflected first pulse and incoming second pulse overlap?",
+      "role": "evidentiary",
+      "observables": [
+        "local fields",
+        "local phase record",
+        "numerical controls"
+      ],
+      "representation": "Question-driven PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "usable": "resolved predicted even quadratic response",
+        "inadequate": "prediction mismatch or unresolved local interval"
+      },
+      "controls": [
+        "frozen",
+        "numerics",
+        "pulse-controls"
+      ],
+      "uncertainty": "Grid/time/box differences; radial restriction; counterfactual quiet reference",
+      "source_data": [
+        "plot-data/spacetime.csv"
+      ],
+      "transformations": [
+        "Saved samples, matched subtraction, prescribed amplitude normalization and local atan2 phase; no fitted response."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "withheld-response",
+      "question": "Does surface-only prediction match the withheld local clock and density response?",
+      "role": "evidentiary",
+      "observables": [
+        "local fields",
+        "local phase record",
+        "numerical controls"
+      ],
+      "representation": "Question-driven PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "usable": "resolved predicted even quadratic response",
+        "inadequate": "prediction mismatch or unresolved local interval"
+      },
+      "controls": [
+        "frozen",
+        "numerics",
+        "pulse-controls"
+      ],
+      "uncertainty": "Grid/time/box differences; radial restriction; counterfactual quiet reference",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Saved samples, matched subtraction, prescribed amplitude normalization and local atan2 phase; no fitted response."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "local-markers",
+      "question": "Do locally triggered intervals carry a resolved predicted clock record?",
+      "role": "evidentiary",
+      "observables": [
+        "local fields",
+        "local phase record",
+        "numerical controls"
+      ],
+      "representation": "Question-driven PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "usable": "resolved predicted even quadratic response",
+        "inadequate": "prediction mismatch or unresolved local interval"
+      },
+      "controls": [
+        "frozen",
+        "numerics",
+        "pulse-controls"
+      ],
+      "uncertainty": "Grid/time/box differences; radial restriction; counterfactual quiet reference",
+      "source_data": [
+        "plot-data/markers.csv",
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Saved samples, matched subtraction, prescribed amplitude normalization and local atan2 phase; no fitted response."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "controls",
+      "question": "Do sign, amplitude, pulse-overlap and clock-phase controls support the response mechanism?",
+      "role": "evidentiary",
+      "observables": [
+        "local fields",
+        "local phase record",
+        "numerical controls"
+      ],
+      "representation": "Question-driven PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "usable": "resolved predicted even quadratic response",
+        "inadequate": "prediction mismatch or unresolved local interval"
+      },
+      "controls": [
+        "frozen",
+        "numerics",
+        "pulse-controls"
+      ],
+      "uncertainty": "Grid/time/box differences; radial restriction; counterfactual quiet reference",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Saved samples, matched subtraction, prescribed amplitude normalization and local atan2 phase; no fitted response."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "error-budget",
+      "question": "Is the local record larger than independent numerical errors?",
+      "role": "evidentiary",
+      "observables": [
+        "local fields",
+        "local phase record",
+        "numerical controls"
+      ],
+      "representation": "Question-driven PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "usable": "resolved predicted even quadratic response",
+        "inadequate": "prediction mismatch or unresolved local interval"
+      },
+      "controls": [
+        "frozen",
+        "numerics",
+        "pulse-controls"
+      ],
+      "uncertainty": "Grid/time/box differences; radial restriction; counterfactual quiet reference",
+      "source_data": [
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Saved samples, matched subtraction, prescribed amplitude normalization and local atan2 phase; no fitted response."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 3600,
+    "max_memory_mb": 1024,
+    "max_output_mb": 250
+  },
+  "prohibited_inferences": [
+    "No emergent spacetime, gravity, protected knots or angular stability claim.",
+    "Central reflection supplies counterpropagating radial shells; no two-object exchange or recoil.",
+    "Quiet marker reference is counterfactual; transformed-coordinate invariance and autonomous detector hardware are not evaluated.",
+    "A failed or unresolved marker gate does not become a pass because a full-history trace matches."
+  ],
+  "locked_sha256": "1bd9fb8ce1db34fbbe0ba2bae4d4ca3ce9455869b9822b050bfd622adbe8f154"
+}

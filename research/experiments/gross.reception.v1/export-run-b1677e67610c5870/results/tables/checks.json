@@ -1,0 +1,266 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "frozen-inputs",
+      "status": "pass",
+      "value": [
+        {
+          "name": "profile-0.900.npz",
+          "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+          "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+        },
+        {
+          "name": "profile-fine.npz",
+          "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+          "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+        },
+        {
+          "name": "profile-wide.npz",
+          "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+          "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+        }
+      ]
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "prediction-first",
+      "status": "pass",
+      "value": {
+        "first_receiver_start": 8,
+        "hashes_valid": true,
+        "lock_event": 7
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "record-resolution",
+      "status": "pass",
+      "value": {
+        "2": {
+          "absolute_error": 1.486084941401075e-10,
+          "prediction_error": 2.719742554987939e-10,
+          "signal": -4.567289260047866e-09,
+          "signal_to_error": 30.73370258191193
+        },
+        "5": {
+          "absolute_error": 2.490356957653046e-10,
+          "prediction_error": 1.2714054872063354e-09,
+          "signal": 4.008876727588823e-08,
+          "signal_to_error": 160.97598841279586
+        },
+        "6": {
+          "absolute_error": 6.646846391386829e-10,
+          "prediction_error": 1.0918388581815043e-09,
+          "signal": -6.850352311098256e-08,
+          "signal_to_error": 103.06169133042003
+        },
+        "9": {
+          "absolute_error": 1.3862789549356587e-10,
+          "prediction_error": 2.5036573443632104e-10,
+          "signal": -1.3986456870653478e-07,
+          "signal_to_error": 1008.9208106966199
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "surface-prediction",
+      "status": "pass",
+      "value": {
+        "relative_errors": [
+          0.0,
+          0.0007349709625623533,
+          0.0019340553875106577,
+          0.007605270012297065,
+          0.0019340553875106577,
+          0.004362065409256722,
+          0.0037505855683061763,
+          0.0037505855683061763,
+          0.0,
+          0.0010763704419403635
+        ],
+        "trace_error_budget": {
+          "2": 0.005393067947279396,
+          "5": 0.008573612628146874,
+          "6": 0.008613245237937212,
+          "9": 0.005404900868533435
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "marker-prediction",
+      "status": "fail",
+      "value": {
+        "2": {
+          "absolute_error": 1.486084941401075e-10,
+          "prediction_error": 2.719742554987939e-10,
+          "signal": -4.567289260047866e-09,
+          "signal_to_error": 30.73370258191193
+        },
+        "5": {
+          "absolute_error": 2.490356957653046e-10,
+          "prediction_error": 1.2714054872063354e-09,
+          "signal": 4.008876727588823e-08,
+          "signal_to_error": 160.97598841279586
+        },
+        "6": {
+          "absolute_error": 6.646846391386829e-10,
+          "prediction_error": 1.0918388581815043e-09,
+          "signal": -6.850352311098256e-08,
+          "signal_to_error": 103.06169133042003
+        },
+        "9": {
+          "absolute_error": 1.3862789549356587e-10,
+          "prediction_error": 2.5036573443632104e-10,
+          "signal": -1.3986456870653478e-07,
+          "signal_to_error": 1008.9208106966199
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "local-markers",
+      "status": "fail",
+      "value": {
+        "base": false,
+        "fine": true,
+        "finer": true,
+        "time": false,
+        "wide": false
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "sign-even",
+      "status": "pass",
+      "value": {
+        "base": [
+          0.0,
+          0.0
+        ],
+        "fine": [
+          0.0,
+          0.0
+        ],
+        "finer": [
+          0.0,
+          0.0
+        ],
+        "time": [
+          0.0,
+          0.0
+        ],
+        "wide": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "amplitude-square",
+      "status": "pass",
+      "value": {
+        "base": [
+          1.999353988418108,
+          0.007283583721572633
+        ],
+        "fine": [
+          1.9993665061314154,
+          0.007188280740004863
+        ],
+        "finer": [
+          1.999369686844112,
+          0.007164228110191211
+        ],
+        "time": [
+          1.9993539896272523,
+          0.007283580871277101
+        ],
+        "wide": [
+          1.999353988692182,
+          0.007283584497258409
+        ]
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "pulse-overlap",
+      "status": "pass",
+      "value": {
+        "prediction_relative": 0.0018566712826438903,
+        "signal_to_error": 101.47065498973922
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "frozen-core-control",
+      "status": "pass",
+      "value": {
+        "full_signal_rms": 1.3158788887887783e-09,
+        "incomplete_prediction_max": 0.0
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "numerical-controls",
+      "status": "pass",
+      "value": {
+        "2": {
+          "fine": 0.021492766529340162,
+          "finer_vs_fine": 0.005325396664411474,
+          "time": 4.82378581657674e-07,
+          "wide": 2.6407411656177308e-08
+        },
+        "5": {
+          "fine": 0.034433777478546077,
+          "finer_vs_fine": 0.008545905182782176,
+          "time": 6.833966604514118e-07,
+          "wide": 1.0826677148864328e-08
+        },
+        "6": {
+          "fine": 0.03469682653527679,
+          "finer_vs_fine": 0.008600177690336093,
+          "time": 6.705081239599394e-07,
+          "wide": 8.290612032064535e-09
+        },
+        "9": {
+          "fine": 0.021537030281566314,
+          "finer_vs_fine": 0.005354560452036059,
+          "time": 3.683511377697636e-07,
+          "wide": 1.1942801505347173e-08
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "conservation",
+      "status": "pass",
+      "value": {
+        "base": [
+          2.36205988102256e-09,
+          7.80588439194517e-08
+        ],
+        "fine": [
+          7.381273370299368e-11,
+          2.60778753920113e-09
+        ],
+        "finer": [
+          2.3072654897760003e-12,
+          1.6296450306765042e-10
+        ],
+        "time": [
+          7.381295574759861e-11,
+          2.772284846721474e-09
+        ],
+        "wide": [
+          2.36206032511177e-09,
+          7.798070354171662e-08
+        ]
+      }
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

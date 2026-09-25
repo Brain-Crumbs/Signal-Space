@@ -1,0 +1,8 @@
+{
+  "status": "reviewed",
+  "results_pages": 8,
+  "setup_pages": 6,
+  "figures": 6,
+  "findings": "All final pages rendered and visually inspected; no clipping or overlap. Radial amplitude and signed-log contraction expose packet transport; local phase residuals and numerical error budgets visible.",
+  "classification_unchanged": "fail"
+}

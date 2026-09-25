@@ -1,0 +1,408 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 test:browser
+> playwright test
+
+[WebServer] (node:40) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:53) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 15 tests using 4 workers
+
+(node:95) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:88) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:89) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 [chromium] › e2e/workspace.spec.ts:552:1 › research runtime disconnect is explicit and retryable (1ms)
+  ✘   3 [chromium] › e2e/workspace.spec.ts:524:1 › interrupted run stays visible and resumes as a linked attempt on a narrow screen (1ms)
+  ✘   4 [chromium] › e2e/workspace.spec.ts:463:1 › research workspace completes prepare, audit, analysis and report journey (2ms)
+(node:140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:157) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 [chromium] › e2e/workspace.spec.ts:572:1 › research runtime explains HTML responses without exposing a JSON parse error (2ms)
+  ✘   6 [chromium] › e2e/workspace.spec.ts:599:1 › event streams report a missing first sequence (1ms)
+  ✘   7 [chromium] › e2e/workspace.spec.ts:608:1 › research collection is searchable and exposes source evidence (1ms)
+(node:181) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:193) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:201) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 [chromium] › e2e/workspace.spec.ts:643:1 › research collection renders inline and display mathematics (3ms)
+  ✘   9 [chromium] › e2e/workspace.spec.ts:661:1 › production worker renders the same initial snapshot as the shared engine (2ms)
+  ✘  10 [chromium] › e2e/workspace.spec.ts:697:1 › worker startup failure is visible and allows retry (3ms)
+(node:243) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:250) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:259) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 [chromium] › e2e/workspace.spec.ts:708:1 › production worker integrates the same causal history as Node (1ms)
+  ✘  12 [chromium] › e2e/workspace.spec.ts:792:1 › production worker runs and resumes seeded packets using the shared engine (3ms)
+  ✘  13 [chromium] › e2e/workspace.spec.ts:898:1 › preparation retains nested solver settings and angular-sector arrays (1ms)
+(node:275) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:287) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 [chromium] › e2e/workspace.spec.ts:946:1 › report preview does not require synthetic recurrence files (1ms)
+  ✘  15 [chromium] › e2e/workspace.spec.ts:969:1 › E01 research preset is explicit and loading it never launches a run (1ms)
+  ✘   1 [chromium] › e2e/research-visuals.spec.ts:70:1 › real E01 reports support linked selection, progress, exports and compatible overlays (0ms)
+
+
+  1) [chromium] › e2e/research-visuals.spec.ts:70:1 › real E01 reports support linked selection, progress, exports and compatible overlays 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/research-visuals-real-E01--35be2-rts-and-compatible-overlays-chromium/error-context.md
+
+    Error Context: test-results/research-visuals-real-E01--35be2-rts-and-compatible-overlays-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/research-visuals-real-E01--35be2-rts-and-compatible-overlays-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/research-visuals-real-E01--35be2-rts-and-compatible-overlays-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › e2e/workspace.spec.ts:463:1 › research workspace completes prepare, audit, analysis and report journey 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-research-workspa-35775-analysis-and-report-journey-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-research-workspa-35775-analysis-and-report-journey-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-research-workspa-35775-analysis-and-report-journey-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › e2e/workspace.spec.ts:524:1 › interrupted run stays visible and resumes as a linked attempt on a narrow screen 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-interrupted-run--5fee6--attempt-on-a-narrow-screen-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-interrupted-run--5fee6--attempt-on-a-narrow-screen-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-interrupted-run--5fee6--attempt-on-a-narrow-screen-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › e2e/workspace.spec.ts:552:1 › research runtime disconnect is explicit and retryable 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-research-runtime-377e2-t-is-explicit-and-retryable-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-research-runtime-377e2-t-is-explicit-and-retryable-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-research-runtime-377e2-t-is-explicit-and-retryable-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › e2e/workspace.spec.ts:572:1 › research runtime explains HTML responses without exposing a JSON parse error 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-research-runtime-cbc31-exposing-a-JSON-parse-error-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-research-runtime-cbc31-exposing-a-JSON-parse-error-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-research-runtime-cbc31-exposing-a-JSON-parse-error-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › e2e/workspace.spec.ts:599:1 › event streams report a missing first sequence ──────
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-event-streams-report-a-missing-first-sequence-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-event-streams-report-a-missing-first-sequence-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-event-streams-report-a-missing-first-sequence-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › e2e/workspace.spec.ts:608:1 › research collection is searchable and exposes source evidence 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-research-collect-c89ee-and-exposes-source-evidence-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-research-collect-c89ee-and-exposes-source-evidence-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-research-collect-c89ee-and-exposes-source-evidence-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › e2e/workspace.spec.ts:643:1 › research collection renders inline and display mathematics 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-research-collect-47c9b-ine-and-display-mathematics-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-research-collect-47c9b-ine-and-display-mathematics-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-research-collect-47c9b-ine-and-display-mathematics-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium] › e2e/workspace.spec.ts:661:1 › production worker renders the same initial snapshot as the shared engine 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-production-worke-63ac4-apshot-as-the-shared-engine-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-production-worke-63ac4-apshot-as-the-shared-engine-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-production-worke-63ac4-apshot-as-the-shared-engine-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [chromium] › e2e/workspace.spec.ts:697:1 › worker startup failure is visible and allows retry 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-worker-startup-failure-is-visible-and-allows-retry-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-worker-startup-failure-is-visible-and-allows-retry-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-worker-startup-failure-is-visible-and-allows-retry-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [chromium] › e2e/workspace.spec.ts:708:1 › production worker integrates the same causal history as Node 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-production-worke-03a42-same-causal-history-as-Node-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-production-worke-03a42-same-causal-history-as-Node-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-production-worke-03a42-same-causal-history-as-Node-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [chromium] › e2e/workspace.spec.ts:792:1 › production worker runs and resumes seeded packets using the shared engine 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-production-worke-bc02c-ets-using-the-shared-engine-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-production-worke-bc02c-ets-using-the-shared-engine-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-production-worke-bc02c-ets-using-the-shared-engine-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [chromium] › e2e/workspace.spec.ts:898:1 › preparation retains nested solver settings and angular-sector arrays 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-preparation-reta-2940c-s-and-angular-sector-arrays-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-preparation-reta-2940c-s-and-angular-sector-arrays-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-preparation-reta-2940c-s-and-angular-sector-arrays-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [chromium] › e2e/workspace.spec.ts:946:1 › report preview does not require synthetic recurrence files 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-report-preview-d-c6037--synthetic-recurrence-files-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-report-preview-d-c6037--synthetic-recurrence-files-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-report-preview-d-c6037--synthetic-recurrence-files-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) [chromium] › e2e/workspace.spec.ts:969:1 › E01 research preset is explicit and loading it never launches a run 
+
+    Error: browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/workspace-E01-research-pre-a281c-ing-it-never-launches-a-run-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/workspace-E01-research-pre-a281c-ing-it-never-launches-a-run-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/workspace-E01-research-pre-a281c-ing-it-never-launches-a-run-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15 failed
+    [chromium] › e2e/research-visuals.spec.ts:70:1 › real E01 reports support linked selection, progress, exports and compatible overlays 
+    [chromium] › e2e/workspace.spec.ts:463:1 › research workspace completes prepare, audit, analysis and report journey 
+    [chromium] › e2e/workspace.spec.ts:524:1 › interrupted run stays visible and resumes as a linked attempt on a narrow screen 
+    [chromium] › e2e/workspace.spec.ts:552:1 › research runtime disconnect is explicit and retryable 
+    [chromium] › e2e/workspace.spec.ts:572:1 › research runtime explains HTML responses without exposing a JSON parse error 
+    [chromium] › e2e/workspace.spec.ts:599:1 › event streams report a missing first sequence ───────
+    [chromium] › e2e/workspace.spec.ts:608:1 › research collection is searchable and exposes source evidence 
+    [chromium] › e2e/workspace.spec.ts:643:1 › research collection renders inline and display mathematics 
+    [chromium] › e2e/workspace.spec.ts:661:1 › production worker renders the same initial snapshot as the shared engine 
+    [chromium] › e2e/workspace.spec.ts:697:1 › worker startup failure is visible and allows retry ──
+    [chromium] › e2e/workspace.spec.ts:708:1 › production worker integrates the same causal history as Node 
+    [chromium] › e2e/workspace.spec.ts:792:1 › production worker runs and resumes seeded packets using the shared engine 
+    [chromium] › e2e/workspace.spec.ts:898:1 › preparation retains nested solver settings and angular-sector arrays 
+    [chromium] › e2e/workspace.spec.ts:946:1 › report preview does not require synthetic recurrence files 
+    [chromium] › e2e/workspace.spec.ts:969:1 › E01 research preset is explicit and loading it never launches a run 

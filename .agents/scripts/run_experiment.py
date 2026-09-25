@@ -20,6 +20,7 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-02": "docs/research/plans/gross-test-02.json",
            "gross-test-03": "docs/research/plans/gross-test-03.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
+RECIPES["gross-test-07"] = "docs/research/plans/gross-test-07.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 for kind in ("longevity", "response"):
@@ -32,6 +33,17 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.reception.v1":
+        lines = ["# Test 7: surface-only reception assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "", "Scientific interpretation and visual review remain pending.", "",
+                 "| Check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "Surface-only inversion and time-dependent Taylor predictions precede the held-out nonlinear receiver.",
+                  "Local threshold markers define an interval; the quiet history at those times is a counterfactual reference.",
+                  "Radial origin reflection supplies opposite propagation directions. No recoil or observer invariance is claimed.",
+                  "Next: resolve any failed interval or numerical gate before Test 8. If accepted, register two surviving objects and conservation of exchanged momentum."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.router-propagation.v1":
         return router_assessment(manifest, analysis, checks)
     if manifest.get("experiment_id") == "gross.full-spectrum.v1":

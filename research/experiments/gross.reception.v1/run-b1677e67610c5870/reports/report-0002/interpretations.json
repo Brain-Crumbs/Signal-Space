@@ -1,0 +1,38 @@
+{
+  "controls": {
+    "limitation": "Sign symmetry is enforced by the action and is not independent evidence for the response coefficient.",
+    "question": "Do sign, amplitude, pulse-overlap and clock-phase controls support the response mechanism?",
+    "reading": "Weak amplitude exponent 1.999370; overlap check pass; frozen-core control pass.",
+    "significance": "Individual pulses isolate the interaction term; clock phase changes test a held-out response configuration."
+  },
+  "error-budget": {
+    "limitation": "The budget is deterministic, not a statistical confidence interval. The finest profile is interpolated, not independently re-solved.",
+    "question": "Is the local record larger than independent numerical errors?",
+    "reading": "Bars compare absolute interval magnitude, direct numerical error and prediction residual. Resolution requires signal greater than five error budgets.",
+    "significance": "A good-looking trace cannot substitute for a resolved local interval."
+  },
+  "local-markers": {
+    "limitation": "The quiet history is evaluated at counterfactual event times. Last-fall selection is retrospective in a finite window.",
+    "question": "Do locally triggered intervals carry a resolved predicted clock record?",
+    "reading": "Local marker check: fail; resolution: pass; interval prediction: fail.",
+    "significance": "The interval uses locally recorded neutral events and local clock quadrature, rather than coordinate arrival alone."
+  },
+  "packet-overlap": {
+    "limitation": "The left panel removes the 1/r focusing factor. The right uses symmetric log color; this is not two planar beams.",
+    "question": "Where do the reflected first pulse and incoming second pulse overlap?",
+    "reading": "Both packets begin outside r=14. Central reflection sends the first outward through the second incoming packet.",
+    "significance": "This supplies opposite radial directions and allows both-minus-each-alone subtraction."
+  },
+  "surface-characteristics": {
+    "limitation": "This is a linear acquisition on a frozen core. Exterior vacuum inversion has mesh and tail errors.",
+    "question": "Can the upstream record distinguish incoming drive from returning radiation?",
+    "reading": "Incoming and outgoing characteristics are built from a, a_t and a_r. Only t=0..16 is inverted.",
+    "significance": "The predictor no longer consumes the prescribed interior neutral history."
+  },
+  "withheld-response": {
+    "limitation": "The Taylor and full evolutions share the discrete Hamiltonian. Agreement is bounded by independent numerical controls.",
+    "question": "Does surface-only prediction match the withheld local clock and density response?",
+    "reading": "Finest trace errors: single 0.193%; both 0.375%.",
+    "significance": "This tests the neutral-to-core-to-clock coefficient without fitting the withheld evolution."
+  }
+}

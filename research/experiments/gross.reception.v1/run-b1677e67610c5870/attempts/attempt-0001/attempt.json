@@ -1,0 +1,12 @@
+{
+  "attempt_id": "attempt-0001",
+  "checkpoint": null,
+  "created_at": "2026-09-25T21:40:00.875009Z",
+  "exit_code": 0,
+  "failure": null,
+  "parent_attempt_id": null,
+  "path": "attempts/attempt-0001",
+  "schema_version": "research-attempt-v1",
+  "state": "completed",
+  "updated_at": "2026-09-25T21:49:47.114988Z"
+}

@@ -1,0 +1,435 @@
+{
+  "cases": [
+    {
+      "amplitude": 0,
+      "baseline": 0,
+      "name": "quiet",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.002,
+      "baseline": 0,
+      "name": "half",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 0,
+      "name": "single",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.008,
+      "baseline": 0,
+      "name": "double",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": -0.004,
+      "baseline": 0,
+      "name": "negative",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 0,
+      "name": "second",
+      "phase": 0.0,
+      "prediction": 1,
+      "weights": [
+        0,
+        1
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 0,
+      "name": "both",
+      "phase": 0.0,
+      "prediction": 2,
+      "weights": [
+        1,
+        1
+      ]
+    },
+    {
+      "amplitude": -0.004,
+      "baseline": 0,
+      "name": "both-negative",
+      "phase": 0.0,
+      "prediction": 2,
+      "weights": [
+        1,
+        1
+      ]
+    },
+    {
+      "amplitude": 0,
+      "baseline": 8,
+      "name": "phase-quiet",
+      "phase": 1.0471975511965976,
+      "prediction": 3,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 8,
+      "name": "phase",
+      "phase": 1.0471975511965976,
+      "prediction": 3,
+      "weights": [
+        1,
+        0
+      ]
+    }
+  ],
+  "checks": {
+    "amplitude-square": "pass",
+    "conservation": "pass",
+    "frozen-core-control": "pass",
+    "frozen-inputs": "pass",
+    "local-markers": "fail",
+    "marker-prediction": "fail",
+    "numerical-controls": "pass",
+    "prediction-first": "pass",
+    "pulse-overlap": "pass",
+    "record-resolution": "pass",
+    "sign-even": "pass",
+    "surface-prediction": "pass"
+  },
+  "interaction_signal_to_error": 101.47065498973922,
+  "marker_definition": "first rising and last falling |a|=1e-4 at r=0.1 in t=0..100; matched quiet phase sampled at these counterfactual local times",
+  "metrics": {
+    "base": {
+      "amplitude_normalized_difference": 0.007283583721572633,
+      "charge_error": 2.36205988102256e-09,
+      "interaction_prediction_relative": 0.024724527196875748,
+      "interaction_rms": 1.1287251635635547e-09,
+      "interval_cycles": [
+        null,
+        4.090739353985975e-09,
+        -3.904347326789713e-09,
+        7.710729611035728e-08,
+        -3.904347326789713e-09,
+        4.3140533524270244e-08,
+        -6.475872992371329e-08,
+        -6.475872992371329e-08,
+        null,
+        -1.4029055455276427e-07
+      ],
+      "markers_missing": false,
+      "markers_valid": false,
+      "matched_energy_residual_over_incident": 7.80588439194517e-08,
+      "pair_sign_odd_fraction": 0.0,
+      "predicted_interval_cycles": [
+        null,
+        3.6516462887372696e-09,
+        -4.0579835337898776e-09,
+        7.243655602566031e-08,
+        -4.0579835337898776e-09,
+        3.411312110182994e-08,
+        -6.65968339698382e-08,
+        -6.65968339698382e-08,
+        null,
+        -1.4100691790850126e-07
+      ],
+      "sign_odd_fraction": 0.0,
+      "single_signal_rms": 1.3050761315095034e-09,
+      "trace_prediction_relative": [
+        0.0,
+        0.0069328909894186925,
+        0.007271068743964739,
+        0.010714165765209678,
+        0.007271068743964739,
+        0.02313230935069514,
+        0.022506392065172826,
+        0.022506392065172826,
+        0.0,
+        0.007947756309489571
+      ],
+      "weak_slope": 1.999353988418108
+    },
+    "fine": {
+      "amplitude_normalized_difference": 0.007188280740004863,
+      "charge_error": 7.381273370299368e-11,
+      "interaction_prediction_relative": 0.006270503007187324,
+      "interaction_rms": 1.1362209548431484e-09,
+      "interval_cycles": [
+        null,
+        4.328021557252691e-09,
+        -4.4402651774238635e-09,
+        7.308912546447755e-08,
+        -4.4402651774238635e-09,
+        4.029939377612517e-08,
+        -6.785230248001914e-08,
+        -6.785230248001914e-08,
+        null,
+        -1.3993471987300666e-07
+      ],
+      "markers_missing": false,
+      "markers_valid": true,
+      "matched_energy_residual_over_incident": 2.60778753920113e-09,
+      "pair_sign_odd_fraction": 0.0,
+      "predicted_interval_cycles": [
+        null,
+        4.250345022634443e-09,
+        -4.679049843412791e-09,
+        6.932010255739387e-08,
+        -4.679049843412791e-09,
+        3.9089534063431675e-08,
+        -6.863792010180858e-08,
+        -6.863792010180858e-08,
+        null,
+        -1.40229278684275e-07
+      ],
+      "sign_odd_fraction": 0.0,
+      "single_signal_rms": 1.3136974941087535e-09,
+      "trace_prediction_relative": [
+        0.0,
+        0.001899576648000931,
+        0.0026645934184179815,
+        0.007914990769464522,
+        0.0026645934184179815,
+        0.007247519490448428,
+        0.0066890608643346335,
+        0.0066890608643346335,
+        0.0,
+        0.0022758304456552
+      ],
+      "weak_slope": 1.9993665061314154
+    },
+    "finer": {
+      "amplitude_normalized_difference": 0.007164228110191211,
+      "charge_error": 2.3072654897760003e-12,
+      "interaction_prediction_relative": 0.0018566712826438903,
+      "interaction_rms": 1.1381366830033547e-09,
+      "interval_cycles": [
+        null,
+        4.350585926241552e-09,
+        -4.567289260047866e-09,
+        7.228179574571147e-08,
+        -4.567289260047866e-09,
+        4.008876727588823e-08,
+        -6.850352311098256e-08,
+        -6.850352311098256e-08,
+        null,
+        -1.3986456870653478e-07
+      ],
+      "markers_missing": false,
+      "markers_valid": true,
+      "matched_energy_residual_over_incident": 1.6296450306765042e-10,
+      "pair_sign_odd_fraction": 0.0,
+      "predicted_interval_cycles": [
+        null,
+        4.277378499267883e-09,
+        -4.83926351554666e-09,
+        6.831743240677162e-08,
+        -4.83926351554666e-09,
+        3.8817361788681895e-08,
+        -6.959536196916407e-08,
+        -6.959536196916407e-08,
+        null,
+        -1.401149344409711e-07
+      ],
+      "sign_odd_fraction": 0.0,
+      "single_signal_rms": 1.3158788887887783e-09,
+      "trace_prediction_relative": [
+        0.0,
+        0.0007349709625623533,
+        0.0019340553875106577,
+        0.007605270012297065,
+        0.0019340553875106577,
+        0.004362065409256722,
+        0.0037505855683061763,
+        0.0037505855683061763,
+        0.0,
+        0.0010763704419403635
+      ],
+      "weak_slope": 1.999369686844112
+    },
+    "time": {
+      "amplitude_normalized_difference": 0.007283580871277101,
+      "charge_error": 7.381295574759861e-11,
+      "interaction_prediction_relative": 0.024724200597975345,
+      "interaction_rms": 1.1287253803006892e-09,
+      "interval_cycles": [
+        null,
+        4.101672694838877e-09,
+        -3.915900948772291e-09,
+        7.712858185846911e-08,
+        -3.915900948772291e-09,
+        4.31689367439741e-08,
+        -6.475528868079298e-08,
+        -6.475528868079298e-08,
+        null,
+        -1.4034890094163005e-07
+      ],
+      "markers_missing": false,
+      "markers_valid": false,
+      "matched_energy_residual_over_incident": 2.772284846721474e-09,
+      "pair_sign_odd_fraction": 0.0,
+      "predicted_interval_cycles": [
+        null,
+        3.6872066951184047e-09,
+        -4.056258353651916e-09,
+        7.24567868003759e-08,
+        -4.056258353651916e-09,
+        3.3758754706780304e-08,
+        -6.666176708601553e-08,
+        -6.666176708601553e-08,
+        null,
+        -1.4099831860472188e-07
+      ],
+      "sign_odd_fraction": 0.0,
+      "single_signal_rms": 1.3050764186309236e-09,
+      "trace_prediction_relative": [
+        0.0,
+        0.006932830263862912,
+        0.007271009520562195,
+        0.010714122517777891,
+        0.007271009520562195,
+        0.023132086974279927,
+        0.022506163299269397,
+        0.022506163299269397,
+        0.0,
+        0.007947670265057279
+      ],
+      "weak_slope": 1.9993539896272523
+    },
+    "wide": {
+      "amplitude_normalized_difference": 0.007283584497258409,
+      "charge_error": 2.36206032511177e-09,
+      "interaction_prediction_relative": 0.02472452781074604,
+      "interaction_rms": 1.128725163065122e-09,
+      "interval_cycles": [
+        null,
+        4.09100870503734e-09,
+        -3.904378116323239e-09,
+        7.710721548519434e-08,
+        -3.904378116323239e-09,
+        4.3140539500094755e-08,
+        -6.475875268896824e-08,
+        -6.475875268896824e-08,
+        null,
+        -1.4029042421260836e-07
+      ],
+      "markers_missing": false,
+      "markers_valid": false,
+      "matched_energy_residual_over_incident": 7.798070354171662e-08,
+      "pair_sign_odd_fraction": 0.0,
+      "predicted_interval_cycles": [
+        null,
+        3.6516462888199364e-09,
+        -4.057983533836861e-09,
+        7.243655602602431e-08,
+        -4.057983533836861e-09,
+        3.411312110379535e-08,
+        -6.659683397024969e-08,
+        -6.659683397024969e-08,
+        null,
+        -1.4100691790905183e-07
+      ],
+      "sign_odd_fraction": 0.0,
+      "single_signal_rms": 1.3050761316883304e-09,
+      "trace_prediction_relative": [
+        0.0,
+        0.006932889100413637,
+        0.007271068543577137,
+        0.010714165660171755,
+        0.007271068543577137,
+        0.02313230928686932,
+        0.022506392060614607,
+        0.022506392060614607,
+        0.0,
+        0.007947756401742138
+      ],
+      "weak_slope": 1.999353988692182
+    }
+  },
+  "numerical_controls": {
+    "2": {
+      "fine": 0.021492766529340162,
+      "finer_vs_fine": 0.005325396664411474,
+      "time": 4.82378581657674e-07,
+      "wide": 2.6407411656177308e-08
+    },
+    "5": {
+      "fine": 0.034433777478546077,
+      "finer_vs_fine": 0.008545905182782176,
+      "time": 6.833966604514118e-07,
+      "wide": 1.0826677148864328e-08
+    },
+    "6": {
+      "fine": 0.03469682653527679,
+      "finer_vs_fine": 0.008600177690336093,
+      "time": 6.705081239599394e-07,
+      "wide": 8.290612032064535e-09
+    },
+    "9": {
+      "fine": 0.021537030281566314,
+      "finer_vs_fine": 0.005354560452036059,
+      "time": 3.683511377697636e-07,
+      "wide": 1.1942801505347173e-08
+    }
+  },
+  "record_error_budgets": {
+    "2": {
+      "absolute_error": 1.486084941401075e-10,
+      "prediction_error": 2.719742554987939e-10,
+      "signal": -4.567289260047866e-09,
+      "signal_to_error": 30.73370258191193
+    },
+    "5": {
+      "absolute_error": 2.490356957653046e-10,
+      "prediction_error": 1.2714054872063354e-09,
+      "signal": 4.008876727588823e-08,
+      "signal_to_error": 160.97598841279586
+    },
+    "6": {
+      "absolute_error": 6.646846391386829e-10,
+      "prediction_error": 1.0918388581815043e-09,
+      "signal": -6.850352311098256e-08,
+      "signal_to_error": 103.06169133042003
+    },
+    "9": {
+      "absolute_error": 1.3862789549356587e-10,
+      "prediction_error": 2.5036573443632104e-10,
+      "signal": -1.3986456870653478e-07,
+      "signal_to_error": 1008.9208106966199
+    }
+  },
+  "trace_error_budgets": {
+    "2": 0.005393067947279396,
+    "5": 0.008573612628146874,
+    "6": 0.008613245237937212,
+    "9": 0.005404900868533435
+  }
+}

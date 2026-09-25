@@ -1,0 +1,61 @@
+{
+  "status": "post-hoc diagnostic; never used to change locked classification",
+  "rows": [
+    {
+      "case": "single",
+      "actual": -4.567289260047866e-09,
+      "standalone_prediction": -4.83926351554666e-09,
+      "diagnostic_prediction_at_actual_events": -4.842387366354053e-09,
+      "response_component": 2.750981063061866e-10,
+      "marker_component": -3.123850807392666e-12,
+      "relative_error": 0.059548287838450495
+    },
+    {
+      "case": "second",
+      "actual": 4.008876727588823e-08,
+      "standalone_prediction": 3.8817361788681895e-08,
+      "diagnostic_prediction_at_actual_events": 3.885389901121182e-08,
+      "response_component": 1.2348682646764102e-09,
+      "marker_component": 3.653722252992527e-11,
+      "relative_error": 0.03171475636695455
+    },
+    {
+      "case": "both",
+      "actual": -6.850352311098256e-08,
+      "standalone_prediction": -6.959536196916407e-08,
+      "diagnostic_prediction_at_actual_events": -6.95864015055725e-08,
+      "response_component": 1.0828783945899325e-09,
+      "marker_component": 8.960463591571815e-12,
+      "relative_error": 0.01593843365417303
+    },
+    {
+      "case": "phase",
+      "actual": -1.3986456870653478e-07,
+      "standalone_prediction": -1.401149344409711e-07,
+      "diagnostic_prediction_at_actual_events": -1.4013128736123145e-07,
+      "response_component": 2.667186546966675e-10,
+      "marker_component": -1.6352920260346444e-11,
+      "relative_error": 0.0017900583167824362
+    }
+  ],
+  "fixed_nominal_marker_amplitude_diagnostic": [
+    {
+      "amplitude": 0.002,
+      "error_at_fixed_nominal_events": 1.4741488043038122e-11,
+      "error_over_A2": 3.6853720107595304e-06,
+      "error_over_A4": 0.9213430026898825
+    },
+    {
+      "amplitude": 0.004,
+      "error_at_fixed_nominal_events": 2.7509810630618627e-10,
+      "error_over_A2": 1.7193631644136643e-05,
+      "error_over_A4": 1.0746019777585398
+    },
+    {
+      "amplitude": 0.008,
+      "error_at_fixed_nominal_events": 4.561905983751736e-09,
+      "error_over_A2": 7.127978099612088e-05,
+      "error_over_A4": 1.1137465780643885
+    }
+  ]
+}
