@@ -24,6 +24,10 @@ for path in paths:
             continue
         if "\\operatorname" in line:
             problems.append((path, number, "use a supported math command such as \\mathrm"))
+        if "{}_" in line:
+            problems.append((path, number, "remove empty groups before subscripts in inline math"))
+        if "^*" in line:
+            problems.append((path, number, "write complex conjugation without a Markdown emphasis marker"))
         if any(mark in line for mark in ("\\(", "\\)", "\\[", "\\]")):
             problems.append((path, number, "use $...$ or standalone $$ lines"))
         if "$$" in line and line.strip() != "$$":
