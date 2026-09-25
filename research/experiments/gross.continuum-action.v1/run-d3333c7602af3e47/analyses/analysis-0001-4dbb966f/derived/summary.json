@@ -1,0 +1,18 @@
+{
+  "directions": 20,
+  "gravity_scope": "flat linearized harmonic gauge TT symbol and constraints; nonlinear Einstein evolution/constraints not evaluated",
+  "gravity_symbol_constraint_residual": 3.430452712773149e-16,
+  "max_equation_residual": 4.88386164074601e-16,
+  "max_hessian_residual": 7.43048673107928e-16,
+  "max_operator_metric_residual": 8.881784197001252e-16,
+  "max_root_residual": 1.7663431662366935e-15,
+  "min_valid_field_kinetic_eigenvalue": 1.0,
+  "negative_z_control_eigenvalue": -0.5,
+  "orientation_control_reference_error": 1.1102230246251565e-16,
+  "orientation_control_space_coefficient": 0.9999999999999999,
+  "orientation_control_speed": 0.934946990008457,
+  "orientation_control_time_coefficient": 1.1440000000000001,
+  "physical_scope": "common characteristic is chosen in SS OCF 1; local algebra is implementation evidence, not emergence",
+  "samples": 200,
+  "sectors": 6
+}

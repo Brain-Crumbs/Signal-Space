@@ -1,0 +1,69 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "characteristic-surfaces",
+      "role": "evidentiary",
+      "question": "Do all six matter sectors share one coframe null cone in shifted coordinates?",
+      "reading": "The six saved roots coincide across 20 directions on 200 coframes; maximum null-polynomial/root residual 1.77e-15. Coordinate drift differs across coframes.",
+      "significance": "The action implementation retains the selected common matter principal cone even in shifted coordinate frames.",
+      "limitation": "Only four coframes and two of six fields are displayed; all saved sectors enter the check. Local frozen coefficients do not establish a metric derived from microscopic reception.",
+      "source_data": [
+        "results/data/plot-data/characteristics.csv"
+      ],
+      "spec_file": "results/figure-specs/characteristic-surfaces.figure.json",
+      "transformations": [
+        "display four seeded coframes and core/neutral roots; no fit",
+        "all six fields and 200 coframes retained in raw roots"
+      ],
+      "files": [
+        "figures/static/characteristic-surfaces.png",
+        "figures/static/characteristic-surfaces.svg",
+        "figures/static/characteristic-surfaces.pdf"
+      ]
+    },
+    {
+      "figure_id": "failure-controls",
+      "role": "evidentiary",
+      "question": "Do unhealthy Z and quartic orientation change distinct accepted properties?",
+      "reading": "Negative Z=-0.5 fails kinetic positivity; separately versioned quartic orientation action gives speed 0.934947 versus metric speed 1.",
+      "significance": "The audit can detect both a bad kinetic sign and an extra material characteristic that a common coordinate shift cannot remove.",
+      "limitation": "The quartic term is excluded from SS OCF 1 and tested on one flat static gradient. It neither proves topology protection nor exhausts all constitutive alternatives.",
+      "source_data": [
+        "results/data/plot-data/controls.json",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/failure-controls.figure.json",
+      "transformations": [
+        "orientation speed from kinetic Hessian of separate quartic action",
+        "valid matter speed normalized to metric null speed"
+      ],
+      "files": [
+        "figures/static/failure-controls.png",
+        "figures/static/failure-controls.svg",
+        "figures/static/failure-controls.pdf"
+      ]
+    },
+    {
+      "figure_id": "action-audit",
+      "role": "evidentiary",
+      "question": "Do action derivatives agree with the written equations on nonzero jets?",
+      "reading": "Maximum Hessian residual 7.43e-16; equation residual 4.88e-16; operator metric residual 8.88e-16 against 1e-10.",
+      "significance": "Independent action polarization and complex-step force distinguish the written equations from a copied principal matrix.",
+      "limitation": "Finite smooth local jets; no on-shell solution, spatial grid, long-time conservation test or nonlinear gravity constraint solution.",
+      "source_data": [
+        "results/data/plot-data/samples.csv"
+      ],
+      "spec_file": "results/figure-specs/action-audit.figure.json",
+      "transformations": [
+        "scale-normalized maximum tensor/equation residual per sample",
+        "log display floor only; exact zeros retained"
+      ],
+      "files": [
+        "figures/static/action-audit.png",
+        "figures/static/action-audit.svg",
+        "figures/static/action-audit.pdf"
+      ]
+    }
+  ]
+}

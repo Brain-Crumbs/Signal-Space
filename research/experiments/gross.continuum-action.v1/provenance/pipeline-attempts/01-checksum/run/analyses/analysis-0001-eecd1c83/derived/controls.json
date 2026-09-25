@@ -1,0 +1,11 @@
+{
+  "gravity_gauge": "linearized harmonic/de Donder, flat TT",
+  "gravity_symbol_constraint_residual": 3.430452712773149e-16,
+  "negative_z": -0.5,
+  "orientation_kappa": 0.4,
+  "orientation_kt": 1.1440000000000001,
+  "orientation_kx": 0.9999999999999999,
+  "orientation_model_id": "signal-space.ss-ocf-1.orientation-quartic-control.v1",
+  "orientation_p": 0.6,
+  "orientation_speed": 0.934946990008457
+}

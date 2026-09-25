@@ -1,0 +1,182 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.continuum-action.v1",
+  "model_id": "signal-space.ss-ocf-1.action-audit.v1",
+  "question": "Does the SS OCF 1 action implementation preserve its chosen common principal structure on smooth local backgrounds?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7-8,12.3,15.5",
+    "docs/research/gross-test-05.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-05.json",
+  "runtime_config_sha256": "373c33c3e93662ec231e5804e8a2b2f83c6c04e77a6ccbf95cd0f096534e4b2e",
+  "method": {
+    "action": "SS OCF 1 Einstein plus four real q fields, neutral a with Z=1+0.1s and real chi; potentials per program section 7.3. Separate quartic orientation action control.",
+    "units": "c=hbar=m=M0=1, (+---), |k|=1; fields mass dimension 1, first derivatives mass².",
+    "domain": "200 seeded invertible smooth local coframes, arbitrary local q,a,chi gradients and symmetric second jets; 20 deterministic sphere directions.",
+    "boundaries": "Frozen pointwise principal-symbol/action audit; no spatial boundary, PDE mesh or evolution. Gravity flat linearized harmonic TT symbol only.",
+    "initial_data": "PCG64 seed 2026092505, lapse .8..1.2, shift +/- .2, spatial coframe I +/- .15; fields +/-1, gradients/jets +/- .5.",
+    "solver": "Action polarization on all 24 derivative slots, independent complex-step field forces, saved roots and independent null-polynomial/coframe audit; TT Einstein symbol and constraints.",
+    "tolerances": "All normalized errors <1e-10; positive kinetic eigenvalues; control split >1e-3; resource 150s/512MiB/24MiB."
+  },
+  "hypotheses": [
+    {
+      "id": "common",
+      "prediction": "H=diag(1,1,1,1,Z,1) tensor g^-1; all six roots agree, valid Z>0."
+    },
+    {
+      "id": "split",
+      "prediction": "Quartic orientation control splits a physical speed; negative Z violates positive kinetic health."
+    }
+  ],
+  "controls": [
+    {
+      "id": "negative-z",
+      "purpose": "detect failed kinetic health",
+      "method": "set Z=-0.5 in an explicitly artificial frozen control"
+    },
+    {
+      "id": "quartic",
+      "purpose": "detect a material cone split",
+      "method": "separate versioned -kappa H_ab H^ab/4 orientation action with p=.6,kappa=.4"
+    },
+    {
+      "id": "complex-step",
+      "purpose": "independently verify written equations",
+      "method": "complex-step differentiation of complete matter L with nonzero q,a,chi jets"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "coverage",
+      "observable": "full coverage",
+      "pass_if": "exactly 200 x 20 x 6 x 2 finite roots and complete arrays",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    },
+    {
+      "id": "hessian",
+      "observable": "normalized action Hessian residual",
+      "pass_if": "maximum scale-normalized action tensor and operator-metric error <1e-10",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    },
+    {
+      "id": "equations",
+      "observable": "Euler-Lagrange local-jet residual",
+      "pass_if": "maximum scale-normalized action/equation discrepancy <1e-10",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    },
+    {
+      "id": "characteristics",
+      "observable": "six-sector null-root residual",
+      "pass_if": "maximum root equality and null polynomial residual <1e-10",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    },
+    {
+      "id": "positive-kinetic",
+      "observable": "valid and negative-control kinetic eigenvalues",
+      "pass_if": "all valid field eigenvalues >0 and negative Z=-0.5 is detected",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    },
+    {
+      "id": "orientation-control",
+      "observable": "quartic-control second speed",
+      "pass_if": "separate quartic action speed <0.999 with independent formula error <1e-10 and positive coefficients",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    },
+    {
+      "id": "gravity-symbol",
+      "observable": "harmonic-gauge TT symbol and linearized constraint residual",
+      "pass_if": "linearized harmonic TT symbol and flat linearized Hamiltonian/momentum constraints <1e-10",
+      "fail_if": "complete evidence contradicts the preregistered condition",
+      "unresolved_if": "missing, nonfinite or incomplete evidence prevents assessment",
+      "uncertainty": "floating point and coframe conditioning; no stochastic confidence or global PDE convergence claim"
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "characteristic-surfaces",
+      "question": "Do all six matter sectors share one coframe null cone in shifted coordinates?",
+      "role": "evidentiary",
+      "observables": [
+        "Do all six matter sectors share one coframe null cone in shifted coordinates?"
+      ],
+      "representation": "static figure and exact plot data",
+      "competing_signatures": {
+        "common": "all valid matter branches share metric null roots and positive kinetic matrix",
+        "split": "orientation quartic has separate characteristic; negative Z fails health"
+      },
+      "controls": ["negative-z"],
+      "uncertainty": "full arrays retained; flat local jets and fixed directional samples limit scope",
+      "source_data": ["reports/<report-id>/plot-data/characteristics.csv"],
+      "transformations": [
+        "display four coframes in root plot; all 200 in residual plot; no fit or smoothing; log display floor 1e-18"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "action-audit",
+      "question": "Do action derivatives agree with the written equations on nonzero jets?",
+      "role": "evidentiary",
+      "observables": [
+        "Do action derivatives agree with the written equations on nonzero jets?"
+      ],
+      "representation": "static figure and exact plot data",
+      "competing_signatures": {
+        "common": "all valid matter branches share metric null roots and positive kinetic matrix",
+        "split": "orientation quartic has separate characteristic; negative Z fails health"
+      },
+      "controls": ["complex-step"],
+      "uncertainty": "full arrays retained; flat local jets and fixed directional samples limit scope",
+      "source_data": ["reports/<report-id>/plot-data/samples.csv"],
+      "transformations": [
+        "display four coframes in root plot; all 200 in residual plot; no fit or smoothing; log display floor 1e-18"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "failure-controls",
+      "question": "Do unhealthy Z and quartic orientation change distinct accepted properties?",
+      "role": "evidentiary",
+      "observables": [
+        "Do unhealthy Z and quartic orientation change distinct accepted properties?"
+      ],
+      "representation": "static figure and exact plot data",
+      "competing_signatures": {
+        "common": "all valid matter branches share metric null roots and positive kinetic matrix",
+        "split": "orientation quartic has separate characteristic; negative Z fails health"
+      },
+      "controls": ["negative-z", "quartic"],
+      "uncertainty": "full arrays retained; flat local jets and fixed directional samples limit scope",
+      "source_data": [
+        "reports/<report-id>/plot-data/controls.json",
+        "reports/<report-id>/plot-data/summary.json"
+      ],
+      "transformations": [
+        "display four coframes in root plot; all 200 in residual plot; no fit or smoothing; log display floor 1e-18"
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 150,
+    "max_memory_mb": 512,
+    "max_output_mb": 24
+  },
+  "prohibited_inferences": [
+    "The common cone is chosen by the action and is no proof of emergent spacetime or an operational detector geometry.",
+    "Flat TT constraint identities do not establish nonlinear Einstein evolution or constraint-satisfying initial data.",
+    "The orientation failure control is a different model and does not make SS OCF 1 topologically protected."
+  ],
+  "locked_sha256": "7dcbb82ce275c4c30fa92c5a4f6335a40fc83b2b3bcdecdf927d51bf116b3915"
+}

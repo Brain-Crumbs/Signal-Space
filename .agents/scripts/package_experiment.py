@@ -25,10 +25,11 @@ def text_pages(pdf, title: str, content: str) -> None:
     lines = []
     for line in content.splitlines():
         lines.extend(textwrap.wrap(line, width=105, replace_whitespace=False) or [""])
-    for start in range(0, max(1, len(lines)), 50):
+    # Keep the last line well above the letter-page bottom at 8.2 pt and 1.35 spacing.
+    for start in range(0, max(1, len(lines)), 40):
         page = plt.figure(figsize=(8.5, 11))
         page.text(0.07, 0.96, title, fontsize=14, weight="bold", va="top")
-        page.text(0.07, 0.91, "\n".join(lines[start : start + 50]), fontsize=8.2, va="top", family="monospace", linespacing=1.35)
+        page.text(0.07, 0.91, "\n".join(lines[start : start + 40]), fontsize=8.2, va="top", family="monospace", linespacing=1.35)
         pdf.savefig(page)
         plt.close(page)
 

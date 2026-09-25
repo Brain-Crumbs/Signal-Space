@@ -1,12 +1,1272 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 1164,
+  "file_count": 1416,
   "files": [
     {
       "path": "research/catalog.json",
       "size": 14646,
       "sha256": "bc64950c1a6612aeab2fa9e4485a450c38c8bfcc1dd9a19a51da2d70da946833"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/Experiment_Analysis_and_Next.md",
+      "size": 7189,
+      "sha256": "5bf48caa0b739549092d7bad4324b624ed1f62c9560a0dda911d669e1d7ebcd4"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/Experiment_Results.pdf",
+      "size": 254285,
+      "sha256": "ff709d36e1e77f5c5030450405803a027e982af6da939b727abfcc0780a5cd19"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/Experimental_Setup.pdf",
+      "size": 35941,
+      "sha256": "89d523d0cdcad0638874a3822bfdbc887b37a0deedb91302a2d4a1211cd715d1"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/export.json",
+      "size": 15925,
+      "sha256": "14611a315f3061799473a0451c5fafa7c5fdf3dbab7e520bb41a533722d9320d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/figure_index.json",
+      "size": 3571,
+      "sha256": "1d7fd3f8cda98e2633c98caecb717bcf828b7a3d458c824fa0605aa345c828bc"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/action-audit.pdf",
+      "size": 22616,
+      "sha256": "0ec3541ae5855f7cc05dfb3c301dede040d040586919dbad6e4f2e8c78f6af4e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/action-audit.png",
+      "size": 100360,
+      "sha256": "074ffee639bd1bfc6935b4e6adcb76f4ac6b66aff0a20e748662f2fab05a4d8a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/action-audit.svg",
+      "size": 104201,
+      "sha256": "7067ac9929ca18d2a2375087a2b31d6631994fe0766fcfa18061f7dca146f707"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/characteristic-surfaces.pdf",
+      "size": 21060,
+      "sha256": "9890aaf4dbcd62ad7cc40c4b0ba095a174508b524e4ed07a7f034c7d38d4ad63"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/characteristic-surfaces.png",
+      "size": 209689,
+      "sha256": "03ed7d19a9e5e132e34f03adf2b757612a214f2f2ebf1541802db544df877bd0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/characteristic-surfaces.svg",
+      "size": 72541,
+      "sha256": "f0e8e8340478f56bde8f77c8c56d4b2e96227d1996554422d44347afa3f53fd0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/failure-controls.pdf",
+      "size": 16744,
+      "sha256": "605a5f6496ca3c3f7a1ac4c07890a96cbf0595a4b7718cacf57bf2b758003f67"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/failure-controls.png",
+      "size": 69650,
+      "sha256": "1c8c1980a5ecb887e0976cb5a95e8bed3ed7120fd180696fb11df03db01a76c8"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/figures/static/failure-controls.svg",
+      "size": 47694,
+      "sha256": "d09ff3974a779e2f9ddac9ae3c738fe860c6b2d352e7e871eea4ee0c1d64aa6d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/plan.json",
+      "size": 9498,
+      "sha256": "56627bc22bfd005ac4c82e33d6d6b8ee15157f0d96bd4f93c75e27b5ffe7d0d3"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/README.md",
+      "size": 1341,
+      "sha256": "ac618cd6d5993149a1921acc89d6eb53160bf63843aca5cb589e8bad5a71bfb2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/derived/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/derived/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/derived/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/derived/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/plot-data/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/plot-data/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/plot-data/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/plot-data/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/raw/attempt-0001/continuum.npz",
+      "size": 311166,
+      "sha256": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/raw/attempt-0001/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/raw/attempt-0001/execution.json",
+      "size": 460,
+      "sha256": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/raw/attempt-0001/rng-end.json",
+      "size": 189,
+      "sha256": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/data/raw/attempt-0001/rng-start.json",
+      "size": 189,
+      "sha256": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/figure-specs/action-audit.figure.json",
+      "size": 668,
+      "sha256": "2f179b7bf981461f145e824349f791e72a0c0d0d124f14d9dc2ae44fd18cf313"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/figure-specs/characteristic-surfaces.figure.json",
+      "size": 695,
+      "sha256": "a19ecb181db30c276b8d1995b0cb5d5659e2ee0a605db21427f87f417862db34"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/figure-specs/failure-controls.figure.json",
+      "size": 715,
+      "sha256": "1b4e5e8e05db1765d28c1ef6846797f6d8b0aba6db1124424e648a64c39104e6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/__init__.py",
+      "size": 70,
+      "sha256": "773a483c668342f54b2d252d1418c6b0ad5ba434f55a147b9e5e3fe429814c43"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/__main__.py",
+      "size": 60,
+      "sha256": "6e40041537e992294f93ec2fddf9a77c4a3bc98c1a78f44458d19e64e1cc4cfb"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/__init__.py",
+      "size": 69,
+      "sha256": "c8a3e4a6b22fd75658eaa738367271a5eed3cde4e3600f25e437be88f64a2833"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/charged.py",
+      "size": 32935,
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/continuum.py",
+      "size": 6093,
+      "sha256": "d4a4104faba7e715400498e19a1d1e8d0b6099acd457d29a78f3510aefe12ca1"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/floquet.py",
+      "size": 10187,
+      "sha256": "7e628affa1e66eef0707524abb1b64afadb0b6746f5d2656f25c94f994f9eb66"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/operators.py",
+      "size": 6386,
+      "sha256": "d6f59ddd93a3f8e7da5b11e511a30e9100981569978b4fc275d96a6ba7f7e906"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/reciprocal.py",
+      "size": 11770,
+      "sha256": "dac3004d873845a5edde65ce520cda26d181637dc7c6f5f0c6f4ddd864efb1df"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/router.py",
+      "size": 12341,
+      "sha256": "9c929c8e316ff3c4412e0092b1f413fbd4d23ff11ebd257db00f59c8a6922ea0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/analysis/synthetic.py",
+      "size": 2935,
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/cli.py",
+      "size": 6896,
+      "sha256": "41333857805258154ba44dfa47059741546c387edc2a39e15ed94e7e6dc59df2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/contracts/__init__.py",
+      "size": 149,
+      "sha256": "088648491bc037ec067e6b066f72289445407db07c56404d200e6ca612e00b38"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/contracts/e01.py",
+      "size": 3216,
+      "sha256": "cbde6313d7eb5bf1c5c6bd6df92bb4e0d47390ebbb1be5b2010b3b669dd89b54"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/contracts/generated.py",
+      "size": 1456,
+      "sha256": "c050a45fa317f5b90cec3f7d7a78c4ee4897f4d320add1e7d416cdaeebf2dd79"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/contracts/validation.py",
+      "size": 16015,
+      "sha256": "01041254107be4fc49ee1175669ed980e1d0e0344686bb507ae1eae183e4c16d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/__init__.py",
+      "size": 308,
+      "sha256": "3d2a64b92f34435007b230d7d8e680ca4e5b37946d93b9e6a410ac2617b7774f"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/base.py",
+      "size": 1653,
+      "sha256": "41ab6e8b770368c6a373e1f2429702fd9c3aee35891cf93faaa2f091b2dfc6c6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/charged_worker.py",
+      "size": 11310,
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/charged.py",
+      "size": 6082,
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/continuum.py",
+      "size": 4307,
+      "sha256": "eb6aa17d0bb2208f7a231a2dda0462db0342a1c7714cea2ae5c32abb4284b929"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/floquet.py",
+      "size": 4972,
+      "sha256": "4f5f2f24b0bec958a53451c99fe35783666e029b516054ea9dc20802bce0c246"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/operators.py",
+      "size": 4248,
+      "sha256": "0bcb0ea43bbfbfdb7ce2a1db4156692bc51e55ac0e161219791b44dc0077f6c8"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/reciprocal.py",
+      "size": 4869,
+      "sha256": "93e41839832e27374158968213567d0dada8d920a387272192981678d18dec63"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/registry.py",
+      "size": 1356,
+      "sha256": "f2bdd050bc68f5faba04a761bb0ec6fae3f0091344e394aa5b035d4c63ee887a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/router.py",
+      "size": 4968,
+      "sha256": "32bbccac7ee3cf9d9d98be5e10fa50c521b2a6950f8d78a04e6029e4986945c3"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/synthetic_worker.py",
+      "size": 5684,
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/experiments/synthetic.py",
+      "size": 5004,
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/__init__.py",
+      "size": 48,
+      "sha256": "f1c1bc09905be0aadc69485581ca35c071641d896df665b743a0830fc483be3e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/charged_scalar.py",
+      "size": 944,
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/continuum.py",
+      "size": 1268,
+      "sha256": "760b0bb875749412f3f9473285dd1d65946ed78ace81a1c3c12cd3a138c32e61"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/floquet.py",
+      "size": 3520,
+      "sha256": "47eeeab1c910ba04386bd3a29d5121424fed9843dae87bd2dd49ac250a4baa52"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/operators.py",
+      "size": 1324,
+      "sha256": "7f7cac1968e78ed5da8c8bd6b7aacd25911d4dd924302b4c96a6a34fa8b87714"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/reciprocal.py",
+      "size": 1182,
+      "sha256": "e74cb8c10f1a1d3e13d71b6d44a3535dc7597c26cfc21f7e649ed1984d698e82"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/router.py",
+      "size": 1848,
+      "sha256": "3b6f49b929b52d58df5dd93eb79e0037edf92c83511aa21940a410619aff16a9"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/models/synthetic.py",
+      "size": 326,
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/__init__.py",
+      "size": 68,
+      "sha256": "0995e134f9ee087f13047a806677ebd0de56fc0245e54b8058bf06a4d4bdb164"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/charged_radial.py",
+      "size": 5115,
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/charged_spectrum.py",
+      "size": 7228,
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/continuum.py",
+      "size": 6074,
+      "sha256": "e3e10708a35b62a04e757efb6311cb0620b7f40829593de2b6dab6802bfd4cfc"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/floquet.py",
+      "size": 3982,
+      "sha256": "fbf8719014bdb2be9e8cf1fd8ce245e08d2ac323413b30444f41c33250ad5bcb"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/operators.py",
+      "size": 6855,
+      "sha256": "9c022b82344eebd75dcd8a5f89e7a261b0883098debbf69c9104fa6691d0334f"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/reciprocal.py",
+      "size": 7611,
+      "sha256": "1226766200701c610fda50c22141fa517cccb89befa6d86e8af3b8a9f5f17d41"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/router.py",
+      "size": 4852,
+      "sha256": "173dcf35b3770ceb07bbbfa2da347f7366eae0c605bfd202abe4089fda2f80f6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/numerics/synthetic.py",
+      "size": 692,
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/__init__.py",
+      "size": 70,
+      "sha256": "4833796dbf6c1a61eeb9bce5bb5af0f2a5176b975dcf80dc7a8d4a476a87a03b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/charged.py",
+      "size": 11784,
+      "sha256": "c919726353ca552ce5eaea956253ec6945a5aa22dcdbdcd779f2c2e03e7dc269"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/continuum.py",
+      "size": 9916,
+      "sha256": "75311ae3001c4fe57349e85de47956b35253e5d884483067b513a0b318880aa6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/exploration.py",
+      "size": 4065,
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/floquet.py",
+      "size": 13960,
+      "sha256": "ce66b759c1edad56a2f9b1aafa75e5db705a37b85109b1c78c1b96be86228cc1"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/operators.py",
+      "size": 11773,
+      "sha256": "2b13860c05869b50388b36bc0a30e3489ebe2142a389d2eacd4a4a27e0d1ed8c"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/reciprocal.py",
+      "size": 15210,
+      "sha256": "cbaa8032826478a6794f2358d5ece61ceffbaf97f0d3dbaaf4e0ae8cfe6c4124"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/router.py",
+      "size": 16548,
+      "sha256": "e3bc20c7a6c74d8ee049002bf8b327a58ade2b5dee8160a1588b7f7060a01227"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/reporting/synthetic.py",
+      "size": 7412,
+      "sha256": "4c3ef0fb2d6466a8c02f3398f1e3e4cbb0c2ad1d3efe49c7211361f0fe7d49c6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/__init__.py",
+      "size": 294,
+      "sha256": "9e5f034118112842072a8ef1dd1ed96e7cfe8453e57b64b4d63f408cee25656d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/archive.py",
+      "size": 2430,
+      "sha256": "73894d51459075b0ff80d037ed62fb6bbd1b5ea7de7861e17156df8fb2fd32b4"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/errors.py",
+      "size": 448,
+      "sha256": "9a9f0f8f57af38bfeeb1504dade9844435f163167a343804339d6cbc5bf8239c"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/events.py",
+      "size": 1982,
+      "sha256": "47b8ee842b04002f80ec094bd860d7596092140fdd267afdc45f6dae417f71e3"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/io.py",
+      "size": 1986,
+      "sha256": "9f5cf2ab67969e348b61d879f6f5fc166278a606fd02c462373d2eb01a928d72"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/limits.py",
+      "size": 626,
+      "sha256": "8685bb2ba64ae5339f17262d2cf7be59ed618a1f60169a698fb3cd65f8850215"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/package.py",
+      "size": 12980,
+      "sha256": "450d75eec92261121daf7a32ab57514fba510ec3c7a134d2f02fbafa6f5319ac"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/runner.py",
+      "size": 28240,
+      "sha256": "84bd02824c56ee64634d0c2c5da971155ab11029d0afff89840c9edec9059b6e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/seeds.py",
+      "size": 647,
+      "sha256": "fb4f68b4bbd732e08952b2154b1f793bbb9211e0ffae70e621e3000005b18057"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/verify.py",
+      "size": 9683,
+      "sha256": "6fed68498b61f14886d6a836dc4052cc384a304ba8ed78b31ee7dc588d961e22"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/runtime/worker.py",
+      "size": 812,
+      "sha256": "a279541fa4e4d557030bc9797b4c46de0cd0fa805fc41b6bd93e4aad70769721"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/service/__init__.py",
+      "size": 74,
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/source/service/api.py",
+      "size": 12687,
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/tables/analysis.json",
+      "size": 2133,
+      "sha256": "8abcd6fd4667b1c94ed96972ccdffa48887ab009705f866fb660c8aefa0a5bdb"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/tables/checks.json",
+      "size": 1039,
+      "sha256": "3d5c0affa4fb8feda922f52722a56b88b637e4fb002ce4cbfdf566751229602e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/results/tables/resolved-config.json",
+      "size": 600,
+      "sha256": "ce27155a30ca7e6a230397cd21fb00bd442f98e7249ec7bffd58dfe98d797c50"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/analyze.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/analyze.stdout.log",
+      "size": 1989,
+      "sha256": "281150659449c170cd892efa8701c106cdb2462a4bbb53cb322f33a154225d8b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/report.stderr.log",
+      "size": 139,
+      "sha256": "2096c463c67ed834d1394bd708c258209d59079dec9ebc4940557d477527ecc0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/report.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/run-plan.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/run-plan.stdout.log",
+      "size": 1256,
+      "sha256": "4f703bc2c2f174378f49762928b6735de28ce659e3c32be9cec12f66a163960a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-revision.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-revision.stdout.log",
+      "size": 41,
+      "sha256": "3710ecbb20f1be4e6ac770c7525b2b039fe2cba9b0c09c9239a8fdbe199d6f02"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-snapshot.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-snapshot.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-status.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-status.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-tree.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/logs/source-tree.stdout.log",
+      "size": 41,
+      "sha256": "3a32d4f15d9c37ae39dfa3fa38a9409b3ccd8680098d475dffd0c4440c1107a5"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/analyses/analysis-0001-eecd1c83/analysis.json",
+      "size": 2133,
+      "sha256": "c18ee24441e3172803fdef004903ebc22717b1333de7c46f1d55dae09f92be91"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/analyses/analysis-0001-eecd1c83/checks.json",
+      "size": 1039,
+      "sha256": "3d5c0affa4fb8feda922f52722a56b88b637e4fb002ce4cbfdf566751229602e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/analyses/analysis-0001-eecd1c83/derived/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/analyses/analysis-0001-eecd1c83/derived/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/analyses/analysis-0001-eecd1c83/derived/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/analyses/analysis-0001-eecd1c83/derived/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "0a2aed38b336d2c51820448873d99ab3fff804a46701db04495ec4f4a4e6b89c"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/events.jsonl",
+      "size": 960,
+      "sha256": "92e27f7333cd6139be152564e9d157a5769af9480696712044bc588202873139"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/preparation.json",
+      "size": 241,
+      "sha256": "9859b571fb72b7ca1edb08c2002935ba593eee4e5788d6aa9a80301026895591"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/raw/continuum.npz",
+      "size": 311166,
+      "sha256": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/raw/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/raw/execution.json",
+      "size": 460,
+      "sha256": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/raw/rng-end.json",
+      "size": 189,
+      "sha256": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/raw/rng-start.json",
+      "size": 189,
+      "sha256": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/attempts/attempt-0001/request.json",
+      "size": 1191,
+      "sha256": "a44396e7cdf0bbee05ff5cd27f12e3f6bcd9166765f10f77853e7b44363825ac"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/checksums.sha256",
+      "size": 2280,
+      "sha256": "a4ddac13a1d8c625ce393aa2510e62e159d03a38ef41f8665e3cca37b5a63df7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/manifest.json",
+      "size": 12944,
+      "sha256": "1c8d34fd081da71833f1e8da41dd60a3707c9a0b8ae2bd79ae91c54c1100fd93"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/provenance/code.json",
+      "size": 206,
+      "sha256": "d4f3e62914c086b62e4e4b643945e857aadf4e1ee8f156110513defa50f5b864"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/provenance/inputs.json",
+      "size": 133,
+      "sha256": "7f8fd89816e5d02b0baa62855fe9770e31344ed456899d4076d437ddbf0b3576"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/run/resolved-config.json",
+      "size": 600,
+      "sha256": "ce27155a30ca7e6a230397cd21fb00bd442f98e7249ec7bffd58dfe98d797c50"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/01-checksum/status.json",
+      "size": 343,
+      "sha256": "fde9ff81fee74701dc6ddd98f9ee80ab235bcf633101297fd166e6b3f12f8d7a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/analyze.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/analyze.stdout.log",
+      "size": 1989,
+      "sha256": "bee76307b06906b6775a7cce43365f914467d0cb5009c36487333adba086f34b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/package.stderr.log",
+      "size": 550,
+      "sha256": "9da8228f9b2109d079502d514d7e4c9d7c95df8f7939b3a241974e12628a9ca2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/package.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/report.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/report.stdout.log",
+      "size": 1413,
+      "sha256": "1b00bb6ad3ecfdacccee73db14dc89fda39a271b995328615e3be3c7d7a02311"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/run-plan.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/run-plan.stdout.log",
+      "size": 1258,
+      "sha256": "68bd06ae96d97cab6d62fbaf70e44da91a949c99ad50b6eac32fdada84a9bc4a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-revision.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-revision.stdout.log",
+      "size": 41,
+      "sha256": "3710ecbb20f1be4e6ac770c7525b2b039fe2cba9b0c09c9239a8fdbe199d6f02"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-snapshot.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-snapshot.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-status.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-status.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-tree.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/source-tree.stdout.log",
+      "size": 41,
+      "sha256": "3a32d4f15d9c37ae39dfa3fa38a9409b3ccd8680098d475dffd0c4440c1107a5"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/verify.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/logs/verify.stdout.log",
+      "size": 124,
+      "sha256": "a1f3eea80f6424650716efa0767f8864cbb160b334d5b894d4c4f010c5158e3d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/analyses/analysis-0001-b014dca8/analysis.json",
+      "size": 2133,
+      "sha256": "956851856b8cf2138494f439ba5879d952c8238cc2dc83e4ec52191ae84b265d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/analyses/analysis-0001-b014dca8/checks.json",
+      "size": 1039,
+      "sha256": "3d5c0affa4fb8feda922f52722a56b88b637e4fb002ce4cbfdf566751229602e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/analyses/analysis-0001-b014dca8/derived/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/analyses/analysis-0001-b014dca8/derived/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/analyses/analysis-0001-b014dca8/derived/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/analyses/analysis-0001-b014dca8/derived/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "ec21cd6ed6e90ee1f00450684790e9483579c8d2dffe20635af77d6bfdd50861"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/events.jsonl",
+      "size": 1639,
+      "sha256": "37bbab11884133401b324e143ec57493bf391978d959bf83d746ec10a41cb827"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/preparation.json",
+      "size": 241,
+      "sha256": "9859b571fb72b7ca1edb08c2002935ba593eee4e5788d6aa9a80301026895591"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/raw/continuum.npz",
+      "size": 311166,
+      "sha256": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/raw/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/raw/execution.json",
+      "size": 460,
+      "sha256": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/raw/rng-end.json",
+      "size": 189,
+      "sha256": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/raw/rng-start.json",
+      "size": 189,
+      "sha256": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/attempts/attempt-0001/request.json",
+      "size": 1193,
+      "sha256": "a8e95149b0d501b27a8be9c90f0a55e624cf4967671254c4551853c1170a7ada"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/checksums.sha256",
+      "size": 4635,
+      "sha256": "36f88c6d36019827b28dd0636ebbaae0aa6f08945f8360e58ccd339fb6983cd5"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/manifest.json",
+      "size": 21258,
+      "sha256": "6622ada43ddb3105b93e833fcef9fa370f0cbf7ec15e944bf823a44142e2b148"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/provenance/code.json",
+      "size": 206,
+      "sha256": "d4f3e62914c086b62e4e4b643945e857aadf4e1ee8f156110513defa50f5b864"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/provenance/inputs.json",
+      "size": 133,
+      "sha256": "7f8fd89816e5d02b0baa62855fe9770e31344ed456899d4076d437ddbf0b3576"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/action-audit.figure.json",
+      "size": 668,
+      "sha256": "2f179b7bf981461f145e824349f791e72a0c0d0d124f14d9dc2ae44fd18cf313"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/action-audit.pdf",
+      "size": 22616,
+      "sha256": "16606fa3a61874c8738166ad959faa49731ad69bf8ecd0cf9ea84c257fb64d1a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/action-audit.png",
+      "size": 100360,
+      "sha256": "074ffee639bd1bfc6935b4e6adcb76f4ac6b66aff0a20e748662f2fab05a4d8a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/action-audit.svg",
+      "size": 104201,
+      "sha256": "42d69e1a3141bf2265b0304e5119b65192335b9262d8dfcdb1c4b181574933f4"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/characteristic-surfaces.figure.json",
+      "size": 695,
+      "sha256": "a19ecb181db30c276b8d1995b0cb5d5659e2ee0a605db21427f87f417862db34"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/characteristic-surfaces.pdf",
+      "size": 21060,
+      "sha256": "c9d91a0b38139665eb359a5de29ffb9169def79ee14a1c7a21a6302f42a56849"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/characteristic-surfaces.png",
+      "size": 209689,
+      "sha256": "03ed7d19a9e5e132e34f03adf2b757612a214f2f2ebf1541802db544df877bd0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/characteristic-surfaces.svg",
+      "size": 72541,
+      "sha256": "591b7aae532efb70accadc317f01e5c135ca606e64536a6069532ec949ed13cb"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/failure-controls.figure.json",
+      "size": 715,
+      "sha256": "1b4e5e8e05db1765d28c1ef6846797f6d8b0aba6db1124424e648a64c39104e6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/failure-controls.pdf",
+      "size": 16744,
+      "sha256": "1754ef30f37dcc8730544b73c0f01357f1860719b04c1da10c2a91fb9eaf6ce3"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/failure-controls.png",
+      "size": 69650,
+      "sha256": "1c8c1980a5ecb887e0976cb5a95e8bed3ed7120fd180696fb11df03db01a76c8"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/figures/failure-controls.svg",
+      "size": 47694,
+      "sha256": "d47317e4356366763e6fe186045372272415c81a28cf5e6d0c67e62c6b6528f4"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/interpretations.json",
+      "size": 1848,
+      "sha256": "f35806470abcee52554b4a53123efffdfc2b66613f32ae55a9cb89a4cb01b0c2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/plot-data/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/plot-data/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/plot-data/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/plot-data/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/report.html",
+      "size": 3612,
+      "sha256": "43b3bbd47bd9dcf1fd8e78e0f14567181c507f4fe043916cd80fcf26e3d7acd6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/report.json",
+      "size": 1675,
+      "sha256": "91cd990342771f7ba7f9ef843e4da165430d4c08bfd409a0203c523fb0e7e1d1"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/report.md",
+      "size": 3035,
+      "sha256": "028e75f13ba4c74f932a154f15f012236c6156532b917fdaa658194f7e59dfd2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/reports/report-0001/report.pdf",
+      "size": 15522,
+      "sha256": "4985e550fd1f2251dbf6dfb6b3753a650d179327ef589ee8ff8ffe8fd1c669be"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/run/resolved-config.json",
+      "size": 600,
+      "sha256": "ce27155a30ca7e6a230397cd21fb00bd442f98e7249ec7bffd58dfe98d797c50"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/02-question-mismatch/status.json",
+      "size": 346,
+      "sha256": "fccd19ee1e142651587821060254912316135c5354271a347be733a773124ae6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/pipeline-attempts/README.md",
+      "size": 1089,
+      "sha256": "c17e02dd868e2f11978d899268e17067f7d0f84574e1eab43bd018e17746ba38"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/provenance/source-history.bundle",
+      "size": 28991,
+      "sha256": "af253ad38be75828347b05793d235b12411d017bd8566b34f936e16726e4ff79"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/README.md",
+      "size": 2148,
+      "sha256": "3e3e53f9563932174a23323f120477901d1347e8bf0a9bf92a566de8c89ceccc"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/analyses/analysis-0001-4dbb966f/analysis.json",
+      "size": 2133,
+      "sha256": "8abcd6fd4667b1c94ed96972ccdffa48887ab009705f866fb660c8aefa0a5bdb"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/analyses/analysis-0001-4dbb966f/checks.json",
+      "size": 1039,
+      "sha256": "3d5c0affa4fb8feda922f52722a56b88b637e4fb002ce4cbfdf566751229602e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/analyses/analysis-0001-4dbb966f/derived/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/analyses/analysis-0001-4dbb966f/derived/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/analyses/analysis-0001-4dbb966f/derived/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/analyses/analysis-0001-4dbb966f/derived/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "c92693c6649534051a92ee96dec634e516ea321dfc640051292fdfc6e7aebdea"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/events.jsonl",
+      "size": 1639,
+      "sha256": "7bb2de8599988f6f42e855e08922225d5997faa008c673fb89f8af11180718f1"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/preparation.json",
+      "size": 241,
+      "sha256": "9859b571fb72b7ca1edb08c2002935ba593eee4e5788d6aa9a80301026895591"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/raw/continuum.npz",
+      "size": 311166,
+      "sha256": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/raw/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/raw/execution.json",
+      "size": 460,
+      "sha256": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/raw/rng-end.json",
+      "size": 189,
+      "sha256": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/raw/rng-start.json",
+      "size": 189,
+      "sha256": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/attempts/attempt-0001/request.json",
+      "size": 1163,
+      "sha256": "a8f4fe261cd460f786f32c0c1b7d4144e0a0007527ec2e078d9242c5523aaa23"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/checksums.sha256",
+      "size": 4635,
+      "sha256": "dfa04fa37139b457bc2a7f5c4fc24d71f8834d457b9f0985f55bed7340c0ceb5"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/manifest.json",
+      "size": 21258,
+      "sha256": "2bdb68fc31bd863d0da9acdac6d45a75a6efbf7faf0b467bbdebfdfa36825a13"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/provenance/code.json",
+      "size": 206,
+      "sha256": "629d866c329f2302bc806e4d10d2dd96b50de2fa64dbdb1b6e672b86b13310af"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/provenance/inputs.json",
+      "size": 133,
+      "sha256": "7f8fd89816e5d02b0baa62855fe9770e31344ed456899d4076d437ddbf0b3576"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/action-audit.figure.json",
+      "size": 668,
+      "sha256": "2f179b7bf981461f145e824349f791e72a0c0d0d124f14d9dc2ae44fd18cf313"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/action-audit.pdf",
+      "size": 22616,
+      "sha256": "0ec3541ae5855f7cc05dfb3c301dede040d040586919dbad6e4f2e8c78f6af4e"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/action-audit.png",
+      "size": 100360,
+      "sha256": "074ffee639bd1bfc6935b4e6adcb76f4ac6b66aff0a20e748662f2fab05a4d8a"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/action-audit.svg",
+      "size": 104201,
+      "sha256": "7067ac9929ca18d2a2375087a2b31d6631994fe0766fcfa18061f7dca146f707"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/characteristic-surfaces.figure.json",
+      "size": 695,
+      "sha256": "a19ecb181db30c276b8d1995b0cb5d5659e2ee0a605db21427f87f417862db34"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/characteristic-surfaces.pdf",
+      "size": 21060,
+      "sha256": "9890aaf4dbcd62ad7cc40c4b0ba095a174508b524e4ed07a7f034c7d38d4ad63"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/characteristic-surfaces.png",
+      "size": 209689,
+      "sha256": "03ed7d19a9e5e132e34f03adf2b757612a214f2f2ebf1541802db544df877bd0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/characteristic-surfaces.svg",
+      "size": 72541,
+      "sha256": "f0e8e8340478f56bde8f77c8c56d4b2e96227d1996554422d44347afa3f53fd0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/failure-controls.figure.json",
+      "size": 715,
+      "sha256": "1b4e5e8e05db1765d28c1ef6846797f6d8b0aba6db1124424e648a64c39104e6"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/failure-controls.pdf",
+      "size": 16744,
+      "sha256": "605a5f6496ca3c3f7a1ac4c07890a96cbf0595a4b7718cacf57bf2b758003f67"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/failure-controls.png",
+      "size": 69650,
+      "sha256": "1c8c1980a5ecb887e0976cb5a95e8bed3ed7120fd180696fb11df03db01a76c8"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/figures/failure-controls.svg",
+      "size": 47694,
+      "sha256": "d09ff3974a779e2f9ddac9ae3c738fe860c6b2d352e7e871eea4ee0c1d64aa6d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/interpretations.json",
+      "size": 1798,
+      "sha256": "3239c3a29b5dd8de2c719abbfd1c725941d1736c65ebbcaae0d21518e34227ab"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/plot-data/characteristics.csv",
+      "size": 67873,
+      "sha256": "b3d87585e16e4bd56a54a5e6d402493781f02cfb1719855a52ae3e1218f95ff0"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/plot-data/controls.json",
+      "size": 405,
+      "sha256": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/plot-data/samples.csv",
+      "size": 25005,
+      "sha256": "1ced81388090767456b17a750f6828aba654332584973aa8fd820dd7e6a4def7"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/plot-data/summary.json",
+      "size": 906,
+      "sha256": "ff70466f8795e8dbe8595abc716ff711b251199a0d888f507162094232c30d2b"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/report.html",
+      "size": 3512,
+      "sha256": "ea3477cbc1fe1576ee382f6c3a72ce0f09800aabf68f1eafebf78171e949fcbe"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/report.json",
+      "size": 1675,
+      "sha256": "0afc773225e952bb08b6094d11e748dbb73cebc3ef09609fd33ec034858b449d"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/report.md",
+      "size": 2985,
+      "sha256": "c77e0a046e743b85cc2eb6896447b7ee13ce999bc9c4f9314adb30d9c74448ec"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/reports/report-0001/report.pdf",
+      "size": 47244,
+      "sha256": "48ab1a9237712746c2f78df7af361d11eab826374d59ef7720aca43b5b0a529f"
+    },
+    {
+      "path": "research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/resolved-config.json",
+      "size": 600,
+      "sha256": "ce27155a30ca7e6a230397cd21fb00bd442f98e7249ec7bffd58dfe98d797c50"
     },
     {
       "path": "research/experiments/gross.full-spectrum.v1/export-run-5a55cb5041050589/Experiment_Analysis_and_Next.md",

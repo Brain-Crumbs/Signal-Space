@@ -1,0 +1,146 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "type": "string",
+      "const": "gross.continuum-action.v1"
+    },
+    "model_id": {
+      "type": "string",
+      "const": "signal-space.ss-ocf-1.action-audit.v1"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "samples",
+        "directions",
+        "epsilon",
+        "orientation_p",
+        "orientation_kappa"
+      ],
+      "properties": {
+        "samples": {
+          "type": "integer",
+          "const": 200
+        },
+        "directions": {
+          "type": "integer",
+          "const": 20
+        },
+        "epsilon": {
+          "type": "number",
+          "const": 0.1
+        },
+        "orientation_p": {
+          "type": "number",
+          "const": 0.6
+        },
+        "orientation_kappa": {
+          "type": "number",
+          "const": 0.4
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["length", "mass", "signal", "coordinate"],
+      "properties": {
+        "length": {
+          "type": "string",
+          "const": "m^-1"
+        },
+        "mass": {
+          "type": "string",
+          "const": "m=1"
+        },
+        "signal": {
+          "type": "string",
+          "const": "c=hbar=1"
+        },
+        "coordinate": {
+          "type": "string",
+          "const": "local chart; covector spatial norm=1"
+        }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root"],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "const": 2026092505
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "const": 120
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "const": 150
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "const": 512
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "const": 24
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_residual"],
+      "properties": {
+        "max_residual": {
+          "type": "number",
+          "const": 1e-10
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "const": "Signal Space / GROSS Test 5: Continuum Action and Characteristics"
+        }
+      }
+    }
+  }
+}

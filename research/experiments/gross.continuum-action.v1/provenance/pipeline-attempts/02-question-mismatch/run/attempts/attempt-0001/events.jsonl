@@ -1,0 +1,9 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T17:32:54.611446Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":120,"max_memory_mb":512,"max_output_mb":24,"max_wall_seconds":150}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T17:32:54.613658Z","type":"attempt-running"}
+{"payload":{"algorithm":"local-action-polarization-v1","pid":23},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T17:32:54.683880Z","type":"worker-started"}
+{"payload":{"count":50},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T17:32:54.851489Z","type":"samples-completed"}
+{"payload":{"count":100},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T17:32:55.024524Z","type":"samples-completed"}
+{"payload":{"count":150},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T17:32:55.214938Z","type":"samples-completed"}
+{"payload":{"count":200},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T17:32:55.380597Z","type":"samples-completed"}
+{"payload":{"directions":20,"samples":200},"schema_version":"research-event-v1","sequence":8,"stage":"run","timestamp":"2026-09-25T17:32:55.406092Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":9,"stage":"runtime","timestamp":"2026-09-25T17:32:55.423111Z","type":"attempt-completed"}

@@ -1,0 +1,43 @@
+{
+  "analysis_id": "analysis-0001-b014dca8",
+  "classification": "pass",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "07f0f1a47d752e730d4bc97cbf748351ca966dc0",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "created_at": "2026-09-25T17:32:55.906718Z",
+  "input_artifacts": {
+    "attempts/attempt-0001/raw/continuum.npz": "7fc737f8c3791c15508d643a702727f855561355d15f8bdd28f7c1fc3838c6d2",
+    "attempts/attempt-0001/raw/controls.json": "8ca76017a39b8c9f1f309e7c0eb58276fdd582ebf1766bc29b7e9d17af04e1ce",
+    "attempts/attempt-0001/raw/execution.json": "95b24792a5a303e0b8971d06c4c4cc78011998867527bc8597fae8c4972a44f0",
+    "attempts/attempt-0001/raw/rng-end.json": "659f0f3b12daba99283da2adbccd860005dddb1cce76484500904bde0fde695b",
+    "attempts/attempt-0001/raw/rng-start.json": "1b75c73fedf1b30dfc0776e82f5a96f435b635d73c42fc99680e819a9ad26374"
+  },
+  "parameters": {
+    "max_residual": 1e-10
+  },
+  "path": "analyses/analysis-0001-b014dca8",
+  "raw_source": "attempts/attempt-0001/raw/continuum.npz",
+  "schema_version": "research-analysis-v1",
+  "summary": {
+    "directions": 20,
+    "gravity_scope": "flat linearized harmonic gauge TT symbol and constraints; nonlinear Einstein evolution/constraints not evaluated",
+    "gravity_symbol_constraint_residual": 3.430452712773149e-16,
+    "max_equation_residual": 4.88386164074601e-16,
+    "max_hessian_residual": 7.43048673107928e-16,
+    "max_operator_metric_residual": 8.881784197001252e-16,
+    "max_root_residual": 1.7663431662366935e-15,
+    "min_valid_field_kinetic_eigenvalue": 1.0,
+    "negative_z_control_eigenvalue": -0.5,
+    "orientation_control_reference_error": 1.1102230246251565e-16,
+    "orientation_control_space_coefficient": 0.9999999999999999,
+    "orientation_control_speed": 0.934946990008457,
+    "orientation_control_time_coefficient": 1.1440000000000001,
+    "physical_scope": "common characteristic is chosen in SS OCF 1; local algebra is implementation evidence, not emergence",
+    "samples": 200,
+    "sectors": 6
+  },
+  "supersedes": null
+}
