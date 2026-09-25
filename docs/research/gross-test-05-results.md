@@ -4,9 +4,11 @@
 
 ## Physical question
 
-In the SS OCF 1 continuum candidate, an invertible Hermitian coframe $E_\mu=e^a{}_{\mu}\sigma_a$ defines $g_{\mu\nu}=e^a{}_{\mu}\eta_{ab}e^b{}_{\nu}$. Here $\eta=\operatorname{diag}(1,-1,-1,-1)$. The six real matter fields are four real components of a complex core doublet $\Phi$, a neutral field $a$, and a clock candidate $\chi$. The proposed action gives $Z(s)=1+0.1s$, where $s=\Phi^\dagger\Phi=\sum_Iq_I^2/2$. Its two-derivative matter Hessian should be
+In the SS OCF 1 continuum candidate, an invertible Hermitian coframe $E_\mu=e^a{}_{\mu}\sigma_a$ defines $g_{\mu\nu}=e^a{}_{\mu}\eta_{ab}e^b{}_{\nu}$. Here $\eta=\mathrm{diag}(1,-1,-1,-1)$. The six real matter fields are four real components of a complex core doublet $\Phi$, a neutral field $a$, and a clock candidate $\chi$. The proposed action gives $Z(s)=1+0.1s$, where $s=\Phi^\dagger\Phi=\sum_Iq_I^2/2$. Its two-derivative matter Hessian should be
 
-$$\frac{\partial^2\mathcal L_m}{\partial(\partial_\mu\varphi_A)\partial(\partial_\nu\varphi_B)}=H_{AB}g^{\mu\nu},\qquad H=\operatorname{diag}(1,1,1,1,Z,1).$$
+$$
+\frac{\partial^2\mathcal L_m}{\partial(\partial_\mu\varphi_A)\partial(\partial_\nu\varphi_B)}=H_{AB}g^{\mu\nu},\qquad H=\mathrm{diag}(1,1,1,1,Z,1).
+$$
 
 For a local covector $\xi_\mu$, a characteristic satisfies $g^{\mu\nu}\xi_\mu\xi_\nu=0$. Universal coupling to the chosen metric makes this prediction analytically expected. The useful failure condition is an independent derivative or equation implementation that produces a split or an unhealthy sign.
 

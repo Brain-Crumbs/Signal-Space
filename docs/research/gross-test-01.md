@@ -11,12 +11,12 @@ This registers `gross.operator-identities.v1` with model `signal-space.operator-
 A Hermitian operator is $X=x^0I+x^i\sigma_i$, where $I$ is the identity and $\sigma_i$ are the Pauli matrices. The worker computes the determinant polarization
 
 $$
-\mathfrak g(X,Y)=\frac{\operatorname{tr}X\operatorname{tr}Y-\operatorname{tr}(XY)}2.
+\mathfrak g(X,Y)=\frac{\mathrm{tr}(X)\,\mathrm{tr}(Y)-\mathrm{tr}(XY)}2.
 $$
 
 Analysis extracts the four real coefficients directly from matrix entries and independently computes $x^0y^0-\mathbf x\cdot\mathbf y$. A positive aggregate $J=AA^\dagger$ is made from the two columns of $A$. Its observer is $T=J/\sqrt{\det J}$. Test $\det T=1$, the norm $z^\dagger T^{-1}z=2\mathfrak g(T,zz^\dagger)$, covariance under $SL(2,\mathbb C)$ congruence, and positivity of $h_T(X,Y)=2\mathfrak g(T,X)\mathfrak g(T,Y)-\mathfrak g(X,Y)$.
 
-For $P=zz^\dagger/(z^\dagger z)$ and $c=\operatorname{tr}(SPS^\dagger)$, check $P'=SPS^\dagger/c$ and $\rho'=c\rho$. Omitting the transformed weight is the deliberately incorrect control, not a new physical model.
+For $P=zz^\dagger/(z^\dagger z)$ and $c=\mathrm{tr}(SPS^\dagger)$, check $P'=SPS^\dagger/c$ and $\rho'=c\rho$. Omitting the transformed weight is the deliberately incorrect control, not a new physical model.
 
 ## Frozen sampling and thresholds
 
