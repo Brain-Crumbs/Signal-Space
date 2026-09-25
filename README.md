@@ -126,6 +126,8 @@ git diff --check
 
 `verify:research` checks the catalog and byte-level archive manifest. `check` runs formatting, lint, strict type checking, generated contract checks, historical and E00 lifecycle tests, and production builds. Browser tests exercise the built worker, schema-driven research journey, interruption/resume audit, reports, narrow screens, keyboard access, and research explorer.
 
+GitHub CI runs formatting, lint, type checking, generated-contract and research-file validation, builds, and the CLI sample. Automated test suites (JavaScript/TypeScript, Python, experiment-contract fixtures, and Playwright) run locally via the commands above; CI does not invoke them. The manual **Run experiment** workflow remains available for scientific runs and downloadable results.
+
 ## Data policy
 
 Git stores manuscripts, source, configurations, compact tabular/JSON results, report code, and curated figures. Large field arrays, probe streams, and transient binaries belong in immutable external run packages identified by hashes; accepted run summaries and manifests are archived under `research/experiments/`. This prevents Git history from becoming the raw-data backend while keeping every accepted claim traceable.
