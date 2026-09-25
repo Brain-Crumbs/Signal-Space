@@ -1,0 +1,26 @@
+{
+  "bound-control": {
+    "limitation": "A finite-box eigenvalue above 0.25 is a nonbound control. Radial Hessian diagnostics do not exclude all nonlinear or angular instabilities.",
+    "question": "Does the bound eigenvalue survive resolution controls and disappear without trapping?",
+    "reading": "Selected E/Q=0.919412; removing nu gives lowest eigenvalue 0.251711 versus 0.25 threshold. Eigen error estimate 2.82e-07.",
+    "significance": "The trapping coefficient is causally relevant to this bound mode in the registered family."
+  },
+  "core-and-well": {
+    "limitation": "Flat spherical branch only; neither gravity nor nonspherical perturbations follow from this profile.",
+    "question": "Which trial core supplies a spatial mass well and localized clock eigenfunction?",
+    "reading": "Selected omega_Q=0.900; core center F=0.7426; clock eigenvalue 0.170362 below vacuum 0.25.",
+    "significance": "The declared core density produces a spatially resolved clock mass well and a separately solved localized mode."
+  },
+  "lifetime-convergence": {
+    "limitation": "Refined/wider runs and half/double amplitude controls cover 20 periods. Background-scale energy error exceeds the clock energy, so sponge loss cannot be assigned to clock radiation; nonspherical dynamics are untested.",
+    "question": "Does the mode persist with controlled charge, amplitude, grid and boundary errors?",
+    "reading": "Over 100 periods mode-energy loss 2.53e-05; maximum charge ledger error 1.44e-15; short-run frequency grid/domain difference 1.01e-05. Total-energy ledger residual is 13.4 initial clock-mode energies.",
+    "significance": "The duration and numerical controls quantify whether this core can provisionally serve as Test 7 calibration."
+  },
+  "local-trace": {
+    "limitation": "This is an ideal local field probe in the flat limit. Marker coupling, device noise and invariant reception comparison are future tests.",
+    "question": "Does a local field trace tick for 100 periods when the unexcited core does not?",
+    "reading": "Nominal local trace completes 100.00 inferred signed cycles; local frequency 0.412749 versus eigenfrequency 0.41275. Unexcited trace is zero.",
+    "significance": "Unlike the stationary core density/projector, the field sampled inside the core has a repeatable local zero-crossing record."
+  }
+}

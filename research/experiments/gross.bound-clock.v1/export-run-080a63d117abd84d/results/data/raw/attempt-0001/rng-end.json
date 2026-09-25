@@ -1,0 +1,9 @@
+{
+  "root_seed": {
+    "analysis": 14847330545538242625,
+    "initialization": 9497253636053910495,
+    "perturbations": 3438477401105694923,
+    "sampling": 873902148180242579
+  },
+  "stochastic_use": "none"
+}

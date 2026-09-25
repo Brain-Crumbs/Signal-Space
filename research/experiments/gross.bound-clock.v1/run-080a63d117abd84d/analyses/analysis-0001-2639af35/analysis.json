@@ -1,0 +1,325 @@
+{
+  "analysis_id": "analysis-0001-2639af35",
+  "classification": "pass",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "8c42249f03b447e814c9d8017ce2cc02c0484eed",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "created_at": "2026-09-25T18:58:34.405682Z",
+  "input_artifacts": {
+    "attempts/attempt-0001/raw/controls.json": "59d7f064a30a180ed92d8afee86976e27a94f5534cf3431d5cac04db2665ca54",
+    "attempts/attempt-0001/raw/evolution-0.0000.npz": "479477cd3bbc229794dc5523640d369079b7623d52f2fbc5bfc7f92e87ada6c9",
+    "attempts/attempt-0001/raw/evolution-0.0005.npz": "ef0164400179c78fdc5d5895dd00f986267fb882baaf92e0c9a4b176bbbdb9f6",
+    "attempts/attempt-0001/raw/evolution-0.0010.npz": "d4bbbbc0a512d241b04cc57c32c9693e33571a7ffe56e2efe43a374f2baac3e3",
+    "attempts/attempt-0001/raw/evolution-0.0020.npz": "71bf73816bb154bdae4d90de11b73c82ed889fdc090395ab4a3ea22d3db97583",
+    "attempts/attempt-0001/raw/evolution-fine.npz": "8513b6d9429b0723d564725090433f314e9bc929765057e1e0c33cb7a2c1ffba",
+    "attempts/attempt-0001/raw/evolution-wide.npz": "c12793b4b88df202eb21de77007e02a113fa21289c69d5abcdaa824821231834",
+    "attempts/attempt-0001/raw/evolutions.json": "9e4930bd5dd37c4c8f18998f3e48b8c159c9082054210c9981b2402dcff57506",
+    "attempts/attempt-0001/raw/execution.json": "8135fd5483858b7dcbf237bebcd8ae7db6d028c607186021e7790bc0a082961f",
+    "attempts/attempt-0001/raw/profile-0.900.npz": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+    "attempts/attempt-0001/raw/profile-0.940.npz": "37f7fd792e16e6ec9aeefeda989d162e1a3ce2a122016183fdf789cb996b978b",
+    "attempts/attempt-0001/raw/profile-attempts-0.868.json": "6003eebee23831193a8631f0d4e36f0d059652d27024f63b0519e5f4cbc811ec",
+    "attempts/attempt-0001/raw/profile-attempts-0.875.json": "b8512eea02b710d2cc0a83f4ea40eac438ac1332166f7ffa0151b00c1f4f4797",
+    "attempts/attempt-0001/raw/profile-attempts-0.900.json": "ccd190361c699be7a0eb4a115500cbfd7ff29ab2efb43530abb7c4d46d94a0fd",
+    "attempts/attempt-0001/raw/profile-attempts-0.940.json": "ad98490f77bb46ee7525dcd8c31730f9cbd28cfb1765b24426224bb3802b5328",
+    "attempts/attempt-0001/raw/profile-attempts-fine.json": "48720e87490295e3da972616036595e20bc7dc4689fa05b1d900ec686f1d63be",
+    "attempts/attempt-0001/raw/profile-attempts-wide.json": "8f1ced98efe883a3308d5b95a18a96b586b566f925daa75e75f41d73bc41b51d",
+    "attempts/attempt-0001/raw/profile-fine.npz": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+    "attempts/attempt-0001/raw/profile-wide.npz": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+    "attempts/attempt-0001/raw/profiles.json": "699851355ed96b7e77a46fb84af92e5b3081f5d4c726235664162021324e03b3",
+    "attempts/attempt-0001/raw/refinements.json": "a401447121796cc8a89137bf4d9c7e343e032b9d0c552ba5ce7048832cac83f7",
+    "attempts/attempt-0001/raw/rng-end.json": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f",
+    "attempts/attempt-0001/raw/rng-start.json": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+  },
+  "parameters": {
+    "amplitude_shift_max": 0.01,
+    "bound_margin_factor": 5,
+    "charge_drift_max": 0.01,
+    "convergence_relative_max": 0.01,
+    "frequency_relative_max": 0.02,
+    "mode_energy_loss_max": 0.01,
+    "profile_residual_max": 2e-10,
+    "tail_max": 1e-05
+  },
+  "path": "analyses/analysis-0001-2639af35",
+  "raw_source": "attempts/attempt-0001/raw/execution.json",
+  "schema_version": "research-analysis-v1",
+  "summary": {
+    "charge_slope_estimate": -62066.32089661696,
+    "controls": {
+      "nu-off": {
+        "eigenvalue": 0.251710689531893,
+        "threshold": 0.25
+      },
+      "nu-on": {
+        "eigenvalue": 0.17036248958684702,
+        "threshold": 0.25
+      },
+      "unexcited": {
+        "chi_initial": 0.0,
+        "chi_momentum_initial": 0.0,
+        "density_static": true,
+        "local_chi_zero_by_uniqueness": true,
+        "projector_static": true
+      }
+    },
+    "eigen_error_estimate": 2.8238360975466986e-07,
+    "frequency_convergence_fraction": 1.0058187309062391e-05,
+    "frequency_shift_fraction": 6.316678937388386e-06,
+    "mode_energy_loss_fraction": 2.52638749344003e-05,
+    "observations": {
+      "0.0000": {
+        "crossings": 0,
+        "duration": 304.48,
+        "frequency": null,
+        "last_charge_balance_error": -4.794753792071207e-16,
+        "last_mode_energy_fraction": 0.0,
+        "max_charge_balance_error": 1.118775884816615e-15,
+        "max_core_peak_shift": 0.00013501612045776172,
+        "max_local_chi": 0.0,
+        "outer_energy_sink": 2.8420395885024353e-05,
+        "signed_cycles": 0.0,
+        "total_energy_end": 2615.9860333753977,
+        "total_energy_start": 2615.9859600628142
+      },
+      "0.0005": {
+        "crossings": 20,
+        "duration": 304.48,
+        "early_frequency": 0.41275087093205126,
+        "frequency": 0.4127512122122966,
+        "last_charge_balance_error": -1.118775884816615e-15,
+        "last_crossing": 300.6497730027558,
+        "last_mode_energy_fraction": 0.9999731830913335,
+        "late_frequency": 0.41274865990682813,
+        "max_charge_balance_error": 1.118775884816615e-15,
+        "max_core_peak_shift": 0.00013500854723498673,
+        "max_local_chi": 0.0005,
+        "measured_intervals": 19,
+        "outer_energy_sink": 2.8419221778831248e-05,
+        "signed_cycles": 20.001716159922267,
+        "total_energy_end": 2615.986054564046,
+        "total_energy_start": 2615.985981248702
+      },
+      "0.0010": {
+        "crossings": 100,
+        "duration": 1522.28,
+        "early_frequency": 0.4127512109130608,
+        "frequency": 0.4127487306469837,
+        "last_charge_balance_error": -6.393005056094942e-16,
+        "last_crossing": 1518.479332512402,
+        "last_mode_energy_fraction": 0.9999747361250656,
+        "late_frequency": 0.412748209591735,
+        "max_charge_balance_error": 1.438426137621362e-15,
+        "max_core_peak_shift": 0.00013498582768566538,
+        "max_local_chi": 0.001,
+        "measured_intervals": 99,
+        "outer_energy_sink": 3.50787157991627e-05,
+        "signed_cycles": 100.00009660248776,
+        "total_energy_end": 2615.986100122819,
+        "total_energy_start": 2615.9860448063705
+      },
+      "0.0020": {
+        "crossings": 20,
+        "duration": 304.48,
+        "early_frequency": 0.4127509690239787,
+        "frequency": 0.412751337848197,
+        "last_charge_balance_error": -7.991256320118678e-16,
+        "last_crossing": 300.649684093249,
+        "last_mode_energy_fraction": 0.9999731840643716,
+        "late_frequency": 0.4127487853229486,
+        "max_charge_balance_error": 9.589507584142415e-16,
+        "max_core_peak_shift": 0.00013489494950004105,
+        "max_local_chi": 0.002,
+        "measured_intervals": 19,
+        "outer_energy_sink": 2.84016305219907e-05,
+        "signed_cycles": 20.001722248174815,
+        "total_energy_end": 2615.986372393927,
+        "total_energy_start": 2615.9862990371516
+      },
+      "fine": {
+        "crossings": 20,
+        "duration": 304.46,
+        "early_frequency": 0.4127517956224522,
+        "frequency": 0.4127528821510281,
+        "last_charge_balance_error": -4.794164614914446e-16,
+        "last_crossing": 300.648986172689,
+        "last_mode_energy_fraction": 0.999993307472107,
+        "late_frequency": 0.41274952184869695,
+        "max_charge_balance_error": 1.1186384101467041e-15,
+        "max_core_peak_shift": 3.379239571970374e-05,
+        "max_local_chi": 0.001,
+        "measured_intervals": 19,
+        "outer_energy_sink": 1.7741798108740231e-06,
+        "signed_cycles": 20.00048325108394,
+        "total_energy_end": 2616.3292260467165,
+        "total_energy_start": 2616.3292214871976
+      },
+      "wide": {
+        "crossings": 20,
+        "duration": 304.48,
+        "early_frequency": 0.4127508905499696,
+        "frequency": 0.4127512326976772,
+        "last_charge_balance_error": -7.991256320118678e-16,
+        "last_crossing": 300.6497026815433,
+        "last_mode_energy_fraction": 0.9999738731606616,
+        "late_frequency": 0.41274841138657253,
+        "max_charge_balance_error": 1.917901516828483e-15,
+        "max_core_peak_shift": 0.00013498582768566538,
+        "max_local_chi": 0.001,
+        "measured_intervals": 19,
+        "outer_energy_sink": 4.768908446374933e-06,
+        "signed_cycles": 20.001717152633507,
+        "total_energy_end": 2615.986142234569,
+        "total_energy_start": 2615.9860448063705
+      }
+    },
+    "omega_chi": 0.4127499116739421,
+    "radial_branch_screen": true,
+    "refinements": [
+      {
+        "E_over_Q": 0.919419874495461,
+        "Q": 2845.6303907781817,
+        "center": 0.7426154720625691,
+        "dr": 0.05,
+        "eigenvalue": 0.17036164243601776,
+        "label": "fine",
+        "radius": 80,
+        "status": "solved",
+        "tail": 1.909101152771206e-11
+      },
+      {
+        "E_over_Q": 0.919412253680748,
+        "Q": 2845.280721015032,
+        "center": 0.7426140469967158,
+        "dr": 0.1,
+        "eigenvalue": 0.17036248958683914,
+        "label": "wide",
+        "radius": 160,
+        "status": "solved",
+        "tail": 4.195676940744048e-23
+      }
+    ],
+    "relative_frequency_error": 2.8613621105501155e-06,
+    "scope": "flat spherical matter, a=0; no Einstein evolution",
+    "selected_profile": {
+      "E": 2615.9859600628142,
+      "E_over_Q": 0.919412253680748,
+      "Q": 2845.280721015032,
+      "center": 0.7426140469967158,
+      "eigenvalue": 0.17036248958684702,
+      "hessians": {
+        "Lminus_l0": [
+          1.559706522487976e-14,
+          0.18325641138144128,
+          0.19254529899148395
+        ],
+        "Lminus_l1": [
+          0.050668085033228075,
+          0.19319393575903338,
+          0.19959254517078714
+        ],
+        "Lplus_l0": [
+          -0.02215427492560739,
+          0.19204015025186993,
+          0.19815296554822798
+        ],
+        "Lplus_l1": [
+          5.2206364076051806e-06,
+          0.19324551356280073,
+          0.19993139189136716
+        ]
+      },
+      "omega": 0.9,
+      "profile": "solved",
+      "profile_residual": 6.362688154126772e-13,
+      "tail_at_three_quarters": 1.9107662887011436e-11
+    },
+    "selection": "0.900",
+    "trial_profiles": [
+      {
+        "attempts": 7,
+        "omega": 0.868,
+        "profile": "unresolved"
+      },
+      {
+        "attempts": 8,
+        "omega": 0.875,
+        "profile": "unresolved"
+      },
+      {
+        "E": 2615.9859600628142,
+        "E_over_Q": 0.919412253680748,
+        "Q": 2845.280721015032,
+        "center": 0.7426140469967158,
+        "eigenvalue": 0.17036248958684702,
+        "hessians": {
+          "Lminus_l0": [
+            1.559706522487976e-14,
+            0.18325641138144128,
+            0.19254529899148395
+          ],
+          "Lminus_l1": [
+            0.050668085033228075,
+            0.19319393575903338,
+            0.19959254517078714
+          ],
+          "Lplus_l0": [
+            -0.02215427492560739,
+            0.19204015025186993,
+            0.19815296554822798
+          ],
+          "Lplus_l1": [
+            5.2206364076051806e-06,
+            0.19324551356280073,
+            0.19993139189136716
+          ]
+        },
+        "omega": 0.9,
+        "profile": "solved",
+        "profile_residual": 6.362688154126772e-13,
+        "tail_at_three_quarters": 1.9107662887011436e-11
+      },
+      {
+        "E": 354.54585461911637,
+        "E_over_Q": 0.9777126060565061,
+        "Q": 362.62788515035845,
+        "center": 0.7402287149499772,
+        "eigenvalue": 0.2487757595136126,
+        "hessians": {
+          "Lminus_l0": [
+            -2.29126304423313e-14,
+            0.11818076794375768,
+            0.12351045187505383
+          ],
+          "Lminus_l1": [
+            0.11939452429906412,
+            0.12379779484747416,
+            0.12910099720657814
+          ],
+          "Lplus_l0": [
+            -0.09719901801798508,
+            0.11817409622121708,
+            0.12349269691768486
+          ],
+          "Lplus_l1": [
+            2.0827662572416294e-05,
+            0.11958009498719552,
+            0.12590989157839017
+          ]
+        },
+        "omega": 0.94,
+        "profile": "solved",
+        "profile_residual": 3.402833570476105e-14,
+        "tail_at_three_quarters": 2.2342074743966915e-10
+      }
+    ],
+    "unassessed_stability": "l>=2, nonspherical and nonlinear fragmentation not tested",
+    "unresolved_profile_samples": [
+      "0.875",
+      "0.868"
+    ]
+  },
+  "supersedes": null
+}

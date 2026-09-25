@@ -1,0 +1,76 @@
+[
+  {
+    "amplitude": 0.0,
+    "boundary": "Dirichlet with outer dissipative layer",
+    "dt": 0.04,
+    "initial_charge": 2845.280721015032,
+    "initial_mode_energy": 0.0,
+    "sample_stride": 20,
+    "saved_samples": 382,
+    "sink_charge": 1.849262223779819e-05,
+    "sink_energy": 2.8420395885024353e-05,
+    "steps": 7612
+  },
+  {
+    "amplitude": 0.0005,
+    "boundary": "Dirichlet with outer dissipative layer",
+    "dt": 0.04,
+    "initial_charge": 2845.280721015032,
+    "initial_mode_energy": 1.6859795955499404e-06,
+    "sample_stride": 20,
+    "saved_samples": 382,
+    "sink_charge": 1.849074453359898e-05,
+    "sink_energy": 2.8419221778831248e-05,
+    "steps": 7612
+  },
+  {
+    "amplitude": 0.001,
+    "boundary": "Dirichlet with outer dissipative layer",
+    "dt": 0.04,
+    "initial_charge": 2845.280721015032,
+    "initial_mode_energy": 6.743918382199762e-06,
+    "sample_stride": 20,
+    "saved_samples": 1904,
+    "sink_charge": 2.3251662778433432e-05,
+    "sink_energy": 3.50787157991627e-05,
+    "steps": 38057
+  },
+  {
+    "amplitude": 0.002,
+    "boundary": "Dirichlet with outer dissipative layer",
+    "dt": 0.04,
+    "initial_charge": 2845.280721015032,
+    "initial_mode_energy": 2.6975673528799046e-05,
+    "sample_stride": 20,
+    "saved_samples": 382,
+    "sink_charge": 1.846258425159063e-05,
+    "sink_energy": 2.84016305219907e-05,
+    "steps": 7612
+  },
+  {
+    "amplitude": 0.001,
+    "boundary": "Dirichlet with outer dissipative layer",
+    "dt": 0.02,
+    "initial_charge": 2845.630390778181,
+    "initial_mode_energy": 6.743251848697569e-06,
+    "refinement": "fine",
+    "sample_stride": 40,
+    "saved_samples": 382,
+    "sink_charge": 1.1533491638293632e-06,
+    "sink_energy": 1.7741798108740231e-06,
+    "steps": 15223
+  },
+  {
+    "amplitude": 0.001,
+    "boundary": "Dirichlet with outer dissipative layer",
+    "dt": 0.04,
+    "initial_charge": 2845.280721015032,
+    "initial_mode_energy": 6.743918382199293e-06,
+    "refinement": "wide",
+    "sample_stride": 20,
+    "saved_samples": 382,
+    "sink_charge": -1.6444374525405167e-06,
+    "sink_energy": 4.768908446374933e-06,
+    "steps": 7612
+  }
+]

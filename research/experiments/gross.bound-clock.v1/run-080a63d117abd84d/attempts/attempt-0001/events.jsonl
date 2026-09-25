@@ -1,0 +1,15 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T18:57:49.293341Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":550,"max_memory_mb":768,"max_output_mb":35,"max_wall_seconds":650}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T18:57:49.295536Z","type":"attempt-running"}
+{"payload":{"algorithm":"radial-bvp-discrete-newton-eigen-verlet-v1","pid":18},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T18:57:49.595894Z","type":"worker-started"}
+{"payload":{"eigenvalue":0.2487757595136126,"omega":0.94},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T18:57:49.628788Z","type":"profile-solved"}
+{"payload":{"eigenvalue":0.17036248958684702,"omega":0.9},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T18:57:49.660333Z","type":"profile-solved"}
+{"payload":{"omega":0.875},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T18:57:50.883809Z","type":"profile-unresolved"}
+{"payload":{"omega":0.868},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T18:57:51.584453Z","type":"profile-unresolved"}
+{"payload":{"amplitude":0.0,"steps":7612},"schema_version":"research-event-v1","sequence":8,"stage":"run","timestamp":"2026-09-25T18:57:52.648317Z","type":"evolution-completed"}
+{"payload":{"amplitude":0.0005,"steps":7612},"schema_version":"research-event-v1","sequence":9,"stage":"run","timestamp":"2026-09-25T18:57:53.634774Z","type":"evolution-completed"}
+{"payload":{"amplitude":0.001,"steps":38057},"schema_version":"research-event-v1","sequence":10,"stage":"run","timestamp":"2026-09-25T18:57:58.651073Z","type":"evolution-completed"}
+{"payload":{"amplitude":0.002,"steps":7612},"schema_version":"research-event-v1","sequence":11,"stage":"run","timestamp":"2026-09-25T18:57:59.679990Z","type":"evolution-completed"}
+{"payload":{"label":"fine","steps":15223},"schema_version":"research-event-v1","sequence":12,"stage":"run","timestamp":"2026-09-25T18:58:02.125981Z","type":"refinement-evolution-completed"}
+{"payload":{"label":"wide","steps":7612},"schema_version":"research-event-v1","sequence":13,"stage":"run","timestamp":"2026-09-25T18:58:03.351186Z","type":"refinement-evolution-completed"}
+{"payload":{"selection":"0.900"},"schema_version":"research-event-v1","sequence":14,"stage":"run","timestamp":"2026-09-25T18:58:03.351926Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":15,"stage":"runtime","timestamp":"2026-09-25T18:58:03.434237Z","type":"attempt-completed"}

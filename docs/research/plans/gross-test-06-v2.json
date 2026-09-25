@@ -1,0 +1,227 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.bound-clock.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-clock.v1",
+  "question": "Does the proposed SS OCF 1 Q-ball support a bound, locally readable clock for 100 calibrated periods?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7.2-7.3, 8.1, 9.1-9.5 and 15.6",
+    "docs/research/gross-test-06.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-06.json",
+  "runtime_config_sha256": "9979fe8a47fdc39b030b337fd1209d1584caea2789b35ccb6a9059615db28774",
+  "method": {
+    "action": "SS OCF 1 flat decoupling action, U(s)=s-s²+s³, V_chi(s)=0.25-0.4s+0.2s², zeta=0.1; Phi=F(r)exp(-i omega_Q t)u0, a=0.",
+    "units": "c=hbar=m=1, (+---); r and t in m^-1, fields in m, Omega² in m², Q dimensionless.",
+    "domain": "Spherical radius R=80 with h=0.1; trial omega_Q/m=0.868,0.875,0.90,0.94; selected smallest solved bound E/Q<1 candidate.",
+    "boundaries": "Regular r=0, Dirichlet radial u=r Phi and w=r chi at R; outward damping gamma=0.08((r-60)/20)² on momenta in outer layer, logged charge/energy sink. R=160 independent control with sponge at 140.",
+    "initial_data": "Continuous regular BVP with fixed seed radii 5,10,20,40,60 projected by Newton to finite difference grid; chi=A f(r), pi_chi=0, pi_Phi=-i omega_Q Phi, amplitudes A=0,0.0005,0.001,0.002. Deterministic root seed 2026092506 unused by solver. Branch continuation begins from the nearest higher solved trial when fixed seeds fail; no physical parameters or trial frequencies change.",
+    "solver": "SciPy solve_bvp and tridiagonal discrete Newton; independent symmetric-tridiagonal radial chi eigenproblem and core L+/L- Hessian screen; second-order kick-drift-kick reciprocal Phi/chi evolution. Nominal 100 periods, other amplitudes 20, h/2 and 2R 20. Documented numerical recovery: if fixed seeds do not converge, continue the last solved core in omega_Q with steps <=0.005 using the same regular BVP, and project to the same stencil; preserve all earlier failures.",
+    "tolerances": "Profile residual <2e-10; 5 times eigen error margin; mesh/domain and amplitude frequency <1%; local eigenfrequency agreement <2%; nominal mode-energy loss and charge drift <1%; finite sample crossing count >=99. Resources 650s wall/768MiB/35MiB."
+  },
+  "hypotheses": [
+    {
+      "id": "usable-clock",
+      "prediction": "A positive nodeless core supplies a mode with 0<Omega²<0.25 that ticks locally and retains >99% mode energy and core charge for 100 nominal periods."
+    },
+    {
+      "id": "unusable-clock",
+      "prediction": "No accepted core, no bound mode, unstable core, frequency error or leakage beyond gates prevents a calibrated detector in the tested regime."
+    }
+  ],
+  "controls": [
+    {
+      "id": "nu-off",
+      "purpose": "test whether trapping coefficient creates the mode",
+      "method": "set nu=0 in independent finite-box eigenproblem while preserving eta=0.2 and core"
+    },
+    {
+      "id": "unexcited",
+      "purpose": "exclude silent phase as local ticking",
+      "method": "run chi=pi_chi=0 for 20 periods; log local chi and stationary core density/projector"
+    },
+    {
+      "id": "amplitude",
+      "purpose": "measure weak-amplitude shifts and backreaction",
+      "method": "evolve peak chi=0.0005,0.001,0.002, nominal for 100 periods and others for 20"
+    },
+    {
+      "id": "mesh-domain",
+      "purpose": "separate discretization from box effect",
+      "method": "solve profile and spectrum at h/2,R=80 and h,R=160; evolve nominal amplitude for 20 periods on each"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "profiles",
+      "observable": "Trial core profiles",
+      "pass_if": "Four frequencies attempted, selected positive nodeless profile with discrete residual <2e-10 and F(0.75R)<1e-5",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "core-energetics",
+      "observable": "Charge and core energy",
+      "pass_if": "Selected E/Q<1; charge over 100 periods assessed in charge-ledger",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "bound-spectrum",
+      "observable": "Clock bound eigenvalue",
+      "pass_if": "0<Omega_chi²<0.25 and distance from zero and threshold >5 max(|lambda_h-lambda_h/2|/3, |lambda_h-lambda_2R|)",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "trapping-control",
+      "observable": "No-well and quiet-core controls",
+      "pass_if": "nu=0 lowest finite-box eigenvalue >=0.25; unexcited chi is identically zero in the measured trace",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "grid-domain",
+      "observable": "Independent mesh and domain controls",
+      "pass_if": "Relative eigenvalue differences and 20-period local frequency differences from both h/2 and 2R <1%",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "branch-screen",
+      "observable": "Radial stability screen",
+      "pass_if": "Adjacent Q slope negative; radial L+ has one negative and next positive eigenvalue; radial L- phase and l=1 translation eigenvalues within 0.03 of zero; central core peak drifts <1% in nominal evolution",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "local-record",
+      "observable": "Local zero-crossing frequency",
+      "pass_if": ">=99.3 signed cycles in a 100 eigenperiod window, >=99 positive-going crossings and relative frequency difference from eigenfrequency <2%",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "lifetime",
+      "observable": "Trapped mode lifetime",
+      "pass_if": "Absolute projected mode-energy change <1% over 100 eigenperiods at peak chi=0.001",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "amplitude",
+      "observable": "Amplitude dependence",
+      "pass_if": "Maximum relative frequency difference among half/base/double amplitude over first 20 periods <1%",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    },
+    {
+      "id": "charge-ledger",
+      "observable": "Charge after boundary sink",
+      "pass_if": "Maximum absolute (Q+outer sink-Q_initial)/Q_initial <1% for nominal 100 periods",
+      "fail_if": "Complete finite evidence violates the stated locked inequality or qualitative control.",
+      "unresolved_if": "Required branch, refined solution or saved finite record is absent or nonfinite; do not promote an incomplete branch.",
+      "uncertainty": "Mesh error by h versus h/2 divided by three plus independent R versus 2R; deterministic finite window, no statistical confidence."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "core-and-well",
+      "question": "Which trial core supplies a spatial mass well and localized clock eigenfunction?",
+      "role": "evidentiary",
+      "observables": ["F(r)", "V_chi(F²)", "f_chi(r)"],
+      "representation": "PNG/SVG/PDF with exact CSV and raw NPZ",
+      "competing_signatures": {
+        "usable-clock": "bounded oscillation, independent eigenvalue and converged lifetime",
+        "unusable-clock": "missing mode, unresolved error or lost local oscillations"
+      },
+      "controls": ["mesh-domain", "nu-off"],
+      "uncertainty": "finite radial mesh and box, 20-period refinement/control windows; nonspherical dynamics excluded",
+      "source_data": ["plot-data/radial.csv", "plot-data/summary.json"],
+      "transformations": [
+        "radial fields divided by r; no smoothing; first 60 units displayed"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "bound-control",
+      "question": "Does the bound eigenvalue survive resolution controls and disappear without trapping?",
+      "role": "evidentiary",
+      "observables": ["E/Q", "lowest eigenvalue", "continuum threshold"],
+      "representation": "PNG/SVG/PDF with exact CSV and raw NPZ",
+      "competing_signatures": {
+        "usable-clock": "bounded oscillation, independent eigenvalue and converged lifetime",
+        "unusable-clock": "missing mode, unresolved error or lost local oscillations"
+      },
+      "controls": ["nu-off", "mesh-domain"],
+      "uncertainty": "finite radial mesh and box, 20-period refinement/control windows; nonspherical dynamics excluded",
+      "source_data": [
+        "plot-data/profiles.csv",
+        "plot-data/refinements.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": ["plot saved eigenvalues directly; no fit"],
+      "required": true
+    },
+    {
+      "figure_id": "local-trace",
+      "question": "Does a local field trace tick for 100 periods when the unexcited core does not?",
+      "role": "evidentiary",
+      "observables": ["chi at r=h", "zero crossing frequency"],
+      "representation": "PNG/SVG/PDF with exact CSV and raw NPZ",
+      "competing_signatures": {
+        "usable-clock": "bounded oscillation, independent eigenvalue and converged lifetime",
+        "unusable-clock": "missing mode, unresolved error or lost local oscillations"
+      },
+      "controls": ["unexcited", "amplitude"],
+      "uncertainty": "finite radial mesh and box, 20-period refinement/control windows; nonspherical dynamics excluded",
+      "source_data": ["plot-data/evolutions.csv", "plot-data/summary.json"],
+      "transformations": [
+        "display first and last five periods without smoothing; normalize time by independent eigenfrequency"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "lifetime-convergence",
+      "question": "Does the mode persist with controlled charge, amplitude, grid and boundary errors?",
+      "role": "evidentiary",
+      "observables": [
+        "mode energy fraction",
+        "charge balance",
+        "frequency convergence"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV and raw NPZ",
+      "competing_signatures": {
+        "usable-clock": "bounded oscillation, independent eigenvalue and converged lifetime",
+        "unusable-clock": "missing mode, unresolved error or lost local oscillations"
+      },
+      "controls": ["mesh-domain", "amplitude"],
+      "uncertainty": "finite radial mesh and box, 20-period refinement/control windows; nonspherical dynamics excluded",
+      "source_data": ["plot-data/evolutions.csv", "plot-data/summary.json"],
+      "transformations": [
+        "project on independently normalized eigenmode; account outer damping sink in charge ledger"
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 650,
+    "max_memory_mb": 768,
+    "max_output_mb": 35
+  },
+  "prohibited_inferences": [
+    "Flat spherical lifetime is not full nonspherical stability or a nonlinear Einstein core.",
+    "A preselected core and mass well do not derive spacetime or the knot/particle spectrum.",
+    "Test 6 does not evaluate neutral reception, recoil or observer-invariant remote records.",
+    "A trial profile that does not converge with the bounded BVP is unresolved, not evidence of absence of a Q-ball."
+  ],
+  "locked_sha256": "0eeda2dfd7bf4131013bafdfc0fb0e173449a571d79dfa6ca464a20618c4a348"
+}

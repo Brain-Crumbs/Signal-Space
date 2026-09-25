@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bounded SS OCF 1 Test 6 flat clock registration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "const": "gross.bound-clock.v1"
+    },
+    "model_id": {
+      "const": "signal-space.ss-ocf-1.flat-clock.v1"
+    },
+    "parameters": {
+      "const": {
+        "frequencies": [0.868, 0.875, 0.9, 0.94],
+        "radius": 80,
+        "dr": 0.1,
+        "dt": 0.04,
+        "cycles": 100,
+        "control_cycles": 20,
+        "sample_stride": 20,
+        "sponge_start": 60,
+        "nu": 0.4,
+        "amplitudes": [0.0005, 0.001, 0.002]
+      }
+    },
+    "units": {
+      "const": {
+        "mass": "m=1",
+        "length": "m^-1",
+        "time": "m^-1",
+        "signal": "c=hbar=1"
+      }
+    },
+    "seeds": {
+      "const": {
+        "root": 2026092506
+      }
+    },
+    "resources": {
+      "const": {
+        "max_cpu_seconds": 550,
+        "max_wall_seconds": 650,
+        "max_memory_mb": 768,
+        "max_output_mb": 35
+      }
+    },
+    "analysis": {
+      "const": {
+        "profile_residual_max": 2e-10,
+        "tail_max": 1e-5,
+        "bound_margin_factor": 5,
+        "mode_energy_loss_max": 0.01,
+        "charge_drift_max": 0.01,
+        "frequency_relative_max": 0.02,
+        "amplitude_shift_max": 0.01,
+        "convergence_relative_max": 0.01
+      }
+    },
+    "report": {
+      "const": {
+        "title": "Signal Space / GROSS Test 6: Bound Clock Calibration"
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "center": -0.7128828346425312,
+    "guess_radius": 5.0,
+    "message": "The maximum number of mesh nodes is exceeded.",
+    "success": false,
+    "tail": 2.2246714638546147e-20,
+    "valid": false
+  },
+  {
+    "center": 1.7471908167216794e-08,
+    "guess_radius": 10.0,
+    "message": "The algorithm converged to the desired accuracy.",
+    "success": true,
+    "tail": 7.874799269868794e-26,
+    "valid": false
+  },
+  {
+    "center": 0.6716216446479596,
+    "guess_radius": 20.0,
+    "message": "The maximum number of mesh nodes is exceeded.",
+    "success": false,
+    "tail": 1.8300465711127753e-18,
+    "valid": false
+  },
+  {
+    "center": 0.7176030397423984,
+    "guess_radius": 40.0,
+    "message": "The maximum number of mesh nodes is exceeded.",
+    "success": false,
+    "tail": 6.251232179642998e-08,
+    "valid": false
+  },
+  {
+    "center": 0.7176030397423969,
+    "guess_radius": 60.0,
+    "message": "The maximum number of mesh nodes is exceeded.",
+    "success": false,
+    "tail": 0.0002329063124193808,
+    "valid": false
+  }
+]

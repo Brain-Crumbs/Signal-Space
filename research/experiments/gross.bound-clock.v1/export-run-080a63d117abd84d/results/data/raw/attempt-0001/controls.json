@@ -1,0 +1,17 @@
+{
+  "nu-off": {
+    "eigenvalue": 0.251710689531893,
+    "threshold": 0.25
+  },
+  "nu-on": {
+    "eigenvalue": 0.17036248958684702,
+    "threshold": 0.25
+  },
+  "unexcited": {
+    "chi_initial": 0.0,
+    "chi_momentum_initial": 0.0,
+    "density_static": true,
+    "local_chi_zero_by_uniqueness": true,
+    "projector_static": true
+  }
+}
