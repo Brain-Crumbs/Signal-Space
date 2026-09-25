@@ -1,0 +1,92 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "numerical-audit",
+      "role": "evidentiary",
+      "question": "Do conservation and equivalent descriptions survive numerical refinement?",
+      "reading": "Largest event conservation residual 3.51e-10; exact-solution difference 2.45e-11; tolerance-halving difference 2.14e-11. Compare with 1e-9.",
+      "significance": "Checks integrated dynamics against a closed solution and tests description invariance under legal schedules and local frames.",
+      "limitation": "Finite circuit and finite states. U(2) covariance is not Lorentz covariance; numerical tolerance refinement is not a continuum limit. Exact zeros use a display floor.",
+      "source_data": [
+        "results/data/plot-data/residuals.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/numerical-audit.figure.json",
+      "transformations": [
+        "max across all samples, lambdas, gates and saved times; half tolerance compared with baseline",
+        "log display max(value,1e-18); exact zeros retained"
+      ],
+      "files": [
+        "figures/static/numerical-audit.png",
+        "figures/static/numerical-audit.svg",
+        "figures/static/numerical-audit.pdf"
+      ]
+    },
+    {
+      "figure_id": "matrix-balance",
+      "role": "evidentiary",
+      "question": "Does reciprocal memory exchange close the matrix-charge ledger?",
+      "reading": "Wave and memory charge components exchange with opposite signs. The smallest frozen-memory relative charge defect across all cases is 0.198.",
+      "significance": "Tests whether reciprocal memory dynamics closes the conserved matrix ledger; a prescribed frozen projector is an externally driven control.",
+      "limitation": "Displayed trajectory is the first gate of preparation 0. The Pauli component is basis dependent; the full Frobenius residual is the acceptance observable. This is not mechanical recoil.",
+      "source_data": [
+        "results/data/plot-data/balance.csv"
+      ],
+      "spec_file": "results/figure-specs/matrix-balance.figure.json",
+      "transformations": [
+        "preparation 0, first event; signed Pauli-z changes and Frobenius total changes",
+        "log display max(value,1e-18); initial zeros retained"
+      ],
+      "files": [
+        "figures/static/matrix-balance.png",
+        "figures/static/matrix-balance.svg",
+        "figures/static/matrix-balance.pdf"
+      ]
+    },
+    {
+      "figure_id": "order-controls",
+      "role": "evidentiary",
+      "question": "Can the audit distinguish physical interventions from rescheduling?",
+      "reading": "Smallest shared-memory projector change 0.0673; smallest frozen-memory defect 0.198. Every preparation is compared with 1e-4.",
+      "significance": "Distinguishes changes to physical event ordering and reciprocal feedback from permissible rescheduling of independent events.",
+      "limitation": "Generic noncommutativity is expected, not guaranteed for all states. These fixed controls do not define new candidate models or test propagation.",
+      "source_data": [
+        "results/data/plot-data/controls.csv"
+      ],
+      "spec_file": "results/figure-specs/order-controls.figure.json",
+      "transformations": [
+        "every preparation and both lambdas; no fit or smoothing",
+        "physical interventions, not equivalent descriptions"
+      ],
+      "files": [
+        "figures/static/order-controls.png",
+        "figures/static/order-controls.svg",
+        "figures/static/order-controls.pdf"
+      ]
+    },
+    {
+      "figure_id": "causal-incidence",
+      "role": "evidentiary",
+      "question": "Do event outputs depend only on their causal ancestors?",
+      "reading": "Green events descend from initial wave 0. Gray heatmap cells are nonancestors; their largest response is 0. Step-halving Jacobian difference is 4.24e-08.",
+      "significance": "Tests participant-only causal dependence and includes a disconnected branch as a null. Memory-response and intervention checks separately verify nontrivial dynamics.",
+      "limitation": "Incidence is supplied, not derived space. Jacobians cover one preparation, both couplings and physical memory tangents; no universal metric is inferred.",
+      "source_data": [
+        "results/data/plot-data/incidence.json",
+        "results/data/plot-data/jacobian.csv"
+      ],
+      "spec_file": "results/figure-specs/causal-incidence.figure.json",
+      "transformations": [
+        "max Jacobian norm over both lambdas and finite-difference steps",
+        "nonancestors gray; causal entries log10, color range clipped below -3; exact data retained",
+        "layout is incidence, not physical space or time"
+      ],
+      "files": [
+        "figures/static/causal-incidence.png",
+        "figures/static/causal-incidence.svg",
+        "figures/static/causal-incidence.pdf"
+      ]
+    }
+  ]
+}

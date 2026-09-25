@@ -16,7 +16,8 @@ from experiment_contract import digest, validate_bundle, validate_plan, verify_r
 
 ROOT = Path(__file__).resolve().parents[2]
 # A new experiment requires a reviewed, locked plan and its report/assessment adapter.
-RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json"}
+RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
+           "gross-test-02": "docs/research/plans/gross-test-02.json"}
 
 
 def write_json(path: Path, value: object) -> None:
@@ -26,7 +27,10 @@ def write_json(path: Path, value: object) -> None:
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
     classification = manifest["scientific_classification"]
+    reciprocal = manifest.get("experiment_id") == "gross.reciprocal-events.v1"
     next_step = (
+        "Proceed to Test 3 exact-router dispersion with orthogonal, oblique and collinear triads, reversed order and full-zone inspection; keep physical memory modes for Test 4 and directional controls for Test 11."
+        if classification == "pass" and reciprocal else
         "Proceed to the Test 2 reciprocal-event conservation derivation; Test 5's action audit is an independent branch."
         if classification == "pass" else
         "Resolve the failed, unresolved or unevaluated checks before using this run to support the next experiment."
@@ -39,9 +43,11 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     lines += [f"| {c['id']} | {c['status']} | {c.get('value', 'not reported')} |" for c in checks["checks"]]
     lines += ["", "Evidence: `results/tables/checks.json`, `results/tables/analysis.json`, and the exact plotted data in `results/data/plot-data/`.",
               "", "## Meaning and limits", "",
-              "The checks test algebra and its numerical implementation in the locked conditioning domain. They do not establish physical propagation, clock behavior, or emergent spacetime. Finite sampling does not replace an exact proof.",
+              ("The checks audit a finite reciprocal circuit, its conserved matrix ledger, permissible scheduling and causal Jacobian. Exact-solution and half-tolerance comparisons control integration error. Flat transport and U(2) covariance do not establish Lorentz covariance, mechanical recoil, a clock or an emergent metric. Spatial boundary and continuum convergence are not evaluated because no spatial mesh is supplied."
+               if reciprocal else "The checks test algebra and its numerical implementation in the locked conditioning domain. They do not establish physical propagation, clock behavior, or emergent spacetime. Finite sampling does not replace an exact proof."),
               "", "## Next calculation", "", next_step, "",
-              "The next discrimination is whether the specified reciprocal update conserves its declared aggregate under permissible event rescheduling. Derive the invariant and ordering assumptions before coding that dynamics.",
+              ("Competing signatures for the next calculation: long-wavelength dispersion follows the projector Gram matrix; collinear triads become degenerate; reversed order changes finite-band terms. Do not hide stationary memory modes or identify the circuit labels with measured spacetime."
+               if reciprocal else "The next discrimination is whether the specified reciprocal update conserves its declared aggregate under permissible event rescheduling. Derive the invariant and ordering assumptions before coding that dynamics."),
               "", "Review every figure and its limitations before promoting the result to a research conclusion."]
     return "\n".join(lines) + "\n"
 

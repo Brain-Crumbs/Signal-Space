@@ -1,0 +1,13 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T05:22:55.037556Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":120,"max_memory_mb":512,"max_output_mb":32,"max_wall_seconds":120}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T05:22:55.040467Z","type":"attempt-running"}
+{"payload":{"algorithm":"DOP853-circuit-v1","pid":25},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T05:22:55.494103Z","type":"worker-started"}
+{"payload":{"lambda":0,"sample":0},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T05:23:04.837660Z","type":"circuit-completed"}
+{"payload":{"lambda":0.1,"sample":0},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T05:23:14.376890Z","type":"circuit-completed"}
+{"payload":{"lambda":0,"sample":1},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T05:23:14.638719Z","type":"circuit-completed"}
+{"payload":{"lambda":0.1,"sample":1},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T05:23:14.929404Z","type":"circuit-completed"}
+{"payload":{"lambda":0,"sample":2},"schema_version":"research-event-v1","sequence":8,"stage":"run","timestamp":"2026-09-25T05:23:15.219265Z","type":"circuit-completed"}
+{"payload":{"lambda":0.1,"sample":2},"schema_version":"research-event-v1","sequence":9,"stage":"run","timestamp":"2026-09-25T05:23:15.493372Z","type":"circuit-completed"}
+{"payload":{"lambda":0,"sample":3},"schema_version":"research-event-v1","sequence":10,"stage":"run","timestamp":"2026-09-25T05:23:15.769043Z","type":"circuit-completed"}
+{"payload":{"lambda":0.1,"sample":3},"schema_version":"research-event-v1","sequence":11,"stage":"run","timestamp":"2026-09-25T05:23:16.050563Z","type":"circuit-completed"}
+{"payload":{"circuits":8},"schema_version":"research-event-v1","sequence":12,"stage":"run","timestamp":"2026-09-25T05:23:16.051369Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":13,"stage":"runtime","timestamp":"2026-09-25T05:23:16.147101Z","type":"attempt-completed"}

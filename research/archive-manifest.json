@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 441,
+  "file_count": 664,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 12931,
-      "sha256": "b277dfb90b03dc7e1747453d207b8b787fcf7f174f1b9cba28a5b315ce9568a0"
+      "size": 14119,
+      "sha256": "5370ef0694485b5f49bbb46ef9ff40baf5b702641046d8c2f9a543015a56e765"
     },
     {
       "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/Experiment_Analysis_and_Next.md",
@@ -967,6 +967,1121 @@
       "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/resolved-config.json",
       "size": 558,
       "sha256": "b40ef9c9fa4f0f03640acfe953270e3241c425f72438bcb5983112c33f01f21b"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/Experiment_Analysis_and_Next.md",
+      "size": 6353,
+      "sha256": "72981f28ee66cd639bb137684b7a1e3d670b588da7e45abfd82c7cb6f04ff697"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/Experiment_Results.pdf",
+      "size": 296660,
+      "sha256": "d68baa33543fe7bc2143a08fcf836fc8bab2f33668a1db5f1c4c9e6258856cf1"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/Experimental_Setup.pdf",
+      "size": 37541,
+      "sha256": "c7b7dc315be3e73950fb0978f0545f7d8efa8c8f85c1d2fb04158519c8c080a3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/export.json",
+      "size": 16472,
+      "sha256": "f1635de6e2827bd8edb6ad282bdef77619384c5e2422a7f0e3dcb7bcc4d21bea"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/figure_index.json",
+      "size": 4945,
+      "sha256": "fa9e7618e37a60f7d22281a98bb23a9dcd2c8e72f826d952d9940b7614b8a53e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/causal-incidence.pdf",
+      "size": 24161,
+      "sha256": "0a0cdec9a82b7e7eadba641c67e888fcfd594e1330822280d9aec896d904f31c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/causal-incidence.png",
+      "size": 150398,
+      "sha256": "8e9e837971965c565387e88bc2a788a5e58da06d8a720229d2bb88ee12afe4f3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/causal-incidence.svg",
+      "size": 81272,
+      "sha256": "73efedcc645fbde9d3dc5efa4efde6e205ff38f60295fbe2492ead576f01bdf2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/matrix-balance.pdf",
+      "size": 24316,
+      "sha256": "6f510bcfe517bd59bdf80c32251deed3d59eb517255c1c9146088810a047132e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/matrix-balance.png",
+      "size": 151709,
+      "sha256": "f05f034e93d83af8722a73440fb090f2cd594c40051612e706bdd30a2fa104fa"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/matrix-balance.svg",
+      "size": 105863,
+      "sha256": "fc2e13248592dfec2c63ff37cde1e2063be59e26ce1145328a554be08ad8cdfd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/numerical-audit.pdf",
+      "size": 17718,
+      "sha256": "2f403e03edae2289b6e06810cca4e36dcf1ff4a834a86ed59fa253999ea9cf9a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/numerical-audit.png",
+      "size": 68573,
+      "sha256": "b14a35416104af5d1834ce5fe50de2c96f4aee6922374bdd518ba49d5db0e36f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/numerical-audit.svg",
+      "size": 59655,
+      "sha256": "fd686a5deb0f604f7d02da843ae6cba61e40517b8dcd436eef332a664d31f9e5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/order-controls.pdf",
+      "size": 16299,
+      "sha256": "c991a4b071e5761289a1b8fc3b098d29899f11dab756ba578bedb967353ed02f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/order-controls.png",
+      "size": 67939,
+      "sha256": "ac3b34b22c3b351f5170ca6f3a12ab1dae7634144a63f5b9dd40f5621928f60e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/figures/static/order-controls.svg",
+      "size": 62101,
+      "sha256": "1120a4a128aad1e9b4af797cf17133215a47ffde157b99a81ce562eeabdbd33b"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/plan.json",
+      "size": 14396,
+      "sha256": "0394bf2e7aa78a23491636edfc7cac173fe97c6873f5ce508202f8d7e933fed1"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/README.md",
+      "size": 1276,
+      "sha256": "c9a6e5e9357bd634c5aa17c69df38fd201b1e47dc7dc2803c68e5697e332b5e7"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/balance.csv",
+      "size": 3488,
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/controls.csv",
+      "size": 570,
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/incidence.json",
+      "size": 2473,
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/jacobian.csv",
+      "size": 15403,
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/overlaps.csv",
+      "size": 1606,
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/residuals.csv",
+      "size": 23529,
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/derived/summary.json",
+      "size": 681,
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/balance.csv",
+      "size": 3488,
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/controls.csv",
+      "size": 570,
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/incidence.json",
+      "size": 2473,
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/jacobian.csv",
+      "size": 15403,
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/overlaps.csv",
+      "size": 1606,
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/residuals.csv",
+      "size": 23529,
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/plot-data/summary.json",
+      "size": 681,
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/execution.json",
+      "size": 1122,
+      "sha256": "f6e8bf868faee6e419119ddc1c67762bdaa06ab8e32dcbaf5bfbe4ec40b14adf"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/jacobian-lambda-0.1.npz",
+      "size": 73355,
+      "sha256": "1745ceb8d5126bb64a10d00871db28cf5198f35bafa6d6376718664bc4952191"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/jacobian-lambda-0.npz",
+      "size": 71398,
+      "sha256": "0dd5d4fa0ca5a40210700e361e63b5c9070b6a8ff88cf391966831e1042c4a7d"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/rng-end.json",
+      "size": 190,
+      "sha256": "ebb892f0174bbf373998854b30169c44ec4db96c4c5484d747e524c5c650eb27"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/rng-start.json",
+      "size": 190,
+      "sha256": "bfb27bfbdc6feebd6e771ca99198e53fa0fbcc0ec28d2206fdfd516d5cfe1218"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-00-lambda-0.1.npz",
+      "size": 68667,
+      "sha256": "1d3e3b86289203a99bdb049adb71150e320e595d7fd77feb7583198033daa068"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-00-lambda-0.npz",
+      "size": 68640,
+      "sha256": "976378acbc1cd95adb328fa69c578cd15c432e16ca2997d6279f8eed1df51c6e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-01-lambda-0.1.npz",
+      "size": 68699,
+      "sha256": "fafc52be1f4e14d70d55572efec233d7c810b25a6542eb1e48f6509cffcbcbaf"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-01-lambda-0.npz",
+      "size": 68603,
+      "sha256": "696cf350bc1b700c17f336f0b53958ceb7d3ae781dc6154a7c7b882a7a3965f6"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-02-lambda-0.1.npz",
+      "size": 68630,
+      "sha256": "da3e74ec0a40981bb3b0f8b64753fe2ccfc0f6b494c8bdc77d8ce98af97148e5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-02-lambda-0.npz",
+      "size": 68626,
+      "sha256": "cf258040c53b90bf057cb7cffdc3dc4ac3e08c89c06aaa0825180bacb6aa304a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-03-lambda-0.1.npz",
+      "size": 68661,
+      "sha256": "37fd3609071944475df971f069b768c0c89767a07e18c09a2b1623769c19eee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/data/raw/attempt-0001/sample-03-lambda-0.npz",
+      "size": 68561,
+      "sha256": "523625cb6984c2f2dd3214ec897b1f6671e7732b3bf346d559146fd66fe275d4"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/figure-specs/causal-incidence.figure.json",
+      "size": 771,
+      "sha256": "0bbe3598923b7e0dcb3982d35afd7d5e50f9499cf0d7634134db19d2afc3e5dc"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/figure-specs/matrix-balance.figure.json",
+      "size": 658,
+      "sha256": "f7276a79367bfc8456061c33aff52861e378a041d23bba01443f077b833e90ef"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/figure-specs/numerical-audit.figure.json",
+      "size": 704,
+      "sha256": "38215dfb4d07cee2fa6018680968591858ee64dd7628daf33fb78135f42b53f3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/figure-specs/order-controls.figure.json",
+      "size": 635,
+      "sha256": "7261eb4fbba1ff149849d9a717a8f0904d39b17389b7c6854b0d9a4138ac2563"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/__init__.py",
+      "size": 70,
+      "sha256": "773a483c668342f54b2d252d1418c6b0ad5ba434f55a147b9e5e3fe429814c43"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/__main__.py",
+      "size": 60,
+      "sha256": "6e40041537e992294f93ec2fddf9a77c4a3bc98c1a78f44458d19e64e1cc4cfb"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/analysis/__init__.py",
+      "size": 69,
+      "sha256": "c8a3e4a6b22fd75658eaa738367271a5eed3cde4e3600f25e437be88f64a2833"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/analysis/charged.py",
+      "size": 32935,
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/analysis/operators.py",
+      "size": 6386,
+      "sha256": "d6f59ddd93a3f8e7da5b11e511a30e9100981569978b4fc275d96a6ba7f7e906"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/analysis/reciprocal.py",
+      "size": 11770,
+      "sha256": "dac3004d873845a5edde65ce520cda26d181637dc7c6f5f0c6f4ddd864efb1df"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/analysis/synthetic.py",
+      "size": 2935,
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/cli.py",
+      "size": 6896,
+      "sha256": "41333857805258154ba44dfa47059741546c387edc2a39e15ed94e7e6dc59df2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/contracts/__init__.py",
+      "size": 149,
+      "sha256": "088648491bc037ec067e6b066f72289445407db07c56404d200e6ca612e00b38"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/contracts/e01.py",
+      "size": 3216,
+      "sha256": "cbde6313d7eb5bf1c5c6bd6df92bb4e0d47390ebbb1be5b2010b3b669dd89b54"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/contracts/generated.py",
+      "size": 1456,
+      "sha256": "c050a45fa317f5b90cec3f7d7a78c4ee4897f4d320add1e7d416cdaeebf2dd79"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/contracts/validation.py",
+      "size": 16015,
+      "sha256": "01041254107be4fc49ee1175669ed980e1d0e0344686bb507ae1eae183e4c16d"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/__init__.py",
+      "size": 308,
+      "sha256": "3d2a64b92f34435007b230d7d8e680ca4e5b37946d93b9e6a410ac2617b7774f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/base.py",
+      "size": 1653,
+      "sha256": "41ab6e8b770368c6a373e1f2429702fd9c3aee35891cf93faaa2f091b2dfc6c6"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/charged_worker.py",
+      "size": 11310,
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/charged.py",
+      "size": 6082,
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/operators.py",
+      "size": 4248,
+      "sha256": "0bcb0ea43bbfbfdb7ce2a1db4156692bc51e55ac0e161219791b44dc0077f6c8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/reciprocal.py",
+      "size": 4869,
+      "sha256": "93e41839832e27374158968213567d0dada8d920a387272192981678d18dec63"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/registry.py",
+      "size": 989,
+      "sha256": "36385f24fb9a526ef29255643a9185a7e02afb4b6b984d7f845b8cd0c888422f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/synthetic_worker.py",
+      "size": 5684,
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/experiments/synthetic.py",
+      "size": 5004,
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/models/__init__.py",
+      "size": 48,
+      "sha256": "f1c1bc09905be0aadc69485581ca35c071641d896df665b743a0830fc483be3e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/models/charged_scalar.py",
+      "size": 944,
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/models/operators.py",
+      "size": 1324,
+      "sha256": "7f7cac1968e78ed5da8c8bd6b7aacd25911d4dd924302b4c96a6a34fa8b87714"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/models/reciprocal.py",
+      "size": 1182,
+      "sha256": "e74cb8c10f1a1d3e13d71b6d44a3535dc7597c26cfc21f7e649ed1984d698e82"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/models/synthetic.py",
+      "size": 326,
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/numerics/__init__.py",
+      "size": 68,
+      "sha256": "0995e134f9ee087f13047a806677ebd0de56fc0245e54b8058bf06a4d4bdb164"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/numerics/charged_radial.py",
+      "size": 5115,
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/numerics/charged_spectrum.py",
+      "size": 7228,
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/numerics/operators.py",
+      "size": 6855,
+      "sha256": "9c022b82344eebd75dcd8a5f89e7a261b0883098debbf69c9104fa6691d0334f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/numerics/reciprocal.py",
+      "size": 7611,
+      "sha256": "1226766200701c610fda50c22141fa517cccb89befa6d86e8af3b8a9f5f17d41"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/numerics/synthetic.py",
+      "size": 692,
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/reporting/__init__.py",
+      "size": 70,
+      "sha256": "4833796dbf6c1a61eeb9bce5bb5af0f2a5176b975dcf80dc7a8d4a476a87a03b"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/reporting/charged.py",
+      "size": 11784,
+      "sha256": "c919726353ca552ce5eaea956253ec6945a5aa22dcdbdcd779f2c2e03e7dc269"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/reporting/exploration.py",
+      "size": 4065,
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/reporting/operators.py",
+      "size": 11773,
+      "sha256": "2b13860c05869b50388b36bc0a30e3489ebe2142a389d2eacd4a4a27e0d1ed8c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/reporting/reciprocal.py",
+      "size": 15210,
+      "sha256": "cbaa8032826478a6794f2358d5ece61ceffbaf97f0d3dbaaf4e0ae8cfe6c4124"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/reporting/synthetic.py",
+      "size": 7412,
+      "sha256": "4c3ef0fb2d6466a8c02f3398f1e3e4cbb0c2ad1d3efe49c7211361f0fe7d49c6"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/__init__.py",
+      "size": 294,
+      "sha256": "9e5f034118112842072a8ef1dd1ed96e7cfe8453e57b64b4d63f408cee25656d"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/archive.py",
+      "size": 2430,
+      "sha256": "73894d51459075b0ff80d037ed62fb6bbd1b5ea7de7861e17156df8fb2fd32b4"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/errors.py",
+      "size": 448,
+      "sha256": "9a9f0f8f57af38bfeeb1504dade9844435f163167a343804339d6cbc5bf8239c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/events.py",
+      "size": 1982,
+      "sha256": "47b8ee842b04002f80ec094bd860d7596092140fdd267afdc45f6dae417f71e3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/io.py",
+      "size": 1986,
+      "sha256": "9f5cf2ab67969e348b61d879f6f5fc166278a606fd02c462373d2eb01a928d72"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/limits.py",
+      "size": 626,
+      "sha256": "8685bb2ba64ae5339f17262d2cf7be59ed618a1f60169a698fb3cd65f8850215"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/package.py",
+      "size": 12980,
+      "sha256": "450d75eec92261121daf7a32ab57514fba510ec3c7a134d2f02fbafa6f5319ac"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/runner.py",
+      "size": 28240,
+      "sha256": "84bd02824c56ee64634d0c2c5da971155ab11029d0afff89840c9edec9059b6e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/seeds.py",
+      "size": 647,
+      "sha256": "fb4f68b4bbd732e08952b2154b1f793bbb9211e0ffae70e621e3000005b18057"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/verify.py",
+      "size": 9683,
+      "sha256": "6fed68498b61f14886d6a836dc4052cc384a304ba8ed78b31ee7dc588d961e22"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/runtime/worker.py",
+      "size": 812,
+      "sha256": "a279541fa4e4d557030bc9797b4c46de0cd0fa805fc41b6bd93e4aad70769721"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/service/__init__.py",
+      "size": 74,
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/source/service/api.py",
+      "size": 12687,
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/tables/analysis.json",
+      "size": 3011,
+      "sha256": "18a2a521ffd301ec73ed0731df265319184827bd14ef4d725498beb0486b2744"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/tables/checks.json",
+      "size": 1474,
+      "sha256": "6ad966a403c903913b288b83745c5bcd2851f8255ca427dfb86d10f01f7e5170"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/results/tables/resolved-config.json",
+      "size": 818,
+      "sha256": "e0caf90349d6a04a2f068137e4fabccccbabfae5429fcb8ff5ef16ff1e2e3f00"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/gross-test-02-browser-download.log",
+      "size": 5084,
+      "sha256": "edff463c5ff57a0f5f514936071616cfc83ca0b7ac1382bcb2bb7fe4b7c48f4b"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/gross-test-02-browser-install.log",
+      "size": 1224,
+      "sha256": "41526a846314d5e410df1544aa4b4fba0964c7f76dbd72fab73ba637ee7580f3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/gross-test-02-browser-tests.log",
+      "size": 4631,
+      "sha256": "98b92288cc77bd30f5f24b5c0213f3502deff5f7108c7d1d7a476d81f3583deb"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/gross-test-02-cli-sample.json",
+      "size": 736,
+      "sha256": "92a57fbbf616302fc440ac0411b2a0aa846f99e10329ceb0a6be4675bcc697d2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/gross-test-02-report-02.json",
+      "size": 2223,
+      "sha256": "2cd20684b1e5da6b2ecbb6b014ed3fca5157e9d655bea3df431c9a0222542241"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/gross-test-02-validation.log",
+      "size": 36021,
+      "sha256": "c532d1f5b3f8ea72f03855de41c8f05fee90ef6014a078e74d0a8351e26edab8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-execution.json",
+      "size": 663,
+      "sha256": "74648099aa382cbdf27dcdd1174f5d564ad5281ca1bdff8c794e9f66f4ac4bb3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/analyze.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/analyze.stdout.log",
+      "size": 2771,
+      "sha256": "74a10339e88b29131012bbfb8398113f0dd6777c978da07720d8da0a508c0775"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/package.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/package.stdout.log",
+      "size": 78,
+      "sha256": "5558ce53d55cf4380d50064ebb21516a7a9679626b5a223a781ba87d887e2d9e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/report.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/report.stdout.log",
+      "size": 2223,
+      "sha256": "519d6c020cc29277deb452530018d5c25d9ce70ffbb6c2356281ccc62c82d683"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/run-plan.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/run-plan.stdout.log",
+      "size": 1532,
+      "sha256": "1864663df463c59d60779a84d84f883daac84ddf321c7c7b0cdd3bfd253f771c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-revision.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-revision.stdout.log",
+      "size": 41,
+      "sha256": "a27c23ee8bdb35a18f8aa75564bf626d8fb79a40ba63061c67354ccd9a2ddec7"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-snapshot.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-snapshot.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-status.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-status.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-tree.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/source-tree.stdout.log",
+      "size": 41,
+      "sha256": "77e6d5748e1224b0aa42553c6f526aff31371b0640c890672c549eef20be046c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/verify.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-logs/verify.stdout.log",
+      "size": 124,
+      "sha256": "84bebf10862d3b09797d2f011336724a3ec8c839de87a1037df3c4ef9142d475"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/initial-pipeline-status.json",
+      "size": 1939,
+      "sha256": "f57972693de6230687a9f43e470ce66fe63d8179298ebd741392f84d93b76838"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/README.md",
+      "size": 1974,
+      "sha256": "40ce06097761480f94a283117f53d0a8734e8f4225168c23738d047a7f64a9ba"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/provenance/source-history.bundle",
+      "size": 29543,
+      "sha256": "3c6183d1744e18df921a6b9bbe62c7c89dada9eeb9131c5025775da9603ad2e4"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/analysis.json",
+      "size": 3011,
+      "sha256": "18a2a521ffd301ec73ed0731df265319184827bd14ef4d725498beb0486b2744"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/checks.json",
+      "size": 1474,
+      "sha256": "6ad966a403c903913b288b83745c5bcd2851f8255ca427dfb86d10f01f7e5170"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/balance.csv",
+      "size": 3488,
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/controls.csv",
+      "size": 570,
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/incidence.json",
+      "size": 2473,
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/jacobian.csv",
+      "size": 15403,
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/overlaps.csv",
+      "size": 1606,
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/residuals.csv",
+      "size": 23529,
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/analyses/analysis-0001-8c6b8920/derived/summary.json",
+      "size": 681,
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "300f424387ce95942a2215f94aab3961ffb0a8d915a1a096aa3f1683fc416bb5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/events.jsonl",
+      "size": 2340,
+      "sha256": "5002bc0bbf3cc3fbe27f343d9c6cd5e150236af55b457c9cacde884d6a0e61eb"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/preparation.json",
+      "size": 1211,
+      "sha256": "8805d7c9ab1a4c35bae4125d9bc551b5316d82cd393b8859a84eb4f0c3b79849"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/execution.json",
+      "size": 1122,
+      "sha256": "f6e8bf868faee6e419119ddc1c67762bdaa06ab8e32dcbaf5bfbe4ec40b14adf"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/jacobian-lambda-0.1.npz",
+      "size": 73355,
+      "sha256": "1745ceb8d5126bb64a10d00871db28cf5198f35bafa6d6376718664bc4952191"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/jacobian-lambda-0.npz",
+      "size": 71398,
+      "sha256": "0dd5d4fa0ca5a40210700e361e63b5c9070b6a8ff88cf391966831e1042c4a7d"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/rng-end.json",
+      "size": 190,
+      "sha256": "ebb892f0174bbf373998854b30169c44ec4db96c4c5484d747e524c5c650eb27"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/rng-start.json",
+      "size": 190,
+      "sha256": "bfb27bfbdc6feebd6e771ca99198e53fa0fbcc0ec28d2206fdfd516d5cfe1218"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-00-lambda-0.1.npz",
+      "size": 68667,
+      "sha256": "1d3e3b86289203a99bdb049adb71150e320e595d7fd77feb7583198033daa068"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-00-lambda-0.npz",
+      "size": 68640,
+      "sha256": "976378acbc1cd95adb328fa69c578cd15c432e16ca2997d6279f8eed1df51c6e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-01-lambda-0.1.npz",
+      "size": 68699,
+      "sha256": "fafc52be1f4e14d70d55572efec233d7c810b25a6542eb1e48f6509cffcbcbaf"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-01-lambda-0.npz",
+      "size": 68603,
+      "sha256": "696cf350bc1b700c17f336f0b53958ceb7d3ae781dc6154a7c7b882a7a3965f6"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-02-lambda-0.1.npz",
+      "size": 68630,
+      "sha256": "da3e74ec0a40981bb3b0f8b64753fe2ccfc0f6b494c8bdc77d8ce98af97148e5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-02-lambda-0.npz",
+      "size": 68626,
+      "sha256": "cf258040c53b90bf057cb7cffdc3dc4ac3e08c89c06aaa0825180bacb6aa304a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-03-lambda-0.1.npz",
+      "size": 68661,
+      "sha256": "37fd3609071944475df971f069b768c0c89767a07e18c09a2b1623769c19eee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/raw/sample-03-lambda-0.npz",
+      "size": 68561,
+      "sha256": "523625cb6984c2f2dd3214ec897b1f6671e7732b3bf346d559146fd66fe275d4"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/attempts/attempt-0001/request.json",
+      "size": 1410,
+      "sha256": "f4ba66c6f6be5f41de58fcf64e7980aed24104bdfa0254204e5ffdd2fbced076"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/checksums.sha256",
+      "size": 9804,
+      "sha256": "cf8f7885ce6ce49b7ad7b72f725d7f26531adb9478f9008aa0b8683d6c8f3054"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/manifest.json",
+      "size": 40731,
+      "sha256": "f3f7ac076230c90ce87b7ff8520d1ef41ca18627c50ef7831110f411d7bd7aa3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/provenance/code.json",
+      "size": 206,
+      "sha256": "a8cca1333d95eb3672f6db32f43978116cd0a76d0eb743b27b9a77e95d702daf"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/provenance/inputs.json",
+      "size": 133,
+      "sha256": "a482e3201935e0e9142103bc93e0cdcee87c143559ff649201e3d45f97170bdb"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/causal-incidence.figure.json",
+      "size": 771,
+      "sha256": "0bbe3598923b7e0dcb3982d35afd7d5e50f9499cf0d7634134db19d2afc3e5dc"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/causal-incidence.pdf",
+      "size": 23991,
+      "sha256": "357324dadfa229406d6b8239ab74928e74d73047fa7f46de39dde88250b17862"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/causal-incidence.png",
+      "size": 145014,
+      "sha256": "c1538d1793b51784c1a046d1da3329bbcbdecf6720823043eea4f689d6c0e06d"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/causal-incidence.svg",
+      "size": 80963,
+      "sha256": "518ce236db886e80e1c564fc09f8916c40d1688ceb90923f9adf5a97a89690bb"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/matrix-balance.figure.json",
+      "size": 658,
+      "sha256": "f7276a79367bfc8456061c33aff52861e378a041d23bba01443f077b833e90ef"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/matrix-balance.pdf",
+      "size": 24316,
+      "sha256": "f58b2985b181a0879033fbaab5fab4373a0497db9211ccc80fa62b3ffb8324be"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/matrix-balance.png",
+      "size": 151709,
+      "sha256": "f05f034e93d83af8722a73440fb090f2cd594c40051612e706bdd30a2fa104fa"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/matrix-balance.svg",
+      "size": 105863,
+      "sha256": "5391235f981cd7b2ad7d4992639d6102d5499a0ef263c53b79aa3f9fef58a71a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/numerical-audit.figure.json",
+      "size": 704,
+      "sha256": "38215dfb4d07cee2fa6018680968591858ee64dd7628daf33fb78135f42b53f3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/numerical-audit.pdf",
+      "size": 17683,
+      "sha256": "502d15df5bdcf0c067ae55c8f18978ad6a3f1c64157b94fd8d9c1774438db2cc"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/numerical-audit.png",
+      "size": 66790,
+      "sha256": "abf295c2b228044235a026c8e4ce8911fcaa4bbdba60aa7420ce983da305c4a1"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/numerical-audit.svg",
+      "size": 59031,
+      "sha256": "523609ce103826810dc0b4bb711dc5b9d1a00f011c3fef054ec0a373ac8b9760"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/order-controls.figure.json",
+      "size": 635,
+      "sha256": "7261eb4fbba1ff149849d9a717a8f0904d39b17389b7c6854b0d9a4138ac2563"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/order-controls.pdf",
+      "size": 16299,
+      "sha256": "547632496e944878d3d206e6a46f5e1950760967f1efaa2f890ccec09c3dc1b8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/order-controls.png",
+      "size": 67939,
+      "sha256": "ac3b34b22c3b351f5170ca6f3a12ab1dae7634144a63f5b9dd40f5621928f60e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/figures/order-controls.svg",
+      "size": 62101,
+      "sha256": "2d8dc3ca07110db5b0e4a29c7839e8a1b172b8effe646699e47be63acc3fb57d"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/interpretations.json",
+      "size": 2466,
+      "sha256": "a7f91863e22c5ae5f280a0a609b5cfb2d746413ce75d51cf5934b776debe7964"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/balance.csv",
+      "size": 3488,
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/controls.csv",
+      "size": 570,
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/incidence.json",
+      "size": 2473,
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/jacobian.csv",
+      "size": 15403,
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/overlaps.csv",
+      "size": 1606,
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/residuals.csv",
+      "size": 23529,
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/plot-data/summary.json",
+      "size": 681,
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/report.html",
+      "size": 4874,
+      "sha256": "6279768617df3afcc2de227add0cb8cd7feb21b120eaeb908156024492852e03"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/report.json",
+      "size": 2551,
+      "sha256": "1f0f2e4f80971f6cdf1423f77681f5823004a1c205979e8415004faca2b82558"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/report.md",
+      "size": 4246,
+      "sha256": "8d0469cfff19a8241cf004abcc2d93d3a285d6f55999a68144b8925b5c9806f1"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0001/report.pdf",
+      "size": 55413,
+      "sha256": "eb3788f592508057c90800df9cd0ded9bb89b0269e3f640c221e331afc8bfdac"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/causal-incidence.figure.json",
+      "size": 771,
+      "sha256": "0bbe3598923b7e0dcb3982d35afd7d5e50f9499cf0d7634134db19d2afc3e5dc"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/causal-incidence.pdf",
+      "size": 24161,
+      "sha256": "0a0cdec9a82b7e7eadba641c67e888fcfd594e1330822280d9aec896d904f31c"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/causal-incidence.png",
+      "size": 150398,
+      "sha256": "8e9e837971965c565387e88bc2a788a5e58da06d8a720229d2bb88ee12afe4f3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/causal-incidence.svg",
+      "size": 81272,
+      "sha256": "73efedcc645fbde9d3dc5efa4efde6e205ff38f60295fbe2492ead576f01bdf2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/matrix-balance.figure.json",
+      "size": 658,
+      "sha256": "f7276a79367bfc8456061c33aff52861e378a041d23bba01443f077b833e90ef"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/matrix-balance.pdf",
+      "size": 24316,
+      "sha256": "6f510bcfe517bd59bdf80c32251deed3d59eb517255c1c9146088810a047132e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/matrix-balance.png",
+      "size": 151709,
+      "sha256": "f05f034e93d83af8722a73440fb090f2cd594c40051612e706bdd30a2fa104fa"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/matrix-balance.svg",
+      "size": 105863,
+      "sha256": "fc2e13248592dfec2c63ff37cde1e2063be59e26ce1145328a554be08ad8cdfd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/numerical-audit.figure.json",
+      "size": 704,
+      "sha256": "38215dfb4d07cee2fa6018680968591858ee64dd7628daf33fb78135f42b53f3"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/numerical-audit.pdf",
+      "size": 17718,
+      "sha256": "2f403e03edae2289b6e06810cca4e36dcf1ff4a834a86ed59fa253999ea9cf9a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/numerical-audit.png",
+      "size": 68573,
+      "sha256": "b14a35416104af5d1834ce5fe50de2c96f4aee6922374bdd518ba49d5db0e36f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/numerical-audit.svg",
+      "size": 59655,
+      "sha256": "fd686a5deb0f604f7d02da843ae6cba61e40517b8dcd436eef332a664d31f9e5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/order-controls.figure.json",
+      "size": 635,
+      "sha256": "7261eb4fbba1ff149849d9a717a8f0904d39b17389b7c6854b0d9a4138ac2563"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/order-controls.pdf",
+      "size": 16299,
+      "sha256": "c991a4b071e5761289a1b8fc3b098d29899f11dab756ba578bedb967353ed02f"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/order-controls.png",
+      "size": 67939,
+      "sha256": "ac3b34b22c3b351f5170ca6f3a12ab1dae7634144a63f5b9dd40f5621928f60e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/figures/order-controls.svg",
+      "size": 62101,
+      "sha256": "1120a4a128aad1e9b4af797cf17133215a47ffde157b99a81ce562eeabdbd33b"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/interpretations.json",
+      "size": 2467,
+      "sha256": "cd4855254445f5e02cc6d85a854fc1b7428ee4ef0eb3992a6033968fe3e465c5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/balance.csv",
+      "size": 3488,
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/controls.csv",
+      "size": 570,
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/incidence.json",
+      "size": 2473,
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/jacobian.csv",
+      "size": 15403,
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/overlaps.csv",
+      "size": 1606,
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/residuals.csv",
+      "size": 23529,
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/plot-data/summary.json",
+      "size": 681,
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/report.html",
+      "size": 4875,
+      "sha256": "85e00ae11e305af4e99636b7d02ca2b9c70688cb69bafc0726650587279bcf7e"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/report.json",
+      "size": 2551,
+      "sha256": "a98649279dab358f2d0d5a3833a90157a969a7861584efd0428758fcbf7f54ba"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/report.md",
+      "size": 4247,
+      "sha256": "acc7903ed6697ce36d9f974934c093a6dca8bd3b5e9f02c9f25bf67ef72441c5"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/reports/report-0002/report.pdf",
+      "size": 55540,
+      "sha256": "0166654b889b290ba28e683349ad1f5fbdfd6bc541afdfd81bdc367ccab1f16a"
+    },
+    {
+      "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/resolved-config.json",
+      "size": 818,
+      "sha256": "e0caf90349d6a04a2f068137e4fabccccbabfae5429fcb8ff5ef16ff1e2e3f00"
     },
     {
       "path": "research/experiments/README.md",

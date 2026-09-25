@@ -1,0 +1,1114 @@
+{
+  "acceptance_criteria": [
+    {
+      "description": "All 4 preparations, both lambdas, 12 events and all declared comparisons are saved",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "coverage"
+    },
+    {
+      "description": "N, memory norm, J, event H, projector and complete-cut charge residuals below 1e-9 at both tolerances",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "conservation"
+    },
+    {
+      "description": "Reciprocal and frozen numerical trajectories agree with independent closed solutions below 1e-9",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "exact-reference"
+    },
+    {
+      "description": "Halving rtol and atol changes the circuit state and overlap records by less than 1e-9",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "tolerance-refinement"
+    },
+    {
+      "description": "Permissible schedules agree on states and event overlap records below 1e-9",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "rescheduling"
+    },
+    {
+      "description": "Independent U(2) event frames with transformed wire transport agree below 1e-9",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "local-frames"
+    },
+    {
+      "description": "Outside-ancestor response below 1e-9; nonzero inside response above 1e-4 at both difference steps",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "causal-jacobian"
+    },
+    {
+      "description": "Halving the central-difference step changes the Jacobian by less than 1e-6",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "jacobian-refinement"
+    },
+    {
+      "description": "Reversing the shared-memory control changes its final projector by more than 1e-4 in each preparation",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "shared-memory-order"
+    },
+    {
+      "description": "Freezing driven memory exposes matrix-charge error above 1e-4; reciprocal memory responds above 1e-4",
+      "evidence": "analyses/analysis-0001-8c6b8920/checks.json",
+      "id": "frozen-memory"
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "analysis-0001-8c6b8920",
+      "classification": "pass",
+      "code_identity": {
+        "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "revision": "183b95feeae1cc1d4bd79ad3b3cd506f4952fba0",
+        "runtime_version": "0.1.0",
+        "tree_state": "clean"
+      },
+      "created_at": "2026-09-25T05:23:16.530843Z",
+      "input_artifacts": {
+        "attempts/attempt-0001/raw/execution.json": "f6e8bf868faee6e419119ddc1c67762bdaa06ab8e32dcbaf5bfbe4ec40b14adf",
+        "attempts/attempt-0001/raw/jacobian-lambda-0.1.npz": "1745ceb8d5126bb64a10d00871db28cf5198f35bafa6d6376718664bc4952191",
+        "attempts/attempt-0001/raw/jacobian-lambda-0.npz": "0dd5d4fa0ca5a40210700e361e63b5c9070b6a8ff88cf391966831e1042c4a7d",
+        "attempts/attempt-0001/raw/rng-end.json": "ebb892f0174bbf373998854b30169c44ec4db96c4c5484d747e524c5c650eb27",
+        "attempts/attempt-0001/raw/rng-start.json": "bfb27bfbdc6feebd6e771ca99198e53fa0fbcc0ec28d2206fdfd516d5cfe1218",
+        "attempts/attempt-0001/raw/sample-00-lambda-0.1.npz": "1d3e3b86289203a99bdb049adb71150e320e595d7fd77feb7583198033daa068",
+        "attempts/attempt-0001/raw/sample-00-lambda-0.npz": "976378acbc1cd95adb328fa69c578cd15c432e16ca2997d6279f8eed1df51c6e",
+        "attempts/attempt-0001/raw/sample-01-lambda-0.1.npz": "fafc52be1f4e14d70d55572efec233d7c810b25a6542eb1e48f6509cffcbcbaf",
+        "attempts/attempt-0001/raw/sample-01-lambda-0.npz": "696cf350bc1b700c17f336f0b53958ceb7d3ae781dc6154a7c7b882a7a3965f6",
+        "attempts/attempt-0001/raw/sample-02-lambda-0.1.npz": "da3e74ec0a40981bb3b0f8b64753fe2ccfc0f6b494c8bdc77d8ce98af97148e5",
+        "attempts/attempt-0001/raw/sample-02-lambda-0.npz": "cf258040c53b90bf057cb7cffdc3dc4ac3e08c89c06aaa0825180bacb6aa304a",
+        "attempts/attempt-0001/raw/sample-03-lambda-0.1.npz": "37fd3609071944475df971f069b768c0c89767a07e18c09a2b1623769c19eee2",
+        "attempts/attempt-0001/raw/sample-03-lambda-0.npz": "523625cb6984c2f2dd3214ec897b1f6671e7732b3bf346d559146fd66fe275d4"
+      },
+      "parameters": {
+        "max_jacobian_difference": 1e-06,
+        "max_residual": 1e-09,
+        "min_control_signal": 0.0001
+      },
+      "path": "analyses/analysis-0001-8c6b8920",
+      "raw_source": "attempts/attempt-0001/raw/execution.json",
+      "schema_version": "research-analysis-v1",
+      "summary": {
+        "circuits": 8,
+        "events_per_circuit": 12,
+        "maxima": {
+          "conservation": 3.508120358461398e-10,
+          "cut_charge": 1.4954098014556455e-12,
+          "exact": 2.4540123709184297e-11,
+          "frame": 2.0724724511686208e-11,
+          "frozen_exact": 6.201361750012477e-13,
+          "jacobian_outside": 0.0,
+          "jacobian_refinement": 4.2364298758655135e-08,
+          "projector": 6.029898220217553e-11,
+          "refinement": 2.1421741378024786e-11,
+          "rescheduling": 0.0
+        },
+        "minima": {
+          "frozen_charge": 0.19840400830538618,
+          "jacobian_inside": 16.015397722028933,
+          "memory_response": 0.33652957630371255,
+          "order_signal": 0.06727864634082695
+        },
+        "samples": 4,
+        "threshold": 1e-09
+      },
+      "supersedes": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-1c1a91b52e7bb05b",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-8c6b8920/analysis.json",
+      "sha256": "18a2a521ffd301ec73ed0731df265319184827bd14ef4d725498beb0486b2744",
+      "size": 3011,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-48573f231ae25899",
+      "kind": "check",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-8c6b8920/checks.json",
+      "sha256": "6ad966a403c903913b288b83745c5bcd2851f8255ca427dfb86d10f01f7e5170",
+      "size": 1474,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d651fec08a401682",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-8c6b8920/derived/balance.csv",
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5",
+      "size": 3488,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-51ef4ab1d7103cae",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-8c6b8920/derived/controls.csv",
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8",
+      "size": 570,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ecc1fd6672527902",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-8c6b8920/derived/incidence.json",
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08",
+      "size": 2473,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-13fe89885a43cf14",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-8c6b8920/derived/jacobian.csv",
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2",
+      "size": 15403,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ea92b9f3c2ac508a",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-8c6b8920/derived/overlaps.csv",
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83",
+      "size": 1606,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3b928f2ce7220e5f",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-8c6b8920/derived/residuals.csv",
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a",
+      "size": 23529,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4c93c4425cd2b152",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-8c6b8920/derived/summary.json",
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd",
+      "size": 681,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-65496636f09a3c8c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/attempt.json",
+      "sha256": "300f424387ce95942a2215f94aab3961ffb0a8d915a1a096aa3f1683fc416bb5",
+      "size": 319,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9f89b66be863885e",
+      "kind": "event-log",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/events.jsonl",
+      "sha256": "5002bc0bbf3cc3fbe27f343d9c6cd5e150236af55b457c9cacde884d6a0e61eb",
+      "size": 2340,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4df3f1e2a897a91c",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/logs/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e43501766c2f319",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/preparation.json",
+      "sha256": "8805d7c9ab1a4c35bae4125d9bc551b5316d82cd393b8859a84eb4f0c3b79849",
+      "size": 1211,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-24941a1527ae3d69",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/execution.json",
+      "sha256": "f6e8bf868faee6e419119ddc1c67762bdaa06ab8e32dcbaf5bfbe4ec40b14adf",
+      "size": 1122,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ca5c373a9ed5c34c",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/jacobian-lambda-0.1.npz",
+      "sha256": "1745ceb8d5126bb64a10d00871db28cf5198f35bafa6d6376718664bc4952191",
+      "size": 73355,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-e5d95cb2992e6106",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/jacobian-lambda-0.npz",
+      "sha256": "0dd5d4fa0ca5a40210700e361e63b5c9070b6a8ff88cf391966831e1042c4a7d",
+      "size": 71398,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d39f9babcb642ab9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-end.json",
+      "sha256": "ebb892f0174bbf373998854b30169c44ec4db96c4c5484d747e524c5c650eb27",
+      "size": 190,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d85fce8df2903b9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-start.json",
+      "sha256": "bfb27bfbdc6feebd6e771ca99198e53fa0fbcc0ec28d2206fdfd516d5cfe1218",
+      "size": 190,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0f5cee38ae6e0bf6",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-00-lambda-0.1.npz",
+      "sha256": "1d3e3b86289203a99bdb049adb71150e320e595d7fd77feb7583198033daa068",
+      "size": 68667,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5fc730725b9742a1",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-00-lambda-0.npz",
+      "sha256": "976378acbc1cd95adb328fa69c578cd15c432e16ca2997d6279f8eed1df51c6e",
+      "size": 68640,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-cf2a189840308ef2",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-01-lambda-0.1.npz",
+      "sha256": "fafc52be1f4e14d70d55572efec233d7c810b25a6542eb1e48f6509cffcbcbaf",
+      "size": 68699,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-e7e768375c208b4b",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-01-lambda-0.npz",
+      "sha256": "696cf350bc1b700c17f336f0b53958ceb7d3ae781dc6154a7c7b882a7a3965f6",
+      "size": 68603,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-99f35ec19475297b",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-02-lambda-0.1.npz",
+      "sha256": "da3e74ec0a40981bb3b0f8b64753fe2ccfc0f6b494c8bdc77d8ce98af97148e5",
+      "size": 68630,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c0497a6e89399e85",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-02-lambda-0.npz",
+      "sha256": "cf258040c53b90bf057cb7cffdc3dc4ac3e08c89c06aaa0825180bacb6aa304a",
+      "size": 68626,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f744193b03b1c54a",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-03-lambda-0.1.npz",
+      "sha256": "37fd3609071944475df971f069b768c0c89767a07e18c09a2b1623769c19eee2",
+      "size": 68661,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-983b4dd0d05bc1db",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/sample-03-lambda-0.npz",
+      "sha256": "523625cb6984c2f2dd3214ec897b1f6671e7732b3bf346d559146fd66fe275d4",
+      "size": 68561,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1c68737da8c0aaf8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/request.json",
+      "sha256": "f4ba66c6f6be5f41de58fcf64e7980aed24104bdfa0254204e5ffdd2fbced076",
+      "size": 1410,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5d26b47089e4bf8f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/code.json",
+      "sha256": "a8cca1333d95eb3672f6db32f43978116cd0a76d0eb743b27b9a77e95d702daf",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3219b9326cc4f407",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "provenance/dependencies.lock",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091",
+      "size": 294,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1ee42f15d42867c3",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/environment.json",
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219",
+      "size": 305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19b18d73cfa234f8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/inputs.json",
+      "sha256": "a482e3201935e0e9142103bc93e0cdcee87c143559ff649201e3d45f97170bdb",
+      "size": 133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-05d86f20467db647",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/causal-incidence.figure.json",
+      "sha256": "0bbe3598923b7e0dcb3982d35afd7d5e50f9499cf0d7634134db19d2afc3e5dc",
+      "size": 771,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c7455c48efec1027",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/causal-incidence.pdf",
+      "sha256": "357324dadfa229406d6b8239ab74928e74d73047fa7f46de39dde88250b17862",
+      "size": 23991,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-695cb88427211a0a",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/causal-incidence.png",
+      "sha256": "c1538d1793b51784c1a046d1da3329bbcbdecf6720823043eea4f689d6c0e06d",
+      "size": 145014,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-338090f7f024c0dd",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/causal-incidence.svg",
+      "sha256": "518ce236db886e80e1c564fc09f8916c40d1688ceb90923f9adf5a97a89690bb",
+      "size": 80963,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0e5609eecac8a01e",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/matrix-balance.figure.json",
+      "sha256": "f7276a79367bfc8456061c33aff52861e378a041d23bba01443f077b833e90ef",
+      "size": 658,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-31304ec79d8deb6f",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/matrix-balance.pdf",
+      "sha256": "f58b2985b181a0879033fbaab5fab4373a0497db9211ccc80fa62b3ffb8324be",
+      "size": 24316,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-fb3760961e34021e",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/matrix-balance.png",
+      "sha256": "f05f034e93d83af8722a73440fb090f2cd594c40051612e706bdd30a2fa104fa",
+      "size": 151709,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8a33c230745047de",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/matrix-balance.svg",
+      "sha256": "5391235f981cd7b2ad7d4992639d6102d5499a0ef263c53b79aa3f9fef58a71a",
+      "size": 105863,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b683c7444972b588",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/numerical-audit.figure.json",
+      "sha256": "38215dfb4d07cee2fa6018680968591858ee64dd7628daf33fb78135f42b53f3",
+      "size": 704,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a2d84f1c266c10c2",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/numerical-audit.pdf",
+      "sha256": "502d15df5bdcf0c067ae55c8f18978ad6a3f1c64157b94fd8d9c1774438db2cc",
+      "size": 17683,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d598d860a6cc7609",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/numerical-audit.png",
+      "sha256": "abf295c2b228044235a026c8e4ce8911fcaa4bbdba60aa7420ce983da305c4a1",
+      "size": 66790,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-598f79181421e9f9",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/numerical-audit.svg",
+      "sha256": "523609ce103826810dc0b4bb711dc5b9d1a00f011c3fef054ec0a373ac8b9760",
+      "size": 59031,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-da7a1c9443c09b0a",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/order-controls.figure.json",
+      "sha256": "7261eb4fbba1ff149849d9a717a8f0904d39b17389b7c6854b0d9a4138ac2563",
+      "size": 635,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-856a95eede077c30",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/order-controls.pdf",
+      "sha256": "547632496e944878d3d206e6a46f5e1950760967f1efaa2f890ccec09c3dc1b8",
+      "size": 16299,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a7db1441bf06ab76",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/order-controls.png",
+      "sha256": "ac3b34b22c3b351f5170ca6f3a12ab1dae7634144a63f5b9dd40f5621928f60e",
+      "size": 67939,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8bb550096de30556",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/order-controls.svg",
+      "sha256": "2d8dc3ca07110db5b0e4a29c7839e8a1b172b8effe646699e47be63acc3fb57d",
+      "size": 62101,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f6b0a9108a4e88cc",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/interpretations.json",
+      "sha256": "a7f91863e22c5ae5f280a0a609b5cfb2d746413ce75d51cf5934b776debe7964",
+      "size": 2466,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-e7d890e2f086148d",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/balance.csv",
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5",
+      "size": 3488,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-cd0b88ed4750d9d7",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/controls.csv",
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8",
+      "size": 570,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ddccfd63c05a61a3",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/incidence.json",
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08",
+      "size": 2473,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3780d71f6abb1416",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/jacobian.csv",
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2",
+      "size": 15403,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-fffc123ec9e09a3f",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/overlaps.csv",
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83",
+      "size": 1606,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-01bbe7392107c333",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/residuals.csv",
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a",
+      "size": 23529,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-84f35ebd9171570e",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/summary.json",
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd",
+      "size": 681,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4a674077cdd7d824",
+      "kind": "report",
+      "media_type": "text/html",
+      "path": "reports/report-0001/report.html",
+      "sha256": "6279768617df3afcc2de227add0cb8cd7feb21b120eaeb908156024492852e03",
+      "size": 4874,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-96574ae459a5971c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/report.json",
+      "sha256": "1f0f2e4f80971f6cdf1423f77681f5823004a1c205979e8415004faca2b82558",
+      "size": 2551,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a43e0e8d6c28cbac",
+      "kind": "report",
+      "media_type": "text/markdown",
+      "path": "reports/report-0001/report.md",
+      "sha256": "8d0469cfff19a8241cf004abcc2d93d3a285d6f55999a68144b8925b5c9806f1",
+      "size": 4246,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-99fe6a106a397456",
+      "kind": "report",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/report.pdf",
+      "sha256": "eb3788f592508057c90800df9cd0ded9bb89b0269e3f640c221e331afc8bfdac",
+      "size": 55413,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-367ecdf056302311",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0002/figures/causal-incidence.figure.json",
+      "sha256": "0bbe3598923b7e0dcb3982d35afd7d5e50f9499cf0d7634134db19d2afc3e5dc",
+      "size": 771,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1654b0fd6bfbfdfd",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0002/figures/causal-incidence.pdf",
+      "sha256": "0a0cdec9a82b7e7eadba641c67e888fcfd594e1330822280d9aec896d904f31c",
+      "size": 24161,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-21fb36fb27eb6863",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0002/figures/causal-incidence.png",
+      "sha256": "8e9e837971965c565387e88bc2a788a5e58da06d8a720229d2bb88ee12afe4f3",
+      "size": 150398,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-28e2f2bbf4b59d32",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0002/figures/causal-incidence.svg",
+      "sha256": "73efedcc645fbde9d3dc5efa4efde6e205ff38f60295fbe2492ead576f01bdf2",
+      "size": 81272,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ddbeae78ac265b5c",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0002/figures/matrix-balance.figure.json",
+      "sha256": "f7276a79367bfc8456061c33aff52861e378a041d23bba01443f077b833e90ef",
+      "size": 658,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7e399cce53c012ed",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0002/figures/matrix-balance.pdf",
+      "sha256": "6f510bcfe517bd59bdf80c32251deed3d59eb517255c1c9146088810a047132e",
+      "size": 24316,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8a9182f0ce4dab78",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0002/figures/matrix-balance.png",
+      "sha256": "f05f034e93d83af8722a73440fb090f2cd594c40051612e706bdd30a2fa104fa",
+      "size": 151709,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-2b860e4e8c65f6f3",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0002/figures/matrix-balance.svg",
+      "sha256": "fc2e13248592dfec2c63ff37cde1e2063be59e26ce1145328a554be08ad8cdfd",
+      "size": 105863,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3acab806011c4d64",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0002/figures/numerical-audit.figure.json",
+      "sha256": "38215dfb4d07cee2fa6018680968591858ee64dd7628daf33fb78135f42b53f3",
+      "size": 704,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b046cfbfd0544248",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0002/figures/numerical-audit.pdf",
+      "sha256": "2f403e03edae2289b6e06810cca4e36dcf1ff4a834a86ed59fa253999ea9cf9a",
+      "size": 17718,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f7b340b2bc3bb8c9",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0002/figures/numerical-audit.png",
+      "sha256": "b14a35416104af5d1834ce5fe50de2c96f4aee6922374bdd518ba49d5db0e36f",
+      "size": 68573,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c67ff9715a372e6d",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0002/figures/numerical-audit.svg",
+      "sha256": "fd686a5deb0f604f7d02da843ae6cba61e40517b8dcd436eef332a664d31f9e5",
+      "size": 59655,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-50852901f0eff905",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0002/figures/order-controls.figure.json",
+      "sha256": "7261eb4fbba1ff149849d9a717a8f0904d39b17389b7c6854b0d9a4138ac2563",
+      "size": 635,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c8fc6e9a023c74a3",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0002/figures/order-controls.pdf",
+      "sha256": "c991a4b071e5761289a1b8fc3b098d29899f11dab756ba578bedb967353ed02f",
+      "size": 16299,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1b9c75c050a58b6b",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0002/figures/order-controls.png",
+      "sha256": "ac3b34b22c3b351f5170ca6f3a12ab1dae7634144a63f5b9dd40f5621928f60e",
+      "size": 67939,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0ba000de3c5e6887",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0002/figures/order-controls.svg",
+      "sha256": "1120a4a128aad1e9b4af797cf17133215a47ffde157b99a81ce562eeabdbd33b",
+      "size": 62101,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4ed58a2c013dc29f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0002/interpretations.json",
+      "sha256": "cd4855254445f5e02cc6d85a854fc1b7428ee4ef0eb3992a6033968fe3e465c5",
+      "size": 2467,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6c923f1f282e2521",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0002/plot-data/balance.csv",
+      "sha256": "aaa03ce86ef0c8f3d6c229b7e7c72650962b9e72f84e8de6210da74cb3672af5",
+      "size": 3488,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a86b74ede339b07b",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0002/plot-data/controls.csv",
+      "sha256": "90b44a7c4bfe004c7f829053e91b0b4449a1f415101f48eab7d277b1292c52a8",
+      "size": 570,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d7652ae93c86e619",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0002/plot-data/incidence.json",
+      "sha256": "4755f3dc5736ac6c1c0c021526196419e721c3767bf61a9ccb049fc1df7a9b08",
+      "size": 2473,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b9d520c14cf29dc1",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0002/plot-data/jacobian.csv",
+      "sha256": "05c3e663fb832a979187f2da98a7c4b7ad23023b9d7dddd08418475b3f3a6ee2",
+      "size": 15403,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-01387fe2665c91d3",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0002/plot-data/overlaps.csv",
+      "sha256": "10624f9671a5c8de1953924bcec1c3f540a58883652906623721b416213dca83",
+      "size": 1606,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ffab1e3bd8df08dc",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0002/plot-data/residuals.csv",
+      "sha256": "2d90cc0ae36564478d558de90063e0e6dea080dc83e46e9b962420059740496a",
+      "size": 23529,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0fccc7a3b86eb88e",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0002/plot-data/summary.json",
+      "sha256": "f668d3f843debf150ec79bbd77d923ae24d5608f2614260f68ea8508af3b75dd",
+      "size": 681,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7d39cdcb39608bbe",
+      "kind": "report",
+      "media_type": "text/html",
+      "path": "reports/report-0002/report.html",
+      "sha256": "85e00ae11e305af4e99636b7d02ca2b9c70688cb69bafc0726650587279bcf7e",
+      "size": 4875,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1d5e1ebfe82ec2c1",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0002/report.json",
+      "sha256": "a98649279dab358f2d0d5a3833a90157a969a7861584efd0428758fcbf7f54ba",
+      "size": 2551,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-857abd6dcc84144b",
+      "kind": "report",
+      "media_type": "text/markdown",
+      "path": "reports/report-0002/report.md",
+      "sha256": "acc7903ed6697ce36d9f974934c093a6dca8bd3b5e9f02c9f25bf67ef72441c5",
+      "size": 4247,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-954f671e2f5a562d",
+      "kind": "report",
+      "media_type": "application/pdf",
+      "path": "reports/report-0002/report.pdf",
+      "sha256": "0166654b889b290ba28e683349ad1f5fbdfd6bc541afdfd81bdc367ccab1f16a",
+      "size": 55540,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-76b2f4524bba093b",
+      "kind": "config",
+      "media_type": "application/json",
+      "path": "resolved-config.json",
+      "sha256": "e0caf90349d6a04a2f068137e4fabccccbabfae5429fcb8ff5ef16ff1e2e3f00",
+      "size": 818,
+      "source_ids": []
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt-0001",
+      "checkpoint": null,
+      "created_at": "2026-09-25T05:22:55.037353Z",
+      "exit_code": 0,
+      "failure": null,
+      "parent_attempt_id": null,
+      "path": "attempts/attempt-0001",
+      "state": "completed",
+      "updated_at": "2026-09-25T05:23:16.146495Z"
+    }
+  ],
+  "checksum_algorithm": "sha256",
+  "checksum_path": "checksums.sha256",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "183b95feeae1cc1d4bd79ad3b3cd506f4952fba0",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "completeness": {
+    "analysis": true,
+    "attempts_terminal": true,
+    "config": true,
+    "provenance": true,
+    "report": true
+  },
+  "config_hash": "e0caf90349d6a04a2f068137e4fabccccbabfae5429fcb8ff5ef16ff1e2e3f00",
+  "config_path": "resolved-config.json",
+  "created_at": "2026-09-25T05:22:55.031100Z",
+  "execution_identity": {
+    "dependencies": {
+      "path": "python/requirements-lock.txt",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    "environment": {
+      "accelerator": "none",
+      "architecture": "x86_64",
+      "implementation": "CPython",
+      "numeric_libraries": {
+        "matplotlib": "3.10.8",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    }
+  },
+  "experiment_id": "gross.reciprocal-events.v1",
+  "experiment_version": "1.0.0",
+  "known_gaps": [
+    "Finite acyclic circuit, not an emergent metric or autonomous clock.",
+    "Flat wire transport; local U(2) covariance does not establish Lorentz covariance.",
+    "Jacobian tested on one preparation at two lambdas; finite differences are not a global proof.",
+    "No spatial grid or continuum boundary; circuit incidence is assumed. Complete-cut charge is not identified as energy-momentum.",
+    "No checkpoint/resume; interrupted attempts require a new bounded run."
+  ],
+  "model_id": "signal-space.ss-ops-1.v1",
+  "package_version": 1,
+  "parent_run_id": null,
+  "reports": [
+    {
+      "analysis_id": "analysis-0001-8c6b8920",
+      "created_at": "2026-09-25T05:23:23.201610Z",
+      "outputs": {
+        "figure_specs": [
+          "figures/causal-incidence.figure.json",
+          "figures/matrix-balance.figure.json",
+          "figures/numerical-audit.figure.json",
+          "figures/order-controls.figure.json"
+        ],
+        "interpretations": "interpretations.json"
+      },
+      "path": "reports/report-0001",
+      "render_provenance": {
+        "code_identity": {
+          "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "revision": "183b95feeae1cc1d4bd79ad3b3cd506f4952fba0",
+          "runtime_version": "0.1.0",
+          "tree_state": "clean"
+        },
+        "execution_identity": {
+          "dependencies": {
+            "path": "python/requirements-lock.txt",
+            "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+          },
+          "environment": {
+            "accelerator": "none",
+            "architecture": "x86_64",
+            "implementation": "CPython",
+            "numeric_libraries": {
+              "matplotlib": "3.10.8",
+              "numpy": "2.3.5",
+              "scipy": "1.17.0"
+            },
+            "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+            "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+          }
+        }
+      },
+      "report_id": "report-0001",
+      "required_inputs": [
+        "attempts/attempt-0001/raw/execution.json",
+        "attempts/attempt-0001/raw/jacobian-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/jacobian-lambda-0.npz",
+        "attempts/attempt-0001/raw/rng-end.json",
+        "attempts/attempt-0001/raw/rng-start.json",
+        "attempts/attempt-0001/raw/sample-00-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-00-lambda-0.npz",
+        "attempts/attempt-0001/raw/sample-01-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-01-lambda-0.npz",
+        "attempts/attempt-0001/raw/sample-02-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-02-lambda-0.npz",
+        "attempts/attempt-0001/raw/sample-03-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-03-lambda-0.npz",
+        "analyses/analysis-0001-8c6b8920/derived/jacobian.csv",
+        "analyses/analysis-0001-8c6b8920/derived/summary.json",
+        "analyses/analysis-0001-8c6b8920/derived/balance.csv",
+        "analyses/analysis-0001-8c6b8920/derived/controls.csv",
+        "analyses/analysis-0001-8c6b8920/derived/overlaps.csv",
+        "analyses/analysis-0001-8c6b8920/derived/residuals.csv",
+        "analyses/analysis-0001-8c6b8920/derived/incidence.json",
+        "analyses/analysis-0001-8c6b8920/checks.json"
+      ],
+      "schema_version": "research-report-v1"
+    },
+    {
+      "analysis_id": "analysis-0001-8c6b8920",
+      "created_at": "2026-09-25T05:25:13.545738Z",
+      "outputs": {
+        "figure_specs": [
+          "figures/causal-incidence.figure.json",
+          "figures/matrix-balance.figure.json",
+          "figures/numerical-audit.figure.json",
+          "figures/order-controls.figure.json"
+        ],
+        "interpretations": "interpretations.json"
+      },
+      "path": "reports/report-0002",
+      "render_provenance": {
+        "code_identity": {
+          "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "revision": "0ba0865a4d2f6f900ab43986a6f6e77af2c329b0",
+          "runtime_version": "0.1.0",
+          "tree_state": "clean"
+        },
+        "execution_identity": {
+          "dependencies": {
+            "path": "python/requirements-lock.txt",
+            "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+          },
+          "environment": {
+            "accelerator": "none",
+            "architecture": "x86_64",
+            "implementation": "CPython",
+            "numeric_libraries": {
+              "matplotlib": "3.10.8",
+              "numpy": "2.3.5",
+              "scipy": "1.17.0"
+            },
+            "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+            "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+          }
+        }
+      },
+      "report_id": "report-0002",
+      "required_inputs": [
+        "attempts/attempt-0001/raw/execution.json",
+        "attempts/attempt-0001/raw/jacobian-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/jacobian-lambda-0.npz",
+        "attempts/attempt-0001/raw/rng-end.json",
+        "attempts/attempt-0001/raw/rng-start.json",
+        "attempts/attempt-0001/raw/sample-00-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-00-lambda-0.npz",
+        "attempts/attempt-0001/raw/sample-01-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-01-lambda-0.npz",
+        "attempts/attempt-0001/raw/sample-02-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-02-lambda-0.npz",
+        "attempts/attempt-0001/raw/sample-03-lambda-0.1.npz",
+        "attempts/attempt-0001/raw/sample-03-lambda-0.npz",
+        "analyses/analysis-0001-8c6b8920/derived/jacobian.csv",
+        "analyses/analysis-0001-8c6b8920/derived/summary.json",
+        "analyses/analysis-0001-8c6b8920/derived/balance.csv",
+        "analyses/analysis-0001-8c6b8920/derived/controls.csv",
+        "analyses/analysis-0001-8c6b8920/derived/overlaps.csv",
+        "analyses/analysis-0001-8c6b8920/derived/residuals.csv",
+        "analyses/analysis-0001-8c6b8920/derived/incidence.json",
+        "analyses/analysis-0001-8c6b8920/checks.json"
+      ],
+      "schema_version": "research-report-v1"
+    }
+  ],
+  "run_id": "run-81319816afe7cf8e",
+  "schema_version": "research-run-manifest-v1",
+  "scientific_classification": "pass",
+  "seed_algorithm": "sha256-stream-v1",
+  "seed_ledger": {
+    "analysis": 14225551859455423364,
+    "initialization": 11294132287296327896,
+    "perturbations": 13806014363396599371,
+    "sampling": 8712815474797363820
+  },
+  "technical_state": "analyzed",
+  "updated_at": "2026-09-25T05:25:13.550840Z"
+}

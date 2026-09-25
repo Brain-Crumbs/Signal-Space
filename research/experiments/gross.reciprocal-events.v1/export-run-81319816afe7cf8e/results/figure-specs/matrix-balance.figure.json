@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "event index, gate parameter, input wire or category"
+    },
+    "y": {
+      "unit": "dimensionless"
+    }
+  },
+  "downsampling": "none",
+  "fit_window": null,
+  "id": "matrix-balance",
+  "normalization": "see locked protocol; max(1, initial norm)",
+  "ranges": "explicit log display floors where stated",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/balance.csv"
+  ],
+  "transformations": [
+    "preparation 0, first event; signed Pauli-z changes and Frobenius total changes",
+    "log display max(value,1e-18); initial zeros retained"
+  ]
+}

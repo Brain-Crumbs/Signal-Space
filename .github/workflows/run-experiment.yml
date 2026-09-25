@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - gross-test-01
+          - gross-test-02
         default: gross-test-01
         required: true
       retention_days:
