@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "dimensionless wavevector or category"
+    },
+    "y": {
+      "unit": "dimensionless phase/residual or ell/tau_c as labeled"
+    }
+  },
+  "downsampling": "none; prescribed plane/direction selections only",
+  "fit_window": null,
+  "id": "group-directions",
+  "normalization": "q=k ell, phase=omega tau_c; residuals as labeled",
+  "ranges": "explicit in figure axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/groups.csv",
+    "plot-data/dispersion.csv"
+  ],
+  "transformations": [
+    "select qz=0 forward points at |q|=0.02; omit band touchings explicitly",
+    "arrows show xy group components multiplied by .45; out-of-plane components remain in CSV"
+  ]
+}

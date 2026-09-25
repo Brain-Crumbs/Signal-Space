@@ -1,0 +1,211 @@
+{
+  "geometry": [
+    {
+      "eigenvalues": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gram": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "rank": 3,
+      "triad": "orthogonal"
+    },
+    {
+      "eigenvalues": [
+        0.34934070115027044,
+        0.7068784730048632,
+        1.9437808258448657
+      ],
+      "gram": [
+        [
+          1.0,
+          0.6,
+          0.3
+        ],
+        [
+          0.6,
+          1.0,
+          0.5
+        ],
+        [
+          0.3,
+          0.5,
+          0.9999999999999999
+        ]
+      ],
+      "rank": 3,
+      "triad": "oblique"
+    },
+    {
+      "eigenvalues": [
+        -5.848544054508939e-16,
+        -1.769979219099113e-17,
+        2.9999999999999996
+      ],
+      "gram": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "rank": 1,
+      "triad": "collinear"
+    }
+  ],
+  "group_exclusions": "Analytic and numerical group velocity undefined at band touchings; points with quaternion vector norm <=1e-6 excluded explicitly.",
+  "minimum_order_signal": 0.00987207275809493,
+  "residuals": {
+    "field_fourier": 6.778545366739879e-16,
+    "finite_band": 1.1102230246251565e-16,
+    "fourier": 3.345273782981758e-16,
+    "group_reference": 1.1180240583330558e-07,
+    "group_refinement": 8.386598704390735e-08,
+    "node": 3.3306690738754696e-16,
+    "norm": 2.220446049250313e-16,
+    "rotation": 5.551115123125783e-16,
+    "unitarity": 6.661343625597994e-16,
+    "zone_nested": 0.0,
+    "zone_reference": 1.3322676295501878e-15
+  },
+  "samples": 624,
+  "scope": "Wave sector only; stationary physical memory modes belong to Test 4. No clock or detector record.",
+  "worst_cone_error_fine": 0.007742446435048791,
+  "worst_convergence_ratio": 0.4971469247730888,
+  "zone_counts": [
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "forward",
+      "pi_nodes": 8,
+      "size": 16,
+      "triad": "orthogonal",
+      "zero_nodes": 8
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "forward",
+      "pi_nodes": 8,
+      "size": 32,
+      "triad": "orthogonal",
+      "zero_nodes": 8
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "reverse",
+      "pi_nodes": 8,
+      "size": 16,
+      "triad": "orthogonal",
+      "zero_nodes": 8
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "reverse",
+      "pi_nodes": 8,
+      "size": 32,
+      "triad": "orthogonal",
+      "zero_nodes": 8
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 1.3877787807814457e-17,
+      "order": "forward",
+      "pi_nodes": 4,
+      "size": 16,
+      "triad": "oblique",
+      "zero_nodes": 4
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 1.3877787807814457e-17,
+      "order": "forward",
+      "pi_nodes": 4,
+      "size": 32,
+      "triad": "oblique",
+      "zero_nodes": 4
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 3.1031676915590914e-17,
+      "order": "reverse",
+      "pi_nodes": 4,
+      "size": 16,
+      "triad": "oblique",
+      "zero_nodes": 4
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 3.1031676915590914e-17,
+      "order": "reverse",
+      "pi_nodes": 4,
+      "size": 32,
+      "triad": "oblique",
+      "zero_nodes": 4
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "forward",
+      "pi_nodes": 256,
+      "size": 16,
+      "triad": "collinear",
+      "zero_nodes": 256
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "forward",
+      "pi_nodes": 1024,
+      "size": 32,
+      "triad": "collinear",
+      "zero_nodes": 1024
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "reverse",
+      "pi_nodes": 256,
+      "size": 16,
+      "triad": "collinear",
+      "zero_nodes": 256
+    },
+    {
+      "maximum": 3.141592653589793,
+      "minimum": 0.0,
+      "order": "reverse",
+      "pi_nodes": 1024,
+      "size": 32,
+      "triad": "collinear",
+      "zero_nodes": 1024
+    }
+  ]
+}

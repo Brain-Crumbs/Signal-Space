@@ -324,6 +324,16 @@
         "reproducibility"
       ],
       "title": "gross.reciprocal-events.v1 - run-81319816afe7cf8e"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "gross-test-03",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-03.md",
+      "status": "executed bounded experiment",
+      "summary": "Homogeneous SS OPS 1 wave-sector router audit: exact Fourier product, Gram cone, ordered finite-band effects, group directions and full-zone nodes. Nine checks pass; no full-sector geometry or clock.",
+      "tags": ["GROSS", "router-propagation", "test-03"],
+      "title": "Signal Space router propagation protocol"
     }
   ],
   "schema_version": 1,

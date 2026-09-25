@@ -1,0 +1,10 @@
+{
+  "algorithm": "numpy.PCG64",
+  "blas_threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "physical_scope": "homogeneous zero-wave linear wave sector only",
+  "sampling_seed": 17791068400698830315
+}

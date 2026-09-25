@@ -24,6 +24,14 @@ class RunExperimentTests(unittest.TestCase):
             self.assertNotIn("locked conditioning domain", text)
             self.assertEqual("Proceed to Test 3" in text, status == "pass")
 
+    def test_router_assessment_does_not_promote_failed_evidence(self):
+        self.assertIn("gross-test-03", RECIPES)
+        for status in ("pass", "fail", "unresolved", "not-evaluated"):
+            text = assessment({"experiment_id": "gross.router-propagation.v1", "scientific_classification": status, "run_id": "run-fixture"},
+                              {"analysis_id": "analysis-fixture"}, {"checks": []})
+            self.assertIn("wave bands", text)
+            self.assertEqual("Next: Test 4" in text, status == "pass")
+
     def test_output_cannot_dirty_checkout_or_overwrite_prior_attempt(self):
         with tempfile.TemporaryDirectory() as temporary:
             repo = Path(temporary) / "repo"

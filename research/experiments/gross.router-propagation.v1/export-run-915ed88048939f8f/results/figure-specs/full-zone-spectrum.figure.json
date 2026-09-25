@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "dimensionless wavevector or category"
+    },
+    "y": {
+      "unit": "dimensionless phase/residual or ell/tau_c as labeled"
+    }
+  },
+  "downsampling": "none; prescribed plane/direction selections only",
+  "fit_window": null,
+  "id": "full-zone-spectrum",
+  "normalization": "q=k ell, phase=omega tau_c; residuals as labeled",
+  "ranges": "explicit in figure axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/surfaces.npz",
+    "plot-data/zones.csv"
+  ],
+  "transformations": [
+    "32^3 forward-grid slices at qz=0 and -pi/2; nearest-cell rendering",
+    "negative band is -phase; periodic zone, no species identification"
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "group-directions",
+      "role": "evidentiary",
+      "question": "Does the energy-transport direction follow the wavevector in the oblique case?",
+      "reading": "Derivative audit: pass. Maximum analytic-reference error 1.12e-07; step-halving difference 8.39e-08. Collinear nodal directions have no arrows.",
+      "significance": "Oblique projector geometry can direct group transport away from the wavevector direction without requiring several metrics.",
+      "limitation": "These are spectral group derivatives, not tracked wave packets. Arrows project onto xy and exclude touchings; full components remain in saved data.",
+      "source_data": [
+        "results/data/plot-data/groups.csv",
+        "results/data/plot-data/dispersion.csv"
+      ],
+      "spec_file": "results/figure-specs/group-directions.figure.json",
+      "transformations": [
+        "select qz=0 forward points at |q|=0.02; omit band touchings explicitly",
+        "arrows show xy group components multiplied by .45; out-of-plane components remain in CSV"
+      ],
+      "files": [
+        "figures/static/group-directions.png",
+        "figures/static/group-directions.svg",
+        "figures/static/group-directions.pdf"
+      ]
+    },
+    {
+      "figure_id": "numerical-audit",
+      "role": "evidentiary",
+      "question": "Do explicit port shifts conserve amplitude and agree with the independent Fourier reference?",
+      "reading": "Fourier-circuit: pass; conservation: pass; common rotation: pass. Both box sizes and both block orders are included.",
+      "significance": "Independent real-space shifts and exponential/quaternion references test signs, order, amplitudes and global basis covariance.",
+      "limitation": "Periodic boxes check implementation and norm only. There is no PDE timestep or outgoing boundary; no energy-momentum or nonlinear conservation claim follows.",
+      "source_data": [
+        "results/data/plot-data/fields.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/numerical-audit.figure.json",
+      "transformations": [
+        "norm and FFT errors at both orders and box sizes",
+        "display floor 1e-18 only; derivative and matrix limits differ"
+      ],
+      "files": [
+        "figures/static/numerical-audit.png",
+        "figures/static/numerical-audit.svg",
+        "figures/static/numerical-audit.pdf"
+      ]
+    },
+    {
+      "figure_id": "cone-sections",
+      "role": "evidentiary",
+      "question": "Which projector arrangements yield an isotropic, anisotropic or degenerate cone?",
+      "reading": "Gram ranks [3, 3, 1]; exact and leading contours are compared at phase 0.16. Rank check: pass.",
+      "significance": "Independent oblique projectors permit anisotropic propagation; collinear projectors remove two spatial principal directions although the internal matrix algebra is unchanged.",
+      "limitation": "A qz=0 section, with interpolation, is not a full spatial surface or detector geometry. The routing directions are assumed.",
+      "source_data": [
+        "results/data/plot-data/surfaces.npz",
+        "results/data/plot-data/geometry.json"
+      ],
+      "spec_file": "results/figure-specs/cone-sections.figure.json",
+      "transformations": [
+        "101x101 plane; matplotlib linear contour interpolation at phase 0.16",
+        "leading phase sqrt(q.G.q); no data fit"
+      ],
+      "files": [
+        "figures/static/cone-sections.png",
+        "figures/static/cone-sections.svg",
+        "figures/static/cone-sections.pdf"
+      ]
+    },
+    {
+      "figure_id": "continuum-convergence",
+      "role": "evidentiary",
+      "question": "Does the actual circuit approach its predicted cone as wavelength grows?",
+      "reading": "Largest fine-radius residual 0.00774245; worst adjacent fine/coarse ratio 0.497147. Continuum check: pass.",
+      "significance": "Shrinking finite-band error tests the derived Gram cone without fitting it to the measured dispersion.",
+      "limitation": "Four radii and 26 directions; this is a linear wave-sector limit, not a complete coupled-system continuum limit. Collinear roundoff values are not fitted.",
+      "source_data": [
+        "results/data/plot-data/convergence.csv"
+      ],
+      "spec_file": "results/figure-specs/continuum-convergence.figure.json",
+      "transformations": [
+        "maximum over all 26 directions per radius",
+        "log floor 1e-16; saved zeros retained"
+      ],
+      "files": [
+        "figures/static/continuum-convergence.png",
+        "figures/static/continuum-convergence.svg",
+        "figures/static/continuum-convergence.pdf"
+      ]
+    },
+    {
+      "figure_id": "full-zone-spectrum",
+      "role": "evidentiary",
+      "question": "What additional low and pi-quasifrequency modes are hidden outside the origin?",
+      "reading": "The full-zone check is pass. Grid counts and exact corner/half-pi node probes are saved. The orthogonal circuit has zero and pi nodes away from the origin.",
+      "significance": "The near-origin Weyl cone cannot be interpreted as a unique physical species from the long-wavelength calculation alone.",
+      "limitation": "Finite grid inspection does not prove all nodes were found or measure topological charges. Negative wave bands are given by sign reversal; physical memory branches require Test 4.",
+      "source_data": [
+        "results/data/plot-data/surfaces.npz",
+        "results/data/plot-data/zones.csv"
+      ],
+      "spec_file": "results/figure-specs/full-zone-spectrum.figure.json",
+      "transformations": [
+        "32^3 forward-grid slices at qz=0 and -pi/2; nearest-cell rendering",
+        "negative band is -phase; periodic zone, no species identification"
+      ],
+      "files": [
+        "figures/static/full-zone-spectrum.png",
+        "figures/static/full-zone-spectrum.svg",
+        "figures/static/full-zone-spectrum.pdf"
+      ]
+    },
+    {
+      "figure_id": "order-and-direction",
+      "role": "evidentiary",
+      "question": "Is opposite-direction asymmetry a finite-band order effect or leading drift?",
+      "reading": "Order-control status: pass; independent-triad minimum of maximum order differences 0.00987207 rad. Opposite-direction odd phase is divided by |q| to expose any leading term.",
+      "significance": "The signed triple-sine term can generate directional asymmetry while the leading generator stays traceless. Order is physical incidence data.",
+      "limitation": "No leading-drift fit or invariant detector record is measured. Other backgrounds and modified routing laws remain open under Test 11.",
+      "source_data": [
+        "results/data/plot-data/dispersion.csv"
+      ],
+      "spec_file": "results/figure-specs/order-and-direction.figure.json",
+      "transformations": [
+        "select body diagonal and its negative at all radii",
+        "subtract phases by order and opposite direction; no branch unwrapping across pi"
+      ],
+      "files": [
+        "figures/static/order-and-direction.png",
+        "figures/static/order-and-direction.svg",
+        "figures/static/order-and-direction.pdf"
+      ]
+    }
+  ]
+}

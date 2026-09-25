@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 664,
+  "file_count": 873,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 14119,
-      "sha256": "5370ef0694485b5f49bbb46ef9ff40baf5b702641046d8c2f9a543015a56e765"
+      "size": 14646,
+      "sha256": "bc64950c1a6612aeab2fa9e4485a450c38c8bfcc1dd9a19a51da2d70da946833"
     },
     {
       "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/Experiment_Analysis_and_Next.md",
@@ -2082,6 +2082,1051 @@
       "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/resolved-config.json",
       "size": 818,
       "sha256": "e0caf90349d6a04a2f068137e4fabccccbabfae5429fcb8ff5ef16ff1e2e3f00"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/Experiment_Analysis_and_Next.md",
+      "size": 6921,
+      "sha256": "0272c240a0b8ad3a9f3ab8a3675581fc4151a92e3ad88ce73e9aab2f6e665561"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/Experiment_Results.pdf",
+      "size": 464573,
+      "sha256": "c47d33550effcc16012cfdf88ef56623ac74e2704c2366d1f2cf2db848ec915c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/Experimental_Setup.pdf",
+      "size": 38796,
+      "sha256": "89fd8395aff2531f218da61fab6010f4146130dfeaaf443b48782dcb3b54997e"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/export.json",
+      "size": 17455,
+      "sha256": "92e88a96bac0d3160f0e0fe3535f338fffb3a81399637a9dad38464c3641eea2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/figure_index.json",
+      "size": 7234,
+      "sha256": "3874ef982c876b2f11b9a430cf2a6011d231d3ecfe9c25a9557ec6b6d0b1fabe"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/cone-sections.pdf",
+      "size": 21670,
+      "sha256": "9e62a4d83fa52fd8c4e19b3b60c7d92d5e78bc18b8638410683ea26c9fe6a192"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/cone-sections.png",
+      "size": 108817,
+      "sha256": "0cb0c9e6c5888a4c0addcb337e20319c5beca12866d373cffeaae83ef499c723"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/cone-sections.svg",
+      "size": 90151,
+      "sha256": "b715e08a34a5078a189b04d8ca819d971e61cdee07a43f0617d945de2482180b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/continuum-convergence.pdf",
+      "size": 20442,
+      "sha256": "e5c2c41f83d0dba3f20947b6a90d35a9665395f6ccbf42a0eed59c050fcbdb4c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/continuum-convergence.png",
+      "size": 70888,
+      "sha256": "aa922dd1fd03c808b06acc088fd8f3cf76a9307052a991f075466de31ac7fc72"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/continuum-convergence.svg",
+      "size": 74995,
+      "sha256": "3d765842234c70fa2a52c06432f2fcbffee416054e53a0bb614ef4b54de9f7c1"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/full-zone-spectrum.pdf",
+      "size": 31169,
+      "sha256": "d1fbab010719c3858180b7cbc4097b09d5681e3393bf7758b920d5a9fc25575f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/full-zone-spectrum.png",
+      "size": 111403,
+      "sha256": "87fda19fcac7dc34cbfa66ad7b7ad062b4839416cfd83cae9251789961483cc4"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/full-zone-spectrum.svg",
+      "size": 106763,
+      "sha256": "527f01d7362a9b36b7f4e89808effa26245609bf3f3566419a89ffb8b5bfb1b8"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/group-directions.pdf",
+      "size": 21778,
+      "sha256": "9ea3643fead3541bb53369c125702990ade297f57fc77ba53c974a7be0be7ffb"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/group-directions.png",
+      "size": 72774,
+      "sha256": "9ec573c8811cf25dcd140abc19ea846819c1d29decb100f8afc0b0adbf3bae57"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/group-directions.svg",
+      "size": 73839,
+      "sha256": "e8d83ebb5bb3d5272ba5b84151a567cb10694ecd2a86031ef8194e19d683e269"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/numerical-audit.pdf",
+      "size": 20864,
+      "sha256": "103bc62d031ae0a8bf6cb5c5b164d359e28451f69418bf3f540e6943d4ca9387"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/numerical-audit.png",
+      "size": 109609,
+      "sha256": "8e62240480f32a7b1a285aa9a6dc3e5f856d428ba294bf0b803cfcde112b709c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/numerical-audit.svg",
+      "size": 76344,
+      "sha256": "e0e991a6319844078e90c803f62e1d1f34a4ce6b0c075dd9567a5172dae533c5"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/order-and-direction.pdf",
+      "size": 20936,
+      "sha256": "717d5cf1e1e0bb054119b45d6b32ab83bd58b2aadc10acabe30a4839bd43eab6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/order-and-direction.png",
+      "size": 134005,
+      "sha256": "84ef81c1175a5e636e1ee7bc2737504713443552def1b30e83150240dd4b9793"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/figures/static/order-and-direction.svg",
+      "size": 75615,
+      "sha256": "99cf836a3f6a3527f8ea595871bf27d5dbc0fe2507293543754b6125e8121610"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/plan.json",
+      "size": 17692,
+      "sha256": "8c0a94d5dcfbae9e0848fee6a9e9bd3efdd9df901192fcf98ab1827bdd8b8295"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/README.md",
+      "size": 1243,
+      "sha256": "edf1947104bdb97dc8b5dfdad15388e8f2798dd084ff03847d4f5e0a28bd1049"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/convergence.csv",
+      "size": 1038,
+      "sha256": "a9e4ca7360b8c7486eed037dc78d1a48a30f0b0c5fc2eb5440999886f245974c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/dispersion.csv",
+      "size": 82426,
+      "sha256": "fce331eea73fa53f196f8cc2a9d885ae951c019569eb6f7a208f9e1af859b422"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/fields.csv",
+      "size": 726,
+      "sha256": "c2d06f3e6981109859b2e4cd54e6fd1a408b3a30a988c6ce2230cc2320a6906a"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/geometry.json",
+      "size": 962,
+      "sha256": "70f01efb1c2b9a39d2c47d325058aab439b48ba87f45fe706cfc34722b8464ba"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/groups.csv",
+      "size": 74795,
+      "sha256": "3fc4e628f010b566f91e491915f412e0135ca178cf962403500fec09ebd43306"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/nodes.csv",
+      "size": 8043,
+      "sha256": "2b08895bbdef2dcf35c194307f2fb03e9a3af48fca0cdaf7c6b84d2881cf1690"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/summary.json",
+      "size": 4375,
+      "sha256": "7303a3f5aeae4baa7c8f8e1450e5b980eabed124054fe2e5696802a16be642fa"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/surfaces.npz",
+      "size": 645163,
+      "sha256": "a581bb624af29bd3b7b8344542515727e9d8af4fa849ac9407e2d814eaddcff3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/derived/zones.csv",
+      "size": 722,
+      "sha256": "7bcf6ce5ee435b4b27729a6f5f34c4d746c9f84beb4762f5397d6975de30b705"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/convergence.csv",
+      "size": 1038,
+      "sha256": "a9e4ca7360b8c7486eed037dc78d1a48a30f0b0c5fc2eb5440999886f245974c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/dispersion.csv",
+      "size": 82426,
+      "sha256": "fce331eea73fa53f196f8cc2a9d885ae951c019569eb6f7a208f9e1af859b422"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/fields.csv",
+      "size": 726,
+      "sha256": "c2d06f3e6981109859b2e4cd54e6fd1a408b3a30a988c6ce2230cc2320a6906a"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/geometry.json",
+      "size": 962,
+      "sha256": "70f01efb1c2b9a39d2c47d325058aab439b48ba87f45fe706cfc34722b8464ba"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/groups.csv",
+      "size": 74795,
+      "sha256": "3fc4e628f010b566f91e491915f412e0135ca178cf962403500fec09ebd43306"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/nodes.csv",
+      "size": 8043,
+      "sha256": "2b08895bbdef2dcf35c194307f2fb03e9a3af48fca0cdaf7c6b84d2881cf1690"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/summary.json",
+      "size": 4375,
+      "sha256": "7303a3f5aeae4baa7c8f8e1450e5b980eabed124054fe2e5696802a16be642fa"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/surfaces.npz",
+      "size": 645163,
+      "sha256": "a581bb624af29bd3b7b8344542515727e9d8af4fa849ac9407e2d814eaddcff3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/plot-data/zones.csv",
+      "size": 722,
+      "sha256": "7bcf6ce5ee435b4b27729a6f5f34c4d746c9f84beb4762f5397d6975de30b705"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/raw/attempt-0001/execution.json",
+      "size": 256,
+      "sha256": "f1690babc60a553095c8f46a26557536ee215c3d711432699a8f3a1baa70f855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/raw/attempt-0001/rng-end.json",
+      "size": 190,
+      "sha256": "50ec8b3c21d8839dd514fe36af184522aaf19a3c3eb46810d8315d4113579509"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/raw/attempt-0001/rng-start.json",
+      "size": 190,
+      "sha256": "a5ac37159644352a6fbafbcb905b090358f3f4acacd01609d558b23c4eb0eb79"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/data/raw/attempt-0001/router.npz",
+      "size": 1525915,
+      "sha256": "b01d8a238101a4655b970a77f7538361d2c98af4152578962b033083f3a03197"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/figure-specs/cone-sections.figure.json",
+      "size": 723,
+      "sha256": "ea6578ce424f8357551b237b9929ef3dfde5608d2f5af8f1e2c5d2a79e3572f5"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/figure-specs/continuum-convergence.figure.json",
+      "size": 675,
+      "sha256": "675548c3e35f5d114dbb2b59da0affbe212164fb9d62ea6c471da0e1ea4b95ac"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/figure-specs/full-zone-spectrum.figure.json",
+      "size": 749,
+      "sha256": "a7a4658f3c06fca2c228dfb8c2db29204c5557e08cc160dbcfa5a0ffcd07b71f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/figure-specs/group-directions.figure.json",
+      "size": 777,
+      "sha256": "881d34323ca89aeafe6d0b45b2750290bb43a2b00a57e41f4565e5b0e5f70dc2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/figure-specs/numerical-audit.figure.json",
+      "size": 725,
+      "sha256": "a21e144d237f5860185c28b7b2f8c6220219f992963c7fb51d582ba96c695966"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/figure-specs/order-and-direction.figure.json",
+      "size": 723,
+      "sha256": "154e5b7805b0be2bc831deee122ab4a636a7f9d4622d01cd0ffc117413e58bab"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/__init__.py",
+      "size": 70,
+      "sha256": "773a483c668342f54b2d252d1418c6b0ad5ba434f55a147b9e5e3fe429814c43"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/__main__.py",
+      "size": 60,
+      "sha256": "6e40041537e992294f93ec2fddf9a77c4a3bc98c1a78f44458d19e64e1cc4cfb"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/analysis/__init__.py",
+      "size": 69,
+      "sha256": "c8a3e4a6b22fd75658eaa738367271a5eed3cde4e3600f25e437be88f64a2833"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/analysis/charged.py",
+      "size": 32935,
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/analysis/operators.py",
+      "size": 6386,
+      "sha256": "d6f59ddd93a3f8e7da5b11e511a30e9100981569978b4fc275d96a6ba7f7e906"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/analysis/reciprocal.py",
+      "size": 11770,
+      "sha256": "dac3004d873845a5edde65ce520cda26d181637dc7c6f5f0c6f4ddd864efb1df"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/analysis/router.py",
+      "size": 12341,
+      "sha256": "9c929c8e316ff3c4412e0092b1f413fbd4d23ff11ebd257db00f59c8a6922ea0"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/analysis/synthetic.py",
+      "size": 2935,
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/cli.py",
+      "size": 6896,
+      "sha256": "41333857805258154ba44dfa47059741546c387edc2a39e15ed94e7e6dc59df2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/contracts/__init__.py",
+      "size": 149,
+      "sha256": "088648491bc037ec067e6b066f72289445407db07c56404d200e6ca612e00b38"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/contracts/e01.py",
+      "size": 3216,
+      "sha256": "cbde6313d7eb5bf1c5c6bd6df92bb4e0d47390ebbb1be5b2010b3b669dd89b54"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/contracts/generated.py",
+      "size": 1456,
+      "sha256": "c050a45fa317f5b90cec3f7d7a78c4ee4897f4d320add1e7d416cdaeebf2dd79"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/contracts/validation.py",
+      "size": 16015,
+      "sha256": "01041254107be4fc49ee1175669ed980e1d0e0344686bb507ae1eae183e4c16d"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/__init__.py",
+      "size": 308,
+      "sha256": "3d2a64b92f34435007b230d7d8e680ca4e5b37946d93b9e6a410ac2617b7774f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/base.py",
+      "size": 1653,
+      "sha256": "41ab6e8b770368c6a373e1f2429702fd9c3aee35891cf93faaa2f091b2dfc6c6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/charged_worker.py",
+      "size": 11310,
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/charged.py",
+      "size": 6082,
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/operators.py",
+      "size": 4248,
+      "sha256": "0bcb0ea43bbfbfdb7ce2a1db4156692bc51e55ac0e161219791b44dc0077f6c8"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/reciprocal.py",
+      "size": 4869,
+      "sha256": "93e41839832e27374158968213567d0dada8d920a387272192981678d18dec63"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/registry.py",
+      "size": 1106,
+      "sha256": "37067b05b5f984c17c8ef9328c9cd3efdc7f758a30a9c5908fdd26bb76ddfb91"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/router.py",
+      "size": 4968,
+      "sha256": "32bbccac7ee3cf9d9d98be5e10fa50c521b2a6950f8d78a04e6029e4986945c3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/synthetic_worker.py",
+      "size": 5684,
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/experiments/synthetic.py",
+      "size": 5004,
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/models/__init__.py",
+      "size": 48,
+      "sha256": "f1c1bc09905be0aadc69485581ca35c071641d896df665b743a0830fc483be3e"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/models/charged_scalar.py",
+      "size": 944,
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/models/operators.py",
+      "size": 1324,
+      "sha256": "7f7cac1968e78ed5da8c8bd6b7aacd25911d4dd924302b4c96a6a34fa8b87714"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/models/reciprocal.py",
+      "size": 1182,
+      "sha256": "e74cb8c10f1a1d3e13d71b6d44a3535dc7597c26cfc21f7e649ed1984d698e82"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/models/router.py",
+      "size": 1848,
+      "sha256": "3b6f49b929b52d58df5dd93eb79e0037edf92c83511aa21940a410619aff16a9"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/models/synthetic.py",
+      "size": 326,
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/__init__.py",
+      "size": 68,
+      "sha256": "0995e134f9ee087f13047a806677ebd0de56fc0245e54b8058bf06a4d4bdb164"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/charged_radial.py",
+      "size": 5115,
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/charged_spectrum.py",
+      "size": 7228,
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/operators.py",
+      "size": 6855,
+      "sha256": "9c022b82344eebd75dcd8a5f89e7a261b0883098debbf69c9104fa6691d0334f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/reciprocal.py",
+      "size": 7611,
+      "sha256": "1226766200701c610fda50c22141fa517cccb89befa6d86e8af3b8a9f5f17d41"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/router.py",
+      "size": 4852,
+      "sha256": "173dcf35b3770ceb07bbbfa2da347f7366eae0c605bfd202abe4089fda2f80f6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/numerics/synthetic.py",
+      "size": 692,
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/__init__.py",
+      "size": 70,
+      "sha256": "4833796dbf6c1a61eeb9bce5bb5af0f2a5176b975dcf80dc7a8d4a476a87a03b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/charged.py",
+      "size": 11784,
+      "sha256": "c919726353ca552ce5eaea956253ec6945a5aa22dcdbdcd779f2c2e03e7dc269"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/exploration.py",
+      "size": 4065,
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/operators.py",
+      "size": 11773,
+      "sha256": "2b13860c05869b50388b36bc0a30e3489ebe2142a389d2eacd4a4a27e0d1ed8c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/reciprocal.py",
+      "size": 15210,
+      "sha256": "cbaa8032826478a6794f2358d5ece61ceffbaf97f0d3dbaaf4e0ae8cfe6c4124"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/router.py",
+      "size": 16548,
+      "sha256": "e3bc20c7a6c74d8ee049002bf8b327a58ade2b5dee8160a1588b7f7060a01227"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/reporting/synthetic.py",
+      "size": 7412,
+      "sha256": "4c3ef0fb2d6466a8c02f3398f1e3e4cbb0c2ad1d3efe49c7211361f0fe7d49c6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/__init__.py",
+      "size": 294,
+      "sha256": "9e5f034118112842072a8ef1dd1ed96e7cfe8453e57b64b4d63f408cee25656d"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/archive.py",
+      "size": 2430,
+      "sha256": "73894d51459075b0ff80d037ed62fb6bbd1b5ea7de7861e17156df8fb2fd32b4"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/errors.py",
+      "size": 448,
+      "sha256": "9a9f0f8f57af38bfeeb1504dade9844435f163167a343804339d6cbc5bf8239c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/events.py",
+      "size": 1982,
+      "sha256": "47b8ee842b04002f80ec094bd860d7596092140fdd267afdc45f6dae417f71e3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/io.py",
+      "size": 1986,
+      "sha256": "9f5cf2ab67969e348b61d879f6f5fc166278a606fd02c462373d2eb01a928d72"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/limits.py",
+      "size": 626,
+      "sha256": "8685bb2ba64ae5339f17262d2cf7be59ed618a1f60169a698fb3cd65f8850215"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/package.py",
+      "size": 12980,
+      "sha256": "450d75eec92261121daf7a32ab57514fba510ec3c7a134d2f02fbafa6f5319ac"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/runner.py",
+      "size": 28240,
+      "sha256": "84bd02824c56ee64634d0c2c5da971155ab11029d0afff89840c9edec9059b6e"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/seeds.py",
+      "size": 647,
+      "sha256": "fb4f68b4bbd732e08952b2154b1f793bbb9211e0ffae70e621e3000005b18057"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/verify.py",
+      "size": 9683,
+      "sha256": "6fed68498b61f14886d6a836dc4052cc384a304ba8ed78b31ee7dc588d961e22"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/runtime/worker.py",
+      "size": 812,
+      "sha256": "a279541fa4e4d557030bc9797b4c46de0cd0fa805fc41b6bd93e4aad70769721"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/service/__init__.py",
+      "size": 74,
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/source/service/api.py",
+      "size": 12687,
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/tables/analysis.json",
+      "size": 5996,
+      "sha256": "d6908402612373c9df6fb02fcd9ad2c5398bf6fe51c6be4fcbf5b1476e44d68b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/tables/checks.json",
+      "size": 1352,
+      "sha256": "8d01eefd7d6049f30fb29eb9a8e6da873b16023afd25e659f447a2421e1a0e62"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/results/tables/resolved-config.json",
+      "size": 1226,
+      "sha256": "7540ff4770e1e68b9255e38a7552f5e28c892ad68ecf4a1184e2e1bcadae1f24"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/automated-assessment.md",
+      "size": 2036,
+      "sha256": "0ac26cbdca4d37a2b299f23ca4c52ec8133913e0abbe427dc36bbafeb3fb430d"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/browser-install3.log",
+      "size": 1224,
+      "sha256": "41526a846314d5e410df1544aa4b4fba0964c7f76dbd72fab73ba637ee7580f3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/browser-tests3.log",
+      "size": 36424,
+      "sha256": "77cc416800b8e829b22fe17c5eb2c2e9bb8994274bfcf6486bb4b3ba8f37600b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/cli-sample3.json",
+      "size": 736,
+      "sha256": "92a57fbbf616302fc440ac0411b2a0aa846f99e10329ceb0a6be4675bcc697d2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/config.json",
+      "size": 1847,
+      "sha256": "c7100f70a77e46c4fd855beb8de132376d8163d1a88bdd846ab13066f7a055ab"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/execution.json",
+      "size": 663,
+      "sha256": "0767a979bc9b0111ca24d07d27cae3478f631aa4bfbd726c55c6d0302a1fdfd6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/analyze.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/analyze.stdout.log",
+      "size": 4134,
+      "sha256": "a0d1f66bdb864f77fe074d4b5e2299ffd06e71e71309a2d812fb550587e753c1"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/package.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/package.stdout.log",
+      "size": 78,
+      "sha256": "a3290c39047c1f386a2e5d9575731d58451968c6db91a1fda7c12f78a4b46ee3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/report.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/report.stdout.log",
+      "size": 1802,
+      "sha256": "5b32680738145e0b7aada0c5d278c2a35b9bd3acf01152e06421f272ef50bf2f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/run-plan.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/run-plan.stdout.log",
+      "size": 2022,
+      "sha256": "1d4ac9f8865faf78896720743ec9a3f99dd51af8af948a252f311ff2de730937"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-revision.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-revision.stdout.log",
+      "size": 41,
+      "sha256": "6fb80b3fc925de23d5392c53c6563c44abbca80a7340f1396aaa73c09928fa2e"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-snapshot.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-snapshot.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-status.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-status.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-tree.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/source-tree.stdout.log",
+      "size": 41,
+      "sha256": "b9e7dfff881f2fea3e4bca752d0f4924101136674402f8e6aa494acc673d7db2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/verify.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/pipeline-logs/verify.stdout.log",
+      "size": 124,
+      "sha256": "b55a858f49c52e9c16737b87c4504f8bce41f4d5fb36589ab552df7b40885582"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/plan.json",
+      "size": 17692,
+      "sha256": "8c0a94d5dcfbae9e0848fee6a9e9bd3efdd9df901192fcf98ab1827bdd8b8295"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/preflight3-final.jsonl",
+      "size": 1744,
+      "sha256": "4cab2ccfe6ed0019c520b86f9bf06902932bb1736a6f28bdf95fe9f1c8614682"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/README.md",
+      "size": 763,
+      "sha256": "15e1e4fb065b1be9bd07876ece73e463a385cf0e80c6beb9bb9315134d8d69d5"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/reviewed-analysis.md",
+      "size": 6921,
+      "sha256": "0272c240a0b8ad3a9f3ab8a3675581fc4151a92e3ad88ce73e9aab2f6e665561"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/source-history.bundle",
+      "size": 29888,
+      "sha256": "5ea94688617a3ffe5c29808ef8fbd4037ba04b4f6a759f413ec2756155353380"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/status.json",
+      "size": 1819,
+      "sha256": "dce1e55a14029a57eada0629b24ad176f77b156893cb5d770397beba65d08475"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/provenance/validation.md",
+      "size": 2186,
+      "sha256": "921b31f4fa835a6937884f2dd1749c5af72bff2cf5539295e023d4775b18af74"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/analysis.json",
+      "size": 5996,
+      "sha256": "d6908402612373c9df6fb02fcd9ad2c5398bf6fe51c6be4fcbf5b1476e44d68b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/checks.json",
+      "size": 1352,
+      "sha256": "8d01eefd7d6049f30fb29eb9a8e6da873b16023afd25e659f447a2421e1a0e62"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/convergence.csv",
+      "size": 1038,
+      "sha256": "a9e4ca7360b8c7486eed037dc78d1a48a30f0b0c5fc2eb5440999886f245974c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/dispersion.csv",
+      "size": 82426,
+      "sha256": "fce331eea73fa53f196f8cc2a9d885ae951c019569eb6f7a208f9e1af859b422"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/fields.csv",
+      "size": 726,
+      "sha256": "c2d06f3e6981109859b2e4cd54e6fd1a408b3a30a988c6ce2230cc2320a6906a"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/geometry.json",
+      "size": 962,
+      "sha256": "70f01efb1c2b9a39d2c47d325058aab439b48ba87f45fe706cfc34722b8464ba"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/groups.csv",
+      "size": 74795,
+      "sha256": "3fc4e628f010b566f91e491915f412e0135ca178cf962403500fec09ebd43306"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/nodes.csv",
+      "size": 8043,
+      "sha256": "2b08895bbdef2dcf35c194307f2fb03e9a3af48fca0cdaf7c6b84d2881cf1690"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/summary.json",
+      "size": 4375,
+      "sha256": "7303a3f5aeae4baa7c8f8e1450e5b980eabed124054fe2e5696802a16be642fa"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/surfaces.npz",
+      "size": 645163,
+      "sha256": "a581bb624af29bd3b7b8344542515727e9d8af4fa849ac9407e2d814eaddcff3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/analyses/analysis-0001-53e821db/derived/zones.csv",
+      "size": 722,
+      "sha256": "7bcf6ce5ee435b4b27729a6f5f34c4d746c9f84beb4762f5397d6975de30b705"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "b650ce82df158b42e34a90d8f694fd98084f1d8d23a544b3cc7efd8c3aecfc98"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/events.jsonl",
+      "size": 2168,
+      "sha256": "1d46e839bf1337e81d05aeecfd65e0e0cc456252c3a27d41268c1de812e64c31"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/preparation.json",
+      "size": 2748,
+      "sha256": "5233d3b8de7a76f97fd153cf588c3219a109f28a3b800fc7c15feef0dd000661"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/raw/execution.json",
+      "size": 256,
+      "sha256": "f1690babc60a553095c8f46a26557536ee215c3d711432699a8f3a1baa70f855"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/raw/rng-end.json",
+      "size": 190,
+      "sha256": "50ec8b3c21d8839dd514fe36af184522aaf19a3c3eb46810d8315d4113579509"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/raw/rng-start.json",
+      "size": 190,
+      "sha256": "a5ac37159644352a6fbafbcb905b090358f3f4acacd01609d558b23c4eb0eb79"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/raw/router.npz",
+      "size": 1525915,
+      "sha256": "b01d8a238101a4655b970a77f7538361d2c98af4152578962b033083f3a03197"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/attempts/attempt-0001/request.json",
+      "size": 1818,
+      "sha256": "529234523d60484d634c4a08c04d644e2370417c02276bc59c5a56c9b26ffed2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/checksums.sha256",
+      "size": 7060,
+      "sha256": "6dfec2afe9f845120daf8e661bfa09bb84d003982e68d25fc01a2b0814399fa4"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/manifest.json",
+      "size": 33423,
+      "sha256": "811e50a6d60129726102550e9705f1fd96bb8642d90e714af9470274bd98a735"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/provenance/code.json",
+      "size": 206,
+      "sha256": "d6abcf56dccb2c2792acfd74ce05e9e74bb143bb84ae16d24effd1cb9a32cb1b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/provenance/inputs.json",
+      "size": 133,
+      "sha256": "d5ecba56ea2eeaf4f7e959268dffabd3bb2cae3ea014f1f8f11bfeb57e00c1c3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/cone-sections.figure.json",
+      "size": 723,
+      "sha256": "ea6578ce424f8357551b237b9929ef3dfde5608d2f5af8f1e2c5d2a79e3572f5"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/cone-sections.pdf",
+      "size": 21670,
+      "sha256": "9e62a4d83fa52fd8c4e19b3b60c7d92d5e78bc18b8638410683ea26c9fe6a192"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/cone-sections.png",
+      "size": 108817,
+      "sha256": "0cb0c9e6c5888a4c0addcb337e20319c5beca12866d373cffeaae83ef499c723"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/cone-sections.svg",
+      "size": 90151,
+      "sha256": "b715e08a34a5078a189b04d8ca819d971e61cdee07a43f0617d945de2482180b"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/continuum-convergence.figure.json",
+      "size": 675,
+      "sha256": "675548c3e35f5d114dbb2b59da0affbe212164fb9d62ea6c471da0e1ea4b95ac"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/continuum-convergence.pdf",
+      "size": 20442,
+      "sha256": "e5c2c41f83d0dba3f20947b6a90d35a9665395f6ccbf42a0eed59c050fcbdb4c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/continuum-convergence.png",
+      "size": 70888,
+      "sha256": "aa922dd1fd03c808b06acc088fd8f3cf76a9307052a991f075466de31ac7fc72"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/continuum-convergence.svg",
+      "size": 74995,
+      "sha256": "3d765842234c70fa2a52c06432f2fcbffee416054e53a0bb614ef4b54de9f7c1"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/full-zone-spectrum.figure.json",
+      "size": 749,
+      "sha256": "a7a4658f3c06fca2c228dfb8c2db29204c5557e08cc160dbcfa5a0ffcd07b71f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/full-zone-spectrum.pdf",
+      "size": 31169,
+      "sha256": "d1fbab010719c3858180b7cbc4097b09d5681e3393bf7758b920d5a9fc25575f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/full-zone-spectrum.png",
+      "size": 111403,
+      "sha256": "87fda19fcac7dc34cbfa66ad7b7ad062b4839416cfd83cae9251789961483cc4"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/full-zone-spectrum.svg",
+      "size": 106763,
+      "sha256": "527f01d7362a9b36b7f4e89808effa26245609bf3f3566419a89ffb8b5bfb1b8"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/group-directions.figure.json",
+      "size": 777,
+      "sha256": "881d34323ca89aeafe6d0b45b2750290bb43a2b00a57e41f4565e5b0e5f70dc2"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/group-directions.pdf",
+      "size": 21778,
+      "sha256": "9ea3643fead3541bb53369c125702990ade297f57fc77ba53c974a7be0be7ffb"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/group-directions.png",
+      "size": 72774,
+      "sha256": "9ec573c8811cf25dcd140abc19ea846819c1d29decb100f8afc0b0adbf3bae57"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/group-directions.svg",
+      "size": 73839,
+      "sha256": "e8d83ebb5bb3d5272ba5b84151a567cb10694ecd2a86031ef8194e19d683e269"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/numerical-audit.figure.json",
+      "size": 725,
+      "sha256": "a21e144d237f5860185c28b7b2f8c6220219f992963c7fb51d582ba96c695966"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/numerical-audit.pdf",
+      "size": 20864,
+      "sha256": "103bc62d031ae0a8bf6cb5c5b164d359e28451f69418bf3f540e6943d4ca9387"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/numerical-audit.png",
+      "size": 109609,
+      "sha256": "8e62240480f32a7b1a285aa9a6dc3e5f856d428ba294bf0b803cfcde112b709c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/numerical-audit.svg",
+      "size": 76344,
+      "sha256": "e0e991a6319844078e90c803f62e1d1f34a4ce6b0c075dd9567a5172dae533c5"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/order-and-direction.figure.json",
+      "size": 723,
+      "sha256": "154e5b7805b0be2bc831deee122ab4a636a7f9d4622d01cd0ffc117413e58bab"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/order-and-direction.pdf",
+      "size": 20936,
+      "sha256": "717d5cf1e1e0bb054119b45d6b32ab83bd58b2aadc10acabe30a4839bd43eab6"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/order-and-direction.png",
+      "size": 134005,
+      "sha256": "84ef81c1175a5e636e1ee7bc2737504713443552def1b30e83150240dd4b9793"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/figures/order-and-direction.svg",
+      "size": 75615,
+      "sha256": "99cf836a3f6a3527f8ea595871bf27d5dbc0fe2507293543754b6125e8121610"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/interpretations.json",
+      "size": 3629,
+      "sha256": "8f399932c244f7e654f8a5b9079a08a9b5317832df4120c5cba1c711f8431aa1"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/convergence.csv",
+      "size": 1038,
+      "sha256": "a9e4ca7360b8c7486eed037dc78d1a48a30f0b0c5fc2eb5440999886f245974c"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/dispersion.csv",
+      "size": 82426,
+      "sha256": "fce331eea73fa53f196f8cc2a9d885ae951c019569eb6f7a208f9e1af859b422"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/fields.csv",
+      "size": 726,
+      "sha256": "c2d06f3e6981109859b2e4cd54e6fd1a408b3a30a988c6ce2230cc2320a6906a"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/geometry.json",
+      "size": 962,
+      "sha256": "70f01efb1c2b9a39d2c47d325058aab439b48ba87f45fe706cfc34722b8464ba"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/groups.csv",
+      "size": 74795,
+      "sha256": "3fc4e628f010b566f91e491915f412e0135ca178cf962403500fec09ebd43306"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/nodes.csv",
+      "size": 8043,
+      "sha256": "2b08895bbdef2dcf35c194307f2fb03e9a3af48fca0cdaf7c6b84d2881cf1690"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/summary.json",
+      "size": 4375,
+      "sha256": "7303a3f5aeae4baa7c8f8e1450e5b980eabed124054fe2e5696802a16be642fa"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/surfaces.npz",
+      "size": 645163,
+      "sha256": "a581bb624af29bd3b7b8344542515727e9d8af4fa849ac9407e2d814eaddcff3"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/plot-data/zones.csv",
+      "size": 722,
+      "sha256": "7bcf6ce5ee435b4b27729a6f5f34c4d746c9f84beb4762f5397d6975de30b705"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/report.html",
+      "size": 6075,
+      "sha256": "accf03de088a877b721c4f18a2b283b593e25c7d3cf210e728347a844c4132b9"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/report.json",
+      "size": 2102,
+      "sha256": "7acaf2647977eba30021408d625ddbd3be463d6327580ee7074f0b01e3674e89"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/report.md",
+      "size": 5129,
+      "sha256": "07a6599cd591b590afe23e692447c27c937e7ef047ce4d6fe40966b44788b6f4"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/reports/report-0001/report.pdf",
+      "size": 82688,
+      "sha256": "94d142316e04c52ce17d2812869866352304505d63f075718b09e0ef96b5b48f"
+    },
+    {
+      "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/resolved-config.json",
+      "size": 1226,
+      "sha256": "7540ff4770e1e68b9255e38a7552f5e28c892ad68ecf4a1184e2e1bcadae1f24"
     },
     {
       "path": "research/experiments/README.md",

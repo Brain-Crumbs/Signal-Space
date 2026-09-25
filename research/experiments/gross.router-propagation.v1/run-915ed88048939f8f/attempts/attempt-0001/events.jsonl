@@ -1,0 +1,11 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T06:49:46.871398Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":120,"max_memory_mb":512,"max_output_mb":32,"max_wall_seconds":120}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T06:49:46.874630Z","type":"attempt-running"}
+{"payload":{"algorithm":"port-stencil-fourier-v1","pid":26},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T06:49:47.361303Z","type":"worker-started"}
+{"payload":{"order":"forward","samples":104,"triad":"collinear"},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T06:49:47.466060Z","type":"measurement"}
+{"payload":{"order":"reverse","samples":104,"triad":"collinear"},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T06:49:47.518844Z","type":"measurement"}
+{"payload":{"order":"forward","samples":104,"triad":"oblique"},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T06:49:47.559542Z","type":"measurement"}
+{"payload":{"order":"reverse","samples":104,"triad":"oblique"},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T06:49:47.589208Z","type":"measurement"}
+{"payload":{"order":"forward","samples":104,"triad":"orthogonal"},"schema_version":"research-event-v1","sequence":8,"stage":"run","timestamp":"2026-09-25T06:49:47.620778Z","type":"measurement"}
+{"payload":{"order":"reverse","samples":104,"triad":"orthogonal"},"schema_version":"research-event-v1","sequence":9,"stage":"run","timestamp":"2026-09-25T06:49:47.658485Z","type":"measurement"}
+{"payload":{"sectors":6,"wavevectors_per_sector":104},"schema_version":"research-event-v1","sequence":10,"stage":"run","timestamp":"2026-09-25T06:49:47.782136Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":11,"stage":"runtime","timestamp":"2026-09-25T06:49:47.848328Z","type":"attempt-completed"}

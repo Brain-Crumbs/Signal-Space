@@ -1,0 +1,88 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.router-propagation.v1",
+  "model_id": "signal-space.ss-ops-1.router-linear.v1",
+  "parameters": {
+    "triads": {
+      "orthogonal": [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+      ],
+      "oblique": [
+        [1, 0, 0],
+        [0.6, 0.8, 0],
+        [0.3, 0.4, 0.8660254037844386]
+      ],
+      "collinear": [
+        [0, 0, 1],
+        [0, 0, 1],
+        [0, 0, 1]
+      ]
+    },
+    "orders": {
+      "forward": [0, 1, 2],
+      "reverse": [2, 1, 0]
+    },
+    "directions": [
+      [-1, -1, -1],
+      [-1, -1, 0],
+      [-1, -1, 1],
+      [-1, 0, -1],
+      [-1, 0, 0],
+      [-1, 0, 1],
+      [-1, 1, -1],
+      [-1, 1, 0],
+      [-1, 1, 1],
+      [0, -1, -1],
+      [0, -1, 0],
+      [0, -1, 1],
+      [0, 0, -1],
+      [0, 0, 1],
+      [0, 1, -1],
+      [0, 1, 0],
+      [0, 1, 1],
+      [1, -1, -1],
+      [1, -1, 0],
+      [1, -1, 1],
+      [1, 0, -1],
+      [1, 0, 0],
+      [1, 0, 1],
+      [1, 1, -1],
+      [1, 1, 0],
+      [1, 1, 1]
+    ],
+    "radii": [0.02, 0.04, 0.08, 0.16],
+    "zone_sizes": [16, 32],
+    "box_sizes": [8, 12],
+    "derivative_steps": [1e-5, 5e-6],
+    "rotation_angle": 0.731,
+    "surface_frequency": 0.16
+  },
+  "units": {
+    "label_step": "ell=1",
+    "cycle": "tau_c=1",
+    "wavevector": "q=k*ell",
+    "quasifrequency": "phase=omega*tau_c",
+    "group_velocity": "ell/tau_c"
+  },
+  "seeds": {
+    "root": 2026092503
+  },
+  "resources": {
+    "max_cpu_seconds": 120,
+    "max_wall_seconds": 120,
+    "max_memory_mb": 512,
+    "max_output_mb": 32
+  },
+  "analysis": {
+    "matrix_tolerance": 1e-10,
+    "fine_cone_error": 0.02,
+    "convergence_ratio": 0.65,
+    "min_order_signal": 0.0001,
+    "gradient_tolerance": 1e-6
+  },
+  "report": {
+    "title": "Signal Space / GROSS Test 3: Router Propagation"
+  }
+}
