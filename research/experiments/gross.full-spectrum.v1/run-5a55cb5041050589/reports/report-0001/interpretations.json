@@ -1,0 +1,32 @@
+{
+  "accuracy-audit": {
+    "limitation": "Deterministic tolerances are not statistical confidence. No kinetic positivity theorem, globally conserved circuit Hamiltonian, or spacetime momentum is asserted.",
+    "question": "Are recurrence, differential accuracy, phase redundancy and local conservation controlled?",
+    "reading": "Periodicity 3.67e-16; conservation 1.98e-15; differential refinement 4.71e-10; independent ODE Jacobian 6.11e-11.",
+    "significance": "The gates check self-consistent backgrounds, complete differential maps, exact phase redundancy and local conserved ledgers before physical interpretation."
+  },
+  "causal-memory-response": {
+    "limitation": "Three cycles of the linearized circuit, with one impulse direction. Squared tangent amplitude is not physical energy. Projection sums over transverse cells.",
+    "question": "Where can a local physical memory perturbation influence the circuit?",
+    "reading": "Outside-support amplitude 0; two-box difference 0; impulse Fourier discrepancy 1.39e-16.",
+    "significance": "The explicit local incidence constrains response. A physical orientation perturbation can remain at rest or seed a wave depending on background."
+  },
+  "complete-spectrum": {
+    "limitation": "The displayed axis/diagonal sections are finite samples. Degenerate eigenvector colors can change basis, and neither quasiphase nor memory participation is a measured clock record.",
+    "question": "Do all physical wave and memory variations propagate on one cone?",
+    "reading": "All 20 multipliers are retained. Vacuum has twelve stationary physical memory dimensions; memory identity residual 1.12e-10. Strong vacuum cone status: fail.",
+    "significance": "Propagating wave sectors do not by themselves define one geometry for the complete physical state. The equal nonzero preparation retains the vacuum obstruction."
+  },
+  "directional-sectors": {
+    "limitation": "Vacuum/equal background wave sectors only. Signed frequency pairing is used because some directions are supercritical; no clock calibration, invariant record or full operational Test 11.",
+    "question": "Does this specified routing generate leading drift or only finite-band asymmetry?",
+    "reading": "The exact A-port odd/even phases are compared with v_A=-(1,1,1)/2 and D=I/4; B has opposite drift. All 26 directions and four radii remain in the data.",
+    "significance": "Leading drift follows from this explicit incidence. A single common coordinate shift cannot erase opposite drift in two physical port sectors. Directional asymmetry alone is not grounds to reject a geometric signal sector."
+  },
+  "growth-backreaction": {
+    "limitation": "No growth detection is not a stability proof; Jordan effects, untested wavevectors and nonlinear perturbations remain. Frozen memory is an intervention, not a gauge transformation.",
+    "question": "Does the nonzero background activate memory response, and is exponential growth detected?",
+    "reading": "Counter full/frozen difference 0.44444; low-q maximum growth 3.9308e-11. Counter stability: unresolved.",
+    "significance": "The opposing-port background can distinguish reciprocal memory dynamics from imposed projector coefficients. Growth above numerical uncertainty would reject its stability."
+  }
+}

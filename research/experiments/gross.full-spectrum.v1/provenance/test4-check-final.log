@@ -1,0 +1,444 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 check
+> npm run format:check && npm run lint && npm run typecheck && npm run contracts:check && npm run verify:research && npm run verify:experiments && npm test && npm run test:research && npm run build
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 lint
+> eslint .
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 typecheck
+> tsc --noEmit
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 contracts:check
+> python3 scripts/generate-research-contracts.py --check
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 verify:research
+> node scripts/research-archive.mjs
+
+Verified 873 research files and 30 catalog entries.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 verify:experiments
+> python3 .agents/scripts/experiment_contract.py plan .agents/examples/synthetic-plan.json && python3 -m unittest discover -s .agents/tests && python3 .agents/scripts/experiment_contract.py scan research/experiments
+
+validated plan: .agents/examples/synthetic-plan.json
+.......[source-status]
+ValueError: commit source changes before executing; a clean checkout is required
+.[failure]
+[timeout]
+.....
+----------------------------------------------------------------------
+Ran 13 tests in 4.524s
+
+OK
+validated scan: research/experiments
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 test
+> node --import tsx --test test/*.test.js test/*.test.ts
+
+✔ analytic phase advance, signed slips, and reception inventory (6.364219ms)
+✔ tick totals and spatial correlations use saved physical records (0.647155ms)
+✔ persistent equal-frequency offset is only a frequency candidate without recovery (0.711551ms)
+✔ perturbation recovery promotes phase candidate while modulation is allowed (1.826563ms)
+✔ unchanged offsets do not count as perturbation recovery (1.49152ms)
+✔ perturbation recovery requires exact matched reference samples (1.46775ms)
+✔ uncovered and non-nested windows cannot produce candidates (2.727961ms)
+✔ short windows and failures remain unresolved or failed (0.429181ms)
+✔ retarded phase labels simulator access unless protocol declares it (0.537868ms)
+✔ replicate interval retains runs and treats runs as independent (0.874248ms)
+✔ spatial caveat and causal response fronts remain explicit (1.192396ms)
+✔ CLI sample and direct engine have identical output (1199.703024ms)
+✔ CLI rejects invalid flags and file failures with nonzero exit and structured errors (4897.313625ms)
+✔ research CLI resolves the Python package from the repository root (585.474282ms)
+✔ CLI --until runs the shared deterministic engine and validates duration (2907.056544ms)
+✔ CLI --seed selects shared packet execution and requires a duration (1918.279377ms)
+✔ CLI propagates incomplete run status and persists append-only sweep attempts (1110.011362ms)
+✔ R0 phase, nonnegative E0/E1 rates, quadrature and section crossings match independent identities (85.37216ms)
+✔ constant-input R1 matches exponential frequency and integrated phase for both gain signs (33.783762ms)
+✔ explicit per-node response-rate scales are validated and leave physical r-star unchanged (25.624939ms)
+✔ non-grid delay preserves causal onset and refinement converges (49.556358ms)
+✔ saved complete history resumes identically at an accepted step and rejects missing/corrupt history (102.287691ms)
+✔ checkpoint restore rejects valid RK4 half-steps that fail adaptive acceptance (3.405274ms)
+✔ checkpoint restore rejects RK4 pairs that cross scheduled boundaries (1.979675ms)
+✔ checkpoint restore rejects adaptive mesh growth unavailable to the controller (1.184353ms)
+✔ checkpoint restore rejects an impossible saved next-step proposal (3.24789ms)
+✔ checkpoint restore rejects counters beyond the lifetime attempt budget (1.840321ms)
+✔ checkpoint restore rejects rejection counters without a replayable controller attempt (1.801771ms)
+✔ checkpoint restore replays a genuine rejected adaptive attempt (2.117299ms)
+✔ checkpoint restore tolerates portable last-bit replay differences (41.702657ms)
+✔ checkpoint restore rejects macroscopic changes to large replay values (1.50355ms)
+✔ checkpoint replay counts ULPs exactly below a binade boundary (1.300352ms)
+✔ checkpoint restore tolerates a last-bit acceptance-threshold flip (1.139611ms)
+✔ checkpoint restore rejects cumulative sub-threshold RK4 increment changes (77.188253ms)
+✔ reflection exchanges ports, adds pi, and preserves R2 histories and total emissions (114.561448ms)
+✔ piecewise inputs and gain changes use exact discontinuity boundaries without phase resets (12.38437ms)
+✔ numerically coincident propagated and direct boundaries are coalesced (75.822287ms)
+✔ retarded left limits preserve pre-jump source state at propagated boundaries (17.141153ms)
+✔ representable event intervals near zero are not coalesced (0.89017ms)
+✔ representable multi-ULP event intervals remain distinct (12.600415ms)
+✔ sampled prehistory uses phase Hermite derivative and rejects hidden between-knot frequency violations (55.756689ms)
+✔ solver tolerances do not widen physical prehistory bounds (0.927914ms)
+✔ prehistory bounds permit only representation-scale roundoff (0.544348ms)
+✔ overflowed prehistory derivative extrema are rejected (0.469983ms)
+✔ prehistory uses gain bounds immediately before a time-zero intervention (3.574808ms)
+✔ segments ending at gain changes use left-limit bounds (0.628275ms)
+✔ solver tolerances do not widen evolved physical bounds (0.651661ms)
+✔ dense intensity history cannot decrease between increasing endpoints (0.434572ms)
+✔ unsupported physics and exhausted error control fail structurally without clipping (14.588011ms)
+✔ non-finite envelope option values fail at the request boundary (23.783385ms)
+✔ unrepresentable initial tick indices fail before exposing a sample (2.690255ms)
+✔ phases too coarse to resolve individual tick sections fail before sampling (3.580918ms)
+✔ phase spacing is measured exactly below a floating-point binade (4.634473ms)
+✔ negative phase spacing is measured toward increasing phase (3.429142ms)
+✔ worker envelope cancellation emits a resumable checkpoint and no completion (6.457423ms)
+✔ nonlinear retarded source history converges against independent convolution quadrature (84.614419ms)
+✔ sample preparation preserves complete initial state without advancing physics (25.883257ms)
+✔ execution owns the request before yielding control to the caller (8.755822ms)
+✔ invalid structures and semantic bounds produce field-level failures, no snapshots (8.801925ms)
+✔ unimplemented modes fail explicitly (0.760951ms)
+✔ pre-start and in-flight cancellation yield one terminal event and no completion (3.215542ms)
+✔ worker and direct execution emit identical structured-cloneable events (9.802988ms)
+✔ worker cancels only matching run, rejects overlap, and accepts a later run (10.588864ms)
+✔ nested preparation fields cannot cross the typed execution boundary malformed (10.317013ms)
+✔ isolated and reciprocal pair fixtures are valid (20.725642ms)
+✔ A-B-C and chain topologies are accepted (4.488327ms)
+✔ explicit positive-delay ring and mirror boundaries are accepted (9.788785ms)
+✔ emission laws, R0 gain, boundary kind, and closure history are enforced (4.359892ms)
+✔ malformed node and link collections return errors instead of throwing (3.960485ms)
+✔ invalid bounds, zero delay, and inconsistent ports return field errors (6.267726ms)
+✔ round trip preserves predictive state and observer protocol has no private fields (2.542275ms)
+✔ dimensionless scaling can round trip without changing physical inputs (2.259339ms)
+✔ retention 0/1 changes only detached observer records; no missing-event inventory leaks (27.142666ms)
+✔ half-open gate and bins, detector latency, and jitter order are explicit (12.562442ms)
+✔ local-phase timestamps need no global time channel; readable source tags require a declared channel (6.658764ms)
+✔ observer export enforces UTF-16 bounds for run IDs and readable source tags (19.676266ms)
+✔ observer datasets reject hidden fields at type, schema and runtime boundaries (4.990666ms)
+✔ independent observer streams are repeatable and share one unchanged physical history (7.825619ms)
+✔ invalid, unsupported and uncovered detector protocols fail before exporting (4.650258ms)
+✔ physical removal branches and re-evolves filters/frequency, preserving the parent and common prefix (30.224021ms)
+✔ a probe follows positive-delay transport, changes the receiving law, and carries physical lineage (21.350208ms)
+✔ unordered actions preserve plan IDs, time-zero batches, and replay across batches (149.349563ms)
+✔ 10,000 future actions require only bounded scheduling inspections per step (377.659804ms)
+✔ branch lineage requires distinct bounded string IDs at untyped boundaries (14.951363ms)
+✔ bad physical actions fail; simultaneous removal precedes joint arrivals and respects budgets (4.223574ms)
+✔ physical intervention execution agrees across the shared direct/worker API (42.899388ms)
+✔ branching rejects a future action that changes a previously rejected trial (4.031109ms)
+✔ joint arrivals and analytic exponential filter memory are insertion-order independent (16.773753ms)
+✔ R0 rate controls use 64 predeclared seeds and six-sigma aggregate Poisson bands (620.70779ms)
+✔ same-runtime replay preserves every raw event, RNG, queue and adaptive continuation (66.074028ms)
+✔ supplementary Unicode seeds and node IDs retain their complete characters (39.633546ms)
+✔ malformed packet checkpoints fail as INVALID_HISTORY in direct and worker execution (221.44374ms)
+✔ serialized decimal route times allow only representation-scale roundoff (8.666343ms)
+✔ packet accounting, causal support, no retransmission, positive bounded omega (26.918187ms)
+✔ passive detector seed and recording config cannot change physical traces (25.01083ms)
+✔ nonlinear R1 filtered forcing agrees with independent convolution quadrature (5.329035ms)
+✔ resource exhaustion is explicitly incomplete and checkpoint corruption/unsupported laws fail (24.851157ms)
+✔ cancellation yields a complete, restartable physical checkpoint (56.515587ms)
+✔ undeclared fields are rejected across closed nested shapes (51.937632ms)
+✔ history and filter maps require exactly the scenario node IDs (10.999724ms)
+✔ pending packets reject future emission, past arrival, zero transit and nonfinite times (14.118909ms)
+✔ causal boundary packets and declared arbitrary payloads survive inspection (12.976338ms)
+✔ history endpoints must match initial phase and frequency exactly (13.059166ms)
+✔ pending responses must target a declared clock (3.068052ms)
+✔ pending packet source and target must be declared clocks (4.366636ms)
+✔ mirror round trips contribute to the required history horizon (15.594713ms)
+✔ uncloneable extension values are invalid scenarios, not internal failures (1.317482ms)
+✔ shared memory is rejected even in nested containers and views (1.823359ms)
+✔ ordinary buffer payloads are owned before the first progress event (4.085403ms)
+✔ generated research boundary types match the versioned fixture (24.878768ms)
+✔ branch adapter preserves physical normalization and explicit parent graph across failed/disconnected solves (6.43699ms)
+✔ point and sector selection never mix spectra; numerical error multiplier is explicit (1.820796ms)
+✔ invalid numeric output is rejected instead of silently rendered (1.426684ms)
+✔ comparison exposes every material resolved-config dimension (9.316996ms)
+✔ million-row plots use iterative bounds and bounded browser rendering (464.847109ms)
+✔ configuration identity ignores JSON key ordering but preserves array order (0.930699ms)
+✔ plot parser rejects missing and nonfinite evidence instead of dropping it (1.939304ms)
+✔ canonical definitions resolve stable identities and hierarchical seeds (44.479554ms)
+✔ manifest budgets are enforced in the shared execution request (12.778051ms)
+✔ envelope budgets apply when solver options are omitted (11.951301ms)
+✔ resolved manifests reject scenario hash tampering (7.427548ms)
+✔ packet manifests reject root-seed tampering (11.250021ms)
+✔ definition validation rejects invalid resolved values and unbounded plans (9.592291ms)
+✔ all A-I smoke definitions resolve without launching research-scale work (31.810001ms)
+✔ sweep concurrency does not alter run identities or seeded results (71.032913ms)
+✔ partial sweep checkpoints resume only unfinished runs (67.38378ms)
+✔ resume retries cancelled attempts instead of silently dropping them (32.27703ms)
+✔ resource-incomplete attempts remain auditable and cannot continue (21.546432ms)
+✔ checkpoint validation checks plan result identity and terminal status (22.773563ms)
+✔ continuation uses the complete solver checkpoint rather than restarting (31.21454ms)
+✔ Setup A isolated baseline has uniform recurrence and no arrivals (50.944836ms)
+✔ Setup A R0 and constant-input R1 controls cover both gain signs (60.670691ms)
+✔ Setup A preserves scalar response when equal total input switches sides (26.384029ms)
+✔ Setup A records fixed-sum switching, pulse ordering, bounds, ticks, and filters (110.015956ms)
+✔ Setup A response curve saves pulse phase/amplitude and defers interpretation (237.958689ms)
+✔ Setup A definitions are schema-compatible across protocols and variants (13.165064ms)
+✔ Setup B runs every E/R variant under both symmetric preparations (1495.589474ms)
+✔ Setup B R0 preserves the analytic uncoupled continuation (50.619799ms)
+✔ Setup B default phase perturbation is admissible for zero gain (85.598625ms)
+✔ Setup B defaults remain valid for short protocols and R0 sweeps (116.551766ms)
+✔ Setup B validates finite overrides, durations, and perturbation nodes (1.445838ms)
+✔ E0 with zero amplitude and R1 does not manufacture phase restoration (44.481406ms)
+✔ Setup B keeps reciprocal, one-way, and prescribed controls distinct (258.209985ms)
+✔ Setup B saves the exact classification window start without a perturbation (66.929992ms)
+✔ Setup B gain sweep records signed values through zero without a locking claim (191.960786ms)
+✔ Setup B perturbations land at preparation boundaries and replay with history (240.619023ms)
+✔ Setup B rejects phase jumps beyond the tick crossing output cap (16.080127ms)
+✔ Setup B phase jumps emit directed tick crossings (34.796831ms)
+✔ Setup B rejects perturbations merged by canonical boundary time (0.642042ms)
+✔ Setup B definitions are shared-API schema-compatible (18.824161ms)
+✔ Setup C converts dimensionless coordinates into an admissible pair scenario (106.204987ms)
+✔ Setup C E0 baseline matching follows each detuned clock (103.648089ms)
+✔ Setup C controls expose no-feedback, zero-contrast, and positive-delay controls (63.727437ms)
+✔ Setup C maps preserve cell identity and distinguish unrun cells (21.238248ms)
+✔ Setup C reverse continuation retains complete prior snapshots separately from restarts (79.988836ms)
+✔ Setup C definitions use the shared manifest contract (184.389271ms)
+✔ Setup C can compare distinct initial preparations and refine selected cells (90.372465ms)
+✔ Setup C applies controls before scan validation and preserves scan cells (19.977673ms)
+✔ Setup C persists classifier and sampling criteria and honors preparation seeds (20.755556ms)
+✔ Setup C rejects invalid scan configuration before masking it as numerical failure (1.154043ms)
+✔ Setup C rejects nonpositive delay and invalid contrast (0.308998ms)
+✔ Setup D represents the A-B-C neighbor degrees and open outer ports (150.10572ms)
+✔ Setup D records the reflected C endpoint convention and admissible intrinsic boost (171.567665ms)
+✔ Setup D keeps physical and degree-normalized r-star as distinct conventions (164.455243ms)
+✔ Setup D endpoint replay is a non-responsive receiver-only control preserving schedules (75.13082ms)
+✔ Setup D empty-link replay keeps all prehistory arrivals empty (91.510641ms)
+✔ Setup D separates prepared asymmetry from a positive-time disturbance (166.341494ms)
+✔ Setup D E0 preparation changes intrinsic frequency without changing fixed emission rate (89.907889ms)
+✔ Setup D replay has its own executable definition and behavior-complete identity (205.717834ms)
+✔ Setup D preparation ensemble keeps independent declared phase preparations (214.487096ms)
+✔ Setup D exposes local metrics, retarded mismatches, propagation records, and shared definitions (851.617689ms)
+✔ Setup D rejects non-admissible baseline gain before evolution (0.778935ms)
+ℹ tests 172
+ℹ suites 0
+ℹ pass 172
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13909.840272
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 test:research
+> PYTHONPATH=python python3 -m unittest discover -s python/tests -v
+
+test_breakup_search_does_not_join_disconnected_branches (test_e01.E01NumericalTest.test_breakup_search_does_not_join_disconnected_branches) ... ok
+test_exact_vacuum_rejected (test_e01.E01NumericalTest.test_exact_vacuum_rejected) ... ok
+test_nontrivial_profile_independent_residual_and_virial (test_e01.E01NumericalTest.test_nontrivial_profile_independent_residual_and_virial) ... ok
+test_normalized_gaussian_against_exact_integrals (test_e01.E01NumericalTest.test_normalized_gaussian_against_exact_integrals) ... ok
+test_spectrum_original_equation_charge_constraint_and_refinement (test_e01.E01NumericalTest.test_spectrum_original_equation_charge_constraint_and_refinement) ... ok
+test_tail_integrals_and_robin_are_spherical (test_e01.E01NumericalTest.test_tail_integrals_and_robin_are_spherical) ... ok
+test_vacuum_full_generator_has_analytic_exp_sigma_signs (test_e01.E01NumericalTest.test_vacuum_full_generator_has_analytic_exp_sigma_signs) ... ok
+test_checkpoint_resumes_same_pending_continuation (test_e01.E01RuntimeTest.test_checkpoint_resumes_same_pending_continuation) ... ok
+test_closed_config_units_domains_and_opt_in (test_e01.E01RuntimeTest.test_closed_config_units_domains_and_opt_in) ... ok
+test_headless_saved_data_reanalysis_report_and_verify (test_e01.E01RuntimeTest.test_headless_saved_data_reanalysis_report_and_verify) ... ok
+test_small_refinement_fixture_keeps_incomplete_budget_visible (test_e01.E01RuntimeTest.test_small_refinement_fixture_keeps_incomplete_budget_visible) ... ok
+test_fixed_charge_dilation_and_virial_energy_identity (test_e01_analytic_controls.AnalyticControlsTest.test_fixed_charge_dilation_and_virial_energy_identity) ... ok
+test_gaussian_energy_charge_radius_and_coupling_normalization (test_e01_analytic_controls.AnalyticControlsTest.test_gaussian_energy_charge_radius_and_coupling_normalization) ... ok
+test_origin_and_exterior_three_dimensional_measure (test_e01_analytic_controls.AnalyticControlsTest.test_origin_and_exterior_three_dimensional_measure) ... ok
+test_potential_hessian_and_exp_sigma_vacuum_signs (test_e01_analytic_controls.AnalyticControlsTest.test_potential_hessian_and_exp_sigma_vacuum_signs) ... ok
+test_finite_single_emission_can_fail_with_free_and_two_body_passing (test_e01_review.E01ReviewTest.test_finite_single_emission_can_fail_with_free_and_two_body_passing) ... ok
+test_frequency_lower_bound_is_exclusive_for_all_three_fields (test_e01_review.E01ReviewTest.test_frequency_lower_bound_is_exclusive_for_all_three_fields) ... ok
+test_growing_high_mode_below_old_selection_cutoff_is_not_omitted (test_e01_review.E01ReviewTest.test_growing_high_mode_below_old_selection_cutoff_is_not_omitted) ... ok
+test_growth_uses_own_error_despite_unrelated_mode_drift (test_e01_review.E01ReviewTest.test_growth_uses_own_error_despite_unrelated_mode_drift) ... ok
+test_single_fragment_checks_interior_kink_without_charge_grid_rounding (test_e01_review.E01ReviewTest.test_single_fragment_checks_interior_kink_without_charge_grid_rounding) ... ok
+test_single_fragment_excludes_only_identity_even_without_edges (test_e01_review.E01ReviewTest.test_single_fragment_excludes_only_identity_even_without_edges) ... ok
+test_symmetry_splitting_uses_own_error (test_e01_review.E01ReviewTest.test_symmetry_splitting_uses_own_error) ... ok
+test_top_level_checks_preserve_mixed_failures_and_composite_verdict (test_e01_review.E01ReviewTest.test_top_level_checks_preserve_mixed_failures_and_composite_verdict) ... ok
+test_unmatched_refined_growth_remains_unresolved (test_e01_review.E01ReviewTest.test_unmatched_refined_growth_remains_unresolved) ... ok
+test_bond_phase_matches_explicit_real_stencil (test_floquet.FloquetTests.test_bond_phase_matches_explicit_real_stencil) ... ok
+test_closed_schema_and_identity (test_floquet.FloquetTests.test_closed_schema_and_identity) ... ok
+test_periodic_projectors_and_wave (test_floquet.FloquetTests.test_periodic_projectors_and_wave) ... ok
+test_science_failure_is_not_technical_pass (test_floquet.FloquetTests.test_science_failure_is_not_technical_pass) ... ok
+test_vacuum_fourier_realification (test_floquet.FloquetTests.test_vacuum_fourier_realification) ... ok
+test_closed_schema_and_fixed_gates (test_operators.OperatorTests.test_closed_schema_and_fixed_gates) ... ok
+test_lifecycle_and_independent_corruption_detection (test_operators.OperatorTests.test_lifecycle_and_independent_corruption_detection) ... ok
+test_singular_observer_and_exact_boost (test_operators.OperatorTests.test_singular_observer_and_exact_boost) ... ok
+test_cancellation_is_bounded_even_for_uncooperative_worker (test_readiness.ReadinessTest.test_cancellation_is_bounded_even_for_uncooperative_worker) ... ok
+test_cannot_resume_completed_run_from_old_interrupted_attempt (test_readiness.ReadinessTest.test_cannot_resume_completed_run_from_old_interrupted_attempt) ... ok
+test_direct_analysis_import_does_not_load_circular_registry (test_readiness.ReadinessTest.test_direct_analysis_import_does_not_load_circular_registry) ... ok
+test_manifest_uses_plugin_acceptance_metadata (test_readiness.ReadinessTest.test_manifest_uses_plugin_acceptance_metadata) ... ok
+test_nonseries_plugin_evidence_survives_analysis_and_report (test_readiness.ReadinessTest.test_nonseries_plugin_evidence_survives_analysis_and_report) ... ok
+test_package_updates_are_serialized_across_processes (test_readiness.ReadinessTest.test_package_updates_are_serialized_across_processes) ... ok
+test_preparation_failure_has_terminal_evidence (test_readiness.ReadinessTest.test_preparation_failure_has_terminal_evidence) ... ok
+test_raw_series_rejects_duplicate_missing_negative_and_nonfinite_samples (test_readiness.ReadinessTest.test_raw_series_rejects_duplicate_missing_negative_and_nonfinite_samples) ... ok
+test_reference_is_stable_near_unit_gain (test_readiness.ReadinessTest.test_reference_is_stable_near_unit_gain) ... ok
+test_resume_rejects_changed_numerical_environment (test_readiness.ReadinessTest.test_resume_rejects_changed_numerical_environment) ... ok
+test_resumed_output_does_not_inherit_old_classification (test_readiness.ReadinessTest.test_resumed_output_does_not_inherit_old_classification) ... ok
+test_verify_rejects_resealed_false_config_or_analysis_identity (test_readiness.ReadinessTest.test_verify_rejects_resealed_false_config_or_analysis_identity) ... ok
+test_worker_launch_failure_has_terminal_evidence (test_readiness.ReadinessTest.test_worker_launch_failure_has_terminal_evidence) ... ok
+test_closed_schema_rejects_changed_physics_and_boolean_indices (test_reciprocal.ReciprocalTests.test_closed_schema_rejects_changed_physics_and_boolean_indices) ... ok
+test_exact_solution_derivative_and_zero_wave_null (test_reciprocal.ReciprocalTests.test_exact_solution_derivative_and_zero_wave_null) ... ok
+test_frozen_router_has_exact_swap_control (test_reciprocal.ReciprocalTests.test_frozen_router_has_exact_swap_control) ... ok
+test_schedule_preserves_every_wire_order (test_reciprocal.ReciprocalTests.test_schedule_preserves_every_wire_order) ... ok
+test_wrong_memory_sign_breaks_ledger (test_reciprocal.ReciprocalTests.test_wrong_memory_sign_breaks_ledger) ... ok
+test_analytic_derivative_axial_limit (test_router.RouterTests.test_analytic_derivative_axial_limit) ... ok
+test_collinear_is_exact_translation_of_components (test_router.RouterTests.test_collinear_is_exact_translation_of_components) ... ok
+test_config_closed_and_classification_not_assumed (test_router.RouterTests.test_config_closed_and_classification_not_assumed) ... ok
+test_order_sign_and_extra_nodes (test_router.RouterTests.test_order_sign_and_extra_nodes) ... ok
+test_aggregate_output_limit_stops_many_small_files (test_runtime.RuntimeTest.test_aggregate_output_limit_stops_many_small_files) ... ok
+test_analysis_reference_is_independent_of_worker_primitive (test_runtime.RuntimeTest.test_analysis_reference_is_independent_of_worker_primitive) ... ok
+test_archive_preserves_unresolved_scientific_result (test_runtime.RuntimeTest.test_archive_preserves_unresolved_scientific_result) ... ok
+test_closed_validation_units_finite_numbers_and_estimate (test_runtime.RuntimeTest.test_closed_validation_units_finite_numbers_and_estimate) ... ok
+test_complete_reanalysis_report_integrity_and_archive (test_runtime.RuntimeTest.test_complete_reanalysis_report_integrity_and_archive) ... ok
+test_concurrent_reports_receive_unique_ids_and_provenance (test_runtime.RuntimeTest.test_concurrent_reports_receive_unique_ids_and_provenance) ... ok
+test_corrupt_artifact_is_explicit (test_runtime.RuntimeTest.test_corrupt_artifact_is_explicit) ... ok
+test_external_cancel_is_terminal_and_resumable (test_runtime.RuntimeTest.test_external_cancel_is_terminal_and_resumable) ... ok
+test_hard_termination_kills_uncooperative_worker (test_runtime.RuntimeTest.test_hard_termination_kills_uncooperative_worker) ... ok
+test_interruption_resume_and_checkpoint_mismatch (test_runtime.RuntimeTest.test_interruption_resume_and_checkpoint_mismatch) ... ok
+test_manifest_rejects_open_or_empty_child_records (test_runtime.RuntimeTest.test_manifest_rejects_open_or_empty_child_records) ... ok
+test_manifest_update_is_not_visible_before_artifact_reseal (test_runtime.RuntimeTest.test_manifest_update_is_not_visible_before_artifact_reseal) ... ok
+test_resume_reconciles_orphaned_running_attempt (test_runtime.RuntimeTest.test_resume_reconciles_orphaned_running_attempt) ... ok
+test_run_identity_includes_execution_provenance (test_runtime.RuntimeTest.test_run_identity_includes_execution_provenance) ... ok
+test_service_queues_resume_without_blocking_on_resumed_work (test_runtime.RuntimeTest.test_service_queues_resume_without_blocking_on_resumed_work) ... ok
+test_service_returns_run_id_before_long_job_finishes (test_runtime.RuntimeTest.test_service_returns_run_id_before_long_job_finishes) ... ok
+test_service_uses_same_validation_and_enforces_origin_token (test_runtime.RuntimeTest.test_service_uses_same_validation_and_enforces_origin_token) ... ok
+test_sweep_propagates_failed_member_state (test_runtime.RuntimeTest.test_sweep_propagates_failed_member_state) ... ok
+test_unreadable_manifest_fails_catalog_listing_explicitly (test_runtime.RuntimeTest.test_unreadable_manifest_fails_catalog_listing_explicitly) ... ok
+
+----------------------------------------------------------------------
+Ran 73 tests in 25.714s
+
+OK
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> signal-space@0.1.0 build
+> npm run build -w @signal-space/cli && npm run build -w @signal-space/web
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @signal-space/cli@0.1.0 build
+> esbuild src/index.ts --bundle --platform=node --format=esm --target=node24 --outfile=dist/index.js
+
+
+  dist/index.js  407.1kb
+
+⚡ Done in 30ms
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @signal-space/web@0.1.0 build
+> vite build
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 471 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                             0.54 kB │ gzip:   0.33 kB
+dist/assets/README-BsRAMlZI.md                                              4.29 kB
+dist/assets/KaTeX_Size3-Regular-CTq5MqoE.woff                               4.42 kB
+dist/assets/e01-analytic-controls-CNR_WoCn.md                               4.46 kB
+dist/assets/README-CMpyEFPa.md                                              4.52 kB
+dist/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2                              4.92 kB
+dist/assets/README-DWfHbzjQ.md                                              4.98 kB
+dist/assets/gross-test-01-DI98ZGi_.md                                       5.16 kB
+dist/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2                              5.20 kB
+dist/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2                              5.46 kB
+dist/assets/artifact-contract-B2nyqbVi.md                                   5.83 kB
+dist/assets/ui-Bxv-sOVW.md                                                  5.97 kB
+dist/assets/KaTeX_Size4-Regular-BF-4gkZK.woff                               5.98 kB
+dist/assets/KaTeX_Size2-Regular-oD1tc_U0.woff                               6.18 kB
+dist/assets/experiment-plan-uVbqDs8y.md                                     6.35 kB
+dist/assets/KaTeX_Size1-Regular-C195tn64.woff                               6.49 kB
+dist/assets/first-experiment-CFXvfXfm.md                                    6.66 kB
+dist/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2                        6.90 kB
+dist/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2                           6.91 kB
+dist/assets/gross-progress-C5ELiK5V.md                                      7.19 kB
+dist/assets/e01-readiness-review-C2xr9kvG.md                                7.49 kB
+dist/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf                                7.58 kB
+dist/assets/visual-exploration-BqwkiDpX.md                                  7.59 kB
+dist/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff                         7.65 kB
+dist/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff                            7.71 kB
+dist/assets/gross-test-04-B-BOSLUG.md                                       8.01 kB
+dist/assets/architecture-CqFnSg8s.md                                        8.02 kB
+dist/assets/gross-test-03-4SUZLAov.md                                       8.04 kB
+dist/assets/gross-test-02-fuTI7Yso.md                                       8.12 kB
+dist/assets/KaTeX_Script-Regular-D3wIWfF6.woff2                             9.64 kB
+dist/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2                         10.34 kB
+dist/assets/KaTeX_Size4-Regular-DWFBv043.ttf                               10.36 kB
+dist/assets/KaTeX_Script-Regular-D5yQViql.woff                             10.58 kB
+dist/assets/github-actions-Ccd1NBlF.md                                     10.86 kB
+dist/assets/runtime-DA_FT8ng.md                                            11.08 kB
+dist/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2                           11.31 kB
+dist/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2                              11.34 kB
+dist/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf                               11.50 kB
+dist/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2                          12.02 kB
+dist/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2                            12.21 kB
+dist/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf                               12.22 kB
+dist/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff                          12.31 kB
+dist/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf                         12.34 kB
+dist/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf                            12.36 kB
+dist/assets/e01-running-BC5cJozr.md                                        12.92 kB
+dist/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff                            13.20 kB
+dist/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff                               13.29 kB
+dist/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2                        13.56 kB
+dist/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff                           14.11 kB
+dist/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff                             14.40 kB
+dist/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff                         16.02 kB
+dist/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2                           16.40 kB
+dist/assets/KaTeX_Math-Italic-t53AETM-.woff2                               16.44 kB
+dist/assets/KaTeX_Script-Regular-C5JkGWo-.ttf                              16.64 kB
+dist/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2                           16.78 kB
+dist/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2                               16.98 kB
+dist/assets/research-coach-persona-BMalH9m_.md                             17.99 kB
+dist/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff                            18.66 kB
+dist/assets/KaTeX_Math-Italic-DA0__PXp.woff                                18.74 kB
+dist/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff                            19.41 kB
+dist/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf                           19.43 kB
+dist/assets/KaTeX_Fraktur-Regular-CB_wures.ttf                             19.57 kB
+dist/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf                                19.58 kB
+dist/assets/KaTeX_Main-Italic-BMLOBm91.woff                                19.67 kB
+dist/assets/charged-clock-damping-ChVtlMUV.md                              22.32 kB
+dist/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf                            22.36 kB
+dist/assets/charged-clock-radiation-C3WRyICZ.md                            22.87 kB
+dist/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf                              24.50 kB
+dist/assets/KaTeX_Main-Bold-Cx986IdX.woff2                                 25.32 kB
+dist/assets/KaTeX_Main-Regular-B22Nviop.woff2                              26.27 kB
+dist/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf                          27.55 kB
+dist/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2                               28.07 kB
+dist/assets/KaTeX_Main-Bold-Jm3AIy58.woff                                  29.91 kB
+dist/assets/KaTeX_Main-Regular-Dr94JaBh.woff                               30.77 kB
+dist/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf                             31.19 kB
+dist/assets/KaTeX_Math-Italic-flOr_0UB.ttf                                 31.30 kB
+dist/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf                             32.96 kB
+dist/assets/KaTeX_AMS-Regular-DMm9YOAa.woff                                33.51 kB
+dist/assets/KaTeX_Main-Italic-3WenGoN9.ttf                                 33.58 kB
+dist/assets/full-theory-research-architecture-BtG_nOVK.md                  35.05 kB
+dist/assets/knot-to-standard-model-research-grid-SsFS16ei.md               35.35 kB
+dist/assets/charged-recurrence-winding-hopf-CDfcHMyq.md                    38.09 kB
+dist/assets/charged-clock-formation-DuUw5Zd_.md                            39.51 kB
+dist/assets/KaTeX_Main-Bold-waoOVXN0.ttf                                   51.33 kB
+dist/assets/KaTeX_Main-Regular-ypZvNtVU.ttf                                53.58 kB
+dist/assets/signal-states-lorentz-cones-operational-clocks-F_W569sr.md     62.03 kB
+dist/assets/KaTeX_AMS-Regular-DRggAlZN.ttf                                 63.63 kB
+dist/assets/gross-operator-program-v0.2-DbknAJ2X.md                       103.65 kB
+dist/assets/formation-scan-CQedajgK.png                                   158.61 kB
+dist/assets/worker-BHV8W4oZ.js                                            180.55 kB
+dist/assets/formation-readout-CYUhQkvT.png                                181.41 kB
+dist/assets/charged-clock-radiation-diagnostics-B6kVnuP-.png              334.75 kB
+dist/assets/charged-clock-damping-diagnostics-DmIy-Ij4.png                422.95 kB
+dist/assets/formation-diagnostics-saPz5rEd.png                            439.20 kB
+dist/assets/index-DyaOq2I2.css                                             43.84 kB │ gzip:  12.04 kB
+dist/assets/index-D6Vga5az.js                                           1,363.19 kB │ gzip: 431.84 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.07s

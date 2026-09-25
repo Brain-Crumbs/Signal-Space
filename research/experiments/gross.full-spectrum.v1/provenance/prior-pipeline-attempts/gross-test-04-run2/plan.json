@@ -1,0 +1,299 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.full-spectrum.v1",
+  "model_id": "signal-space.ss-ops-1.six-gate.v1",
+  "question": "Can all physical wave and memory sectors share a stable geometry in the declared reciprocal routing circuit and exact backgrounds?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 5,15.4,15.11",
+    "docs/research/gross-test-04.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-04.json",
+  "runtime_config_sha256": "f71ee5d046b1ebb28916c2fbee3b9e8c4fbdb5825cefeaae7158d773737ce8e0",
+  "method": {
+    "action": "SS OPS 1 H=(pi/2)|w dagger (a-b)|², lambda=0. Three onsite/bond pairs per cycle, two wave spinors and six independent memories per cell. Explicit new incidence; not the Test 3 reduced stencil.",
+    "units": "ell=tau_c=1; q=k ell; omega tau_c; growth log modulus per cycle; event parameter is not proper time.",
+    "domain": "Vacuum orthogonal memories, equal nonzero orthogonal memories, counterport collinear memories. Twenty physical real dimensions. 26 signed directions, four radii .02,.04,.08,.16; three 65-point full-zone paths.",
+    "boundaries": "Homogeneous infinite-lattice Bloch matrices; local impulse for three cycles on 9³/13³ periodic boxes before wraparound. No continuum PDE discretization.",
+    "initial_data": "Exact analytical physical period-one backgrounds a=b=0; a=b=(.5,0); a=-b=(.5,0). Counter memory representatives return in four cycles but projectors in one. PCG64 off-background gate controls.",
+    "solver": "Exact reciprocal event solution; full physical Jacobians via centered h=2e-5,1e-5; independent DOP853 with rtol2e-12 atol2e-14 maxstep.05. Compose twenty-dimensional maps with bond Fourier phase. Save all eigenmodes in analysis.",
+    "tolerances": "Conservation and physical recurrence <1e-10; differential/reference <2e-6; exponential growth fail above max(1e-5,5 matched eigenvalue refinement). Unit moduli leave stability unresolved."
+  },
+  "hypotheses": [
+    {
+      "id": "common-geometry",
+      "prediction": "Every physical sector shares a stable nondegenerate cone, possibly with a common drift and anisotropy; stationary physical memories plus propagating waves contradict this at the vacuum."
+    },
+    {
+      "id": "sector-and-material",
+      "prediction": "A signal sector can be geometric while memories have additional response. A successful explanation needs independent constitutive and clock predictions; spectra alone cannot establish it."
+    },
+    {
+      "id": "background-dependence",
+      "prediction": "Equal nonzero waves still decouple memories; counterport waves activate memory response and may introduce growth or mode dependence."
+    }
+  ],
+  "controls": [
+    {
+      "id": "reference",
+      "purpose": "Verify complete differential map and conserved quantities",
+      "method": "Independent DOP853 local Jacobians, exact frozen vacuum Fourier reference, off-background local conservation."
+    },
+    {
+      "id": "physical-memory",
+      "purpose": "Distinguish gauge redundancy and real backreaction",
+      "method": "Memory phase null, physical overlap change, full/frozen maps on three exact backgrounds."
+    },
+    {
+      "id": "resolution",
+      "purpose": "Bound numerical and causal errors",
+      "method": "Two differential steps, four paired radii, two finite boxes, three-cycle local impulse and Fourier comparison."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "coverage",
+      "observable": "Three backgrounds, 20 physical real dimensions, six local gates, both differential steps, all 104 signed low-q points, three full-zone paths and two impulse boxes are finite and complete.",
+      "pass_if": "Three backgrounds, 20 physical real dimensions, six local gates, both differential steps, all 104 signed low-q points, three full-zone paths and two impulse boxes are finite and complete.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "periodicity",
+      "observable": "Wave and projector period-one residual below 1e-10; raw memory spinor phases need not recur.",
+      "pass_if": "Wave and projector period-one residual below 1e-10; raw memory spinor phases need not recur.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "conservation",
+      "observable": "Local total wave norm, memory norm, Hamiltonian and matrix charge residuals below 1e-10 on 24 off-background gates.",
+      "pass_if": "Local total wave norm, memory norm, Hamiltonian and matrix charge residuals below 1e-10 on 24 off-background gates.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "linearization",
+      "observable": "Fine/coarse full map and independent DOP853 local Jacobian differ by less than 2e-6.",
+      "pass_if": "Fine/coarse full map and independent DOP853 local Jacobian differ by less than 2e-6.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "vacuum-reference",
+      "observable": "Vacuum map agrees with independent frozen two-port Fourier construction and memory identity to 2e-6.",
+      "pass_if": "Vacuum map agrees with independent frozen two-port Fourier construction and memory identity to 2e-6.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "phase-quotient",
+      "observable": "Memory spinor phase leaves wave outputs and projectors invariant below 1e-10; normalized orientation change modifies its overlap by more than 1e-6.",
+      "pass_if": "Memory spinor phase leaves wave outputs and projectors invariant below 1e-10; normalized orientation change modifies its overlap by more than 1e-6.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "causal-domain",
+      "observable": "Localized tangent impulse stays inside Chebyshev radius t after t cycles (outside amplitude <1e-10); common centered region agrees between boxes to 1e-10; one-cycle FFT agrees to 2e-6.",
+      "pass_if": "Localized tangent impulse stays inside Chebyshev radius t after t cycles (outside amplitude <1e-10); common centered region agrees between boxes to 1e-10; one-cycle FFT agrees to 2e-6.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "backreaction",
+      "observable": "Counterport full/frozen map difference exceeds 1e-3; vacuum and equal-port differences below 2e-6.",
+      "pass_if": "Counterport full/frozen map difference exceeds 1e-3; vacuum and equal-port differences below 2e-6.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "vacuum-common-cone",
+      "observable": "Strong all-sector common nondegenerate cone: fail if physical memory identity persists across every nonzero q with residual <2e-6, while wave map differs from identity by >1e-3.",
+      "pass_if": "Strong all-sector common nondegenerate cone: fail if physical memory identity persists across every nonzero q with residual <2e-6, while wave map differs from identity by >1e-3.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    },
+    {
+      "id": "counter-stability",
+      "observable": "Fail for a sampled physical multiplier with log modulus >max(1e-5,5 times matched step-refinement eigenvalue error); otherwise unresolved because finite paths and unit moduli do not exclude Jordan growth or unsampled instability.",
+      "pass_if": "Fail for a sampled physical multiplier with log modulus >max(1e-5,5 times matched step-refinement eigenvalue error); otherwise unresolved because finite paths and unit moduli do not exclude Jordan growth or unsampled instability.",
+      "fail_if": "Complete evidence contradicts the named criterion; scientific fail is not technical failure.",
+      "unresolved_if": "Missing or nonfinite evidence, failed numerical prerequisite, or stability not settled by finite samples.",
+      "uncertainty": "Differential refinement, independent ODE and exact Fourier reference; finite direction coverage and degeneracy retained."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "complete-spectrum",
+      "question": "Do all physical wave and memory variations propagate on one cone?",
+      "role": "evidentiary",
+      "observables": [
+        "Floquet phase",
+        "memory participation",
+        "growth",
+        "local impulse",
+        "numerical residual"
+      ],
+      "representation": "complete-spectrum",
+      "competing_signatures": {
+        "common-geometry": "One healthy nondegenerate shared cone across physical sectors.",
+        "sector-and-material": "Stationary or differently propagating physical memories, or backreaction-dependent response; clock/material explanation still required."
+      },
+      "controls": [
+        "reference",
+        "physical-memory",
+        "resolution"
+      ],
+      "uncertainty": "All physical modes retained; degenerate eigenvectors are basis-dependent. Finite sampling is not a stability theorem.",
+      "source_data": [
+        "reports/<report-id>/plot-data/spectrum.csv"
+      ],
+      "transformations": [
+        "See saved specifications; sorted phase scatter, prescribed sectors and impulse projection only. No fitted geometry or smoothing."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "growth-backreaction",
+      "question": "Does the nonzero background activate memory response, and is exponential growth detected?",
+      "role": "evidentiary",
+      "observables": [
+        "Floquet phase",
+        "memory participation",
+        "growth",
+        "local impulse",
+        "numerical residual"
+      ],
+      "representation": "growth-backreaction",
+      "competing_signatures": {
+        "common-geometry": "One healthy nondegenerate shared cone across physical sectors.",
+        "sector-and-material": "Stationary or differently propagating physical memories, or backreaction-dependent response; clock/material explanation still required."
+      },
+      "controls": [
+        "reference",
+        "physical-memory",
+        "resolution"
+      ],
+      "uncertainty": "All physical modes retained; degenerate eigenvectors are basis-dependent. Finite sampling is not a stability theorem.",
+      "source_data": [
+        "reports/<report-id>/plot-data/spectrum.csv",
+        "reports/<report-id>/plot-data/summary.json"
+      ],
+      "transformations": [
+        "See saved specifications; sorted phase scatter, prescribed sectors and impulse projection only. No fitted geometry or smoothing."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "causal-memory-response",
+      "question": "Where can a local physical memory perturbation influence the circuit?",
+      "role": "evidentiary",
+      "observables": [
+        "Floquet phase",
+        "memory participation",
+        "growth",
+        "local impulse",
+        "numerical residual"
+      ],
+      "representation": "causal-memory-response",
+      "competing_signatures": {
+        "common-geometry": "One healthy nondegenerate shared cone across physical sectors.",
+        "sector-and-material": "Stationary or differently propagating physical memories, or backreaction-dependent response; clock/material explanation still required."
+      },
+      "controls": [
+        "reference",
+        "physical-memory",
+        "resolution"
+      ],
+      "uncertainty": "All physical modes retained; degenerate eigenvectors are basis-dependent. Finite sampling is not a stability theorem.",
+      "source_data": [
+        "reports/<report-id>/plot-data/impulses.csv"
+      ],
+      "transformations": [
+        "See saved specifications; sorted phase scatter, prescribed sectors and impulse projection only. No fitted geometry or smoothing."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "directional-sectors",
+      "question": "Does this specified routing generate leading drift or only finite-band asymmetry?",
+      "role": "evidentiary",
+      "observables": [
+        "Floquet phase",
+        "memory participation",
+        "growth",
+        "local impulse",
+        "numerical residual"
+      ],
+      "representation": "directional-sectors",
+      "competing_signatures": {
+        "common-geometry": "One healthy nondegenerate shared cone across physical sectors.",
+        "sector-and-material": "Stationary or differently propagating physical memories, or backreaction-dependent response; clock/material explanation still required."
+      },
+      "controls": [
+        "reference",
+        "physical-memory",
+        "resolution"
+      ],
+      "uncertainty": "All physical modes retained; degenerate eigenvectors are basis-dependent. Finite sampling is not a stability theorem.",
+      "source_data": [
+        "reports/<report-id>/plot-data/directional.csv"
+      ],
+      "transformations": [
+        "See saved specifications; sorted phase scatter, prescribed sectors and impulse projection only. No fitted geometry or smoothing."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "accuracy-audit",
+      "question": "Are recurrence, differential accuracy, phase redundancy and local conservation controlled?",
+      "role": "evidentiary",
+      "observables": [
+        "Floquet phase",
+        "memory participation",
+        "growth",
+        "local impulse",
+        "numerical residual"
+      ],
+      "representation": "accuracy-audit",
+      "competing_signatures": {
+        "common-geometry": "One healthy nondegenerate shared cone across physical sectors.",
+        "sector-and-material": "Stationary or differently propagating physical memories, or backreaction-dependent response; clock/material explanation still required."
+      },
+      "controls": [
+        "reference",
+        "physical-memory",
+        "resolution"
+      ],
+      "uncertainty": "All physical modes retained; degenerate eigenvectors are basis-dependent. Finite sampling is not a stability theorem.",
+      "source_data": [
+        "reports/<report-id>/plot-data/summary.json"
+      ],
+      "transformations": [
+        "See saved specifications; sorted phase scatter, prescribed sectors and impulse projection only. No fitted geometry or smoothing."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 180,
+    "max_memory_mb": 512,
+    "max_output_mb": 48
+  },
+  "prohibited_inferences": [
+    "No emergent spacetime, autonomous clock, physical detector record, particle identity or protected topology.",
+    "No generic exclusion of nonzero backgrounds, drift, anisotropy or geometry with derived material response.",
+    "No stability proof from unit Floquet moduli; no energy meaning assigned to tangent norm or eigenvector participation.",
+    "No equivalence asserted between the six-gate routing ansatz and Test 3 reduced stencil."
+  ],
+  "locked_sha256": "8ae4badcb81f956f753711092bdbaf0ee38e330365edb93357eb78e13f797f0a"
+}

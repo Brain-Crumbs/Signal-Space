@@ -1,0 +1,8 @@
+{"payload":{"attempt_id":"attempt-0001","parent_attempt_id":null},"schema_version":"research-event-v1","sequence":1,"stage":"prepare","timestamp":"2026-09-25T07:46:35.133248Z","type":"attempt-prepared"}
+{"payload":{"limits":{"max_cpu_seconds":180,"max_memory_mb":512,"max_output_mb":48,"max_wall_seconds":180}},"schema_version":"research-event-v1","sequence":2,"stage":"runtime","timestamp":"2026-09-25T07:46:35.136273Z","type":"attempt-running"}
+{"payload":{"algorithm":"physical-ray-tangent-v1","pid":60},"schema_version":"research-event-v1","sequence":3,"stage":"run","timestamp":"2026-09-25T07:46:35.616793Z","type":"worker-started"}
+{"payload":{"background":"vacuum","physical_dimensions":20},"schema_version":"research-event-v1","sequence":4,"stage":"run","timestamp":"2026-09-25T07:46:36.545776Z","type":"background-completed"}
+{"payload":{"background":"equal","physical_dimensions":20},"schema_version":"research-event-v1","sequence":5,"stage":"run","timestamp":"2026-09-25T07:46:37.478457Z","type":"background-completed"}
+{"payload":{"background":"counter","physical_dimensions":20},"schema_version":"research-event-v1","sequence":6,"stage":"run","timestamp":"2026-09-25T07:46:38.362786Z","type":"background-completed"}
+{"payload":{"backgrounds":3},"schema_version":"research-event-v1","sequence":7,"stage":"run","timestamp":"2026-09-25T07:46:38.475488Z","type":"worker-completed"}
+{"payload":{"exit_code":0,"recoverable":false},"schema_version":"research-event-v1","sequence":8,"stage":"runtime","timestamp":"2026-09-25T07:46:38.561494Z","type":"attempt-completed"}

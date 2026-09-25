@@ -1,0 +1,725 @@
+{
+  "acceptance_criteria": [
+    {
+      "description": "Three backgrounds, 20 physical real dimensions, six local gates, both differential steps, all 104 signed low-q points, three full-zone paths and two impulse boxes are finite and complete.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "coverage"
+    },
+    {
+      "description": "Wave and projector period-one residual below 1e-10; raw memory spinor phases need not recur.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "periodicity"
+    },
+    {
+      "description": "Local total wave norm, memory norm, Hamiltonian and matrix charge residuals below 1e-10 on 24 off-background gates.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "conservation"
+    },
+    {
+      "description": "Fine/coarse full map and independent DOP853 local Jacobian differ by less than 2e-6.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "linearization"
+    },
+    {
+      "description": "Vacuum map agrees with independent frozen two-port Fourier construction and memory identity to 2e-6.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "vacuum-reference"
+    },
+    {
+      "description": "Memory spinor phase leaves wave outputs and projectors invariant below 1e-10; normalized orientation change modifies its overlap by more than 1e-6.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "phase-quotient"
+    },
+    {
+      "description": "Localized tangent impulse stays inside Chebyshev radius t after t cycles (outside amplitude <1e-10); common centered region agrees between boxes to 1e-10; one-cycle FFT agrees to 2e-6.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "causal-domain"
+    },
+    {
+      "description": "Counterport full/frozen map difference exceeds 1e-3; vacuum and equal-port differences below 2e-6.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "backreaction"
+    },
+    {
+      "description": "Strong all-sector common nondegenerate cone: fail if physical memory identity persists across every nonzero q with residual <2e-6, while wave map differs from identity by >1e-3.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "vacuum-common-cone"
+    },
+    {
+      "description": "Fail for a sampled physical multiplier with log modulus >max(1e-5,5 times matched step-refinement eigenvalue error); otherwise unresolved because finite paths and unit moduli do not exclude Jordan growth or unsampled instability.",
+      "evidence": "analyses/analysis-0001-bceef551/checks.json",
+      "id": "counter-stability"
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "analysis-0001-bceef551",
+      "classification": "fail",
+      "code_identity": {
+        "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "revision": "2e0a17228d380421248fabf46bf17de5c9e5fbd7",
+        "runtime_version": "0.1.0",
+        "tree_state": "clean"
+      },
+      "created_at": "2026-09-25T07:48:15.485608Z",
+      "input_artifacts": {
+        "attempts/attempt-0001/raw/execution.json": "d8e290ac71e5290b4a126c61a6fba5004b0e9cf2fdd240a6b2aac8dbfa592af3",
+        "attempts/attempt-0001/raw/floquet.npz": "b3c11c09d75f890068bcb796b82f076babcc6122306e4817028eb4a8f219ddff",
+        "attempts/attempt-0001/raw/rng-end.json": "794ef8374dfdf74ed5cfaeb1a348807f0b94947a6e53cddb8d033d3ba1d35d6d",
+        "attempts/attempt-0001/raw/rng-start.json": "b77af30b6d1ee423729717051f24fcb7a3c01215fe2d621427d8ad53af19024b"
+      },
+      "parameters": {
+        "conservation_tolerance": 1e-10,
+        "growth_floor": 1e-05,
+        "matrix_tolerance": 2e-06
+      },
+      "path": "analyses/analysis-0001-bceef551",
+      "raw_source": "attempts/attempt-0001/raw/floquet.npz",
+      "schema_version": "research-analysis-v1",
+      "summary": {
+        "backgrounds": {
+          "counter": {
+            "backreaction_difference": 0.44444444447793086,
+            "eigenvalue_refinement": 7.913617981253219e-10,
+            "max_eigenvector_condition": 10.833976494410841,
+            "max_low_q_growth": 3.9307668230686044e-11,
+            "max_path_growth": 3.9307668230686044e-11,
+            "minimum_unit_multiplicity": 0,
+            "ode_jacobian_error": 6.106205291313987e-11,
+            "stability": "unresolved",
+            "step_map_error": 3.6499514521892706e-10
+          },
+          "equal": {
+            "backreaction_difference": 1.618070327773636e-10,
+            "eigenvalue_refinement": 9.84478154885555e-10,
+            "max_eigenvector_condition": 2.6029763800630694,
+            "max_low_q_growth": 7.700817760950468e-11,
+            "max_path_growth": 1.4393886082005787e-10,
+            "minimum_unit_multiplicity": 12,
+            "ode_jacobian_error": 1.3877787807814457e-11,
+            "stability": "unresolved",
+            "step_map_error": 4.712386548114457e-10
+          },
+          "vacuum": {
+            "backreaction_difference": 1.5708068441136224e-10,
+            "eigenvalue_refinement": 9.890522088309296e-10,
+            "max_eigenvector_condition": 2.5310879570155125,
+            "max_low_q_growth": 7.264810974752302e-11,
+            "max_path_growth": 1.4142220726819664e-10,
+            "minimum_unit_multiplicity": 12,
+            "ode_jacobian_error": 1.2205347843519121e-11,
+            "stability": "unresolved",
+            "step_map_error": 4.712388037457356e-10
+          }
+        },
+        "memory_dimensions": 12,
+        "physical_dimensions": 20,
+        "residuals": {
+          "box_difference": 0.0,
+          "conservation": 1.9842042680358083e-15,
+          "impulse_fourier": 1.3897676904923465e-16,
+          "map_refinement": 4.712388037457356e-10,
+          "memory_identity": 1.1220524509525376e-10,
+          "ode_jacobian": 6.106205291313987e-11,
+          "outside_causal_support": 0.0,
+          "periodicity": 3.673940397442059e-16,
+          "phase_null": 1.6690549615570372e-16,
+          "physical_overlap_change": 9.999000099958355e-05,
+          "vacuum_reference": 1.5708068441136224e-10,
+          "wave_nonidentity": 0.18430501550342235
+        },
+        "scope": "Strong all-sector vacuum/equal-background geometry rejected only when numerical controls pass. Counter background sampled stability distinct. Material/clock explanation and unsampled backgrounds unresolved.",
+        "spectrum_rows": 17940
+      },
+      "supersedes": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-1efd4b5b38a2cd97",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-bceef551/analysis.json",
+      "sha256": "acf632339a8de8dfe147f33e803764b589d46b82fed80daedc8de0512781e5da",
+      "size": 3485,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-38daf4adf35399cf",
+      "kind": "check",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-bceef551/checks.json",
+      "sha256": "3ddd07cb44586f9b9d7585aaf0d0f134ad775d6ff2807051e36c2d29a729b9df",
+      "size": 1511,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6363033f765a80d8",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-bceef551/derived/diagnostics.csv",
+      "sha256": "cc62c471f97849b18de41d28a494ebe64ab5a9b27c6a946b6a01d9393745d9a9",
+      "size": 667,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b1120a9377df3def",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-bceef551/derived/directional.csv",
+      "sha256": "cbf321636c9eed408e7c485a764ff683a6ddf86739e86eb5bb408a051a9ac59b",
+      "size": 6603,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0ad8602aedf27c69",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-bceef551/derived/impulses.csv",
+      "sha256": "5afc058026b228e8ff766a412d8d6e8320f29acaafdfb9b5b2a8043045029346",
+      "size": 2835,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c380006bffc7c88f",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-bceef551/derived/spectrum.csv",
+      "sha256": "ec388cb2321a0294bba0e0971d375ee72d67308d3c59d4e6d2099253f0becfe2",
+      "size": 1897246,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-67e6b6dd99b13964",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-bceef551/derived/summary.json",
+      "sha256": "17539bd4718e9ab71ab178dddc1d98248518ec94f25039e1471ea9c0600d5c8f",
+      "size": 2235,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-65496636f09a3c8c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/attempt.json",
+      "sha256": "e023e069ce9b1f407ec9a3190647355555652173410ba5fce455e0508389967a",
+      "size": 319,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9f89b66be863885e",
+      "kind": "event-log",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/events.jsonl",
+      "sha256": "eb3c1f0fc68cecba810eecb6c1851ff03427c9351445b39d9c22390de2f7892f",
+      "size": 1576,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4df3f1e2a897a91c",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/logs/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e43501766c2f319",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/preparation.json",
+      "sha256": "e1681f1dc8a64ccdb29fa3cee36c1f439cf442d1e4cbfcab9916b5c8041fb3ae",
+      "size": 1793,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-24941a1527ae3d69",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/execution.json",
+      "sha256": "d8e290ac71e5290b4a126c61a6fba5004b0e9cf2fdd240a6b2aac8dbfa592af3",
+      "size": 340,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f1b1bd6b872f0c23",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/floquet.npz",
+      "sha256": "b3c11c09d75f890068bcb796b82f076babcc6122306e4817028eb4a8f219ddff",
+      "size": 1144730,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d39f9babcb642ab9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-end.json",
+      "sha256": "794ef8374dfdf74ed5cfaeb1a348807f0b94947a6e53cddb8d033d3ba1d35d6d",
+      "size": 190,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d85fce8df2903b9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-start.json",
+      "sha256": "b77af30b6d1ee423729717051f24fcb7a3c01215fe2d621427d8ad53af19024b",
+      "size": 190,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1c68737da8c0aaf8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/request.json",
+      "sha256": "467231b9e33397a1b5a3ef8611ab8cc63525c394a000da0ea217a351e6834996",
+      "size": 1601,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5d26b47089e4bf8f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/code.json",
+      "sha256": "b1ffb7f6a60422f685d4f40ee21f1349db9ba0659f5b9b808944e19be900dcfb",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3219b9326cc4f407",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "provenance/dependencies.lock",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091",
+      "size": 294,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1ee42f15d42867c3",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/environment.json",
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219",
+      "size": 305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19b18d73cfa234f8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/inputs.json",
+      "sha256": "da4153a0f78ae7ba0a3230285f0b4289646dfe6b941b15f8a4b6dfd97237b0a7",
+      "size": 133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d087750a5d4aabd3",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/accuracy-audit.figure.json",
+      "sha256": "24dafc227e4ad3080f0d173412229c7371678f769f2f20b6dda0596223a8ad61",
+      "size": 580,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-85b1b00d4c9a5b77",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/accuracy-audit.pdf",
+      "sha256": "0dab25044ec9b31f7626062c6ee953c8a05e61890b95ac92878dec365939ccf3",
+      "size": 15649,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7c783dcd404a01a4",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/accuracy-audit.png",
+      "sha256": "8679bba3aa3424379e9557f8d621475b26b9cd188c6621a2cffa29893d95a45b",
+      "size": 68265,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6a6b68cfd3c5f1ed",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/accuracy-audit.svg",
+      "sha256": "45eb0f87c703f4dfdc1e7e66d8cc61543b9555fcd2bbab50fb902c6215d9dcfc",
+      "size": 46976,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-2f41a189e0ed2393",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/causal-memory-response.figure.json",
+      "sha256": "a22b604fc782923d20b63fb3c0b0976767610269fc948da68d376f8374067fc6",
+      "size": 644,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9746c23944974d6a",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/causal-memory-response.pdf",
+      "sha256": "07652665c17013aac148fad964585d2f27a6a7337c362c338eeffb68569e9f41",
+      "size": 30174,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-60a353348f4af78e",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/causal-memory-response.png",
+      "sha256": "b84bacfab9334d25b68071e4de77801b023cd9ba8aa01382e75f81aa1ebf8902",
+      "size": 122117,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19f4354c920cda0a",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/causal-memory-response.svg",
+      "sha256": "4a9383c29a8ee5cc363447fa19762e85540f94bc5759b2ab7c6b211bba75b81c",
+      "size": 141118,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c37c05e3f325967d",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/complete-spectrum.figure.json",
+      "sha256": "25681cb3288a87c57d6dc5500f19f42d54b40de9d73fcf808c290fb820366bd0",
+      "size": 662,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-48af91be598103ff",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/complete-spectrum.pdf",
+      "sha256": "b2d43f550c3577724b30a1e5e6208e52b01097a22720098189b6fca90b3441d6",
+      "size": 66362,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d8ce749745dd10d8",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/complete-spectrum.png",
+      "sha256": "6a2f3e76b3f9dc935923361b072851a9d3de82616da02b0865b59e2026b2d98d",
+      "size": 586742,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-28930e1319b885ca",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/complete-spectrum.svg",
+      "sha256": "429dbad0cb639acfb3b9ea55369deb82b1a0b6fb70f35cecc2f3b9a655b05297",
+      "size": 1687068,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-fedcbe8989606dfd",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/directional-sectors.figure.json",
+      "sha256": "dfd466fe9769ddbdf3b30c4c5b65562392c3fb127bd4b0feab68c710b6fd410a",
+      "size": 669,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-15e1865292bde4f2",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/directional-sectors.pdf",
+      "sha256": "b8519f81165816f87a65ce0027ec6c9a4fb31a7507b1f1c8fe7da0cff9421b30",
+      "size": 23503,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-25f3581a29f8acc2",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/directional-sectors.png",
+      "sha256": "118a51c7bf21b019785a216f15885741697b92670370a6b7862ff90a4bb369ac",
+      "size": 145839,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-36f29a859b9bfdeb",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/directional-sectors.svg",
+      "sha256": "a83f0ebcd9a2f9c8bf11661b9023a4280461cb5e0cdf836022d64a8d69dfa94e",
+      "size": 90235,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-27ecced3bf05f9e3",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/growth-backreaction.figure.json",
+      "sha256": "2e86507da4a5694406d61a9517275436eee96165528735b2b6cbf2459cb3300f",
+      "size": 668,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-c42de50d419312c1",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/growth-backreaction.pdf",
+      "sha256": "a4dd2a3942dd685ea9620d5c57fc86e672313e06b28c188851cca91283e152f9",
+      "size": 19139,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-afeb6cbf2bf7cafd",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/growth-backreaction.png",
+      "sha256": "5af738f69922ff43401799c7229d4a0dc928b1dbc71af1f0e584b3e5e05620b7",
+      "size": 68687,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4c3d6ff8f0c68caf",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/growth-backreaction.svg",
+      "sha256": "38012e83db91f2222acc64eca7a50b8ee8955c785603e058302667bfec2e083a",
+      "size": 55683,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f6b0a9108a4e88cc",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/interpretations.json",
+      "sha256": "eec085fa0f3687e12a1958ec2aa0de00fe3fe14fe69f24c15f93c7c5146bb639",
+      "size": 3301,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b20d324c885de30e",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/diagnostics.csv",
+      "sha256": "cc62c471f97849b18de41d28a494ebe64ab5a9b27c6a946b6a01d9393745d9a9",
+      "size": 667,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5dda7cf0bdede4e0",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/directional.csv",
+      "sha256": "cbf321636c9eed408e7c485a764ff683a6ddf86739e86eb5bb408a051a9ac59b",
+      "size": 6603,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-83b110fa21d5bac3",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/impulses.csv",
+      "sha256": "5afc058026b228e8ff766a412d8d6e8320f29acaafdfb9b5b2a8043045029346",
+      "size": 2835,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9be6e715680f418a",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/spectrum.csv",
+      "sha256": "ec388cb2321a0294bba0e0971d375ee72d67308d3c59d4e6d2099253f0becfe2",
+      "size": 1897246,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-84f35ebd9171570e",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/summary.json",
+      "sha256": "17539bd4718e9ab71ab178dddc1d98248518ec94f25039e1471ea9c0600d5c8f",
+      "size": 2235,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4a674077cdd7d824",
+      "kind": "report",
+      "media_type": "text/html",
+      "path": "reports/report-0001/report.html",
+      "sha256": "1bbd096097c37fe79049958f7a7a8f06065c55f612caafa072aea5a6142e7818",
+      "size": 5375,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-96574ae459a5971c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/report.json",
+      "sha256": "3cbb2c9019931ffe8111148f58003e3614085db51513e4bff6ea6dd04d99f648",
+      "size": 1832,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a43e0e8d6c28cbac",
+      "kind": "report",
+      "media_type": "text/markdown",
+      "path": "reports/report-0001/report.md",
+      "sha256": "054facec6fe83de78f80f9fb3b953972a55356bb34195df54a128c9323c996eb",
+      "size": 4570,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-99fe6a106a397456",
+      "kind": "report",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/report.pdf",
+      "sha256": "e3828c1366c2bd793fe7e3e55c8dff80347ec9c2774b43c5527ad5c0f0c6fc23",
+      "size": 110768,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-76b2f4524bba093b",
+      "kind": "config",
+      "media_type": "application/json",
+      "path": "resolved-config.json",
+      "sha256": "7bfac7c0155a8c4671077d63f694ff67508833dcf8a8d02e49cd7f7a2d6b2ae7",
+      "size": 1011,
+      "source_ids": []
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt-0001",
+      "checkpoint": null,
+      "created_at": "2026-09-25T07:48:08.509585Z",
+      "exit_code": 0,
+      "failure": null,
+      "parent_attempt_id": null,
+      "path": "attempts/attempt-0001",
+      "state": "completed",
+      "updated_at": "2026-09-25T07:48:14.265099Z"
+    }
+  ],
+  "checksum_algorithm": "sha256",
+  "checksum_path": "checksums.sha256",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "2e0a17228d380421248fabf46bf17de5c9e5fbd7",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "completeness": {
+    "analysis": true,
+    "attempts_terminal": true,
+    "config": true,
+    "provenance": true,
+    "report": true
+  },
+  "config_hash": "7bfac7c0155a8c4671077d63f694ff67508833dcf8a8d02e49cd7f7a2d6b2ae7",
+  "config_path": "resolved-config.json",
+  "created_at": "2026-09-25T07:48:08.497769Z",
+  "execution_identity": {
+    "dependencies": {
+      "path": "python/requirements-lock.txt",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    "environment": {
+      "accelerator": "none",
+      "architecture": "x86_64",
+      "implementation": "CPython",
+      "numeric_libraries": {
+        "matplotlib": "3.10.8",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    }
+  },
+  "experiment_id": "gross.full-spectrum.v1",
+  "experiment_version": "1.0.0",
+  "known_gaps": [
+    "Incidence and calibration scales assumed; this six-gate routing is not Test 3 reduced stencil.",
+    "Three exact homogeneous backgrounds only; no exhaustive nonzero-background search.",
+    "Finite spectral sampling cannot prove stability; tangent norm is not conserved physical energy.",
+    "No autonomous clock, invariant detector record, or validated material-response geometry.",
+    "No checkpoint/resume. Memory phase removed only because event law depends on its projector."
+  ],
+  "model_id": "signal-space.ss-ops-1.six-gate.v1",
+  "package_version": 1,
+  "parent_run_id": null,
+  "reports": [
+    {
+      "analysis_id": "analysis-0001-bceef551",
+      "created_at": "2026-09-25T07:48:25.573158Z",
+      "outputs": {
+        "figure_specs": [
+          "figures/complete-spectrum.figure.json",
+          "figures/growth-backreaction.figure.json",
+          "figures/causal-memory-response.figure.json",
+          "figures/directional-sectors.figure.json",
+          "figures/accuracy-audit.figure.json"
+        ],
+        "interpretations": "interpretations.json"
+      },
+      "path": "reports/report-0001",
+      "render_provenance": {
+        "code_identity": {
+          "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "revision": "2e0a17228d380421248fabf46bf17de5c9e5fbd7",
+          "runtime_version": "0.1.0",
+          "tree_state": "clean"
+        },
+        "execution_identity": {
+          "dependencies": {
+            "path": "python/requirements-lock.txt",
+            "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+          },
+          "environment": {
+            "accelerator": "none",
+            "architecture": "x86_64",
+            "implementation": "CPython",
+            "numeric_libraries": {
+              "matplotlib": "3.10.8",
+              "numpy": "2.3.5",
+              "scipy": "1.17.0"
+            },
+            "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+            "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+          }
+        }
+      },
+      "report_id": "report-0001",
+      "required_inputs": [
+        "attempts/attempt-0001/raw/floquet.npz",
+        "analyses/analysis-0001-bceef551/derived/spectrum.csv",
+        "analyses/analysis-0001-bceef551/derived/diagnostics.csv",
+        "analyses/analysis-0001-bceef551/derived/impulses.csv",
+        "analyses/analysis-0001-bceef551/derived/directional.csv",
+        "analyses/analysis-0001-bceef551/derived/summary.json",
+        "analyses/analysis-0001-bceef551/checks.json"
+      ],
+      "schema_version": "research-report-v1"
+    }
+  ],
+  "run_id": "run-5a55cb5041050589",
+  "schema_version": "research-run-manifest-v1",
+  "scientific_classification": "fail",
+  "seed_algorithm": "sha256-stream-v1",
+  "seed_ledger": {
+    "analysis": 6060137651779513479,
+    "initialization": 17650488549050903437,
+    "perturbations": 15879836509965867992,
+    "sampling": 16910000495915957996
+  },
+  "technical_state": "analyzed",
+  "updated_at": "2026-09-25T07:48:25.578473Z"
+}

@@ -1,0 +1,247 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "type": "string",
+      "const": "gross.full-spectrum.v1"
+    },
+    "model_id": {
+      "type": "string",
+      "const": "signal-space.ss-ops-1.six-gate.v1"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backgrounds",
+        "amplitude",
+        "kappa",
+        "lambda",
+        "directions",
+        "radii",
+        "steps",
+        "path_points",
+        "box_sizes",
+        "cycles"
+      ],
+      "properties": {
+        "backgrounds": {
+          "type": "array",
+          "const": ["vacuum", "equal", "counter"],
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        },
+        "amplitude": {
+          "type": "number",
+          "const": 0.5
+        },
+        "kappa": {
+          "type": "number",
+          "const": 1.5707963267948966
+        },
+        "lambda": {
+          "type": "integer",
+          "const": 0
+        },
+        "directions": {
+          "type": "array",
+          "const": [
+            [-1, -1, -1],
+            [-1, -1, 0],
+            [-1, -1, 1],
+            [-1, 0, -1],
+            [-1, 0, 0],
+            [-1, 0, 1],
+            [-1, 1, -1],
+            [-1, 1, 0],
+            [-1, 1, 1],
+            [0, -1, -1],
+            [0, -1, 0],
+            [0, -1, 1],
+            [0, 0, -1],
+            [0, 0, 1],
+            [0, 1, -1],
+            [0, 1, 0],
+            [0, 1, 1],
+            [1, -1, -1],
+            [1, -1, 0],
+            [1, -1, 1],
+            [1, 0, -1],
+            [1, 0, 0],
+            [1, 0, 1],
+            [1, 1, -1],
+            [1, 1, 0],
+            [1, 1, 1]
+          ],
+          "minItems": 26,
+          "maxItems": 26,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "radii": {
+          "type": "array",
+          "const": [0.02, 0.04, 0.08, 0.16],
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "const": [2e-5, 1e-5],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "path_points": {
+          "type": "integer",
+          "const": 65
+        },
+        "box_sizes": {
+          "type": "array",
+          "const": [9, 13],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "cycles": {
+          "type": "integer",
+          "const": 3
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label_step", "cycle", "wavevector", "phase", "growth"],
+      "properties": {
+        "label_step": {
+          "type": "string",
+          "const": "ell=1"
+        },
+        "cycle": {
+          "type": "string",
+          "const": "tau_c=1"
+        },
+        "wavevector": {
+          "type": "string",
+          "const": "q=k ell"
+        },
+        "phase": {
+          "type": "string",
+          "const": "omega tau_c"
+        },
+        "growth": {
+          "type": "string",
+          "const": "log modulus per cycle"
+        }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root"],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "const": 2026092504
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "const": 180
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "const": 180
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "const": 512
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "const": 48
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matrix_tolerance",
+        "conservation_tolerance",
+        "growth_floor"
+      ],
+      "properties": {
+        "matrix_tolerance": {
+          "type": "number",
+          "const": 2e-6
+        },
+        "conservation_tolerance": {
+          "type": "number",
+          "const": 1e-10
+        },
+        "growth_floor": {
+          "type": "number",
+          "const": 1e-5
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "const": "Signal Space / GROSS Test 4: Full Reciprocal Spectrum"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/research/floquet.v1.schema.json",
+  "title": "SS OPS 1 full six-gate circuit spectrum"
+}

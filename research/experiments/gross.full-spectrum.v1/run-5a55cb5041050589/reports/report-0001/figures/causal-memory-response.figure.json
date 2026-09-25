@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "dimensionless, as labeled"
+    },
+    "y": {
+      "unit": "dimensionless, as labeled"
+    }
+  },
+  "downsampling": "specified slices only; no smoothing",
+  "fit_window": null,
+  "id": "causal-memory-response",
+  "normalization": "ell=tau_c=1; tangent norm is not energy",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/impulses.csv"
+  ],
+  "transformations": [
+    "sum squared tangent components over y,z, separately wave and memory",
+    "log10 floor 1e-14; no physical energy interpretation"
+  ]
+}

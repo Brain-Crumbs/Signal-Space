@@ -1,0 +1,9 @@
+{
+  "experiment": "gross-test-04",
+  "technical_status": "failed",
+  "scientific_classification": "not-evaluated",
+  "stage": "source-tree",
+  "source_commit": "99fbd580aa3fc632dfb3900ff9cfd1ea683e5f44",
+  "error": "ValueError: runtime configuration differs from locked SHA-256",
+  "elapsed_seconds": 0.061
+}

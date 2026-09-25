@@ -110,3 +110,7 @@ GitHub references: [manual dispatch](https://docs.github.com/en/actions/how-tos/
 Select `gross-test-03` for the locked homogeneous SS OPS 1 wave-sector audit. It compares orthogonal, oblique and collinear triads, both gate orders, norm conservation, group derivatives and full-zone extra nodes. Six interpreted figures and exact plot data accompany the setup/results PDFs. This does not certify the full microscopic spectrum or a clock.
 
 Local equivalent: `python3 .agents/scripts/run_experiment.py --experiment gross-test-03 --output ../gross-test-03-output`. The output must be a new directory outside the checkout. Scientific failure and technical completion remain distinct.
+
+## Test 4 full spectrum
+
+Select `gross-test-04` to run the locked six-gate reciprocal-circuit spectrum audit. This tests three exact backgrounds and all physical memory modes. A scientifically failed common-cone hypothesis remains a technically successful workflow and produces both artifacts. No invariant clock record or generic nonzero-background verdict follows.
