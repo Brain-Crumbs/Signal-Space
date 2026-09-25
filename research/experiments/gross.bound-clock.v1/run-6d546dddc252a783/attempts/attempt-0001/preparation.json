@@ -1,0 +1,25 @@
+{
+  "model": "signal-space.ss-ocf-1.flat-clock.v1",
+  "parameters": {
+    "amplitudes": [
+      0.0005,
+      0.001,
+      0.002
+    ],
+    "control_cycles": 20,
+    "cycles": 100,
+    "dr": 0.1,
+    "dt": 0.04,
+    "frequencies": [
+      0.868,
+      0.875,
+      0.9,
+      0.94
+    ],
+    "nu": 0.4,
+    "radius": 80,
+    "sample_stride": 20,
+    "sponge_start": 60
+  },
+  "source": "docs/research/gross-test-06.md"
+}

@@ -1,0 +1,279 @@
+{
+  "charge_slope_estimate": -62066.32089661696,
+  "controls": {
+    "nu-off": {
+      "eigenvalue": 0.251710689531893,
+      "threshold": 0.25
+    },
+    "nu-on": {
+      "eigenvalue": 0.17036248958684702,
+      "threshold": 0.25
+    },
+    "unexcited": {
+      "chi_initial": 0.0,
+      "chi_momentum_initial": 0.0,
+      "density_static": true,
+      "local_chi_zero_by_uniqueness": true,
+      "projector_static": true
+    }
+  },
+  "eigen_error_estimate": 2.8238360975466986e-07,
+  "energy_residual_over_clock_mode": 13.403952926346646,
+  "frequency_convergence_fraction": 1.0058187309062391e-05,
+  "frequency_shift_fraction": 6.316678937388386e-06,
+  "mode_energy_loss_fraction": 2.52638749344003e-05,
+  "nominal_mode_initial_energy": 6.743918382199762e-06,
+  "observations": {
+    "0.0000": {
+      "crossings": 0,
+      "duration": 304.48,
+      "frequency": null,
+      "last_charge_balance_error": -4.794753792071207e-16,
+      "last_mode_energy_fraction": 0.0,
+      "max_charge_balance_error": 1.118775884816615e-15,
+      "max_core_peak_shift": 0.00013501612045776172,
+      "max_local_chi": 0.0,
+      "outer_energy_sink": 2.8420395885024353e-05,
+      "signed_cycles": 0.0,
+      "total_energy_end": 2615.9860333753977,
+      "total_energy_start": 2615.9859600628142
+    },
+    "0.0005": {
+      "crossings": 20,
+      "duration": 304.48,
+      "early_frequency": 0.41275087093205126,
+      "frequency": 0.4127512122122966,
+      "last_charge_balance_error": -1.118775884816615e-15,
+      "last_crossing": 300.6497730027558,
+      "last_mode_energy_fraction": 0.9999731830913335,
+      "late_frequency": 0.41274865990682813,
+      "max_charge_balance_error": 1.118775884816615e-15,
+      "max_core_peak_shift": 0.00013500854723498673,
+      "max_local_chi": 0.0005,
+      "measured_intervals": 19,
+      "outer_energy_sink": 2.8419221778831248e-05,
+      "signed_cycles": 20.001716159922267,
+      "total_energy_end": 2615.986054564046,
+      "total_energy_start": 2615.985981248702
+    },
+    "0.0010": {
+      "crossings": 100,
+      "duration": 1522.28,
+      "early_frequency": 0.4127512109130608,
+      "frequency": 0.4127487306469837,
+      "last_charge_balance_error": -6.393005056094942e-16,
+      "last_crossing": 1518.479332512402,
+      "last_mode_energy_fraction": 0.9999747361250656,
+      "late_frequency": 0.412748209591735,
+      "max_charge_balance_error": 1.438426137621362e-15,
+      "max_core_peak_shift": 0.00013498582768566538,
+      "max_local_chi": 0.001,
+      "measured_intervals": 99,
+      "outer_energy_sink": 3.50787157991627e-05,
+      "signed_cycles": 100.00009660248776,
+      "total_energy_end": 2615.986100122819,
+      "total_energy_start": 2615.9860448063705
+    },
+    "0.0020": {
+      "crossings": 20,
+      "duration": 304.48,
+      "early_frequency": 0.4127509690239787,
+      "frequency": 0.412751337848197,
+      "last_charge_balance_error": -7.991256320118678e-16,
+      "last_crossing": 300.649684093249,
+      "last_mode_energy_fraction": 0.9999731840643716,
+      "late_frequency": 0.4127487853229486,
+      "max_charge_balance_error": 9.589507584142415e-16,
+      "max_core_peak_shift": 0.00013489494950004105,
+      "max_local_chi": 0.002,
+      "measured_intervals": 19,
+      "outer_energy_sink": 2.84016305219907e-05,
+      "signed_cycles": 20.001722248174815,
+      "total_energy_end": 2615.986372393927,
+      "total_energy_start": 2615.9862990371516
+    },
+    "fine": {
+      "crossings": 20,
+      "duration": 304.46,
+      "early_frequency": 0.4127517956224522,
+      "frequency": 0.4127528821510281,
+      "last_charge_balance_error": -4.794164614914446e-16,
+      "last_crossing": 300.648986172689,
+      "last_mode_energy_fraction": 0.999993307472107,
+      "late_frequency": 0.41274952184869695,
+      "max_charge_balance_error": 1.1186384101467041e-15,
+      "max_core_peak_shift": 3.379239571970374e-05,
+      "max_local_chi": 0.001,
+      "measured_intervals": 19,
+      "outer_energy_sink": 1.7741798108740231e-06,
+      "signed_cycles": 20.00048325108394,
+      "total_energy_end": 2616.3292260467165,
+      "total_energy_start": 2616.3292214871976
+    },
+    "wide": {
+      "crossings": 20,
+      "duration": 304.48,
+      "early_frequency": 0.4127508905499696,
+      "frequency": 0.4127512326976772,
+      "last_charge_balance_error": -7.991256320118678e-16,
+      "last_crossing": 300.6497026815433,
+      "last_mode_energy_fraction": 0.9999738731606616,
+      "late_frequency": 0.41274841138657253,
+      "max_charge_balance_error": 1.917901516828483e-15,
+      "max_core_peak_shift": 0.00013498582768566538,
+      "max_local_chi": 0.001,
+      "measured_intervals": 19,
+      "outer_energy_sink": 4.768908446374933e-06,
+      "signed_cycles": 20.001717152633507,
+      "total_energy_end": 2615.986142234569,
+      "total_energy_start": 2615.9860448063705
+    }
+  },
+  "omega_chi": 0.4127499116739421,
+  "outer_sink_over_clock_mode": 5.2015332646597905,
+  "radial_branch_screen": true,
+  "refinements": [
+    {
+      "E_over_Q": 0.919419874495461,
+      "Q": 2845.6303907781817,
+      "center": 0.7426154720625691,
+      "dr": 0.05,
+      "eigenvalue": 0.17036164243601776,
+      "label": "fine",
+      "radius": 80,
+      "status": "solved",
+      "tail": 1.909101152771206e-11
+    },
+    {
+      "E_over_Q": 0.919412253680748,
+      "Q": 2845.280721015032,
+      "center": 0.7426140469967158,
+      "dr": 0.1,
+      "eigenvalue": 0.17036248958683914,
+      "label": "wide",
+      "radius": 160,
+      "status": "solved",
+      "tail": 4.195676940744048e-23
+    }
+  ],
+  "relative_frequency_error": 2.8613621105501155e-06,
+  "scope": "flat spherical matter, a=0; no Einstein evolution",
+  "selected_profile": {
+    "E": 2615.9859600628142,
+    "E_over_Q": 0.919412253680748,
+    "Q": 2845.280721015032,
+    "center": 0.7426140469967158,
+    "eigenvalue": 0.17036248958684702,
+    "hessians": {
+      "Lminus_l0": [
+        1.559706522487976e-14,
+        0.18325641138144128,
+        0.19254529899148395
+      ],
+      "Lminus_l1": [
+        0.050668085033228075,
+        0.19319393575903338,
+        0.19959254517078714
+      ],
+      "Lplus_l0": [
+        -0.02215427492560739,
+        0.19204015025186993,
+        0.19815296554822798
+      ],
+      "Lplus_l1": [
+        5.2206364076051806e-06,
+        0.19324551356280073,
+        0.19993139189136716
+      ]
+    },
+    "omega": 0.9,
+    "profile": "solved",
+    "profile_residual": 6.362688154126772e-13,
+    "tail_at_three_quarters": 1.9107662887011436e-11
+  },
+  "selection": "0.900",
+  "total_energy_plus_sink_residual": 9.039516453412944e-05,
+  "trial_profiles": [
+    {
+      "attempts": 7,
+      "omega": 0.868,
+      "profile": "unresolved"
+    },
+    {
+      "attempts": 8,
+      "omega": 0.875,
+      "profile": "unresolved"
+    },
+    {
+      "E": 2615.9859600628142,
+      "E_over_Q": 0.919412253680748,
+      "Q": 2845.280721015032,
+      "center": 0.7426140469967158,
+      "eigenvalue": 0.17036248958684702,
+      "hessians": {
+        "Lminus_l0": [
+          1.559706522487976e-14,
+          0.18325641138144128,
+          0.19254529899148395
+        ],
+        "Lminus_l1": [
+          0.050668085033228075,
+          0.19319393575903338,
+          0.19959254517078714
+        ],
+        "Lplus_l0": [
+          -0.02215427492560739,
+          0.19204015025186993,
+          0.19815296554822798
+        ],
+        "Lplus_l1": [
+          5.2206364076051806e-06,
+          0.19324551356280073,
+          0.19993139189136716
+        ]
+      },
+      "omega": 0.9,
+      "profile": "solved",
+      "profile_residual": 6.362688154126772e-13,
+      "tail_at_three_quarters": 1.9107662887011436e-11
+    },
+    {
+      "E": 354.54585461911637,
+      "E_over_Q": 0.9777126060565061,
+      "Q": 362.62788515035845,
+      "center": 0.7402287149499772,
+      "eigenvalue": 0.2487757595136126,
+      "hessians": {
+        "Lminus_l0": [
+          -2.29126304423313e-14,
+          0.11818076794375768,
+          0.12351045187505383
+        ],
+        "Lminus_l1": [
+          0.11939452429906412,
+          0.12379779484747416,
+          0.12910099720657814
+        ],
+        "Lplus_l0": [
+          -0.09719901801798508,
+          0.11817409622121708,
+          0.12349269691768486
+        ],
+        "Lplus_l1": [
+          2.0827662572416294e-05,
+          0.11958009498719552,
+          0.12590989157839017
+        ]
+      },
+      "omega": 0.94,
+      "profile": "solved",
+      "profile_residual": 3.402833570476105e-14,
+      "tail_at_three_quarters": 2.2342074743966915e-10
+    }
+  ],
+  "unassessed_stability": "l>=2, nonspherical and nonlinear fragmentation not tested",
+  "unresolved_profile_samples": [
+    "0.875",
+    "0.868"
+  ]
+}

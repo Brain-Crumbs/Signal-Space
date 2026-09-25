@@ -1,0 +1,16 @@
+{
+  "algorithm": "radial-bvp-discrete-newton-eigen-verlet-v1",
+  "boundary": "Dirichlet outer radius with logged velocity damping layer",
+  "failures": [
+    "0.868",
+    "0.875"
+  ],
+  "scope": "flat spherical SS OCF 1 with a=0; gravity decoupled; clock backreacts on core",
+  "seed_ledger": {
+    "analysis": 14847330545538242625,
+    "initialization": 9497253636053910495,
+    "perturbations": 3438477401105694923,
+    "sampling": 873902148180242579
+  },
+  "selection": "0.900"
+}

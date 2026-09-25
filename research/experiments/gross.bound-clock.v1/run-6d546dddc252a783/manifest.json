@@ -1,0 +1,816 @@
+{
+  "acceptance_criteria": [
+    {
+      "description": "Four trial branch samples attempted; accepted profile has a converged discrete residual, positive nodeless core and localized tail",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "profiles"
+    },
+    {
+      "description": "Accepted profile has E/Q<1 and bounded core drift after charge sink",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "core-energetics"
+    },
+    {
+      "description": "Independent chi eigenvalue lies >5 estimated errors from zero and the continuum threshold",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "bound-spectrum"
+    },
+    {
+      "description": "nu=0 has no eigenvalue below vacuum threshold; unexcited chi=0 has no local ticks",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "trapping-control"
+    },
+    {
+      "description": "Selected eigenvalue and profile converge on h/2 and 2R independently",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "grid-domain"
+    },
+    {
+      "description": "Radial Hessian/charge-slope diagnostics and 100-period evolution have no resolved core instability",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "branch-screen"
+    },
+    {
+      "description": "At least 100 signed cycles measurable locally with frequency near independent eigenvalue",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "local-record"
+    },
+    {
+      "description": "Clock-mode energy loss <1% over 100 periods at peak chi=0.001",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "lifetime"
+    },
+    {
+      "description": "Half/base/double amplitudes have a controlled frequency shift below 1%",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "amplitude"
+    },
+    {
+      "description": "Core charge drift after outer sink <1% over 100 periods",
+      "evidence": "analyses/analysis-0001-314f2741/checks.json",
+      "id": "charge-ledger"
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "analysis-0001-314f2741",
+      "classification": "pass",
+      "code_identity": {
+        "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "revision": "c5f5a736ed062a6ffcfdfc8427e514203680a804",
+        "runtime_version": "0.1.0",
+        "tree_state": "clean"
+      },
+      "created_at": "2026-09-25T18:55:34.241247Z",
+      "input_artifacts": {
+        "attempts/attempt-0001/raw/controls.json": "59d7f064a30a180ed92d8afee86976e27a94f5534cf3431d5cac04db2665ca54",
+        "attempts/attempt-0001/raw/evolution-0.0000.npz": "479477cd3bbc229794dc5523640d369079b7623d52f2fbc5bfc7f92e87ada6c9",
+        "attempts/attempt-0001/raw/evolution-0.0005.npz": "ef0164400179c78fdc5d5895dd00f986267fb882baaf92e0c9a4b176bbbdb9f6",
+        "attempts/attempt-0001/raw/evolution-0.0010.npz": "d4bbbbc0a512d241b04cc57c32c9693e33571a7ffe56e2efe43a374f2baac3e3",
+        "attempts/attempt-0001/raw/evolution-0.0020.npz": "71bf73816bb154bdae4d90de11b73c82ed889fdc090395ab4a3ea22d3db97583",
+        "attempts/attempt-0001/raw/evolution-fine.npz": "8513b6d9429b0723d564725090433f314e9bc929765057e1e0c33cb7a2c1ffba",
+        "attempts/attempt-0001/raw/evolution-wide.npz": "c12793b4b88df202eb21de77007e02a113fa21289c69d5abcdaa824821231834",
+        "attempts/attempt-0001/raw/evolutions.json": "9e4930bd5dd37c4c8f18998f3e48b8c159c9082054210c9981b2402dcff57506",
+        "attempts/attempt-0001/raw/execution.json": "cae50d94407d1abdd8aa18a4f0660072fd5917c12f22850fafb159a7d3571f1a",
+        "attempts/attempt-0001/raw/profile-0.900.npz": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+        "attempts/attempt-0001/raw/profile-0.940.npz": "37f7fd792e16e6ec9aeefeda989d162e1a3ce2a122016183fdf789cb996b978b",
+        "attempts/attempt-0001/raw/profile-attempts-0.868.json": "f4f515759e1471680a8234b91945b9dfbb57370ddb6a0676638136e46ae8537b",
+        "attempts/attempt-0001/raw/profile-attempts-0.875.json": "ff5b3d13d6060c504079e81109edde5266bb9c94bd1d497234c6fa2de7e1558f",
+        "attempts/attempt-0001/raw/profile-attempts-0.900.json": "ccd190361c699be7a0eb4a115500cbfd7ff29ab2efb43530abb7c4d46d94a0fd",
+        "attempts/attempt-0001/raw/profile-attempts-0.940.json": "ad98490f77bb46ee7525dcd8c31730f9cbd28cfb1765b24426224bb3802b5328",
+        "attempts/attempt-0001/raw/profile-attempts-fine.json": "48720e87490295e3da972616036595e20bc7dc4689fa05b1d900ec686f1d63be",
+        "attempts/attempt-0001/raw/profile-attempts-wide.json": "8f1ced98efe883a3308d5b95a18a96b586b566f925daa75e75f41d73bc41b51d",
+        "attempts/attempt-0001/raw/profile-fine.npz": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+        "attempts/attempt-0001/raw/profile-wide.npz": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+        "attempts/attempt-0001/raw/profiles.json": "373d13438b8c48fdc642c04bb44690054d6200d5da1f089da660c44811cb8575",
+        "attempts/attempt-0001/raw/refinements.json": "a401447121796cc8a89137bf4d9c7e343e032b9d0c552ba5ce7048832cac83f7",
+        "attempts/attempt-0001/raw/rng-end.json": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f",
+        "attempts/attempt-0001/raw/rng-start.json": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+      },
+      "parameters": {
+        "amplitude_shift_max": 0.01,
+        "bound_margin_factor": 5,
+        "charge_drift_max": 0.01,
+        "convergence_relative_max": 0.01,
+        "frequency_relative_max": 0.02,
+        "mode_energy_loss_max": 0.01,
+        "profile_residual_max": 2e-10,
+        "tail_max": 1e-05
+      },
+      "path": "analyses/analysis-0001-314f2741",
+      "raw_source": "attempts/attempt-0001/raw/execution.json",
+      "schema_version": "research-analysis-v1",
+      "summary": {
+        "charge_slope_estimate": -62066.32089661696,
+        "controls": {
+          "nu-off": {
+            "eigenvalue": 0.251710689531893,
+            "threshold": 0.25
+          },
+          "nu-on": {
+            "eigenvalue": 0.17036248958684702,
+            "threshold": 0.25
+          },
+          "unexcited": {
+            "chi_initial": 0.0,
+            "chi_momentum_initial": 0.0,
+            "density_static": true,
+            "local_chi_zero_by_uniqueness": true,
+            "projector_static": true
+          }
+        },
+        "eigen_error_estimate": 2.8238360975466986e-07,
+        "frequency_convergence_fraction": 1.0058187309062391e-05,
+        "frequency_shift_fraction": 6.316678937388386e-06,
+        "mode_energy_loss_fraction": 2.52638749344003e-05,
+        "observations": {
+          "0.0000": {
+            "crossings": 0,
+            "duration": 304.48,
+            "frequency": null,
+            "last_charge_balance_error": -4.794753792071207e-16,
+            "last_mode_energy_fraction": 0.0,
+            "max_charge_balance_error": 1.118775884816615e-15,
+            "max_core_peak_shift": 0.00013501612045776172,
+            "max_local_chi": 0.0,
+            "outer_energy_sink": 2.8420395885024353e-05,
+            "signed_cycles": 0.0,
+            "total_energy_end": 2615.9860333753977,
+            "total_energy_start": 2615.9859600628142
+          },
+          "0.0005": {
+            "crossings": 20,
+            "duration": 304.48,
+            "early_frequency": 0.41275087093205126,
+            "frequency": 0.4127512122122966,
+            "last_charge_balance_error": -1.118775884816615e-15,
+            "last_crossing": 300.6497730027558,
+            "last_mode_energy_fraction": 0.9999731830913335,
+            "late_frequency": 0.41274865990682813,
+            "max_charge_balance_error": 1.118775884816615e-15,
+            "max_core_peak_shift": 0.00013500854723498673,
+            "max_local_chi": 0.0005,
+            "measured_intervals": 19,
+            "outer_energy_sink": 2.8419221778831248e-05,
+            "signed_cycles": 20.001716159922267,
+            "total_energy_end": 2615.986054564046,
+            "total_energy_start": 2615.985981248702
+          },
+          "0.0010": {
+            "crossings": 100,
+            "duration": 1522.28,
+            "early_frequency": 0.4127512109130608,
+            "frequency": 0.4127487306469837,
+            "last_charge_balance_error": -6.393005056094942e-16,
+            "last_crossing": 1518.479332512402,
+            "last_mode_energy_fraction": 0.9999747361250656,
+            "late_frequency": 0.412748209591735,
+            "max_charge_balance_error": 1.438426137621362e-15,
+            "max_core_peak_shift": 0.00013498582768566538,
+            "max_local_chi": 0.001,
+            "measured_intervals": 99,
+            "outer_energy_sink": 3.50787157991627e-05,
+            "signed_cycles": 100.00009660248776,
+            "total_energy_end": 2615.986100122819,
+            "total_energy_start": 2615.9860448063705
+          },
+          "0.0020": {
+            "crossings": 20,
+            "duration": 304.48,
+            "early_frequency": 0.4127509690239787,
+            "frequency": 0.412751337848197,
+            "last_charge_balance_error": -7.991256320118678e-16,
+            "last_crossing": 300.649684093249,
+            "last_mode_energy_fraction": 0.9999731840643716,
+            "late_frequency": 0.4127487853229486,
+            "max_charge_balance_error": 9.589507584142415e-16,
+            "max_core_peak_shift": 0.00013489494950004105,
+            "max_local_chi": 0.002,
+            "measured_intervals": 19,
+            "outer_energy_sink": 2.84016305219907e-05,
+            "signed_cycles": 20.001722248174815,
+            "total_energy_end": 2615.986372393927,
+            "total_energy_start": 2615.9862990371516
+          },
+          "fine": {
+            "crossings": 20,
+            "duration": 304.46,
+            "early_frequency": 0.4127517956224522,
+            "frequency": 0.4127528821510281,
+            "last_charge_balance_error": -4.794164614914446e-16,
+            "last_crossing": 300.648986172689,
+            "last_mode_energy_fraction": 0.999993307472107,
+            "late_frequency": 0.41274952184869695,
+            "max_charge_balance_error": 1.1186384101467041e-15,
+            "max_core_peak_shift": 3.379239571970374e-05,
+            "max_local_chi": 0.001,
+            "measured_intervals": 19,
+            "outer_energy_sink": 1.7741798108740231e-06,
+            "signed_cycles": 20.00048325108394,
+            "total_energy_end": 2616.3292260467165,
+            "total_energy_start": 2616.3292214871976
+          },
+          "wide": {
+            "crossings": 20,
+            "duration": 304.48,
+            "early_frequency": 0.4127508905499696,
+            "frequency": 0.4127512326976772,
+            "last_charge_balance_error": -7.991256320118678e-16,
+            "last_crossing": 300.6497026815433,
+            "last_mode_energy_fraction": 0.9999738731606616,
+            "late_frequency": 0.41274841138657253,
+            "max_charge_balance_error": 1.917901516828483e-15,
+            "max_core_peak_shift": 0.00013498582768566538,
+            "max_local_chi": 0.001,
+            "measured_intervals": 19,
+            "outer_energy_sink": 4.768908446374933e-06,
+            "signed_cycles": 20.001717152633507,
+            "total_energy_end": 2615.986142234569,
+            "total_energy_start": 2615.9860448063705
+          }
+        },
+        "omega_chi": 0.4127499116739421,
+        "radial_branch_screen": true,
+        "refinements": [
+          {
+            "E_over_Q": 0.919419874495461,
+            "Q": 2845.6303907781817,
+            "center": 0.7426154720625691,
+            "dr": 0.05,
+            "eigenvalue": 0.17036164243601776,
+            "label": "fine",
+            "radius": 80,
+            "status": "solved",
+            "tail": 1.909101152771206e-11
+          },
+          {
+            "E_over_Q": 0.919412253680748,
+            "Q": 2845.280721015032,
+            "center": 0.7426140469967158,
+            "dr": 0.1,
+            "eigenvalue": 0.17036248958683914,
+            "label": "wide",
+            "radius": 160,
+            "status": "solved",
+            "tail": 4.195676940744048e-23
+          }
+        ],
+        "relative_frequency_error": 2.8613621105501155e-06,
+        "scope": "flat spherical matter, a=0; no Einstein evolution",
+        "selected_profile": {
+          "E": 2615.9859600628142,
+          "E_over_Q": 0.919412253680748,
+          "Q": 2845.280721015032,
+          "center": 0.7426140469967158,
+          "eigenvalue": 0.17036248958684702,
+          "hessians": {
+            "Lminus_l0": [
+              1.559706522487976e-14,
+              0.18325641138144128,
+              0.19254529899148395
+            ],
+            "Lminus_l1": [
+              0.050668085033228075,
+              0.19319393575903338,
+              0.19959254517078714
+            ],
+            "Lplus_l0": [
+              -0.02215427492560739,
+              0.19204015025186993,
+              0.19815296554822798
+            ],
+            "Lplus_l1": [
+              5.2206364076051806e-06,
+              0.19324551356280073,
+              0.19993139189136716
+            ]
+          },
+          "omega": 0.9,
+          "profile": "solved",
+          "profile_residual": 6.362688154126772e-13,
+          "tail_at_three_quarters": 1.9107662887011436e-11
+        },
+        "selection": "0.900",
+        "trial_profiles": [
+          {
+            "attempts": 5,
+            "omega": 0.868,
+            "profile": "unresolved"
+          },
+          {
+            "attempts": 5,
+            "omega": 0.875,
+            "profile": "unresolved"
+          },
+          {
+            "E": 2615.9859600628142,
+            "E_over_Q": 0.919412253680748,
+            "Q": 2845.280721015032,
+            "center": 0.7426140469967158,
+            "eigenvalue": 0.17036248958684702,
+            "hessians": {
+              "Lminus_l0": [
+                1.559706522487976e-14,
+                0.18325641138144128,
+                0.19254529899148395
+              ],
+              "Lminus_l1": [
+                0.050668085033228075,
+                0.19319393575903338,
+                0.19959254517078714
+              ],
+              "Lplus_l0": [
+                -0.02215427492560739,
+                0.19204015025186993,
+                0.19815296554822798
+              ],
+              "Lplus_l1": [
+                5.2206364076051806e-06,
+                0.19324551356280073,
+                0.19993139189136716
+              ]
+            },
+            "omega": 0.9,
+            "profile": "solved",
+            "profile_residual": 6.362688154126772e-13,
+            "tail_at_three_quarters": 1.9107662887011436e-11
+          },
+          {
+            "E": 354.54585461911637,
+            "E_over_Q": 0.9777126060565061,
+            "Q": 362.62788515035845,
+            "center": 0.7402287149499772,
+            "eigenvalue": 0.2487757595136126,
+            "hessians": {
+              "Lminus_l0": [
+                -2.29126304423313e-14,
+                0.11818076794375768,
+                0.12351045187505383
+              ],
+              "Lminus_l1": [
+                0.11939452429906412,
+                0.12379779484747416,
+                0.12910099720657814
+              ],
+              "Lplus_l0": [
+                -0.09719901801798508,
+                0.11817409622121708,
+                0.12349269691768486
+              ],
+              "Lplus_l1": [
+                2.0827662572416294e-05,
+                0.11958009498719552,
+                0.12590989157839017
+              ]
+            },
+            "omega": 0.94,
+            "profile": "solved",
+            "profile_residual": 3.402833570476105e-14,
+            "tail_at_three_quarters": 2.2342074743966915e-10
+          }
+        ],
+        "unassessed_stability": "l>=2, nonspherical and nonlinear fragmentation not tested",
+        "unresolved_profile_samples": [
+          "0.868",
+          "0.875"
+        ]
+      },
+      "supersedes": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-8bbdc768455bc77d",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-314f2741/analysis.json",
+      "sha256": "3ebd41874fa473d2d7a00b074cae19dc89bf671cbed3ae19d902bc37d5545299",
+      "size": 12650,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-2a817aed30ad4e6f",
+      "kind": "check",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-314f2741/checks.json",
+      "sha256": "3a0bc7c038d297aa8fb69b7727287e76aa6decafc7164617ede70c01599bd47e",
+      "size": 2938,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-eec12db919d761e8",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-314f2741/derived/evolutions.csv",
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09",
+      "size": 741947,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a0fcc7b87f287057",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-314f2741/derived/profiles.csv",
+      "sha256": "dadf10633de2236a0a85d5c87f5c818bbb9d602c009007dc21eb19f08d4c1d14",
+      "size": 455,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0b31f644dbd07966",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-314f2741/derived/radial.csv",
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac",
+      "size": 54419,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-eca1d9dd00e7e848",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-314f2741/derived/refinements.csv",
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b",
+      "size": 295,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-817757bb5fd31edf",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-314f2741/derived/summary.json",
+      "sha256": "62823fc3204c0d6e0affac1a01b703aea163b9d2b8c38e95646560472191375e",
+      "size": 8467,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-65496636f09a3c8c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/attempt.json",
+      "sha256": "be09f8155d51a90fc254dd1a6a8953dc205458de2cf059d98fe4540000bff290",
+      "size": 319,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9f89b66be863885e",
+      "kind": "event-log",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/events.jsonl",
+      "sha256": "e21551b3b5ff2025560bcb8e79ec12c0c4224a46817fd8914fef85be516444f4",
+      "size": 2813,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4df3f1e2a897a91c",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/logs/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e43501766c2f319",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/preparation.json",
+      "sha256": "bee15797b8378788035652cfae8f9526a87a1bf4bf79b83e40d75984dec5c604",
+      "size": 421,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f580b4ff192e5858",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/controls.json",
+      "sha256": "59d7f064a30a180ed92d8afee86976e27a94f5534cf3431d5cac04db2665ca54",
+      "size": 338,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-87a81140babe97bc",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/evolution-0.0000.npz",
+      "sha256": "479477cd3bbc229794dc5523640d369079b7623d52f2fbc5bfc7f92e87ada6c9",
+      "size": 10609,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ac4b7f7b07117b04",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/evolution-0.0005.npz",
+      "sha256": "ef0164400179c78fdc5d5895dd00f986267fb882baaf92e0c9a4b176bbbdb9f6",
+      "size": 21880,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5ea57b75178211b9",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/evolution-0.0010.npz",
+      "sha256": "d4bbbbc0a512d241b04cc57c32c9693e33571a7ffe56e2efe43a374f2baac3e3",
+      "size": 106884,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0865e375a3099aef",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/evolution-0.0020.npz",
+      "sha256": "71bf73816bb154bdae4d90de11b73c82ed889fdc090395ab4a3ea22d3db97583",
+      "size": 21876,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0a754f69fb898315",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/evolution-fine.npz",
+      "sha256": "8513b6d9429b0723d564725090433f314e9bc929765057e1e0c33cb7a2c1ffba",
+      "size": 21265,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-262642c0cc890165",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/evolution-wide.npz",
+      "sha256": "c12793b4b88df202eb21de77007e02a113fa21289c69d5abcdaa824821231834",
+      "size": 21355,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-fafb4be36808c7f8",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/evolutions.json",
+      "sha256": "9e4930bd5dd37c4c8f18998f3e48b8c159c9082054210c9981b2402dcff57506",
+      "size": 2152,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-24941a1527ae3d69",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/execution.json",
+      "sha256": "cae50d94407d1abdd8aa18a4f0660072fd5917c12f22850fafb159a7d3571f1a",
+      "size": 483,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b582d9fe2ef5151a",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+      "size": 17390,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-41bba7a5478598bb",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-0.940.npz",
+      "sha256": "37f7fd792e16e6ec9aeefeda989d162e1a3ce2a122016183fdf789cb996b978b",
+      "size": 17196,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-29bf216c65dfa77b",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profile-attempts-0.868.json",
+      "sha256": "f4f515759e1471680a8234b91945b9dfbb57370ddb6a0676638136e46ae8537b",
+      "size": 1066,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4fc8d8d54dd06c92",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profile-attempts-0.875.json",
+      "sha256": "ff5b3d13d6060c504079e81109edde5266bb9c94bd1d497234c6fa2de7e1558f",
+      "size": 1056,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-fbc3a7aaf02042b4",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profile-attempts-0.900.json",
+      "sha256": "ccd190361c699be7a0eb4a115500cbfd7ff29ab2efb43530abb7c4d46d94a0fd",
+      "size": 515,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b4f90ab4a214835b",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profile-attempts-0.940.json",
+      "sha256": "ad98490f77bb46ee7525dcd8c31730f9cbd28cfb1765b24426224bb3802b5328",
+      "size": 301,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b2b57ccde84b8c5c",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profile-attempts-fine.json",
+      "sha256": "48720e87490295e3da972616036595e20bc7dc4689fa05b1d900ec686f1d63be",
+      "size": 515,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7d56caca22e637d1",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profile-attempts-wide.json",
+      "sha256": "8f1ced98efe883a3308d5b95a18a96b586b566f925daa75e75f41d73bc41b51d",
+      "size": 514,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3eeccd1c73ac8bf8",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+      "size": 33432,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-150fb7b2b63c96be",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+      "size": 31518,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-54fd691b1d4db6ea",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/profiles.json",
+      "sha256": "373d13438b8c48fdc642c04bb44690054d6200d5da1f089da660c44811cb8575",
+      "size": 1776,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a8ef5ff679ce38a7",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/refinements.json",
+      "sha256": "a401447121796cc8a89137bf4d9c7e343e032b9d0c552ba5ce7048832cac83f7",
+      "size": 520,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d39f9babcb642ab9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-end.json",
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f",
+      "size": 211,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d85fce8df2903b9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-start.json",
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f",
+      "size": 211,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1c68737da8c0aaf8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/request.json",
+      "sha256": "188cd0bc1dbd70f3a4b1f0263903ce89b54a2c384a4251e1690b054449347077",
+      "size": 1384,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5d26b47089e4bf8f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/code.json",
+      "sha256": "5f4f8e3e3ba1d665c7fc8e43de36edcf5af2832e80d49444fef2accec0842700",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3219b9326cc4f407",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "provenance/dependencies.lock",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091",
+      "size": 294,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1ee42f15d42867c3",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/environment.json",
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219",
+      "size": 305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19b18d73cfa234f8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/inputs.json",
+      "sha256": "2c340f414deb26e114b9b5d18f3cec0cedecd1c08207cca502067ca116b5dc9c",
+      "size": 133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-76b2f4524bba093b",
+      "kind": "config",
+      "media_type": "application/json",
+      "path": "resolved-config.json",
+      "sha256": "a5291eb94b0344a9f69110e44bebe5be166d1c20a663cfa4f24b9f87e654ffaa",
+      "size": 825,
+      "source_ids": []
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt-0001",
+      "checkpoint": null,
+      "created_at": "2026-09-25T18:54:59.849738Z",
+      "exit_code": 0,
+      "failure": null,
+      "parent_attempt_id": null,
+      "path": "attempts/attempt-0001",
+      "state": "completed",
+      "updated_at": "2026-09-25T18:55:13.867946Z"
+    }
+  ],
+  "checksum_algorithm": "sha256",
+  "checksum_path": "checksums.sha256",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "6c0d271be19a656d9689abb481e92be4ebfe53c0",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "completeness": {
+    "analysis": true,
+    "attempts_terminal": true,
+    "config": true,
+    "provenance": true,
+    "report": false
+  },
+  "config_hash": "a5291eb94b0344a9f69110e44bebe5be166d1c20a663cfa4f24b9f87e654ffaa",
+  "config_path": "resolved-config.json",
+  "created_at": "2026-09-25T18:54:59.844904Z",
+  "execution_identity": {
+    "dependencies": {
+      "path": "python/requirements-lock.txt",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    "environment": {
+      "accelerator": "none",
+      "architecture": "x86_64",
+      "implementation": "CPython",
+      "numeric_libraries": {
+        "matplotlib": "3.10.8",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    }
+  },
+  "experiment_id": "gross.bound-clock.v1",
+  "experiment_version": "1.0.0",
+  "known_gaps": [
+    "Spherical flat decoupling sector only; gravitational and nonradial stability untested.",
+    "Outer finite domain has a documented dissipative layer; infinite-domain lifetime is inferred only within convergence controls.",
+    "No neutral emission/reception, recoil, autonomous geometry or operator-to-continuum derivation.",
+    "Half/double amplitude and refined controls run for 20 periods; 100-period longevity is evaluated at nominal amplitude."
+  ],
+  "model_id": "signal-space.ss-ocf-1.flat-clock.v1",
+  "package_version": 1,
+  "parent_run_id": null,
+  "reports": [],
+  "run_id": "run-6d546dddc252a783",
+  "schema_version": "research-run-manifest-v1",
+  "scientific_classification": "pass",
+  "seed_algorithm": "sha256-stream-v1",
+  "seed_ledger": {
+    "analysis": 14847330545538242625,
+    "initialization": 9497253636053910495,
+    "perturbations": 3438477401105694923,
+    "sampling": 873902148180242579
+  },
+  "technical_state": "analyzed",
+  "updated_at": "2026-09-25T18:55:34.255155Z"
+}

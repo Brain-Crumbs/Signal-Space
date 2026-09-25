@@ -21,6 +21,7 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-03": "docs/research/plans/gross-test-03.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
+RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 
 
 def write_json(path: Path, value: object) -> None:
@@ -41,6 +42,15 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
         lines += [f"| {c['id']} | {c['status']} | {c.get('value')} |" for c in checks['checks']]
         lines += ["", "The common matter cone is selected by the action. Frozen local jets do not establish emergence, a bound clock, nonlinear Einstein evolution or constraint-satisfying initial data.",
                   "", "Next: Test 6 core profile and independently resolved bound clock eigenmode; require branch and finite-domain convergence before reception work."]
+        return "\n".join(lines) + "\n"
+    if manifest.get("experiment_id") == "gross.bound-clock.v1":
+        lines = ["# Test 6 bound clock: automated assessment", "",
+                 "Human scientific interpretation and visual review remain separate.", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; bounded classification {analysis['classification']}.", "",
+                 "| Check | Status | Value |", "| --- | --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} | {c.get('value')} |" for c in checks['checks']]
+        lines += ["", "This is a spherical flat decoupling calculation. An accepted radial lifetime does not establish nonspherical stability, gravity, reception or emergent geometry.",
+                  "", "Next: if accepted, freeze the local clock calibration and preregister Test 7 incident neutral pulses and predicted local response before measuring reception; otherwise resolve the failing branch, mode or lifetime gate."]
         return "\n".join(lines) + "\n"
     classification = manifest["scientific_classification"]
     reciprocal = manifest.get("experiment_id") == "gross.reciprocal-events.v1"

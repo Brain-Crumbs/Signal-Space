@@ -1,12 +1,1402 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 1416,
+  "file_count": 1694,
   "files": [
     {
       "path": "research/catalog.json",
       "size": 14646,
       "sha256": "bc64950c1a6612aeab2fa9e4485a450c38c8bfcc1dd9a19a51da2d70da946833"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Analysis_and_Next.md",
+      "size": 8693,
+      "sha256": "11d1037cc59b8456c6e90a13a905e56ee4e1573e270037fe7bb3b5b41165fb0d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Results.pdf",
+      "size": 310627,
+      "sha256": "5654759347bebddd5399b75d533eaf475f02e87268010ccd4da6bcaf91e83a2d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experimental_Setup.pdf",
+      "size": 39894,
+      "sha256": "12072d410c89e70bf379eaba629bfd9014ed62992c4bdcbd5fcca4f66e7bfd79"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/export.json",
+      "size": 20428,
+      "sha256": "f9b723abc1c41ac2b7d6c079350236e09fba33663b79ef4b2f49384cda791908"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/figure_index.json",
+      "size": 4705,
+      "sha256": "c9742af84756698a460ac6a4e871338ca25d4138c2733b619c3841ece95d77f5"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/bound-control.pdf",
+      "size": 18863,
+      "sha256": "24b0a3e9a9f37186fe7fa001f84f2ef3689cbd42d4c87640926b559d99b09a89"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/bound-control.png",
+      "size": 83690,
+      "sha256": "cf1b78601cb1aa10fea5048ad7442a301ad187d084aed20aa13fc21ddaa055dc"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/bound-control.svg",
+      "size": 56731,
+      "sha256": "3dfb3a18248d9863f3d5369a23fca349d4b29250e090d8bc4404851218993905"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/core-and-well.pdf",
+      "size": 18706,
+      "sha256": "612f0ac5a919d01d3aa15a580998457e9f3456b719b9c171370b585c1f92d0a8"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/core-and-well.png",
+      "size": 95427,
+      "sha256": "d3ad27ce4edfdca9ff00a89db7ae3725de8aca5bb17a642eb50d724ee514dd75"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/core-and-well.svg",
+      "size": 57319,
+      "sha256": "1e635bbe55937e26a66ab61062f5340babc5739b687ffb21c9cc89316f3bf2fe"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/lifetime-convergence.pdf",
+      "size": 57304,
+      "sha256": "4d2bbba932eb363e81873ec879cbb03bb86d2b2d44747364271f75a2c690c4be"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/lifetime-convergence.png",
+      "size": 190407,
+      "sha256": "d2bdb45b5e7fd8effcff485c96fcac5f6cc65e6c6a77c9a0a6dc2aa18e6e6f50"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/lifetime-convergence.svg",
+      "size": 205891,
+      "sha256": "f02480f0d74bb420d16d24b2769c28ce99d31e6589a6e37b4343d9d18bdd4598"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/local-trace.pdf",
+      "size": 18673,
+      "sha256": "c8fa1baa9911acea1bc9a22534093bd61276b1380ba4113276cfec0c177aa9fd"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/local-trace.png",
+      "size": 162924,
+      "sha256": "a60e517fcaa081c35126687ed0e85ad1f30551fc6cf221dcc635cbc9663b5692"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/figures/static/local-trace.svg",
+      "size": 54377,
+      "sha256": "ebb243cb890b80e1e9003c269c9dfa11fb2438d372c86a2e3a22c9f9cb9e8dcc"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/plan.json",
+      "size": 14309,
+      "sha256": "b56d5d49f37abc630a446688afce29f9d428ed923680fcb6227ca810aaef90b2"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/README.md",
+      "size": 1286,
+      "sha256": "458c16f0a46cc8e5e0303bb28f5d2b2588b66b0ae506ec0111cc947555008994"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/derived/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/derived/profiles.csv",
+      "size": 455,
+      "sha256": "4eabbcb0e27c800d97fab6dc68bf0bf636f1e2650a4c67158e0f05a334120798"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/derived/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/derived/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/derived/summary.json",
+      "size": 8692,
+      "sha256": "aa33f317848358ffdf85bae7de1aa32b6d6695cb847cac5d82355c808c0f5308"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/plot-data/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/plot-data/profiles.csv",
+      "size": 455,
+      "sha256": "4eabbcb0e27c800d97fab6dc68bf0bf636f1e2650a4c67158e0f05a334120798"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/plot-data/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/plot-data/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/plot-data/summary.json",
+      "size": 8692,
+      "sha256": "aa33f317848358ffdf85bae7de1aa32b6d6695cb847cac5d82355c808c0f5308"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/controls.json",
+      "size": 338,
+      "sha256": "59d7f064a30a180ed92d8afee86976e27a94f5534cf3431d5cac04db2665ca54"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolution-0.0000.npz",
+      "size": 10609,
+      "sha256": "479477cd3bbc229794dc5523640d369079b7623d52f2fbc5bfc7f92e87ada6c9"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolution-0.0005.npz",
+      "size": 21880,
+      "sha256": "ef0164400179c78fdc5d5895dd00f986267fb882baaf92e0c9a4b176bbbdb9f6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolution-0.0010.npz",
+      "size": 106884,
+      "sha256": "d4bbbbc0a512d241b04cc57c32c9693e33571a7ffe56e2efe43a374f2baac3e3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolution-0.0020.npz",
+      "size": 21876,
+      "sha256": "71bf73816bb154bdae4d90de11b73c82ed889fdc090395ab4a3ea22d3db97583"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolution-fine.npz",
+      "size": 21265,
+      "sha256": "8513b6d9429b0723d564725090433f314e9bc929765057e1e0c33cb7a2c1ffba"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolution-wide.npz",
+      "size": 21355,
+      "sha256": "c12793b4b88df202eb21de77007e02a113fa21289c69d5abcdaa824821231834"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/evolutions.json",
+      "size": 2152,
+      "sha256": "9e4930bd5dd37c4c8f18998f3e48b8c159c9082054210c9981b2402dcff57506"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/execution.json",
+      "size": 483,
+      "sha256": "8135fd5483858b7dcbf237bebcd8ae7db6d028c607186021e7790bc0a082961f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-0.900.npz",
+      "size": 17390,
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-0.940.npz",
+      "size": 17196,
+      "sha256": "37f7fd792e16e6ec9aeefeda989d162e1a3ce2a122016183fdf789cb996b978b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-attempts-0.868.json",
+      "size": 1567,
+      "sha256": "6003eebee23831193a8631f0d4e36f0d059652d27024f63b0519e5f4cbc811ec"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-attempts-0.875.json",
+      "size": 1794,
+      "sha256": "b8512eea02b710d2cc0a83f4ea40eac438ac1332166f7ffa0151b00c1f4f4797"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-attempts-0.900.json",
+      "size": 515,
+      "sha256": "ccd190361c699be7a0eb4a115500cbfd7ff29ab2efb43530abb7c4d46d94a0fd"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-attempts-0.940.json",
+      "size": 301,
+      "sha256": "ad98490f77bb46ee7525dcd8c31730f9cbd28cfb1765b24426224bb3802b5328"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-attempts-fine.json",
+      "size": 515,
+      "sha256": "48720e87490295e3da972616036595e20bc7dc4689fa05b1d900ec686f1d63be"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-attempts-wide.json",
+      "size": 514,
+      "sha256": "8f1ced98efe883a3308d5b95a18a96b586b566f925daa75e75f41d73bc41b51d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-fine.npz",
+      "size": 33432,
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profile-wide.npz",
+      "size": 31518,
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/profiles.json",
+      "size": 1776,
+      "sha256": "699851355ed96b7e77a46fb84af92e5b3081f5d4c726235664162021324e03b3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/refinements.json",
+      "size": 520,
+      "sha256": "a401447121796cc8a89137bf4d9c7e343e032b9d0c552ba5ce7048832cac83f7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/rng-end.json",
+      "size": 211,
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/data/raw/attempt-0001/rng-start.json",
+      "size": 211,
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/figure-specs/bound-control.figure.json",
+      "size": 639,
+      "sha256": "f19a20af6a562f1fc8290f06bb2f9e5584131dc9edaafcab395295166c77b6d6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/figure-specs/core-and-well.figure.json",
+      "size": 602,
+      "sha256": "06d8cfd85f955bf16adf538248d0c0e735e5a005a98d98d432d0588540dc09b7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/figure-specs/lifetime-convergence.figure.json",
+      "size": 613,
+      "sha256": "9aaf3f42fedd63f032c9e25c918ef9a60b36215da194d09071546160128d3d92"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/figure-specs/local-trace.figure.json",
+      "size": 619,
+      "sha256": "94906896ecf95abb0cdbc70ca0c4cd52a599d5c6ea480c2f9e4194c881becc3e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/__init__.py",
+      "size": 70,
+      "sha256": "773a483c668342f54b2d252d1418c6b0ad5ba434f55a147b9e5e3fe429814c43"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/__main__.py",
+      "size": 60,
+      "sha256": "6e40041537e992294f93ec2fddf9a77c4a3bc98c1a78f44458d19e64e1cc4cfb"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/__init__.py",
+      "size": 69,
+      "sha256": "c8a3e4a6b22fd75658eaa738367271a5eed3cde4e3600f25e437be88f64a2833"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/charged.py",
+      "size": 32935,
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/clock.py",
+      "size": 10307,
+      "sha256": "335dad586208c14678e1e7dfda59fdce9c99dfe6e4f6a0f648cf0ca7b5728219"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/continuum.py",
+      "size": 6093,
+      "sha256": "d4a4104faba7e715400498e19a1d1e8d0b6099acd457d29a78f3510aefe12ca1"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/floquet.py",
+      "size": 10187,
+      "sha256": "7e628affa1e66eef0707524abb1b64afadb0b6746f5d2656f25c94f994f9eb66"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/operators.py",
+      "size": 6386,
+      "sha256": "d6f59ddd93a3f8e7da5b11e511a30e9100981569978b4fc275d96a6ba7f7e906"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/reciprocal.py",
+      "size": 11770,
+      "sha256": "dac3004d873845a5edde65ce520cda26d181637dc7c6f5f0c6f4ddd864efb1df"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/router.py",
+      "size": 12341,
+      "sha256": "9c929c8e316ff3c4412e0092b1f413fbd4d23ff11ebd257db00f59c8a6922ea0"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/analysis/synthetic.py",
+      "size": 2935,
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/cli.py",
+      "size": 6896,
+      "sha256": "41333857805258154ba44dfa47059741546c387edc2a39e15ed94e7e6dc59df2"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/contracts/__init__.py",
+      "size": 149,
+      "sha256": "088648491bc037ec067e6b066f72289445407db07c56404d200e6ca612e00b38"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/contracts/e01.py",
+      "size": 3216,
+      "sha256": "cbde6313d7eb5bf1c5c6bd6df92bb4e0d47390ebbb1be5b2010b3b669dd89b54"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/contracts/generated.py",
+      "size": 1456,
+      "sha256": "c050a45fa317f5b90cec3f7d7a78c4ee4897f4d320add1e7d416cdaeebf2dd79"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/contracts/validation.py",
+      "size": 16015,
+      "sha256": "01041254107be4fc49ee1175669ed980e1d0e0344686bb507ae1eae183e4c16d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/__init__.py",
+      "size": 308,
+      "sha256": "3d2a64b92f34435007b230d7d8e680ca4e5b37946d93b9e6a410ac2617b7774f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/base.py",
+      "size": 1653,
+      "sha256": "41ab6e8b770368c6a373e1f2429702fd9c3aee35891cf93faaa2f091b2dfc6c6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/charged_worker.py",
+      "size": 11310,
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/charged.py",
+      "size": 6082,
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/clock.py",
+      "size": 4479,
+      "sha256": "067e9313875016e80d8d8517a18147dadedcf3b6b32dd7cb27eb8414280f2679"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/continuum.py",
+      "size": 4307,
+      "sha256": "eb6aa17d0bb2208f7a231a2dda0462db0342a1c7714cea2ae5c32abb4284b929"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/floquet.py",
+      "size": 4972,
+      "sha256": "4f5f2f24b0bec958a53451c99fe35783666e029b516054ea9dc20802bce0c246"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/operators.py",
+      "size": 4248,
+      "sha256": "0bcb0ea43bbfbfdb7ce2a1db4156692bc51e55ac0e161219791b44dc0077f6c8"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/reciprocal.py",
+      "size": 4869,
+      "sha256": "93e41839832e27374158968213567d0dada8d920a387272192981678d18dec63"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/registry.py",
+      "size": 1469,
+      "sha256": "f5c0ae3b0481e997ac8cce91a7d44d12d10417d25e3e6adb81f1d0469b39aa72"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/router.py",
+      "size": 4968,
+      "sha256": "32bbccac7ee3cf9d9d98be5e10fa50c521b2a6950f8d78a04e6029e4986945c3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/synthetic_worker.py",
+      "size": 5684,
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/experiments/synthetic.py",
+      "size": 5004,
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/__init__.py",
+      "size": 48,
+      "sha256": "f1c1bc09905be0aadc69485581ca35c071641d896df665b743a0830fc483be3e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/charged_scalar.py",
+      "size": 944,
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/clock.py",
+      "size": 1382,
+      "sha256": "b3981591e2fdbf47d565348f37010e9c9b7c264d234b278cbdf3000e46368d86"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/continuum.py",
+      "size": 1268,
+      "sha256": "760b0bb875749412f3f9473285dd1d65946ed78ace81a1c3c12cd3a138c32e61"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/floquet.py",
+      "size": 3520,
+      "sha256": "47eeeab1c910ba04386bd3a29d5121424fed9843dae87bd2dd49ac250a4baa52"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/operators.py",
+      "size": 1324,
+      "sha256": "7f7cac1968e78ed5da8c8bd6b7aacd25911d4dd924302b4c96a6a34fa8b87714"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/reciprocal.py",
+      "size": 1182,
+      "sha256": "e74cb8c10f1a1d3e13d71b6d44a3535dc7597c26cfc21f7e649ed1984d698e82"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/router.py",
+      "size": 1848,
+      "sha256": "3b6f49b929b52d58df5dd93eb79e0037edf92c83511aa21940a410619aff16a9"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/models/synthetic.py",
+      "size": 326,
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/__init__.py",
+      "size": 68,
+      "sha256": "0995e134f9ee087f13047a806677ebd0de56fc0245e54b8058bf06a4d4bdb164"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/charged_radial.py",
+      "size": 5115,
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/charged_spectrum.py",
+      "size": 7228,
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/clock.py",
+      "size": 14148,
+      "sha256": "d4d294a64f606dc60868ed01a689773a5483a1ff7a04342ccf808c37e793ea30"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/continuum.py",
+      "size": 6074,
+      "sha256": "e3e10708a35b62a04e757efb6311cb0620b7f40829593de2b6dab6802bfd4cfc"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/floquet.py",
+      "size": 3982,
+      "sha256": "fbf8719014bdb2be9e8cf1fd8ce245e08d2ac323413b30444f41c33250ad5bcb"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/operators.py",
+      "size": 6855,
+      "sha256": "9c022b82344eebd75dcd8a5f89e7a261b0883098debbf69c9104fa6691d0334f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/reciprocal.py",
+      "size": 7611,
+      "sha256": "1226766200701c610fda50c22141fa517cccb89befa6d86e8af3b8a9f5f17d41"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/router.py",
+      "size": 4852,
+      "sha256": "173dcf35b3770ceb07bbbfa2da347f7366eae0c605bfd202abe4089fda2f80f6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/numerics/synthetic.py",
+      "size": 692,
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/__init__.py",
+      "size": 70,
+      "sha256": "4833796dbf6c1a61eeb9bce5bb5af0f2a5176b975dcf80dc7a8d4a476a87a03b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/charged.py",
+      "size": 11784,
+      "sha256": "c919726353ca552ce5eaea956253ec6945a5aa22dcdbdcd779f2c2e03e7dc269"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/clock.py",
+      "size": 14827,
+      "sha256": "0e446a2d4ebb39eef573d8f3a18a45dae2fee6267e9927ad19e8c5933e727dae"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/continuum.py",
+      "size": 9916,
+      "sha256": "75311ae3001c4fe57349e85de47956b35253e5d884483067b513a0b318880aa6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/exploration.py",
+      "size": 4065,
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/floquet.py",
+      "size": 13960,
+      "sha256": "ce66b759c1edad56a2f9b1aafa75e5db705a37b85109b1c78c1b96be86228cc1"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/operators.py",
+      "size": 11773,
+      "sha256": "2b13860c05869b50388b36bc0a30e3489ebe2142a389d2eacd4a4a27e0d1ed8c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/reciprocal.py",
+      "size": 15210,
+      "sha256": "cbaa8032826478a6794f2358d5ece61ceffbaf97f0d3dbaaf4e0ae8cfe6c4124"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/router.py",
+      "size": 16548,
+      "sha256": "e3bc20c7a6c74d8ee049002bf8b327a58ade2b5dee8160a1588b7f7060a01227"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/reporting/synthetic.py",
+      "size": 7412,
+      "sha256": "4c3ef0fb2d6466a8c02f3398f1e3e4cbb0c2ad1d3efe49c7211361f0fe7d49c6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/__init__.py",
+      "size": 294,
+      "sha256": "9e5f034118112842072a8ef1dd1ed96e7cfe8453e57b64b4d63f408cee25656d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/archive.py",
+      "size": 2430,
+      "sha256": "73894d51459075b0ff80d037ed62fb6bbd1b5ea7de7861e17156df8fb2fd32b4"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/errors.py",
+      "size": 448,
+      "sha256": "9a9f0f8f57af38bfeeb1504dade9844435f163167a343804339d6cbc5bf8239c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/events.py",
+      "size": 1982,
+      "sha256": "47b8ee842b04002f80ec094bd860d7596092140fdd267afdc45f6dae417f71e3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/io.py",
+      "size": 1986,
+      "sha256": "9f5cf2ab67969e348b61d879f6f5fc166278a606fd02c462373d2eb01a928d72"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/limits.py",
+      "size": 626,
+      "sha256": "8685bb2ba64ae5339f17262d2cf7be59ed618a1f60169a698fb3cd65f8850215"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/package.py",
+      "size": 12980,
+      "sha256": "450d75eec92261121daf7a32ab57514fba510ec3c7a134d2f02fbafa6f5319ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/runner.py",
+      "size": 28240,
+      "sha256": "84bd02824c56ee64634d0c2c5da971155ab11029d0afff89840c9edec9059b6e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/seeds.py",
+      "size": 647,
+      "sha256": "fb4f68b4bbd732e08952b2154b1f793bbb9211e0ffae70e621e3000005b18057"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/verify.py",
+      "size": 9683,
+      "sha256": "6fed68498b61f14886d6a836dc4052cc384a304ba8ed78b31ee7dc588d961e22"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/runtime/worker.py",
+      "size": 812,
+      "sha256": "a279541fa4e4d557030bc9797b4c46de0cd0fa805fc41b6bd93e4aad70769721"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/service/__init__.py",
+      "size": 74,
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/source/service/api.py",
+      "size": 12687,
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/tables/analysis.json",
+      "size": 12903,
+      "sha256": "bc4e00e35c5ed6ed7ea4dd135d6827fb8e3951ea705a6fe130abccabc2c37b9f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/tables/checks.json",
+      "size": 2938,
+      "sha256": "3a0bc7c038d297aa8fb69b7727287e76aa6decafc7164617ede70c01599bd47e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/results/tables/resolved-config.json",
+      "size": 825,
+      "sha256": "a5291eb94b0344a9f69110e44bebe5be166d1c20a663cfa4f24b9f87e654ffaa"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/provenance/source-history.bundle",
+      "size": 28433,
+      "sha256": "409c0b8bfba4eef6724ba8c95126f671e963da580c8394f9e05612071d3b2b12"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/README.md",
+      "size": 1725,
+      "sha256": "8cae74ef776fa8d1c08223acf911f3b46c91389105ccfcaa83ff449d2e19d103"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/analysis.json",
+      "size": 12650,
+      "sha256": "1d6864b97a6f7bbc39ace403a79ded6314601dd1089b0d591b3c0d970bb4ed4e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/checks.json",
+      "size": 2938,
+      "sha256": "3a0bc7c038d297aa8fb69b7727287e76aa6decafc7164617ede70c01599bd47e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/derived/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/derived/profiles.csv",
+      "size": 455,
+      "sha256": "4eabbcb0e27c800d97fab6dc68bf0bf636f1e2650a4c67158e0f05a334120798"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/derived/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/derived/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0001-2639af35/derived/summary.json",
+      "size": 8467,
+      "sha256": "f8037132eec127755c1538b8a5361348995942216707d6529b38371c7695de24"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/analysis.json",
+      "size": 12903,
+      "sha256": "bc4e00e35c5ed6ed7ea4dd135d6827fb8e3951ea705a6fe130abccabc2c37b9f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/checks.json",
+      "size": 2938,
+      "sha256": "3a0bc7c038d297aa8fb69b7727287e76aa6decafc7164617ede70c01599bd47e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/derived/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/derived/profiles.csv",
+      "size": 455,
+      "sha256": "4eabbcb0e27c800d97fab6dc68bf0bf636f1e2650a4c67158e0f05a334120798"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/derived/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/derived/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/analyses/analysis-0002-04d7ed8c/derived/summary.json",
+      "size": 8692,
+      "sha256": "aa33f317848358ffdf85bae7de1aa32b6d6695cb847cac5d82355c808c0f5308"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "e5d0c263c698511f1c89fb555fac614ac3f33cd0a4e9760d73ef71ea7a2cf452"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/events.jsonl",
+      "size": 2813,
+      "sha256": "05a02baf50c394cf0f44373bc59766fb0f199c6a7c24907d4294d393cbd8cf9e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/preparation.json",
+      "size": 421,
+      "sha256": "bee15797b8378788035652cfae8f9526a87a1bf4bf79b83e40d75984dec5c604"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/controls.json",
+      "size": 338,
+      "sha256": "59d7f064a30a180ed92d8afee86976e27a94f5534cf3431d5cac04db2665ca54"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolution-0.0000.npz",
+      "size": 10609,
+      "sha256": "479477cd3bbc229794dc5523640d369079b7623d52f2fbc5bfc7f92e87ada6c9"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolution-0.0005.npz",
+      "size": 21880,
+      "sha256": "ef0164400179c78fdc5d5895dd00f986267fb882baaf92e0c9a4b176bbbdb9f6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolution-0.0010.npz",
+      "size": 106884,
+      "sha256": "d4bbbbc0a512d241b04cc57c32c9693e33571a7ffe56e2efe43a374f2baac3e3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolution-0.0020.npz",
+      "size": 21876,
+      "sha256": "71bf73816bb154bdae4d90de11b73c82ed889fdc090395ab4a3ea22d3db97583"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolution-fine.npz",
+      "size": 21265,
+      "sha256": "8513b6d9429b0723d564725090433f314e9bc929765057e1e0c33cb7a2c1ffba"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolution-wide.npz",
+      "size": 21355,
+      "sha256": "c12793b4b88df202eb21de77007e02a113fa21289c69d5abcdaa824821231834"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/evolutions.json",
+      "size": 2152,
+      "sha256": "9e4930bd5dd37c4c8f18998f3e48b8c159c9082054210c9981b2402dcff57506"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/execution.json",
+      "size": 483,
+      "sha256": "8135fd5483858b7dcbf237bebcd8ae7db6d028c607186021e7790bc0a082961f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+      "size": 17390,
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.940.npz",
+      "size": 17196,
+      "sha256": "37f7fd792e16e6ec9aeefeda989d162e1a3ce2a122016183fdf789cb996b978b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-attempts-0.868.json",
+      "size": 1567,
+      "sha256": "6003eebee23831193a8631f0d4e36f0d059652d27024f63b0519e5f4cbc811ec"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-attempts-0.875.json",
+      "size": 1794,
+      "sha256": "b8512eea02b710d2cc0a83f4ea40eac438ac1332166f7ffa0151b00c1f4f4797"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-attempts-0.900.json",
+      "size": 515,
+      "sha256": "ccd190361c699be7a0eb4a115500cbfd7ff29ab2efb43530abb7c4d46d94a0fd"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-attempts-0.940.json",
+      "size": 301,
+      "sha256": "ad98490f77bb46ee7525dcd8c31730f9cbd28cfb1765b24426224bb3802b5328"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-attempts-fine.json",
+      "size": 515,
+      "sha256": "48720e87490295e3da972616036595e20bc7dc4689fa05b1d900ec686f1d63be"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-attempts-wide.json",
+      "size": 514,
+      "sha256": "8f1ced98efe883a3308d5b95a18a96b586b566f925daa75e75f41d73bc41b51d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+      "size": 33432,
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+      "size": 31518,
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profiles.json",
+      "size": 1776,
+      "sha256": "699851355ed96b7e77a46fb84af92e5b3081f5d4c726235664162021324e03b3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/refinements.json",
+      "size": 520,
+      "sha256": "a401447121796cc8a89137bf4d9c7e343e032b9d0c552ba5ce7048832cac83f7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/rng-end.json",
+      "size": 211,
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/rng-start.json",
+      "size": 211,
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/request.json",
+      "size": 1387,
+      "sha256": "a1777a4f633474b8b5d796e1ebad42f25736c8eeaa24e0e722996ffbadc082e3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/checksums.sha256",
+      "size": 11139,
+      "sha256": "d760c7069a18396d28d7d348dae5f3a5b36613782806f902a60cdbce79041868"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/manifest.json",
+      "size": 67116,
+      "sha256": "1067e22cc1a67d273466b69943d6d5ed052a0b8fd482014c1e1a74a1a5326b15"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/provenance/code.json",
+      "size": 206,
+      "sha256": "4aa274e804bee1ea1a10dcb56062cb21729ba5a7c42aea026bf296e5913512d3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/provenance/inputs.json",
+      "size": 133,
+      "sha256": "2c340f414deb26e114b9b5d18f3cec0cedecd1c08207cca502067ca116b5dc9c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/bound-control.figure.json",
+      "size": 639,
+      "sha256": "f19a20af6a562f1fc8290f06bb2f9e5584131dc9edaafcab395295166c77b6d6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/bound-control.pdf",
+      "size": 18733,
+      "sha256": "213f571ab0a4cfbd52b60fa311160bc65c4dad4d64c68e6c5d52af27fe3ef2cd"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/bound-control.png",
+      "size": 89043,
+      "sha256": "cfdeea0887d2357dd2b0b99c539a21f0577ef4ca6687afb827ccb1888fd6f298"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/bound-control.svg",
+      "size": 55610,
+      "sha256": "812e7b4f394417fa3118bc4e044cbd570423f447c6c7e45a5067414a29751d9e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/core-and-well.figure.json",
+      "size": 602,
+      "sha256": "06d8cfd85f955bf16adf538248d0c0e735e5a005a98d98d432d0588540dc09b7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/core-and-well.pdf",
+      "size": 18706,
+      "sha256": "3745cbdbc214c56479e7e8b0204562c224eea47f4a50267db941927f4aabf252"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/core-and-well.png",
+      "size": 95427,
+      "sha256": "d3ad27ce4edfdca9ff00a89db7ae3725de8aca5bb17a642eb50d724ee514dd75"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/core-and-well.svg",
+      "size": 57319,
+      "sha256": "5b3a8a1422d838cbbf633861ecf4eb6e095b2f7d1a843bc04df79e521ff25c84"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/lifetime-convergence.figure.json",
+      "size": 613,
+      "sha256": "9aaf3f42fedd63f032c9e25c918ef9a60b36215da194d09071546160128d3d92"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/lifetime-convergence.pdf",
+      "size": 27595,
+      "sha256": "b19123efcab7332246d60286cc14295f36e639d8b5185a8a784f303fb11deadb"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/lifetime-convergence.png",
+      "size": 100285,
+      "sha256": "4989fbe1c20598ba4ecb2b4a868cfb1b6cae16c4d6a8f901d575415259550fb7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/lifetime-convergence.svg",
+      "size": 84082,
+      "sha256": "c9a071cb74d4208e824cf937d6076823ccedf6d2634dd8b91c5ee6b06aaaaacf"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/local-trace.figure.json",
+      "size": 619,
+      "sha256": "94906896ecf95abb0cdbc70ca0c4cd52a599d5c6ea480c2f9e4194c881becc3e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/local-trace.pdf",
+      "size": 18673,
+      "sha256": "22d8e6a48ba367d53997d3e2f48413b9deff655bcfd447e083985059728416e2"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/local-trace.png",
+      "size": 162924,
+      "sha256": "a60e517fcaa081c35126687ed0e85ad1f30551fc6cf221dcc635cbc9663b5692"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/figures/local-trace.svg",
+      "size": 54377,
+      "sha256": "a5ca4fdad4f446021403e450bb61b5b2e2575609b0074d8988667821bf9825c0"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/interpretations.json",
+      "size": 2221,
+      "sha256": "e6710012f50e9c1b4638e00e45a1d526680031e07f50479a8bcef7dc24d0d243"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/plot-data/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/plot-data/profiles.csv",
+      "size": 455,
+      "sha256": "4eabbcb0e27c800d97fab6dc68bf0bf636f1e2650a4c67158e0f05a334120798"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/plot-data/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/plot-data/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/plot-data/summary.json",
+      "size": 8467,
+      "sha256": "f8037132eec127755c1538b8a5361348995942216707d6529b38371c7695de24"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/report.html",
+      "size": 3475,
+      "sha256": "c62b979b0cf40766c939701cbd11f3c3e6f2df734556917de4c070aac83c068c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/report.json",
+      "size": 1585,
+      "sha256": "6ca5a700d4de7b3a8e47ed1d8956b13e3d005da0dba80a16066822fc61edba66"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/report.md",
+      "size": 2796,
+      "sha256": "198c4eef5073bd574d3aa3c1c0eaa8d245dd509236229515e8d14d52d4e95774"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/report.pdf",
+      "size": 56064,
+      "sha256": "7562c751f3f3c7c1a7cf3ad6dfcff94c674622960bbf5503884c149d7eb604c9"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0001/report.pdf.tmp",
+      "size": 3392,
+      "sha256": "9ec1dc54f7da3c379da4a9926d7e6f49f178abd01c9e6cc16f87149bae757b66"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/bound-control.figure.json",
+      "size": 639,
+      "sha256": "f19a20af6a562f1fc8290f06bb2f9e5584131dc9edaafcab395295166c77b6d6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/bound-control.pdf",
+      "size": 18863,
+      "sha256": "24b0a3e9a9f37186fe7fa001f84f2ef3689cbd42d4c87640926b559d99b09a89"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/bound-control.png",
+      "size": 83690,
+      "sha256": "cf1b78601cb1aa10fea5048ad7442a301ad187d084aed20aa13fc21ddaa055dc"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/bound-control.svg",
+      "size": 56731,
+      "sha256": "3dfb3a18248d9863f3d5369a23fca349d4b29250e090d8bc4404851218993905"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/core-and-well.figure.json",
+      "size": 602,
+      "sha256": "06d8cfd85f955bf16adf538248d0c0e735e5a005a98d98d432d0588540dc09b7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/core-and-well.pdf",
+      "size": 18706,
+      "sha256": "612f0ac5a919d01d3aa15a580998457e9f3456b719b9c171370b585c1f92d0a8"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/core-and-well.png",
+      "size": 95427,
+      "sha256": "d3ad27ce4edfdca9ff00a89db7ae3725de8aca5bb17a642eb50d724ee514dd75"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/core-and-well.svg",
+      "size": 57319,
+      "sha256": "1e635bbe55937e26a66ab61062f5340babc5739b687ffb21c9cc89316f3bf2fe"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/lifetime-convergence.figure.json",
+      "size": 613,
+      "sha256": "9aaf3f42fedd63f032c9e25c918ef9a60b36215da194d09071546160128d3d92"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/lifetime-convergence.pdf",
+      "size": 57304,
+      "sha256": "4d2bbba932eb363e81873ec879cbb03bb86d2b2d44747364271f75a2c690c4be"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/lifetime-convergence.png",
+      "size": 190407,
+      "sha256": "d2bdb45b5e7fd8effcff485c96fcac5f6cc65e6c6a77c9a0a6dc2aa18e6e6f50"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/lifetime-convergence.svg",
+      "size": 205891,
+      "sha256": "f02480f0d74bb420d16d24b2769c28ce99d31e6589a6e37b4343d9d18bdd4598"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/local-trace.figure.json",
+      "size": 619,
+      "sha256": "94906896ecf95abb0cdbc70ca0c4cd52a599d5c6ea480c2f9e4194c881becc3e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/local-trace.pdf",
+      "size": 18673,
+      "sha256": "c8fa1baa9911acea1bc9a22534093bd61276b1380ba4113276cfec0c177aa9fd"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/local-trace.png",
+      "size": 162924,
+      "sha256": "a60e517fcaa081c35126687ed0e85ad1f30551fc6cf221dcc635cbc9663b5692"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/figures/local-trace.svg",
+      "size": 54377,
+      "sha256": "ebb243cb890b80e1e9003c269c9dfa11fb2438d372c86a2e3a22c9f9cb9e8dcc"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/interpretations.json",
+      "size": 2352,
+      "sha256": "b1b560eaaef9e6c4419d2eb60c17be07e28ecd088f0467047a60d00d8f81d64a"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/plot-data/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/plot-data/profiles.csv",
+      "size": 455,
+      "sha256": "4eabbcb0e27c800d97fab6dc68bf0bf636f1e2650a4c67158e0f05a334120798"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/plot-data/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/plot-data/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/plot-data/summary.json",
+      "size": 8692,
+      "sha256": "aa33f317848358ffdf85bae7de1aa32b6d6695cb847cac5d82355c808c0f5308"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/report.html",
+      "size": 3845,
+      "sha256": "6e27cf431cecdeb63d7ec143698d8b4291f79360071bb82d620047491720df18"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/report.json",
+      "size": 1585,
+      "sha256": "47512d8e260766a8ca38f272f4bba3740c27db0aa17a992839cabd3db9d7ca10"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/report.md",
+      "size": 3166,
+      "sha256": "097787b0f86ff2223b76d05a776156d79df9d8d1fdfada048f93cfab7677ad62"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/reports/report-0002/report.pdf",
+      "size": 84959,
+      "sha256": "edd83b5bbab8e5e52e67321d3d88604dea35c977b65e54164d76953f5ba9cf5c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/resolved-config.json",
+      "size": 825,
+      "sha256": "a5291eb94b0344a9f69110e44bebe5be166d1c20a663cfa4f24b9f87e654ffaa"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/.package.lock",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/analysis.json",
+      "size": 12650,
+      "sha256": "3ebd41874fa473d2d7a00b074cae19dc89bf671cbed3ae19d902bc37d5545299"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/checks.json",
+      "size": 2938,
+      "sha256": "3a0bc7c038d297aa8fb69b7727287e76aa6decafc7164617ede70c01599bd47e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/derived/evolutions.csv",
+      "size": 741947,
+      "sha256": "eb58557d03e77ee4fe1682a3d4cfe6e6478b1e182668beba25de1bdc8e9acb09"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/derived/profiles.csv",
+      "size": 455,
+      "sha256": "dadf10633de2236a0a85d5c87f5c818bbb9d602c009007dc21eb19f08d4c1d14"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/derived/radial.csv",
+      "size": 54419,
+      "sha256": "d5da0cd51a81eaa67d084d04490de0a70188a0cf421e577cb23352bed8f8a6ac"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/derived/refinements.csv",
+      "size": 295,
+      "sha256": "edf1ebd57ebf2784c45a75d970c50b9b37bc8607472500d136c1ee335fcd754b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/analyses/analysis-0001-314f2741/derived/summary.json",
+      "size": 8467,
+      "sha256": "62823fc3204c0d6e0affac1a01b703aea163b9d2b8c38e95646560472191375e"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/attempt.json",
+      "size": 319,
+      "sha256": "be09f8155d51a90fc254dd1a6a8953dc205458de2cf059d98fe4540000bff290"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/events.jsonl",
+      "size": 2813,
+      "sha256": "e21551b3b5ff2025560bcb8e79ec12c0c4224a46817fd8914fef85be516444f4"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/logs/worker.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/preparation.json",
+      "size": 421,
+      "sha256": "bee15797b8378788035652cfae8f9526a87a1bf4bf79b83e40d75984dec5c604"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/controls.json",
+      "size": 338,
+      "sha256": "59d7f064a30a180ed92d8afee86976e27a94f5534cf3431d5cac04db2665ca54"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolution-0.0000.npz",
+      "size": 10609,
+      "sha256": "479477cd3bbc229794dc5523640d369079b7623d52f2fbc5bfc7f92e87ada6c9"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolution-0.0005.npz",
+      "size": 21880,
+      "sha256": "ef0164400179c78fdc5d5895dd00f986267fb882baaf92e0c9a4b176bbbdb9f6"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolution-0.0010.npz",
+      "size": 106884,
+      "sha256": "d4bbbbc0a512d241b04cc57c32c9693e33571a7ffe56e2efe43a374f2baac3e3"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolution-0.0020.npz",
+      "size": 21876,
+      "sha256": "71bf73816bb154bdae4d90de11b73c82ed889fdc090395ab4a3ea22d3db97583"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolution-fine.npz",
+      "size": 21265,
+      "sha256": "8513b6d9429b0723d564725090433f314e9bc929765057e1e0c33cb7a2c1ffba"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolution-wide.npz",
+      "size": 21355,
+      "sha256": "c12793b4b88df202eb21de77007e02a113fa21289c69d5abcdaa824821231834"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/evolutions.json",
+      "size": 2152,
+      "sha256": "9e4930bd5dd37c4c8f18998f3e48b8c159c9082054210c9981b2402dcff57506"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/execution.json",
+      "size": 483,
+      "sha256": "cae50d94407d1abdd8aa18a4f0660072fd5917c12f22850fafb159a7d3571f1a"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-0.900.npz",
+      "size": 17390,
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-0.940.npz",
+      "size": 17196,
+      "sha256": "37f7fd792e16e6ec9aeefeda989d162e1a3ce2a122016183fdf789cb996b978b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-attempts-0.868.json",
+      "size": 1066,
+      "sha256": "f4f515759e1471680a8234b91945b9dfbb57370ddb6a0676638136e46ae8537b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-attempts-0.875.json",
+      "size": 1056,
+      "sha256": "ff5b3d13d6060c504079e81109edde5266bb9c94bd1d497234c6fa2de7e1558f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-attempts-0.900.json",
+      "size": 515,
+      "sha256": "ccd190361c699be7a0eb4a115500cbfd7ff29ab2efb43530abb7c4d46d94a0fd"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-attempts-0.940.json",
+      "size": 301,
+      "sha256": "ad98490f77bb46ee7525dcd8c31730f9cbd28cfb1765b24426224bb3802b5328"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-attempts-fine.json",
+      "size": 515,
+      "sha256": "48720e87490295e3da972616036595e20bc7dc4689fa05b1d900ec686f1d63be"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-attempts-wide.json",
+      "size": 514,
+      "sha256": "8f1ced98efe883a3308d5b95a18a96b586b566f925daa75e75f41d73bc41b51d"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-fine.npz",
+      "size": 33432,
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profile-wide.npz",
+      "size": 31518,
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/profiles.json",
+      "size": 1776,
+      "sha256": "373d13438b8c48fdc642c04bb44690054d6200d5da1f089da660c44811cb8575"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/refinements.json",
+      "size": 520,
+      "sha256": "a401447121796cc8a89137bf4d9c7e343e032b9d0c552ba5ce7048832cac83f7"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/rng-end.json",
+      "size": 211,
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/raw/rng-start.json",
+      "size": 211,
+      "sha256": "8ca26968d996048bbf6c6b508916d1c89705eab97919846fac9f30343cf2602f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/attempts/attempt-0001/request.json",
+      "size": 1384,
+      "sha256": "188cd0bc1dbd70f3a4b1f0263903ce89b54a2c384a4251e1690b054449347077"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/checksums.sha256",
+      "size": 4442,
+      "sha256": "0aa721634ebede580b656e356fbf18db8e47f6e036a980db66199bfe21e81ac4"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/manifest.json",
+      "size": 30995,
+      "sha256": "192e1138190245f4721b56ec91b287d90d544167b1138db6b77f1613f6906d7f"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/provenance/code.json",
+      "size": 206,
+      "sha256": "5f4f8e3e3ba1d665c7fc8e43de36edcf5af2832e80d49444fef2accec0842700"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/provenance/dependencies.lock",
+      "size": 294,
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/provenance/environment.json",
+      "size": 305,
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/provenance/inputs.json",
+      "size": 133,
+      "sha256": "2c340f414deb26e114b9b5d18f3cec0cedecd1c08207cca502067ca116b5dc9c"
+    },
+    {
+      "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/resolved-config.json",
+      "size": 825,
+      "sha256": "a5291eb94b0344a9f69110e44bebe5be166d1c20a663cfa4f24b9f87e654ffaa"
     },
     {
       "path": "research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/Experiment_Analysis_and_Next.md",

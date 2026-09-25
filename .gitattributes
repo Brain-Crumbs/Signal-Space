@@ -1,0 +1,6 @@
+# Plot renderers emit significant spaces at SVG line ends; immutable figure hashes must not be edited.
+research/experiments/**/*.svg -whitespace
+# CSV plot data preserves the writer's CRLF dialect for exact figure provenance.
+research/experiments/**/*.csv -whitespace
+# Exported Python sources retain original bytes, including existing final blank lines.
+research/experiments/**/results/source/**/*.py -whitespace

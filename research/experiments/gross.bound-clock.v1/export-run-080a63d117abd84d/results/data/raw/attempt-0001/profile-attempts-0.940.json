@@ -1,0 +1,14 @@
+[
+  {
+    "center": 0.7403465602665328,
+    "guess_radius": 5.0,
+    "message": "The algorithm converged to the desired accuracy.",
+    "success": true,
+    "tail": 1.2451159583016249e-14,
+    "valid": true
+  },
+  {
+    "discrete_newton_steps": 3,
+    "discrete_residual": 3.402833570476105e-14
+  }
+]

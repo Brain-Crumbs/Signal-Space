@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "eigenperiods"
+    },
+    "y": {
+      "unit": "m"
+    }
+  },
+  "downsampling": "first and last five of nominal 100 periods",
+  "fit_window": null,
+  "id": "local-trace",
+  "normalization": "c=hbar=m=1; radial fields normalized as labeled",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/evolutions.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "plot saved r=dr local trace; no interpolation in display",
+    "time divided by independent eigenperiod"
+  ]
+}

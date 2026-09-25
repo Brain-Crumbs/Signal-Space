@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "m^-1"
+    },
+    "y": {
+      "unit": "field or m\u00b2"
+    }
+  },
+  "downsampling": "display first 60 units; full domain saved",
+  "fit_window": null,
+  "id": "core-and-well",
+  "normalization": "c=hbar=m=1; radial fields normalized as labeled",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/radial.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "F=u/r and mode=f/r for r>0; no spatial smoothing",
+    "show first 60 radial units"
+  ]
+}
