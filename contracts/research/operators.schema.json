@@ -1,0 +1,141 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "type": "string",
+      "const": "gross.operator-identities.v1"
+    },
+    "model_id": {
+      "type": "string",
+      "const": "signal-space.operator-constitution.v1"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["samples", "near_angles"],
+      "properties": {
+        "samples": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "near_angles": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "number",
+            "minimum": 1e-8,
+            "maximum": 0.5
+          },
+          "const": [0.5, 0.1, 0.01, 0.001, 0.0001, 1e-5, 1e-6, 1e-7, 1e-8]
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["matrix", "angle"],
+      "properties": {
+        "matrix": {
+          "type": "string",
+          "const": "dimensionless"
+        },
+        "angle": {
+          "type": "string",
+          "const": "radian"
+        }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root"],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 300
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2048
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_residual", "min_negative_error"],
+      "properties": {
+        "max_residual": {
+          "type": "number",
+          "const": 1e-10
+        },
+        "min_negative_error": {
+          "type": "number",
+          "const": 0.001
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/research/operators.v1.schema.json",
+  "title": "Signal Space operator identity configuration"
+}

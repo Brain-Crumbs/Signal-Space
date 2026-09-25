@@ -5,3 +5,6 @@ playwright-report
 test-results
 research/source
 research/figures
+# Byte-preserved source and immutable, checksummed experiment evidence.
+research/papers/gross-operator-program-v0.2.md
+research/experiments

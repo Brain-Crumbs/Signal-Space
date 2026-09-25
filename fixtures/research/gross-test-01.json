@@ -1,0 +1,29 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.operator-identities.v1",
+  "model_id": "signal-space.operator-constitution.v1",
+  "parameters": {
+    "samples": 1000,
+    "near_angles": [0.5, 0.1, 0.01, 0.001, 0.0001, 1e-5, 1e-6, 1e-7, 1e-8]
+  },
+  "units": {
+    "matrix": "dimensionless",
+    "angle": "radian"
+  },
+  "seeds": {
+    "root": 2026092501
+  },
+  "resources": {
+    "max_cpu_seconds": 60,
+    "max_wall_seconds": 60,
+    "max_memory_mb": 512,
+    "max_output_mb": 16
+  },
+  "analysis": {
+    "max_residual": 1e-10,
+    "min_negative_error": 0.001
+  },
+  "report": {
+    "title": "Signal Space / GROSS Test 1: Operator and Observer Identities"
+  }
+}

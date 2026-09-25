@@ -52,6 +52,10 @@ research/
 
 The existing TypeScript delay-network implementation is preserved as a separately labeled historical workspace. It is not the numerical foundation for the new charged-recurrence and knot program.
 
+## Operator program experiments
+
+The GROSS operator program uses the same research runtime with separately versioned models. See the [source program](research/papers/gross-operator-program-v0.2.md), [Test 1 protocol](docs/research/gross-test-01.md), and [Tests 1-11 progress ledger](docs/research/gross-progress.md). The operator identity experiment checks algebra only; it does not register either candidate's dynamical solver.
+
 ## Quick start
 
 Install Node **24.19.0** (see `.nvmrc`), npm **11.9.0**, and Python **3.12**, then:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-09-18",
+  "updated": "2026-09-25",
   "entries": [
     {
       "id": "e00-runtime-guide",
@@ -268,6 +268,26 @@
       "path": "docs/research/e01-running.md",
       "summary": "Author-controlled launch, equation mapping, numerical methods, refinements, artifact interpretation and limits.",
       "tags": ["E01", "runtime", "reproducibility"]
+    },
+    {
+      "id": "gross-operator-program-v02",
+      "title": "Signal Space operator models and experimental program v0.2",
+      "kind": "paper",
+      "status": "analytical model construction and proposed experiments",
+      "date": "2026-09-24",
+      "path": "research/papers/gross-operator-program-v0.2.md",
+      "summary": "Byte-preserved supplied source: two separate candidates, directional propagation revision, and Tests 1-11. No new executed evolution.",
+      "tags": ["operators", "GROSS", "research-program"]
+    },
+    {
+      "id": "gross-test-01",
+      "title": "Signal Space operator identity protocol",
+      "kind": "protocol",
+      "status": "registered bounded experiment",
+      "date": "2026-09-25",
+      "path": "docs/research/gross-test-01.md",
+      "summary": "Operator/observer algebra, conditioning, tetrahedral Gram and nonunitary weight controls. No dynamics claim.",
+      "tags": ["GROSS", "operators", "test-01"]
     }
   ]
 }

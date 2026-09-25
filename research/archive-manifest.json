@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 248,
+  "file_count": 249,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 11259,
-      "sha256": "af0ee6a3cd58e91bb8abee972d724ca0db483528e60a6a04d7192f2e09e67645"
+      "size": 12219,
+      "sha256": "b0dd33b91fae5a1cd571ebe1c81457de9643af3a6576f6ec804383636284ca76"
     },
     {
       "path": "research/experiments/README.md",
@@ -62,6 +62,11 @@
       "path": "research/papers/full-theory-research-architecture.md",
       "size": 35055,
       "sha256": "7064a27c14e9c81a6d957c34239155bff09b8fb6a4816f69e108fa881271221b"
+    },
+    {
+      "path": "research/papers/gross-operator-program-v0.2.md",
+      "size": 103655,
+      "sha256": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123"
     },
     {
       "path": "research/papers/knot-to-standard-model-research-grid.md",
