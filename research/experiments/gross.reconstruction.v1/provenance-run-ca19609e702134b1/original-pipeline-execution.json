@@ -1,0 +1,19 @@
+{
+  "source_commit": "fc758dab3f58802e036c04b2e31e0b2955048698",
+  "source_tree": "bc207bb5f330f4be28366382548550ffc1e55b68",
+  "source_archive_sha256": "b83b4df003387c7a4dbcca06c986c9074db10732f0fca531deb2a17becac9935",
+  "github": {
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_SHA": null,
+    "GITHUB_REF": null,
+    "GITHUB_WORKFLOW_REF": null,
+    "GITHUB_WORKFLOW_SHA": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_SERVER_URL": null,
+    "RUNNER_OS": null,
+    "RUNNER_ARCH": null
+  },
+  "plan_path": "docs/research/plans/gross-test-07-reconstruction.json",
+  "plan_lock": "f517a3471570bcd3cf620d77bc5d8d97e5d6037684c43ff072e475b56fda3cba"
+}

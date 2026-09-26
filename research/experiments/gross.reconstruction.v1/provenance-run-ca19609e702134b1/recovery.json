@@ -1,0 +1,13 @@
+{
+  "physical_solver_repeated": false,
+  "solver_commit": "fc758dab3f58802e036c04b2e31e0b2955048698",
+  "published_equivalent_source_commit": "349b7c739d61f1c45e05c19772779f2ce74f0f7c",
+  "source_tree": "bc207bb5f330f4be28366382548550ffc1e55b68",
+  "source_bundle_requires": "f0d13ad248ffe352ad0f17d63bf211464b050014",
+  "analysis_fix_commit": "9ba17fc",
+  "reviewed_renderer_commit": "ee4a6e7",
+  "analysis_id": "analysis-0001-a8cc0c93",
+  "report_id": "report-0002",
+  "original_failure": "Analysis joined a Path by indexing; corrected before analysis of unchanged raw bytes.",
+  "archive_note": "original-pipeline-evidence-index.json describes the original pipeline including its source.tar.gz snapshot, which is replaced here by the exact solver-source.bundle plus existing base revision. It is not this directory checksum ledger."
+}

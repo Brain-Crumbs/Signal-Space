@@ -1,0 +1,26 @@
+{
+  "event-budgets": {
+    "limitation": "Budgets are direct difference estimates. They measure reconstruction residuals; absolute continuum event shifts and nonlinear phase acceptance are separate.",
+    "question": "Are first and last reconstruction errors separately below their uncertainty budgets?",
+    "reading": "Each event has its own capture residual budget; small first-event errors cannot hide a last-event discrepancy.",
+    "significance": "Tests a strict reconstruction prerequisite with target 1e-4 time units, preserving the original Test 7 thresholds."
+  },
+  "local-reconstruction": {
+    "limitation": "Causal capture uses an extra neighboring surface site. The known-source curve is a downstream audit; no nonlinear clock is evolved.",
+    "question": "How do the inverse and causal surface capture reproduce the local waveform and its late tail?",
+    "reading": "Top panels show the complete local linear field; lower panels resolve the threshold neighborhood of the last event.",
+    "significance": "A close overall waveform can still produce a sensitive late threshold time."
+  },
+  "sampling-continuum": {
+    "limitation": "The h=0.0125 source is not an exact continuum reference. Surface-sampling and independent time/domain components are also retained in the saved budgets.",
+    "question": "How much do sampling and mesh changes move each event?",
+    "reading": "Lines are adjacent absolute event mesh changes; crosses show output-decimation shifts on the finest grid.",
+    "significance": "Separates absolute event convergence from agreement between source and reconstruction on one grid."
+  },
+  "singular-observability": {
+    "limitation": "The norm radii and surface tolerance are declared conditional assumptions; root linearization is checked with finite witnesses but is not a global event theorem.",
+    "question": "Which surface singular directions remain relevant to each local event?",
+    "reading": "The dashed cutoff divides the retained inverse from weakly observed directions. Lower panels show how those directions enter each event field.",
+    "significance": "Observability depends on interior sensitivity as well as the size of the surface singular value."
+  }
+}

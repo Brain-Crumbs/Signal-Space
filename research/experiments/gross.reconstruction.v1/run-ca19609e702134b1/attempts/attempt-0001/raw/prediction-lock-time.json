@@ -1,0 +1,17 @@
+[
+  {
+    "case": "time-broad",
+    "json": "b48cc6bc30fca98fab090419179faa9bfeecc8e337f09b1b220801c53cdda6b3",
+    "npz": "491d7f11761ad5c8e1c8a9b3cb90a80c5bab4f6ef66ec71218789129b3184a39"
+  },
+  {
+    "case": "time-carrier",
+    "json": "62d16564e208007c7bde22107ad9e422607f4c68b781582fb8b0e3eb06a28bdc",
+    "npz": "f5f9dd733d38210829125dc8680d8b5663bc96237f25ba9b5c9196eff1468eaf"
+  },
+  {
+    "case": "time-new",
+    "json": "4af6c9626e45a0dfa801128e7ed659e7d871d64576238ddb8d33e89c3c7586bc",
+    "npz": "29d62eb666975a81a7e55dcbca3c242e7e780c4587ecd52f9806161ed357ac64"
+  }
+]

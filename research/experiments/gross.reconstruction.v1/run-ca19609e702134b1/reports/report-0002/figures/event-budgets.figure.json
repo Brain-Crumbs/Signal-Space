@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "as labeled"
+    },
+    "y": {
+      "unit": "as labeled"
+    }
+  },
+  "downsampling": "all saved displayed samples",
+  "fit_window": null,
+  "id": "event-budgets",
+  "normalization": "c=hbar=m=1; a=A*b/r with A=.012",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "direct saved history and event comparisons",
+    "SVD event coefficients",
+    "no fitting or extrapolation"
+  ]
+}

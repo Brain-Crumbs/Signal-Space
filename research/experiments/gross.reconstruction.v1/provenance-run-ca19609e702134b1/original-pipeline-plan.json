@@ -1,0 +1,255 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.reconstruction.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "question": "Can upstream surface data constrain separate local first/last markers, and does causal two-site capture remove the initial-data inverse sensitivity before another nonlinear reception run?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7-10 and 15.7",
+    "docs/research/gross-test-07-transfer.md",
+    "docs/research/gross-test-07-reconstruction.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-07-reconstruction.json",
+  "runtime_config_sha256": "8e94df0f8731c79a5e1669e4860b279f67962d4b85e94c3d9afbb25e50cc1e40",
+  "method": {
+    "action": "Frozen linear neutral sector of unchanged SS OCF 1: M b_tt=-K b, both M and K Z-weighted. No nonlinear receiver.",
+    "units": "c=hbar=m=1; b=r*a; time in m^-1.",
+    "domain": "Frozen independently solved omega_Q=.9 profiles from verified transfer run; h=.05,.025,.0125, R=80; independent R100 at h=.025.",
+    "boundaries": "Regular origin and outer Dirichlet; duration60, local r=.1, acquisition r14 to t16.",
+    "initial_data": "Support[18,26], v=D_h b; broad and carrier prior shapes plus new center21.5 width2.75 carrier.8. All shapes fixed before execution. A=.012.",
+    "solver": "RK4 dt=.0025 and finest .00125. Exact adjoint H and L; full economy SVD. Two-site causal commutator forcing from b and b_t every .0125, stopped at t16; sample .025 control.",
+    "tolerances": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+  },
+  "hypotheses": [
+    {
+      "id": "observable",
+      "prediction": "Surface-consistent variations constrain both events to the declared target; causal capture gives controlled local markers."
+    },
+    {
+      "id": "ill-conditioned",
+      "prediction": "Weak singular directions move late events despite tiny surface residual, or finite acquisition/sampling leaves causal timing unresolved."
+    }
+  ],
+  "controls": [
+    {
+      "id": "numeric",
+      "purpose": "Separate each source of numerical error",
+      "method": "Three meshes, independent finest time halving, wider box, independent surface/output decimation."
+    },
+    {
+      "id": "singular",
+      "purpose": "Test interior sensitivity rather than surface fit",
+      "method": "Retained/discarded decomposition, explicit input norm prior and surface tolerance, finite adversarial witnesses."
+    },
+    {
+      "id": "causal",
+      "purpose": "Avoid full initial-state inversion",
+      "method": "Two-site commutator source reconstructs projected interior state at16; omitted exterior state remains an audited error."
+    },
+    {
+      "id": "spectrum",
+      "purpose": "Avoid judging only previously inspected shapes",
+      "method": "All methods locked on three linear shapes before their interior audits; new shape is only a linear validation, not held-out nonlinear reception."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "prediction-first",
+      "observable": "prediction-first",
+      "pass_if": "Each variant locks both reconstruction forecasts and sensitivities before its known-source interior audit; every frozen input and forecast hash verifies.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "decomposition",
+      "observable": "decomposition",
+      "pass_if": "Every source-minus-inverse local history equals the separately propagated retained plus discarded input error to relative 1e-8, with absolute floor 1e-10.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "surface-replay",
+      "observable": "surface-replay",
+      "pass_if": "All synthetic single-site inverse replay residuals are below 1e-7. This check alone does not establish interior observability.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "inverse-observability",
+      "observable": "inverse-observability",
+      "pass_if": "Each finest event conditional first-order timing bound is <=1e-4 and no admissible finite singular-direction witness exceeds 1e-4. A witness beyond target rejects robustness; a bound above target without witness is unresolved.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "causal-capture",
+      "observable": "causal-capture",
+      "pass_if": "Every variant causal capture state differs from the projected acquired state by <1e-6 in relative quadratic energy. This excludes omitted exterior energy, which is reported separately.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "causal-timing",
+      "observable": "causal-timing",
+      "pass_if": "For all three spectra each finest causal first/last timing residual is <=1e-4 and the separate residual budget B (mesh residual change + time residual change + domain residual change + surface/output sampling +1e-7) is <=1e-4; require residual <=B. Missing markers or B>target is unresolved, resolved violation fails.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "continuum-events",
+      "observable": "continuum-events",
+      "pass_if": "For both methods and source reference, each finest absolute event mesh change is <=0.6 preceding change plus time/domain/sampling differences and 1e-7; otherwise unresolved. No absolute continuum timing accuracy is implied.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "sampling",
+      "observable": "sampling",
+      "pass_if": "Each finest event changes <=1e-4 under output decimation .0125 to .025; causal surface sampling .0125 to .025 is separately <=1e-4. Otherwise unresolved.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    },
+    {
+      "id": "source-energy",
+      "observable": "source-energy",
+      "pass_if": "Frozen unforced acquisition conserves its quadratic neutral energy to relative 1e-6 over t=0..16 on every grid and waveform. No clock radiation is inferred.",
+      "fail_if": "A resolved violation of the specified gate; see protocol for conditional witness rules.",
+      "unresolved_if": "Missing events, inadequate budget or unconverged sequence; never replace uncertainty by pass.",
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "local-reconstruction",
+      "question": "How do the inverse and causal surface capture reproduce the local waveform and its late tail?",
+      "role": "evidentiary",
+      "observables": [
+        "surface record",
+        "local neutral history",
+        "separate marker times",
+        "singular sensitivities",
+        "direct numerical differences"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "observable": "controlled event bounds and causal replay",
+        "ill-conditioned": "surface-compatible marker shifts or unresolved timing"
+      },
+      "controls": ["numeric", "singular", "causal", "spectrum"],
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv",
+        "plot-data/singular.csv"
+      ],
+      "transformations": [
+        "Hermite event roots; SVD projections; unextrapolated differences; no fitted correction."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "singular-observability",
+      "question": "Which surface singular directions remain relevant to each local event?",
+      "role": "evidentiary",
+      "observables": [
+        "surface record",
+        "local neutral history",
+        "separate marker times",
+        "singular sensitivities",
+        "direct numerical differences"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "observable": "controlled event bounds and causal replay",
+        "ill-conditioned": "surface-compatible marker shifts or unresolved timing"
+      },
+      "controls": ["numeric", "singular", "causal", "spectrum"],
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv",
+        "plot-data/singular.csv"
+      ],
+      "transformations": [
+        "Hermite event roots; SVD projections; unextrapolated differences; no fitted correction."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "event-budgets",
+      "question": "Are first and last reconstruction errors separately below their uncertainty budgets?",
+      "role": "evidentiary",
+      "observables": [
+        "surface record",
+        "local neutral history",
+        "separate marker times",
+        "singular sensitivities",
+        "direct numerical differences"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "observable": "controlled event bounds and causal replay",
+        "ill-conditioned": "surface-compatible marker shifts or unresolved timing"
+      },
+      "controls": ["numeric", "singular", "causal", "spectrum"],
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv",
+        "plot-data/singular.csv"
+      ],
+      "transformations": [
+        "Hermite event roots; SVD projections; unextrapolated differences; no fitted correction."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "sampling-continuum",
+      "question": "How much do sampling and mesh changes move each event?",
+      "role": "evidentiary",
+      "observables": [
+        "surface record",
+        "local neutral history",
+        "separate marker times",
+        "singular sensitivities",
+        "direct numerical differences"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "observable": "controlled event bounds and causal replay",
+        "ill-conditioned": "surface-compatible marker shifts or unresolved timing"
+      },
+      "controls": ["numeric", "singular", "causal", "spectrum"],
+      "uncertainty": "Separate first/last target1e-4, floor1e-7. eta=1e-10||surface||, rho=2||recovered input|| are explicit conditional perturbation radii. Causal timing budgets use residual mesh/time/domain changes and both output/surface sampling; absolute event mesh changes are reported separately.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv",
+        "plot-data/singular.csv"
+      ],
+      "transformations": [
+        "Hermite event roots; SVD projections; unextrapolated differences; no fitted correction."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 4500,
+    "max_memory_mb": 2048,
+    "max_output_mb": 300
+  },
+  "prohibited_inferences": [
+    "No nonlinear reception or clock phase prediction is executed. A pass is a reconstruction prerequisite only.",
+    "Original Test7 fail and Test8 block remain; a new held-out nonlinear forecast and separate acceptance review are required.",
+    "Two-site capture changes acquisition; do not attribute its information to the original single-site record.",
+    "Conditional linear timing sensitivity is not a rigorous nonlinear event bound.",
+    "No two-object, invariance, gravity, angular stability, topology or emergent-spacetime claim."
+  ],
+  "locked_sha256": "f517a3471570bcd3cf620d77bc5d8d97e5d6037684c43ff072e475b56fda3cba"
+}

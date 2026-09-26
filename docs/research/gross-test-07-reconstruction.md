@@ -38,7 +38,7 @@ $$
 M(Pb)_{tt}=-K(Pb)+(KP-PK)b.
 $$
 
-Because $K$ couples adjacent nodes, the commutator source has only two entries. Starting from zero interior fields, drive those entries with the measured pair of traces, using cubic Hermite interpolation at the RK4 stage times. At acquisition time 16 stop the source and evolve freely on the original full domain. Up to time 16 this reconstructs the projected interior state, subject to interpolation and time integration error. Afterward it omits the acquired solution's exterior state; its energy fraction and effect on local markers are audited, never assumed zero.
+Because $K$ couples adjacent nodes, the commutator source has only two entries. Starting from zero interior fields, drive those entries with the measured pair of traces, using cubic Hermite interpolation at the RK4 stage times. At acquisition time 16 stop the source and evolve freely on the original full domain. Up to time 16 this reconstructs the projected interior state, subject to interpolation and time integration error. Afterward it omits the acquired solution's exterior state; its energy norm ratio and effect on local markers are audited, never assumed zero.
 
 This control forecasts local events from surface data ending before the first local event. It does not inject a prescribed interior waveform. The captured state and projected known-source state are compared only downstream of the prediction lock. The causal control currently tests synthetic noiseless two-site data; a physical noise model remains absent.
 

@@ -1,0 +1,33 @@
+{
+  "pdfs": {
+    "Experiment_Results.pdf": {
+      "sha256": "4e68441ebc320ddcda4303f58fae5560d04bbc4a2a6ef3a1dc0742adc0b21a4f",
+      "pages": 6
+    },
+    "Experimental_Setup.pdf": {
+      "sha256": "9632b925f0729fd754409b77e1785d2cb1f6175ff7186816fc36ae8603bea940",
+      "pages": 5
+    },
+    "singular-observability.pdf": {
+      "sha256": "0d0bc0d6eeac93f45ecde0a03d919503c6bb73ef1eb05665e0df865750836135",
+      "pages": 6
+    },
+    "event-budgets.pdf": {
+      "sha256": "a1ebf9c522e0d90cbdae7718b5c2cc722429b4247d0d9d1480a827f87b459cbb",
+      "pages": 6
+    },
+    "local-reconstruction.pdf": {
+      "sha256": "ad6295ecbfe3b752b51c461593a2ed96f77d2eb3828796b8041ea7a07818cff4",
+      "pages": 6
+    },
+    "sampling-continuum.pdf": {
+      "sha256": "e1e44579cbb07a36a0abc0b6704b17efd4b15d7a43ba4d6e16629055e5a6368b",
+      "pages": 6
+    }
+  },
+  "all_pdf_pages_visually_inspected": true,
+  "figures_visually_inspected": 4,
+  "findings": "No clipping, overlap, missing figures, or unreadable labels at inspection resolution. Numerical captions reviewed against saved analysis.",
+  "preview_resolution_dpi": 90,
+  "previews_retained_in_canonical_evidence": false
+}

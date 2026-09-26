@@ -44,7 +44,7 @@ concurrency:
 jobs:
   experiment:
     runs-on: ubuntu-24.04
-    timeout-minutes: ${{ inputs.experiment == 'gross-test-07-transfer' && 160 || 75 }}
+    timeout-minutes: ${{ inputs.experiment == 'gross-test-07-transfer' && 160 || inputs.experiment == 'gross-test-07-reconstruction' && 100 || 75 }}
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
