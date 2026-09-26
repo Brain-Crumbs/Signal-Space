@@ -17,9 +17,9 @@ All sixteen surface/input/profile/response hashes and first/last marker forecast
 All values below are cycles, at A=0.012, h=0.0125 and dt=0.0025. The observed interval uses measured markers; forecasts use their locked predicted markers.
 
 | Spectrum | Observed interval | Second-order error | Fourth-order error | Locked budget | Forecast-inclusive audit | Maximum discrimination budget |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| broad | -1.464093e-6 | 3.013161e-8 | 4.059571e-11 | 3.857757e-10 | 6.939473e-10 | 7.522753e-9 |
-| carrier | 5.602454e-7 | 2.528696e-8 | 6.491810e-10 | 5.196703e-9 | 1.002800e-8 | 6.484036e-9 |
+| -------- | ----------------: | -----------------: | -----------------: | ------------: | -----------------------: | ----------------------------: |
+| broad    |      -1.464093e-6 |        3.013161e-8 |       4.059571e-11 |  3.857757e-10 |             6.939473e-10 |                   7.522753e-9 |
+| carrier  |       5.602454e-7 |        2.528696e-8 |       6.491810e-10 |   5.196703e-9 |              1.002800e-8 |                   6.484036e-9 |
 
 The registered budget takes receiver changes for mesh, time and domain. The post-lock audit takes the larger receiver or forecast change for each of those terms. It preserves the original classification and exposes a limitation of the locked budget. Broad remains resolved under this audit. Carrier does not: its audit budget is 1.55 times the quarter-order target. A close finest-grid match cannot establish the stronger claim.
 
@@ -27,21 +27,21 @@ For carrier, forecast changes contribute 2.408e-9 cycles from mesh refinement an
 
 ### Amplitude and sign diagnostics
 
-| Spectrum | A | Signed residual Y - P2 | Derived correction P4 - P2 | Remaining Y - P4 |
-| --- | ---: | ---: | ---: | ---: |
-| broad | 0.008 | 3.611502e-9 | 4.171795e-9 | -5.602932e-10 |
-| broad | 0.012 | 3.013161e-8 | 3.009101e-8 | 4.059571e-11 |
-| carrier | 0.008 | 8.702762e-9 | 8.264885e-9 | 4.378767e-10 |
-| carrier | 0.012 | 2.528696e-8 | 2.593614e-8 | -6.491810e-10 |
+| Spectrum |     A | Signed residual Y - P2 | Derived correction P4 - P2 | Remaining Y - P4 |
+| -------- | ----: | ---------------------: | -------------------------: | ---------------: |
+| broad    | 0.008 |            3.611502e-9 |                4.171795e-9 |    -5.602932e-10 |
+| broad    | 0.012 |            3.013161e-8 |                3.009101e-8 |     4.059571e-11 |
+| carrier  | 0.008 |            8.702762e-9 |                8.264885e-9 |     4.378767e-10 |
+| carrier  | 0.012 |            2.528696e-8 |                2.593614e-8 |    -6.491810e-10 |
 
 The unfitted correction has the residual's sign and reduces its magnitude in these four comparisons. Positive and negative nominal amplitudes give identical saved intervals and marker times. The fixed absolute marker threshold moves the endpoints when amplitude changes, so these interval ratios are not a clean A^4 scaling measurement. They must not be presented as a fitted or independently resolved power law; the 0.008 rows are diagnostic, outside the nominal budget gate.
 
 ## Marker timing and the located inverse limit
 
 | Spectrum | Locked first marker | Observed first marker | Locked last marker | Observed last marker | Absolute last residual |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| broad | 18.786813489 | 18.786813489 | 48.524599665 | 48.527194373 | 0.002594708 |
-| carrier | 19.482027048 | 19.482027048 | 46.610332679 | 46.609709549 | 0.000623130 |
+| -------- | ------------------: | --------------------: | -----------------: | -------------------: | ---------------------: |
+| broad    |        18.786813489 |          18.786813489 |       48.524599665 |         48.527194373 |            0.002594708 |
+| carrier  |        19.482027048 |          19.482027048 |       46.610332679 |         46.609709549 |            0.000623130 |
 
 Times are in inverse mass units. All-case maximum residual is 0.0141202, below the unchanged 0.1 gate. However, the first-marker continuum mesh changes are still 0.0616135 (broad) and 0.0812253 (carrier). These dominate the combined timing budgets 0.0703983 and 0.0832888. Near-roundoff first-marker agreement on the same mesh is not a continuum timing result, and a maximum over both events does not tightly constrain the last event.
 
@@ -50,10 +50,10 @@ Last-marker residuals are nonmonotonic across meshes. Broad changes from 0.00293
 The downstream known-source audit propagates the true and reconstructed inputs through the same frozen linear operator. It never feeds the source shape back into the locked prediction.
 
 | Frozen linear audit | Relative local waveform error | Maximum local field error | Reconstructed minus source last marker |
-| --- | ---: | ---: | ---: |
-| finest-broad | 2.103243e-6 | 8.938561e-7 | -1.715479e-3 |
-| finest-carrier | 6.617038e-7 | 3.210294e-7 | 1.622975e-3 |
-| time-carrier | 7.276713e-7 | 4.533110e-7 | -1.100463e-3 |
+| ------------------- | ----------------------------: | ------------------------: | -------------------------------------: |
+| finest-broad        |                   2.103243e-6 |               8.938561e-7 |                           -1.715479e-3 |
+| finest-carrier      |                   6.617038e-7 |               3.210294e-7 |                            1.622975e-3 |
+| time-carrier        |                   7.276713e-7 |               4.533110e-7 |                           -1.100463e-3 |
 
 At the finest mesh the inverse retains rank 449 of 641 input columns, while surface relative replay residuals are 1.91e-13 and 1.26e-13. Weakly observed input components can therefore remain relevant at the interior tail. For carrier, halving dt shifts the known-source linear last marker by only 4.76e-7, but the reconstructed last marker moves by about 0.00272. This locates an inverse/late-marker sensitivity before nonlinear response truncation. It does not prove that all remaining phase error has that origin.
 

@@ -2,7 +2,7 @@
   "run_id": "run-941d5c9e1c37ccc8",
   "source_commit": "13b7d51a33d9ded87eafb6f586960a564c04bb28",
   "classification": "pass",
-  "review": "pending",
+  "review": "completed; see reviewed results and PDF audit",
   "local_attempt": "run-8546b880d907e0ae; completion unverified after environment loss",
   "role": "hosted reproduction of unchanged locked protocol; not a new held-out sample"
 }

@@ -398,7 +398,7 @@
       "date": "2026-09-26",
       "kind": "experiment-run",
       "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/README.md",
-      "status": "registered pass; scientific review pending",
+      "status": "registered pass; see reviewed limitations",
       "summary": "Hosted recovery of fixed Test 7 transfer protocol; original failure unchanged; post-lock forecast and inverse audits retained.",
       "tags": ["gross.reception-transfer.v1", "reproducibility"],
       "title": "Test 7 discrete-transfer recovery - run-941d5c9e1c37ccc8"

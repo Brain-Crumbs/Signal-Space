@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 18308,
-      "sha256": "da035e25ec42e573373d6eebe7977e41d49a8bb8b6bb5e012e4c66595cc542d2"
+      "size": 18307,
+      "sha256": "c7ae84486bc93a84f16ce31c61bd69eaa80e36acfd3621f082b5f6c6f005b55e"
     },
     {
       "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Analysis_and_Next.md",
@@ -7895,23 +7895,23 @@
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/Experiment_Analysis_and_Next.md",
-      "size": 1620,
-      "sha256": "f641d2b911d2beb2aecc4141aee51e8b07fe1068d4e7f8f6f74f33400f907046"
+      "size": 10008,
+      "sha256": "e47ca0de48b5b7e6f66673a8f0ab2e0c9378142c8878023a217b4a65fdb1fb10"
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/Experiment_Results.pdf",
       "size": 306406,
-      "sha256": "03f8f4e105d2711a2df55283a276f61458dcd4e9e1576b759decad2573bca45b"
+      "sha256": "f08ed18e76ddc8d0d13261bd15c96f658c0caba694f0199d6028e480538b8c45"
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/Experimental_Setup.pdf",
       "size": 39478,
-      "sha256": "cc4b9ec0ecebb63ff3885746fd0ccbde1f447a9fd45fa89a18abf0f1d77688f9"
+      "sha256": "4f5ce91ae67b27ab40f0435117a0a0310b0c06a00f2fe8744bc999ecd04d87f3"
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/export.json",
       "size": 38937,
-      "sha256": "2f7453019eb5b4a4bc6722545dac2bd9e0e7bdd1ddd5ab20f6c7d01b69fbc6e9"
+      "sha256": "aca0759bbfbbf633e5bd667f28239094f2223c6beda996d1cf6267e245ad053d"
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/figures/figure_index.json",
@@ -9095,8 +9095,8 @@
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/hosted-latest.json",
-      "size": 331,
-      "sha256": "08e3848374c86870ced06b797942e24e30a87baef300c06c9d66816b5fbd8315"
+      "size": 369,
+      "sha256": "47fa6d8a2c925fd166f7969eb75721bc0e12f1ab0b05ddbdfca82e09f3d7a44d"
     },
     {
       "path": "research/experiments/gross.reception-transfer.v1/provenance-run-941d5c9e1c37ccc8/config.json",
