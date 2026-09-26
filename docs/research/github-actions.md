@@ -50,7 +50,15 @@ The assessment is generated from this run's saved checks and explicitly awaits h
 
 The workflow has read-only repository permissions and no automatic commit, PR, merge or archive step. It is manual-only; normal pushes/PRs continue to run the existing CI without launching this full research run. No API key is needed for templated reports.
 
-## Verify and check in a selected result
+## Run it yourself, then hand off the artifacts
+
+Dispatch the locked recipe from **Actions → Run experiment** on the implementation branch. You can leave the browser while it runs. The job shows execution and upload status; download the **evidence** and **reader** artifacts from the same run and attempt when it completes. A scientific fail or unresolved outcome still produces artifacts. Send the two artifact ZIPs or the Actions run URL, run ID and attempt to the analyst with the branch/commit and the scientific question. Do not paste only figures: the canonical data, checks and provenance are needed to review the result.
+
+The analyst verifies the paired artifacts and file hashes, inspects the checks and figures, then updates the reviewed result Markdown, progress ledger, catalog and a compact evidence index in a PR. The calculation runs only once unless a specific numerical control or technical failure requires another run. Keep all figure formats, full reader exports, raw arrays and intermediate report versions in the artifacts. No generated figures should be added to a new results PR.
+
+Artifacts expire according to the selected retention and repository policy (the selector offers 7, 30 or 90 days). Before expiration, mirror a selected result's complete canonical and reader packages to durable storage and record the mirror locator and checksums. GitHub Actions artifacts are not a permanent archive. Earlier accepted packages already committed to Git remain unchanged by this policy.
+
+## Verify a selected result
 
 Download the two artifacts from the same run **and attempt**, and extract them into separate `evidence/` and `reader/` directories outside your checkout. Install the repository's pinned Python dependencies. From the checkout, substitute the run ID shown in `evidence/status.json` and your download path:
 
@@ -85,11 +93,9 @@ print('Evidence hashes and reader/canonical pairing verified')
 PY
 ```
 
-On a results branch, copy the canonical directory to `research/experiments/<experiment-id>/<run-id>/` and the reader directory to `research/experiments/<experiment-id>/export-<run-id>/`. Refuse existing destinations; do not overwrite an earlier run/export. Keep their bytes unchanged so the reader's manifest hash remains valid. The reader's portable source locator already names that repository destination. Retain the outer evidence metadata/logs/source snapshot alongside them in a uniquely named `provenance/actions-<Actions-run-ID>-<attempt>/` directory.
+On a results branch, add the reviewed Markdown and a compact index identifying the exact canonical manifest, checksums, file hashes, source commit/tree, Actions run and attempt, artifact digest and expiration. Point a catalog entry at the reviewed Markdown or index with the scientific classification and limitations. Keep the full canonical and reader directories outside Git; preserve them unchanged in the artifacts and, before expiry, a durable mirror. A new report or interpretation creates its own analysis/report identity; it does not rewrite the raw run.
 
-Add a catalog entry in `research/catalog.json` pointing to the selected report and stating its scientific classification and limitations. Run `npm run research:manifest` to refresh the outer archive inventory, then `npm run check`, inspect the diff, commit and open a results PR. Do not run the runtime `archive` command on these already paired files: it transitions the manifest to `archived`, which would require a newly generated reader export with that new manifest hash. A verified completed package can be preserved byte-for-byte in Git without that optional state transition.
-
-An optional future **Archive run** workflow can automate this verified import and open a PR. This first version intentionally delivers the manual run and download path; selection and check-in remain under your control. Preserve selected evidence before artifact expiry. Larger datasets should use durable external storage with hashes and locators committed to the catalog.
+Run `npm run research:manifest` to refresh the compact archive inventory, then `npm run check`, inspect the diff, commit and open a results PR. Do not run the runtime `archive` command on paired files solely to produce a PR: it transitions the manifest to `archived`, requiring a new reader export with that manifest hash. Updating documentation is not another experiment execution.
 
 ## Local rehearsal
 
@@ -122,3 +128,7 @@ Select `gross-test-05` to run the locked SS OCF 1 local action and characteristi
 Select `gross-test-07` to execute the locked radial receiver protocol, including surface characteristic acquisition, predictions saved before receiver evolution, local markers and five numerical variants. The worker ceiling is 3,600 seconds, 1,024 MiB and 250 MiB output; the manual workflow job permits 75 minutes for setup, analysis, rendering and upload. The completed local run took about ten minutes and scientifically failed two locked marker/interval checks. A scientific failure remains a downloadable completed experiment. See [the reviewed results](gross-test-07-results.md). Hosted dispatch and artifact upload have not been exercised for this recipe.
 
 Select `gross-test-07-order4` for the separately locked follow-up with formal fourth-order response, prior-data diagnostic and a fresh held-out radial packet. It saves predictions before receiver evolution, compares local markers at 0.05 time-unit output and retains the original Test 7 failure. The worker ceiling is 4,000 seconds, 1,024 MiB and 250 MiB output; the 75-minute workflow budget includes setup and packaging. Hosted dispatch and artifact upload remain untested.
+
+## Test 7 bounded reconstruction audit
+
+Select `gross-test-07-reconstruction` to run the locked linear observability and separate-event audit. It compares the single-site initial-data inverse with an explicitly different two-site finite-capture control on three waveforms, three meshes, independent time-step halving and a larger domain. No nonlinear receiver is evolved. Worker ceilings are 4,500 wall seconds, 4,000 CPU seconds, 2,048 MiB memory and 300 MiB output; the job permits 100 minutes for setup and packaging. The local physical run completed in about eight minutes. The original pipeline analysis typo was repaired from saved data; the archived result is five pass, one fail and three unresolved checks. Hosted dispatch/upload for this recipe is not exercised. See [reviewed results](gross-test-07-reconstruction-results.md).

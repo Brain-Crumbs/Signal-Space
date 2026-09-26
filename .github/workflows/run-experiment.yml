@@ -19,6 +19,7 @@ on:
           - gross-test-07
           - gross-test-07-order4
           - gross-test-07-transfer
+          - gross-test-07-reconstruction
         default: gross-test-01
         required: true
       retention_days:
@@ -43,7 +44,7 @@ concurrency:
 jobs:
   experiment:
     runs-on: ubuntu-24.04
-    timeout-minutes: ${{ inputs.experiment == 'gross-test-07-transfer' && 160 || 75 }}
+    timeout-minutes: ${{ inputs.experiment == 'gross-test-07-transfer' && 160 || inputs.experiment == 'gross-test-07-reconstruction' && 100 || 75 }}
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'

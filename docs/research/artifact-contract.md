@@ -36,6 +36,8 @@ research/experiments/<experiment-id>/<run-id>/
 
 Large packages may live in external artifact storage. The Git archive keeps the same manifest, checksums, compact evidence, and durable locator; storage location never substitutes for content identity.
 
+GitHub Actions run artifacts are a convenient handoff but have finite retention. Record their run/attempt and artifact IDs, expiration, archive digest and individual file hashes in a compact Git index. Before expiration, copy the identical bytes to durable storage and append its locator. A run artifact without a durable mirror is temporarily available evidence, not a permanent archive. Figure PNG/SVG/PDF variants and complete reader exports should stay with the full package rather than be copied into Git for every analysis or report revision.
+
 ## 3. Identity and immutability
 
 - `experiment_id` and `model_id` identify versioned registered definitions.
