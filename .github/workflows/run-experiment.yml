@@ -18,6 +18,7 @@ on:
           - gross-test-06-response
           - gross-test-07
           - gross-test-07-order4
+          - gross-test-07-transfer
         default: gross-test-01
         required: true
       retention_days:

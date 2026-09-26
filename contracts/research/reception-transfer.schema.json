@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "const": "gross.reception-transfer.v1"
+    },
+    "model_id": {
+      "const": "signal-space.ss-ocf-1.flat-neutral-clock.v1"
+    },
+    "parameters": {
+      "const": {
+        "omega_Q": 0.9,
+        "omega_chi": 0.41274991,
+        "clock_amplitude": 0.001,
+        "local_radius": 0.1,
+        "frozen_inputs": [
+          {
+            "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+            "name": "profile-0.900.npz",
+            "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+          },
+          {
+            "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+            "name": "profile-fine.npz",
+            "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+          },
+          {
+            "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+            "name": "profile-wide.npz",
+            "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+          }
+        ],
+        "epsilon": 0.2,
+        "M0": 1.0,
+        "upstream_radius": 14.0,
+        "marker_threshold": 0.0001,
+        "marker_time_tolerance": 0.1,
+        "kind": "reception-transfer",
+        "duration": 60.0,
+        "acquisition_duration": 16.0,
+        "surface_sample_interval": 0.025,
+        "sample_interval": 0.025,
+        "support": [18.0, 26.0],
+        "cycle_noise_floor": 2e-11,
+        "marker_noise_floor": 1e-6,
+        "amplitudes": [0.008, 0.012, -0.012],
+        "nominal_amplitude": 0.012,
+        "waveforms": [
+          {
+            "name": "broad",
+            "center": 22.0,
+            "width": 3.25,
+            "carrier": 0.0
+          },
+          {
+            "name": "carrier",
+            "center": 22.0,
+            "width": 2.5,
+            "carrier": 1.4
+          }
+        ],
+        "variants": [
+          {
+            "name": "base",
+            "h": 0.1,
+            "dt": 0.005,
+            "radius": 80,
+            "cutoff": 1e-10,
+            "profile": "independent"
+          },
+          {
+            "name": "fine",
+            "h": 0.05,
+            "dt": 0.005,
+            "radius": 80,
+            "cutoff": 1e-10,
+            "profile": "independent"
+          },
+          {
+            "name": "finer",
+            "h": 0.025,
+            "dt": 0.005,
+            "radius": 80,
+            "cutoff": 1e-10,
+            "profile": "independent"
+          },
+          {
+            "name": "finest",
+            "h": 0.0125,
+            "dt": 0.0025,
+            "radius": 80,
+            "cutoff": 1e-10,
+            "profile": "independent"
+          },
+          {
+            "name": "time",
+            "h": 0.0125,
+            "dt": 0.00125,
+            "radius": 80,
+            "cutoff": 1e-10,
+            "profile": "independent"
+          },
+          {
+            "name": "inverse",
+            "h": 0.0125,
+            "dt": 0.0025,
+            "radius": 80,
+            "cutoff": 1e-8,
+            "profile": "independent"
+          },
+          {
+            "name": "wide",
+            "h": 0.025,
+            "dt": 0.005,
+            "radius": 100,
+            "cutoff": 1e-10,
+            "profile": "independent"
+          },
+          {
+            "name": "frozen",
+            "h": 0.0125,
+            "dt": 0.0025,
+            "radius": 80,
+            "cutoff": 1e-10,
+            "profile": "frozen"
+          }
+        ]
+      }
+    },
+    "units": {
+      "const": {
+        "mass": "m=1",
+        "length": "m^-1",
+        "time": "m^-1",
+        "signal": "c=hbar=1"
+      }
+    },
+    "seeds": {
+      "const": {
+        "root": 202609259
+      }
+    },
+    "resources": {
+      "const": {
+        "max_cpu_seconds": 7000,
+        "max_wall_seconds": 7600,
+        "max_memory_mb": 2048,
+        "max_output_mb": 300
+      }
+    },
+    "analysis": {
+      "const": {
+        "prediction-first": "All surface/input/jet/profile and marker/interval forecast hashes verify and all predictions precede all nonlinear receiver starts.",
+        "profile-refinement": "Independent profiles have discrete residual <2e-10 and finest eigenvalue change <=0.6 times previous change.",
+        "surface-inverse": "Every surface relative replay residual <1e-7; changed SVD cutoff is included in prediction uncertainty.",
+        "continuum-convergence": "For both spectra at A=.012, finest interval change <=0.6 previous mesh change plus declared nonspatial error. Otherwise unresolved.",
+        "order-resolution": "For both spectra at A=.012, total absolute interval budget B <= |P4-P2|/4 and |Y|>5B. Otherwise unresolved; never use the 5% record gate to resolve A4.",
+        "fourth-order-prediction": "On each resolved converged spectrum, |Y-P4|<=B and |Y-P2|>3B; resolved violation fails, unresolved controls defer judgment.",
+        "marker-transfer": "All cases possess first/last Hermite markers and error <=0.1. On each nominal finest spectrum error <= direct mesh+time+domain+inverse+sampling+1e-6 timing budget and decreases from fine or is below that budget.",
+        "sign-even": "Finest +.012/-.012 marker times differ <1e-9 and intervals <1e-10 cycles for each spectrum.",
+        "conservation": "All cases charge drift <1e-5 and energy residual <1% of incident energy."
+      }
+    },
+    "report": {
+      "const": {
+        "title": "Test 7 discrete transfer and order discrimination"
+      }
+    }
+  }
+}

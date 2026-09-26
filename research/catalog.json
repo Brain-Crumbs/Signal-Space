@@ -382,6 +382,16 @@
         "reproducibility"
       ],
       "title": "gross.reception-order4.v1 - run-29c4c4228ffddbb4"
+    },
+    {
+      "id": "gross-test-07-transfer",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-transfer.md",
+      "status": "locked protocol; execution pending",
+      "summary": "Exact adjoint discrete surface inverse, independently refined profiles, two spectra and an absolute budget that resolves second versus fourth order.",
+      "tags": ["GROSS", "test-07", "discrete-transfer", "reception"],
+      "title": "Test 7 discrete transfer discriminator"
     }
   ],
   "schema_version": 1,

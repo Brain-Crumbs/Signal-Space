@@ -12,6 +12,7 @@ from signal_space.experiments.clock import ClockExperiment
 from signal_space.experiments.prereception import PrereceptionExperiment
 from signal_space.experiments.reception import ReceptionExperiment
 from signal_space.experiments.reception_order4 import ReceptionOrder4Experiment
+from signal_space.experiments.reception_transfer import ReceptionTransferExperiment
 
 _PLUGINS: dict[str, ExperimentPlugin] = {
     SyntheticExperiment.experiment_id: SyntheticExperiment(),
@@ -26,6 +27,7 @@ _PLUGINS: dict[str, ExperimentPlugin] = {
     "gross.clock-response.v1": PrereceptionExperiment("response"),
     ReceptionExperiment.experiment_id: ReceptionExperiment(),
     ReceptionOrder4Experiment.experiment_id: ReceptionOrder4Experiment(),
+    ReceptionTransferExperiment.experiment_id: ReceptionTransferExperiment(),
 }
 
 

@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 17227,
-      "sha256": "e1175a413fb342b57ca8da1a6a1e30c3c3092c5afd9983838f528357f887909e"
+      "size": 17738,
+      "sha256": "eaae894379fe9cc3e4a124ff3bda7231a6c3c9bb4922481ee7dc9dfd57a02bb4"
     },
     {
       "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Analysis_and_Next.md",
