@@ -39,7 +39,7 @@ if args.mode in ('execute','import'):
         'role':'hosted reproduction of unchanged locked protocol; not a new held-out sample'})
 else:
     status=read(POINTER);run_id=status['run_id'];run=FAMILY/run_id
-if args.mode in ('import','package'):
+if args.mode=='import':
     command('python3','-m','signal_space','--workspace','research/experiments','verify','--run-id',run_id)
     command('python3','-m','signal_space','--workspace','research/experiments','report','--run-id',run_id)
     if args.mode=='import':

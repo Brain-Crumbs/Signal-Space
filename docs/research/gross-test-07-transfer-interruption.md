@@ -19,10 +19,10 @@ These entries are transcribed from observed tool outputs. They are not a replace
 
 At nominal amplitude 0.012 on the finest mesh:
 
-| Spectrum |      Observed interval | Locked second-order forecast | Locked fourth-order forecast |
-| -------- | ---------------------: | ---------------------------: | ---------------------------: |
-| Broad    | -1.4640933917626983e-6 |       -1.4942281252691185e-6 |       -1.4641207992926101e-6 |
-| Carrier  |   5.602444109906745e-7 |          5.34148833451933e-7 |         5.601034452192704e-7 |
+| Spectrum | Observed interval | Locked second-order forecast | Locked fourth-order forecast |
+| --- | ---: | ---: | ---: |
+| Broad | -1.4640933917626983e-6 | -1.4942281252691185e-6 | -1.4641207992926101e-6 |
+| Carrier | 5.602444109906745e-7 | 5.34148833451933e-7 | 5.601034452192704e-7 |
 
 All values are cycles. The missing time/domain/control results prevent a completed classification. The carrier forecast showed poorer convergence than the measured interval, motivating a separately labeled downstream diagnostic of forecast convergence and linear inverse error. No original threshold was changed.
 
@@ -31,3 +31,11 @@ All values are cycles. The missing time/domain/control results prevent a complet
 The branch-specific hosted workflow repeats the same locked configuration and physical solver with independent run provenance. It retains the original nine checks and adds the post-lock diagnostics. The already inspected local histories cannot be called a new held-out sample merely because they are repeated on another computer.
 
 A completed hosted package is reproducibility evidence for this fixed protocol. Scientific review must retain the distinction between its machine classification and the stronger question of whether forecast convergence resolves the fourth-order correction. Original Test 7 remains failed, and Test 8 remains blocked pending a separate acceptance review.
+
+## Completed hosted evidence
+
+Hosted solver run `run-941d5c9e1c37ccc8` completed all sixteen receiver cases under source `13b7d51a33d9ded87eafb6f586960a564c04bb28`. Analysis `analysis-0001-792256a8` passes nine registered checks. The [reviewed assessment](gross-test-07-transfer-results.md) nevertheless leaves the stronger two-spectrum extension unresolved because forecast convergence exceeds the carrier discrimination budget.
+
+[Execution 36218801522](https://github.com/Brain-Crumbs/Signal-Space/actions/runs/36218801522) completed solver, analysis, reporting and canonical verification, then failed the reader's exact figure-question check. [Import 36222416162](https://github.com/Brain-Crumbs/Signal-Space/actions/runs/36222416162) stopped while creating an empty source bundle from an unnamed positive commit reference. [Import 36222509106](https://github.com/Brain-Crumbs/Signal-Space/actions/runs/36222509106) succeeded after naming the execution ref and aligning report questions with the unchanged locked plan. It appended report-0002 and built the reader from saved outputs; no physical solve or analysis was repeated.
+
+The original failed pipeline status, stage logs, canonical report-0001, source bundle and repair record are preserved under the run's provenance and reports. The unavailable local attempt remains unverified. This recovery does not make inspected histories held out again.
