@@ -1,0 +1,13 @@
+{
+  "capture_energy_error_relative": 1.5980803600857722e-19,
+  "decomposition_residual": 6.917453059506711e-12,
+  "discarded_input_error_norm": 1.1532910860085577e-08,
+  "omitted_exterior_energy_relative": 0.002440920406753081,
+  "retained_input_error_norm": 0.0002066357266462775,
+  "source_energy_relative_drift": 8.91090744984257e-15,
+  "source_markers": [
+    18.786811572738785,
+    48.525262544455586
+  ],
+  "source_norm_relative_to_recovered": 0.9999999999996207
+}

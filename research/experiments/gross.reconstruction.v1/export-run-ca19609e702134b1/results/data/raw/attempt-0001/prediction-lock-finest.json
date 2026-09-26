@@ -1,0 +1,17 @@
+[
+  {
+    "case": "finest-broad",
+    "json": "0954a52dbe63c55c80ec581fb94748b227c8d2b8be2e3110d34607b2bea0b24d",
+    "npz": "e9de86af6c417c5ee119b96030e95f40365f779d9c828043615f6ba45fd226c8"
+  },
+  {
+    "case": "finest-carrier",
+    "json": "e03905126479f7eb1a8e4cc927444418aa9691bacb3eadd99e08336058187ab9",
+    "npz": "ffbeb0d77a2fdcfaf916b7e6e13487866fc7e1ced29e571f247e5e59a44143a1"
+  },
+  {
+    "case": "finest-new",
+    "json": "33e11364406523ded2d7335227578d2c041de8a28a18c762449606223b83e4f9",
+    "npz": "cdecf3690326807d20e9e8dec8e633f251f3a5d113a9efe68da85908811b9cf7"
+  }
+]

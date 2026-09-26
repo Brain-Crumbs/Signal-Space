@@ -1,0 +1,7 @@
+# Can upstream surface data constrain separate local first/last markers, and does causal two-site capture remove the initial-data inverse sensitivity before another nonlinear reception run?
+
+Model: `signal-space.ss-ocf-1.flat-neutral-clock.v1`. Run: `run-ca19609e702134b1`. Analysis: `analysis-0001-a8cc0c93`. Report: `report-0002`. Scientific classification: `fail`.
+
+Canonical source locator: `research/experiments/gross.reconstruction.v1/run-ca19609e702134b1`. For an Actions download, the canonical package is also in the companion evidence artifact under `runs/<experiment-id>/<run-id>/`; a repository locator is the intended check-in destination. See `plan.json` for the locked protocol, `Experimental_Setup.pdf` for the setup, `Experiment_Results.pdf` for all saved figures and interpretations, `Experiment_Analysis_and_Next.md` for assessment, `results/` for data and code, and `figures/figure_index.json` for figure provenance.
+
+Known gaps: No nonlinear receiver or new clock phase forecast; this cannot promote Test 7 or unblock Test 8., Singular sensitivity bound assumes declared surface tolerance and initial-data norm radius; it is a linear root estimate., Causal capture adds a neighboring surface site, stops acquisition at t=16, and omits residual exterior state., Acquisition and prediction share the registered discrete operator; no independent measurement-noise or discretization model., Three linear shapes, fixed support and incoming rule; radial flat sector only..

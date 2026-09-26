@@ -1,0 +1,17 @@
+[
+  {
+    "case": "fine-broad",
+    "json": "48a2240630838e52830e61952990b769d4a94e97fe3d200938e53b1f8089a494",
+    "npz": "77ba48bff974b59522bba64c621d93322dd03af6b57370a127b991e2d3542d29"
+  },
+  {
+    "case": "fine-carrier",
+    "json": "4b88e9a59130d0a7158ea028591481e4ca5730166d0f0662e1ddc69346737bb0",
+    "npz": "53b3234e33b7694436a0c6a7f9dace293c5192dfc81cd562d678e391fb6a5415"
+  },
+  {
+    "case": "fine-new",
+    "json": "c1b285c9b1c365f08411efb631898b2ee63fccfeca66ff055dbb7afeca54564b",
+    "npz": "26b687dde8c86c6da6009a9ed51fb9c7fb89f6aa0e1e2ed9f43849e52cc493cd"
+  }
+]

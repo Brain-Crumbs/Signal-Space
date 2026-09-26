@@ -402,6 +402,26 @@
       "summary": "Hosted recovery of fixed Test 7 transfer protocol; original failure unchanged; post-lock forecast and inverse audits retained.",
       "tags": ["gross.reception-transfer.v1", "reproducibility"],
       "title": "Test 7 discrete-transfer recovery - run-941d5c9e1c37ccc8"
+    },
+    {
+      "id": "gross-test-07-reconstruction",
+      "date": "2026-09-26",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-reconstruction.md",
+      "status": "executed; conditional inverse robustness failed",
+      "summary": "Linear singular observability and two-site finite capture with separate event budgets. No nonlinear receiver or Test 7 promotion.",
+      "tags": ["GROSS", "Test 7", "reconstruction"],
+      "title": "Test 7 bounded reconstruction and event timing"
+    },
+    {
+      "id": "run-run-ca19609e702134b1",
+      "date": "2026-09-26",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reconstruction.v1/export-run-ca19609e702134b1/README.md",
+      "status": "5 pass, 1 fail, 3 unresolved; Test 8 blocked",
+      "summary": "Late-event inverse sensitivity persists; finite causal capture introduces late ringing after exterior truncation. First-event reconstruction passes its controls.",
+      "tags": ["gross.reconstruction.v1", "observability"],
+      "title": "Test 7 reconstruction audit - run-ca19609e702134b1"
     }
   ],
   "schema_version": 1,

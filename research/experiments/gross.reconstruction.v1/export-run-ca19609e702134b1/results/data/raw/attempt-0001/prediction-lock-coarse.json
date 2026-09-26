@@ -1,0 +1,17 @@
+[
+  {
+    "case": "coarse-broad",
+    "json": "b64f4ed6bc2d5c4bb0834ef22747736373968d8d5d3669e1d353f23919b65f92",
+    "npz": "f441a06d91594c05137ce7322ad9254408d716ec62b345b6cd737e80ece8b162"
+  },
+  {
+    "case": "coarse-carrier",
+    "json": "f9ef1d01fb707326e8a606a6252296ecd187027179cf3d593b49b4377309cee0",
+    "npz": "c7c39364808fa3898cf416cc1202810df5f9f39d90356bbc00883b4f3208c8bb"
+  },
+  {
+    "case": "coarse-new",
+    "json": "98bce3e5b85806ea4027c397ab3cb435cbd00cef558e841b981488763fc9825a",
+    "npz": "e2e673236fdd5a4a484c7d3ccd11f18bf1fde65181f8c88ef5ebb03a36fcf639"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "event-budgets": {
+    "limitation": "Budgets are direct difference estimates. They measure reconstruction residuals; absolute continuum event shifts and nonlinear phase acceptance are separate.",
+    "question": "Are first and last reconstruction errors separately below their uncertainty budgets?",
+    "reading": "All three causal first events meet the 1e-4 target and their separate budgets. Every last-event budget exceeds that target; inverse last-event errors are 1.49e-3 to 3.51e-3.",
+    "significance": "Tests a strict reconstruction prerequisite with target 1e-4 time units, preserving the original Test 7 thresholds."
+  },
+  "local-reconstruction": {
+    "limitation": "Causal capture uses an extra neighboring surface site. The known-source curve is a downstream audit; no nonlinear clock is evolved.",
+    "question": "How do the inverse and causal surface capture reproduce the local waveform and its late tail?",
+    "reading": "The main pulses overlap closely. Near the source last event, the inverse has a small ripple while finite causal capture has rapid ringing. Its last event moves by 4.01 to 7.33 time units on the finest grid.",
+    "significance": "A close overall waveform can still produce a sensitive late threshold time."
+  },
+  "sampling-continuum": {
+    "limitation": "The h=0.0125 source is not an exact continuum reference. Surface-sampling and independent time/domain components are also retained in the saved budgets.",
+    "question": "How much do sampling and mesh changes move each event?",
+    "reading": "First-event mesh shifts remain 0.043 to 0.081 despite excellent same-mesh reconstruction. Last-event convergence is uneven; the broad causal last event moves 0.209 under output decimation.",
+    "significance": "Separates absolute event convergence from agreement between source and reconstruction on one grid."
+  },
+  "singular-observability": {
+    "limitation": "The norm radii and surface tolerance are declared conditional assumptions; root linearization is checked with finite witnesses but is not a global event theorem.",
+    "question": "Which surface singular directions remain relevant to each local event?",
+    "reading": "The inverse retains 451 of 641 directions. Discarded directions have almost no first-event coefficient, while substantial last-event coefficients persist beyond the cutoff. Surface-consistent finite witnesses move the last event by over 11 time units.",
+    "significance": "Observability depends on interior sensitivity as well as the size of the surface singular value."
+  }
+}
