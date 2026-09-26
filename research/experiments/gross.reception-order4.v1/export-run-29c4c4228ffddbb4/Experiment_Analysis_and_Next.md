@@ -6,7 +6,7 @@ Source commit `2854331b9151859ac465cc97de98089950025188`; canonical run `run-29c
 
 ## What was derived
 
-The frozen SS OCF 1 action, radial Hamiltonian, $\omega_Q=0.900$ core, $\Omega_\chi=0.41274991$ clock and local $r=0.1$ calibration are unchanged. Formal neutral orders $b=Ab_1+A^3b_3+\cdots$, core orders $u=u_0+A^2u_2+A^4u_4+\cdots$, and clock orders $w=w_0+A^2w_2+A^4w_4+\cdots$ were evolved together. The fourth-order local quadrature phase contains both $\operatorname{Im}(z_4/z_0)$ and the indispensable $-\frac12\operatorname{Im}[(z_2/z_0)^2]$, with $z=\chi-i\dot\chi/\Omega_\chi$. The [protocol](gross-test-07-order4.md) derives every source term from the registered discrete action. An independent full-equation finite-amplitude check finds the expected $A^5$ neutral and $A^6$ charged/clock remainder orders. No response coefficient was fitted.
+The frozen SS OCF 1 action, radial Hamiltonian, $\omega_Q=0.900$ core, $\Omega_\chi=0.41274991$ clock and local $r=0.1$ calibration are unchanged. Formal neutral orders $b=Ab_1+A^3b_3+\cdots$, core orders $u=u_0+A^2u_2+A^4u_4+\cdots$, and clock orders $w=w_0+A^2w_2+A^4w_4+\cdots$ were evolved together. The fourth-order local quadrature phase contains both $\mathrm{Im}(z_4/z_0)$ and the indispensable $-\frac12\mathrm{Im}[(z_2/z_0)^2]$, with $z=\chi-i\dot\chi/\Omega_\chi$. The [protocol](gross-test-07-order4.md) derives every source term from the registered discrete action. An independent full-equation finite-amplitude check finds the expected $A^5$ neutral and $A^6$ charged/clock remainder orders. No response coefficient was fitted.
 
 ## Inspected-history diagnostic, not a fresh prediction
 
