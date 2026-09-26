@@ -1,4 +1,4 @@
-name: Recover Test 7 discrete transfer
+name: Recover Test 7 discrete transfer evidence
 run-name: 'Test 7 transfer recovery - ${{ github.run_number }}'
 on:
   push:

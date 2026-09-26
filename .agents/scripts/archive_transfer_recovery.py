@@ -30,7 +30,8 @@ if args.mode in ('execute','import'):
     for name in ['status.json','execution.json','plan.json','config.json','README.md']:
         shutil.copy2(args.output/'evidence'/name,provenance/name)
     shutil.copytree(args.output/'evidence/logs',provenance/'logs')
-    command('git','bundle','create',provenance/'source.bundle','origin/main..'+status['source_commit'])
+    command('git','update-ref','refs/heads/transfer-execution-source',status['source_commit'])
+    command('git','bundle','create',provenance/'source.bundle','origin/main..transfer-execution-source')
     command('git','bundle','verify',provenance/'source.bundle')
     write(POINTER,{'run_id':run_id,'source_commit':status['source_commit'],
         'classification':status['scientific_classification'],'review':'pending',
