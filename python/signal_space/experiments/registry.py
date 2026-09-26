@@ -13,6 +13,7 @@ from signal_space.experiments.prereception import PrereceptionExperiment
 from signal_space.experiments.reception import ReceptionExperiment
 from signal_space.experiments.reception_order4 import ReceptionOrder4Experiment
 from signal_space.experiments.reception_transfer import ReceptionTransferExperiment
+from signal_space.experiments.reconstruction import ReconstructionExperiment
 
 _PLUGINS: dict[str, ExperimentPlugin] = {
     SyntheticExperiment.experiment_id: SyntheticExperiment(),
@@ -28,6 +29,7 @@ _PLUGINS: dict[str, ExperimentPlugin] = {
     ReceptionExperiment.experiment_id: ReceptionExperiment(),
     ReceptionOrder4Experiment.experiment_id: ReceptionOrder4Experiment(),
     ReceptionTransferExperiment.experiment_id: ReceptionTransferExperiment(),
+    ReconstructionExperiment.experiment_id: ReconstructionExperiment(),
 }
 
 
