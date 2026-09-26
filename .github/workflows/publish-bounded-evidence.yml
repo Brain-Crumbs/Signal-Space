@@ -1,0 +1,33 @@
+name: Publish exact bounded-audit evidence
+on:
+  push:
+    branches: [research/gross-test-07-reconstruction-audit]
+    paths: [.github/workflows/publish-bounded-evidence.yml]
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Reassemble and verify two raw Git blobs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: python
+        run: |
+          import base64, hashlib, json, os, urllib.request
+          base = "https://api.github.com/repos/Brain-Crumbs/Signal-Space"
+          def request(path, data=None):
+              payload = None if data is None else json.dumps(data).encode()
+              req = urllib.request.Request(base + path, data=payload, headers={"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Accept": "application/vnd.github+json", "Content-Type": "application/json"})
+              with urllib.request.urlopen(req, timeout=120) as response:
+                  return json.load(response)
+          for item in [{"sha":"18dbfe694aefcc5e80b71dd7359c8d6137a60168","size":13191971,"parts":["d2caebe760bac854ba2b92fd19bdb47f2b275e13","15fc541d0a22fb88e1174bdb13cbcc0199388b6b"]},{"sha":"b21303275c6da36434a633467174f7b192d7ad2e","size":13197561,"parts":["0dcb1437a497bbedcccc0942750e231e5e05cbb2","139e5d30e7aabf0e31c19e1c3988d9ffe0ae3fc4"]}]:
+              data = b"".join(base64.b64decode(request("/git/blobs/" + sha)["content"]) for sha in item["parts"])
+              assert len(data) == item["size"]
+              digest = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+              assert digest == item["sha"], (digest, item["sha"])
+              result = request("/git/blobs", {"content": base64.b64encode(data).decode(), "encoding": "base64"})
+              assert result["sha"] == item["sha"]
+              print("Verified exact raw blob", result["sha"], len(data))
+          
