@@ -1,0 +1,25 @@
+{
+  "axes": {
+    "x": {
+      "unit": "as labeled"
+    },
+    "y": {
+      "unit": "as labeled"
+    }
+  },
+  "downsampling": "all saved local samples; spatial views saved every 1 time unit and 0.2 radius",
+  "fit_window": null,
+  "id": "local-markers",
+  "normalization": "natural units c=hbar=m=1; cycles = radians/(2*pi)",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/markers.csv",
+    "plot-data/traces.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "local atan2 phase from chi and chi_dot; quiet subtraction; first/last absolute-a threshold crossings"
+  ]
+}

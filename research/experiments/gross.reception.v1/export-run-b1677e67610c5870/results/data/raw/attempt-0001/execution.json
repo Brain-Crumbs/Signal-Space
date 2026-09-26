@@ -1,0 +1,214 @@
+{
+  "algorithm": "surface-only-reception-v1",
+  "cases": [
+    {
+      "amplitude": 0,
+      "baseline": 0,
+      "name": "quiet",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.002,
+      "baseline": 0,
+      "name": "half",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 0,
+      "name": "single",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.008,
+      "baseline": 0,
+      "name": "double",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": -0.004,
+      "baseline": 0,
+      "name": "negative",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 0,
+      "name": "second",
+      "phase": 0.0,
+      "prediction": 1,
+      "weights": [
+        0,
+        1
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 0,
+      "name": "both",
+      "phase": 0.0,
+      "prediction": 2,
+      "weights": [
+        1,
+        1
+      ]
+    },
+    {
+      "amplitude": -0.004,
+      "baseline": 0,
+      "name": "both-negative",
+      "phase": 0.0,
+      "prediction": 2,
+      "weights": [
+        1,
+        1
+      ]
+    },
+    {
+      "amplitude": 0,
+      "baseline": 8,
+      "name": "phase-quiet",
+      "phase": 1.0471975511965976,
+      "prediction": 3,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 0.004,
+      "baseline": 8,
+      "name": "phase",
+      "phase": 1.0471975511965976,
+      "prediction": 3,
+      "weights": [
+        1,
+        0
+      ]
+    }
+  ],
+  "columns": [
+    "time",
+    "chi",
+    "chi_dot",
+    "a",
+    "a_dot",
+    "density",
+    "invariant",
+    "energy",
+    "charge",
+    "delta_chi_2",
+    "delta_chi_dot_2",
+    "delta_density_2"
+  ],
+  "limitations": [
+    "spherical reflected shells, not opposing planar beams",
+    "flat fixed receiver; no recoil or transformed history",
+    "finer grid interpolates frozen fine profile, not a newly solved branch",
+    "surface acquisition is linear on frozen background"
+  ],
+  "prediction_cases": [
+    {
+      "amplitude": 1,
+      "baseline": 0,
+      "name": "first",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    },
+    {
+      "amplitude": 1,
+      "baseline": 0,
+      "name": "second",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        0,
+        1
+      ]
+    },
+    {
+      "amplitude": 1,
+      "baseline": 0,
+      "name": "both",
+      "phase": 0.0,
+      "prediction": 0,
+      "weights": [
+        1,
+        1
+      ]
+    },
+    {
+      "amplitude": 1,
+      "baseline": 0,
+      "name": "phase",
+      "phase": 1.0471975511965976,
+      "prediction": 0,
+      "weights": [
+        1,
+        0
+      ]
+    }
+  ],
+  "source_run": "run-82cb109afa4e14c2",
+  "variants": [
+    [
+      "base",
+      "profile-0.900.npz",
+      0.1,
+      0.02
+    ],
+    [
+      "fine",
+      "profile-fine.npz",
+      0.05,
+      0.01
+    ],
+    [
+      "finer",
+      "profile-fine.npz",
+      0.025,
+      0.005
+    ],
+    [
+      "time",
+      "profile-0.900.npz",
+      0.1,
+      0.01
+    ],
+    [
+      "wide",
+      "profile-wide.npz",
+      0.1,
+      0.02
+    ]
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.reception.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "parameters": {
+    "omega_Q": 0.9,
+    "omega_chi": 0.41274991,
+    "clock_amplitude": 0.001,
+    "local_radius": 0.1,
+    "frozen_inputs": [
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+        "name": "profile-0.900.npz",
+        "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+        "name": "profile-fine.npz",
+        "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+        "name": "profile-wide.npz",
+        "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+      }
+    ],
+    "epsilon": 0.2,
+    "M0": 1.0,
+    "duration": 100.0,
+    "kind": "reception",
+    "upstream_radius": 14.0,
+    "packet_centers": [
+      18.0,
+      26.0
+    ],
+    "packet_width": 3.0,
+    "acquisition_duration": 55.0,
+    "incoming_window": 16.0,
+    "sample_interval": 0.1,
+    "marker_threshold": 0.0001,
+    "marker_time_tolerance": 0.1,
+    "field_noise_floor": 1e-13,
+    "cycle_noise_floor": 1e-11,
+    "prediction_cases": [
+      {
+        "name": "first",
+        "amplitude": 1,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "second",
+        "amplitude": 1,
+        "weights": [
+          0,
+          1
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "both",
+        "amplitude": 1,
+        "weights": [
+          1,
+          1
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "phase",
+        "amplitude": 1,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 1.0471975511965976,
+        "baseline": 0,
+        "prediction": 0
+      }
+    ],
+    "cases": [
+      {
+        "name": "quiet",
+        "amplitude": 0,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "half",
+        "amplitude": 0.002,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "single",
+        "amplitude": 0.004,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "double",
+        "amplitude": 0.008,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "negative",
+        "amplitude": -0.004,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "second",
+        "amplitude": 0.004,
+        "weights": [
+          0,
+          1
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 1
+      },
+      {
+        "name": "both",
+        "amplitude": 0.004,
+        "weights": [
+          1,
+          1
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 2
+      },
+      {
+        "name": "both-negative",
+        "amplitude": -0.004,
+        "weights": [
+          1,
+          1
+        ],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 2
+      },
+      {
+        "name": "phase-quiet",
+        "amplitude": 0,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 1.0471975511965976,
+        "baseline": 8,
+        "prediction": 3
+      },
+      {
+        "name": "phase",
+        "amplitude": 0.004,
+        "weights": [
+          1,
+          0
+        ],
+        "phase": 1.0471975511965976,
+        "baseline": 8,
+        "prediction": 3
+      }
+    ]
+  },
+  "units": {
+    "mass": "m=1",
+    "length": "m^-1",
+    "time": "m^-1",
+    "signal": "c=hbar=1"
+  },
+  "seeds": {
+    "root": 202609257
+  },
+  "resources": {
+    "max_cpu_seconds": 3500,
+    "max_wall_seconds": 3600,
+    "max_memory_mb": 1024,
+    "max_output_mb": 250
+  },
+  "analysis": {
+    "frozen-inputs": "Saved Test 6 profile/eigenmode hashes match exactly; finer h=.025 uses documented natural cubic interpolation of the frozen h=.05 data, no calibration fit.",
+    "prediction-first": "Surface, reconstructed inputs, calibration and all prediction hashes verify; all prediction locks precede the first nonlinear receiver-start event.",
+    "record-resolution": "For nominal single, second, both and changed-phase interval records on h=.025, |delta_N| > 5*(|finer-fine|+|base-time|+|base-wide|+1e-11 cycles). Otherwise unresolved.",
+    "surface-prediction": "Fine-grid (h=.025) local chi trace prediction relative L2 error <= max(5%, direct mesh+time+box L2 error plus 1e-13 m/sample floor, divided by signal norm), for single, second, both and phase controls.",
+    "marker-prediction": "For each selected local interval, standalone precomputed marker/phase record differs by <= max(5% of actual interval record, its registered absolute error budget). If interval not resolved, unresolved.",
+    "local-markers": "Every nonquiet case on every grid has a first rising and subsequent last falling |a|=1e-4 local crossing in t=0..100; predicted marker times within 0.1 m^-1 of observed events. Quiet has no neutral markers and is only a matched counterfactual reference.",
+    "sign-even": "Single and pair sign-odd/even local trace norm ratio <1e-5 on every grid.",
+    "amplitude-square": "A=.002,.004,.008 amplitude-normalized single-pulse trace differences <5%; weak log slope within 0.1 of two on every grid.",
+    "pulse-overlap": "Both-minus-each-alone chi trace is >5 times direct mesh+time+box+1e-13 m/sample budget and its predicted residual <=max(5%, inverse signal/error ratio); otherwise unresolved.",
+    "frozen-core-control": "Executed incomplete Taylor replay gives max absolute delta_chi2 and delta_chi_dot2 <1e-15, while full single response RMS >5e-13 m.",
+    "numerical-controls": "Each relative chi response L2 difference (fine/base, time/base, wide/base, finer/fine) <5% in single, second, both and phase controls.",
+    "conservation": "Maximum charge relative error <1e-5 and matched discrete energy residual/initial incident energy <1% for every grid and nonquiet case."
+  },
+  "report": {
+    "title": "Signal Space Test 7: surface-only predicted reception"
+  }
+}

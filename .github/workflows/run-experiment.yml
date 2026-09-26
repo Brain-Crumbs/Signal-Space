@@ -16,6 +16,7 @@ on:
           - gross-test-06
           - gross-test-06-longevity
           - gross-test-06-response
+          - gross-test-07
         default: gross-test-01
         required: true
       retention_days:
@@ -40,7 +41,7 @@ concurrency:
 jobs:
   experiment:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 75
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'

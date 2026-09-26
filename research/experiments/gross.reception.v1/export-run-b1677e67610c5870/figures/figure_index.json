@@ -1,0 +1,129 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "packet-overlap",
+      "role": "evidentiary",
+      "question": "Where do the reflected first pulse and incoming second pulse overlap?",
+      "reading": "Both packets begin outside r=14. Central reflection sends the first outward through the second incoming packet.",
+      "significance": "This supplies opposite radial directions and allows both-minus-each-alone subtraction.",
+      "limitation": "The left panel removes the 1/r focusing factor. The right uses symmetric log color; this is not two planar beams.",
+      "source_data": [
+        "results/data/plot-data/spacetime.csv"
+      ],
+      "spec_file": "results/figure-specs/packet-overlap.figure.json",
+      "transformations": [
+        "base grid; reshape time/radius rows; multiply a by r to expose radial transport; signed contraction uses symmetric log normalization with linear threshold 0.001 of its maximum absolute value; show t<=55"
+      ],
+      "files": [
+        "figures/static/packet-overlap.png",
+        "figures/static/packet-overlap.svg",
+        "figures/static/packet-overlap.pdf"
+      ]
+    },
+    {
+      "figure_id": "local-markers",
+      "role": "evidentiary",
+      "question": "Do locally triggered intervals carry a resolved predicted clock record?",
+      "reading": "Local marker check: fail; resolution: pass; interval prediction: fail.",
+      "significance": "The interval uses locally recorded neutral events and local clock quadrature, rather than coordinate arrival alone.",
+      "limitation": "The quiet history is evaluated at counterfactual event times. Last-fall selection is retrospective in a finite window.",
+      "source_data": [
+        "results/data/plot-data/markers.csv",
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/local-markers.figure.json",
+      "transformations": [
+        "local atan2 phase from chi and chi_dot; quiet subtraction; first/last absolute-a threshold crossings"
+      ],
+      "files": [
+        "figures/static/local-markers.png",
+        "figures/static/local-markers.svg",
+        "figures/static/local-markers.pdf"
+      ]
+    },
+    {
+      "figure_id": "withheld-response",
+      "role": "evidentiary",
+      "question": "Does surface-only prediction match the withheld local clock and density response?",
+      "reading": "Finest trace errors: single 0.193%; both 0.375%.",
+      "significance": "This tests the neutral-to-core-to-clock coefficient without fitting the withheld evolution.",
+      "limitation": "The Taylor and full evolutions share the discrete Hamiltonian. Agreement is bounded by independent numerical controls.",
+      "source_data": [
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/withheld-response.figure.json",
+      "transformations": [
+        "finer grid h=.025; matched quiet subtraction; multiply Taylor coefficients by A squared"
+      ],
+      "files": [
+        "figures/static/withheld-response.png",
+        "figures/static/withheld-response.svg",
+        "figures/static/withheld-response.pdf"
+      ]
+    },
+    {
+      "figure_id": "error-budget",
+      "role": "evidentiary",
+      "question": "Is the local record larger than independent numerical errors?",
+      "reading": "Bars compare absolute interval magnitude, direct numerical error and prediction residual. Resolution requires signal greater than five error budgets.",
+      "significance": "A good-looking trace cannot substitute for a resolved local interval.",
+      "limitation": "The budget is deterministic, not a statistical confidence interval. The finest profile is interpolated, not independently re-solved.",
+      "source_data": [
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/error-budget.figure.json",
+      "transformations": [
+        "absolute values; log floor1e-16; budgets from finer/fine + base/time + base/wide +1e-11 cycles"
+      ],
+      "files": [
+        "figures/static/error-budget.png",
+        "figures/static/error-budget.svg",
+        "figures/static/error-budget.pdf"
+      ]
+    },
+    {
+      "figure_id": "controls",
+      "role": "evidentiary",
+      "question": "Do sign, amplitude, pulse-overlap and clock-phase controls support the response mechanism?",
+      "reading": "Weak amplitude exponent 1.999370; overlap check pass; frozen-core control pass.",
+      "significance": "Individual pulses isolate the interaction term; clock phase changes test a held-out response configuration.",
+      "limitation": "Sign symmetry is enforced by the action and is not independent evidence for the response coefficient.",
+      "source_data": [
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/controls.figure.json",
+      "transformations": [
+        "divide amplitude traces by A squared; half-sum/difference; both-minus-single-minus-second; h=.025"
+      ],
+      "files": [
+        "figures/static/controls.png",
+        "figures/static/controls.svg",
+        "figures/static/controls.pdf"
+      ]
+    },
+    {
+      "figure_id": "surface-characteristics",
+      "role": "evidentiary",
+      "question": "Can the upstream record distinguish incoming drive from returning radiation?",
+      "reading": "Incoming and outgoing characteristics are built from a, a_t and a_r. Only t=0..16 is inverted.",
+      "significance": "The predictor no longer consumes the prescribed interior neutral history.",
+      "limitation": "This is a linear acquisition on a frozen core. Exterior vacuum inversion has mesh and tail errors.",
+      "source_data": [
+        "results/data/plot-data/surface.csv"
+      ],
+      "spec_file": "results/figure-specs/surface-characteristics.figure.json",
+      "transformations": [
+        "I=(r*a_t+a+r*a_r)/2; O=(r*a_t-a-r*a_r)/2"
+      ],
+      "files": [
+        "figures/static/surface-characteristics.png",
+        "figures/static/surface-characteristics.svg",
+        "figures/static/surface-characteristics.pdf"
+      ]
+    }
+  ]
+}

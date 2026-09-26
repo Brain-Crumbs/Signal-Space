@@ -52,7 +52,7 @@
       "kind": "plan",
       "path": "docs/research/experiment-plan.md",
       "status": "active design",
-      "summary": "Ordered E00\u2013E11 derivation gates from the framework fixture to a shared coexistence test.",
+      "summary": "Ordered E00–E11 derivation gates from the framework fixture to a shared coexistence test.",
       "tags": ["roadmap", "experiments", "derivation gates"],
       "title": "Experiment execution plan"
     },
@@ -299,7 +299,7 @@
         "signal-space.operator-constitution.v1",
         "reproducibility"
       ],
-      "title": "gross.operator-identities.v1 \u2014 run-2ae9c65dbd171851"
+      "title": "gross.operator-identities.v1 — run-2ae9c65dbd171851"
     },
     {
       "date": "2026-09-25",
@@ -334,6 +334,30 @@
       "summary": "Homogeneous SS OPS 1 wave-sector router audit: exact Fourier product, Gram cone, ordered finite-band effects, group directions and full-zone nodes. Nine checks pass; no full-sector geometry or clock.",
       "tags": ["GROSS", "router-propagation", "test-03"],
       "title": "Signal Space router propagation protocol"
+    },
+    {
+      "id": "gross-test-07",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07.md",
+      "status": "executed bounded experiment; scientific fail",
+      "summary": "Surface-characteristic-only radial reception with local threshold markers and mesh/time/box, phase, amplitude and pulse-overlap controls. Ten checks pass; interval prediction and all-grid marker timing fail.",
+      "tags": ["GROSS", "test-07", "reception"],
+      "title": "Signal Space Test 7: surface-only predicted reception"
+    },
+    {
+      "id": "run-run-b1677e67610c5870",
+      "date": "2026-09-25",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reception.v1/export-run-b1677e67610c5870/README.md",
+      "status": "scientific fail; technical completion",
+      "summary": "Resolved local clock records and 0.108–0.436% finest waveform errors; nominal interval prediction misses 5% gate, coarse marker exceeds timing allowance. No threshold retuning; PDFs, six figures, exact data and next calculation preserved.",
+      "tags": [
+        "gross.reception.v1",
+        "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+        "reproducibility"
+      ],
+      "title": "gross.reception.v1 - run-b1677e67610c5870"
     }
   ],
   "schema_version": 1,

@@ -1,0 +1,24 @@
+{
+  "axes": {
+    "x": {
+      "unit": "as labeled"
+    },
+    "y": {
+      "unit": "as labeled"
+    }
+  },
+  "downsampling": "all saved local samples; spatial views saved every 1 time unit and 0.2 radius",
+  "fit_window": null,
+  "id": "controls",
+  "normalization": "natural units c=hbar=m=1; cycles = radians/(2*pi)",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/traces.csv",
+    "plot-data/summary.json"
+  ],
+  "transformations": [
+    "divide amplitude traces by A squared; half-sum/difference; both-minus-single-minus-second; h=.025"
+  ]
+}
