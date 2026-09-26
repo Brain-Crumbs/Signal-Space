@@ -8,11 +8,12 @@ on:
     inputs:
       mode:
         type: choice
-        options: [execute, package]
+        options: [execute, import, package]
         default: package
         required: true
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: test-07-transfer-recovery
   cancel-in-progress: false
@@ -28,7 +29,7 @@ jobs:
       MPLBACKEND: Agg
       PYTHONPATH: python
       PYTHONUNBUFFERED: '1'
-      RECOVERY_MODE: ${{ inputs.mode || 'execute' }}
+      RECOVERY_MODE: ${{ inputs.mode || 'import' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,13 +59,31 @@ jobs:
       - name: Execute unchanged locked experiment
         if: env.RECOVERY_MODE == 'execute'
         run: python .agents/scripts/run_experiment.py --experiment gross-test-07-transfer --output "$RUNNER_TEMP/transfer-output"
+      - name: Retrieve completed solver evidence
+        if: env.RECOVERY_MODE == 'import'
+        uses: actions/download-artifact@v4
+        with:
+          name: test-07-transfer-recovery-36218801522-1
+          run-id: 36218801522
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/transfer-output
+      - name: Show retained packaging diagnostics
+        if: env.RECOVERY_MODE == 'import'
+        run: |
+          cat "$RUNNER_TEMP/transfer-output/evidence/status.json"
+          cat "$RUNNER_TEMP/transfer-output/evidence/logs/package.stderr.log"
       - name: Archive verified evidence and reader previews
         run: python .agents/scripts/archive_transfer_recovery.py --mode "$RECOVERY_MODE" --output "$RUNNER_TEMP/transfer-output"
+      - name: Validate completed review package
+        if: env.RECOVERY_MODE == 'package'
+        run: |
+          npm run check
+          node apps/cli/dist/index.js --sample pair
       - name: Save results on the task branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .github/workflows/recover-transfer.yml research/experiments/gross.reception-transfer.v1 research/catalog.json research/archive-manifest.json docs/research/gross-test-07-transfer-results.md docs/research/gross-test-07-transfer-interruption.md
+          git add .github/workflows/recover-transfer.yml .github/workflows/run-experiment.yml docs/research/gross-test-07-transfer.md docs/research/gross-progress.md research/experiments/gross.reception-transfer.v1 research/catalog.json research/archive-manifest.json docs/research/gross-test-07-transfer-results.md docs/research/gross-test-07-transfer-interruption.md
           git diff --cached --quiet || git commit -m "Archive Test 7 transfer recovery evidence"
           git push origin HEAD:refs/heads/research/gross-test-07-discrete-transfer
       - name: Retain execution artifacts and failures

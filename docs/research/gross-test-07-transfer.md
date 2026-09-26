@@ -46,7 +46,7 @@ All reconstructed inputs, profiles, complete Taylor histories, and numerical fir
 
 ## Predeclared error budget and decision
 
-Let $Y$ be the measured interval in cycles and $P_2,P_4$ its forecasts. For each nominal spectrum define the conservative, unextrapolated budget
+Let $Y$ be the measured interval in cycles and $P_2,P_4$ its forecasts. For each nominal spectrum the originally declared, unextrapolated budget is
 
 $$
 B=|Y_{h/2}-Y_h|+|Y_{dt/2}-Y_{dt}|+|Y_{R100}-Y_{R80}|+|P_{4,c8}-P_{4,c10}|+E_{\mathrm{sample}}+2\times10^{-11}.
@@ -65,6 +65,6 @@ The exact machine criteria and figure plan are locked in `plans/gross-test-07-tr
 
 ## Separately labeled post-lock audit and execution recovery
 
-After all sixteen forecasts in the local attempt were locked and the first receiver comparisons were inspected, a downstream diagnostic was added. It preserves the nine registered checks and their original budget. It separately reports an audit budget using the larger receiver or forecast change for each mesh, time, and domain term. This diagnostic cannot promote or rewrite the registered result; it can expose a limit in what those checks establish.
+After all sixteen forecasts in the local attempt were locked and the first receiver comparisons were inspected, a downstream diagnostic was added. It preserves the nine registered checks and their original budget. It separately reports an audit budget using the larger receiver or forecast change for each mesh, time, and domain term. This diagnostic cannot promote or rewrite the registered result; it can expose a limit in what those checks establish. In particular, the locked mesh/time/domain terms use receiver changes and do not bound forecast changes. A registered pass alone therefore cannot establish the stronger forecast-convergence claim.
 
 The audit compares frozen linear propagation from recovered input with propagation from the known source on the finest grid, and the carrier time control. The known shape is used only in this downstream diagnostic, never in the original inverse or forecast. See [the interruption record](gross-test-07-transfer-interruption.md) for the inaccessible partial local attempt and the separate hosted recovery. Repeating a previously inspected history is reproducibility evidence, not a new held-out claim.

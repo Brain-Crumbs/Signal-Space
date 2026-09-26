@@ -36,10 +36,10 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
         ax[1,col].set(xlabel='time (m^-1)',ylabel='a at r=0.1 (m)');ax[1,col].legend(fontsize=8)
         for key,label in [('actual_cycles','receiver'),('second_cycles','order 2'),('fourth_cycles','order 4')]:ax[2,col].plot(values(d,'time'),values(d,key),label=label)
         ax[2,col].set(xlabel='time (m^-1)',ylabel='matched phase (cycles)');ax[2,col].legend(fontsize=8)
-    save(fig,'surface-transfer','Can an external record determine the local neutral and clock histories?',
+    save(fig,'surface-transfer','How does the external record determine the local neutral and clock response?',
         'Each column follows a different recorded spectrum from r=14 to r=0.1, at A=.012.',
         'The prediction uses a discrete initial-data inverse and derived response coefficients.',
-        'Synthetic acquisition assumes exact support and v=D_h b; this is not an unknown-source detector.', ['surface.csv','traces.csv'])
+        'Acquisition and inverse share a discretization and assume support plus v=D_h b; surface replay error alone does not bound interior error.', ['surface.csv','traces.csv'])
     fig,ax=plt.subplots(1,3,figsize=(12,4),layout='constrained')
     for grid in ('fine','finer','finest','frozen'):
         d=[x for x in profiles if x['grid']==grid]
@@ -49,7 +49,7 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
     ax[2].loglog(h[:-1],abs(np.diff(e)),'o-');ax[2].set(xlabel='coarser h (m^-1)',ylabel='adjacent eigenvalue change (m^2)',title='Independent clock eigenproblem')
     ax[0].set(xlabel='r (m^-1)',ylabel='core amplitude (m)',title='Same omega_Q branch');ax[0].legend(fontsize=8)
     ax[1].set(xlabel='r (m^-1)',ylabel='Z - 1',title='Both inertia and stiffness use Z')
-    save(fig,'profile-convergence','Does independent radial calibration converge beyond the old interpolated profile?',
+    save(fig,'profile-convergence','Does independent radial calibration converge beyond the interpolated old profile?',
         'Profiles are independently solved and frozen at each mesh; frozen denotes the earlier interpolated fine profile.',
         'Separates a refined physical preparation from merely interpolating old samples.',
         'The calibrated readout frequency stays fixed; this does not repeat the 100-period longevity test.', ['profiles.csv','summary.json'])
@@ -64,9 +64,9 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
         audit=s.get('forecast_convergence_audit',{}).get(wave,{})
         labels=['order 2 error','order 4 error','locked budget','audit budget','order separation'];vals=[b['second_error'],b['fourth_error'],b['total'],audit.get('forecast_inclusive_budget',b['total']),b['order_separation']]
         bars=ax[1,col].bar(range(5),vals);bars[3].set_hatch('//')
-        ax[1,col].set(xticks=range(5),xticklabels=labels,yscale='log',ylabel='cycles',title='Registered order gate resolved' if b['resolved'] and b['converged'] else 'Registered order gate unresolved')
+        ax[1,col].set(xticks=range(5),xticklabels=labels,yscale='log',ylabel='cycles',title=('Registered gate '+('resolved' if b['resolved'] and b['converged'] else 'unresolved')+'\nForecast audit '+('resolved' if audit.get('discrimination_resolved',False) else 'unresolved')))
         ax[1,col].tick_params(axis='x',rotation=20)
-    save(fig,'order-budget','Is the fourth-order improvement larger than every declared uncertainty?',
+    save(fig,'order-budget','Is the fourth-order improvement larger than every declared numerical uncertainty?',
         'Compare both errors with the locked budget. The hatched post-hoc audit also includes convergence of the forecast itself.',
         'A fourth-order claim requires sufficient resolution on both spectra; the ordinary 5% gate is insufficient.',
         'The audit cannot promote or rewrite a locked check. Budgets are difference estimates, not rigorous bounds.', ['summary.json'])
@@ -81,13 +81,17 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
         if wave in s['timing_budgets']:ax[col].axhline(s['timing_budgets'][wave]['budget'],ls='--',label='finest direct budget')
         ax[col].axhline(.1,color='red',ls=':',label='original gate')
         ax[col].set(xlabel='h (m^-1)',ylabel='absolute timing residual (m^-1)',title=wave+' marker transfer');ax[col].legend(fontsize=8)
-    save(fig,'marker-convergence','Do first and last marker residuals decrease under refinement?',
+    save(fig,'marker-convergence','Do first and last marker prediction residuals decrease under the controls?',
         'Each point compares a locked forecast with independently evolved receiver markers on the same mesh.',
         'Tests the discrete transfer separately from clock-phase order discrimination.',
         'First/last events are selected retrospectively in the declared window; no autonomous trigger is modeled.', ['summary.json'])
     write_json(report_path/'interpretations.json',interpretations)
     lines=['# Test 7 discrete-transfer discriminator','',f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
         'Original Test 7 remains failed. Test 8 needs separate acceptance. No two-object, gravity, invariance or emergent-spacetime claim.','']
+    unresolved=[wave for wave,audit in s.get('forecast_convergence_audit',{}).items() if not audit['discrimination_resolved']]
+    if unresolved:
+        lines += ['Scientific assessment: forecast-inclusive order discrimination remains unresolved for '+', '.join(unresolved)+'. A controlled two-spectrum extension is not established.','']
+    lines += ['Recovery repeats inspected histories; it is not a new held-out prediction. Synthetic linear surface acquisition assumes known support and v=D_h b.','']
     lines += [f'{k}: {v}' for k,v in s['checks'].items()]
     for wave,b in s['budgets'].items():
         if 'total' in b:lines += [f"{wave}: B={b['total']:.8e} cycles, order separation={b['order_separation']:.8e}, second error={b['second_error']:.8e}, fourth error={b['fourth_error']:.8e}."]

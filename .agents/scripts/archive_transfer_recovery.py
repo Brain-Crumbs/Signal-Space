@@ -15,14 +15,15 @@ def write(p,x):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dump
 def command(*args):subprocess.run(list(map(str,args)),cwd=ROOT,check=True)
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--mode',choices=['execute','package'],required=True)
+parser.add_argument('--mode',choices=['execute','import','package'],required=True)
 parser.add_argument('--output',type=Path,required=True)
 args=parser.parse_args()
 args.output.mkdir(parents=True,exist_ok=True)
-if args.mode=='execute':
+if args.mode in ('execute','import'):
     status=read(args.output/'evidence/status.json')
-    if status['technical_status']!='completed':raise RuntimeError('pipeline did not complete; retain uploaded diagnostics')
-    source=args.output/'evidence'/status['canonical_path']
+    if status['technical_status']!='completed' and not (args.mode=='import' and status.get('stage')=='package'):
+        raise RuntimeError('only a verified solver with a packaging-only failure may be imported')
+    source=args.output/'evidence'/status.get('canonical_path','runs/gross.reception-transfer.v1/'+status['run_id'])
     run_id=status['run_id'];run=FAMILY/run_id
     shutil.copytree(source,run)
     provenance=FAMILY/('provenance-'+run_id);provenance.mkdir()
@@ -37,11 +38,16 @@ if args.mode=='execute':
         'role':'hosted reproduction of unchanged locked protocol; not a new held-out sample'})
 else:
     status=read(POINTER);run_id=status['run_id'];run=FAMILY/run_id
+if args.mode in ('import','package'):
+    command('python3','-m','signal_space','--workspace','research/experiments','verify','--run-id',run_id)
+    command('python3','-m','signal_space','--workspace','research/experiments','report','--run-id',run_id)
+    if args.mode=='import':
+        write(FAMILY/('provenance-'+run_id)/'reader-repair.json',{'original_pipeline_status':'failed at package after canonical verification','repair':'align figure questions with locked plan; append report and rebuild reader','solver_rerun':False})
 manifest=read(run/'manifest.json');analysis=manifest['analyses'][-1]
 report=next(x for x in reversed(manifest['reports']) if x['analysis_id']==analysis['analysis_id'])
 summary=read(run/analysis['path']/'derived/summary.json')
 doc=ROOT/'docs/research/gross-test-07-transfer-results.md'
-if args.mode=='execute':
+if args.mode in ('execute','import'):
     lines=['# Test 7 discrete transfer: hosted recovery','',
         '**Scientific review and PDF inspection pending.**','',
         'Canonical run: '+run_id+'. Registered classification: '+manifest['scientific_classification']+'.',
@@ -82,7 +88,7 @@ for item in catalog['entries']:
         item['summary']='Discrete transfer with independent profiles, two spectra, strict order budget and separately labeled convergence/inverse audits.'
 entry={'id':'run-'+run_id,'date':'2026-09-26','kind':'experiment-run',
        'path':str((target/'README.md').relative_to(ROOT)),
-       'status':'registered '+manifest['scientific_classification']+'; '+('scientific review pending' if args.mode=='execute' else 'see reviewed limitations'),
+       'status':'registered '+manifest['scientific_classification']+'; '+('scientific review pending' if args.mode in ('execute','import') else 'see reviewed limitations'),
        'summary':'Hosted recovery of fixed Test 7 transfer protocol; original failure unchanged; post-lock forecast and inverse audits retained.',
        'tags':['gross.reception-transfer.v1','reproducibility'],
        'title':'Test 7 discrete-transfer recovery - '+run_id}
@@ -90,7 +96,7 @@ catalog['entries']=[x for x in catalog['entries'] if x['id']!=entry['id']]+[entr
 write(ROOT/'research/catalog.json',catalog)
 if args.mode=='package':
     status['review']='completed; see reviewed results and PDF audit';write(POINTER,status)
-command('npx','prettier','--write','research/catalog.json','docs/research/gross-test-07-transfer-results.md','docs/research/gross-test-07-transfer-interruption.md','.github/workflows/recover-transfer.yml')
+command('npx','prettier','--write','research/catalog.json','docs/research/gross-test-07-transfer-results.md','docs/research/gross-test-07-transfer-interruption.md','docs/research/gross-test-07-transfer.md','docs/research/gross-progress.md','.github/workflows/run-experiment.yml','.github/workflows/recover-transfer.yml')
 command('node','scripts/research-archive.mjs','--write')
 command('python3','scripts/check-experiment-math.py')
 command('git','diff','--check')
