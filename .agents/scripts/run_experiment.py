@@ -21,6 +21,7 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-03": "docs/research/plans/gross-test-03.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
 RECIPES["gross-test-07"] = "docs/research/plans/gross-test-07.json"
+RECIPES["gross-test-07-order4"] = "docs/research/plans/gross-test-07-order4.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 for kind in ("longevity", "response"):
@@ -33,6 +34,17 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.reception-order4.v1":
+        lines = ["# Test 7 formal fourth-order follow-up", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Original Test 7 failed and retains its original result. The inspected-history amplitude comparison is diagnostic.",
+                 "The new held-out radial waveform uses saved upstream records, locked predictions and local markers.",
+                 "", "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "A technical pass of this follow-up does not retroactively pass Test 7 or authorize Test 8.",
+                  "Known-Z optical inversion is approximate; evaluate remaining spatial timing error before a two-object protocol.",
+                  "No two-object recoil, coordinate invariance, gravity or emergent spacetime is tested."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.reception.v1":
         lines = ["# Test 7: surface-only reception assessment", "",
                  f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",

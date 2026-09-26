@@ -1,0 +1,1292 @@
+{
+  "acceptance_criteria": [
+    {
+      "description": "Frozen calibration and inspected-history inputs verify by hash; all new surface and Taylor forecasts locked before any held-out receiver start.",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "prediction-first"
+    },
+    {
+      "description": "Held-out finest A=.004 local interval exceeds five times |finer-fine|+|base-time|+1e-11 cycles, else unresolved.",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "record-resolution"
+    },
+    {
+      "description": "Held-out A=.004 fourth-order interval error <= max(5% of actual interval, direct numerical budget); no relaxation of old Test 7 thresholds.",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "heldout-interval"
+    },
+    {
+      "description": "Held-out A=.004 fourth-order matched phase L2 error < min(5%, second-order L2 error).",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "heldout-waveform"
+    },
+    {
+      "description": "All nonzero cases and grids have first rising and last falling |a|=1e-4 events; standalone forecast within 0.1 m^-1 on each grid.",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "marker-timing"
+    },
+    {
+      "description": "A=+.004 and -.004 give first/last marker times equal and interval differences <1e-10 cycles on finest grid.",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "sign-even"
+    },
+    {
+      "description": "All grid/case relative charge errors <1e-5; discrete total energy residual <1% of initial incident energy.",
+      "evidence": "analyses/analysis-0001-ac36b679/checks.json",
+      "id": "conservation"
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "analysis-0001-ac36b679",
+      "classification": "pass",
+      "code_identity": {
+        "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "revision": "2854331b9151859ac465cc97de98089950025188",
+        "runtime_version": "0.1.0",
+        "tree_state": "clean"
+      },
+      "created_at": "2026-09-26T00:41:04.787282Z",
+      "input_artifacts": {
+        "attempts/attempt-0001/raw/diagnostic-finer.npz": "e547f10cd9f8cc47a82711cde32b462a078ded193aeef983dbb3fb925b7477f4",
+        "attempts/attempt-0001/raw/execution.json": "4bfbf7c2b079ac16c7807d562a218dcc14bf4c762519f2767d90e5e50cb0428b",
+        "attempts/attempt-0001/raw/input-base.npz": "d8ff1227cb27e43598a8f30a6f948af5a81daaf4ffb23572a40b1e8a6c4a573d",
+        "attempts/attempt-0001/raw/input-fine.npz": "04b0889716f9b22b5782f2f71f71e3dca2b3f98a2a37f84c7f95bdfbe5347376",
+        "attempts/attempt-0001/raw/input-finer.npz": "b504ffbcb8e27091dfdbfaebccf1bf045896a66586690296b27da253c9d4c03b",
+        "attempts/attempt-0001/raw/input-time.npz": "db21d4485d99c8b448c5b9dbce6a8e7bb2b0669b902da050e69e0e534af9f4dd",
+        "attempts/attempt-0001/raw/optical-base.json": "cc96dfe5602041da4f2bcc8db09b0f0889a7c18121bfc576a6c96d4c841521be",
+        "attempts/attempt-0001/raw/optical-fine.json": "eda9c6bc2a3af5752799dc9503a785c90bcebdbb5e162a31ba7f0d471e9407fa",
+        "attempts/attempt-0001/raw/optical-finer.json": "7975decf55b406d086ff49ffb1a3b6bee064f0e8dd2d97aa11011dac6d7ed1ea",
+        "attempts/attempt-0001/raw/optical-time.json": "e7d69a9f426a91428780db435a4c4cec68656287c6cf75999b3f3fa2a1481596",
+        "attempts/attempt-0001/raw/prediction-base.npz": "e6788458886b2cc01031c2cfac87151839219295be9702335ec09e505898cf81",
+        "attempts/attempt-0001/raw/prediction-fine.npz": "1370f41fd834bf7ff0a9197907911355212f098e92cfe7797aa45e99f387a724",
+        "attempts/attempt-0001/raw/prediction-finer.npz": "de6b60c220c3dc64a1275db3de75b5cee09c304fad7661bfe61062266eed8b61",
+        "attempts/attempt-0001/raw/prediction-lock.json": "a2ffb91ba62e10da7fa5f1c7c1043b608d1f7dbd0d6ad41cbaf0e4b326efd230",
+        "attempts/attempt-0001/raw/prediction-time.npz": "638ac442492ac4d7f8c1b23852f20a102e80001cdac518d240dd20a1f38468dd",
+        "attempts/attempt-0001/raw/profile-0.900.npz": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+        "attempts/attempt-0001/raw/profile-fine.npz": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+        "attempts/attempt-0001/raw/profile-wide.npz": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+        "attempts/attempt-0001/raw/receiver-base.npz": "0c7b39a05d2681b31296a3b433b21af213782aa33f0c59fad81d294db0022b97",
+        "attempts/attempt-0001/raw/receiver-fine.npz": "b63a470c4827a83baa69270c0539b0e07daa6b15190f03686a540aa2b5628435",
+        "attempts/attempt-0001/raw/receiver-finer.npz": "bc148a5fd7e308e0e194b874a1228e0706028188bbd8a2ae89df19b7a2ebbeca",
+        "attempts/attempt-0001/raw/receiver-time.npz": "d43655aee8a2f309d2425ef81336d0aa91ec2db65f315e81fc23d54f7ecdd526",
+        "attempts/attempt-0001/raw/rng-end.json": "d64049c95551c350a01734423c667713c2ee2deb312a98146728d25dd72cf34d",
+        "attempts/attempt-0001/raw/rng-start.json": "d64049c95551c350a01734423c667713c2ee2deb312a98146728d25dd72cf34d",
+        "attempts/attempt-0001/raw/surface-base.npz": "78cd18b639b45eacb6ded4aabc3dd23a1af3c5b71c23e284b18a1b657f4171d7",
+        "attempts/attempt-0001/raw/surface-fine.npz": "33686615cd9f4e68f1b3e7137156a997851a2f872070b80c6bd9af68f451a283",
+        "attempts/attempt-0001/raw/surface-finer.npz": "ea9c05cfd5969eca4ee06f885989531b819f44a8e091dfd51df6e9d4447ca65b",
+        "attempts/attempt-0001/raw/surface-time.npz": "2f815409305727843d163fda7efa624ca6afa2acccc5009ce64b3105f16b325c"
+      },
+      "parameters": {
+        "conservation": "All grid/case relative charge errors <1e-5; discrete total energy residual <1% of initial incident energy.",
+        "heldout-interval": "Held-out A=.004 fourth-order interval error <= max(5% of actual interval, direct numerical budget); no relaxation of old Test 7 thresholds.",
+        "heldout-waveform": "Held-out A=.004 fourth-order matched phase L2 error < min(5%, second-order L2 error).",
+        "marker-timing": "All nonzero cases and grids have first rising and last falling |a|=1e-4 events; standalone forecast within 0.1 m^-1 on each grid.",
+        "prediction-first": "Frozen calibration and inspected-history inputs verify by hash; all new surface and Taylor forecasts locked before any held-out receiver start.",
+        "record-resolution": "Held-out finest A=.004 local interval exceeds five times |finer-fine|+|base-time|+1e-11 cycles, else unresolved.",
+        "sign-even": "A=+.004 and -.004 give first/last marker times equal and interval differences <1e-10 cycles on finest grid."
+      },
+      "path": "analyses/analysis-0001-ac36b679",
+      "raw_source": "attempts/attempt-0001/raw/execution.json",
+      "schema_version": "research-analysis-v1",
+      "summary": {
+        "checks": {
+          "conservation": "pass",
+          "heldout-interval": "pass",
+          "heldout-waveform": "pass",
+          "marker-timing": "pass",
+          "prediction-first": "pass",
+          "record-resolution": "pass",
+          "sign-even": "pass"
+        },
+        "heldout": {
+          "base": [
+            {
+              "actual": -2.208381264671304e-07,
+              "amplitude": 0.004,
+              "charge_relative": 4.797806451985492e-11,
+              "energy_relative": 1.3321644923099373e-06,
+              "marker_actual_hermite": [
+                18.460997271616545,
+                46.102020036769915
+              ],
+              "marker_actual_linear": [
+                18.45978376145463,
+                46.10216288334618
+              ],
+              "marker_decimated_hermite": [
+                18.461028918335327,
+                46.102020717284475
+              ],
+              "marker_decimated_linear": [
+                18.453914108946456,
+                46.102288742426914
+              ],
+              "marker_pred_hermite": [
+                18.39997978855616,
+                46.116001141549866
+              ],
+              "marker_pred_linear": [
+                18.399976860920646,
+                46.11578185886548
+              ],
+              "order2": -2.1644394396365113e-07,
+              "order4": -2.159981508208618e-07,
+              "quartic_interval_at_actual_events": 4.465266808951191e-10,
+              "residual_order2_at_actual_events": 3.357428762340643e-09,
+              "trace2_relative": 0.021247950471191934,
+              "trace4_relative": 0.021126702517317623
+            },
+            {
+              "actual": -2.208381264671304e-07,
+              "amplitude": -0.004,
+              "charge_relative": 4.797806451985492e-11,
+              "energy_relative": 1.3321644923099373e-06,
+              "marker_actual_hermite": [
+                18.460997271616545,
+                46.102020036769915
+              ],
+              "marker_actual_linear": [
+                18.45978376145463,
+                46.10216288334618
+              ],
+              "marker_decimated_hermite": [
+                18.461028918335327,
+                46.102020717284475
+              ],
+              "marker_decimated_linear": [
+                18.453914108946456,
+                46.102288742426914
+              ],
+              "marker_pred_hermite": [
+                18.39997978855616,
+                46.116001141549866
+              ],
+              "marker_pred_linear": [
+                18.399976860920646,
+                46.11578185886548
+              ],
+              "order2": -2.1644394396365113e-07,
+              "order4": -2.159981508208618e-07,
+              "quartic_interval_at_actual_events": 4.465266808951191e-10,
+              "residual_order2_at_actual_events": 3.357428762340643e-09,
+              "trace2_relative": 0.021247950471191934,
+              "trace4_relative": 0.021126702517317623
+            },
+            {
+              "actual": 3.1521494948647456e-07,
+              "amplitude": 0.006,
+              "charge_relative": 4.797758504447572e-11,
+              "energy_relative": 5.926140017168465e-07,
+              "marker_actual_hermite": [
+                18.39769608937619,
+                46.97622254638042
+              ],
+              "marker_actual_linear": [
+                18.397345747774214,
+                46.975079089700195
+              ],
+              "marker_decimated_hermite": [
+                18.39769630842213,
+                46.97613135461061
+              ],
+              "marker_decimated_linear": [
+                18.39693788858706,
+                46.97398960866566
+              ],
+              "marker_pred_hermite": [
+                18.33281894359788,
+                46.963544641163715
+              ],
+              "marker_pred_linear": [
+                18.331189263569865,
+                46.9637063514485
+              ],
+              "order2": 3.1167905289552685e-07,
+              "order4": 3.1330039728026106e-07,
+              "quartic_interval_at_actual_events": 1.6117254007821112e-09,
+              "residual_order2_at_actual_events": 2.9557752232275886e-09,
+              "trace2_relative": 0.021414641685642492,
+              "trace4_relative": 0.021129717461292812
+            }
+          ],
+          "fine": [
+            {
+              "actual": -2.1005468860284687e-07,
+              "amplitude": 0.004,
+              "charge_relative": 4.7977442578269153e-11,
+              "energy_relative": 1.331712641338894e-06,
+              "marker_actual_hermite": [
+                18.700551905085703,
+                46.11233845298725
+              ],
+              "marker_actual_linear": [
+                18.70044911080044,
+                46.112420062369736
+              ],
+              "marker_decimated_hermite": [
+                18.70055194485931,
+                46.112348936268276
+              ],
+              "marker_decimated_linear": [
+                18.70036273329971,
+                46.1126176460407
+              ],
+              "marker_pred_hermite": [
+                18.671334019119914,
+                46.11235417364237
+              ],
+              "marker_pred_linear": [
+                18.668991224820537,
+                46.112439425671226
+              ],
+              "order2": -2.1130054725153646e-07,
+              "order4": -2.1086111276211335e-07,
+              "quartic_interval_at_actual_events": 4.39435669861497e-10,
+              "residual_order2_at_actual_events": 1.2568395209274892e-09,
+              "trace2_relative": 0.005763664164237734,
+              "trace4_relative": 0.005625369454296692
+            },
+            {
+              "actual": -2.1005468860284687e-07,
+              "amplitude": -0.004,
+              "charge_relative": 4.7977442578269153e-11,
+              "energy_relative": 1.331712641338894e-06,
+              "marker_actual_hermite": [
+                18.700551905085703,
+                46.11233845298725
+              ],
+              "marker_actual_linear": [
+                18.70044911080044,
+                46.112420062369736
+              ],
+              "marker_decimated_hermite": [
+                18.70055194485931,
+                46.112348936268276
+              ],
+              "marker_decimated_linear": [
+                18.70036273329971,
+                46.1126176460407
+              ],
+              "marker_pred_hermite": [
+                18.671334019119914,
+                46.11235417364237
+              ],
+              "marker_pred_linear": [
+                18.668991224820537,
+                46.112439425671226
+              ],
+              "order2": -2.1130054725153646e-07,
+              "order4": -2.1086111276211335e-07,
+              "quartic_interval_at_actual_events": 4.39435669861497e-10,
+              "residual_order2_at_actual_events": 1.2568395209274892e-09,
+              "trace2_relative": 0.005763664164237734,
+              "trace4_relative": 0.005625369454296692
+            },
+            {
+              "actual": 3.1771801733450064e-07,
+              "amplitude": 0.006,
+              "charge_relative": 4.7977442578269153e-11,
+              "energy_relative": 5.924216829593293e-07,
+              "marker_actual_hermite": [
+                18.656213226491058,
+                46.966477874135315
+              ],
+              "marker_actual_linear": [
+                18.65512628680915,
+                46.966543517672285
+              ],
+              "marker_decimated_hermite": [
+                18.65631582075774,
+                46.96643321654076
+              ],
+              "marker_decimated_linear": [
+                18.645650946795197,
+                46.96684128591451
+              ],
+              "marker_pred_hermite": [
+                18.624512146424845,
+                46.96633752170199
+              ],
+              "marker_pred_linear": [
+                18.621997237076847,
+                46.96646711999082
+              ],
+              "order2": 3.1575699176077276e-07,
+              "order4": 3.173221322126124e-07,
+              "quartic_interval_at_actual_events": 1.5650760486361212e-09,
+              "residual_order2_at_actual_events": 1.9588834105464056e-09,
+              "trace2_relative": 0.005979695202310631,
+              "trace4_relative": 0.005625928612843618
+            }
+          ],
+          "finer": [
+            {
+              "actual": -2.0877767371622133e-07,
+              "amplitude": 0.004,
+              "charge_relative": 1.4996146917423757e-12,
+              "energy_relative": 4.1620259661245447e-08,
+              "marker_actual_hermite": [
+                18.810184875285078,
+                46.112390574722326
+              ],
+              "marker_actual_linear": [
+                18.808138814881623,
+                46.11247694441087
+              ],
+              "marker_decimated_hermite": [
+                18.81020327749983,
+                46.11239505069271
+              ],
+              "marker_decimated_linear": [
+                18.806134548836972,
+                46.112609555474286
+              ],
+              "marker_pred_hermite": [
+                18.798066620840405,
+                46.11258241524496
+              ],
+              "marker_pred_linear": [
+                18.797530825202497,
+                46.1126792743429
+              ],
+              "order2": -2.0939038581366823e-07,
+              "order4": -2.0895271838303498e-07,
+              "quartic_interval_at_actual_events": 4.376801262137444e-10,
+              "residual_order2_at_actual_events": 7.288481574706791e-10,
+              "trace2_relative": 0.001881966768249624,
+              "trace4_relative": 0.0017124457393285937
+            },
+            {
+              "actual": -2.0877767371622133e-07,
+              "amplitude": -0.004,
+              "charge_relative": 1.4996146917423757e-12,
+              "energy_relative": 4.1620259661245447e-08,
+              "marker_actual_hermite": [
+                18.810184875285078,
+                46.112390574722326
+              ],
+              "marker_actual_linear": [
+                18.808138814881623,
+                46.11247694441087
+              ],
+              "marker_decimated_hermite": [
+                18.81020327749983,
+                46.11239505069271
+              ],
+              "marker_decimated_linear": [
+                18.806134548836972,
+                46.112609555474286
+              ],
+              "marker_pred_hermite": [
+                18.798066620840405,
+                46.11258241524496
+              ],
+              "marker_pred_linear": [
+                18.797530825202497,
+                46.1126792743429
+              ],
+              "order2": -2.0939038581366823e-07,
+              "order4": -2.0895271838303498e-07,
+              "quartic_interval_at_actual_events": 4.376801262137444e-10,
+              "residual_order2_at_actual_events": 7.288481574706791e-10,
+              "trace2_relative": 0.001881966768249624,
+              "trace4_relative": 0.0017124457393285937
+            },
+            {
+              "actual": 3.1832914242250647e-07,
+              "amplitude": 0.006,
+              "charge_relative": 1.499295080768006e-12,
+              "energy_relative": 1.8517590418802953e-08,
+              "marker_actual_hermite": [
+                18.777948759493658,
+                46.9666315058085
+              ],
+              "marker_actual_linear": [
+                18.774366854891912,
+                46.96676195638932
+              ],
+              "marker_decimated_hermite": [
+                18.77802977842142,
+                46.96657789673814
+              ],
+              "marker_decimated_linear": [
+                18.766904198202642,
+                46.96713413812958
+              ],
+              "marker_pred_hermite": [
+                18.764309057602013,
+                46.96681046676589
+              ],
+              "marker_pred_linear": [
+                18.761649821583653,
+                46.96695250502477
+              ],
+              "order2": 3.16625595862515e-07,
+              "order4": 3.1817644305524224e-07,
+              "quartic_interval_at_actual_events": 1.5510076102366567e-09,
+              "residual_order2_at_actual_events": 1.7071984477493398e-09,
+              "trace2_relative": 0.0022056257435376717,
+              "trace4_relative": 0.0017123492817235823
+            }
+          ],
+          "time": [
+            {
+              "actual": -2.2084572763553515e-07,
+              "amplitude": 0.004,
+              "charge_relative": 1.4997989861598735e-12,
+              "energy_relative": 4.1639532806814636e-08,
+              "marker_actual_hermite": [
+                18.460996517701258,
+                46.102007960777975
+              ],
+              "marker_actual_linear": [
+                18.459783071351413,
+                46.10215017204349
+              ],
+              "marker_decimated_hermite": [
+                18.461028164484652,
+                46.10200863230581
+              ],
+              "marker_decimated_linear": [
+                18.45391333156679,
+                46.10227503205525
+              ],
+              "marker_pred_hermite": [
+                18.39997904260211,
+                46.11598474923988
+              ],
+              "marker_pred_linear": [
+                18.399976006973187,
+                46.11576692497422
+              ],
+              "order2": -2.1645245431339887e-07,
+              "order4": -2.1600666037459918e-07,
+              "quartic_interval_at_actual_events": 4.465273574597928e-10,
+              "residual_order2_at_actual_events": 3.3570672518873423e-09,
+              "trace2_relative": 0.02124793833610098,
+              "trace4_relative": 0.021126690408384226
+            },
+            {
+              "actual": -2.2084572763553515e-07,
+              "amplitude": -0.004,
+              "charge_relative": 1.4997989861598735e-12,
+              "energy_relative": 4.1639532806814636e-08,
+              "marker_actual_hermite": [
+                18.460996517701258,
+                46.102007960777975
+              ],
+              "marker_actual_linear": [
+                18.459783071351413,
+                46.10215017204349
+              ],
+              "marker_decimated_hermite": [
+                18.461028164484652,
+                46.10200863230581
+              ],
+              "marker_decimated_linear": [
+                18.45391333156679,
+                46.10227503205525
+              ],
+              "marker_pred_hermite": [
+                18.39997904260211,
+                46.11598474923988
+              ],
+              "marker_pred_linear": [
+                18.399976006973187,
+                46.11576692497422
+              ],
+              "order2": -2.1645245431339887e-07,
+              "order4": -2.1600666037459918e-07,
+              "quartic_interval_at_actual_events": 4.465273574597928e-10,
+              "residual_order2_at_actual_events": 3.3570672518873423e-09,
+              "trace2_relative": 0.02124793833610098,
+              "trace4_relative": 0.021126690408384226
+            },
+            {
+              "actual": 3.1521788758564625e-07,
+              "amplitude": 0.006,
+              "charge_relative": 1.4983605600222522e-12,
+              "energy_relative": 1.8508648879641367e-08,
+              "marker_actual_hermite": [
+                18.397695158492006,
+                46.97630419155921
+              ],
+              "marker_actual_linear": [
+                18.39734468387552,
+                46.9751542764299
+              ],
+              "marker_decimated_hermite": [
+                18.397695377704483,
+                46.97621248720988
+              ],
+              "marker_decimated_linear": [
+                18.396936662380156,
+                46.974048957328506
+              ],
+              "marker_pred_hermite": [
+                18.332818042288412,
+                46.96350381173514
+              ],
+              "marker_pred_linear": [
+                18.331188329135173,
+                46.963667650398406
+              ],
+              "order2": 3.116770657093768e-07,
+              "order4": 3.1329844275286463e-07,
+              "quartic_interval_at_actual_events": 1.611661734362866e-09,
+              "residual_order2_at_actual_events": 2.9549001365910266e-09,
+              "trace2_relative": 0.02141462898790554,
+              "trace4_relative": 0.021129704816901074
+            }
+          ]
+        },
+        "inversion_control": {
+          "heldout_actual_linear": [
+            18.45978376145463,
+            46.10216288334618
+          ],
+          "known_Z_max_error": 0.05980690053786475,
+          "known_Z_optical_linear": [
+            18.399976860916766,
+            46.11579852959297
+          ],
+          "status": "post-hoc control on held-out receiver; optical fourth-order forecast was locked before receiver",
+          "vacuum_linear": [
+            18.39980545358822,
+            46.115274602965314
+          ],
+          "vacuum_max_error": 0.05997830786641245
+        },
+        "marker_error": {
+          "base:-0.004": 0.059806900533985186,
+          "base:0.004": 0.059806900533985186,
+          "base:0.006": 0.06615648420434894,
+          "fine:-0.004": 0.03145788597990418,
+          "fine:0.004": 0.03145788597990418,
+          "fine:0.006": 0.03312904973230246,
+          "finer:-0.004": 0.010607989679126462,
+          "finer:0.004": 0.010607989679126462,
+          "finer:0.006": 0.012717033308259573,
+          "time:-0.004": 0.05980706437822647,
+          "time:0.004": 0.05980706437822647,
+          "time:0.006": 0.06615635474034676
+        },
+        "model": "unchanged SS OCF 1 radial discrete Hamiltonian; calibrated omega and mode",
+        "numerical_budget_cycles": 1.294616055030286e-09,
+        "prior_inspected_diagnostic": [
+          {
+            "actual_minus_fourth_at_fixed_nominal_markers": -3.275169741301954e-12,
+            "actual_minus_second_at_fixed_nominal_markers": 1.4741488043037992e-11,
+            "amplitude": 0.002,
+            "derived_fourth_at_fixed_nominal_markers": 1.8016657784339945e-11,
+            "status": "diagnostic: inspected Test 7 data and fixed nominal marker times; no held-out acceptance"
+          },
+          {
+            "actual_minus_fourth_at_fixed_nominal_markers": -1.3168418243253342e-11,
+            "actual_minus_second_at_fixed_nominal_markers": 2.750981063061858e-10,
+            "amplitude": 0.004,
+            "derived_fourth_at_fixed_nominal_markers": 2.882665245494391e-10,
+            "status": "diagnostic: inspected Test 7 data and fixed nominal marker times; no held-out acceptance"
+          },
+          {
+            "actual_minus_fourth_at_fixed_nominal_markers": -5.0358409039292437e-11,
+            "actual_minus_second_at_fixed_nominal_markers": 4.561905983751734e-09,
+            "amplitude": 0.008,
+            "derived_fourth_at_fixed_nominal_markers": 4.612264392791026e-09,
+            "status": "diagnostic: inspected Test 7 data and fixed nominal marker times; no held-out acceptance"
+          }
+        ],
+        "sample": "0.05; retrospective first-rise last-fall; quiet interval is counterfactual",
+        "temporal_interpolation": {
+          "base": {
+            "coarse_hermite_vs_fine_hermite": 3.164671878153058e-05,
+            "coarse_linear_vs_fine_hermite": 0.007083162670088683,
+            "fine_linear_vs_fine_hermite": 0.0012135101619143995
+          },
+          "fine": {
+            "coarse_hermite_vs_fine_hermite": 1.0483281023709878e-05,
+            "coarse_linear_vs_fine_hermite": 0.00027919305344425993,
+            "fine_linear_vs_fine_hermite": 0.00010279428526160928
+          },
+          "finer": {
+            "coarse_hermite_vs_fine_hermite": 1.8402214752910595e-05,
+            "coarse_linear_vs_fine_hermite": 0.004050326448105324,
+            "fine_linear_vs_fine_hermite": 0.0020460604034546748
+          }
+        }
+      },
+      "supersedes": null
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-2ac5026ac59eb19b",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-ac36b679/analysis.json",
+      "sha256": "c328b1ee73b073e955a433dacee672b600844961374ab23ff58365952af13751",
+      "size": 22890,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1e7a410c5d2c9483",
+      "kind": "check",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-ac36b679/checks.json",
+      "sha256": "d401d9e382032897b8187bf3b0595040f6f4daafa7cc9bc8abc4e6ff37cd18d2",
+      "size": 2182,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a65ba04bc56d1b32",
+      "kind": "derived",
+      "media_type": "application/json",
+      "path": "analyses/analysis-0001-ac36b679/derived/summary.json",
+      "sha256": "77eaa3586bd442d72f0ba7091072b6b13214acba1c1a525708e74300d907c06d",
+      "size": 16921,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d9dab2ef0e15cd97",
+      "kind": "derived",
+      "media_type": "text/csv",
+      "path": "analyses/analysis-0001-ac36b679/derived/traces.csv",
+      "sha256": "e6bbcc050cf745aa0a09959197002f0e300e4912f0e6dac9b722d02826cd688b",
+      "size": 624189,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-65496636f09a3c8c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/attempt.json",
+      "sha256": "dab7859cae9492552912bf3bf1991227f634beb56250c218f6826b2fc8a2c544",
+      "size": 319,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-9f89b66be863885e",
+      "kind": "event-log",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/events.jsonl",
+      "sha256": "2f6c2e8609e32d713e87f8ca9e1992ba7c1aeef01a42c921dcc1c8d581cb7aef",
+      "size": 3140,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4df3f1e2a897a91c",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/logs/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e43501766c2f319",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/preparation.json",
+      "sha256": "c4db352a2ff3df5fed63e639421dfe851883e1c3318a83038c59b05f08158e84",
+      "size": 2720,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-81a1fdd94861be5d",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/diagnostic-finer.npz",
+      "sha256": "e547f10cd9f8cc47a82711cde32b462a078ded193aeef983dbb3fb925b7477f4",
+      "size": 99521,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-24941a1527ae3d69",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/execution.json",
+      "sha256": "4bfbf7c2b079ac16c7807d562a218dcc14bf4c762519f2767d90e5e50cb0428b",
+      "size": 640,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b35db78d417debdf",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/input-base.npz",
+      "sha256": "d8ff1227cb27e43598a8f30a6f948af5a81daaf4ffb23572a40b1e8a6c4a573d",
+      "size": 5467,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f57a38eaddb07a2c",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/input-fine.npz",
+      "sha256": "04b0889716f9b22b5782f2f71f71e3dca2b3f98a2a37f84c7f95bdfbe5347376",
+      "size": 9723,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-df9a374c35d41234",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/input-finer.npz",
+      "sha256": "b504ffbcb8e27091dfdbfaebccf1bf045896a66586690296b27da253c9d4c03b",
+      "size": 18090,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0929a9c8442c4302",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/input-time.npz",
+      "sha256": "db21d4485d99c8b448c5b9dbce6a8e7bb2b0669b902da050e69e0e534af9f4dd",
+      "size": 5477,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-77a0199d85e52efd",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/optical-base.json",
+      "sha256": "cc96dfe5602041da4f2bcc8db09b0f0889a7c18121bfc576a6c96d4c841521be",
+      "size": 165,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b082b566b6187fe7",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/optical-fine.json",
+      "sha256": "eda9c6bc2a3af5752799dc9503a785c90bcebdbb5e162a31ba7f0d471e9407fa",
+      "size": 166,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8867ce91ab601b35",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/optical-finer.json",
+      "sha256": "7975decf55b406d086ff49ffb1a3b6bee064f0e8dd2d97aa11011dac6d7ed1ea",
+      "size": 166,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-752567fbd56b7e7b",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/optical-time.json",
+      "sha256": "e7d69a9f426a91428780db435a4c4cec68656287c6cf75999b3f3fa2a1481596",
+      "size": 165,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-df4e654f7bb1a2e6",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/prediction-base.npz",
+      "sha256": "e6788458886b2cc01031c2cfac87151839219295be9702335ec09e505898cf81",
+      "size": 105719,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-276b718ff2903def",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/prediction-fine.npz",
+      "sha256": "1370f41fd834bf7ff0a9197907911355212f098e92cfe7797aa45e99f387a724",
+      "size": 103089,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-06714fa0151f1ae3",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/prediction-finer.npz",
+      "sha256": "de6b60c220c3dc64a1275db3de75b5cee09c304fad7661bfe61062266eed8b61",
+      "size": 99613,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-e74d853f0e51b9c1",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/prediction-lock.json",
+      "sha256": "a2ffb91ba62e10da7fa5f1c7c1043b608d1f7dbd0d6ad41cbaf0e4b326efd230",
+      "size": 1116,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-68a89e19bbd5205a",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/prediction-time.npz",
+      "sha256": "638ac442492ac4d7f8c1b23852f20a102e80001cdac518d240dd20a1f38468dd",
+      "size": 105830,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b582d9fe2ef5151a",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+      "size": 17390,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3eeccd1c73ac8bf8",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+      "size": 33432,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-150fb7b2b63c96be",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+      "size": 31518,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d9394688c58167d",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/receiver-base.npz",
+      "sha256": "0c7b39a05d2681b31296a3b433b21af213782aa33f0c59fad81d294db0022b97",
+      "size": 124146,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-bde0b64552400adf",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/receiver-fine.npz",
+      "sha256": "b63a470c4827a83baa69270c0539b0e07daa6b15190f03686a540aa2b5628435",
+      "size": 120989,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-0901d62f75abe5cc",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/receiver-finer.npz",
+      "sha256": "bc148a5fd7e308e0e194b874a1228e0706028188bbd8a2ae89df19b7a2ebbeca",
+      "size": 112429,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-2ce9ce83c1bfed33",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/receiver-time.npz",
+      "sha256": "d43655aee8a2f309d2425ef81336d0aa91ec2db65f315e81fc23d54f7ecdd526",
+      "size": 118194,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d39f9babcb642ab9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-end.json",
+      "sha256": "d64049c95551c350a01734423c667713c2ee2deb312a98146728d25dd72cf34d",
+      "size": 209,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8d85fce8df2903b9",
+      "kind": "raw",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/raw/rng-start.json",
+      "sha256": "d64049c95551c350a01734423c667713c2ee2deb312a98146728d25dd72cf34d",
+      "size": 209,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-479b51b0f744f0c7",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/surface-base.npz",
+      "sha256": "78cd18b639b45eacb6ded4aabc3dd23a1af3c5b71c23e284b18a1b657f4171d7",
+      "size": 92544,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7903e32d8341b8f1",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/surface-fine.npz",
+      "sha256": "33686615cd9f4e68f1b3e7137156a997851a2f872070b80c6bd9af68f451a283",
+      "size": 91994,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b4255258b86daa8d",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/surface-finer.npz",
+      "sha256": "ea9c05cfd5969eca4ee06f885989531b819f44a8e091dfd51df6e9d4447ca65b",
+      "size": 182005,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a441bb24f25866e4",
+      "kind": "raw",
+      "media_type": "application/octet-stream",
+      "path": "attempts/attempt-0001/raw/surface-time.npz",
+      "sha256": "2f815409305727843d163fda7efa624ca6afa2acccc5009ce64b3105f16b325c",
+      "size": 184183,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1c68737da8c0aaf8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "attempts/attempt-0001/request.json",
+      "sha256": "cd31f870e7adf6b286ab50b0c81be0511828661e15188300ac19cadfbbf65ff5",
+      "size": 4208,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-5d26b47089e4bf8f",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/code.json",
+      "sha256": "5ea2d71cfd4fb4b5575a2b5eb7a6ea4449560788016048200cb3b8e6289b06e3",
+      "size": 206,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-3219b9326cc4f407",
+      "kind": "provenance",
+      "media_type": "application/octet-stream",
+      "path": "provenance/dependencies.lock",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091",
+      "size": 294,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-1ee42f15d42867c3",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/environment.json",
+      "sha256": "51e7931154a7f1902a9419ff9f440e49b9ce8ccccd7e83463c8e1a1d08d0a219",
+      "size": 305,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-19b18d73cfa234f8",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "provenance/inputs.json",
+      "sha256": "dc503739b15400ae831dc24f8c614f034dace393a4048eda91a87a21b73bf176",
+      "size": 133,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-ad41f19bd45bfce5",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/heldout-phase.figure.json",
+      "sha256": "46cb749461c3ecd00c59aea770e278f9f6b72d97fda53a28415715b0662367ae",
+      "size": 552,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-73ef6f1b0ba52b61",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/heldout-phase.pdf",
+      "sha256": "0e8a214d0724b541ab66ca25568d274e4cb6465c745fdc321aa3a04ee7b26be7",
+      "size": 23634,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-7bc2bd89598d72c9",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/heldout-phase.png",
+      "sha256": "f7355042865f2d1b96338a6edc982d36f7580a19f1664b00f7741510e59b54ed",
+      "size": 123669,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-633e1c06da615379",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/heldout-phase.svg",
+      "sha256": "65b1341b9b5ca0f0ff31dc71f055248448a438124ef5859f71a175fb2a2a81ee",
+      "size": 73469,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-b353ca2ebc3b6a02",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/marker-reconstruction.figure.json",
+      "sha256": "2519a2fa3f96d0de41695517f0ab8bc419c49e05accd777f4bb85742c339767c",
+      "size": 568,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6e9495ae80b3395d",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/marker-reconstruction.pdf",
+      "sha256": "1118d4e2e5adafbb8f1c67322f761d45adad00ca14d3a76dd32d5eb2487cf03a",
+      "size": 17570,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-eff7953049fd995a",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/marker-reconstruction.png",
+      "sha256": "b3e15445cd3612248139b9652cdd6ba58a24c04551eaeceaa247ced78f21906f",
+      "size": 97683,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-8b9e2ed8086ddebb",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/marker-reconstruction.svg",
+      "sha256": "ca281038ad5e089ad5f34aaa04176dfe703a590b6e6b016e0c180fda5067fe54",
+      "size": 56628,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-329006ff20230834",
+      "kind": "figure",
+      "media_type": "application/json",
+      "path": "reports/report-0001/figures/prior-diagnostic.figure.json",
+      "sha256": "3b768ae69de434e17af1aedc4a0177f07dbb692fa2ab5ba27d11ddb47bc2a010",
+      "size": 542,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-079027b20e55de68",
+      "kind": "figure",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/figures/prior-diagnostic.pdf",
+      "sha256": "777c9502d2ed54b4203ddb34fcb650521a18fe23b975e5b4db068176edf70968",
+      "size": 16768,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-6926809bb263ceb0",
+      "kind": "figure",
+      "media_type": "image/png",
+      "path": "reports/report-0001/figures/prior-diagnostic.png",
+      "sha256": "957836b1d4026d7b078356ac671dceb797dc2515480a0bdc2a80b1362e1646cb",
+      "size": 91082,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-93804f889379274b",
+      "kind": "figure",
+      "media_type": "image/svg+xml",
+      "path": "reports/report-0001/figures/prior-diagnostic.svg",
+      "sha256": "dcf43cd2f1d32bf792dfef7202c929561c49fec55371d76e3d0a0c9731c83718",
+      "size": 51762,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-f6b0a9108a4e88cc",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/interpretations.json",
+      "sha256": "1f827ef4d4de3c41fe3c0bbd05816911101bca73556fc1cd6a2070a38482dc18",
+      "size": 1348,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-84f35ebd9171570e",
+      "kind": "plot-data",
+      "media_type": "application/json",
+      "path": "reports/report-0001/plot-data/summary.json",
+      "sha256": "77eaa3586bd442d72f0ba7091072b6b13214acba1c1a525708e74300d907c06d",
+      "size": 16921,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-d35b9755f1ef95d1",
+      "kind": "plot-data",
+      "media_type": "text/csv",
+      "path": "reports/report-0001/plot-data/traces.csv",
+      "sha256": "e6bbcc050cf745aa0a09959197002f0e300e4912f0e6dac9b722d02826cd688b",
+      "size": 624189,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-4a674077cdd7d824",
+      "kind": "report",
+      "media_type": "text/html",
+      "path": "reports/report-0001/report.html",
+      "sha256": "49e62423c9c2728f8311e83d3361cbf1b382929734d224bcc68b461d957397c6",
+      "size": 2119,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-96574ae459a5971c",
+      "kind": "provenance",
+      "media_type": "application/json",
+      "path": "reports/report-0001/report.json",
+      "sha256": "0ac2aff1f37667ef88d2f5da8c0b3a1cc8543eb9ef3992d89d77279bd0bac641",
+      "size": 1488,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-a43e0e8d6c28cbac",
+      "kind": "report",
+      "media_type": "text/markdown",
+      "path": "reports/report-0001/report.md",
+      "sha256": "6dfcf30eecca0441510ea278b0cc35e4fc269659ea378345efa90acea613217a",
+      "size": 1913,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-99fe6a106a397456",
+      "kind": "report",
+      "media_type": "application/pdf",
+      "path": "reports/report-0001/report.pdf",
+      "sha256": "83a8d54c740a7d7001dd196306a2f7570b6d12d82c337207662fb5870897416b",
+      "size": 42286,
+      "source_ids": []
+    },
+    {
+      "id": "artifact-76b2f4524bba093b",
+      "kind": "config",
+      "media_type": "application/json",
+      "path": "resolved-config.json",
+      "sha256": "f1b3ca80591a1a5ee336fe9f8c70c006b9086f30357617e6eed2ffa674603e39",
+      "size": 3625,
+      "source_ids": []
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt-0001",
+      "checkpoint": null,
+      "created_at": "2026-09-26T00:36:42.019815Z",
+      "exit_code": 0,
+      "failure": null,
+      "parent_attempt_id": null,
+      "path": "attempts/attempt-0001",
+      "state": "completed",
+      "updated_at": "2026-09-26T00:41:03.578004Z"
+    }
+  ],
+  "checksum_algorithm": "sha256",
+  "checksum_path": "checksums.sha256",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "2854331b9151859ac465cc97de98089950025188",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "completeness": {
+    "analysis": true,
+    "attempts_terminal": true,
+    "config": true,
+    "provenance": true,
+    "report": true
+  },
+  "config_hash": "f1b3ca80591a1a5ee336fe9f8c70c006b9086f30357617e6eed2ffa674603e39",
+  "config_path": "resolved-config.json",
+  "created_at": "2026-09-26T00:36:42.015119Z",
+  "execution_identity": {
+    "dependencies": {
+      "path": "python/requirements-lock.txt",
+      "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+    },
+    "environment": {
+      "accelerator": "none",
+      "architecture": "x86_64",
+      "implementation": "CPython",
+      "numeric_libraries": {
+        "matplotlib": "3.10.8",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    }
+  },
+  "experiment_id": "gross.reception-order4.v1",
+  "experiment_version": "1.0.0",
+  "known_gaps": [
+    "Inspected earlier Test 7 histories are diagnostic only.",
+    "Flat radial shell and retrospective markers; no two-object recoil or observer invariance.",
+    "Optical inversion is leading WKB, not the exact discrete transfer."
+  ],
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "package_version": 1,
+  "parent_run_id": null,
+  "reports": [
+    {
+      "analysis_id": "analysis-0001-ac36b679",
+      "created_at": "2026-09-26T00:41:06.889244Z",
+      "outputs": {
+        "figure_specs": [
+          "figures/prior-diagnostic.figure.json",
+          "figures/heldout-phase.figure.json",
+          "figures/marker-reconstruction.figure.json"
+        ],
+        "interpretations": "interpretations.json"
+      },
+      "path": "reports/report-0001",
+      "render_provenance": {
+        "code_identity": {
+          "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "revision": "2854331b9151859ac465cc97de98089950025188",
+          "runtime_version": "0.1.0",
+          "tree_state": "clean"
+        },
+        "execution_identity": {
+          "dependencies": {
+            "path": "python/requirements-lock.txt",
+            "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+          },
+          "environment": {
+            "accelerator": "none",
+            "architecture": "x86_64",
+            "implementation": "CPython",
+            "numeric_libraries": {
+              "matplotlib": "3.10.8",
+              "numpy": "2.3.5",
+              "scipy": "1.17.0"
+            },
+            "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+            "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+          }
+        }
+      },
+      "report_id": "report-0001",
+      "required_inputs": [
+        "attempts/attempt-0001/raw/execution.json",
+        "analyses/analysis-0001-ac36b679/derived/summary.json",
+        "analyses/analysis-0001-ac36b679/checks.json"
+      ],
+      "schema_version": "research-report-v1"
+    }
+  ],
+  "run_id": "run-29c4c4228ffddbb4",
+  "schema_version": "research-run-manifest-v1",
+  "scientific_classification": "pass",
+  "seed_algorithm": "sha256-stream-v1",
+  "seed_ledger": {
+    "analysis": 3642285276860304329,
+    "initialization": 10308330472710538624,
+    "perturbations": 15685844196614978125,
+    "sampling": 13651229951245639105
+  },
+  "technical_state": "analyzed",
+  "updated_at": "2026-09-26T00:41:06.892283Z"
+}

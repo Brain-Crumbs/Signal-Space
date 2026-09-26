@@ -1,0 +1,67 @@
+{
+  "schema_version": "signal-space-figure-index-v1",
+  "figures": [
+    {
+      "figure_id": "prior-diagnostic",
+      "role": "diagnostic",
+      "question": "Does the derived fourth-order coefficient explain the inspected residual sign and scaling?",
+      "reading": "Compare the saved Test 7 amplitude ladder at the same nominal A=.004 marker times.",
+      "significance": "This diagnoses the missing order independently of a fitted coefficient.",
+      "limitation": "The prior histories and marker times were already inspected; this is not a prospective prediction.",
+      "source_data": [
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/prior-diagnostic.figure.json",
+      "transformations": [
+        "formal Taylor coefficient times A^4; fixed nominal A=.004 markers from old receiver"
+      ],
+      "files": [
+        "figures/static/prior-diagnostic.png",
+        "figures/static/prior-diagnostic.svg",
+        "figures/static/prior-diagnostic.pdf"
+      ]
+    },
+    {
+      "figure_id": "heldout-phase",
+      "role": "evidentiary",
+      "question": "Does the locked fourth-order prediction improve a new local clock history?",
+      "reading": "Held-out finest trace error: second 0.1882%, fourth 0.1712%.",
+      "significance": "A separate waveform tests the coefficient after the inspected-history diagnostic.",
+      "limitation": "Quiet phase at the pulse markers is counterfactual; grid differences and inversion error remain.",
+      "source_data": [
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/heldout-phase.figure.json",
+      "transformations": [
+        "matched quiet subtraction; exact quadrature Taylor expansion; no fit"
+      ],
+      "files": [
+        "figures/static/heldout-phase.png",
+        "figures/static/heldout-phase.svg",
+        "figures/static/heldout-phase.pdf"
+      ]
+    },
+    {
+      "figure_id": "marker-reconstruction",
+      "role": "evidentiary",
+      "question": "Do derivative-informed markers and twice-frequent output explain local timing error?",
+      "reading": "On h=.025, compare markers at 0.05 and decimated 0.1; coarse vacuum/known-Z maximum errors are 0.05998/0.05981.",
+      "significance": "Separates temporal interpolation from surface-propagation error.",
+      "limitation": "The coarse vacuum control is post-hoc; Hermite cannot repair spatial dispersion or WKB error.",
+      "source_data": [
+        "results/data/plot-data/traces.csv",
+        "results/data/plot-data/summary.json"
+      ],
+      "spec_file": "results/figure-specs/marker-reconstruction.figure.json",
+      "transformations": [
+        "linear threshold crossings; cubic Hermite with local a_t; decimate .05 to .1"
+      ],
+      "files": [
+        "figures/static/marker-reconstruction.png",
+        "figures/static/marker-reconstruction.svg",
+        "figures/static/marker-reconstruction.pdf"
+      ]
+    }
+  ]
+}

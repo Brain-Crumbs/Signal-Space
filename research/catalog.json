@@ -52,7 +52,7 @@
       "kind": "plan",
       "path": "docs/research/experiment-plan.md",
       "status": "active design",
-      "summary": "Ordered E00–E11 derivation gates from the framework fixture to a shared coexistence test.",
+      "summary": "Ordered E00\u2013E11 derivation gates from the framework fixture to a shared coexistence test.",
       "tags": ["roadmap", "experiments", "derivation gates"],
       "title": "Experiment execution plan"
     },
@@ -299,7 +299,7 @@
         "signal-space.operator-constitution.v1",
         "reproducibility"
       ],
-      "title": "gross.operator-identities.v1 — run-2ae9c65dbd171851"
+      "title": "gross.operator-identities.v1 \u2014 run-2ae9c65dbd171851"
     },
     {
       "date": "2026-09-25",
@@ -351,13 +351,37 @@
       "kind": "experiment-run",
       "path": "research/experiments/gross.reception.v1/export-run-b1677e67610c5870/README.md",
       "status": "scientific fail; technical completion",
-      "summary": "Resolved local clock records and 0.108–0.436% finest waveform errors; nominal interval prediction misses 5% gate, coarse marker exceeds timing allowance. No threshold retuning; PDFs, six figures, exact data and next calculation preserved.",
+      "summary": "Resolved local clock records and 0.108\u20130.436% finest waveform errors; nominal interval prediction misses 5% gate, coarse marker exceeds timing allowance. No threshold retuning; PDFs, six figures, exact data and next calculation preserved.",
       "tags": [
         "gross.reception.v1",
         "signal-space.ss-ocf-1.flat-neutral-clock.v1",
         "reproducibility"
       ],
       "title": "gross.reception.v1 - run-b1677e67610c5870"
+    },
+    {
+      "id": "gross-test-07-order4",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-order4.md",
+      "status": "executed bounded follow-up; pass of separate criteria",
+      "summary": "Formal fourth-order neutral/core/clock reception and a new locked upstream waveform with marker and sampling controls. Original Test 7 scientific failure remains.",
+      "tags": ["GROSS", "test-07", "fourth-order", "reception"],
+      "title": "Test 7 fourth-order held-out reception protocol"
+    },
+    {
+      "id": "run-run-29c4c4228ffddbb4",
+      "date": "2026-09-25",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reception-order4.v1/export-run-29c4c4228ffddbb4/README.md",
+      "status": "bounded pass of follow-up; original Test 7 fail unchanged",
+      "summary": "Seven locked follow-up checks pass, with an unfitted A^4 inspected-history diagnostic, held-out local interval and known-Z timing control. Two- to four-order interval improvement is below numerical error budget; Test 8 remains blocked.",
+      "tags": [
+        "gross.reception-order4.v1",
+        "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+        "reproducibility"
+      ],
+      "title": "gross.reception-order4.v1 - run-29c4c4228ffddbb4"
     }
   ],
   "schema_version": 1,

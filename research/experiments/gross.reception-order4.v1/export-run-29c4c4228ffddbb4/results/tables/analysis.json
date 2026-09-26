@@ -1,0 +1,581 @@
+{
+  "analysis_id": "analysis-0001-ac36b679",
+  "classification": "pass",
+  "code_identity": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "2854331b9151859ac465cc97de98089950025188",
+    "runtime_version": "0.1.0",
+    "tree_state": "clean"
+  },
+  "created_at": "2026-09-26T00:41:04.787282Z",
+  "input_artifacts": {
+    "attempts/attempt-0001/raw/diagnostic-finer.npz": "e547f10cd9f8cc47a82711cde32b462a078ded193aeef983dbb3fb925b7477f4",
+    "attempts/attempt-0001/raw/execution.json": "4bfbf7c2b079ac16c7807d562a218dcc14bf4c762519f2767d90e5e50cb0428b",
+    "attempts/attempt-0001/raw/input-base.npz": "d8ff1227cb27e43598a8f30a6f948af5a81daaf4ffb23572a40b1e8a6c4a573d",
+    "attempts/attempt-0001/raw/input-fine.npz": "04b0889716f9b22b5782f2f71f71e3dca2b3f98a2a37f84c7f95bdfbe5347376",
+    "attempts/attempt-0001/raw/input-finer.npz": "b504ffbcb8e27091dfdbfaebccf1bf045896a66586690296b27da253c9d4c03b",
+    "attempts/attempt-0001/raw/input-time.npz": "db21d4485d99c8b448c5b9dbce6a8e7bb2b0669b902da050e69e0e534af9f4dd",
+    "attempts/attempt-0001/raw/optical-base.json": "cc96dfe5602041da4f2bcc8db09b0f0889a7c18121bfc576a6c96d4c841521be",
+    "attempts/attempt-0001/raw/optical-fine.json": "eda9c6bc2a3af5752799dc9503a785c90bcebdbb5e162a31ba7f0d471e9407fa",
+    "attempts/attempt-0001/raw/optical-finer.json": "7975decf55b406d086ff49ffb1a3b6bee064f0e8dd2d97aa11011dac6d7ed1ea",
+    "attempts/attempt-0001/raw/optical-time.json": "e7d69a9f426a91428780db435a4c4cec68656287c6cf75999b3f3fa2a1481596",
+    "attempts/attempt-0001/raw/prediction-base.npz": "e6788458886b2cc01031c2cfac87151839219295be9702335ec09e505898cf81",
+    "attempts/attempt-0001/raw/prediction-fine.npz": "1370f41fd834bf7ff0a9197907911355212f098e92cfe7797aa45e99f387a724",
+    "attempts/attempt-0001/raw/prediction-finer.npz": "de6b60c220c3dc64a1275db3de75b5cee09c304fad7661bfe61062266eed8b61",
+    "attempts/attempt-0001/raw/prediction-lock.json": "a2ffb91ba62e10da7fa5f1c7c1043b608d1f7dbd0d6ad41cbaf0e4b326efd230",
+    "attempts/attempt-0001/raw/prediction-time.npz": "638ac442492ac4d7f8c1b23852f20a102e80001cdac518d240dd20a1f38468dd",
+    "attempts/attempt-0001/raw/profile-0.900.npz": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+    "attempts/attempt-0001/raw/profile-fine.npz": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b",
+    "attempts/attempt-0001/raw/profile-wide.npz": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687",
+    "attempts/attempt-0001/raw/receiver-base.npz": "0c7b39a05d2681b31296a3b433b21af213782aa33f0c59fad81d294db0022b97",
+    "attempts/attempt-0001/raw/receiver-fine.npz": "b63a470c4827a83baa69270c0539b0e07daa6b15190f03686a540aa2b5628435",
+    "attempts/attempt-0001/raw/receiver-finer.npz": "bc148a5fd7e308e0e194b874a1228e0706028188bbd8a2ae89df19b7a2ebbeca",
+    "attempts/attempt-0001/raw/receiver-time.npz": "d43655aee8a2f309d2425ef81336d0aa91ec2db65f315e81fc23d54f7ecdd526",
+    "attempts/attempt-0001/raw/rng-end.json": "d64049c95551c350a01734423c667713c2ee2deb312a98146728d25dd72cf34d",
+    "attempts/attempt-0001/raw/rng-start.json": "d64049c95551c350a01734423c667713c2ee2deb312a98146728d25dd72cf34d",
+    "attempts/attempt-0001/raw/surface-base.npz": "78cd18b639b45eacb6ded4aabc3dd23a1af3c5b71c23e284b18a1b657f4171d7",
+    "attempts/attempt-0001/raw/surface-fine.npz": "33686615cd9f4e68f1b3e7137156a997851a2f872070b80c6bd9af68f451a283",
+    "attempts/attempt-0001/raw/surface-finer.npz": "ea9c05cfd5969eca4ee06f885989531b819f44a8e091dfd51df6e9d4447ca65b",
+    "attempts/attempt-0001/raw/surface-time.npz": "2f815409305727843d163fda7efa624ca6afa2acccc5009ce64b3105f16b325c"
+  },
+  "parameters": {
+    "conservation": "All grid/case relative charge errors <1e-5; discrete total energy residual <1% of initial incident energy.",
+    "heldout-interval": "Held-out A=.004 fourth-order interval error <= max(5% of actual interval, direct numerical budget); no relaxation of old Test 7 thresholds.",
+    "heldout-waveform": "Held-out A=.004 fourth-order matched phase L2 error < min(5%, second-order L2 error).",
+    "marker-timing": "All nonzero cases and grids have first rising and last falling |a|=1e-4 events; standalone forecast within 0.1 m^-1 on each grid.",
+    "prediction-first": "Frozen calibration and inspected-history inputs verify by hash; all new surface and Taylor forecasts locked before any held-out receiver start.",
+    "record-resolution": "Held-out finest A=.004 local interval exceeds five times |finer-fine|+|base-time|+1e-11 cycles, else unresolved.",
+    "sign-even": "A=+.004 and -.004 give first/last marker times equal and interval differences <1e-10 cycles on finest grid."
+  },
+  "path": "analyses/analysis-0001-ac36b679",
+  "raw_source": "attempts/attempt-0001/raw/execution.json",
+  "schema_version": "research-analysis-v1",
+  "summary": {
+    "checks": {
+      "conservation": "pass",
+      "heldout-interval": "pass",
+      "heldout-waveform": "pass",
+      "marker-timing": "pass",
+      "prediction-first": "pass",
+      "record-resolution": "pass",
+      "sign-even": "pass"
+    },
+    "heldout": {
+      "base": [
+        {
+          "actual": -2.208381264671304e-07,
+          "amplitude": 0.004,
+          "charge_relative": 4.797806451985492e-11,
+          "energy_relative": 1.3321644923099373e-06,
+          "marker_actual_hermite": [
+            18.460997271616545,
+            46.102020036769915
+          ],
+          "marker_actual_linear": [
+            18.45978376145463,
+            46.10216288334618
+          ],
+          "marker_decimated_hermite": [
+            18.461028918335327,
+            46.102020717284475
+          ],
+          "marker_decimated_linear": [
+            18.453914108946456,
+            46.102288742426914
+          ],
+          "marker_pred_hermite": [
+            18.39997978855616,
+            46.116001141549866
+          ],
+          "marker_pred_linear": [
+            18.399976860920646,
+            46.11578185886548
+          ],
+          "order2": -2.1644394396365113e-07,
+          "order4": -2.159981508208618e-07,
+          "quartic_interval_at_actual_events": 4.465266808951191e-10,
+          "residual_order2_at_actual_events": 3.357428762340643e-09,
+          "trace2_relative": 0.021247950471191934,
+          "trace4_relative": 0.021126702517317623
+        },
+        {
+          "actual": -2.208381264671304e-07,
+          "amplitude": -0.004,
+          "charge_relative": 4.797806451985492e-11,
+          "energy_relative": 1.3321644923099373e-06,
+          "marker_actual_hermite": [
+            18.460997271616545,
+            46.102020036769915
+          ],
+          "marker_actual_linear": [
+            18.45978376145463,
+            46.10216288334618
+          ],
+          "marker_decimated_hermite": [
+            18.461028918335327,
+            46.102020717284475
+          ],
+          "marker_decimated_linear": [
+            18.453914108946456,
+            46.102288742426914
+          ],
+          "marker_pred_hermite": [
+            18.39997978855616,
+            46.116001141549866
+          ],
+          "marker_pred_linear": [
+            18.399976860920646,
+            46.11578185886548
+          ],
+          "order2": -2.1644394396365113e-07,
+          "order4": -2.159981508208618e-07,
+          "quartic_interval_at_actual_events": 4.465266808951191e-10,
+          "residual_order2_at_actual_events": 3.357428762340643e-09,
+          "trace2_relative": 0.021247950471191934,
+          "trace4_relative": 0.021126702517317623
+        },
+        {
+          "actual": 3.1521494948647456e-07,
+          "amplitude": 0.006,
+          "charge_relative": 4.797758504447572e-11,
+          "energy_relative": 5.926140017168465e-07,
+          "marker_actual_hermite": [
+            18.39769608937619,
+            46.97622254638042
+          ],
+          "marker_actual_linear": [
+            18.397345747774214,
+            46.975079089700195
+          ],
+          "marker_decimated_hermite": [
+            18.39769630842213,
+            46.97613135461061
+          ],
+          "marker_decimated_linear": [
+            18.39693788858706,
+            46.97398960866566
+          ],
+          "marker_pred_hermite": [
+            18.33281894359788,
+            46.963544641163715
+          ],
+          "marker_pred_linear": [
+            18.331189263569865,
+            46.9637063514485
+          ],
+          "order2": 3.1167905289552685e-07,
+          "order4": 3.1330039728026106e-07,
+          "quartic_interval_at_actual_events": 1.6117254007821112e-09,
+          "residual_order2_at_actual_events": 2.9557752232275886e-09,
+          "trace2_relative": 0.021414641685642492,
+          "trace4_relative": 0.021129717461292812
+        }
+      ],
+      "fine": [
+        {
+          "actual": -2.1005468860284687e-07,
+          "amplitude": 0.004,
+          "charge_relative": 4.7977442578269153e-11,
+          "energy_relative": 1.331712641338894e-06,
+          "marker_actual_hermite": [
+            18.700551905085703,
+            46.11233845298725
+          ],
+          "marker_actual_linear": [
+            18.70044911080044,
+            46.112420062369736
+          ],
+          "marker_decimated_hermite": [
+            18.70055194485931,
+            46.112348936268276
+          ],
+          "marker_decimated_linear": [
+            18.70036273329971,
+            46.1126176460407
+          ],
+          "marker_pred_hermite": [
+            18.671334019119914,
+            46.11235417364237
+          ],
+          "marker_pred_linear": [
+            18.668991224820537,
+            46.112439425671226
+          ],
+          "order2": -2.1130054725153646e-07,
+          "order4": -2.1086111276211335e-07,
+          "quartic_interval_at_actual_events": 4.39435669861497e-10,
+          "residual_order2_at_actual_events": 1.2568395209274892e-09,
+          "trace2_relative": 0.005763664164237734,
+          "trace4_relative": 0.005625369454296692
+        },
+        {
+          "actual": -2.1005468860284687e-07,
+          "amplitude": -0.004,
+          "charge_relative": 4.7977442578269153e-11,
+          "energy_relative": 1.331712641338894e-06,
+          "marker_actual_hermite": [
+            18.700551905085703,
+            46.11233845298725
+          ],
+          "marker_actual_linear": [
+            18.70044911080044,
+            46.112420062369736
+          ],
+          "marker_decimated_hermite": [
+            18.70055194485931,
+            46.112348936268276
+          ],
+          "marker_decimated_linear": [
+            18.70036273329971,
+            46.1126176460407
+          ],
+          "marker_pred_hermite": [
+            18.671334019119914,
+            46.11235417364237
+          ],
+          "marker_pred_linear": [
+            18.668991224820537,
+            46.112439425671226
+          ],
+          "order2": -2.1130054725153646e-07,
+          "order4": -2.1086111276211335e-07,
+          "quartic_interval_at_actual_events": 4.39435669861497e-10,
+          "residual_order2_at_actual_events": 1.2568395209274892e-09,
+          "trace2_relative": 0.005763664164237734,
+          "trace4_relative": 0.005625369454296692
+        },
+        {
+          "actual": 3.1771801733450064e-07,
+          "amplitude": 0.006,
+          "charge_relative": 4.7977442578269153e-11,
+          "energy_relative": 5.924216829593293e-07,
+          "marker_actual_hermite": [
+            18.656213226491058,
+            46.966477874135315
+          ],
+          "marker_actual_linear": [
+            18.65512628680915,
+            46.966543517672285
+          ],
+          "marker_decimated_hermite": [
+            18.65631582075774,
+            46.96643321654076
+          ],
+          "marker_decimated_linear": [
+            18.645650946795197,
+            46.96684128591451
+          ],
+          "marker_pred_hermite": [
+            18.624512146424845,
+            46.96633752170199
+          ],
+          "marker_pred_linear": [
+            18.621997237076847,
+            46.96646711999082
+          ],
+          "order2": 3.1575699176077276e-07,
+          "order4": 3.173221322126124e-07,
+          "quartic_interval_at_actual_events": 1.5650760486361212e-09,
+          "residual_order2_at_actual_events": 1.9588834105464056e-09,
+          "trace2_relative": 0.005979695202310631,
+          "trace4_relative": 0.005625928612843618
+        }
+      ],
+      "finer": [
+        {
+          "actual": -2.0877767371622133e-07,
+          "amplitude": 0.004,
+          "charge_relative": 1.4996146917423757e-12,
+          "energy_relative": 4.1620259661245447e-08,
+          "marker_actual_hermite": [
+            18.810184875285078,
+            46.112390574722326
+          ],
+          "marker_actual_linear": [
+            18.808138814881623,
+            46.11247694441087
+          ],
+          "marker_decimated_hermite": [
+            18.81020327749983,
+            46.11239505069271
+          ],
+          "marker_decimated_linear": [
+            18.806134548836972,
+            46.112609555474286
+          ],
+          "marker_pred_hermite": [
+            18.798066620840405,
+            46.11258241524496
+          ],
+          "marker_pred_linear": [
+            18.797530825202497,
+            46.1126792743429
+          ],
+          "order2": -2.0939038581366823e-07,
+          "order4": -2.0895271838303498e-07,
+          "quartic_interval_at_actual_events": 4.376801262137444e-10,
+          "residual_order2_at_actual_events": 7.288481574706791e-10,
+          "trace2_relative": 0.001881966768249624,
+          "trace4_relative": 0.0017124457393285937
+        },
+        {
+          "actual": -2.0877767371622133e-07,
+          "amplitude": -0.004,
+          "charge_relative": 1.4996146917423757e-12,
+          "energy_relative": 4.1620259661245447e-08,
+          "marker_actual_hermite": [
+            18.810184875285078,
+            46.112390574722326
+          ],
+          "marker_actual_linear": [
+            18.808138814881623,
+            46.11247694441087
+          ],
+          "marker_decimated_hermite": [
+            18.81020327749983,
+            46.11239505069271
+          ],
+          "marker_decimated_linear": [
+            18.806134548836972,
+            46.112609555474286
+          ],
+          "marker_pred_hermite": [
+            18.798066620840405,
+            46.11258241524496
+          ],
+          "marker_pred_linear": [
+            18.797530825202497,
+            46.1126792743429
+          ],
+          "order2": -2.0939038581366823e-07,
+          "order4": -2.0895271838303498e-07,
+          "quartic_interval_at_actual_events": 4.376801262137444e-10,
+          "residual_order2_at_actual_events": 7.288481574706791e-10,
+          "trace2_relative": 0.001881966768249624,
+          "trace4_relative": 0.0017124457393285937
+        },
+        {
+          "actual": 3.1832914242250647e-07,
+          "amplitude": 0.006,
+          "charge_relative": 1.499295080768006e-12,
+          "energy_relative": 1.8517590418802953e-08,
+          "marker_actual_hermite": [
+            18.777948759493658,
+            46.9666315058085
+          ],
+          "marker_actual_linear": [
+            18.774366854891912,
+            46.96676195638932
+          ],
+          "marker_decimated_hermite": [
+            18.77802977842142,
+            46.96657789673814
+          ],
+          "marker_decimated_linear": [
+            18.766904198202642,
+            46.96713413812958
+          ],
+          "marker_pred_hermite": [
+            18.764309057602013,
+            46.96681046676589
+          ],
+          "marker_pred_linear": [
+            18.761649821583653,
+            46.96695250502477
+          ],
+          "order2": 3.16625595862515e-07,
+          "order4": 3.1817644305524224e-07,
+          "quartic_interval_at_actual_events": 1.5510076102366567e-09,
+          "residual_order2_at_actual_events": 1.7071984477493398e-09,
+          "trace2_relative": 0.0022056257435376717,
+          "trace4_relative": 0.0017123492817235823
+        }
+      ],
+      "time": [
+        {
+          "actual": -2.2084572763553515e-07,
+          "amplitude": 0.004,
+          "charge_relative": 1.4997989861598735e-12,
+          "energy_relative": 4.1639532806814636e-08,
+          "marker_actual_hermite": [
+            18.460996517701258,
+            46.102007960777975
+          ],
+          "marker_actual_linear": [
+            18.459783071351413,
+            46.10215017204349
+          ],
+          "marker_decimated_hermite": [
+            18.461028164484652,
+            46.10200863230581
+          ],
+          "marker_decimated_linear": [
+            18.45391333156679,
+            46.10227503205525
+          ],
+          "marker_pred_hermite": [
+            18.39997904260211,
+            46.11598474923988
+          ],
+          "marker_pred_linear": [
+            18.399976006973187,
+            46.11576692497422
+          ],
+          "order2": -2.1645245431339887e-07,
+          "order4": -2.1600666037459918e-07,
+          "quartic_interval_at_actual_events": 4.465273574597928e-10,
+          "residual_order2_at_actual_events": 3.3570672518873423e-09,
+          "trace2_relative": 0.02124793833610098,
+          "trace4_relative": 0.021126690408384226
+        },
+        {
+          "actual": -2.2084572763553515e-07,
+          "amplitude": -0.004,
+          "charge_relative": 1.4997989861598735e-12,
+          "energy_relative": 4.1639532806814636e-08,
+          "marker_actual_hermite": [
+            18.460996517701258,
+            46.102007960777975
+          ],
+          "marker_actual_linear": [
+            18.459783071351413,
+            46.10215017204349
+          ],
+          "marker_decimated_hermite": [
+            18.461028164484652,
+            46.10200863230581
+          ],
+          "marker_decimated_linear": [
+            18.45391333156679,
+            46.10227503205525
+          ],
+          "marker_pred_hermite": [
+            18.39997904260211,
+            46.11598474923988
+          ],
+          "marker_pred_linear": [
+            18.399976006973187,
+            46.11576692497422
+          ],
+          "order2": -2.1645245431339887e-07,
+          "order4": -2.1600666037459918e-07,
+          "quartic_interval_at_actual_events": 4.465273574597928e-10,
+          "residual_order2_at_actual_events": 3.3570672518873423e-09,
+          "trace2_relative": 0.02124793833610098,
+          "trace4_relative": 0.021126690408384226
+        },
+        {
+          "actual": 3.1521788758564625e-07,
+          "amplitude": 0.006,
+          "charge_relative": 1.4983605600222522e-12,
+          "energy_relative": 1.8508648879641367e-08,
+          "marker_actual_hermite": [
+            18.397695158492006,
+            46.97630419155921
+          ],
+          "marker_actual_linear": [
+            18.39734468387552,
+            46.9751542764299
+          ],
+          "marker_decimated_hermite": [
+            18.397695377704483,
+            46.97621248720988
+          ],
+          "marker_decimated_linear": [
+            18.396936662380156,
+            46.974048957328506
+          ],
+          "marker_pred_hermite": [
+            18.332818042288412,
+            46.96350381173514
+          ],
+          "marker_pred_linear": [
+            18.331188329135173,
+            46.963667650398406
+          ],
+          "order2": 3.116770657093768e-07,
+          "order4": 3.1329844275286463e-07,
+          "quartic_interval_at_actual_events": 1.611661734362866e-09,
+          "residual_order2_at_actual_events": 2.9549001365910266e-09,
+          "trace2_relative": 0.02141462898790554,
+          "trace4_relative": 0.021129704816901074
+        }
+      ]
+    },
+    "inversion_control": {
+      "heldout_actual_linear": [
+        18.45978376145463,
+        46.10216288334618
+      ],
+      "known_Z_max_error": 0.05980690053786475,
+      "known_Z_optical_linear": [
+        18.399976860916766,
+        46.11579852959297
+      ],
+      "status": "post-hoc control on held-out receiver; optical fourth-order forecast was locked before receiver",
+      "vacuum_linear": [
+        18.39980545358822,
+        46.115274602965314
+      ],
+      "vacuum_max_error": 0.05997830786641245
+    },
+    "marker_error": {
+      "base:-0.004": 0.059806900533985186,
+      "base:0.004": 0.059806900533985186,
+      "base:0.006": 0.06615648420434894,
+      "fine:-0.004": 0.03145788597990418,
+      "fine:0.004": 0.03145788597990418,
+      "fine:0.006": 0.03312904973230246,
+      "finer:-0.004": 0.010607989679126462,
+      "finer:0.004": 0.010607989679126462,
+      "finer:0.006": 0.012717033308259573,
+      "time:-0.004": 0.05980706437822647,
+      "time:0.004": 0.05980706437822647,
+      "time:0.006": 0.06615635474034676
+    },
+    "model": "unchanged SS OCF 1 radial discrete Hamiltonian; calibrated omega and mode",
+    "numerical_budget_cycles": 1.294616055030286e-09,
+    "prior_inspected_diagnostic": [
+      {
+        "actual_minus_fourth_at_fixed_nominal_markers": -3.275169741301954e-12,
+        "actual_minus_second_at_fixed_nominal_markers": 1.4741488043037992e-11,
+        "amplitude": 0.002,
+        "derived_fourth_at_fixed_nominal_markers": 1.8016657784339945e-11,
+        "status": "diagnostic: inspected Test 7 data and fixed nominal marker times; no held-out acceptance"
+      },
+      {
+        "actual_minus_fourth_at_fixed_nominal_markers": -1.3168418243253342e-11,
+        "actual_minus_second_at_fixed_nominal_markers": 2.750981063061858e-10,
+        "amplitude": 0.004,
+        "derived_fourth_at_fixed_nominal_markers": 2.882665245494391e-10,
+        "status": "diagnostic: inspected Test 7 data and fixed nominal marker times; no held-out acceptance"
+      },
+      {
+        "actual_minus_fourth_at_fixed_nominal_markers": -5.0358409039292437e-11,
+        "actual_minus_second_at_fixed_nominal_markers": 4.561905983751734e-09,
+        "amplitude": 0.008,
+        "derived_fourth_at_fixed_nominal_markers": 4.612264392791026e-09,
+        "status": "diagnostic: inspected Test 7 data and fixed nominal marker times; no held-out acceptance"
+      }
+    ],
+    "sample": "0.05; retrospective first-rise last-fall; quiet interval is counterfactual",
+    "temporal_interpolation": {
+      "base": {
+        "coarse_hermite_vs_fine_hermite": 3.164671878153058e-05,
+        "coarse_linear_vs_fine_hermite": 0.007083162670088683,
+        "fine_linear_vs_fine_hermite": 0.0012135101619143995
+      },
+      "fine": {
+        "coarse_hermite_vs_fine_hermite": 1.0483281023709878e-05,
+        "coarse_linear_vs_fine_hermite": 0.00027919305344425993,
+        "fine_linear_vs_fine_hermite": 0.00010279428526160928
+      },
+      "finer": {
+        "coarse_hermite_vs_fine_hermite": 1.8402214752910595e-05,
+        "coarse_linear_vs_fine_hermite": 0.004050326448105324,
+        "fine_linear_vs_fine_hermite": 0.0020460604034546748
+      }
+    }
+  },
+  "supersedes": null
+}

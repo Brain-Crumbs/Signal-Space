@@ -1,0 +1,86 @@
+{
+  "M0": 1.0,
+  "acquisition_duration": 35.0,
+  "amplitudes": [
+    0.004,
+    -0.004,
+    0.006
+  ],
+  "clock_amplitude": 0.001,
+  "cycle_noise_floor": 1e-11,
+  "duration": 65.0,
+  "epsilon": 0.2,
+  "frozen_inputs": [
+    {
+      "name": "profile-0.900.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "name": "profile-fine.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "name": "profile-wide.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    }
+  ],
+  "heldout_center": 22.0,
+  "heldout_width": 3.25,
+  "incoming_window": 15.0,
+  "kind": "reception-order4",
+  "local_radius": 0.1,
+  "marker_threshold": 0.0001,
+  "marker_time_tolerance": 0.1,
+  "omega_Q": 0.9,
+  "omega_chi": 0.41274991,
+  "prior_inputs": [
+    {
+      "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/input-base.npz",
+      "sha256": "64d3d7a89bbfecb05703ae380004b371d8dc35ec6b613821e45d5a77a7b1f1be"
+    },
+    {
+      "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/input-fine.npz",
+      "sha256": "5f3ee5a6c9f6b59b391743e8c781ba0046ce9a9c1ba4264245891515d4e0ab62"
+    },
+    {
+      "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/input-finer.npz",
+      "sha256": "862f21f28bf9652494a171697f33416073eefd5986624f98ef5da2a2a46ec2e9"
+    },
+    {
+      "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/receiver-finer.npz",
+      "sha256": "287772fc97bbea306030340d0e7243be175a2cea135dd980758607444bd482b4"
+    }
+  ],
+  "prior_raw": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw",
+  "sample_interval": 0.05,
+  "upstream_radius": 14.0,
+  "variants": [
+    {
+      "dt": 0.01,
+      "h": 0.1,
+      "name": "base",
+      "profile": "profile-0.900.npz"
+    },
+    {
+      "dt": 0.01,
+      "h": 0.05,
+      "name": "fine",
+      "profile": "profile-fine.npz"
+    },
+    {
+      "dt": 0.005,
+      "h": 0.025,
+      "name": "finer",
+      "profile": "profile-fine.npz"
+    },
+    {
+      "dt": 0.005,
+      "h": 0.1,
+      "name": "time",
+      "profile": "profile-0.900.npz"
+    }
+  ]
+}
