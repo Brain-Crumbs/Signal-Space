@@ -1,0 +1,30 @@
+{
+  "attempts": [
+    {
+      "center": 5.1893275038818824e-08,
+      "guess_radius": 5.0,
+      "message": "The algorithm converged to the desired accuracy.",
+      "success": true,
+      "tail": 4.0647350334883917e-25,
+      "valid": false
+    },
+    {
+      "center": 0.7426159462132575,
+      "guess_radius": 10.0,
+      "message": "The algorithm converged to the desired accuracy.",
+      "success": true,
+      "tail": 5.1069730407306995e-17,
+      "valid": true
+    },
+    {
+      "discrete_newton_steps": 3,
+      "discrete_residual": 2.3412105587539145e-12
+    }
+  ],
+  "eigenvalues": [
+    0.17036143078907212,
+    0.25186077325858314,
+    0.2573983420739059
+  ],
+  "method": "independent BVP and discrete Newton; independent eigenproblem; fixed readout omega"
+}

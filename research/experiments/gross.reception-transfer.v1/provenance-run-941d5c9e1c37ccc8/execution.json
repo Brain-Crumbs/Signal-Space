@@ -1,0 +1,19 @@
+{
+  "source_commit": "13b7d51a33d9ded87eafb6f586960a564c04bb28",
+  "source_tree": "cb9b114092a198ff92d0e019234169bf20d268cd",
+  "source_archive_sha256": "82afcf712ab610b844851ecd57294c20fa4d6c0a9482d3023fe2043aeaa41800",
+  "github": {
+    "GITHUB_REPOSITORY": "Brain-Crumbs/Signal-Space",
+    "GITHUB_SHA": "13b7d51a33d9ded87eafb6f586960a564c04bb28",
+    "GITHUB_REF": "refs/heads/research/gross-test-07-discrete-transfer",
+    "GITHUB_WORKFLOW_REF": "Brain-Crumbs/Signal-Space/.github/workflows/recover-transfer.yml@refs/heads/research/gross-test-07-discrete-transfer",
+    "GITHUB_WORKFLOW_SHA": "13b7d51a33d9ded87eafb6f586960a564c04bb28",
+    "GITHUB_RUN_ID": "36218801522",
+    "GITHUB_RUN_ATTEMPT": "1",
+    "GITHUB_SERVER_URL": "https://github.com",
+    "RUNNER_OS": "Linux",
+    "RUNNER_ARCH": "X64"
+  },
+  "plan_path": "docs/research/plans/gross-test-07-transfer.json",
+  "plan_lock": "12fa3a66a48d90185d499eee95a457d652b70ee2af87b4cbc3a0b6bb4268cbaf"
+}

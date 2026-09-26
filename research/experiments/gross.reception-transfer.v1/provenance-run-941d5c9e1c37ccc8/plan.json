@@ -1,0 +1,258 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.reception-transfer.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "question": "Can an explicit discrete surface inverse and independently refined calibration resolve the unfitted fourth-order response on two incident spectra?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7-10, 15.7",
+    "docs/research/gross-test-07-order4-results.md",
+    "docs/research/gross-test-07-transfer.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-07-transfer.json",
+  "runtime_config_sha256": "fce134c32b2740cb52e122b96e5818c4390f36e5a43786a8cd4e2d10ab7c6f99",
+  "method": {
+    "action": "Unchanged SS OCF 1 radial Hamiltonian; exact formal neutral A,A3 and core/clock A0,A2,A4 coefficients, including quadrature logarithm square term.",
+    "units": "c=hbar=m=1; cycles = phase/(2*pi).",
+    "domain": "Regular origin, R=80 and domain control R=100; h=.1,.05,.025,.0125. Independent BVP/Newton core and independent clock eigenmode at fixed omega_Q=.9. Readout omega_chi=.41274991 stays fixed.",
+    "boundaries": "Zero radial fields at outer boundary, T=60 before any outer reflection returns. Local r=.1; surface r=14.",
+    "initial_data": "b compact in known [18,26], v=D_h b. Two shapes unknown to inverse: cos^4 envelope center22 width3.25 and width2.5 times cos(1.4(r-22)). A=.008,+/-.012, quiet receiver. Clock amplitude .001 and phase0.",
+    "solver": "RK4 plus exact adjoint of the discrete acquisition propagator. Surface b and b_t every .025 through t16. SVD inverse cutoff1e-10 and1e-8 control. Predictors receive support/incoming rule but not shape. Output .025 with decimated .05 control. Nonlinear receivers follow all locked forecasts.",
+    "tolerances": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+  },
+  "hypotheses": [
+    {
+      "id": "controlled",
+      "prediction": "Discrete inversion removes coarse propagation mismatch; a converged fourth-order correction improves both spectra by more than the complete numerical budget."
+    },
+    {
+      "id": "inadequate",
+      "prediction": "A persistent resolved phase/timing residual rejects the extension; insufficient numerical resolution leaves it unresolved."
+    }
+  ],
+  "controls": [
+    {
+      "id": "frozen",
+      "purpose": "Preserve action and calibration identity",
+      "method": "Independently resolve the same omega_Q branch and mode without fitting omega_chi; prior interpolated fine profile is a labeled diagnostic."
+    },
+    {
+      "id": "numeric",
+      "purpose": "Bound mesh, time, box, sampling, and inverse error",
+      "method": "Four meshes, finest half-dt, wide box, Hermite decimation, fixed alternate SVD cutoff."
+    },
+    {
+      "id": "spectrum",
+      "purpose": "Fresh prediction across spectral content",
+      "method": "Broad shell and carrier-modulated shell; signed amplitudes; no nonlinear receiver before all forecast locks."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "prediction-first",
+      "observable": "prediction-first",
+      "pass_if": "All surface/input/jet/profile and marker/interval forecast hashes verify and all predictions precede all nonlinear receiver starts.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "profile-refinement",
+      "observable": "profile-refinement",
+      "pass_if": "Independent profiles have discrete residual <2e-10 and finest eigenvalue change <=0.6 times previous change.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "surface-inverse",
+      "observable": "surface-inverse",
+      "pass_if": "Every surface relative replay residual <1e-7; changed SVD cutoff is included in prediction uncertainty.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "continuum-convergence",
+      "observable": "continuum-convergence",
+      "pass_if": "For both spectra at A=.012, finest interval change <=0.6 previous mesh change plus declared nonspatial error. Otherwise unresolved.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "order-resolution",
+      "observable": "order-resolution",
+      "pass_if": "For both spectra at A=.012, total absolute interval budget B <= |P4-P2|/4 and |Y|>5B. Otherwise unresolved; never use the 5% record gate to resolve A4.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "fourth-order-prediction",
+      "observable": "fourth-order-prediction",
+      "pass_if": "On each resolved converged spectrum, |Y-P4|<=B and |Y-P2|>3B; resolved violation fails, unresolved controls defer judgment.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "marker-transfer",
+      "observable": "marker-transfer",
+      "pass_if": "All cases possess first/last Hermite markers and error <=0.1. On each nominal finest spectrum error <= direct mesh+time+domain+inverse+sampling+1e-6 timing budget and decreases from fine or is below that budget.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "sign-even",
+      "observable": "sign-even",
+      "pass_if": "Finest +.012/-.012 marker times differ <1e-9 and intervals <1e-10 cycles for each spectrum.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    },
+    {
+      "id": "conservation",
+      "observable": "conservation",
+      "pass_if": "All cases charge drift <1e-5 and energy residual <1% of incident energy.",
+      "fail_if": "Resolved evidence violates the locked condition; inversion or prediction-order failure fails technical inference.",
+      "unresolved_if": "Missing markers, unconverged sequence or B greater than one quarter of order separation defers order discrimination.",
+      "uncertainty": "Nominal A=.012. B=|Yfinest-Yfiner|+|Yfinest-Ytime|+|Ywide-Yfiner|+|P4inverse-P4finest|+max sampling interval change+2e-11 cycles. Require B<=|P4-P2|/4. See protocol for marker, convergence and decision rules."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "surface-transfer",
+      "question": "How does the external record determine the local neutral and clock response?",
+      "role": "evidentiary",
+      "observables": [
+        "surface field",
+        "local clock phase",
+        "marker times",
+        "error budgets"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "converged resolved response",
+        "inadequate": "persistent residual or unresolved order separation"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "spectrum"
+      ],
+      "uncertainty": "Direct mesh/time/domain/inverse/sampling differences; no fitted error reduction.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv",
+        "plot-data/surface.csv"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; unfitted quadrature expansion; Hermite marker roots; direct numerical differences."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "profile-convergence",
+      "question": "Does independent radial calibration converge beyond the interpolated old profile?",
+      "role": "evidentiary",
+      "observables": [
+        "surface field",
+        "local clock phase",
+        "marker times",
+        "error budgets"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "converged resolved response",
+        "inadequate": "persistent residual or unresolved order separation"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "spectrum"
+      ],
+      "uncertainty": "Direct mesh/time/domain/inverse/sampling differences; no fitted error reduction.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv",
+        "plot-data/profiles.csv"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; unfitted quadrature expansion; Hermite marker roots; direct numerical differences."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "order-budget",
+      "question": "Is the fourth-order improvement larger than every declared numerical uncertainty?",
+      "role": "evidentiary",
+      "observables": [
+        "surface field",
+        "local clock phase",
+        "marker times",
+        "error budgets"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "converged resolved response",
+        "inadequate": "persistent residual or unresolved order separation"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "spectrum"
+      ],
+      "uncertainty": "Direct mesh/time/domain/inverse/sampling differences; no fitted error reduction.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; unfitted quadrature expansion; Hermite marker roots; direct numerical differences."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "marker-convergence",
+      "question": "Do first and last marker prediction residuals decrease under the controls?",
+      "role": "evidentiary",
+      "observables": [
+        "surface field",
+        "local clock phase",
+        "marker times",
+        "error budgets"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "converged resolved response",
+        "inadequate": "persistent residual or unresolved order separation"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "spectrum"
+      ],
+      "uncertainty": "Direct mesh/time/domain/inverse/sampling differences; no fitted error reduction.",
+      "source_data": [
+        "plot-data/summary.json",
+        "plot-data/traces.csv"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; unfitted quadrature expansion; Hermite marker roots; direct numerical differences."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 7600,
+    "max_memory_mb": 2048,
+    "max_output_mb": 300
+  },
+  "prohibited_inferences": [
+    "Inspected prior Test 7 data cannot support a fresh prediction claim.",
+    "Test 7 original scientific fail remains unchanged; Test 8 is blocked until separate acceptance.",
+    "No two-object recoil, invariance, gravity, angular stability or emergent spacetime inference."
+  ],
+  "locked_sha256": "12fa3a66a48d90185d499eee95a457d652b70ee2af87b4cbc3a0b6bb4268cbaf"
+}

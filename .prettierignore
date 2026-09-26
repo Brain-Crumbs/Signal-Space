@@ -22,3 +22,7 @@ docs/research/plans/gross-test-07.json
 # Locked Test 7 fourth-order follow-up, exact pre-execution bytes.
 fixtures/research/gross-test-07-order4.json
 docs/research/plans/gross-test-07-order4.json
+
+# Locked discrete-transfer inputs
+fixtures/research/gross-test-07-transfer.json
+docs/research/plans/gross-test-07-transfer.json

@@ -382,6 +382,26 @@
         "reproducibility"
       ],
       "title": "gross.reception-order4.v1 - run-29c4c4228ffddbb4"
+    },
+    {
+      "id": "gross-test-07-transfer",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-transfer.md",
+      "status": "executed hosted recovery; original Test 7 status unchanged",
+      "summary": "Discrete transfer with independent profiles, two spectra, strict order budget and separately labeled convergence/inverse audits.",
+      "tags": ["GROSS", "test-07", "discrete-transfer", "reception"],
+      "title": "Test 7 discrete transfer discriminator"
+    },
+    {
+      "id": "run-run-941d5c9e1c37ccc8",
+      "date": "2026-09-26",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/README.md",
+      "status": "registered pass; see reviewed limitations",
+      "summary": "Hosted recovery of fixed Test 7 transfer protocol; original failure unchanged; post-lock forecast and inverse audits retained.",
+      "tags": ["gross.reception-transfer.v1", "reproducibility"],
+      "title": "Test 7 discrete-transfer recovery - run-941d5c9e1c37ccc8"
     }
   ],
   "schema_version": 1,

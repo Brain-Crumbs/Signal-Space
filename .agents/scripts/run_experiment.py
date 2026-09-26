@@ -22,6 +22,7 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
 RECIPES["gross-test-07"] = "docs/research/plans/gross-test-07.json"
 RECIPES["gross-test-07-order4"] = "docs/research/plans/gross-test-07-order4.json"
+RECIPES["gross-test-07-transfer"] = "docs/research/plans/gross-test-07-transfer.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 for kind in ("longevity", "response"):
@@ -34,6 +35,17 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.reception-transfer.v1":
+        lines = ["# Test 7 discrete-transfer assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Scientific review and visual inspection remain pending.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "The full interval budget must resolve the second-to-fourth-order separation on both spectra.",
+                  "The discrete inverse assumes known support and incoming preparation; no response coefficient is fitted.",
+                  "Original Test 7 remains failed. Test 8 requires separate acceptance review.",
+                  "Two-object recoil, invariance, gravity, angular stability and emergent spacetime remain untested."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.reception-order4.v1":
         lines = ["# Test 7 formal fourth-order follow-up", "",
                  f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
@@ -172,7 +184,7 @@ class Pipeline:
         return (self.logs / f"{stage}.stdout.log").read_text(encoding="utf-8")
 
     def runtime(self, stage: str, run_id: str) -> dict:
-        return json.loads(self.command(stage, [sys.executable, "-m", "signal_space", "--workspace", str(self.workspace), stage, "--run-id", run_id]))
+        return json.loads(self.command(stage, [sys.executable, "-m", "signal_space", "--workspace", str(self.workspace), stage, "--run-id", run_id], timeout=900 if self.experiment == "gross-test-07-transfer" and stage == "analyze" else 180))
 
     def execute(self) -> None:
         if self.command("source-status", ["git", "status", "--porcelain"]).strip():

@@ -1,0 +1,26 @@
+{
+  "marker-convergence": {
+    "limitation": "First/last events are selected retrospectively in the declared window; no autonomous trigger is modeled.",
+    "question": "Do first and last marker prediction residuals decrease under the controls?",
+    "reading": "Each point compares a locked forecast with independently evolved receiver markers on the same mesh.",
+    "significance": "Tests the discrete transfer separately from clock-phase order discrimination."
+  },
+  "order-budget": {
+    "limitation": "The audit cannot promote or rewrite a locked check. Budgets are difference estimates, not rigorous bounds.",
+    "question": "Is the fourth-order improvement larger than every declared numerical uncertainty?",
+    "reading": "Compare both errors with the locked budget. The hatched post-hoc audit also includes convergence of the forecast itself.",
+    "significance": "A fourth-order claim requires sufficient resolution on both spectra; the ordinary 5% gate is insufficient."
+  },
+  "profile-convergence": {
+    "limitation": "The calibrated readout frequency stays fixed; this does not repeat the 100-period longevity test.",
+    "question": "Does independent radial calibration converge beyond the interpolated old profile?",
+    "reading": "Profiles are independently solved and frozen at each mesh; frozen denotes the earlier interpolated fine profile.",
+    "significance": "Separates a refined physical preparation from merely interpolating old samples."
+  },
+  "surface-transfer": {
+    "limitation": "Acquisition and inverse share a discretization and assume support plus v=D_h b; surface replay error alone does not bound interior error.",
+    "question": "How does the external record determine the local neutral and clock response?",
+    "reading": "Each column follows a different recorded spectrum from r=14 to r=0.1, at A=.012.",
+    "significance": "The prediction uses a discrete initial-data inverse and derived response coefficients."
+  }
+}

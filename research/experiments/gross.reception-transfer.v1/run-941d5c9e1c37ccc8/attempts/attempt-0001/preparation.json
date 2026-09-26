@@ -1,0 +1,125 @@
+{
+  "M0": 1.0,
+  "acquisition_duration": 16.0,
+  "amplitudes": [
+    0.008,
+    0.012,
+    -0.012
+  ],
+  "clock_amplitude": 0.001,
+  "cycle_noise_floor": 2e-11,
+  "duration": 60.0,
+  "epsilon": 0.2,
+  "frozen_inputs": [
+    {
+      "name": "profile-0.900.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+      "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+    },
+    {
+      "name": "profile-fine.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+      "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+    },
+    {
+      "name": "profile-wide.npz",
+      "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+      "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+    }
+  ],
+  "kind": "reception-transfer",
+  "local_radius": 0.1,
+  "marker_noise_floor": 1e-06,
+  "marker_threshold": 0.0001,
+  "marker_time_tolerance": 0.1,
+  "nominal_amplitude": 0.012,
+  "omega_Q": 0.9,
+  "omega_chi": 0.41274991,
+  "sample_interval": 0.025,
+  "support": [
+    18.0,
+    26.0
+  ],
+  "surface_sample_interval": 0.025,
+  "upstream_radius": 14.0,
+  "variants": [
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.1,
+      "name": "base",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.05,
+      "name": "fine",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.025,
+      "name": "finer",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.0025,
+      "h": 0.0125,
+      "name": "finest",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.00125,
+      "h": 0.0125,
+      "name": "time",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-08,
+      "dt": 0.0025,
+      "h": 0.0125,
+      "name": "inverse",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.025,
+      "name": "wide",
+      "profile": "independent",
+      "radius": 100
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.0025,
+      "h": 0.0125,
+      "name": "frozen",
+      "profile": "frozen",
+      "radius": 80
+    }
+  ],
+  "waveforms": [
+    {
+      "carrier": 0.0,
+      "center": 22.0,
+      "name": "broad",
+      "width": 3.25
+    },
+    {
+      "carrier": 1.4,
+      "center": 22.0,
+      "name": "carrier",
+      "width": 2.5
+    }
+  ]
+}
