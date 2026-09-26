@@ -1,0 +1,118 @@
+{
+  "schema_version": "research-experiment-v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "units": {
+    "mass": "m=1",
+    "length": "m^-1",
+    "time": "m^-1",
+    "signal": "c=hbar=1"
+  },
+  "experiment_id": "gross.reception-order4.v1",
+  "parameters": {
+    "omega_Q": 0.9,
+    "omega_chi": 0.41274991,
+    "clock_amplitude": 0.001,
+    "local_radius": 0.1,
+    "frozen_inputs": [
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+        "name": "profile-0.900.npz",
+        "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+        "name": "profile-fine.npz",
+        "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+        "name": "profile-wide.npz",
+        "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+      }
+    ],
+    "epsilon": 0.2,
+    "M0": 1.0,
+    "duration": 65.0,
+    "upstream_radius": 14.0,
+    "acquisition_duration": 35.0,
+    "incoming_window": 15.0,
+    "marker_threshold": 0.0001,
+    "marker_time_tolerance": 0.1,
+    "cycle_noise_floor": 1e-11,
+    "kind": "reception-order4",
+    "prior_raw": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw",
+    "prior_inputs": [
+      {
+        "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/input-base.npz",
+        "sha256": "64d3d7a89bbfecb05703ae380004b371d8dc35ec6b613821e45d5a77a7b1f1be"
+      },
+      {
+        "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/input-fine.npz",
+        "sha256": "5f3ee5a6c9f6b59b391743e8c781ba0046ce9a9c1ba4264245891515d4e0ab62"
+      },
+      {
+        "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/input-finer.npz",
+        "sha256": "862f21f28bf9652494a171697f33416073eefd5986624f98ef5da2a2a46ec2e9"
+      },
+      {
+        "path": "research/experiments/gross.reception.v1/run-b1677e67610c5870/attempts/attempt-0001/raw/receiver-finer.npz",
+        "sha256": "287772fc97bbea306030340d0e7243be175a2cea135dd980758607444bd482b4"
+      }
+    ],
+    "heldout_center": 22.0,
+    "heldout_width": 3.25,
+    "sample_interval": 0.05,
+    "amplitudes": [
+      0.004,
+      -0.004,
+      0.006
+    ],
+    "variants": [
+      {
+        "name": "base",
+        "profile": "profile-0.900.npz",
+        "h": 0.1,
+        "dt": 0.01
+      },
+      {
+        "name": "fine",
+        "profile": "profile-fine.npz",
+        "h": 0.05,
+        "dt": 0.01
+      },
+      {
+        "name": "finer",
+        "profile": "profile-fine.npz",
+        "h": 0.025,
+        "dt": 0.005
+      },
+      {
+        "name": "time",
+        "profile": "profile-0.900.npz",
+        "h": 0.1,
+        "dt": 0.005
+      }
+    ]
+  },
+  "seeds": {
+    "root": 202609258
+  },
+  "resources": {
+    "max_cpu_seconds": 3700,
+    "max_wall_seconds": 4000,
+    "max_memory_mb": 1024,
+    "max_output_mb": 250
+  },
+  "analysis": {
+    "prediction-first": "Frozen calibration and inspected-history inputs verify by hash; all new surface and Taylor forecasts locked before any held-out receiver start.",
+    "record-resolution": "Held-out finest A=.004 local interval exceeds five times |finer-fine|+|base-time|+1e-11 cycles, else unresolved.",
+    "heldout-interval": "Held-out A=.004 fourth-order interval error <= max(5% of actual interval, direct numerical budget); no relaxation of old Test 7 thresholds.",
+    "heldout-waveform": "Held-out A=.004 fourth-order matched phase L2 error < min(5%, second-order L2 error).",
+    "marker-timing": "All nonzero cases and grids have first rising and last falling |a|=1e-4 events; standalone forecast within 0.1 m^-1 on each grid.",
+    "sign-even": "A=+.004 and -.004 give first/last marker times equal and interval differences <1e-10 cycles on finest grid.",
+    "conservation": "All grid/case relative charge errors <1e-5; discrete total energy residual <1% of initial incident energy."
+  },
+  "report": {
+    "title": "Test 7 fourth-order held-out reception"
+  }
+}

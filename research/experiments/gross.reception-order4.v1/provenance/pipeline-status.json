@@ -1,0 +1,91 @@
+{
+  "experiment": "gross-test-07-order4",
+  "technical_status": "completed",
+  "scientific_classification": "pass",
+  "stage": "complete",
+  "source_commit": "2854331b9151859ac465cc97de98089950025188",
+  "run_id": "run-29c4c4228ffddbb4",
+  "analysis_id": "analysis-0001-ac36b679",
+  "report_id": "report-0001",
+  "canonical_path": "runs/gross.reception-order4.v1/run-29c4c4228ffddbb4",
+  "repository_destination": "research/experiments/gross.reception-order4.v1/run-29c4c4228ffddbb4",
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "prediction-first",
+      "status": "pass",
+      "value": {
+        "hashes_and_order": true
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "record-resolution",
+      "status": "pass",
+      "value": {
+        "budget": 1.294616055030286e-09,
+        "signal": -2.0877767371622133e-07
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "heldout-interval",
+      "status": "pass",
+      "value": {
+        "actual": -2.0877767371622133e-07,
+        "allowance": 1.0438883685811068e-08,
+        "fourth": -2.0895271838303498e-07,
+        "fourth_error": 1.7504466681365206e-10,
+        "second": -2.0939038581366823e-07,
+        "second_error": 6.127120974468999e-10
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "heldout-waveform",
+      "status": "pass",
+      "value": {
+        "fourth": 0.0017124457393285937,
+        "second": 0.001881966768249624
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "marker-timing",
+      "status": "pass",
+      "value": {
+        "base:-0.004": 0.059806900533985186,
+        "base:0.004": 0.059806900533985186,
+        "base:0.006": 0.06615648420434894,
+        "fine:-0.004": 0.03145788597990418,
+        "fine:0.004": 0.03145788597990418,
+        "fine:0.006": 0.03312904973230246,
+        "finer:-0.004": 0.010607989679126462,
+        "finer:0.004": 0.010607989679126462,
+        "finer:0.006": 0.012717033308259573,
+        "time:-0.004": 0.05980706437822647,
+        "time:0.004": 0.05980706437822647,
+        "time:0.006": 0.06615635474034676
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "sign-even",
+      "status": "pass",
+      "value": {
+        "negative": -2.0877767371622133e-07,
+        "positive": -2.0877767371622133e-07
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "conservation",
+      "status": "pass",
+      "value": {
+        "charge_relative": 4.797806451985492e-11,
+        "energy_relative": 1.3321644923099373e-06
+      }
+    }
+  ],
+  "elapsed_seconds": 275.55
+}

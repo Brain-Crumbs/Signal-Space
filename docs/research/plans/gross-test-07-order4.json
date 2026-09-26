@@ -1,0 +1,206 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.reception-order4.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "question": "Does the unfitted A^4 response explain the inspected Test 7 residual and predict a new locked radial waveform and local marker record?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7-10 and 15.7",
+    "docs/research/gross-test-07-results.md",
+    "docs/research/gross-test-07-order4.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-07-order4.json",
+  "runtime_config_sha256": "b9e5ddcae60f1a8118b07564dd08215f3440011e4755524b29d09c6a67aa732e",
+  "method": {
+    "action": "Unchanged SS OCF 1 discrete radial Hamiltonian. Formal Taylor coefficients neutral odd A,A^3 and core/clock even A^0,A^2,A^4; exact quadrature phase series; no fitted coefficient.",
+    "units": "c=hbar=m=1, r and t in m^-1, phase divided by 2*pi is cycles.",
+    "domain": "Frozen Test 6 base/fine modes at R=80, h=.1,.05,.025 (finest interpolated profile); local r=.1; upstream r=14.",
+    "boundaries": "Regular origin and zero outer radial fields. T=65; earliest boundary reflection cannot reach local probe.",
+    "initial_data": "Held-out center 22, width 3.25, A=+.004,-.004,+.006; neutral field b=r*a starts exterior to surface, b_t=b_r; fixed clock phase 0 and amplitude .001.",
+    "solver": "RK4 dt=.01,.01,.005 plus independent dt=.005 at coarse; output .05 and decimated .1 interpolation control; optical travel-time inversion with known exterior Z, with vacuum inversion saved as control. Fourth-order formal ODE integrated on quiet history. Prior Test 7 evidence is diagnostic only.",
+    "tolerances": "Fresh held-out record and marker criteria specified below; the prior Test 7 failures and thresholds stay fixed. First-rise/last-fall local |a|=1e-4, quiet-phase counterfactual."
+  },
+  "hypotheses": [
+    {
+      "id": "controlled",
+      "prediction": "Derived fourth-order sign and A^4 amplitude behavior predict the fresh held-out phase and interval within predeclared numerical and marker tolerances."
+    },
+    {
+      "id": "inadequate",
+      "prediction": "Residual persists after fourth-order term, temporal interpolation and known exterior Z control, or markers fail; response extension remains insufficient."
+    }
+  ],
+  "controls": [
+    {
+      "id": "frozen",
+      "purpose": "Exclude coefficient fits or changed action",
+      "method": "Hash frozen Test 6 calibration, saved Test 7 diagnostic inputs and all predictions before new receiver evolution."
+    },
+    {
+      "id": "numeric",
+      "purpose": "Estimate spatial, time and output-interpolation effects",
+      "method": "h=.1,.05,.025, dt-halved coarse, output .05 decimated .1, linear versus local-derivative Hermite crossings."
+    },
+    {
+      "id": "reversal",
+      "purpose": "Test even clock response",
+      "method": "New held-out +A and -A plus larger amplitude .006."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "prediction-first",
+      "observable": "prediction-first",
+      "pass_if": "Frozen calibration and inspected-history inputs verify by hash; all new surface and Taylor forecasts locked before any held-out receiver start.",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    },
+    {
+      "id": "record-resolution",
+      "observable": "record-resolution",
+      "pass_if": "Held-out finest A=.004 local interval exceeds five times |finer-fine|+|base-time|+1e-11 cycles, else unresolved.",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    },
+    {
+      "id": "heldout-interval",
+      "observable": "heldout-interval",
+      "pass_if": "Held-out A=.004 fourth-order interval error <= max(5% of actual interval, direct numerical budget); no relaxation of old Test 7 thresholds.",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    },
+    {
+      "id": "heldout-waveform",
+      "observable": "heldout-waveform",
+      "pass_if": "Held-out A=.004 fourth-order matched phase L2 error < min(5%, second-order L2 error).",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    },
+    {
+      "id": "marker-timing",
+      "observable": "marker-timing",
+      "pass_if": "All nonzero cases and grids have first rising and last falling |a|=1e-4 events; standalone forecast within 0.1 m^-1 on each grid.",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    },
+    {
+      "id": "sign-even",
+      "observable": "sign-even",
+      "pass_if": "A=+.004 and -.004 give first/last marker times equal and interval differences <1e-10 cycles on finest grid.",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    },
+    {
+      "id": "conservation",
+      "observable": "conservation",
+      "pass_if": "All grid/case relative charge errors <1e-5; discrete total energy residual <1% of initial incident energy.",
+      "fail_if": "Resolved finite evidence violates locked inequality.",
+      "unresolved_if": "Missing events or signal below five-budget resolution; no promotion.",
+      "uncertainty": "Direct finer/fine plus base/time interval difference and 1e-11 cycles; marker timing absolute 0.1 m^-1."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "prior-diagnostic",
+      "question": "Does the derived fourth-order coefficient explain the inspected residual sign and scaling?",
+      "role": "diagnostic",
+      "observables": [
+        "local phase",
+        "local neutral marker",
+        "numerical error"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "derived predicted scaling and resolved held-out agreement",
+        "inadequate": "persistent residual or failed timing"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "reversal"
+      ],
+      "uncertainty": "direct grid/time differences, sample interpolation and wave inversion",
+      "source_data": [
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; exact formal A^4 quadrature expansion; no fitted coefficient."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "heldout-phase",
+      "question": "Does the locked fourth-order prediction improve a new local clock history?",
+      "role": "evidentiary",
+      "observables": [
+        "local phase",
+        "local neutral marker",
+        "numerical error"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "derived predicted scaling and resolved held-out agreement",
+        "inadequate": "persistent residual or failed timing"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "reversal"
+      ],
+      "uncertainty": "direct grid/time differences, sample interpolation and wave inversion",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; exact formal A^4 quadrature expansion; no fitted coefficient."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "marker-reconstruction",
+      "question": "Do derivative-informed markers and twice-frequent output explain local timing error?",
+      "role": "evidentiary",
+      "observables": [
+        "local phase",
+        "local neutral marker",
+        "numerical error"
+      ],
+      "representation": "PNG/SVG/PDF with exact CSV/JSON",
+      "competing_signatures": {
+        "controlled": "derived predicted scaling and resolved held-out agreement",
+        "inadequate": "persistent residual or failed timing"
+      },
+      "controls": [
+        "frozen",
+        "numeric",
+        "reversal"
+      ],
+      "uncertainty": "direct grid/time differences, sample interpolation and wave inversion",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Matched quiet subtraction; exact formal A^4 quadrature expansion; no fitted coefficient."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 4000,
+    "max_memory_mb": 1024,
+    "max_output_mb": 250
+  },
+  "prohibited_inferences": [
+    "Inspected prior Test 7 data cannot support a fresh prediction claim.",
+    "Test 7 original scientific fail remains unchanged; Test 8 is blocked until separate acceptance.",
+    "No two-object recoil, invariance, gravity, angular stability or emergent spacetime inference."
+  ],
+  "locked_sha256": "b86e456899a69ba40670889b0702ac4f6cf47f2db9025b8d6f7610c2a8a81bf6"
+}

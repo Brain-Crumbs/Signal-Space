@@ -1,0 +1,36 @@
+{
+  "algorithm": "formal-order-four-reception-v1",
+  "amplitudes": [
+    0.004,
+    -0.004,
+    0.006
+  ],
+  "prior_role": "inspected diagnostic only",
+  "prior_run": "run-b1677e67610c5870",
+  "variants": [
+    {
+      "dt": 0.01,
+      "h": 0.1,
+      "name": "base",
+      "profile": "profile-0.900.npz"
+    },
+    {
+      "dt": 0.01,
+      "h": 0.05,
+      "name": "fine",
+      "profile": "profile-fine.npz"
+    },
+    {
+      "dt": 0.005,
+      "h": 0.025,
+      "name": "finer",
+      "profile": "profile-fine.npz"
+    },
+    {
+      "dt": 0.005,
+      "h": 0.1,
+      "name": "time",
+      "profile": "profile-0.900.npz"
+    }
+  ]
+}

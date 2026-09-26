@@ -18,3 +18,7 @@ docs/research/plans/gross-test-06-response.json
 # Exact Test 7 runtime configuration and plan, locked before execution.
 fixtures/research/gross-test-07.json
 docs/research/plans/gross-test-07.json
+
+# Locked Test 7 fourth-order follow-up, exact pre-execution bytes.
+fixtures/research/gross-test-07-order4.json
+docs/research/plans/gross-test-07-order4.json
