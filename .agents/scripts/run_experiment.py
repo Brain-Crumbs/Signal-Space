@@ -184,7 +184,7 @@ class Pipeline:
         return (self.logs / f"{stage}.stdout.log").read_text(encoding="utf-8")
 
     def runtime(self, stage: str, run_id: str) -> dict:
-        return json.loads(self.command(stage, [sys.executable, "-m", "signal_space", "--workspace", str(self.workspace), stage, "--run-id", run_id]))
+        return json.loads(self.command(stage, [sys.executable, "-m", "signal_space", "--workspace", str(self.workspace), stage, "--run-id", run_id], timeout=900 if self.experiment == "gross-test-07-transfer" and stage == "analyze" else 180))
 
     def execute(self) -> None:
         if self.command("source-status", ["git", "status", "--porcelain"]).strip():

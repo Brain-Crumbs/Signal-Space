@@ -30,6 +30,31 @@ def evaluate(jet,rec,A,p,stride=1):
     return data,{'time':t,'actual_cycles':actual,'second_cycles':second,'fourth_cycles':fourth,'actual_a':rec[:,1,3],'predicted_a':neutral}
 
 
+
+def transfer_audit(raw,p):
+    """Post-lock known-source audit, never a new response prediction."""
+    from signal_space.numerics.prereception import RadialSystem
+    from signal_space.numerics.reception_transfer import incident, acquire_surface
+    summary={};rows=[]
+    for name,wave_name in [('finest','broad'),('finest','carrier'),('time','carrier')]:
+        variant=next(x for x in p['variants'] if x['name']==name)
+        wave=next(x for x in p['waveforms'] if x['name']==wave_name);tag=name+'-'+wave_name
+        with np.load(raw/f'profile-{name}.npz') as d:r=d['r'];u=d['u']
+        system=RadialSystem(r,p['epsilon']);b,v=incident(system.r,wave,variant['h'])
+        with np.load(raw/f'input-{tag}.npz') as d:rb=d['b'];rv=d['v']
+        original=acquire_surface(system,u,b,v,variant['dt'],p['duration'],p['sample_interval'],p['local_radius'])
+        inverse=acquire_surface(system,u,rb,rv,variant['dt'],p['duration'],p['sample_interval'],p['local_radius'])
+        A=p['nominal_amplitude'];scale=A/p['local_radius'];t=original[:,0]
+        true_markers=hermite_markers(t,scale*original[:,1],scale*original[:,2],p['marker_threshold'])
+        inverse_markers=hermite_markers(t,scale*inverse[:,1],scale*inverse[:,2],p['marker_threshold'])
+        summary[tag]={'max_local_a_error':float(np.max(abs(scale*(original[:,1]-inverse[:,1])))),
+            'relative_local_l2':float(np.linalg.norm(original[:,1]-inverse[:,1])/np.linalg.norm(original[:,1])),
+            'source_markers':true_markers,'inverse_markers':inverse_markers,
+            'marker_difference':(np.asarray(inverse_markers)-true_markers).tolist() if true_markers and inverse_markers else None}
+        rows.extend({'case':tag,'time':float(ti),'source_a':float(scale*x),'inverse_a':float(scale*y)} for ti,x,y in zip(t,original[:,1],inverse[:,1]))
+    return {'role':'post-hoc diagnostic using known source; no acceptance reclassification','cases':summary},rows
+
+
 def analyze(run_path,output,config):
     p=config['parameters'];raw=next((run_path/'attempts').glob('*/raw'));derived=output/'derived';derived.mkdir(parents=True)
     events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
@@ -123,6 +148,25 @@ def analyze(run_path,output,config):
     check('conservation',energy<.01 and charge<1e-5,{'energy_relative':energy,'charge_relative':charge})
     summary={'metrics':metrics,'budgets':budgets,'timing_budgets':timings,'profiles':profiles,'inversion':inversion,'checks':{x['id']:x['status'] for x in checks},
         'claim_scope':'discrete incoming preparation, known support, synthetic linear surface; original Test 7 unchanged'}
+    # These post-lock diagnostics preserve all nine original check outcomes.
+    forecast_audit={}
+    for wave in p['waveforms']:
+        name=wave['name'];get=lambda grid:metrics[grid+'-'+name][j]
+        if not present:continue
+        x=get('finest');f=get('finer');g=get('fine');t=get('time');w=get('wide')
+        prediction_changes={'mesh':abs(x['fourth']-f['fourth']),
+            'previous_mesh':abs(f['fourth']-g['fourth']),'time':abs(x['fourth']-t['fourth']),
+            'domain':abs(w['fourth']-f['fourth'])}
+        old=budgets[name]['components'];augmented=dict(old)
+        for key in ('mesh','time','domain'):augmented[key]=max(old[key],prediction_changes[key])
+        forecast_audit[name]={'role':'post-hoc diagnostic; cannot promote a locked result',
+            'prediction_changes':prediction_changes,'forecast_inclusive_components':augmented,
+            'forecast_inclusive_budget':sum(augmented.values()),
+            'quarter_order_separation':budgets[name]['maximum_discrimination_budget'],
+            'discrimination_resolved':sum(augmented.values())<=budgets[name]['maximum_discrimination_budget']}
+    summary['forecast_convergence_audit']=forecast_audit
+    summary['transfer_oracle_audit'],audit_rows=transfer_audit(raw,p)
+    save_csv(derived/'transfer-audit.csv',audit_rows)
     save_csv(derived/'traces.csv',traces);save_csv(derived/'surface.csv',surfaces);save_csv(derived/'profiles.csv',profile_rows)
     write_json(derived/'summary.json',summary);out={'schema_version':'research-checks-v1','checks':checks};write_json(output/'checks.json',out)
     return {'raw_source':str(raw.relative_to(run_path)/'execution.json'),'checks':out,'summary':summary}

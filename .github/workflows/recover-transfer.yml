@@ -1,0 +1,77 @@
+name: Recover Test 7 discrete transfer
+run-name: 'Test 7 transfer recovery - ${{ github.run_number }}'
+on:
+  push:
+    branches: [research/gross-test-07-discrete-transfer]
+    paths: [.github/workflows/recover-transfer.yml]
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [execute, package]
+        default: package
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: test-07-transfer-recovery
+  cancel-in-progress: false
+jobs:
+  recovery:
+    if: github.ref == 'refs/heads/research/gross-test-07-discrete-transfer'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 160
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+      PYTHONPATH: python
+      PYTHONUNBUFFERED: '1'
+      RECOVERY_MODE: ${{ inputs.mode || 'execute' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: python/requirements-lock.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Install bounded runner and rendering dependencies
+        run: |
+          python -m pip install -r python/requirements-lock.txt
+          npm install --global npm@11.9.0
+          npm ci
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+      - name: Validate source and fixed protocol
+        run: |
+          python -m py_compile python/signal_space/analysis/reception_transfer.py python/signal_space/reporting/reception_transfer.py .agents/scripts/archive_transfer_recovery.py
+          python -m unittest discover -s python/tests -p test_reception_transfer.py -v
+          python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-07-transfer.json
+          python scripts/check-experiment-math.py
+      - name: Execute unchanged locked experiment
+        if: env.RECOVERY_MODE == 'execute'
+        run: python .agents/scripts/run_experiment.py --experiment gross-test-07-transfer --output "$RUNNER_TEMP/transfer-output"
+      - name: Archive verified evidence and reader previews
+        run: python .agents/scripts/archive_transfer_recovery.py --mode "$RECOVERY_MODE" --output "$RUNNER_TEMP/transfer-output"
+      - name: Save results on the task branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/recover-transfer.yml research/experiments/gross.reception-transfer.v1 research/catalog.json research/archive-manifest.json docs/research/gross-test-07-transfer-results.md docs/research/gross-test-07-transfer-interruption.md
+          git diff --cached --quiet || git commit -m "Archive Test 7 transfer recovery evidence"
+          git push origin HEAD:refs/heads/research/gross-test-07-discrete-transfer
+      - name: Retain execution artifacts and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-07-transfer-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/transfer-output
+          retention-days: 30
+          if-no-files-found: warn

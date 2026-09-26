@@ -61,3 +61,10 @@ The first pair is finest/finer; the time pair is finest/time; the domain pair is
 - Independently solved profiles require residual below $2\times10^{-10}$ and convergent eigenvalues. Surface replay residual must be below $10^{-7}$. Charge drift must be below $10^{-5}$ and energy residual below 1% of incident energy.
 
 The exact machine criteria and figure plan are locked in `plans/gross-test-07-transfer.json`. Both spectra must satisfy the order discrimination; a good result on only one is reported as such. Missing marker or convergence evidence prevents promotion. The useful outcome is either a resolved extension on this preparation, a localized numerical limit, or a controlled rejection. Two-object survival/recoil, observer and coordinate invariance, gravity, angular stability and emergent spacetime remain outside this calculation.
+
+
+## Separately labeled post-lock audit and execution recovery
+
+After all sixteen forecasts in the local attempt were locked and the first receiver comparisons were inspected, a downstream diagnostic was added. It preserves the nine registered checks and their original budget. It separately reports an audit budget using the larger receiver or forecast change for each mesh, time, and domain term. This diagnostic cannot promote or rewrite the registered result; it can expose a limit in what those checks establish.
+
+The audit compares frozen linear propagation from recovered input with propagation from the known source on the finest grid, and the carrier time control. The known shape is used only in this downstream diagnostic, never in the original inverse or forecast. See [the interruption record](gross-test-07-transfer-interruption.md) for the inaccessible partial local attempt and the separate hosted recovery. Repeating a previously inspected history is reproducibility evidence, not a new held-out claim.

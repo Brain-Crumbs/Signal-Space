@@ -61,13 +61,15 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
         parts=b['components'];ax[0,col].bar(range(len(parts)),list(parts.values()));ax[0,col].set(xticks=range(len(parts)),xticklabels=list(parts),ylabel='absolute interval error (cycles)',title=wave+' budget')
         ax[0,col].tick_params(axis='x',rotation=25)
         ax[0,col].axhline(b['maximum_discrimination_budget'],color='red',ls='--',label='order separation / 4');ax[0,col].legend(fontsize=8)
-        labels=['order 2 error','order 4 error','total budget','order separation'];vals=[b['second_error'],b['fourth_error'],b['total'],b['order_separation']]
-        ax[1,col].bar(range(4),vals);ax[1,col].set(xticks=range(4),xticklabels=labels,yscale='log',ylabel='cycles',title='Resolved' if b['resolved'] and b['converged'] else 'Unresolved controls')
+        audit=s.get('forecast_convergence_audit',{}).get(wave,{})
+        labels=['order 2 error','order 4 error','locked budget','audit budget','order separation'];vals=[b['second_error'],b['fourth_error'],b['total'],audit.get('forecast_inclusive_budget',b['total']),b['order_separation']]
+        bars=ax[1,col].bar(range(5),vals);bars[3].set_hatch('//')
+        ax[1,col].set(xticks=range(5),xticklabels=labels,yscale='log',ylabel='cycles',title='Registered order gate resolved' if b['resolved'] and b['converged'] else 'Registered order gate unresolved')
         ax[1,col].tick_params(axis='x',rotation=20)
     save(fig,'order-budget','Is the fourth-order improvement larger than every declared uncertainty?',
-        'Compare the summed direct error budget with one quarter of the order separation, then compare both forecast errors.',
+        'Compare both errors with the locked budget. The hatched post-hoc audit also includes convergence of the forecast itself.',
         'A fourth-order claim requires sufficient resolution on both spectra; the ordinary 5% gate is insufficient.',
-        'Budgets are numerical difference estimates, not rigorous bounds; no Richardson reduction is used.', ['summary.json'])
+        'The audit cannot promote or rewrite a locked check. Budgets are difference estimates, not rigorous bounds.', ['summary.json'])
     fig,ax=plt.subplots(1,2,figsize=(11,4),layout='constrained')
     for col,wave in enumerate(('broad','carrier')):
         for event,label in enumerate(('first rise','last fall')):
@@ -89,6 +91,9 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
     lines += [f'{k}: {v}' for k,v in s['checks'].items()]
     for wave,b in s['budgets'].items():
         if 'total' in b:lines += [f"{wave}: B={b['total']:.8e} cycles, order separation={b['order_separation']:.8e}, second error={b['second_error']:.8e}, fourth error={b['fourth_error']:.8e}."]
+    lines += ['', 'Post-hoc audit: original checks remain unchanged. Forecast convergence and known-source linear replay are additional diagnostics.']
+    for wave,audit in s.get('forecast_convergence_audit',{}).items():
+        lines += [f"{wave}: forecast-inclusive audit budget {audit['forecast_inclusive_budget']:.8e} versus quarter-order target {audit['quarter_order_separation']:.8e} cycles."]
     for key,value in interpretations.items():lines += ['',key]+[f'{k.title()}: {v}' for k,v in value.items()]
     md='\n'.join(lines)+'\n';(report_path/'report.md').write_text(md)
     (report_path/'report.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(md)+'</pre>'+''.join(f'<img width="900" src="figures/{k}.svg">' for k in interpretations))
