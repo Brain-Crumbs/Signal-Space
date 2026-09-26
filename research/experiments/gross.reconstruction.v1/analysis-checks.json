@@ -1,0 +1,313 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "prediction-first",
+      "status": "pass",
+      "value": {
+        "hashes_and_sequence": true
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "decomposition",
+      "status": "pass",
+      "value": {
+        "max_relative_with_floor": 5.670759869958507e-10
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "surface-replay",
+      "status": "pass",
+      "value": {
+        "max_relative_residual": 3.3270478244008846e-13
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "source-energy",
+      "status": "pass",
+      "value": {
+        "clock_radiation": "not evaluated",
+        "max_frozen_linear_energy_drift": 9.649749213177458e-12
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "inverse-observability",
+      "status": "fail",
+      "value": {
+        "finite_witness_rejects_robustness": true,
+        "max_admissible_witness_shift": 13.379653482318027,
+        "max_linear_sensitivity": 127774.26201979285
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "causal-capture",
+      "status": "pass",
+      "value": {
+        "max_capture_relative_energy_error": 6.385348240914135e-18,
+        "max_omitted_exterior_relative_energy": 0.002440920406753081
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "causal-timing",
+      "status": "unresolved",
+      "value": {
+        "broad": {
+          "first": {
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 2.1576401110223742e-08,
+              "output_sampling": 1.9010453975454311e-06,
+              "surface_sampling": 9.572126522527924e-07,
+              "time": 1.7713865929636086e-09
+            },
+            "error": 6.205580049822856e-08,
+            "resolved": true,
+            "target": 0.0001,
+            "total": 2.9816058375014108e-06,
+            "within_budget": true,
+            "within_target": true
+          },
+          "last": {
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 2.6995066805094723,
+              "output_sampling": 0.20891726888919493,
+              "surface_sampling": 1.1206111594219692e-09,
+              "time": 0.2887046955940491
+            },
+            "error": 7.06491900262013,
+            "resolved": false,
+            "target": 0.0001,
+            "total": 3.1971287461133273,
+            "within_budget": false,
+            "within_target": false
+          }
+        },
+        "carrier": {
+          "first": {
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 6.20898141789894e-08,
+              "output_sampling": 2.267806099354175e-06,
+              "surface_sampling": 1.8483426629245514e-06,
+              "time": 3.3590374926006916e-09
+            },
+            "error": 1.197330021796006e-07,
+            "resolved": true,
+            "target": 0.0001,
+            "total": 4.281597613950316e-06,
+            "within_budget": true,
+            "within_target": true
+          },
+          "last": {
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 3.727614091826247,
+              "output_sampling": 7.32597954566927e-06,
+              "surface_sampling": 2.8067361768080445e-09,
+              "time": 1.6628181957169588
+            },
+            "error": 4.009643753852721,
+            "resolved": false,
+            "target": 0.0001,
+            "total": 5.390439716329488,
+            "within_budget": true,
+            "within_target": false
+          }
+        },
+        "new": {
+          "first": {
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 3.4511415947235946e-09,
+              "output_sampling": 7.033484905605292e-10,
+              "surface_sampling": 2.704603012659845e-07,
+              "time": 5.493063781614183e-10
+            },
+            "error": 1.7625659154418827e-08,
+            "resolved": true,
+            "target": 0.0001,
+            "total": 3.7516409772943006e-07,
+            "within_budget": true,
+            "within_target": true
+          },
+          "last": {
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 2.7107499670615525,
+              "output_sampling": 7.745349707732885e-05,
+              "surface_sampling": 6.195861601554498e-10,
+              "time": 0.5010908807691052
+            },
+            "error": 7.332621570890531,
+            "resolved": false,
+            "target": 0.0001,
+            "total": 3.211918401947321,
+            "within_budget": false,
+            "within_target": false
+          }
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "continuum-events",
+      "status": "unresolved",
+      "value": {
+        "broad": {
+          "causal": {
+            "first": {
+              "converged": true,
+              "mesh": 0.06161229884452979,
+              "nonspatial": 2.971156105754835e-06,
+              "previous_mesh": 0.14338432323540573
+            },
+            "last": {
+              "converged": false,
+              "mesh": 2.699351808072933,
+              "nonspatial": 0.49762209953647013,
+              "previous_mesh": 1.7035594651788841
+            }
+          },
+          "inverse": {
+            "first": {
+              "converged": true,
+              "mesh": 0.06161227726975582,
+              "nonspatial": 2.015721234979628e-06,
+              "previous_mesh": 0.14338430055707008
+            },
+            "last": {
+              "converged": true,
+              "mesh": 0.0031913109324150923,
+              "nonspatial": 0.011459523474263985,
+              "previous_mesh": 0.027815567248900663
+            }
+          },
+          "source": {
+            "first": {
+              "converged": true,
+              "mesh": 0.06161227726812868,
+              "nonspatial": 2.0157155897175925e-06,
+              "previous_mesh": 0.14338430055594387
+            },
+            "last": {
+              "converged": true,
+              "mesh": 0.00015487243653922178,
+              "nonspatial": 1.3393566316844953e-07,
+              "previous_mesh": 0.0007799815579829783
+            }
+          }
+        },
+        "carrier": {
+          "causal": {
+            "first": {
+              "converged": true,
+              "mesh": 0.08122448113662628,
+              "nonspatial": 4.371050638493534e-06,
+              "previous_mesh": 0.1701181902636435
+            },
+            "last": {
+              "converged": true,
+              "mesh": 3.727395611647239,
+              "nonspatial": 1.6628247749213674,
+              "previous_mesh": 5.630033880191142
+            }
+          },
+          "inverse": {
+            "first": {
+              "converged": true,
+              "mesh": 0.08122441904539457,
+              "nonspatial": 2.526012088108109e-06,
+              "previous_mesh": 0.17011815363516902
+            },
+            "last": {
+              "converged": true,
+              "mesh": 0.010367204097669003,
+              "nonspatial": 0.014819623345323659,
+              "previous_mesh": 0.01156633012999464
+            }
+          },
+          "source": {
+            "first": {
+              "converged": true,
+              "mesh": 0.0812244190468121,
+              "nonspatial": 2.5260141735510387e-06,
+              "previous_mesh": 0.17011815363521876
+            },
+            "last": {
+              "converged": false,
+              "mesh": 0.00021848017900794048,
+              "nonspatial": 1.1079713845811965e-06,
+              "previous_mesh": 3.784946393636801e-06
+            }
+          }
+        },
+        "new": {
+          "causal": {
+            "first": {
+              "converged": true,
+              "mesh": 0.04278511332444168,
+              "nonspatial": 4.646006945245972e-07,
+              "previous_mesh": 0.08333782391931166
+            },
+            "last": {
+              "converged": false,
+              "mesh": 2.7106298038765644,
+              "nonspatial": 0.5011678569494281,
+              "previous_mesh": 2.953533624887328
+            }
+          },
+          "inverse": {
+            "first": {
+              "converged": true,
+              "mesh": 0.04278510987264639,
+              "nonspatial": 1.9359606067960157e-07,
+              "previous_mesh": 0.08333781028169085
+            },
+            "last": {
+              "converged": true,
+              "mesh": 0.0016635986721951213,
+              "nonspatial": 0.0014782650599005048,
+              "previous_mesh": 0.004258770093279907
+            }
+          },
+          "source": {
+            "first": {
+              "converged": true,
+              "mesh": 0.04278510987330009,
+              "nonspatial": 1.9359102648431871e-07,
+              "previous_mesh": 0.0833378102853004
+            },
+            "last": {
+              "converged": false,
+              "mesh": 0.00012016318498808687,
+              "nonspatial": 7.752525649744712e-07,
+              "previous_mesh": 0.00014193434444109698
+            }
+          }
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "sampling",
+      "status": "unresolved",
+      "value": {
+        "maximum_event_change": 0.20891726888919493
+      }
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 3048,
+  "file_count": 3054,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 18307,
-      "sha256": "c7ae84486bc93a84f16ce31c61bd69eaa80e36acfd3621f082b5f6c6f005b55e"
+      "size": 19374,
+      "sha256": "e009789270ba6d9a412132d83d2d4b4316403928a7be4a28569381bd5ffc0951"
     },
     {
       "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Analysis_and_Next.md",
@@ -12959,6 +12959,36 @@
       "sha256": "e0caf90349d6a04a2f068137e4fabccccbabfae5429fcb8ff5ef16ff1e2e3f00"
     },
     {
+      "path": "research/experiments/gross.reconstruction.v1/analysis-checks.json",
+      "size": 9568,
+      "sha256": "27c36f039e1a6d45cf3f91fb83f6517a3cd0fcf65e1b19054a49a8536d845aa9"
+    },
+    {
+      "path": "research/experiments/gross.reconstruction.v1/artifact-index.json",
+      "size": 90349,
+      "sha256": "7d5ebe424744fdb767467d6b61fa26d4bcc0b5a34460bf3d4c7f49ffab2c76fc"
+    },
+    {
+      "path": "research/experiments/gross.reconstruction.v1/canonical-checksums.sha256",
+      "size": 15499,
+      "sha256": "19cfd060fb0c0bfa056888e07954088961d7820d40806373036a527d8bdba020"
+    },
+    {
+      "path": "research/experiments/gross.reconstruction.v1/canonical-manifest.json",
+      "size": 751296,
+      "sha256": "f5d66cb12e07816b0b3c3a14bebbb48e98696dce397a1e51c656fb62566eb4ca"
+    },
+    {
+      "path": "research/experiments/gross.reconstruction.v1/README.md",
+      "size": 957,
+      "sha256": "54b810c17bc1889b1236345234289a4e4bedf49ee81f8c33ffba2e71fad42c33"
+    },
+    {
+      "path": "research/experiments/gross.reconstruction.v1/report-interpretations.json",
+      "size": 2566,
+      "sha256": "d05472f5ba24cd38de94656e6533226857a45757f251052410ee22b69e5d8ca3"
+    },
+    {
       "path": "research/experiments/gross.router-propagation.v1/export-run-915ed88048939f8f/Experiment_Analysis_and_Next.md",
       "size": 6921,
       "sha256": "0272c240a0b8ad3a9f3ab8a3675581fc4151a92e3ad88ce73e9aab2f6e665561"
@@ -14005,8 +14035,8 @@
     },
     {
       "path": "research/experiments/README.md",
-      "size": 327,
-      "sha256": "28f9ca45c52d2d2ddc1b8ef5bb04b08be757d36375e83c25b3ce5a5a856938c0"
+      "size": 792,
+      "sha256": "f4e02d96f8fb0e6e0c6d0c0b40d22f9425d8032bf264bddc059f8459dd321b27"
     },
     {
       "path": "research/figures/charged-clock-damping-diagnostics.png",

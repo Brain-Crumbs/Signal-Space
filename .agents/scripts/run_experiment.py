@@ -22,6 +22,7 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
 RECIPES["gross-test-07"] = "docs/research/plans/gross-test-07.json"
 RECIPES["gross-test-07-order4"] = "docs/research/plans/gross-test-07-order4.json"
+RECIPES["gross-test-07-reconstruction"] = "docs/research/plans/gross-test-07-reconstruction.json"
 RECIPES["gross-test-07-transfer"] = "docs/research/plans/gross-test-07-transfer.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
@@ -35,6 +36,17 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.reconstruction.v1":
+        lines = ["# Test 7 reconstruction: automated assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Scientific review and visual inspection remain pending.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "Single-site observability and a separate two-site causal capture protocol are compared.",
+                  "The conditional singular bounds use declared surface and input perturbation radii.",
+                  "No nonlinear receiver was evolved. Original Test 7 remains failed and Test 8 remains blocked.",
+                  "A controlled reconstruction method permits a fresh locked nonlinear forecast and acceptance review, not automatic promotion."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.reception-transfer.v1":
         lines = ["# Test 7 discrete-transfer assessment", "",
                  f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
@@ -229,7 +241,11 @@ class Pipeline:
         checks = json.loads((run_path / analysis["path"] / "checks.json").read_text())
         mentor = self.evidence / "automated-assessment.md"
         mentor.write_text(assessment(manifest, analysis, checks), encoding="utf-8")
-        locator = f"research/experiments/{manifest['experiment_id']}/{run_id}"
+        github_run = self.env.get("GITHUB_RUN_ID")
+        repository = self.env.get("GITHUB_REPOSITORY")
+        server = self.env.get("GITHUB_SERVER_URL", "https://github.com")
+        locator = (f"{server}/{repository}/actions/runs/{github_run}"
+                   if repository and github_run else f"evidence/runs/{manifest['experiment_id']}/{run_id}")
         self.command("package", [sys.executable, str(self.repo / ".agents/scripts/package_experiment.py"),
                      "--run", str(run_path), "--plan", str(plan_path),
                      "--interpretations", str(run_path / report["path"] / "interpretations.json"),
@@ -239,7 +255,7 @@ class Pipeline:
         self.status.update({"technical_status": "completed", "stage": "complete",
                             "analysis_id": analysis["analysis_id"], "report_id": report["report_id"],
                             "canonical_path": run_path.relative_to(self.evidence).as_posix(),
-                            "repository_destination": locator, "checks": checks["checks"]})
+                            "evidence_locator": locator, "checks": checks["checks"]})
 
     def run(self) -> int:
         started = time.monotonic()
@@ -276,8 +292,8 @@ class Pipeline:
             lines += ["| Check | Status | Value |", "| --- | --- | --- |"]
             lines += [f"| {c['id']} | {c['status']} | {c.get('value', '')} |" for c in self.status["checks"]]
         lines += ["", "Download the evidence and reader artifacts from this workflow run. Evidence contains `runs/`, source snapshot, plan, config, stage logs and `execution.json`. The reader export contains PDFs, figures, data and an automated assessment; human interpretation and visual review remain pending.",
-                  "", "The reader's source locator names the intended repository destination if you choose to check in this run. Until then, the canonical bytes are under this evidence package's `runs/` directory. No results are automatically committed.",
-                  "", "Artifacts expire under the chosen retention policy. Preserve selected results before expiry. See `docs/research/github-actions.md` in the source snapshot for verification and manual check-in instructions."]
+                  "", "The reader's source locator names this Actions run or the sibling local evidence directory. The canonical bytes are under the evidence package's `runs/` directory. No results are automatically committed.",
+                  "", "Artifacts expire under the chosen retention policy. Preserve selected results before expiry. See `docs/research/github-actions.md` in the source snapshot for verification and artifact-first review instructions."]
         return "\n".join(lines) + "\n"
 
 
