@@ -62,7 +62,6 @@ The first pair is finest/finer; the time pair is finest/time; the domain pair is
 
 The exact machine criteria and figure plan are locked in `plans/gross-test-07-transfer.json`. Both spectra must satisfy the order discrimination; a good result on only one is reported as such. Missing marker or convergence evidence prevents promotion. The useful outcome is either a resolved extension on this preparation, a localized numerical limit, or a controlled rejection. Two-object survival/recoil, observer and coordinate invariance, gravity, angular stability and emergent spacetime remain outside this calculation.
 
-
 ## Separately labeled post-lock audit and execution recovery
 
 After all sixteen forecasts in the local attempt were locked and the first receiver comparisons were inspected, a downstream diagnostic was added. It preserves the nine registered checks and their original budget. It separately reports an audit budget using the larger receiver or forecast change for each mesh, time, and domain term. This diagnostic cannot promote or rewrite the registered result; it can expose a limit in what those checks establish. In particular, the locked mesh/time/domain terms use receiver changes and do not bound forecast changes. A registered pass alone therefore cannot establish the stronger forecast-convergence claim.

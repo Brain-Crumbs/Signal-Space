@@ -19,10 +19,10 @@ These entries are transcribed from observed tool outputs. They are not a replace
 
 At nominal amplitude 0.012 on the finest mesh:
 
-| Spectrum | Observed interval | Locked second-order forecast | Locked fourth-order forecast |
-| --- | ---: | ---: | ---: |
-| Broad | -1.4640933917626983e-6 | -1.4942281252691185e-6 | -1.4641207992926101e-6 |
-| Carrier | 5.602444109906745e-7 | 5.34148833451933e-7 | 5.601034452192704e-7 |
+| Spectrum |      Observed interval | Locked second-order forecast | Locked fourth-order forecast |
+| -------- | ---------------------: | ---------------------------: | ---------------------------: |
+| Broad    | -1.4640933917626983e-6 |       -1.4942281252691185e-6 |       -1.4641207992926101e-6 |
+| Carrier  |   5.602444109906745e-7 |          5.34148833451933e-7 |         5.601034452192704e-7 |
 
 All values are cycles. The missing time/domain/control results prevent a completed classification. The carrier forecast showed poorer convergence than the measured interval, motivating a separately labeled downstream diagnostic of forecast convergence and linear inverse error. No original threshold was changed.
 

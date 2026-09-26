@@ -1,0 +1,85 @@
+{
+  "algorithm": "discrete-adjoint-surface-transfer-v1",
+  "preparation": "compact incoming b; v=D_h b, known support only passed to inverse",
+  "receiver_use_in_prediction": false,
+  "variants": [
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.1,
+      "name": "base",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.05,
+      "name": "fine",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.025,
+      "name": "finer",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.0025,
+      "h": 0.0125,
+      "name": "finest",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.00125,
+      "h": 0.0125,
+      "name": "time",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-08,
+      "dt": 0.0025,
+      "h": 0.0125,
+      "name": "inverse",
+      "profile": "independent",
+      "radius": 80
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.005,
+      "h": 0.025,
+      "name": "wide",
+      "profile": "independent",
+      "radius": 100
+    },
+    {
+      "cutoff": 1e-10,
+      "dt": 0.0025,
+      "h": 0.0125,
+      "name": "frozen",
+      "profile": "frozen",
+      "radius": 80
+    }
+  ],
+  "waveforms": [
+    {
+      "carrier": 0.0,
+      "center": 22.0,
+      "name": "broad",
+      "width": 3.25
+    },
+    {
+      "carrier": 1.4,
+      "center": 22.0,
+      "name": "carrier",
+      "width": 2.5
+    }
+  ]
+}

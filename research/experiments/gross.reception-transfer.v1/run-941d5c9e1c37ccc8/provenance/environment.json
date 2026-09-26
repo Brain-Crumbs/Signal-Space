@@ -1,0 +1,12 @@
+{
+  "accelerator": "none",
+  "architecture": "x86_64",
+  "implementation": "CPython",
+  "numeric_libraries": {
+    "matplotlib": "3.10.8",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]"
+}

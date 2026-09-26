@@ -1,0 +1,47 @@
+{
+  "analysis_id": "analysis-0001-792256a8",
+  "created_at": "2026-09-26T05:57:55.134825Z",
+  "outputs": {
+    "figure_specs": [
+      "figures/surface-transfer.figure.json",
+      "figures/profile-convergence.figure.json",
+      "figures/order-budget.figure.json",
+      "figures/marker-convergence.figure.json"
+    ],
+    "interpretations": "interpretations.json"
+  },
+  "path": "reports/report-0001",
+  "render_provenance": {
+    "code_identity": {
+      "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "revision": "13b7d51a33d9ded87eafb6f586960a564c04bb28",
+      "runtime_version": "0.1.0",
+      "tree_state": "clean"
+    },
+    "execution_identity": {
+      "dependencies": {
+        "path": "python/requirements-lock.txt",
+        "sha256": "9fc310b78c8dc861588c550a76040bd6720b9ec301369a4cb6420865d5f7d091"
+      },
+      "environment": {
+        "accelerator": "none",
+        "architecture": "x86_64",
+        "implementation": "CPython",
+        "numeric_libraries": {
+          "matplotlib": "3.10.8",
+          "numpy": "2.3.5",
+          "scipy": "1.17.0"
+        },
+        "os": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]"
+      }
+    }
+  },
+  "report_id": "report-0001",
+  "required_inputs": [
+    "attempts/attempt-0001/raw/execution.json",
+    "analyses/analysis-0001-792256a8/derived/summary.json",
+    "analyses/analysis-0001-792256a8/checks.json"
+  ],
+  "schema_version": "research-report-v1"
+}

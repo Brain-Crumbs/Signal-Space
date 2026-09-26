@@ -1,0 +1,26 @@
+{
+  "axes": {
+    "x": {
+      "unit": "as labeled"
+    },
+    "y": {
+      "unit": "as labeled"
+    }
+  },
+  "downsampling": "all plotted saved samples",
+  "fit_window": null,
+  "id": "surface-transfer",
+  "normalization": "c=hbar=m=1",
+  "ranges": "shown on axes",
+  "renderer": "matplotlib-3.10.8",
+  "schema_version": "research-figure-spec-v1",
+  "source_datasets": [
+    "plot-data/surface.csv",
+    "plot-data/traces.csv"
+  ],
+  "transformations": [
+    "matched quiet quadrature phase in cycles",
+    "Hermite threshold markers",
+    "direct differences, no extrapolation or fit"
+  ]
+}
