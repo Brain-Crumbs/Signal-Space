@@ -20,6 +20,7 @@ on:
           - gross-test-07-order4
           - gross-test-07-transfer
           - gross-test-07-reconstruction
+          - gross-test-07-boundary
         default: gross-test-01
         required: true
       retention_days:

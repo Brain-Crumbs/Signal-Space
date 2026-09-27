@@ -1,0 +1,235 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.boundary-memory.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "question": "Can causal exterior memory and a prospective local marker support controlled Test 7 reception forecasts?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections 7-10 and 15.7",
+    "docs/research/gross-test-07-boundary.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-07-boundary.json",
+  "runtime_config_sha256": "2983d465a9311e15e3282f78d5a293948c56dd49279e9fce5b6480ea2fc3d227",
+  "method": {
+    "action": "Unchanged frozen SS OCF 1 M b_tt=-K b; exterior elimination and causal de-embedding from two surface sites.",
+    "units": "c=hbar=m=1; radius and time m^-1; a amplitude in m.",
+    "domain": "Radial R=80, h=.05,.025,.0125; independent R=100 control.",
+    "boundaries": "Regular origin; finite Dirichlet exterior beyond causal return; internal interface retains exterior memory.",
+    "initial_data": "Prior three compact supported incident shapes, incoming centered derivative; predictor receives only surface record.",
+    "solver": "RK4 dt=.0025 and independent .00125; Hermite stage interpolation; observations every .0125 and .025 control.",
+    "tolerances": "Local waveform 1e-5; energy 1e-6; prospective event residual/budget 1e-4; absolute convergence criterion and <=.1 uncertainty; see locked criteria."
+  },
+  "hypotheses": [
+    {
+      "id": "memory",
+      "prediction": "Complete causal exterior memory recovers the local history and both prospective events within declared controls."
+    },
+    {
+      "id": "insufficient",
+      "prediction": "Acquisition, sampling or prospective event convergence prevents controlled local timing even with the exact interface."
+    }
+  ],
+  "controls": [
+    {
+      "id": "source",
+      "purpose": "Independent local audit",
+      "method": "Known initial field is propagated locally only after variant prediction lock."
+    },
+    {
+      "id": "mesh",
+      "purpose": "Spatial uncertainty",
+      "method": "Three independent frozen profiles at .05,.025,.0125."
+    },
+    {
+      "id": "time",
+      "purpose": "Time integration uncertainty",
+      "method": "Halve dt at finest h."
+    },
+    {
+      "id": "domain",
+      "purpose": "Outer-boundary sensitivity",
+      "method": "Radius 100 at h=.025."
+    },
+    {
+      "id": "sampling",
+      "purpose": "Observation/interpolation uncertainty",
+      "method": "Independently decimate surface and local samples."
+    },
+    {
+      "id": "cutoff",
+      "purpose": "Information-window dependence",
+      "method": "Cut incoming drive at16 while retaining exterior memory."
+    },
+    {
+      "id": "no-memory",
+      "purpose": "Exterior feedback sensitivity",
+      "method": "Keep incoming drive but suppress exterior memory."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "prediction-first",
+      "observable": "prediction-first",
+      "pass_if": "Every frozen input and variant forecast hash verifies; predictions locked before its source local audit.",
+      "fail_if": "A resolved violation of the stated accuracy or integrity gate.",
+      "unresolved_if": "Missing events or excessive timing/convergence uncertainty as specified.",
+      "uncertainty": "Independent mesh, time, domain, output and surface sampling; direct difference budgets."
+    },
+    {
+      "id": "boundary-waveform",
+      "observable": "boundary-waveform",
+      "pass_if": "Every full-acquisition relative local waveform L2 error <=1e-5.",
+      "fail_if": "A resolved violation of the stated accuracy or integrity gate.",
+      "unresolved_if": "Missing events or excessive timing/convergence uncertainty as specified.",
+      "uncertainty": "Independent mesh, time, domain, output and surface sampling; direct difference budgets."
+    },
+    {
+      "id": "linear-energy",
+      "observable": "linear-energy",
+      "pass_if": "Every frozen unforced linear source relative energy drift over t=0..60 <=1e-6.",
+      "fail_if": "A resolved violation of the stated accuracy or integrity gate.",
+      "unresolved_if": "Missing events or excessive timing/convergence uncertainty as specified.",
+      "uncertainty": "Independent mesh, time, domain, output and surface sampling; direct difference budgets."
+    },
+    {
+      "id": "prospective-events",
+      "observable": "prospective-events",
+      "pass_if": "Each finest first-rise/first-fall residual <=1e-4, residual budget <=1e-4, and residual <= budget. Budget = mesh/time/domain residual changes + source/predictor output and surface sampling +1e-7. Missing events or excessive budget unresolved.",
+      "fail_if": "A resolved violation of the stated accuracy or integrity gate.",
+      "unresolved_if": "Missing events or excessive timing/convergence uncertainty as specified.",
+      "uncertainty": "Independent mesh, time, domain, output and surface sampling; direct difference budgets."
+    },
+    {
+      "id": "event-convergence",
+      "observable": "event-convergence",
+      "pass_if": "Source and full-prediction finest absolute event mesh change <=0.6 prior change + time/domain/sampling differences +1e-7; mesh plus nonspatial <=0.1. Otherwise unresolved.",
+      "fail_if": "A resolved violation of the stated accuracy or integrity gate.",
+      "unresolved_if": "Missing events or excessive timing/convergence uncertainty as specified.",
+      "uncertainty": "Independent mesh, time, domain, output and surface sampling; direct difference budgets."
+    },
+    {
+      "id": "sampling",
+      "observable": "sampling",
+      "pass_if": "Every finest prospective event change under output and surface decimation from .0125 to .025 <=1e-4. Otherwise unresolved.",
+      "fail_if": "A resolved violation of the stated accuracy or integrity gate.",
+      "unresolved_if": "Missing events or excessive timing/convergence uncertainty as specified.",
+      "uncertainty": "Independent mesh, time, domain, output and surface sampling; direct difference budgets."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "boundary-local",
+      "question": "Does retained exterior memory reproduce the local waveform and prospective events?",
+      "role": "evidentiary",
+      "observables": [
+        "Does retained exterior memory reproduce the local waveform and prospective events?"
+      ],
+      "representation": "Saved trace comparisons and quantitative event budgets.",
+      "competing_signatures": {
+        "memory": "Complete replay agrees and error budgets are resolved.",
+        "insufficient": "Residuals, event sensitivity or uncertainty remain above limits."
+      },
+      "controls": [
+        "source",
+        "mesh",
+        "time",
+        "domain",
+        "sampling",
+        "cutoff",
+        "no-memory"
+      ],
+      "uncertainty": "Locked separate event budgets and independent controls.",
+      "source_data": ["derived/traces.csv"],
+      "transformations": ["Direct saved arrays; no fitting or smoothing."],
+      "required": true
+    },
+    {
+      "figure_id": "boundary-drive",
+      "question": "How much of the surface field is incoming drive versus exterior response?",
+      "role": "evidentiary",
+      "observables": [
+        "How much of the surface field is incoming drive versus exterior response?"
+      ],
+      "representation": "Saved trace comparisons and quantitative event budgets.",
+      "competing_signatures": {
+        "memory": "Complete replay agrees and error budgets are resolved.",
+        "insufficient": "Residuals, event sensitivity or uncertainty remain above limits."
+      },
+      "controls": [
+        "source",
+        "mesh",
+        "time",
+        "domain",
+        "sampling",
+        "cutoff",
+        "no-memory"
+      ],
+      "uncertainty": "Locked separate event budgets and independent controls.",
+      "source_data": ["derived/drives.csv"],
+      "transformations": ["Direct saved arrays; no fitting or smoothing."],
+      "required": true
+    },
+    {
+      "figure_id": "boundary-budgets",
+      "question": "Do both prospective events meet their separate reconstruction budgets?",
+      "role": "evidentiary",
+      "observables": [
+        "Do both prospective events meet their separate reconstruction budgets?"
+      ],
+      "representation": "Saved trace comparisons and quantitative event budgets.",
+      "competing_signatures": {
+        "memory": "Complete replay agrees and error budgets are resolved.",
+        "insufficient": "Residuals, event sensitivity or uncertainty remain above limits."
+      },
+      "controls": [
+        "source",
+        "mesh",
+        "time",
+        "domain",
+        "sampling",
+        "cutoff",
+        "no-memory"
+      ],
+      "uncertainty": "Locked separate event budgets and independent controls.",
+      "source_data": ["derived/summary.json"],
+      "transformations": ["Direct saved arrays; no fitting or smoothing."],
+      "required": true
+    },
+    {
+      "figure_id": "boundary-convergence",
+      "question": "Do absolute event shifts and sampling changes converge independently of replay agreement?",
+      "role": "evidentiary",
+      "observables": [
+        "Do absolute event shifts and sampling changes converge independently of replay agreement?"
+      ],
+      "representation": "Saved trace comparisons and quantitative event budgets.",
+      "competing_signatures": {
+        "memory": "Complete replay agrees and error budgets are resolved.",
+        "insufficient": "Residuals, event sensitivity or uncertainty remain above limits."
+      },
+      "controls": [
+        "source",
+        "mesh",
+        "time",
+        "domain",
+        "sampling",
+        "cutoff",
+        "no-memory"
+      ],
+      "uncertainty": "Locked separate event budgets and independent controls.",
+      "source_data": ["derived/summary.json"],
+      "transformations": ["Direct saved arrays; no fitting or smoothing."],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 4000,
+    "max_memory_mb": 1024,
+    "max_output_mb": 150
+  },
+  "prohibited_inferences": [
+    "Linear pass cannot accept Test 7 or open Test 8.",
+    "Complete acquisition is not a forecast from the former cutoff16 record.",
+    "First complete excursion is a new event protocol; the old last-crossing failures remain."
+  ],
+  "locked_sha256": "ba5eb872ee642d6e5e5fa9aafaa6950c8896fdc084ec7e672fc7e8cce5c8972c"
+}

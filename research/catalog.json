@@ -422,8 +422,28 @@
       "summary": "Late-event inverse sensitivity persists; finite causal capture introduces late ringing after exterior truncation. First-event reconstruction passes its controls.",
       "tags": ["gross.reconstruction.v1", "observability"],
       "title": "Test 7 reconstruction audit - run-ca19609e702134b1"
+    },
+    {
+      "id": "gross-test-07-boundary",
+      "date": "2026-09-26",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-boundary.md",
+      "status": "executed: six linear prerequisite checks pass; nonlinear acceptance pending",
+      "summary": "Causal exterior memory, complete versus finite surface acquisition, and prospective local threshold events; nonlinear acceptance remains separate.",
+      "tags": ["GROSS", "Test 7", "boundary memory"],
+      "title": "Test 7 causal exterior memory and prospective events"
+    },
+    {
+      "id": "gross-boundary-memory-run-cbe4ee3c4897af06",
+      "date": "2026-09-27",
+      "kind": "experiment",
+      "path": "research/experiments/gross.boundary-memory.v1/README.md",
+      "status": "bounded linear pass; Test 7 not accepted; Test 8 blocked",
+      "summary": "Causal exterior memory passes all six registered gates. Nonlinear exterior forcing closure and a fresh controlled phase forecast remain required.",
+      "tags": ["gross.boundary-memory.v1", "Test 7"],
+      "title": "Test 7 causal boundary memory \u2014 run-cbe4ee3c4897af06"
     }
   ],
   "schema_version": 1,
-  "updated": "2026-09-25"
+  "updated": "2026-09-27"
 }

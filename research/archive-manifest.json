@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 3054,
+  "file_count": 3059,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 19374,
-      "sha256": "e009789270ba6d9a412132d83d2d4b4316403928a7be4a28569381bd5ffc0951"
+      "size": 20493,
+      "sha256": "e6167bc46850f3ad10d8d2f17516863046a58baada9ca3b9291e233667afa790"
     },
     {
       "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Analysis_and_Next.md",
@@ -1397,6 +1397,31 @@
       "path": "research/experiments/gross.bound-clock.v1/run-6d546dddc252a783/resolved-config.json",
       "size": 825,
       "sha256": "a5291eb94b0344a9f69110e44bebe5be166d1c20a663cfa4f24b9f87e654ffaa"
+    },
+    {
+      "path": "research/experiments/gross.boundary-memory.v1/checks.json",
+      "size": 6681,
+      "sha256": "504e3dadc118ca2d8248710be329af1e923b017464fe3f2410d2eb7fda20bd47"
+    },
+    {
+      "path": "research/experiments/gross.boundary-memory.v1/interpretations.json",
+      "size": 2453,
+      "sha256": "d18e9f0f74f22229b606baeb155c5571d89421244bd7c0a42fce8860e16ac797"
+    },
+    {
+      "path": "research/experiments/gross.boundary-memory.v1/manifest.json",
+      "size": 95709,
+      "sha256": "eb5afcfa5ef2b0d023b10983d50e279ac0d60e7fd59e6afd3a925edbc6db289b"
+    },
+    {
+      "path": "research/experiments/gross.boundary-memory.v1/README.md",
+      "size": 777,
+      "sha256": "136b1edafaa8ef751657a6e0321b1467d1ef0dbd38ff210ec714db546256adb2"
+    },
+    {
+      "path": "research/experiments/gross.boundary-memory.v1/summary.json",
+      "size": 45308,
+      "sha256": "db8f757548632323a5abf251903f09c68ede30011108fe191f2a32f2dba7a29e"
     },
     {
       "path": "research/experiments/gross.clock-longevity.v1/export-run-c765d2d2ca291dd6/Experiment_Analysis_and_Next.md",
