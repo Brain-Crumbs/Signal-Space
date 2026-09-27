@@ -1,0 +1,183 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.two-object-calibration.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1",
+  "question": "Can the frozen Test 6 radial clock be embedded in the action-consistent axisymmetric two-center scheme without immediate numerical or zero-neutral failure?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md §§7–10, 15.6–15.8",
+    "docs/research/gross-test-08.md",
+    "https://github.com/Brain-Crumbs/Signal-Space/issues/82"
+  ],
+  "runtime_config": "fixtures/research/gross-test-08-calibration.json",
+  "runtime_config_sha256": "2f81c2ac93ec9bbf2b4da65fa77cbd7ad208f0e0a03dfd6edd487cad02f8c569",
+  "method": {
+    "action": "SS OCF 1 flat decoupling with fixed doublet direction Phi=(phi,0), U=s-s²+s³, Z=1+0.2s, Vchi=0.25-0.4s+0.2s² and zeta=0.1; canonical neutral momentum and reciprocal backreaction.",
+    "units": "c=hbar=m=M0=1, rho,z,t in m^-1; phi,a,chi in m, E,Q in m and charge units.",
+    "domain": "Axisymmetric annular finite volume; isolated rho<24, |z|<32 and pair rho<24, |z|<64; h=.8,.4; d=72 determined before run from the measured 99.9% clock radius 17.8.",
+    "boundaries": "Regular zero-area axis and reflecting outer faces; no absorber, extraction or emitted-energy claim.",
+    "initial_data": "Frozen Test 6 0.900 profile and mode with verified bytes, chi peak .001, Pi=-0.9i phi, a=pi_a=0; naive in-phase pair superposition with centers ±36. No post-preparation forcing or relaxation.",
+    "solver": "Closed-cell variational face Hamiltonian, canonical RHS and RK4 with dt=.04,.02 (CFL safety <=.25); 16 time units; samples every .16; save full final fields and both conjugate momenta.",
+    "tolerances": "Short pilot conservation <0.001 for E and Q; exact zero-neutral in saved state; full G0–G9 not evaluated. Runtime max 300 CPU seconds, 300 wall seconds, 1 GiB RAM, 100 MiB disk."
+  },
+  "hypotheses": [
+    {
+      "id": "embeddable",
+      "prediction": "Regular-axis spatial core and two distinct pair peaks, exact zero-neutral preservation, short conservative ledgers."
+    },
+    {
+      "id": "numerical-or-preparation-failure",
+      "prediction": "Axis stencil or embedding produces failed conservation, nonzero neutral excitation, or a demonstrably unusable pair."
+    }
+  ],
+  "controls": [
+    {
+      "id": "isolated",
+      "purpose": "separate embedding transients from pair interaction",
+      "method": "same frozen radial profile at one center on both grids"
+    },
+    {
+      "id": "mesh",
+      "purpose": "independent spatial resolution",
+      "method": "h=.8 and .4, with separate dt according to declared CFL; does not yet isolate timestep error"
+    },
+    {
+      "id": "exact-null",
+      "purpose": "guard against spurious neutral emission",
+      "method": "a=pi_a=0 for all scenarios and check saved maxima"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "frozen-source",
+      "observable": "SHA-256 of radial calibration",
+      "pass_if": "Exact supplied Test 6 profile hash matches.",
+      "fail_if": "Hash mismatch blocks execution.",
+      "unresolved_if": "Source unavailable.",
+      "uncertainty": "Cryptographic byte identity."
+    },
+    {
+      "id": "closed-sector",
+      "observable": "Max |a| and |pi_a|",
+      "pass_if": "Both zero in every scenario.",
+      "fail_if": "Any nonzero sample in deterministic zero-field RHS.",
+      "unresolved_if": "Missing or nonfinite arrays.",
+      "uncertainty": "Exact arithmetic invariant; finite-precision zero checked."
+    },
+    {
+      "id": "short-ledgers",
+      "observable": "Maximum relative E and Q drift",
+      "pass_if": "Each <0.001 for 16 time units.",
+      "fail_if": "Any finite resolved drift >=0.001.",
+      "unresolved_if": "Traces missing or nonfinite.",
+      "uncertainty": "Direct Hamiltonian/charge recomputation; finite mirror box."
+    },
+    {
+      "id": "spatial-calibration",
+      "observable": "100-period isolated and quiet pair",
+      "pass_if": "Independent spatial/time/domain/relaxation controls completed.",
+      "fail_if": "Resolved 100-period failure.",
+      "unresolved_if": "Short unrelaxed pilot omits these controls.",
+      "uncertainty": "No extrapolation from 16 units."
+    },
+    {
+      "id": "full-exchange",
+      "observable": "G0–G9 of issue #82",
+      "pass_if": "All held-out gates with two channels pass.",
+      "fail_if": "Completed controlled runs violate a gate.",
+      "unresolved_if": "Not run in this prerequisite stage.",
+      "uncertainty": "No exchange data."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "spatial-embedding",
+      "question": "Do the frozen radial data embed as distinct spatial cores?",
+      "role": "diagnostic",
+      "observables": [
+        "initial axial core"
+      ],
+      "representation": "PNG/SVG/PDF and exact CSV",
+      "competing_signatures": {
+        "embeddable": "Resolved peaks or bounded short drift",
+        "numerical-or-preparation-failure": "Deviation or failed check"
+      },
+      "controls": [
+        "isolated",
+        "mesh",
+        "exact-null"
+      ],
+      "uncertainty": "No convergence extrapolation; h and dt vary together, reflecting boundary and unrelaxed pair.",
+      "source_data": [
+        "plot-data/isolated-base-axial.csv",
+        "plot-data/quiet-pair-base-axial.csv"
+      ],
+      "transformations": [
+        "Direct saved cell and sample values; no fit or smoothing"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "short-ledgers",
+      "question": "Does the closed spatial scheme preserve energy and charge?",
+      "role": "evidentiary",
+      "observables": [
+        "E(t)",
+        "Q(t)"
+      ],
+      "representation": "PNG/SVG/PDF and exact CSV",
+      "competing_signatures": {
+        "embeddable": "Resolved peaks or bounded short drift",
+        "numerical-or-preparation-failure": "Deviation or failed check"
+      },
+      "controls": [
+        "isolated",
+        "mesh",
+        "exact-null"
+      ],
+      "uncertainty": "No convergence extrapolation; h and dt vary together, reflecting boundary and unrelaxed pair.",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Direct saved cell and sample values; no fit or smoothing"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "quiet-local-trace",
+      "question": "Is a short local clock field available in the naive quiet pair?",
+      "role": "diagnostic",
+      "observables": [
+        "chi_A(t)"
+      ],
+      "representation": "PNG/SVG/PDF and exact CSV",
+      "competing_signatures": {
+        "embeddable": "Resolved peaks or bounded short drift",
+        "numerical-or-preparation-failure": "Deviation or failed check"
+      },
+      "controls": [
+        "isolated",
+        "mesh",
+        "exact-null"
+      ],
+      "uncertainty": "No convergence extrapolation; h and dt vary together, reflecting boundary and unrelaxed pair.",
+      "source_data": [
+        "plot-data/traces.csv"
+      ],
+      "transformations": [
+        "Direct saved cell and sample values; no fit or smoothing"
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 300,
+    "max_memory_mb": 1024,
+    "max_output_mb": 100
+  },
+  "prohibited_inferences": [
+    "No 100-period calibration, physical reception, recoil, survival, shared geometry or Test 9 readiness from this pilot."
+  ],
+  "locked_sha256": "5c9f23f11c8acd84d834c4cb3074bc1915cb1c9f245f1718b9d30fb65c57e9b1"
+}

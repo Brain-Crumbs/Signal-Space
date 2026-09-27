@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 3065,
+  "file_count": 3070,
   "files": [
     {
       "path": "research/catalog.json",
@@ -14087,6 +14087,31 @@
       "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/resolved-config.json",
       "size": 1226,
       "sha256": "7540ff4770e1e68b9255e38a7552f5e28c892ad68ecf4a1184e2e1bcadae1f24"
+    },
+    {
+      "path": "research/experiments/gross.two-object-calibration.v1/checks.json",
+      "size": 2377,
+      "sha256": "11a69e0c1ccbaba9579cdd486d60afd1726382a124a0b91400b9e59106b65d6b"
+    },
+    {
+      "path": "research/experiments/gross.two-object-calibration.v1/delivery.json",
+      "size": 1061,
+      "sha256": "792b1d3308603f9791992e093cce8add3c878ec858013745160e829aa1e66071"
+    },
+    {
+      "path": "research/experiments/gross.two-object-calibration.v1/README.md",
+      "size": 615,
+      "sha256": "2c3c005ec5b6548085580a2192120f59a6a9e3532a6eaf1b328091201b3579d1"
+    },
+    {
+      "path": "research/experiments/gross.two-object-calibration.v1/summary.json",
+      "size": 2232,
+      "sha256": "8f920d0088060c1e786ce940adc8bb9e9b3eaa0b579740ff61c309970fdee7dc"
+    },
+    {
+      "path": "research/experiments/gross.two-object-calibration.v1/test9-readiness.json",
+      "size": 772,
+      "sha256": "769622f8d837632a033e3566ef67146f0dd5b65e809079b1bb7f1e7a35afb969"
     },
     {
       "path": "research/experiments/README.md",
