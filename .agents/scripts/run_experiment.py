@@ -27,6 +27,7 @@ RECIPES["gross-test-07-acceptance"] = "docs/research/plans/gross-test-07-accepta
 RECIPES["gross-test-07-reconstruction"] = "docs/research/plans/gross-test-07-reconstruction.json"
 RECIPES["gross-test-07-transfer"] = "docs/research/plans/gross-test-07-transfer.json"
 RECIPES["gross-test-08-calibration"] = "docs/research/plans/gross-test-08-calibration.json"
+RECIPES["gross-test-08-quiet"] = "docs/research/plans/gross-test-08-quiet.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 for kind in ("longevity", "response"):
@@ -47,6 +48,15 @@ def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
         lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
         lines += ["", "The pair is an unrelaxed superposition. Mesh and time steps change together; 100-period calibration, source-only controls, recoil, survival and Test 9 reconstruction remain open.",
                   "Inspect the PDFs and canonical arrays before using this as a prerequisite. Test 8 G0–G9 readiness is false."]
+        return "\n".join(lines) + "\n"
+    if manifest.get("experiment_id") == "gross.two-object-quiet-calibration.v1":
+        lines = ["# Test 8 quiet calibration: automated assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Six frozen periods with an accounted outgoing layer, not Test 8 exchange.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "Inspect independent mesh, timestep and domain differences, and the weak-mode-scale sink ledger.",
+                  "Joint relaxation, 100-period longevity, both source channels, recoil and G0–G9 remain open."]
         return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.reception-acceptance.v1":
         lines = ["# Test 7 known-incident acceptance: automated assessment", "",
@@ -253,6 +263,13 @@ class Pipeline:
                             "docs/research/gross-test-08.md",
                             "docs/research/gross-test-08-calibration-results.md",
                             "docs/research/plans/gross-test-08-calibration.json",
+                            "research/papers/gross-operator-program-v0.2.md",
+                            "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz"]
+        elif self.experiment == "gross-test-08-quiet":
+            source_paths = ["AGENTS.md", ".agents", "python", "contracts/research",
+                            "fixtures/research/gross-test-08-quiet.json",
+                            "docs/research/gross-test-08.md", "docs/research/gross-test-08-quiet.md",
+                            "docs/research/plans/gross-test-08-quiet.json",
                             "research/papers/gross-operator-program-v0.2.md",
                             "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz"]
         self.command("source-snapshot", ["git", "archive", "--format=tar.gz", "--output", str(self.evidence / "source.tar.gz"), revision, *source_paths])
