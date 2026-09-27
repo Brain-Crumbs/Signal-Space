@@ -1,0 +1,210 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.two-object-quiet-calibration.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1",
+  "question": "Can the frozen Test 6 clocks remain distinct and numerically controlled for six periods in a two-center axisymmetric outgoing-layer quiet evolution?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md §§7–10,15.8",
+    "docs/research/gross-test-08-quiet.md",
+    "https://github.com/Brain-Crumbs/Signal-Space/issues/82"
+  ],
+  "runtime_config": "fixtures/research/gross-test-08-quiet.json",
+  "runtime_config_sha256": "a7ce7b8ddd7893d6c103a3d14c37c4da797c4791732509f855f292c0d2974a2c",
+  "method": {
+    "action": "Unchanged SS OCF 1 flat fixed-doublet axisymmetric Hamiltonian; outer momentum damping is numerical and its exact energy/charge sinks are integrated with RK4.",
+    "units": "c=hbar=m=1; time and length in m^-1; energy in m.",
+    "domain": "Single center at z=0 and pair at z=±36, h=.2/.1, 24 radial by 32/64 axial half lengths; pair-wide h=.2 radial32 and axial half80.",
+    "boundaries": "Mirror far boundary, cosine-squared momentum sponge of strength .12 in outer 4 units (wide: 6); energy and charge sinks measured, domain control tests spurious return.",
+    "initial_data": "Byte-locked Test 6 omegaQ=.9 profile, omegaChi=.41274991 and clock peak .001; naive pair superposition, no joint solve, a=pia=0. No source or subsequent force.",
+    "solver": "Axisymmetric annular finite-volume RHS, canonical pi_a and reciprocal backreaction, RK4; six frozen signed-field periods; separately vary spatial grid, dt at fixed h and outer domain.",
+    "tolerances": "Max |E+sink-E0|/initial mode E <.01; |Q+sink-Q0|/Q0<.01; post-2-period projected E within 1%; frequency and jitter within1%; pair separation >3Rc; matched trace controls <5%. These are six-period qualification values; no full acceptance."
+  },
+  "hypotheses": [
+    {
+      "id": "quiet-viable",
+      "prediction": "Two cores and their local projected clocks remain distinct and readable over six periods with bounded sink-corrected residuals and independent-control differences."
+    },
+    {
+      "id": "boundary-preparation-artifact",
+      "prediction": "Clock, charge centers or energy ledgers fail, or time/domain changes explain a supposed quiet baseline."
+    }
+  ],
+  "controls": [
+    {
+      "id": "single",
+      "purpose": "separate spatial embedding from pair drift",
+      "method": "isolated-base and isolated-fine"
+    },
+    {
+      "id": "space",
+      "purpose": "compare spatial embedding and quiet evolution",
+      "method": "h=.2 and .1 pair"
+    },
+    {
+      "id": "time",
+      "purpose": "disentangle dt from h",
+      "method": "pair-time halves dt at h=.2"
+    },
+    {
+      "id": "domain",
+      "purpose": "test absorber and extraction placement",
+      "method": "pair-wide enlarges both boundaries at h=.2"
+    },
+    {
+      "id": "neutral-null",
+      "purpose": "guard source-free invariant",
+      "method": "a=pi_a=0 in all six cases"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "source-identity",
+      "observable": "Profile SHA-256",
+      "pass_if": "Frozen hash matches",
+      "fail_if": "Mismatch blocks execution",
+      "unresolved_if": "Source absent",
+      "uncertainty": "Exact bytes"
+    },
+    {
+      "id": "neutral-null",
+      "observable": "Max neutral fields",
+      "pass_if": "Both remain exact floating point zero",
+      "fail_if": "Any nonzero state",
+      "unresolved_if": "Missing state",
+      "uncertainty": "Exact invariant"
+    },
+    {
+      "id": "sink-ledger",
+      "observable": "Direct E and Q plus integrated absorber sinks",
+      "pass_if": "Energy residual <1% initial clock mode energy, charge residual <1% initial Q in every case",
+      "fail_if": "Any exceeds declared limit",
+      "unresolved_if": "Missing ledger",
+      "uncertainty": "RK4 quadrature and spatial discretization"
+    },
+    {
+      "id": "distinct-pair",
+      "observable": "Charge centroid and localized charge",
+      "pass_if": "Separation >3*17.8, drift <2 and local charge fraction ≥.99 in pair cases",
+      "fail_if": "Resolved violation",
+      "unresolved_if": "Tracking ambiguous",
+      "uncertainty": "Finite cell and worldtube window"
+    },
+    {
+      "id": "short-clocks",
+      "observable": "Projected clock energy and local ticks",
+      "pass_if": "Post-two-period mode energy within 1%, frequency and jitter within 1%, at least three tick intervals",
+      "fail_if": "Resolved violation",
+      "unresolved_if": "Insufficient readable ticks",
+      "uncertainty": "Projection and output interpolation"
+    },
+    {
+      "id": "independent-controls",
+      "observable": "A matched mode trace across pair-fine, pair-time, pair-wide",
+      "pass_if": "Maximum trace difference <5% initial base amplitude for each",
+      "fail_if": "Resolved difference ≥5%",
+      "unresolved_if": "Missing control",
+      "uncertainty": "Two spatial levels do not establish asymptotic contraction"
+    },
+    {
+      "id": "joint-preparation",
+      "observable": "Joint relaxed state",
+      "pass_if": "Measured joint preparation complete",
+      "fail_if": "Resolved unusable joint state",
+      "unresolved_if": "Naive pair plus free settling is not a joint stationary solve",
+      "uncertainty": "Not evaluated here"
+    },
+    {
+      "id": "long-clocks",
+      "observable": "100-period lifetime",
+      "pass_if": "Full isolated and quiet baseline and controls pass",
+      "fail_if": "Controlled failure",
+      "unresolved_if": "Six-period result only",
+      "uncertainty": "No extrapolation"
+    },
+    {
+      "id": "full-exchange",
+      "observable": "G0–G9 of issue #82",
+      "pass_if": "Both sources, recoil, survival and handoff pass",
+      "fail_if": "Controlled failure",
+      "unresolved_if": "Not run at this stage",
+      "uncertainty": "No exchange"
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "bound-clock-history",
+      "question": "Do embedded clocks retain projected mode energy?",
+      "role": "evidentiary",
+      "observables": [
+        "frozen projected mode energy",
+        "quiet center and local ticks",
+        "sink-corrected Hamiltonian/charge"
+      ],
+      "representation": "PNG/SVG/PDF with exact trace CSV",
+      "competing_signatures": {
+        "quiet-viable": "Separated clocks and contracting or bounded balances",
+        "boundary-preparation-artifact": "Drift, sink mismatch or grid/domain dependence"
+      },
+      "controls": ["single", "space"],
+      "uncertainty": "Separate spatial/time/domain/sampling effects; no 100-period extrapolation.",
+      "source_data": ["derived/traces.csv", "derived/summary.json"],
+      "transformations": [
+        "Direct normalized quantities from saved traces; no fitted histories"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "quiet-pair-controls",
+      "question": "Do mesh, time and domain changes affect the quiet clock and center?",
+      "role": "evidentiary",
+      "observables": [
+        "frozen projected mode energy",
+        "quiet center and local ticks",
+        "sink-corrected Hamiltonian/charge"
+      ],
+      "representation": "PNG/SVG/PDF with exact trace CSV",
+      "competing_signatures": {
+        "quiet-viable": "Separated clocks and contracting or bounded balances",
+        "boundary-preparation-artifact": "Drift, sink mismatch or grid/domain dependence"
+      },
+      "controls": ["space", "time", "domain"],
+      "uncertainty": "Separate spatial/time/domain/sampling effects; no 100-period extrapolation.",
+      "source_data": ["derived/traces.csv", "derived/summary.json"],
+      "transformations": [
+        "Direct normalized quantities from saved traces; no fitted histories"
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "absorber-ledgers",
+      "question": "Do the energy and charge sinks close on the weak mode scale?",
+      "role": "evidentiary",
+      "observables": [
+        "frozen projected mode energy",
+        "quiet center and local ticks",
+        "sink-corrected Hamiltonian/charge"
+      ],
+      "representation": "PNG/SVG/PDF with exact trace CSV",
+      "competing_signatures": {
+        "quiet-viable": "Separated clocks and contracting or bounded balances",
+        "boundary-preparation-artifact": "Drift, sink mismatch or grid/domain dependence"
+      },
+      "controls": ["domain", "neutral-null"],
+      "uncertainty": "Separate spatial/time/domain/sampling effects; no 100-period extrapolation.",
+      "source_data": ["derived/traces.csv", "derived/summary.json"],
+      "transformations": [
+        "Direct normalized quantities from saved traces; no fitted histories"
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 8000,
+    "max_memory_mb": 4096,
+    "max_output_mb": 512
+  },
+  "prohibited_inferences": [
+    "No 100-period survival, physical reception, recoil, Test 9 readiness or transverse stability follows from a six-period quiet run."
+  ],
+  "locked_sha256": "60556ffc9a6bdec9ecf91e0d910f55969d95b456b25b43e0aef6eb9c3d42a0b9"
+}

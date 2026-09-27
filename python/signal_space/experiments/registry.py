@@ -17,6 +17,7 @@ from signal_space.experiments.reconstruction import ReconstructionExperiment
 from signal_space.experiments.boundary_memory import BoundaryMemoryExperiment
 from signal_space.experiments.reception_acceptance import ReceptionAcceptanceExperiment
 from signal_space.experiments.two_object import TwoObjectCalibrationExperiment
+from signal_space.experiments.two_object_quiet import TwoObjectQuietExperiment
 
 _PLUGINS: dict[str, ExperimentPlugin] = {
     SyntheticExperiment.experiment_id: SyntheticExperiment(),
@@ -36,6 +37,7 @@ _PLUGINS: dict[str, ExperimentPlugin] = {
     BoundaryMemoryExperiment.experiment_id: BoundaryMemoryExperiment(),
     ReceptionAcceptanceExperiment.experiment_id: ReceptionAcceptanceExperiment(),
     TwoObjectCalibrationExperiment.experiment_id: TwoObjectCalibrationExperiment(),
+    TwoObjectQuietExperiment.experiment_id: TwoObjectQuietExperiment(),
 }
 
 

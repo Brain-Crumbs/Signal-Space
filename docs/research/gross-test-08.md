@@ -2,6 +2,8 @@
 
 This protocol implements the first spatial prerequisite of [issue #82](https://github.com/Brain-Crumbs/Signal-Space/issues/82). It is **not** the full exchange experiment. The full `gross.two-object-exchange.v1` registration and held-out matrix remain pending. The separate pilot ID is `gross.two-object-calibration.v1`; the model ID is `signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1`.
 
+The subsequent [local twelve-period outgoing-layer and quiet-pair qualification](gross-test-08-quiet.md) has its own registered `gross.two-object-quiet-calibration.v1` identity and locked plan. It also cannot certify G0–G9 or preselect held-out source preparations.
+
 ## Action and numerical mapping
 
 Program v0.2 §§7–10 and 15.8 give the flat action and its equations. The model uses $c=\hbar=m=1$, metric $(+---)$, $s=|\phi|^2$, $U=s-s^2+s^3$, $Z=1+0.2s$, $V_\chi=0.25-0.4s+0.2s^2$, and $\zeta=0.1$. The exact fixed-internal-direction reduction is $\Phi=(\phi,0)$. No source term, center force, evolution-time drive or gravitational dynamics is introduced.
