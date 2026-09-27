@@ -1,0 +1,13 @@
+{
+  "size_bytes": 23655046,
+  "sha256": "486fdfd2f30ce28cbd0d3b77e2196c117aa285184fb3cd471ef18230d2061f33",
+  "files": 314,
+  "filename": "Test7_Full_Acceptance_Evidence.zip",
+  "run_id": "run-f2e5dffd14f209f2",
+  "analysis_id": "analysis-0001-0b2d32e3",
+  "report_id": "report-0002",
+  "delivery": "Downloadable package delivered separately with this task; not a GitHub-hosted execution artifact.",
+  "indexed_uncompressed_bytes": 41274218,
+  "source_commit": "755b41e6ebad6ae4e5774d3e76f3cdd56c97bf7e",
+  "verified": "Canonical package, paired reader, all indexed file hashes and ZIP CRCs."
+}

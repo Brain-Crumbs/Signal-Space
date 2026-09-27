@@ -1,0 +1,372 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.reception-acceptance.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "question": "Does the frozen calibrated receiver predict a fresh known incident single and counterpropagating-pair local clock record under every Program 15.7 control?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md sections7-10 and15.7",
+    "docs/research/gross-test-07-order4.md",
+    "docs/research/gross-test-07-acceptance.md"
+  ],
+  "runtime_config": "fixtures/research/gross-test-07-acceptance.json",
+  "runtime_config_sha256": "2009b1e00966c82f586deb2d628534a98c088e1a69835b862467ea8ec41f40f5",
+  "method": {
+    "action": "Unchanged radial SS OCF1 Hamiltonian; exact formal neutral orders1,3 and charged/clock orders0,2,4, unfitted.",
+    "units": "c=hbar=m=1; time and radius m^-1; clock difference in cycles.",
+    "domain": "R80 with h.1,.05,.025; independent R160 at h.1; fixed readout r.1.",
+    "boundaries": "Regular origin and zero outer boundary; no sponge; duration65 before outer return.",
+    "initial_data": "Accepted frozen core/mode; fresh compact incoming cos^4 shells centered19,27 with width3.25; known preparation available to predictor, upstream record saved.",
+    "solver": "Shared RK4 Hamiltonian; dt.01,.005; full time-dependent Taylor response, no adiabatic assumption.",
+    "tolerances": "Program 5% or combined numerical budget; nonzero interval >5 budgets; no changes after lock."
+  },
+  "hypotheses": [
+    {
+      "id": "predictive",
+      "prediction": "Unfitted fourth-order known-incident forecast meets local interval gates and required controls."
+    },
+    {
+      "id": "inadequate",
+      "prediction": "A resolved discrepancy, nonquadratic weak response, control failure or excessive uncertainty rejects acceptance."
+    }
+  ],
+  "controls": [
+    {
+      "id": "quiet",
+      "purpose": "Matched no-pulse phases, including changed initial phase.",
+      "method": "Matched no-pulse phases, including changed initial phase."
+    },
+    {
+      "id": "each-and-both",
+      "purpose": "First and second pulses alone; both together; subtract individual records.",
+      "method": "First and second pulses alone; both together; subtract individual records."
+    },
+    {
+      "id": "sign",
+      "purpose": "Reverse single and both incident amplitudes.",
+      "method": "Reverse single and both incident amplitudes."
+    },
+    {
+      "id": "amplitude",
+      "purpose": "A=.002,.004,.008 with same pulse shapes and fixed events.",
+      "method": "A=.002,.004,.008 with same pulse shapes and fixed events."
+    },
+    {
+      "id": "clock-phase",
+      "purpose": "Nominal first pulse and matched quiet at phase pi/3.",
+      "method": "Nominal first pulse and matched quiet at phase pi/3."
+    },
+    {
+      "id": "frozen-core",
+      "purpose": "Actually execute a Taylor replay with neutral core backreaction suppressed.",
+      "method": "Actually execute a Taylor replay with neutral core backreaction suppressed."
+    },
+    {
+      "id": "mesh",
+      "purpose": "h=.1,.05,.025; finer interpolates accepted .05 calibration without refit.",
+      "method": "h=.1,.05,.025; finer interpolates accepted .05 calibration without refit."
+    },
+    {
+      "id": "time",
+      "purpose": "Halve dt at h=.05.",
+      "method": "Halve dt at h=.05."
+    },
+    {
+      "id": "domain",
+      "purpose": "Double R from80 to160 at h=.1.",
+      "method": "Double R from80 to160 at h=.1."
+    },
+    {
+      "id": "sampling",
+      "purpose": "Compare saved .05 output and .1 decimation; markers deliberately lie on both grids.",
+      "method": "Compare saved .05 output and .1 decimation; markers deliberately lie on both grids."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "frozen-calibration",
+      "observable": "frozen-calibration",
+      "pass_if": "Every copied accepted Test 6 profile and clock mode matches its frozen hash.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "prediction-first",
+      "observable": "prediction-first",
+      "pass_if": "All calibration, incident, surface, fourth-order and frozen-core forecasts hash-locked before any nonlinear receiver starts.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "record-resolution",
+      "observable": "record-resolution",
+      "pass_if": "Every nonquiet finest local cycle interval exceeds five times the combined actual AND forecast mesh/time/domain budget plus sampling and 1e-11 cycles; otherwise unresolved.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "interval-prediction",
+      "observable": "interval-prediction",
+      "pass_if": "Every nonquiet finest fourth-order cycle forecast error <= max(5% of measured record, combined numerical budget); unresolved if record not resolved.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "response-traces",
+      "observable": "response-traces",
+      "pass_if": "Every nonquiet finest phase, chi-response and density-response relative L2 prediction error <= max(5%, combined phase trace numerical budget).",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "sign-even",
+      "observable": "sign-even",
+      "pass_if": "Every grid single and pair sign-odd phase fraction <=1e-5.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "weak-amplitude-law",
+      "observable": "weak-amplitude-law",
+      "pass_if": "On every grid chi-response weak exponent within 0.1 of 2, amplitude-normalized half/nominal/double chi traces within 5%, and half-amplitude second-order phase trace error <=5%; unresolved if interval resolution fails.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "pulse-overlap",
+      "observable": "pulse-overlap",
+      "pass_if": "Both-minus-each-alone phase trace exceeds five combined numerical budgets and its fourth-order prediction error <=max(5%, inverse signal-to-budget); unresolved if not resolved.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "quiet-and-frozen-core",
+      "observable": "quiet-and-frozen-core",
+      "pass_if": "Matched quiet intervals <1e-15 cycles and executed frozen-core Taylor chi coefficients <=1e-15.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "numerical-convergence",
+      "observable": "numerical-convergence",
+      "pass_if": "For every nonquiet actual and forecast phase trace, finest mesh difference <=0.75 previous mesh difference plus time/domain/noise differences; combined relative phase numerical budget <0.2. Otherwise unresolved.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    },
+    {
+      "id": "conservation",
+      "observable": "conservation",
+      "pass_if": "All preparations/grids: relative charge and total energy drift <1e-5; matched energy residual <1% initial incident energy.",
+      "fail_if": "A resolved violation of the locked condition.",
+      "unresolved_if": "Missing or undefined observables; insufficient resolution or convergence as specified.",
+      "uncertainty": "Sum of independent mesh, timestep, domain, actual/forecast and sampling differences; fixed 1e-11 cycle floor."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "acceptance-propagation",
+      "question": "Where do incoming and reflected pulses overlap?",
+      "role": "evidentiary",
+      "observables": ["Where do incoming and reflected pulses overlap?"],
+      "representation": "Saved physical fields, response curves, or budget/control comparisons.",
+      "competing_signatures": {
+        "predictive": "Forecast tracks resolved response; controls and budgets hold.",
+        "inadequate": "Residual or unresolved budget prevents acceptance."
+      },
+      "controls": [
+        "quiet",
+        "each-and-both",
+        "sign",
+        "amplitude",
+        "clock-phase",
+        "frozen-core",
+        "mesh",
+        "time",
+        "domain",
+        "sampling"
+      ],
+      "uncertainty": "Separate direct differences and predeclared gates.",
+      "source_data": ["derived/spacetime.csv"],
+      "transformations": [
+        "Direct fields; matched quiet subtraction; formal Taylor sums; no fitted coefficients."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "acceptance-forcing",
+      "question": "Does the incident invariant drive the predicted core and clock response?",
+      "role": "evidentiary",
+      "observables": [
+        "Does the incident invariant drive the predicted core and clock response?"
+      ],
+      "representation": "Saved physical fields, response curves, or budget/control comparisons.",
+      "competing_signatures": {
+        "predictive": "Forecast tracks resolved response; controls and budgets hold.",
+        "inadequate": "Residual or unresolved budget prevents acceptance."
+      },
+      "controls": [
+        "quiet",
+        "each-and-both",
+        "sign",
+        "amplitude",
+        "clock-phase",
+        "frozen-core",
+        "mesh",
+        "time",
+        "domain",
+        "sampling"
+      ],
+      "uncertainty": "Separate direct differences and predeclared gates.",
+      "source_data": ["derived/traces.csv"],
+      "transformations": [
+        "Direct fields; matched quiet subtraction; formal Taylor sums; no fitted coefficients."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "acceptance-phase",
+      "question": "Does the locked forecast predict the withheld local phase histories?",
+      "role": "evidentiary",
+      "observables": [
+        "Does the locked forecast predict the withheld local phase histories?"
+      ],
+      "representation": "Saved physical fields, response curves, or budget/control comparisons.",
+      "competing_signatures": {
+        "predictive": "Forecast tracks resolved response; controls and budgets hold.",
+        "inadequate": "Residual or unresolved budget prevents acceptance."
+      },
+      "controls": [
+        "quiet",
+        "each-and-both",
+        "sign",
+        "amplitude",
+        "clock-phase",
+        "frozen-core",
+        "mesh",
+        "time",
+        "domain",
+        "sampling"
+      ],
+      "uncertainty": "Separate direct differences and predeclared gates.",
+      "source_data": ["derived/traces.csv"],
+      "transformations": [
+        "Direct fields; matched quiet subtraction; formal Taylor sums; no fitted coefficients."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "acceptance-intervals",
+      "question": "Are nonzero cycle intervals resolved and forecasts within the registered allowance?",
+      "role": "evidentiary",
+      "observables": [
+        "Are nonzero cycle intervals resolved and forecasts within the registered allowance?"
+      ],
+      "representation": "Saved physical fields, response curves, or budget/control comparisons.",
+      "competing_signatures": {
+        "predictive": "Forecast tracks resolved response; controls and budgets hold.",
+        "inadequate": "Residual or unresolved budget prevents acceptance."
+      },
+      "controls": [
+        "quiet",
+        "each-and-both",
+        "sign",
+        "amplitude",
+        "clock-phase",
+        "frozen-core",
+        "mesh",
+        "time",
+        "domain",
+        "sampling"
+      ],
+      "uncertainty": "Separate direct differences and predeclared gates.",
+      "source_data": ["derived/summary.json"],
+      "transformations": [
+        "Direct fields; matched quiet subtraction; formal Taylor sums; no fitted coefficients."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "acceptance-controls",
+      "question": "Do sign parity, amplitude law and pulse overlap support the response mechanism?",
+      "role": "evidentiary",
+      "observables": [
+        "Do sign parity, amplitude law and pulse overlap support the response mechanism?"
+      ],
+      "representation": "Saved physical fields, response curves, or budget/control comparisons.",
+      "competing_signatures": {
+        "predictive": "Forecast tracks resolved response; controls and budgets hold.",
+        "inadequate": "Residual or unresolved budget prevents acceptance."
+      },
+      "controls": [
+        "quiet",
+        "each-and-both",
+        "sign",
+        "amplitude",
+        "clock-phase",
+        "frozen-core",
+        "mesh",
+        "time",
+        "domain",
+        "sampling"
+      ],
+      "uncertainty": "Separate direct differences and predeclared gates.",
+      "source_data": ["derived/traces.csv"],
+      "transformations": [
+        "Direct fields; matched quiet subtraction; formal Taylor sums; no fitted coefficients."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "acceptance-numerics",
+      "question": "Do refinement and conservation support the claimed accuracy?",
+      "role": "evidentiary",
+      "observables": [
+        "Do refinement and conservation support the claimed accuracy?"
+      ],
+      "representation": "Saved physical fields, response curves, or budget/control comparisons.",
+      "competing_signatures": {
+        "predictive": "Forecast tracks resolved response; controls and budgets hold.",
+        "inadequate": "Residual or unresolved budget prevents acceptance."
+      },
+      "controls": [
+        "quiet",
+        "each-and-both",
+        "sign",
+        "amplitude",
+        "clock-phase",
+        "frozen-core",
+        "mesh",
+        "time",
+        "domain",
+        "sampling"
+      ],
+      "uncertainty": "Separate direct differences and predeclared gates.",
+      "source_data": ["derived/summary.json"],
+      "transformations": [
+        "Direct fields; matched quiet subtraction; formal Taylor sums; no fitted coefficients."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 7600,
+    "max_memory_mb": 1536,
+    "max_output_mb": 250
+  },
+  "prohibited_inferences": [
+    "No retroactive promotion of old surface-only runs.",
+    "Known preparation is explicit: no claim of robust surface-only inversion.",
+    "Fixed local timers and quiet counterfactual are not an autonomous detector.",
+    "A radial Test7 pass does not establish Test8 survival/recoil, Test9 invariance or emergent geometry."
+  ],
+  "locked_sha256": "80e7b2dbb9fffcc757e049d11d300ba9690a89a4bfd64f5d4388dcd747ba2d7d"
+}

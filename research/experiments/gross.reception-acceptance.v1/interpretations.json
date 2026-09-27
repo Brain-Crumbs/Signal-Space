@@ -1,0 +1,38 @@
+{
+  "acceptance-controls": {
+    "limitation": "The quadratic reference is normalized to the smallest amplitude for display; it is not a fitted forecast. Frozen-core and quiet null values are in the checks.",
+    "question": "Do sign parity, amplitude law and pulse overlap support the response mechanism?",
+    "reading": "Weak-amplitude gate: pass; parity: pass; overlap: pass. Overlap resolution is 43.6 budgets.",
+    "significance": "Checks the predicted even, quadratic weak response and the additional record caused by counterpropagating overlap."
+  },
+  "acceptance-forcing": {
+    "limitation": "The invariant overlay is leading order; the response forecast includes fourth order. The source preparation is known, not inferred from surface data.",
+    "question": "Does the incident invariant drive the predicted core and clock response?",
+    "reading": "The invariant, matched core-density change and matched clock-field change are saved separately. Response-trace gate: pass.",
+    "significance": "Tests the neutral-to-core-to-clock mechanism rather than arrival time alone."
+  },
+  "acceptance-intervals": {
+    "limitation": "Error bars are deterministic direct-difference budgets, not confidence intervals. Fixed proper-time events differ from the historical threshold event protocol.",
+    "question": "Are nonzero cycle intervals resolved and forecasts within the registered allowance?",
+    "reading": "Resolution gate: pass; interval-prediction gate: pass. The lower panel must be at or below one, and every record must exceed five budgets.",
+    "significance": "Directly evaluates the Program 15.7 acceptance observable, including both receiver and forecast numerical uncertainty."
+  },
+  "acceptance-numerics": {
+    "limitation": "Refinement retains the accepted prepared profile; it does not prove a new continuum bound state. Finite differences are error estimates, not rigorous bounds.",
+    "question": "Do refinement and conservation support the claimed accuracy?",
+    "reading": "Numerical-convergence gate: pass; conservation gate: pass. Time/domain differences and total-energy drift are retained in the summary.",
+    "significance": "Tests whether prediction agreement survives discretization controls while respecting the reciprocal Hamiltonian."
+  },
+  "acceptance-phase": {
+    "limitation": "Both predictions know the preparation and use a matched quiet reference; no autonomous detector or observer-invariance claim is made.",
+    "question": "Does the locked forecast predict the withheld local phase histories?",
+    "reading": "Actual relative quadrature phase is compared with independently locked second- and fourth-order coefficients for four primary preparations. Separate residual panels expose differences hidden by the history overlays.",
+    "significance": "Separates the leading calibrated susceptibility from its unfitted higher-order correction."
+  },
+  "acceptance-propagation": {
+    "limitation": "Radial shells and fixed origin are not two moving objects or planar beams. The field map alone does not demonstrate clock reception.",
+    "question": "Where do incoming and reflected pulses overlap?",
+    "reading": "Saved coupled base-grid fields show the incoming shells and origin reflection. Dotted lines mark the fixed local sampling times.",
+    "significance": "Grounds the pair-minus-individual test in an executed radial counterpropagation geometry."
+  }
+}

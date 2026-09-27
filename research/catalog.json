@@ -442,6 +442,26 @@
       "summary": "Causal exterior memory passes all six registered gates. Nonlinear exterior forcing closure and a fresh controlled phase forecast remain required.",
       "tags": ["gross.boundary-memory.v1", "Test 7"],
       "title": "Test 7 causal boundary memory \u2014 run-cbe4ee3c4897af06"
+    },
+    {
+      "id": "gross-test-07-acceptance",
+      "date": "2026-09-27",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-acceptance.md",
+      "status": "executed: all eleven locked checks pass in known-incident radial scope",
+      "summary": "Program15.7 known-incident local cycle acceptance with fixed proper-time markers, fourth-order unfitted forecast and all required controls.",
+      "tags": ["GROSS", "Test7", "acceptance"],
+      "title": "Test7 known-incident full acceptance protocol"
+    },
+    {
+      "id": "gross-reception-acceptance-run-f2e5dffd14f209f2",
+      "date": "2026-09-27",
+      "kind": "experiment",
+      "path": "research/experiments/gross.reception-acceptance.v1/README.md",
+      "status": "11 pass; Program 15.7 accepted in calibrated known-incident radial scope",
+      "summary": "Fresh fixed-local-marker reception predicts all withheld intervals and passes amplitude, sign, phase, overlap, null, convergence and conservation controls. Earlier surface-only failures unchanged; Test 8 ready for bounded planning.",
+      "tags": ["gross.reception-acceptance.v1", "Test 7"],
+      "title": "Test 7 full known-incident acceptance \u2014 run-f2e5dffd14f209f2"
     }
   ],
   "schema_version": 1,

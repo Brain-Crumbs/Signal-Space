@@ -15,6 +15,7 @@ from signal_space.experiments.reception_order4 import ReceptionOrder4Experiment
 from signal_space.experiments.reception_transfer import ReceptionTransferExperiment
 from signal_space.experiments.reconstruction import ReconstructionExperiment
 from signal_space.experiments.boundary_memory import BoundaryMemoryExperiment
+from signal_space.experiments.reception_acceptance import ReceptionAcceptanceExperiment
 
 _PLUGINS: dict[str, ExperimentPlugin] = {
     SyntheticExperiment.experiment_id: SyntheticExperiment(),
@@ -32,6 +33,7 @@ _PLUGINS: dict[str, ExperimentPlugin] = {
     ReceptionTransferExperiment.experiment_id: ReceptionTransferExperiment(),
     ReconstructionExperiment.experiment_id: ReconstructionExperiment(),
     BoundaryMemoryExperiment.experiment_id: BoundaryMemoryExperiment(),
+    ReceptionAcceptanceExperiment.experiment_id: ReceptionAcceptanceExperiment(),
 }
 
 

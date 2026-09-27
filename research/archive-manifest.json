@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/research-archive.mjs",
-  "file_count": 3059,
+  "file_count": 3065,
   "files": [
     {
       "path": "research/catalog.json",
-      "size": 20493,
-      "sha256": "e6167bc46850f3ad10d8d2f17516863046a58baada9ca3b9291e233667afa790"
+      "size": 21716,
+      "sha256": "de6530fdbb10db4ba88b326af84d06a82444cfe3f2a9a591c065ae02a9503b44"
     },
     {
       "path": "research/experiments/gross.bound-clock.v1/export-run-080a63d117abd84d/Experiment_Analysis_and_Next.md",
@@ -6902,6 +6902,36 @@
       "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/resolved-config.json",
       "size": 558,
       "sha256": "b40ef9c9fa4f0f03640acfe953270e3241c425f72438bcb5983112c33f01f21b"
+    },
+    {
+      "path": "research/experiments/gross.reception-acceptance.v1/checks.json",
+      "size": 22413,
+      "sha256": "c04e0683fe9bf11d74f1fa67aa1e79b9124ff72d4123192e9488ca0bc839b59a"
+    },
+    {
+      "path": "research/experiments/gross.reception-acceptance.v1/delivery.json",
+      "size": 595,
+      "sha256": "f1bbb9ff46571b1bd33743e0bf71f536841ab3ead2fea3006cfdcd739ee9d1e4"
+    },
+    {
+      "path": "research/experiments/gross.reception-acceptance.v1/interpretations.json",
+      "size": 3423,
+      "sha256": "e5b695d9a1c34ef8160586576ea15231e004cce333d40b63c9bad10191f5f0eb"
+    },
+    {
+      "path": "research/experiments/gross.reception-acceptance.v1/manifest.json",
+      "size": 100893,
+      "sha256": "6d9d9ad15370850969a61331d4ee9eefbcff246bd94731d2650f98ed29c03080"
+    },
+    {
+      "path": "research/experiments/gross.reception-acceptance.v1/README.md",
+      "size": 1318,
+      "sha256": "566e2c0c2d9be53468df7003ca1524e708eb862b2c65ecadd83eed6299c549e6"
+    },
+    {
+      "path": "research/experiments/gross.reception-acceptance.v1/summary.json",
+      "size": 42490,
+      "sha256": "2245ae521dbbc8d9868d71393180fe7772ce7fc746b3da1397ec07b71c402780"
     },
     {
       "path": "research/experiments/gross.reception-order4.v1/export-run-29c4c4228ffddbb4/Experiment_Analysis_and_Next.md",
