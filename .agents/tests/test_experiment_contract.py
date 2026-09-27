@@ -75,9 +75,21 @@ class ExperimentContractTests(unittest.TestCase):
                             "--mentor", str(ROOT / ".agents/examples/synthetic-mentor.md"),
                             "--output", str(output), "--source-locator", "research/experiments/portable-fixture"], cwd=ROOT, check=True, capture_output=True)
             contract.validate_bundle(output)
+            contract.validate_bundle(output, Path(run["path"]))
             export = json.loads((output / "export.json").read_text())
             self.assertEqual(export["source_run"]["locator"], "research/experiments/portable-fixture")
             self.assertEqual(export["source_run"]["manifest_sha256"], contract.digest((Path(run["path"]) / "manifest.json").read_bytes()))
+            self.assertTrue(export["canonical_files"])
+            self.assertFalse((output / "results/data/raw").exists())
+            self.assertFalse((output / "results/data/derived").exists())
+            canonical = Path(run["path"]) / export["canonical_files"][0]["path"]
+            original = canonical.read_bytes()
+            try:
+                canonical.write_bytes(original + b"tampered")
+                with self.assertRaisesRegex(ValueError, "canonical checksum mismatch"):
+                    contract.validate_bundle(output, Path(run["path"]))
+            finally:
+                canonical.write_bytes(original)
             plot = output / "results/data/plot-data/recurrence.csv"
             plot.write_text(plot.read_text() + "0,corrupted\n")
             with self.assertRaisesRegex(ValueError, "checksum mismatch"):

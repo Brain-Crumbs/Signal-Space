@@ -251,7 +251,7 @@ class Pipeline:
                      "--interpretations", str(run_path / report["path"] / "interpretations.json"),
                      "--mentor", str(mentor), "--source-dir", str(self.repo / "python/signal_space"),
                      "--source-locator", locator, "--output", str(self.output / "reader")])
-        validate_bundle(self.output / "reader")
+        validate_bundle(self.output / "reader", run_path)
         self.status.update({"technical_status": "completed", "stage": "complete",
                             "analysis_id": analysis["analysis_id"], "report_id": report["report_id"],
                             "canonical_path": run_path.relative_to(self.evidence).as_posix(),

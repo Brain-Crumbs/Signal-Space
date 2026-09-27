@@ -9,7 +9,7 @@ import shutil
 import textwrap
 from pathlib import Path
 
-from experiment_contract import digest, validate_bundle, validate_plan
+from experiment_contract import digest, safe_file, validate_bundle, validate_plan
 
 
 def copy(source: Path, target: Path) -> None:
@@ -120,17 +120,20 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
     try:
         copy(plan_file, destination / "plan.json")
         copy(mentor_file, destination / "Experiment_Analysis_and_Next.md")
+        canonical_files = []
         for attempt in manifest["attempts"]:
             raw = run / attempt["path"] / "raw"
             if raw.exists():
                 for p in raw.rglob("*"):
                     if p.is_file():
-                        copy(p, destination / "results/data/raw" / attempt["attempt_id"] / p.relative_to(raw))
+                        name = p.relative_to(run).as_posix()
+                        canonical_files.append({"path": name, "sha256": digest(safe_file(run, name).read_bytes())})
         derived = run / analysis["path"] / "derived"
         if derived.exists():
             for p in derived.rglob("*"):
                 if p.is_file():
-                    copy(p, destination / "results/data/derived" / p.relative_to(derived))
+                    name = p.relative_to(run).as_posix()
+                    canonical_files.append({"path": name, "sha256": digest(safe_file(run, name).read_bytes())})
         copy(run / analysis["path"] / "analysis.json", destination / "results/tables/analysis.json")
         copy(run / analysis["path"] / "checks.json", destination / "results/tables/checks.json")
         copy(run / "resolved-config.json", destination / "results/tables/resolved-config.json")
@@ -175,7 +178,7 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
                 png = next(path for path in item["files"] if path.endswith(".png"))
                 figure_page(pdf, destination / png, {**item, "question": item["question"]})
         locator = source_locator or str(run.resolve())
-        readme = f"# {plan['question']}\n\nModel: `{plan['model_id']}`. Run: `{manifest['run_id']}`. Analysis: `{analysis['analysis_id']}`. Report: `{report['report_id']}`. Scientific classification: `{manifest['scientific_classification']}`.\n\nCanonical source locator: `{locator}`. For an Actions download, the canonical package is in the companion evidence artifact under `runs/<experiment-id>/<run-id>/`. Record its hash index and mirror it before artifact expiration. See `plan.json` for the locked protocol, `Experimental_Setup.pdf` for the setup, `Experiment_Results.pdf` for all saved figures and interpretations, `Experiment_Analysis_and_Next.md` for assessment, `results/` for data and code, and `figures/figure_index.json` for figure provenance.\n\nKnown gaps: {', '.join(manifest['known_gaps']) or 'none recorded'}.\n"
+        readme = f"# {plan['question']}\n\nModel: `{plan['model_id']}`. Run: `{manifest['run_id']}`. Analysis: `{analysis['analysis_id']}`. Report: `{report['report_id']}`. Scientific classification: `{manifest['scientific_classification']}`.\n\nCanonical source locator: `{locator}`. For an Actions download, the canonical package is in the companion evidence artifact under `runs/<experiment-id>/<run-id>/`. Raw and derived arrays are stored only there; `export.json` lists their paths and SHA-256 hashes in `canonical_files`. Download both artifacts to audit or reanalyze them. Run `python3 .agents/scripts/experiment_contract.py bundle READER --source-run EVIDENCE/runs/<experiment-id>/<run-id>` to verify the paired bytes. Record the evidence hash index and mirror it before artifact expiration. See `plan.json` for the locked protocol, `Experimental_Setup.pdf` for the setup, `Experiment_Results.pdf` for all saved figures and interpretations, `Experiment_Analysis_and_Next.md` for assessment, `results/` for exact plot data, summary tables and code, and `figures/figure_index.json` for figure provenance.\n\nKnown gaps: {', '.join(manifest['known_gaps']) or 'none recorded'}.\n"
         (destination / "README.md").write_text(readme, encoding="utf-8")
         listing = [{"path": p.relative_to(destination).as_posix(), "sha256": digest(p.read_bytes())}
                    for p in sorted(destination.rglob("*")) if p.is_file()]
@@ -184,9 +187,10 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
             "analysis_id": analysis["analysis_id"], "report_id": report["report_id"],
             "manifest_sha256": digest(manifest_path.read_bytes()), "locator": locator},
             "classification": manifest["scientific_classification"], "files": listing,
+            "canonical_files": sorted(canonical_files, key=lambda row: row["path"]),
             "known_gaps": manifest["known_gaps"]}
         (destination / "export.json").write_text(json.dumps(export, indent=2) + "\n")
-        validate_bundle(destination)
+        validate_bundle(destination, run)
     except BaseException:
         shutil.rmtree(destination)
         raise

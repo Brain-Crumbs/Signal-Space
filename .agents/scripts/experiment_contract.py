@@ -141,7 +141,7 @@ def safe_file(base: Path, name: str) -> Path:
     return path
 
 
-def validate_bundle(base: Path) -> None:
+def validate_bundle(base: Path, source_run: Path | None = None) -> None:
     plan = json.loads(safe_file(base, "plan.json").read_text(encoding="utf-8"))
     validate_plan(plan)
     export = json.loads(safe_file(base, "export.json").read_text(encoding="utf-8"))
@@ -150,6 +150,42 @@ def validate_bundle(base: Path) -> None:
     source = export["source_run"]
     if source["experiment_id"] != plan["experiment_id"] or source["model_id"] != plan["model_id"]:
         raise ValueError("export source identity differs from locked plan")
+    canonical_files = export.get("canonical_files", [])
+    canonical_paths = set()
+    for row in canonical_files:
+        name = row["path"]
+        relative_path(name)
+        if name in canonical_paths:
+            raise ValueError(f"duplicate canonical reference: {name}")
+        canonical_paths.add(name)
+        if not ((name.startswith("attempts/") and "/raw/" in name) or
+                (name.startswith("analyses/") and "/derived/" in name)):
+            raise ValueError(f"unexpected canonical reference: {name}")
+    if source_run is not None:
+        manifest_path = safe_file(source_run, "manifest.json")
+        if digest(manifest_path.read_bytes()) != source["manifest_sha256"]:
+            raise ValueError("canonical manifest checksum mismatch")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for key in ("experiment_id", "model_id", "run_id"):
+            if manifest[key] != source[key]:
+                raise ValueError(f"canonical {key} differs from export")
+        if source["analysis_id"] not in {row["analysis_id"] for row in manifest["analyses"]} or source["report_id"] not in {row["report_id"] for row in manifest["reports"]}:
+            raise ValueError("canonical analysis or report differs from export")
+        allowed = [f'{row["path"]}/raw/' for row in manifest["attempts"]]
+        allowed += [f'{row["path"]}/derived/' for row in manifest["analyses"] if row["analysis_id"] == source["analysis_id"]]
+        if "canonical_files" in export:
+            expected = set()
+            for prefix in allowed:
+                directory = source_run / prefix
+                if directory.exists():
+                    expected.update(p.relative_to(source_run).as_posix() for p in directory.rglob("*") if p.is_file())
+            if canonical_paths != expected:
+                raise ValueError(f"canonical reference inventory mismatch: {sorted(canonical_paths ^ expected)}")
+        for row in canonical_files:
+            if not any(row["path"].startswith(prefix) for prefix in allowed):
+                raise ValueError(f"canonical reference outside selected run or analysis: {row['path']}")
+            if digest(safe_file(source_run, row["path"]).read_bytes()) != row["sha256"]:
+                raise ValueError(f"canonical checksum mismatch: {row['path']}")
     index = json.loads(safe_file(base, "figures/figure_index.json").read_text(encoding="utf-8"))
     schema = read_schema("figure-index.schema.json")
     check_schema(index, schema, schema)
@@ -201,13 +237,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("lock", "plan", "bundle", "scan"))
     parser.add_argument("path", type=Path)
+    parser.add_argument("--source-run", type=Path, help="canonical run directory for paired reader verification (bundle only)")
     args = parser.parse_args()
     try:
         if args.action == "scan":
             for path in args.path.rglob("export.json"):
                 validate_bundle(path.parent)
         elif args.action == "bundle":
-            validate_bundle(args.path)
+            validate_bundle(args.path, args.source_run)
         else:
             plan = json.loads(args.path.read_text(encoding="utf-8"))
             if args.action == "lock":

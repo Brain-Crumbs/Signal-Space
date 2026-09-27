@@ -42,7 +42,7 @@ Artifact names use the selected recipe, for example `reader-gross-test-02-RUN-AT
 | Artifact | Contents                                                                                                                                                                                           |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Evidence | `runs/<experiment-id>/<run-id>/` canonical package; raw inputs, seeds, analyses, reports and checksums; `source.tar.gz`; plan/config; `execution.json`; stage logs; status and an outer hash index |
-| Reader   | README, setup/results PDFs, analysis/next-calculation Markdown, figures and their interpretations, exact plot data, Python sources and `export.json`                                               |
+| Reader   | README, setup/results PDFs, analysis/next-calculation Markdown, figures and their interpretations, exact plot data, Python sources and `export.json` with checksummed raw/derived references       |
 
 The source snapshot preserves the exact Git tree even if a branch is removed. Runtime provenance records the numerical environment; fixed versions and threads do not imply bitwise equality across different hardware.
 
@@ -60,7 +60,7 @@ Artifacts expire according to the selected retention and repository policy (the 
 
 ## Verify a selected result
 
-Download the two artifacts from the same run **and attempt**, and extract them into separate `evidence/` and `reader/` directories outside your checkout. Install the repository's pinned Python dependencies. From the checkout, substitute the run ID shown in `evidence/status.json` and your download path:
+Download the two artifacts from the same run **and attempt**, and extract them into separate `evidence/` and `reader/` directories outside your checkout. Install the repository's pinned Python dependencies. From the checkout, substitute the run ID and experiment ID shown in `evidence/status.json` and your download path:
 
 ```sh
 export DOWNLOAD_DIR=/absolute/path/to/downloads
@@ -68,6 +68,7 @@ export EXPERIMENT_RUN_ID=run-REPLACE
 export PYTHONPATH=python
 python -m signal_space --workspace "$DOWNLOAD_DIR/evidence/runs" verify --run-id "$EXPERIMENT_RUN_ID"
 python .agents/scripts/experiment_contract.py bundle "$DOWNLOAD_DIR/reader"
+python .agents/scripts/experiment_contract.py bundle "$DOWNLOAD_DIR/reader" --source-run "$DOWNLOAD_DIR/evidence/runs/EXPERIMENT_ID/$EXPERIMENT_RUN_ID"
 ```
 
 Before combining or committing the downloads, verify their pairing and the outer evidence index:
