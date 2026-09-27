@@ -1,0 +1,214 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "prediction-first",
+      "status": "pass",
+      "value": {
+        "hashes_and_order": true
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "boundary-waveform",
+      "status": "pass",
+      "value": {
+        "max_relative_l2": 2.4273886226275544e-09
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "linear-energy",
+      "status": "pass",
+      "value": {
+        "clock_energy": "not evaluated",
+        "max_relative_drift": 3.6206955961490914e-11
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "prospective-events",
+      "status": "pass",
+      "value": {
+        "broad": {
+          "fall": {
+            "budget": 1.000885016504526e-07,
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 1.5660361896152608e-11,
+              "output_sampling": 6.015810072312888e-11,
+              "surface_sampling": 1.2530421145129367e-11,
+              "time": 1.5276668818842154e-13
+            },
+            "error": 9.592326932761353e-13,
+            "target": 0.0001
+          },
+          "rise": {
+            "budget": 2.9816058375014108e-06,
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 2.1576397557510063e-08,
+              "output_sampling": 1.9010453975454311e-06,
+              "surface_sampling": 9.57212655805506e-07,
+              "time": 1.7713865929636086e-09
+            },
+            "error": 6.205579694551489e-08,
+            "target": 0.0001
+          }
+        },
+        "carrier": {
+          "fall": {
+            "budget": 1.4745265869132708e-07,
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 3.083755473198835e-11,
+              "output_sampling": 1.9132588846559884e-08,
+              "surface_sampling": 2.8237128191221927e-08,
+              "time": 5.2104098813288147e-11
+            },
+            "error": 1.8266952395151748e-09,
+            "target": 0.0001
+          },
+          "rise": {
+            "budget": 4.281597621055744e-06,
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 6.208981062627572e-08,
+              "output_sampling": 2.2678061029068886e-06,
+              "surface_sampling": 1.848342666477265e-06,
+              "time": 3.3590410453143704e-09
+            },
+            "error": 1.197329986268869e-07,
+            "target": 0.0001
+          }
+        },
+        "new": {
+          "fall": {
+            "budget": 1.0910993946945382e-07,
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 1.6190071505661763e-10,
+              "output_sampling": 1.5449543866452586e-09,
+              "surface_sampling": 7.390234202375723e-09,
+              "time": 1.2850165376221412e-11
+            },
+            "error": 4.899938232938439e-10,
+            "target": 0.0001
+          },
+          "rise": {
+            "budget": 3.751640941767164e-07,
+            "components": {
+              "domain": 0.0,
+              "floor": 1e-07,
+              "mesh": 3.4511415947235946e-09,
+              "output_sampling": 7.033484905605292e-10,
+              "surface_sampling": 2.704603012659845e-07,
+              "time": 5.493028254477395e-10
+            },
+            "error": 1.7625659154418827e-08,
+            "target": 0.0001
+          }
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "event-convergence",
+      "status": "pass",
+      "value": {
+        "broad": {
+          "full-fall": {
+            "mesh_change": 0.0009182503626590233,
+            "nonspatial": 1.0024667912157383e-07,
+            "previous_change": 0.003669190981533177,
+            "within_gate": true
+          },
+          "full-rise": {
+            "mesh_change": 0.06161229884452979,
+            "nonspatial": 2.971156858930135e-06,
+            "previous_change": 0.14338432323540573,
+            "within_gate": true
+          },
+          "source-fall": {
+            "mesh_change": 0.0009182503469986614,
+            "nonspatial": 1.0024683188826202e-07,
+            "previous_change": 0.0036691909760513397,
+            "within_gate": true
+          },
+          "source-rise": {
+            "mesh_change": 0.06161227726813223,
+            "nonspatial": 2.9729282455230986e-06,
+            "previous_change": 0.14338430055594387,
+            "within_gate": true
+          }
+        },
+        "carrier": {
+          "full-fall": {
+            "mesh_change": 0.0009500507704238714,
+            "nonspatial": 1.4750016202592632e-07,
+            "previous_change": 0.00525523356195734,
+            "within_gate": true
+          },
+          "full-rise": {
+            "mesh_change": 0.08122448113662273,
+            "nonspatial": 4.3710506455989615e-06,
+            "previous_change": 0.1701181902636506,
+            "within_gate": true
+          },
+          "source-fall": {
+            "mesh_change": 0.0009500507395863167,
+            "nonspatial": 1.4744805792711304e-07,
+            "previous_change": 0.005255233616775712,
+            "within_gate": true
+          },
+          "source-rise": {
+            "mesh_change": 0.0812244190468121,
+            "nonspatial": 4.374409686644276e-06,
+            "previous_change": 0.1701181536352223,
+            "within_gate": true
+          }
+        },
+        "new": {
+          "full-fall": {
+            "mesh_change": 0.016037439947503174,
+            "nonspatial": 1.1250687731157995e-07,
+            "previous_change": 0.1035983984893818,
+            "within_gate": true
+          },
+          "full-rise": {
+            "mesh_change": 0.042785113324445234,
+            "nonspatial": 4.646006909718835e-07,
+            "previous_change": 0.08333782391931166,
+            "within_gate": true
+          },
+          "source-fall": {
+            "mesh_change": 0.01603744010940389,
+            "nonspatial": 1.1251972747695617e-07,
+            "previous_change": 0.1035984092368345,
+            "within_gate": true
+          },
+          "source-rise": {
+            "mesh_change": 0.04278510987330364,
+            "nonspatial": 4.640513881464358e-07,
+            "previous_change": 0.0833378102853004,
+            "within_gate": true
+          }
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "sampling",
+      "status": "pass",
+      "value": {
+        "maximum_event_change": 2.2678061029068886e-06
+      }
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

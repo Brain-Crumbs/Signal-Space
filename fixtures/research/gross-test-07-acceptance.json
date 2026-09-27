@@ -1,0 +1,217 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.reception-acceptance.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+  "parameters": {
+    "omega_Q": 0.9,
+    "omega_chi": 0.41274991,
+    "clock_amplitude": 0.001,
+    "local_radius": 0.1,
+    "epsilon": 0.2,
+    "frozen_inputs": [
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+        "name": "profile-0.900.npz",
+        "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-fine.npz",
+        "name": "profile-fine.npz",
+        "sha256": "31b59ce23d938e52ee1b9e6404c3a4d46aa47b7b34c9135b83420f067335f24b"
+      },
+      {
+        "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-wide.npz",
+        "name": "profile-wide.npz",
+        "sha256": "a0c1da472185a699fb0c489f8396a7946fce3e0fa869ffd405403af8b8ea5687"
+      }
+    ],
+    "cases": [
+      {
+        "name": "quiet",
+        "amplitude": 0,
+        "weights": [1, 0],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "half",
+        "amplitude": 0.002,
+        "weights": [1, 0],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "single",
+        "amplitude": 0.004,
+        "weights": [1, 0],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "double",
+        "amplitude": 0.008,
+        "weights": [1, 0],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "negative",
+        "amplitude": -0.004,
+        "weights": [1, 0],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "second",
+        "amplitude": 0.004,
+        "weights": [0, 1],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 1
+      },
+      {
+        "name": "both",
+        "amplitude": 0.004,
+        "weights": [1, 1],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 2
+      },
+      {
+        "name": "both-negative",
+        "amplitude": -0.004,
+        "weights": [1, 1],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 2
+      },
+      {
+        "name": "phase-quiet",
+        "amplitude": 0,
+        "weights": [1, 0],
+        "phase": 1.0471975511965976,
+        "baseline": 8,
+        "prediction": 3
+      },
+      {
+        "name": "phase",
+        "amplitude": 0.004,
+        "weights": [1, 0],
+        "phase": 1.0471975511965976,
+        "baseline": 8,
+        "prediction": 3
+      }
+    ],
+    "prediction_cases": [
+      {
+        "name": "first",
+        "amplitude": 1,
+        "weights": [1, 0],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "second",
+        "amplitude": 1,
+        "weights": [0, 1],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "both",
+        "amplitude": 1,
+        "weights": [1, 1],
+        "phase": 0.0,
+        "baseline": 0,
+        "prediction": 0
+      },
+      {
+        "name": "phase",
+        "amplitude": 1,
+        "weights": [1, 0],
+        "phase": 1.0471975511965976,
+        "baseline": 0,
+        "prediction": 0
+      }
+    ],
+    "kind": "reception-acceptance",
+    "packet_centers": [19.0, 27.0],
+    "packet_width": 3.25,
+    "duration": 65.0,
+    "sample_interval": 0.05,
+    "upstream_radius": 14.0,
+    "acquisition_duration": 35.0,
+    "event_times": [10.0, 60.0],
+    "cycle_noise_floor": 1e-11,
+    "variants": [
+      {
+        "name": "base",
+        "profile": "profile-0.900.npz",
+        "h": 0.1,
+        "dt": 0.01
+      },
+      {
+        "name": "fine",
+        "profile": "profile-fine.npz",
+        "h": 0.05,
+        "dt": 0.01
+      },
+      {
+        "name": "finer",
+        "profile": "profile-fine.npz",
+        "h": 0.025,
+        "dt": 0.005
+      },
+      {
+        "name": "time",
+        "profile": "profile-fine.npz",
+        "h": 0.05,
+        "dt": 0.005
+      },
+      {
+        "name": "wide",
+        "profile": "profile-wide.npz",
+        "h": 0.1,
+        "dt": 0.01
+      }
+    ]
+  },
+  "units": {
+    "mass": "m=1",
+    "length": "m^-1",
+    "time": "m^-1",
+    "signal": "c=hbar=1"
+  },
+  "seeds": {
+    "root": 202609271
+  },
+  "resources": {
+    "max_cpu_seconds": 7000,
+    "max_wall_seconds": 7600,
+    "max_memory_mb": 1536,
+    "max_output_mb": 250
+  },
+  "analysis": {
+    "frozen-calibration": "Every copied accepted Test 6 profile and clock mode matches its frozen hash.",
+    "prediction-first": "All calibration, incident, surface, fourth-order and frozen-core forecasts hash-locked before any nonlinear receiver starts.",
+    "record-resolution": "Every nonquiet finest local cycle interval exceeds five times the combined actual AND forecast mesh/time/domain budget plus sampling and 1e-11 cycles; otherwise unresolved.",
+    "interval-prediction": "Every nonquiet finest fourth-order cycle forecast error <= max(5% of measured record, combined numerical budget); unresolved if record not resolved.",
+    "response-traces": "Every nonquiet finest phase, chi-response and density-response relative L2 prediction error <= max(5%, combined phase trace numerical budget).",
+    "sign-even": "Every grid single and pair sign-odd phase fraction <=1e-5.",
+    "weak-amplitude-law": "On every grid chi-response weak exponent within 0.1 of 2, amplitude-normalized half/nominal/double chi traces within 5%, and half-amplitude second-order phase trace error <=5%; unresolved if interval resolution fails.",
+    "pulse-overlap": "Both-minus-each-alone phase trace exceeds five combined numerical budgets and its fourth-order prediction error <=max(5%, inverse signal-to-budget); unresolved if not resolved.",
+    "quiet-and-frozen-core": "Matched quiet intervals <1e-15 cycles and executed frozen-core Taylor chi coefficients <=1e-15.",
+    "numerical-convergence": "For every nonquiet actual and forecast phase trace, finest mesh difference <=0.75 previous mesh difference plus time/domain/noise differences; combined relative phase numerical budget <0.2. Otherwise unresolved.",
+    "conservation": "All preparations/grids: relative charge and total energy drift <1e-5; matched energy residual <1% initial incident energy."
+  },
+  "report": {
+    "title": "Test 7 full known-incident acceptance"
+  }
+}

@@ -22,6 +22,8 @@ RECIPES = {"gross-test-01": "docs/research/plans/gross-test-01.json",
            "gross-test-04": "docs/research/plans/gross-test-04.json"}
 RECIPES["gross-test-07"] = "docs/research/plans/gross-test-07.json"
 RECIPES["gross-test-07-order4"] = "docs/research/plans/gross-test-07-order4.json"
+RECIPES["gross-test-07-boundary"] = "docs/research/plans/gross-test-07-boundary.json"
+RECIPES["gross-test-07-acceptance"] = "docs/research/plans/gross-test-07-acceptance.json"
 RECIPES["gross-test-07-reconstruction"] = "docs/research/plans/gross-test-07-reconstruction.json"
 RECIPES["gross-test-07-transfer"] = "docs/research/plans/gross-test-07-transfer.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
@@ -36,6 +38,27 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.reception-acceptance.v1":
+        lines = ["# Test 7 known-incident acceptance: automated assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Scientific and visual review remain pending. All gates must pass to accept this new radial protocol.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "Known initial incident field, fixed local proper-time markers, and an unfitted fourth-order response are explicit protocol choices.",
+                  "Previous surface-only failures remain unchanged. A pass supports Program 15.7 only within this calibrated radial sector.",
+                  "Test 8 still requires its own two-object preparation, survival, exchange and recoil experiment."]
+        return "\n".join(lines) + "\n"
+    if manifest.get("experiment_id") == "gross.boundary-memory.v1":
+        lines = ["# Test 7 causal boundary: automated assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Scientific review and visual inspection remain pending.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "Complete two-site acquisition and causal exterior memory are tested with a new prospective event rule.",
+                  "The old cutoff and retrospective markers remain diagnostic. No nonlinear clock forecast is performed.",
+                  "A passing prerequisite permits a new nonlinear acceptance plan; failure or unresolved stops that stage.",
+                  "Original Test 7 classification remains and Test 8 is blocked pending nonlinear acceptance."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.reconstruction.v1":
         lines = ["# Test 7 reconstruction: automated assessment", "",
                  f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",

@@ -1,0 +1,26 @@
+{
+  "boundary-budgets": {
+    "limitation": "These are linear interface residual budgets. Absolute continuum shifts and nonlinear phase uncertainty require their own checks.",
+    "question": "Do both prospective events meet their separate reconstruction budgets?",
+    "reading": "The locked prospective-event classification is pass. Bars compare finest same-grid residuals with the full direct-difference budget and 1e-4 target.",
+    "significance": "Prevents tiny same-grid differences from being mistaken for independently resolved event predictions."
+  },
+  "boundary-convergence": {
+    "limitation": "The three spatial resolutions and difference budgets are finite numerical evidence. No extrapolated continuum event is claimed.",
+    "question": "Do absolute event shifts and sampling changes converge independently of replay agreement?",
+    "reading": "The locked absolute-event convergence classification is pass and sampling is pass. Mesh changes use independently solved profiles.",
+    "significance": "Separates accuracy of boundary replay on a fixed grid from the continuum event limit."
+  },
+  "boundary-drive": {
+    "limitation": "This decomposition assumes the registered frozen exterior operator and initially empty interior. The entire primary surface history extends to 60.",
+    "question": "How much of the surface field is incoming drive versus exterior response?",
+    "reading": "The measured exterior node is split into the causal response to the interior surface and the remaining free exterior drive. Their subtraction leaves a much smaller drive, shown separately. The dotted line marks cutoff 16.",
+    "significance": "Shows the information that a boundary-memory method must retain or independently acquire."
+  },
+  "boundary-local": {
+    "limitation": "The source and predictor share their frozen linear discretization. No nonlinear clock response or measured laboratory noise is included.",
+    "question": "Does retained exterior memory reproduce the local waveform and prospective events?",
+    "reading": "Complete-acquisition maximum relative waveform error is 2.427e-09. Finest no-memory errors are 1.0005 to 1.0017. Source, full and cutoff traces nearly overlap; separate budgets resolve their small differences.",
+    "significance": "Retaining exterior response removes the large truncation error. The cutoff control retains memory and therefore does not repeat the earlier abrupt state projection."
+  }
+}
