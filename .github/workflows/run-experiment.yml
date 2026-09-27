@@ -22,6 +22,7 @@ on:
           - gross-test-07-reconstruction
           - gross-test-07-boundary
           - gross-test-07-acceptance
+          - gross-test-08-calibration
         default: gross-test-01
         required: true
       retention_days:

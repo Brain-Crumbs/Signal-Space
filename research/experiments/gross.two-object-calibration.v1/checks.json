@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "frozen-source",
+      "status": "pass",
+      "value": {
+        "source": {
+          "mode_peak": 0.001,
+          "omega_Q": 0.9,
+          "omega_chi": 0.41274991,
+          "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+          "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db",
+          "stochastic_use": "none"
+        }
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "closed-sector",
+      "status": "pass",
+      "value": {
+        "maximum": 0.0
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "short-ledgers",
+      "status": "pass",
+      "value": {
+        "limits": {
+          "full_acceptance": "not-evaluated",
+          "max_charge_drift_fraction": 0.001,
+          "max_energy_drift_fraction": 0.001,
+          "require_exact_neutral_null": true
+        },
+        "scenarios": [
+          {
+            "label": "isolated-base",
+            "max_charge_drift_fraction": 1.2053121775440797e-08,
+            "max_energy_drift_fraction": 1.1831018361960795e-08
+          },
+          {
+            "label": "isolated-fine",
+            "max_charge_drift_fraction": 3.773120188246416e-10,
+            "max_energy_drift_fraction": 3.7012222116816155e-10
+          },
+          {
+            "label": "quiet-pair-base",
+            "max_charge_drift_fraction": 1.2053121938269458e-08,
+            "max_energy_drift_fraction": 1.1831018018587583e-08
+          },
+          {
+            "label": "quiet-pair-fine",
+            "max_charge_drift_fraction": 3.773120189252527e-10,
+            "max_energy_drift_fraction": 3.701222212929728e-10
+          }
+        ]
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "spatial-calibration",
+      "status": "unresolved",
+      "value": {
+        "reason": "Only 16 time units, no independent timestep/domain or 100-period longevity; pair not jointly relaxed."
+      }
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "full-exchange",
+      "status": "not-evaluated",
+      "value": {
+        "reason": "No packet, structural companion, measured momentum flux, or Test 9 handoff."
+      }
+    }
+  ],
+  "schema_version": "research-checks-v1"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "test9-readiness-v1",
+  "ready": false,
+  "accepted_run_id": null,
+  "pilot_run_id": "run-a1725e6f3ce12b61",
+  "model_id": "signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1",
+  "locked_pilot_plan": "docs/research/plans/gross-test-08-calibration.json",
+  "gate_statuses": {
+    "G0": "unresolved",
+    "G1": "not-evaluated",
+    "G2": "not-evaluated",
+    "G3": "not-evaluated",
+    "G4": "not-evaluated",
+    "G5": "not-evaluated",
+    "G6": "not-evaluated",
+    "G7": "not-evaluated",
+    "G8": "not-evaluated",
+    "G9": "not-evaluated"
+  },
+  "supported_reconstruction_slab": null,
+  "supported_boost": null,
+  "reason": "No accepted two-object exchange, spatial clock longevity, worldline reconstruction or complete G0-G9 gate matrix."
+}

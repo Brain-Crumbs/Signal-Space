@@ -26,3 +26,7 @@ docs/research/plans/gross-test-07-order4.json
 # Locked discrete-transfer inputs
 fixtures/research/gross-test-07-transfer.json
 docs/research/plans/gross-test-07-transfer.json
+
+# Test 8 pilot config and plan are byte-locked to the verified run.
+fixtures/research/gross-test-08-calibration.json
+docs/research/plans/gross-test-08-calibration.json
