@@ -14095,8 +14095,8 @@
     },
     {
       "path": "research/experiments/gross.two-object-calibration.v1/delivery.json",
-      "size": 1061,
-      "sha256": "792b1d3308603f9791992e093cce8add3c878ec858013745160e829aa1e66071"
+      "size": 1125,
+      "sha256": "0974eaacd07a61ff2d87e55728fc8075aeb33dd7a9ecac9a40ccb0a7eea24c8a"
     },
     {
       "path": "research/experiments/gross.two-object-calibration.v1/README.md",
@@ -14111,7 +14111,7 @@
     {
       "path": "research/experiments/gross.two-object-calibration.v1/test9-readiness.json",
       "size": 772,
-      "sha256": "769622f8d837632a033e3566ef67146f0dd5b65e809079b1bb7f1e7a35afb969"
+      "sha256": "2102304bee2176d4206bb765f20562f67627133a7ed6630842fea943804360ea"
     },
     {
       "path": "research/experiments/README.md",

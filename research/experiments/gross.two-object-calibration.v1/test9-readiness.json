@@ -2,7 +2,7 @@
   "schema_version": "test9-readiness-v1",
   "ready": false,
   "accepted_run_id": null,
-  "pilot_run_id": "run-500a2f07add9555b",
+  "pilot_run_id": "run-a1725e6f3ce12b61",
   "model_id": "signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1",
   "locked_pilot_plan": "docs/research/plans/gross-test-08-calibration.json",
   "gate_statuses": {

@@ -1,21 +1,22 @@
 {
   "schema_version": "test8-calibration-delivery-v1",
   "classification": "unresolved",
-  "run_id": "run-500a2f07add9555b",
-  "analysis_id": "analysis-0001-e4df0387",
-  "report_id": "report-0002",
+  "run_id": "run-a1725e6f3ce12b61",
+  "analysis_id": "analysis-0001-545d32ab",
+  "report_id": "report-0001",
   "plan_sha256": "5c9f23f11c8acd84d834c4cb3074bc1915cb1c9f245f1718b9d30fb65c57e9b1",
   "canonical_evidence": {
     "filename": "Test8_Calibration_Canonical_Evidence.zip",
-    "size_bytes": 3947109,
-    "sha256": "2e92c4b0b086e6d1fdfffaf31409c878233a10e4e07e094a241629be006e79eb",
+    "size_bytes": 3905426,
+    "sha256": "54410e0d0a94046bbffc917470d067200a6e234b64cc62598e41ffcdf1c3e46e",
     "library_file_id": "libfile_47d2a105306881918f1faf6d64e21448"
   },
   "reader": {
     "filename": "Test8_Calibration_Reader.zip",
-    "size_bytes": 789479,
-    "sha256": "f4ede9ef7762a7c990aba4d46c5942730f898fd7066ec4460947c0c6065bf301",
+    "size_bytes": 776534,
+    "sha256": "319db34377a67322aa21694a55266d7f62c44fcec3a93a723f2ab6d349223478",
     "library_file_id": "libfile_0e1ac76f4480819199f6d118908e0037"
   },
-  "recovery": "Download both named files from ChatGPT Library, extract them into a workspace; validate reader against canonical runs/gross.two-object-calibration.v1/run-500a2f07add9555b. The canonical archive also includes the earlier invalid-package adapter attempt."
+  "recovery": "Download both named files from ChatGPT Library; extract evidence/runs/gross.two-object-calibration.v1/run-a1725e6f3ce12b61 with reader/ and run the paired bundle checker. The canonical archive also preserves the original invalid-package adapter attempt.",
+  "source_commit": "4dd36c13442872ef6f8072adef4b82bb7e10ff00"
 }

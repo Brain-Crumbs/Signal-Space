@@ -1,6 +1,6 @@
 # Test 8 spatial calibration pilot: partial numerical result
 
-The locked [pilot plan](plans/gross-test-08-calibration.json) was run with model `signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1`. The canonical identity is `run-500a2f07add9555b`, analysis `analysis-0001-e4df0387`, report `report-0002`. Its canonical verifier passed: one attempt, one analysis, two reports and 62 indexed artifacts. The **scientific classification is unresolved**; this is not Test 8 acceptance.
+The locked [pilot plan](plans/gross-test-08-calibration.json) was run with model `signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1`. The canonical identity is `run-a1725e6f3ce12b61`, analysis `analysis-0001-545d32ab`, report `report-0001`. Its canonical verifier passed: one attempt, one analysis, one report and 42 indexed artifacts. The **scientific classification is unresolved**; this is not Test 8 acceptance.
 
 | Grid and preparation                | Max energy drift / initial total energy | Max charge drift / initial charge | Neutral field maximum |
 | ----------------------------------- | --------------------------------------: | --------------------------------: | --------------------: |
