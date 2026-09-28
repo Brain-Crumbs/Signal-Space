@@ -4,6 +4,8 @@ This prospective design covers [issue #82](https://github.com/Brain-Crumbs/Signa
 
 The [machine-readable design](plans/test-08-acceptance-design.json), [measured timing record](test-08-quiet-timing.json), and [preflight](../../scripts/preflight-test8-acceptance.py) form the planning handoff. This is a prospective design, not a `signal-space-plan-v1` runtime lock. Issue #82 prohibits inventing a locked configuration for an unavailable solver. The registered quiet experiment accepts exactly six periods and always leaves full exchange unevaluated. Its configuration cannot be relabeled as full acceptance.
 
+The [performance and execution plan](test-08-performance-plan.md) adds code profiling, an equivalent compiled CPU backend proposal, complete restart, measured case scheduling and a bounded numerical-selection preflight. It targets a 2–7-day campaign conditionally, with 48 hours elapsed as a stretch target distinct from the existing CPU-hour ceiling. A saved synthetic kernel benchmark supports the optimization priorities; no optimized speedup or physical acceptance is claimed, and the matrix below is unchanged.
+
 ## Evidence and scope
 
 Local run `run-2d17955e8ce845cb`, analysis `analysis-0001-641f2374`, report `report-0001` completed six periods in six configurations. Its six short checks pass; joint preparation and long clocks remain unresolved; full exchange is not evaluated. The canonical manifest hash is `049f8034ebf7f318bae32c2eb4ae80a2a06722ad80ad56b60b44d5915a0e34f9`. Packaging was recovered separately without rerunning physics. Evidence remains in the local `test8-quiet-005-recovery` package; this planning change does not claim new archival or scientific acceptance.

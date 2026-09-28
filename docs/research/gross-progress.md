@@ -34,6 +34,8 @@ The user-authorized workflow is a focused branch, locked experiment, verified ev
 
 ## Test 8 acceptance planning update
 
+The [Test 8 performance plan](test-08-performance-plan.md) adds a 58.7-second synthetic kernel profile and a staged code-first optimization proposal: compiled/preallocated updates, validated restart, measured case scheduling, storage/reconstruction accounting and bounded numerical preflight. Conditional runtime targets do not change the 127-evolution design, physical parameters, G0–G9 thresholds or current unresolved status. No acceptance campaign or optimized backend has been run.
+
 The [full acceptance campaign design](test-08-acceptance-plan.md) maps issue #82 G0–G9 and the complete control matrix without executing new physics. Local six-period run `run-2d17955e8ce845cb` supplies the [measured timing basis](test-08-quiet-timing.json); its six short checks pass while joint preparation/long clocks remain unresolved and full exchange is not evaluated. The design preflight distinguishes valid planning from launch readiness and reports missing implementation and resource gates. No full Test 8 acceptance or Test 9 readiness is claimed.
 
 ## Test 7 accepted known-incident evidence
