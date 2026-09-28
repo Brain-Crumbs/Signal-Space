@@ -30,14 +30,16 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r python/requirements-lock.txt
 python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-08-quiet.json
-python .agents/scripts/run_plan.py --plan docs/research/plans/gross-test-08-quiet.json --repo-root . --workspace ../test8-preflight
+python .agents/scripts/run_plan.py --plan docs/research/plans/gross-test-08-quiet.json --repo-root . --workspace ../test8-preflight-003
 git status --short
-python scripts/run-test8-local.py --output ../test8-quiet-001
+python scripts/run-test8-local.py --output ../test8-quiet-003
 ```
 
-The preflight performs validation and an estimate **without evolution**. The final command runs the unchanged locked configuration, independently analyzes saved data, renders figures/PDFs, verifies canonical and reader packages together, checks the outer file index, and produces two ZIPs and `pr-evidence-index.json` outside the Git checkout. It never commits or pushes. The case estimate is roughly 4,816 CPU seconds, 1,378 MiB memory and 142 MiB uncompressed output under 7,200 CPU seconds, 8,000 wall seconds, 4 GiB memory and 512 MiB output ceilings. These are preflight estimates rather than timing measured on your machine. Reserve additional room for packages and dependency installation. A technical interruption preserves the partial directory and logs; this stage is atomic and does not yet promise solver resume. `--package-only` verifies and packages a completed output without running physics again.
+The preflight performs validation and an estimate **without evolution**. The final command runs the unchanged locked configuration, independently analyzes saved data, renders figures/PDFs, verifies canonical and reader packages together, checks the outer file index, and produces two ZIPs and `pr-evidence-index.json` outside the Git checkout. It never commits or pushes. The case estimate is roughly 4,816 CPU seconds, 1,378 MiB memory and 142 MiB uncompressed output. The revised limits are 20,000 CPU seconds, 21,600 wall seconds (6 hours), 8 GiB memory and 512 MiB output. These limits are ceilings, not a revised runtime estimate; the preflight estimate is not measured timing on this machine. Reserve additional room for packages and dependency installation. A technical interruption preserves the partial directory and logs; this stage is atomic and does not yet promise solver resume. `--package-only` verifies and packages a completed output without running physics again.
 
-During the long `run-plan` stage, inspect `../test8-quiet-001/evidence/status.json` and the `scenario-progress` events in `../test8-quiet-001/evidence/runs/gross.two-object-quiet-calibration.v1/<run-id>/attempts/attempt-0001/events.jsonl`. The command returns only after all six cases and packaging complete; an `unresolved` or `fail` **scientific** classification still yields the paired ZIPs.
+The preserved `../test8-quiet-002` attempt on 27 September 2026 stopped at the 8,000-second wall limit: `evidence/status.json` records 8,004.357 seconds elapsed and `run-plan.stderr.log` records an interrupted run with exit code 124. Its events show `isolated-base`, `isolated-fine` and `pair-base` completed; `pair-fine` reached step 7,000 of 18,267 before the wall-limit event. The attempt is marked nonresumable and has no scientific classification (`not-evaluated`); it supplies timing evidence, not a six-case result. The fine-pair progress rate suggests roughly four hours for a fresh complete run, but this extrapolation is uncertain and excludes downstream analysis and packaging. There is no recorded memory or output limit breach. The 8 GiB memory limit adds headroom above the 1,378 MiB estimate; it does not reserve that memory. Keep `../test8-quiet-002` intact and start the revised run in the new `../test8-quiet-003` directory.
+
+During the long `run-plan` stage, inspect `../test8-quiet-003/evidence/status.json` and the `scenario-progress` events in `../test8-quiet-003/evidence/runs/gross.two-object-quiet-calibration.v1/<run-id>/attempts/attempt-0001/events.jsonl`. The command returns only after all six cases and packaging complete; an `unresolved` or `fail` **scientific** classification still yields the paired ZIPs.
 
 ## Results PR handoff
 
@@ -46,7 +48,7 @@ After inspecting `evidence/status.json`, checks, figures and both PDFs, create a
 ```sh
 git switch -c research/test8-quiet-results
 mkdir -p research/experiments/gross.two-object-quiet-calibration.v1/packages
-cp ../test8-quiet-001/*.zip ../test8-quiet-001/pr-evidence-index.json \
+cp ../test8-quiet-003/*.zip ../test8-quiet-003/pr-evidence-index.json \
   research/experiments/gross.two-object-quiet-calibration.v1/packages/
 # If either ZIP exceeds 50 MiB, do this before git add:
 # git lfs install

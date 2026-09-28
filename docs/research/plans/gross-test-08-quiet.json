@@ -9,7 +9,7 @@
     "https://github.com/Brain-Crumbs/Signal-Space/issues/82"
   ],
   "runtime_config": "fixtures/research/gross-test-08-quiet.json",
-  "runtime_config_sha256": "a7ce7b8ddd7893d6c103a3d14c37c4da797c4791732509f855f292c0d2974a2c",
+  "runtime_config_sha256": "905cdf6b9d876abb16c75f961fb89401b9bc26646dbddc9f5162992ae4c6ee76",
   "method": {
     "action": "Unchanged SS OCF 1 flat fixed-doublet axisymmetric Hamiltonian; outer momentum damping is numerical and its exact energy/charge sinks are integrated with RK4.",
     "units": "c=hbar=m=1; time and length in m^-1; energy in m.",
@@ -199,12 +199,12 @@
     }
   ],
   "resources": {
-    "max_wall_seconds": 8000,
-    "max_memory_mb": 4096,
+    "max_wall_seconds": 21600,
+    "max_memory_mb": 8192,
     "max_output_mb": 512
   },
   "prohibited_inferences": [
     "No 100-period survival, physical reception, recoil, Test 9 readiness or transverse stability follows from a six-period quiet run."
   ],
-  "locked_sha256": "60556ffc9a6bdec9ecf91e0d910f55969d95b456b25b43e0aef6eb9c3d42a0b9"
+  "locked_sha256": "de83b93473f21c35519b8ad5b2fa674d4d5c4a2017da9c0406d3c686e0bc5ac6"
 }

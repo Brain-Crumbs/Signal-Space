@@ -122,9 +122,9 @@
     },
     "resources": {
       "const": {
-        "max_cpu_seconds": 7200,
-        "max_wall_seconds": 8000,
-        "max_memory_mb": 4096,
+        "max_cpu_seconds": 20000,
+        "max_wall_seconds": 21600,
+        "max_memory_mb": 8192,
         "max_output_mb": 512
       }
     },
