@@ -1,0 +1,664 @@
+{
+  "schema_version": "signal-space-test8-campaign-design-v1",
+  "status": "prospective-design-not-executable",
+  "issue": 82,
+  "model_id": "signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1",
+  "proposed_experiment_id": "signal-space.two-object-exchange.v1",
+  "registration_decision": "New work uses Signal Space names. Issue82's historical proposed gross.two-object-exchange.v1 ID is not registered; preserve existing registered historical IDs and evidence. Register any new stages under reviewed Signal Space IDs.",
+  "source_equations": [
+    {
+      "path": "research/papers/gross-operator-program-v0.2.md",
+      "sha256": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123",
+      "sections": ["7-10", "15.6", "15.7", "15.8", "15.9"]
+    }
+  ],
+  "benchmark": "docs/research/test-08-quiet-timing.json",
+  "baseline": {
+    "run_id": "run-2d17955e8ce845cb",
+    "classification": "unresolved",
+    "periods": 6,
+    "omega_Q": 0.9,
+    "omega_chi": 0.41274991,
+    "clock_peak": 0.001,
+    "separation": 72,
+    "profile_sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+  },
+  "physics": {
+    "action": "Unchanged SS OCF1, flat axisymmetric fixed internal direction; no gravity, external pump or center force.",
+    "units": "c=hbar=m=1; length/time m^-1; energy/momentum m.",
+    "potentials": "U=s-s^2+s^3; Z=1+.2s; Vchi=.25-.4s+.2s^2; zeta=.1",
+    "local_record": "w=chi-i(u^mu partial_mu chi)/Omega; Theta=2 unwrap(arg w); N=DeltaTheta/(2pi). Save signed-field cycles=N/2 separately. Markers are prescribed proper-time events from preparation, independent of chi phase.",
+    "momentum": "Independent action-derived stress and moving-worldtube Reynolds terms; disjoint core/exterior partition; absorber E,Q,P sinks plus outer flux without double counting."
+  },
+  "hypotheses": [
+    {
+      "id": "closed-reception",
+      "prediction": "Resolved causal B clock change and recoil with closed accounts and two surviving clocks."
+    },
+    {
+      "id": "prepared-clock",
+      "prediction": "Spatially calibrated isolated and joint quiet clocks survive independently controlled observation."
+    },
+    {
+      "id": "preparation-artifact",
+      "prediction": "Relaxation, phase/readout convention or joint superposition accounts for the apparent record."
+    },
+    {
+      "id": "numerical-artifact",
+      "prediction": "Mesh, time, boundary or sampling controls explain record/impulse or a pre-causal precursor persists."
+    },
+    {
+      "id": "clock-damage",
+      "prediction": "Quadrature loss or unusable clock creates an apparent phase signal."
+    },
+    {
+      "id": "channel-null",
+      "prediction": "Neutral invariant forcing or structural above-threshold radiation is too small; retain a converged null."
+    }
+  ],
+  "stages": [
+    {
+      "id": "S0",
+      "name": "Implementation and inexpensive independent validation",
+      "depends_on": [],
+      "gates": ["G0", "G1", "G3", "G4", "G8", "G9"],
+      "exit": "All implementation blockers resolved and validation controls pass before any new research evolution.",
+      "tests": [
+        "Manufactured regular-axis fields and vacuum dispersion in every sector",
+        "Hamiltonian derivative, stress/current signs and integrated fixed/moving surface flux",
+        "Translating isolated-core tracking, timelike four-velocity, proper time and signed/quadratic cycle factor of two",
+        "Exact neutral zero and whole-field sign parity",
+        "Restart after interruption agrees with uninterrupted validation fixture including all RK state, sinks, sample/crossing history and RNG",
+        "Classifier rejects corrupted momentum, destroyed clock, acausal marker, missing refinement and incorrect readiness",
+        "Package saved fixtures before long runs: exact planned figure questions, immutable exports and mutable lock exclusion; Windows UTF-8 and actual resource enforcement"
+      ]
+    },
+    {
+      "id": "S1",
+      "name": "Boundary discriminator and prepared state",
+      "depends_on": ["S0"],
+      "gates": ["G0", "G1", "G8"],
+      "exit": "Separate boundary location from sponge width; solve the embedded mode and prepare a free joint pair with measured losses/residuals. If no usable preparation within the declared 20-period cap, stop unresolved.",
+      "tests": [
+        "Six-period pair comparison at R32/Z80 and R40/Z96 with fixed width4; width4/6 at fixed R32/Z80; h=.2 and .1 with dt=.005",
+        "Independent local eigenmode and containment calibration before interaction",
+        "Free joint settling capped at 20 signed periods; save complete terminal state and all losses; never pin the physical stage or reset after source insertion"
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "100-period isolated and prepared quiet longevity",
+      "depends_on": ["S1"],
+      "gates": ["G0", "G1", "G5", "G8"],
+      "exit": "Isolated and prepared pair both meet <1% mode-energy loss and flux-corrected charge drift over 100 periods, <1% frequency/jitter and distinctness with independent controls. Every failure/unresolved result blocks sources.",
+      "tests": [
+        "Isolated and pair base/refined h with dt fixed",
+        "Independent dt/2, larger box at fixed sponge width, sponge-width-only controls for isolated and pair",
+        "Three-grid extension if needed for contraction; include its additional cost before launch",
+        "Pair benchmark envelope includes up to 20 preparation periods plus 100 measurement periods; isolated measurement 100"
+      ]
+    },
+    {
+      "id": "S3",
+      "name": "Bounded source-only and independent receiver feasibility",
+      "depends_on": ["S2"],
+      "gates": ["G0", "G1", "G2", "G3", "G6", "G7", "G8"],
+      "exit": "Select primary neutral/structural preparation only from <=6 source-only physical candidates and separately calibrated linear receiver response. Require predicted resolvable neutral phase and impulse with survival headroom, else stop with mechanism/resource blocker.",
+      "tests": [
+        "At most3 compact neutral and3 compact structural candidate preparations, saved whether useful or not; numerical variants are not additional physical candidates",
+        "Derive finite-beam canonical initial data; measure invariant forcing, sector spectra, energy and momentum at prospective receiver surface",
+        "Structural spectrum above vacuum mass threshold1; a=pi_a=0 remains exact",
+        "Neutral plane-wave invariant null and finite-beam/scattering response assessed, no inserted evolution source",
+        "Freeze deterministic candidate selection rule, source support, amplitudes, propagation/settling windows and calibration hashes before any held-out B history is seen"
+      ]
+    },
+    {
+      "id": "S4",
+      "name": "Held-out neutral and structural acceptance matrix",
+      "depends_on": ["S3"],
+      "gates": ["G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8"],
+      "exit": "Execute every mandatory comparison and numerical control, retain all outcomes. Primary neutral reception/recoil/survival must pass; structural channel may yield a converged null. Incomplete matrix remains unresolved.",
+      "tests": [
+        "19 declared physical preparations across five independent numerical variants =95 evolutions",
+        "Third spatial grid for quiet, neutral nominal, structural plus/minus =4 more; extend to any other claim lacking contraction",
+        "Output/event sampling and worldtube/extraction placement refined independently from sufficiently dense saved data; add evolution/replay if saved data are inadequate",
+        "Actual duration = ceil((predicted last arrival + settling)/calibrated period)+20 periods; 30 periods is a cost illustration, never an imposed cutoff"
+      ]
+    },
+    {
+      "id": "S5",
+      "name": "Independent analysis and Test 9 reconstruction handoff",
+      "depends_on": ["S4"],
+      "gates": ["G0", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9"],
+      "exit": "All G0-G9 pass and canonical/reader files verify before readiness can be true; Test9 invariance itself remains untested.",
+      "tests": [
+        "Summed deterministic uncertainty for each observable; independent stress flux vs worldtube momentum",
+        "All eight evidentiary visual groups and exact plot tables; saved-source recovery and packaging validation",
+        "Persist worldlines, local field/proper derivative, signed and quadratic cycles, marker IDs, coframe/transport, regional and total ledgers",
+        "Declare v=.1 reconstruction slab plus halo/time buffers and withheld-sample errors; restartable field/conjugate momentum checkpoints permit deterministic replay"
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Provenance and prerequisites",
+      "pass_if": "Verify exact model, configuration, calibration and Test 6/7 canonical identities; accept spatial calibration and prepared quiet pair; lock all source-only choices before held-out pair evolution.",
+      "fail_if": "Identity mismatch, invalid evidence or failed prerequisite.",
+      "unresolved_if": "Missing full predecessor evidence, pending preparation, unregistered runtime, or unlocked prospective choices.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G1",
+      "name": "Physical preparation",
+      "pass_if": "Finite energy and positive Z; initially distinct cores; compact source differences; all relaxation and initial excitation energy/momentum saved; zero evolution-time external work.",
+      "fail_if": "Nonfinite/unhealthy state, unaccounted work, overlapping identity, or initial receiver change outside compact source support.",
+      "unresolved_if": "Joint preparation or its uncertainty is not established.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G2",
+      "name": "Local reception",
+      "pass_if": "Primary neutral |Delta N_B| > 5 epsilon_N on accepted refined results; contracting spatial errors, independent budgets and no pre-arrival record above its bound.",
+      "fail_if": "Resolved acausal record or failed mandatory numerical control.",
+      "unresolved_if": "Signal does not exceed five budgets or refinement cannot distinguish it from zero.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G3",
+      "name": "Recoil",
+      "pass_if": "Primary neutral |delta P_B_z| > 5 epsilon_P relative to matched quiet; independently integrated stress impulse and worldtube momentum agree within combined budget; mirror reverses impulse.",
+      "fail_if": "Inconsistent flux signs, resolved mismatch or artificial center force.",
+      "unresolved_if": "Unresolved impulse or missing independent stress/worldtube account.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G4",
+      "name": "Ledgers",
+      "pass_if": "Global energy and matched intervention energy residual/injected energy <1%; momentum residual/nonzero declared momentum scale <1%; absolute ledger uncertainty <20% of receiver impulse throughout interval.",
+      "fail_if": "Any required residual exceeds its limit or energy/rest-mass normalization hides the signal.",
+      "unresolved_if": "Zero/undefined normalization, missing sink/flux term or unresolved absolute impulse budget.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G5",
+      "name": "Survival",
+      "pass_if": "Both distinct localized clocks retain readable quadratures and ordered ticks for >=20 calibrated signed-field periods after passage/settling; >=99% post-settling mode energy, >=90% preinteraction mode energy at end of interaction, <1% flux-corrected charge drift, <1% frequency deviation and jitter.",
+      "fail_if": "Core loss/merger, ambiguous ticks, or resolved violation of an energy/charge/frequency/jitter limit.",
+      "unresolved_if": "Missing 20-period follow-up, insufficient mode isolation or tracking precision.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G6",
+      "name": "Mechanism controls",
+      "pass_if": "Exact unseeded neutral null at validated arithmetic floor; any leakage converges below record budget; neutral whole-field sign parity within combined errors; amplitude, clock-phase, removed-object and quiet controls classified; raw invariant forcing and density/clock histories saved.",
+      "fail_if": "Resolved parity/null/causality/control violation.",
+      "unresolved_if": "Omitted or unresolved mandatory control; unresolved quadratic scaling is not forced to pass.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G7",
+      "name": "Structural companion",
+      "pass_if": "Perturbed-core a=pi_a=0 and opposite perturbation evaluated with quiet/source-only/numerical controls; classify emission, local response and recoil with errors. A converged channel null/upper bound is allowed.",
+      "fail_if": "Failed physical/numerical control or spurious neutral production.",
+      "unresolved_if": "Unresolved emission/reception/recoil classification or missing companion control.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G8",
+      "name": "Numerical reliability",
+      "pass_if": "Independent space/time/domain/sponge/output/extraction/preparation controls; three spatial levels for primary observables and any additional case needing contraction; pre-causal precursors shrink below budgets.",
+      "fail_if": "Noncontracting resolved error, causal contamination or failed reliability check.",
+      "unresolved_if": "Incomplete independent errors, inadequate sampling or uncertain embedding/tracking.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    },
+    {
+      "id": "G9",
+      "name": "Handoff",
+      "pass_if": "Canonical and reader verify; all required figures and exact data; persistent event IDs, worldlines, proper times, coframes/basis transport and restartable fields/momenta; supported boost v=0.1 reconstruction slab passes withheld-sample checks; readiness true only if G0-G8 and artifacts pass.",
+      "fail_if": "Corrupted/inconsistent artifacts or unjustified readiness.",
+      "unresolved_if": "Missing reconstruction coverage, export/recovery validation or any unresolved gate.",
+      "uncertainty": "Use the additive deterministic error budget; omit no relevant numerical contribution."
+    }
+  ],
+  "preparations": [
+    {
+      "id": "quiet",
+      "geometry": "pair",
+      "quiet_reference": "none"
+    },
+    {
+      "id": "neutral-nominal",
+      "geometry": "pair",
+      "quiet_reference": "quiet"
+    },
+    {
+      "id": "neutral-half",
+      "geometry": "pair",
+      "quiet_reference": "quiet"
+    },
+    {
+      "id": "neutral-double",
+      "geometry": "pair",
+      "quiet_reference": "quiet"
+    },
+    {
+      "id": "neutral-negative",
+      "geometry": "pair",
+      "quiet_reference": "quiet"
+    },
+    {
+      "id": "quiet-phase",
+      "geometry": "pair",
+      "quiet_reference": "none"
+    },
+    {
+      "id": "neutral-phase",
+      "geometry": "pair",
+      "quiet_reference": "quiet-phase"
+    },
+    {
+      "id": "structural-plus",
+      "geometry": "pair",
+      "quiet_reference": "quiet"
+    },
+    {
+      "id": "structural-minus",
+      "geometry": "pair",
+      "quiet_reference": "quiet"
+    },
+    {
+      "id": "source-quiet",
+      "geometry": "source-only",
+      "quiet_reference": "none"
+    },
+    {
+      "id": "source-neutral",
+      "geometry": "source-only",
+      "quiet_reference": "source-quiet"
+    },
+    {
+      "id": "source-structural-plus",
+      "geometry": "source-only",
+      "quiet_reference": "source-quiet"
+    },
+    {
+      "id": "source-structural-minus",
+      "geometry": "source-only",
+      "quiet_reference": "source-quiet"
+    },
+    {
+      "id": "receiver-quiet",
+      "geometry": "receiver-only",
+      "quiet_reference": "none"
+    },
+    {
+      "id": "receiver-packet",
+      "geometry": "receiver-only",
+      "quiet_reference": "receiver-quiet"
+    },
+    {
+      "id": "quiet-separation",
+      "geometry": "pair",
+      "quiet_reference": "none"
+    },
+    {
+      "id": "neutral-separation",
+      "geometry": "pair",
+      "quiet_reference": "quiet-separation"
+    },
+    {
+      "id": "quiet-mirror",
+      "geometry": "pair",
+      "quiet_reference": "none"
+    },
+    {
+      "id": "neutral-mirror",
+      "geometry": "pair",
+      "quiet_reference": "quiet-mirror"
+    }
+  ],
+  "numerical_variants": [
+    {
+      "id": "base",
+      "h": 0.2,
+      "dt": 0.005,
+      "radius": 32,
+      "half_length": 80,
+      "sponge_width": 4,
+      "sponge_strength": 0.12
+    },
+    {
+      "id": "space",
+      "h": 0.1,
+      "dt": 0.005,
+      "radius": 32,
+      "half_length": 80,
+      "sponge_width": 4,
+      "sponge_strength": 0.12
+    },
+    {
+      "id": "time",
+      "h": 0.2,
+      "dt": 0.0025,
+      "radius": 32,
+      "half_length": 80,
+      "sponge_width": 4,
+      "sponge_strength": 0.12
+    },
+    {
+      "id": "domain",
+      "h": 0.2,
+      "dt": 0.005,
+      "radius": 40,
+      "half_length": 96,
+      "sponge_width": 4,
+      "sponge_strength": 0.12
+    },
+    {
+      "id": "sponge",
+      "h": 0.2,
+      "dt": 0.005,
+      "radius": 32,
+      "half_length": 80,
+      "sponge_width": 6,
+      "sponge_strength": 0.12
+    },
+    {
+      "id": "space-third",
+      "h": 0.05,
+      "dt": 0.005,
+      "radius": 32,
+      "half_length": 80,
+      "sponge_width": 4,
+      "sponge_strength": 0.12
+    }
+  ],
+  "matrix": {
+    "standard_variants": ["base", "space", "time", "domain", "sponge"],
+    "third_grid_preparations": [
+      "quiet",
+      "neutral-nominal",
+      "structural-plus",
+      "structural-minus"
+    ],
+    "additional_third_grid_rule": "Add the third grid to every other nonzero or null-bound claim whose contraction remains unresolved; cost is additional.",
+    "illustrative_periods": 30,
+    "duration_rule": "20 post-settling signed periods plus prospectively predicted last-arrival and settling interval; extend for massive group delay and larger separation. 30 is a lower planning example."
+  },
+  "calibration": {
+    "observation_periods": 100,
+    "max_pair_preparation_periods": 20,
+    "isolated_half_length": 48,
+    "isolated_wide_half_length": 64,
+    "variants": ["base", "space", "time", "domain", "sponge"],
+    "third_grid": "Required if spatial contraction remains unresolved; not included in the initial cost envelope."
+  },
+  "pilot": {
+    "max_physical_preparations": 6,
+    "neutral_candidates": 3,
+    "structural_candidates": 3,
+    "illustrative_periods": 6,
+    "numerical_variants": ["base", "space"],
+    "selection_rule": "Choose one neutral and one structural preparation using source-only flux/spectra and independent spatial receiver calibration, maximizing the smaller conservative predicted phase/impulse margin subject to survival. Tie: least excitation energy. No resolvable primary neutral candidate ends the stage unresolved; no further tuning on held-out B.",
+    "must_freeze_before_pilot": [
+      "Compact bump support, carrier/spectrum and field/canonical momentum formula for each candidate",
+      "Candidate amplitudes from an independent weak-response and finite-energy calculation",
+      "Sampling surfaces, duration and signal/impulse/survival uncertainty budgets"
+    ],
+    "must_freeze_before_acceptance": [
+      "Accepted prepared states and embedded modes with hashes",
+      "Exactly chosen sources, amplitudes, relative phases, separation and mirrored/removed-object mapping",
+      "Causal/marker/settling windows, worldtubes, output cadence, all numerical variants, physical normalization scales",
+      "Runtime config, registered experiment and source hashes; every figure question"
+    ]
+  },
+  "resources": {
+    "single_job_wall_hours": 6,
+    "memory_gib": 8,
+    "total_cpu_hours": 48,
+    "total_persisted_gib": 4,
+    "source_only_job_wall_hours": 2,
+    "wall_headroom_factor": 2,
+    "estimate_method": "Measured sequential case wall time * target cell count/reference cell count * target steps/reference steps; choose measured fine or timestep-controlled pair reference. Single-core wall is a CPU-equivalent proxy, not an instrumented CPU measurement. No parallel or accelerator speedup assumed.",
+    "limitations": [
+      "Full stress/tracking/checkpoint/observer diagnostics overhead is unmeasured.",
+      "Fine-grid cache/memory effects are not linear; third-grid scaling is only a planning proxy.",
+      "All source support/arrival/settling choices may increase the duration; preparation/eigenmode solvers are not timed.",
+      "Two-times wall headroom is a scheduling allowance, not a statistical confidence interval."
+    ]
+  },
+  "error_budget": {
+    "rule": "epsilon_O=sum of absolute relevant independent changes plus calibration/preparation, extraction/tracking and sampling errors; no quadrature sum without justified statistical independence.",
+    "components": [
+      "space",
+      "time",
+      "domain",
+      "sponge",
+      "output-event",
+      "calibration-preparation",
+      "extraction-tracking"
+    ],
+    "thresholds": {
+      "signal_to_error": 5,
+      "ledger_fraction": 0.01,
+      "ledger_uncertainty_to_impulse": 0.2,
+      "end_interaction_mode_fraction": 0.9,
+      "post_settling_mode_fraction": 0.99,
+      "post_periods": 20,
+      "frequency_fraction": 0.01,
+      "jitter_fraction": 0.01,
+      "charge_drift_fraction": 0.01
+    }
+  },
+  "visualization_plan": [
+    {
+      "figure_id": "initial-and-quiet",
+      "question": "Are two independently readable cores prepared?",
+      "representation": "Spatial density, well and mode maps plus preparation residual and 100-period quiet histories.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "density",
+        "mode-shape",
+        "relaxation-loss",
+        "center",
+        "charge"
+      ],
+      "competing_signatures": {
+        "prepared-clock": "Quiet localization survives calibration.",
+        "preparation-artifact": "Mode mixing or free drift changes the apparent clock."
+      },
+      "controls": ["quiet", "quiet-phase"],
+      "source_data": ["prospective derived/initial-and-quiet.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "energy-flow",
+      "question": "Does the prepared excitation reach the receiver region?",
+      "representation": "rho,z field/energy slices and movies paired with integrated sector flux and spectra.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "field-snapshots",
+        "energy-flux",
+        "sector-spectrum",
+        "forcing-invariant"
+      ],
+      "competing_signatures": {
+        "closed-reception": "Resolved outgoing and incoming flux follow the prepared packet.",
+        "channel-null": "No resolved above-threshold structural radiation or effective neutral forcing."
+      },
+      "controls": [
+        "source-neutral",
+        "source-structural-plus",
+        "receiver-packet"
+      ],
+      "source_data": ["prospective derived/energy-flow.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "local-records",
+      "question": "Does B change after causal arrival while A stays readable?",
+      "representation": "Proper-time quadratures, marked events, ticks and matched phase differences with uncertainty.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "local-chi",
+        "proper-derivative",
+        "proper-time",
+        "event-id",
+        "cycle-difference"
+      ],
+      "competing_signatures": {
+        "closed-reception": "Local difference exceeds five deterministic budgets.",
+        "preparation-artifact": "Quiet drift or readout ambiguity accounts for the difference."
+      },
+      "controls": ["quiet", "neutral-phase", "quiet-phase"],
+      "source_data": ["prospective derived/local-records.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "causality",
+      "question": "Does separation change the permissible response window?",
+      "representation": "Source support and moving worldtube diagram with pre-arrival residual bounds.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "source-support",
+        "worldline",
+        "front-bound",
+        "prearrival-record"
+      ],
+      "competing_signatures": {
+        "closed-reception": "Response occurs inside causal future with predicted group-delay envelope.",
+        "numerical-artifact": "Precursors persist under refinement or arrive too early."
+      },
+      "controls": ["neutral-separation", "quiet-separation", "receiver-packet"],
+      "source_data": ["prospective derived/causality.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "recoil",
+      "question": "What carries the receiver impulse?",
+      "representation": "Worldtube momenta, independently integrated impulses, mirror comparison and residual budgets.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "stress-flux",
+        "worldtube-momentum",
+        "sink-momentum",
+        "global-residual"
+      ],
+      "competing_signatures": {
+        "closed-reception": "Resolved mirrored impulse and closed disjoint partition.",
+        "numerical-artifact": "Flux/worldtube mismatch or hidden momentum loss."
+      },
+      "controls": ["neutral-mirror", "quiet-mirror", "source-neutral"],
+      "source_data": ["prospective derived/recoil.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "survival",
+      "question": "Do both clocks remain usable after passage?",
+      "representation": "Mode energy, containment, quadrature amplitude, frequency and jitter with 20-period thresholds.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "mode-energy",
+        "charge",
+        "ticks",
+        "amplitude",
+        "frequency",
+        "jitter"
+      ],
+      "competing_signatures": {
+        "prepared-clock": "Both objects pass90% end-interaction and99% post-settling energy gates.",
+        "clock-damage": "Apparent phase is explained by loss or destroyed readout."
+      },
+      "controls": ["quiet", "structural-plus", "neutral-double"],
+      "source_data": ["prospective derived/survival.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "channel-controls",
+      "question": "Which mechanism changes the local record?",
+      "representation": "Neutral sign/amplitude parity, structural sign, phase and removed-object comparisons.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": ["forcing-invariant", "sector-flux", "phase", "impulse"],
+      "competing_signatures": {
+        "closed-reception": "Resolved effects follow the declared channel and uncertainties.",
+        "channel-null": "Structural upper bounds or invariant forcing null explain absent response."
+      },
+      "controls": [
+        "neutral-negative",
+        "neutral-half",
+        "neutral-double",
+        "structural-minus",
+        "source-structural-minus"
+      ],
+      "source_data": ["prospective derived/channel-controls.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    },
+    {
+      "figure_id": "decision-margins",
+      "question": "Which error determines each G0-G9 decision?",
+      "representation": "Separate spatial/time/domain/sponge/output/calibration/extraction budgets and gate margins.",
+      "role": "evidentiary",
+      "required": true,
+      "observables": [
+        "error-components",
+        "gate-status",
+        "allowance",
+        "measured-value"
+      ],
+      "competing_signatures": {
+        "closed-reception": "All required gates remain within their fixed allowances.",
+        "numerical-artifact": "One or more controls fail or remain unresolved."
+      },
+      "controls": ["quiet", "neutral-nominal", "structural-plus"],
+      "source_data": ["prospective derived/decision-margins.csv"],
+      "transformations": [
+        "Use saved engine data only; declare sampling and normalizations; no hidden smoothing or fitted acceptance thresholds."
+      ],
+      "uncertainty": "Show the relevant additive deterministic numerical/preparation budget. Spatial pictures alone do not establish a physical classification."
+    }
+  ],
+  "implementation_blockers": [
+    "New stage registrations/schemas and all G0-G9 classifiers are absent.",
+    "Prepared joint data, embedded eigenmode isolation and complete phase-aware restart are absent.",
+    "Physical source initial data and independent spatial receiver feasibility are absent.",
+    "Local timelike worldtubes, proper-time marker records and physical stress/momentum/sinks are absent.",
+    "Independent boundary/sponge/extraction/output controls and Test9 reconstruction slab are absent.",
+    "Packaging question mismatch and mutable lock indexing must be fixed and fixture-tested before long runs.",
+    "Windows memory/CPU ceilings need actual enforcement; current worker only applies OS limits on POSIX.",
+    "Measured serial resource projection must fit a revised prospectively reviewed budget or demonstrate sufficient validated optimization."
+  ],
+  "manual_execution": {
+    "enabled": false,
+    "reason": "Design validation cannot make missing registered stages executable. The existing quiet v1 schema permits exactly six periods and hard-codes full exchange not-evaluated. Do not change it into acceptance or relabel existing results.",
+    "next_action": "Implement S0, register each stage with its own config, lock via experiment_contract.py and pass no-evolution run_plan.py preflight. Print the exact reviewed stage launch command only after all dependency/resource gates pass. Research evolution remains user-initiated."
+  }
+}

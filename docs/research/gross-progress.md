@@ -32,6 +32,10 @@ Runtime status: the repository's common runtime is available. Test 2 registers a
 
 The user-authorized workflow is a focused branch, locked experiment, verified evidence and reader export, then a PR. Raw data and prior classifications stay immutable. PR review and merge are separate from scientific classification.
 
+## Test 8 acceptance planning update
+
+The [full acceptance campaign design](test-08-acceptance-plan.md) maps issue #82 G0–G9 and the complete control matrix without executing new physics. Local six-period run `run-2d17955e8ce845cb` supplies the [measured timing basis](test-08-quiet-timing.json); its six short checks pass while joint preparation/long clocks remain unresolved and full exchange is not evaluated. The design preflight distinguishes valid planning from launch readiness and reports missing implementation and resource gates. No full Test 8 acceptance or Test 9 readiness is claimed.
+
 ## Test 7 accepted known-incident evidence
 
 [Reviewed results](gross-test-07-acceptance-results.md), [protocol](gross-test-07-acceptance.md), and [compact evidence](../../research/experiments/gross.reception-acceptance.v1/README.md). Run `run-f2e5dffd14f209f2`, analysis `analysis-0001-0b2d32e3`, reviewed report `report-0002`: all eleven locked checks pass. Fifty full receiver preparations and twenty forecasts cover all required controls and five numerical variants. The minimum interval resolution is 24.13 combined budgets; the largest interval forecast error is 0.001424%, below 5%. The independent leading-order interval forecast also meets 5% for these preparations.
