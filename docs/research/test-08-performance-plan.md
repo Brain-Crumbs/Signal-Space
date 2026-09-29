@@ -1,6 +1,6 @@
 # Signal Space Test 8: performance and execution plan
 
-Status: prospective engineering plan for [issue #82](https://github.com/Brain-Crumbs/Signal-Space/issues/82), extending [PR #85](https://github.com/Brain-Crumbs/Signal-Space/pull/85). No acceptance campaign was run, no optimized backend was implemented, and no scientific threshold or locked configuration was changed. A bounded synthetic kernel benchmark was executed; it is engineering evidence only.
+Status at planning: prospective engineering plan for [issue #82](https://github.com/Brain-Crumbs/Signal-Space/issues/82), extending [PR #85](https://github.com/Brain-Crumbs/Signal-Space/pull/85). The subsequent [CPU backend and quiet restart implementation](test-08-performance-implementation.md) records implemented scope and qualification limits. No acceptance campaign or changed scientific threshold is implied by either engineering benchmark; original locked configurations remain unchanged.
 
 ## Recommendation and expected turnaround
 

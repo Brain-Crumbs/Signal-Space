@@ -25,86 +25,113 @@
       "const": "signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1"
     },
     "parameters": {
-      "const": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "separation", "scenarios"],
+      "properties": {
         "profile": {
-          "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
-          "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
-        },
-        "separation": 72,
-        "scenarios": [
-          {
-            "label": "isolated-base",
-            "pair": false,
-            "h": 0.2,
-            "dt": 0.01,
-            "radius": 24,
-            "half_length": 32,
-            "absorber_width": 4,
-            "absorber_strength": 0.12,
-            "periods": 6,
-            "sample_stride": 40
-          },
-          {
-            "label": "isolated-fine",
-            "pair": false,
-            "h": 0.1,
-            "dt": 0.005,
-            "radius": 24,
-            "half_length": 32,
-            "absorber_width": 4,
-            "absorber_strength": 0.12,
-            "periods": 6,
-            "sample_stride": 80
-          },
-          {
-            "label": "pair-base",
-            "pair": true,
-            "h": 0.2,
-            "dt": 0.01,
-            "radius": 24,
-            "half_length": 64,
-            "absorber_width": 4,
-            "absorber_strength": 0.12,
-            "periods": 6,
-            "sample_stride": 40
-          },
-          {
-            "label": "pair-fine",
-            "pair": true,
-            "h": 0.1,
-            "dt": 0.005,
-            "radius": 24,
-            "half_length": 64,
-            "absorber_width": 4,
-            "absorber_strength": 0.12,
-            "periods": 6,
-            "sample_stride": 80
-          },
-          {
-            "label": "pair-time",
-            "pair": true,
-            "h": 0.2,
-            "dt": 0.005,
-            "radius": 24,
-            "half_length": 64,
-            "absorber_width": 4,
-            "absorber_strength": 0.12,
-            "periods": 6,
-            "sample_stride": 80
-          },
-          {
-            "label": "pair-wide",
-            "pair": true,
-            "h": 0.2,
-            "dt": 0.01,
-            "radius": 32,
-            "half_length": 80,
-            "absorber_width": 6,
-            "absorber_strength": 0.12,
-            "periods": 6,
-            "sample_stride": 40
+          "const": {
+            "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+            "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
           }
-        ]
+        },
+        "separation": {
+          "const": 72
+        },
+        "scenarios": {
+          "const": [
+            {
+              "label": "isolated-base",
+              "pair": false,
+              "h": 0.2,
+              "dt": 0.01,
+              "radius": 24,
+              "half_length": 32,
+              "absorber_width": 4,
+              "absorber_strength": 0.12,
+              "periods": 6,
+              "sample_stride": 40
+            },
+            {
+              "label": "isolated-fine",
+              "pair": false,
+              "h": 0.1,
+              "dt": 0.005,
+              "radius": 24,
+              "half_length": 32,
+              "absorber_width": 4,
+              "absorber_strength": 0.12,
+              "periods": 6,
+              "sample_stride": 80
+            },
+            {
+              "label": "pair-base",
+              "pair": true,
+              "h": 0.2,
+              "dt": 0.01,
+              "radius": 24,
+              "half_length": 64,
+              "absorber_width": 4,
+              "absorber_strength": 0.12,
+              "periods": 6,
+              "sample_stride": 40
+            },
+            {
+              "label": "pair-fine",
+              "pair": true,
+              "h": 0.1,
+              "dt": 0.005,
+              "radius": 24,
+              "half_length": 64,
+              "absorber_width": 4,
+              "absorber_strength": 0.12,
+              "periods": 6,
+              "sample_stride": 80
+            },
+            {
+              "label": "pair-time",
+              "pair": true,
+              "h": 0.2,
+              "dt": 0.005,
+              "radius": 24,
+              "half_length": 64,
+              "absorber_width": 4,
+              "absorber_strength": 0.12,
+              "periods": 6,
+              "sample_stride": 80
+            },
+            {
+              "label": "pair-wide",
+              "pair": true,
+              "h": 0.2,
+              "dt": 0.01,
+              "radius": 32,
+              "half_length": 80,
+              "absorber_width": 6,
+              "absorber_strength": 0.12,
+              "periods": 6,
+              "sample_stride": 40
+            }
+          ]
+        },
+        "execution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["backend", "neutral_mode", "checkpoint_stride"],
+          "properties": {
+            "backend": {
+              "enum": ["numpy", "numba"]
+            },
+            "neutral_mode": {
+              "enum": ["full", "exact-zero"]
+            },
+            "checkpoint_stride": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            }
+          }
+        }
       }
     },
     "units": {

@@ -2,6 +2,8 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. Long-horizon error qualification, full-exchange diagnostics, concurrency/resource enforcement and Test 9 reconstruction retention remain open.
+
 | Test | Scope                                 | Prerequisites                                                | Status                                                                                                                                                                                       |
 | ---- | ------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | Operator and observer identities      | Source audit; registered algebra plugin; locked plan         | Pass: 1,000 samples, six checks; run-2ae9c65dbd171851, analysis-0001-d3c876ea, report-0002                                                                                                   |
