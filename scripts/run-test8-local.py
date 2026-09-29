@@ -63,6 +63,7 @@ def main():
                         help='verify and ZIP a previously completed output without rerunning physics')
     parser.add_argument("--threads", type=int, default=1)
     parser.add_argument("--case-jobs", type=int, default=1)
+    parser.add_argument("--recipe", choices=["gross-test-08-quiet", "gross-test-08-quiet-optimized"], default="gross-test-08-quiet")
     args = parser.parse_args()
     output = args.output.resolve()
     if output.is_relative_to(ROOT):
@@ -74,12 +75,12 @@ def main():
         if output.exists():
             parser.error('a fresh run requires a new output directory')
         command(sys.executable, str(ROOT / '.agents/scripts/run_experiment.py'),
-                '--experiment', 'gross-test-08-quiet', '--output', str(output),
+                '--experiment', args.recipe, '--output', str(output),
                 '--threads', str(args.threads), '--case-jobs', str(args.case_jobs))
 
     evidence, reader = output / 'evidence', output / 'reader'
     status = json.loads((evidence / 'status.json').read_text(encoding="utf-8"))
-    if status['technical_status'] != 'completed' or status['experiment'] != 'gross-test-08-quiet':
+    if status['technical_status'] != 'completed' or status['experiment'] not in {'gross-test-08-quiet', 'gross-test-08-quiet-optimized'}:
         raise ValueError('pipeline is incomplete; preserve evidence and inspect its logs')
     source_run = evidence / status['canonical_path']
     index = json.loads((evidence / 'evidence-index.json').read_text(encoding="utf-8"))

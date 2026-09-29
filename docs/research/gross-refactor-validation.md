@@ -7,10 +7,10 @@ define the migration and supported surface.
 
 ## Completed checks
 
-- 76 retained Python tests pass, including compiled-backend numerical controls.
+- 77 retained Python tests pass, including compiled-backend numerical controls.
 - 13 reader-contract/pipeline tests pass, including locked-plan tampering,
   preserved failure logs, immutable input checks, reports and reader exports.
-- All 16 registered experiments are GROSS plugins; all 17 current locked plans
+- All 16 registered experiments are GROSS plugins; all 18 current locked plans
   and registered configuration fixtures validate.
 - All 386 archived files match their recorded SHA-256 and byte size.
 - All 2,825 current research files match the reviewed index. No file under
@@ -88,8 +88,20 @@ are explicitly expressed by an appropriate adapter.
 The first remote run passed both suites on Ubuntu and Windows. Windows then
 exposed locale-dependent decoding in the repository-wide locked-plan verifier.
 Active text readers/writers now specify UTF-8; archived and evidence bytes were
-not rewritten. CI reruns the full matrix for this correction.
+not rewritten. The reviewed research index also uses explicit POSIX lexical path order on every
+platform. CI reruns the full matrix for these corrections.
 
 CI runs the retained suites on Ubuntu and Windows. PR checks are the authority
 for the latest remote revision; local success is not a substitute for those
 platform results.
+
+## Prepared operational preset
+
+A separate locked `gross-test-08-quiet-optimized` plan selects the existing strict
+Numba/full-neutral backend with checkpoint stride 5000. Removing its execution
+options produces the original configuration exactly, including every physical
+parameter, analysis threshold and resource ceiling. The original plan/config
+bytes remain unchanged. Serial output estimates 324 MiB; two-case execution
+reserves 466 MiB output and 2,546 MiB memory inside the existing 512 MiB/4 GiB
+limits. Admission now accounts for retained child evidence before creating a
+run. The preset is prepared and validated; full-case execution is pending.

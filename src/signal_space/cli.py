@@ -47,7 +47,7 @@ def _parser() -> argparse.ArgumentParser:
         source = command.add_mutually_exclusive_group(required=True)
         source.add_argument('--config')
         source.add_argument('--plan', help='validate locked design and config hash before execution')
-        if name == 'run':
+        if name in ('estimate', 'run'):
             _execution_options(command)
     batch = sub.add_parser('batch', help='parallel independent registered configurations or locked plans')
     source = batch.add_mutually_exclusive_group(required=True)
@@ -174,7 +174,7 @@ def main(argv: list[str] | None = None) -> int:
             if args.command == 'validate':
                 result = {'config': runtime.validate(config)}
             elif args.command == 'estimate':
-                result = runtime.estimate(config)
+                result = runtime.estimate(config, policy=ExecutionPolicy(args.threads, args.case_jobs))
             else:
                 result = runtime.run(config, workspace, policy=ExecutionPolicy(args.threads, args.case_jobs),
                                      on_started=lambda record: print(json.dumps(record), file=sys.stderr, flush=True))

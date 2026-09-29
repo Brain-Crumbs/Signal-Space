@@ -50,7 +50,7 @@ def run_batch(runtime, configs: list[dict[str, Any]], workspace: Path,
     resolved, seen = [], set()
     for config in configs:
         value = runtime.validate(config)
-        estimate = runtime.estimate(value)
+        estimate = runtime.estimate(value, policy=policy)
         if not estimate['accepted']:
             raise ResourceRejected('batch member exceeds its locked resource ceilings')
         resources = value['resources']

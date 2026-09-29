@@ -23,19 +23,19 @@ Six locked cases are isolated and pair at $h=.2,.1$ with $\Delta t=.01,.005$, pa
 
 ## Run on your machine
 
-Use Python 3.12 in Linux or WSL2. On an implementation branch after its PR is merged, from a clean checkout:
+Use Python 3.12+ in a clean checkout. The separately locked optimized preset below retains the same physical protocol and thresholds, selects the strict compiled/full-neutral backend, and changes checkpoint cadence while retaining all original resource ceilings. Its execution is pending:
 
 ```sh
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-lock.txt
-python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-08-quiet.json
-python .agents/scripts/run_plan.py --plan docs/research/plans/gross-test-08-quiet.json --repo-root . --workspace ../test8-preflight
+python -m pip install -r requirements-performance-lock.txt
+python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-08-quiet-optimized.json
+python .agents/scripts/run_plan.py --plan docs/research/plans/gross-test-08-quiet-optimized.json --repo-root . --workspace ../test8-preflight --case-jobs 2
 git status --short
-python scripts/run-test8-local.py --output ../test8-quiet-001
+python scripts/run-test8-local.py --recipe gross-test-08-quiet-optimized --case-jobs 2 --output ../test8-quiet-001
 ```
 
-The preflight performs validation and an estimate **without evolution**. The final command runs the unchanged locked configuration, independently analyzes saved data, renders figures/PDFs, verifies canonical and reader packages together, checks the outer file index, and produces two ZIPs and `pr-evidence-index.json` outside the Git checkout. It never commits or pushes. The case estimate is roughly 4,816 CPU seconds, 1,378 MiB memory and 142 MiB uncompressed output under 7,200 CPU seconds, 8,000 wall seconds, 4 GiB memory and 512 MiB output ceilings. These are preflight estimates rather than timing measured on your machine. Reserve additional room for packages and dependency installation. A technical interruption preserves the partial directory and logs. The new [CPU backend and quiet restart implementation](test-08-performance-implementation.md) supports checkpointed continuation in a new attempt; its retained-state estimate supersedes the original disk estimate above. The old default checkpoint cadence now exceeds the locked output ceiling, so select and prospectively lock an explicit execution configuration before a new physical run. `--package-only` verifies and packages a completed output without running physics again.
+The preflight performs validation and an estimate **without evolution**. The final command runs the explicitly selected locked operational preset, independently analyzes saved data, renders figures/PDFs, verifies canonical and reader packages together, checks the outer file index, and produces two ZIPs and `pr-evidence-index.json` outside the Git checkout. It never commits or pushes. The existing CPU/wall projection is 4,816 CPU seconds and 5,473 wall seconds; it is not a measured compiled-backend timing. The new preset estimates 324 MiB retained output in serial or 466 MiB with parallel child evidence, within the unchanged 512 MiB ceiling. The 4 GiB memory ceiling is shared by the coordinator and admitted cases. Reserve additional room for packages and dependency installation. A technical interruption preserves the partial directory and logs. The [CPU backend and quiet restart implementation](test-08-performance-implementation.md) supports checkpointed continuation in a new attempt. The original plan remains available but its default retained-checkpoint estimate is 1,011 MiB and is rejected by preflight. `--package-only` verifies and packages a completed output without running physics again.
 
 During the long `run-plan` stage, inspect `../test8-quiet-001/evidence/status.json` and the `scenario-progress` events in `../test8-quiet-001/evidence/runs/gross.two-object-quiet-calibration.v1/<run-id>/attempts/attempt-0001/events.jsonl`. The command returns only after all six cases and packaging complete; an `unresolved` or `fail` **scientific** classification still yields the paired ZIPs.
 

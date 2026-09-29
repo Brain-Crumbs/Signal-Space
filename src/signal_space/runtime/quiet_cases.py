@@ -37,6 +37,18 @@ def _memory_mb(case):
     return max(768, int(cells*.004) + 256)
 
 
+def memory_peak_mb(scenarios, jobs, ceiling):
+    reservations = sorted((_memory_mb(s) for s in scenarios), reverse=True)
+    # Admission can reduce concurrency to fit; still reject a single case
+    # that cannot fit beside the coordinator. Never understate that minimum.
+    return max(reservations[0] + 192, min(ceiling, sum(reservations[:jobs]) + 192))
+
+
+def output_overhead_mb(scenarios):
+    cells = sum(round(s['radius']/s['h']) * round(2*s['half_length']/s['h']) for s in scenarios)
+    return max(40, int(cells*.00015) + 25)
+
+
 def execute(request_path):
     request = read_json(request_path)
     attempt = Path(request['attempt_path'])

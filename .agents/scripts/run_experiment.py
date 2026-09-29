@@ -28,6 +28,7 @@ RECIPES["gross-test-07-reconstruction"] = "docs/research/plans/gross-test-07-rec
 RECIPES["gross-test-07-transfer"] = "docs/research/plans/gross-test-07-transfer.json"
 RECIPES["gross-test-08-calibration"] = "docs/research/plans/gross-test-08-calibration.json"
 RECIPES["gross-test-08-quiet"] = "docs/research/plans/gross-test-08-quiet.json"
+RECIPES["gross-test-08-quiet-optimized"] = "docs/research/plans/gross-test-08-quiet-optimized.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 for kind in ("longevity", "response"):

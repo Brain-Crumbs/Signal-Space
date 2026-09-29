@@ -24,7 +24,8 @@ classification remain separate. Scientific review is still required.
 ```sh
 signal-space --workspace /path/runs batch --plan docs/research/plans/gross-test-01.json --plan docs/research/plans/gross-test-02.json --jobs 2 --cpu-slots 4 --memory-mb 4096
 signal-space --workspace /path/runs sweep --config fixtures/research/gross-test-01.json --axis seeds.root=101,102,103 --jobs 3
-signal-space --workspace /path/quiet run --plan docs/research/plans/gross-test-08-quiet.json --case-jobs 2
+python -m pip install -r requirements-performance-lock.txt
+signal-space --workspace /path/quiet run --plan docs/research/plans/gross-test-08-quiet-optimized.json --case-jobs 2
 ```
 
 Batch members must be scientifically independent. Dependency ordering remains
@@ -92,3 +93,27 @@ Batch records live in `WORKSPACE/batches/` and are atomically updated at each
 launch/completion. Per-run packages remain the authoritative scientific evidence.
 The current Test 1–11 statuses are in [the progress ledger](gross-progress.md).
 No scheduler benchmark passes a new scientific gate.
+
+## Prepared Test 8 execution preset
+
+`gross-test-08-quiet-optimized` is a separately locked operational preset for the
+existing six-period quiet protocol. It selects the strict compiled backend with
+the full neutral sector and checkpoint stride 5000 within the original
+512 MiB output ceiling. Preflight estimates 324 MiB serial or 466 MiB with
+parallel child evidence retained. Physical preparations, grid/time
+steps, diagnostics, sample cadence and acceptance thresholds are unchanged.
+The original plan/config bytes remain intact; its default checkpoint estimate
+is 1011 MiB against a 512 MiB cap and is correctly rejected by preflight.
+The two-case memory reservation is 2,546 MiB within the unchanged 4 GiB ceiling.
+The new preset is validation/estimate-ready, **execution pending**.
+
+```sh
+signal-space estimate --plan docs/research/plans/gross-test-08-quiet-optimized.json --case-jobs 2
+signal-space pipeline --experiment gross-test-08-quiet-optimized --case-jobs 2 --output /path/outside/checkout/quiet
+python scripts/run-test8-local.py --recipe gross-test-08-quiet-optimized --case-jobs 2 --output /path/outside/checkout/quiet-zips
+```
+
+Use a new output path for each command; these are alternative complete launch
+commands, not sequential stages of one run. Install the performance dependency
+lock first. CPU/wall estimates remain the conservative existing projection;
+compiled full-case throughput is not inferred from the small scheduler benchmark.

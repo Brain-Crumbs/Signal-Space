@@ -56,9 +56,19 @@ class ResearchRuntime:
             raise ValueError("configuration must name a registered experiment_id")
         return get_experiment(value["experiment_id"]).validate(value)
 
-    def estimate(self, value: Any) -> dict[str, Any]:
+    def estimate(self, value: Any, *, policy: ExecutionPolicy | None = None) -> dict[str, Any]:
         config = self.validate(value)
         estimate = get_experiment(config["experiment_id"]).estimate(config)
+        policy = policy or ExecutionPolicy()
+        if policy.case_jobs > 1:
+            if config['experiment_id'] != 'gross.two-object-quiet-calibration.v1':
+                raise ValueError('case parallelism is registered only for Test 8 quiet calibration; use batch for independent runs')
+            # Child evidence is retained alongside final canonical copies. Reuse
+            # the serial raw/metadata allowance without crediting compression.
+            from signal_space.runtime.quiet_cases import output_overhead_mb, memory_peak_mb
+            estimate['disk_mb'] += output_overhead_mb(config['parameters']['scenarios'])
+            estimate['memory_mb'] = max(estimate['memory_mb'], memory_peak_mb(
+                config['parameters']['scenarios'], policy.case_jobs, config['resources']['max_memory_mb']))
         limits = config["resources"]
         rejected = []
         if estimate["memory_mb"] > limits["max_memory_mb"]: rejected.append("memory")
@@ -78,7 +88,7 @@ class ResearchRuntime:
         policy = policy or ExecutionPolicy()
         if policy.case_jobs > 1 and config['experiment_id'] != 'gross.two-object-quiet-calibration.v1':
             raise ValueError('case parallelism is registered only for Test 8 quiet calibration; use batch for independent runs')
-        estimate = self.estimate(config)
+        estimate = self.estimate(config, policy=policy)
         if not estimate["accepted"]:
             raise ResourceRejected("resource estimate exceeds: " + ", ".join(estimate["rejected_limits"]))
         plugin = get_experiment(config["experiment_id"])

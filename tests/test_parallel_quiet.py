@@ -90,6 +90,35 @@ class ParallelQuietTests(unittest.TestCase):
             self.assertEqual(code, 0)
             self.compare(serial, parallel)
 
+    def test_optimized_preset_preserves_physics_and_budgets_parallel_evidence(self):
+        from signal_space.runtime.runner import ResearchRuntime
+        from signal_space.runtime.execution import ExecutionPolicy
+        from signal_space.runtime.errors import ResourceRejected
+        root = Path(__file__).resolve().parents[1]
+        original = read_json(root/'fixtures/research/gross-test-08-quiet.json')
+        optimized = read_json(root/'fixtures/research/gross-test-08-quiet-optimized.json')
+        physical = deepcopy(optimized)
+        physical['parameters'].pop('execution')
+        self.assertEqual(physical, original)
+        self.assertEqual(optimized['parameters']['execution'],
+                         {'backend': 'numba', 'neutral_mode': 'full', 'checkpoint_stride': 5000})
+        runtime = ResearchRuntime(); policy = ExecutionPolicy(case_jobs=2)
+        serial = runtime.estimate(optimized)
+        parallel = runtime.estimate(optimized, policy=policy)
+        self.assertTrue(serial['accepted'])
+        self.assertTrue(parallel['accepted'])
+        self.assertGreater(parallel['estimate']['disk_mb'], serial['estimate']['disk_mb'])
+        self.assertGreater(parallel['estimate']['memory_mb'], serial['estimate']['memory_mb'])
+        self.assertLessEqual(parallel['estimate']['disk_mb'], original['resources']['max_output_mb'])
+        dense = deepcopy(optimized)
+        dense['parameters']['execution']['checkpoint_stride'] = 3000
+        self.assertTrue(runtime.estimate(dense)['accepted'])
+        self.assertFalse(runtime.estimate(dense, policy=policy)['accepted'])
+        with tempfile.TemporaryDirectory() as folder:
+            with self.assertRaises(ResourceRejected):
+                runtime.create_run(dense, Path(folder), policy=policy)
+            self.assertFalse(list(Path(folder).rglob('manifest.json')))
+
     def test_memory_admission_precedes_case_launch(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder); request = self.request(root)

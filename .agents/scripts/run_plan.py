@@ -30,7 +30,7 @@ def main() -> int:
         for stage in ("validate", "estimate", "run") if args.execute else ("validate", "estimate"):
             command = [sys.executable, "-m", "signal_space", "--workspace", str(args.workspace.resolve()), stage,
                        "--config", str(config.resolve())]
-            if stage == "run":
+            if stage in ("estimate", "run"):
                 command += ["--threads", str(args.threads), "--case-jobs", str(args.case_jobs)]
             completed = subprocess.run(command, cwd=args.repo_root, env=env, text=True, stdout=subprocess.PIPE)
             if completed.returncode:

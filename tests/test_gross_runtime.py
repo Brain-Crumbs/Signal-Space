@@ -88,7 +88,7 @@ class GrossRuntimeTests(unittest.TestCase):
             active = peak = 0
             lock = threading.Lock()
             def validate(self, c): return c
-            def estimate(self, c): return {'accepted': True}
+            def estimate(self, c, **kwargs): return {'accepted': True}
             def run(self, c, workspace, **kwargs):
                 with self.lock:
                     self.active += 1
