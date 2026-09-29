@@ -99,7 +99,11 @@ def execute(request_path):
                 row['state'] = 'queued'
     append_event(events, 'worker-started', 'run', {'algorithm': KIND, 'execution_policy': policy.record(),
                                                  'memory_reservations_mb': reservations})
-    pending = [i for i, row in enumerate(rows) if row['state'] != 'completed']
+    from signal_space.runtime.costs import longest_first, case_cost
+    pending = longest_first([i for i, row in enumerate(rows) if row['state'] != 'completed'],
+                            [case_cost(case) for case in scenarios])
+    append_event(events, 'schedule-selected', 'runtime', {'order':[rows[i]['label'] for i in pending],
+                 'basis':'uncalibrated cell-step work proxy; longest ready first; aggregation retains registered order'})
     active = {}
     sequence = 0
     last_checkpoint = None

@@ -11,6 +11,7 @@ import threading
 import psutil
 from signal_space.runtime.execution import ExecutionPolicy, process_metrics_available
 from signal_space.runtime.processes import ProcessTree
+from signal_space.runtime.admission import admit
 from typing import Any, Callable
 
 from signal_space.experiments.registry import get_experiment, list_experiments
@@ -91,6 +92,7 @@ class ResearchRuntime:
         estimate = self.estimate(config, policy=policy)
         if not estimate["accepted"]:
             raise ResourceRejected("resource estimate exceeds: " + ", ".join(estimate["rejected_limits"]))
+        admit(config["resources"], workspace, policy)
         plugin = get_experiment(config["experiment_id"])
         package = RunPackage.create(workspace, config, plugin.version, (policy or ExecutionPolicy()).record())
         return {
@@ -113,6 +115,7 @@ class ResearchRuntime:
         workspace: Path,
         run_id: str,
         on_started: Callable[[dict[str, Any]], None] | None = None,
+        cancel_event: threading.Event | None = None,
     ) -> dict[str, Any]:
         package = self._package(workspace, run_id)
         self._reconcile_orphaned_attempts(package)
@@ -128,9 +131,13 @@ class ResearchRuntime:
         if checkpoint.get("config_hash") != manifest["config_hash"] or checkpoint.get("code_identity_hash") != code_hash:
             raise CheckpointMismatch("checkpoint config/code identity is incompatible")
         if sha256_bytes(canonical_bytes(code_identity())) != code_hash:
-            raise CheckpointMismatch("current code identity differs from the checkpoint producer")
-        if execution_identity(manifest["execution_identity"]["environment"].get("execution_policy")) != manifest["execution_identity"]:
-            raise CheckpointMismatch("current execution environment differs from the checkpoint producer")
+            produced=manifest['code_identity']
+            raise CheckpointMismatch(f"current code identity differs from the checkpoint producer: required revision={produced['revision']}, tree_state={produced['tree_state']}, patch={produced['dirty_patch_hash']}. Restore the producer checkout/patch in a separate worktree; saved-data analysis and report remain available without solver resume.")
+        current_execution=execution_identity(manifest["execution_identity"]["environment"].get("execution_policy"))
+        if current_execution != manifest["execution_identity"]:
+            from signal_space.workflow.compare import differences
+            changed=[row['path'] for row in differences(manifest['execution_identity'],current_execution)]
+            raise CheckpointMismatch('current execution environment differs from the checkpoint producer: '+', '.join(changed)+'. Restore provenance/environment.json and the pinned dependency files in an isolated environment before resuming.')
         package.verify_immutable()
         config = read_json(package.path / "resolved-config.json")
         plugin = get_experiment(manifest["experiment_id"])
@@ -140,6 +147,7 @@ class ResearchRuntime:
             config,
             {"checkpoint": checkpoint, "parent": parent},
             on_started,
+            cancel_event=cancel_event,
         )
 
     def _attempt(
@@ -151,6 +159,7 @@ class ResearchRuntime:
         on_started: Callable[[dict[str, Any]], None] | None = None,
         cancel_event: threading.Event | None = None,
     ) -> dict[str, Any]:
+        admit(config["resources"], package.path, ExecutionPolicy.from_record(package.manifest["execution_identity"]["environment"].get("execution_policy")))
         with package.locked():
             manifest = package.manifest
             package.verify_immutable()
@@ -446,7 +455,7 @@ class ResearchRuntime:
                     shutil.rmtree(path)
                 raise
 
-    def report(self, workspace: Path, run_id: str, analysis_id: str | None = None) -> dict[str, Any]:
+    def report(self, workspace: Path, run_id: str, analysis_id: str | None = None, plan: str | Path | None = None) -> dict[str, Any]:
         package = self._package(workspace, run_id)
         with package.locked():
             package.verify_immutable()
@@ -470,13 +479,13 @@ class ResearchRuntime:
                 "execution_identity": execution_identity(),
             }
             try:
-                output = get_experiment(manifest["experiment_id"]).report(
-                    package.path,
-                    report_path,
-                    manifest,
-                    analysis,
-                    render_provenance,
-                )
+                from signal_space.reporting.context import using_plan
+                if plan is not None:
+                    from signal_space.workflow.plans import validate_bound_plan
+                    plan = validate_bound_plan(plan, read_json(package.path / "resolved-config.json"))
+                with using_plan(plan):
+                    output = get_experiment(manifest["experiment_id"]).report(
+                        package.path, report_path, manifest, analysis, render_provenance)
                 output = dict(output)
                 required_inputs = output.pop("required_inputs")
                 indexed_paths = {artifact["path"] for artifact in manifest["artifacts"]}
@@ -539,6 +548,7 @@ def _monitor_process(
     cpu_limit = float(resources["max_cpu_seconds"])
     cancellation_deadline = None
     next_scan = 0.
+    next_telemetry = 0.
     peaks = {"peak_rss_bytes": 0, "cpu_seconds": 0., "output_bytes": 0}
     cpu_seen = {}
     metrics_available = process_metrics_available()
@@ -585,6 +595,10 @@ def _monitor_process(
                 if peaks["cpu_seconds"] > cpu_limit:
                     reason = "cpu"
                     break
+                if instant >= next_telemetry:
+                    write_json(attempt_path / 'telemetry.json', {**peaks, 'wall_seconds': instant-started,
+                               'process_metrics_available': metrics_available, 'updated_at': now()})
+                    next_telemetry = instant + 2
                 next_scan = instant + .5
             remaining = deadline - instant
             if remaining <= 0:

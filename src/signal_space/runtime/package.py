@@ -160,6 +160,8 @@ class RunPackage:
         ledger = seed_ledger(int(config["seeds"]["root"]))
         write_json(path / "resolved-config.json", config, canonical=True)
         provenance = path / "provenance"
+        from signal_space.runtime.costs import hardware
+        write_json(provenance / "hardware.json", hardware())
         write_json(provenance / "code.json", identity)
         write_json(provenance / "environment.json", execution["environment"])
         shutil.copy2(ROOT / "requirements-lock.txt", provenance / "dependencies.lock")

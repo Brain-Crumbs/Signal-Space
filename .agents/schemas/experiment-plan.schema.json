@@ -87,6 +87,7 @@
       "additionalProperties": false,
       "required": ["max_wall_seconds", "max_memory_mb", "max_output_mb"],
       "properties": {
+        "max_cpu_seconds": { "type": "integer", "minimum": 1 },
         "max_wall_seconds": { "type": "number", "exclusiveMinimum": 0 },
         "max_memory_mb": { "type": "number", "exclusiveMinimum": 0 },
         "max_output_mb": { "type": "number", "exclusiveMinimum": 0 }

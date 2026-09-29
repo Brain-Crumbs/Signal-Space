@@ -3,6 +3,9 @@
 import csv
 import html
 import shutil
+from pathlib import Path
+
+from signal_space.reporting.context import questions
 
 import matplotlib
 matplotlib.use('Agg')
@@ -14,6 +17,9 @@ from signal_space.runtime.io import read_json, write_json
 
 
 def render_report(run_path, report_path, manifest, analysis, render_provenance):
+    locked_questions = questions(Path(__file__).resolve().parents[3] / 'docs/research/plans/gross-test-08-quiet.json')
+    raw = (run_path / analysis['raw_source']).parent
+    raw_inputs = []
     source = run_path / analysis['path'] / 'derived'
     plots = report_path / 'plot-data'
     figures = report_path / 'figures'
@@ -33,7 +39,7 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
         return np.array([float(r['time']) for r in subset]), subset
 
     def save(fig, key, question, reading, significance, limitation, transforms):
-        interpretation = {'question': question, 'reading': reading,
+        interpretation = {'question': locked_questions[key], 'reading': reading,
                           'significance': significance, 'limitation': limitation}
         spec = {'schema_version': 'research-figure-spec-v1', 'id': key,
                 'source_datasets': ['plot-data/traces.csv', 'plot-data/summary.json'],
@@ -85,7 +91,8 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
         charge = np.array([float(r['charge']) for r in data])
         q_sink = np.array([float(r['charge_sink']) for r in data])
         mode0 = sum(c['mode_energy'] for c in read_json(
-            run_path / 'attempts/attempt-0001/raw' / f'{label}-traces.json')['samples'][0]['clocks'])
+            raw / f'{label}-traces.json')['samples'][0]['clocks'])
+        raw_inputs.append((raw / f'{label}-traces.json').relative_to(run_path).as_posix())
         axes[0].plot(t, (e + sink - e[0]) / mode0, label=label)
         axes[1].plot(t, (charge + q_sink - charge[0]) / charge[0], label=label)
     axes[0].set(ylabel='(E + absorber work - E0) / initial mode E')
@@ -114,6 +121,6 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
             plt.close(fig)
     return {'required_inputs': [f"{analysis['path']}/derived/summary.json",
                                 f"{analysis['path']}/derived/traces.csv",
-                                f"{analysis['path']}/checks.json"],
+                                f"{analysis['path']}/checks.json", *raw_inputs],
             'figures': specs,
             'plot_data': ['plot-data/summary.json', 'plot-data/traces.csv']}

@@ -148,11 +148,31 @@
       }
     },
     "resources": {
-      "const": {
-        "max_cpu_seconds": 7200,
-        "max_wall_seconds": 8000,
-        "max_memory_mb": 4096,
-        "max_output_mb": 512
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "minimum": 1
+        }
       }
     },
     "analysis": {
