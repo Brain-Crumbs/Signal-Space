@@ -1,0 +1,21 @@
+{
+  "campaign_id": "test8",
+  "locked_sha256": "29d46df129c2a73906d57dd04741345a70c1b2e9b77dd91c53381f4a7add22de",
+  "nodes": [
+    {
+      "dependencies": [],
+      "id": "quiet",
+      "plan": "docs/research/plans/gross-test-08-quiet-optimized.json"
+    }
+  ],
+  "question": "Full Test 8 exchange: blocked prospective design in docs/research/plans/test-08-acceptance-design.json; quiet is only an existing prerequisite, not the complete acceptance matrix.",
+  "requires_capabilities": [
+    "joint-relaxed-pair",
+    "embedded-spatial-mode-solve",
+    "physical-source-exchange",
+    "momentum-worldtube-flux",
+    "proper-time-marker-tracking",
+    "Test9-reconstruction"
+  ],
+  "schema_version": "gross-campaign-v1"
+}

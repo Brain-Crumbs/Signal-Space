@@ -6,7 +6,6 @@ from copy import deepcopy
 import json
 import os
 from pathlib import Path
-import subprocess
 import sys
 import time
 from typing import Any
@@ -39,7 +38,24 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument('--workspace', default='.research-work', help='canonical run package root')
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('list')
-    sub.add_parser('doctor')
+    doctor = sub.add_parser('doctor')
+    source = doctor.add_mutually_exclusive_group()
+    source.add_argument('--recipe')
+    source.add_argument('--plan')
+    doctor.add_argument('--profile', choices=['desktop','overnight'], default='desktop')
+    _execution_options(doctor)
+    sub.add_parser('recipes', help='locked recipes, scope, prerequisites and estimated readiness')
+    sub.add_parser('capabilities', help='implemented engine capabilities and explicit missing physics')
+    ledger = sub.add_parser('ledger', help='evidence-linked Tests 1–11 current summary')
+    ledger.add_argument('--markdown', action='store_true')
+    derive = sub.add_parser('derive', help='create a new locked operational plan without changing physics')
+    derive.add_argument('--plan', required=True)
+    derive.add_argument('--output', required=True)
+    for field in ('cpu-seconds','wall-seconds','memory-mb','output-mb'):
+        derive.add_argument('--max-'+field, type=int)
+    derive.add_argument('--backend', choices=['numpy','numba'])
+    derive.add_argument('--neutral-mode', choices=['full','exact-zero'])
+    derive.add_argument('--checkpoint-stride', type=int)
     schema = sub.add_parser('schema')
     schema.add_argument('--experiment', required=True)
     for name in ('validate', 'estimate', 'run'):
@@ -63,7 +79,12 @@ def _parser() -> argparse.ArgumentParser:
         command.add_argument('--run-id', required=name != 'status')
         if name == 'report':
             command.add_argument('--analysis-id')
+            command.add_argument('--plan')
+        if name == 'status':
+            command.add_argument('--watch', action='store_true')
+            command.add_argument('--human', action='store_true')
         if name == 'events':
+            command.add_argument('--cursor-file', help='durable per-attempt/per-case reconnect cursor outside the run')
             command.add_argument('--after', type=int, default=0)
             command.add_argument('--follow', action='store_true')
     archive = sub.add_parser('archive')
@@ -71,18 +92,63 @@ def _parser() -> argparse.ArgumentParser:
     archive.add_argument('--archive-root', default='research/experiments')
     archive.add_argument('--catalog', default='research/catalog.json')
     pipeline = sub.add_parser('pipeline', help='locked run → analysis → report → verified reader package')
-    pipeline.add_argument('--experiment', required=True, help='recipe name, e.g. gross-test-01')
-    pipeline.add_argument('--output', required=True, help='new directory outside the checkout')
+    source = pipeline.add_mutually_exclusive_group()
+    source.add_argument('--experiment', help='recipe name, e.g. gross-test-01')
+    source.add_argument('--plan')
+    pipeline.add_argument('--resume', action='store_true')
+    pipeline.add_argument('--output', required=True, help='external directory; existing only with --resume')
     _execution_options(pipeline)
+    export = sub.add_parser('export', help='reader for a canonical run, or paired handoff for a pipeline')
+    source = export.add_mutually_exclusive_group(required=True)
+    source.add_argument('--pipeline')
+    source.add_argument('--run-id')
+    export.add_argument('--plan')
+    export.add_argument('--output')
+    export.add_argument('--locator', help='durable externally uploaded evidence location to record')
+    importing = sub.add_parser('import', help='verify and unpack a paired handoff into a new folder')
+    importing.add_argument('--index', required=True)
+    importing.add_argument('--output', required=True)
+    compare = sub.add_parser('compare', help='compare saved compatible results after showing configuration differences')
+    compare.add_argument('left')
+    compare.add_argument('right')
+    compare.add_argument('--output')
+    panel = sub.add_parser('panel', help='render a source-hashed saved-data diagnostic panel')
+    panel.add_argument('--spec', required=True)
+    panel.add_argument('--output', required=True)
+    smoke = sub.add_parser('report-smoke', help='render and package copied saved evidence without evolution')
+    smoke.add_argument('--plan', required=True)
+    smoke.add_argument('--run', required=True)
+    smoke.add_argument('--output', required=True)
+    profile_cmd = sub.add_parser('profile', help='collect or match immutable observations of completed work')
+    profiling = profile_cmd.add_subparsers(dest='profile_command', required=True)
+    collect = profiling.add_parser('collect')
+    source = collect.add_mutually_exclusive_group(required=True)
+    source.add_argument('--run-id')
+    source.add_argument('--pipeline')
+    collect.add_argument('--output', required=True)
+    matched = profiling.add_parser('match')
+    matched.add_argument('--profile', required=True)
+    matched.add_argument('--plan', required=True)
+    _execution_options(matched)
+    campaign = sub.add_parser('campaign', help='persistent bounded dependency graph with scientific gates')
+    actions = campaign.add_subparsers(dest='campaign_command', required=True)
+    for action in ('inspect','lock','preflight','start','status','stop','resume','export'):
+        command = actions.add_parser(action)
+        command.add_argument('target', help='locked design/recipe for inspect, preflight and start; output directory otherwise')
+        if action in {'start','preflight'}:
+            command.add_argument('--output', required=True)
+            command.add_argument('--profile', choices=['desktop','overnight'], default='desktop')
+            command.add_argument('--jobs', type=int)
+            _execution_options(command)
+        if action == 'status':
+            command.add_argument('--watch', action='store_true')
+            command.add_argument('--human', action='store_true')
     return parser
 
 
 def _locked_config(path: str) -> dict[str, Any]:
-    sys.path.insert(0, str(ROOT / '.agents/scripts'))
-    from experiment_contract import validate_plan, verify_runtime_config
-    plan = load_json(path)
-    validate_plan(plan)
-    return load_json(verify_runtime_config(plan, ROOT))
+    from signal_space.workflow.plans import load_plan
+    return load_plan(path)[1]
 
 
 def _coerce(text: str) -> Any:
@@ -128,27 +194,15 @@ def _sweep(runtime, config, axes, workspace, budget=None, policy=None):
     return record
 
 
-def _events(runtime, workspace, run_id, after, follow):
+def _events(runtime, workspace, run_id, after, follow, cursor_file=None):
+    from signal_space.runtime.progress import EventStream
     package = runtime._package(workspace, run_id)
-    offsets = {}
+    reader = EventStream(package.path, cursor_file)
     while True:
+        for event in reader.poll(after):
+            _emit(event)
+        reader.acknowledge()
         manifest = package.manifest
-        for entry in manifest['attempts']:
-            path = package.path / entry['path'] / 'events.jsonl'
-            if not path.exists():
-                continue
-            with path.open(encoding='utf-8') as stream:
-                stream.seek(offsets.get(str(path), 0))
-                while True:
-                    position = stream.tell()
-                    line = stream.readline()
-                    if not line or not line.endswith('\n'):
-                        stream.seek(position)
-                        break
-                    event = json.loads(line)
-                    if event['sequence'] > after:
-                        _emit({'run_id': run_id, 'attempt_id': entry['attempt_id'], **event})
-                offsets[str(path)] = stream.tell()
         if not follow or not any(row['state'] in {'prepared', 'running'} for row in manifest['attempts']):
             return
         time.sleep(.25)
@@ -167,6 +221,28 @@ def main(argv: list[str] | None = None) -> int:
             result = {'cpu_slots': cpu_capacity(), 'available_memory_mb': memory_capacity_mb(),
                       'available_output_mb': disk_capacity_mb(workspace), 'python': sys.version,
                       'source_root': str(ROOT), 'default_execution': ExecutionPolicy().record()}
+            from signal_space.workflow.preflight import check, profile
+            from signal_space.workflow.recipes import recipe_path
+            result['profile'] = profile(args.profile)
+            if args.plan or args.recipe:
+                result.update(check(args.plan or recipe_path(args.recipe), workspace,
+                                    ExecutionPolicy(args.threads,args.case_jobs),compile_backend=True))
+        elif args.command == 'recipes':
+            from signal_space.workflow.recipes import catalog
+            result = {'recipes':catalog()}
+        elif args.command == 'capabilities':
+            from signal_space.engine import capabilities
+            result = capabilities()
+        elif args.command == 'ledger':
+            from signal_space.workflow.ledger import current, markdown
+            result = current()
+            if args.markdown:
+                print(markdown(result)); return 0
+        elif args.command == 'derive':
+            from signal_space.workflow.plans import derive
+            changes = {key:getattr(args,key) for key in ('max_cpu_seconds','max_wall_seconds','max_memory_mb','max_output_mb') if getattr(args,key) is not None}
+            execution = {key:getattr(args,key) for key in ('backend','neutral_mode','checkpoint_stride') if getattr(args,key) is not None}
+            result = derive(args.plan,args.output,changes,execution=execution)
         elif args.command == 'schema':
             result = runtime.schema(args.experiment)
         elif args.command in ('validate', 'estimate', 'run'):
@@ -187,26 +263,83 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 result = _sweep(runtime, load_json(args.config), args.axis, workspace, budget, policy)
         elif args.command == 'status':
+            if args.watch or args.human:
+                if not args.run_id:
+                    raise ValueError('--watch/--human requires --run-id')
+                from signal_space.runtime.progress import snapshot, human_status
+                while True:
+                    runtime.status(workspace, args.run_id)
+                    result = snapshot(runtime._package(workspace, args.run_id).path)
+                    print(human_status(result), flush=True) if args.human else _emit(result)
+                    if not args.watch or result['technical_state'] not in {'prepared', 'running'}:
+                        return 0
+                    time.sleep(1)
             result = runtime.status(workspace, args.run_id) if args.run_id else {'runs': runtime.list_runs(workspace)}
         elif args.command in ('cancel', 'resume', 'analyze', 'verify'):
             result = getattr(runtime, args.command)(workspace, args.run_id)
         elif args.command == 'report':
-            result = runtime.report(workspace, args.run_id, args.analysis_id)
+            result = runtime.report(workspace, args.run_id, args.analysis_id, args.plan)
         elif args.command == 'events':
-            _events(runtime, workspace, args.run_id, args.after, args.follow)
+            _events(runtime, workspace, args.run_id, args.after, args.follow, args.cursor_file)
             return 0
         elif args.command == 'archive':
             from signal_space.runtime.archive import archive_run
             result = archive_run(runtime._package(workspace, args.run_id).path, Path(args.archive_root).resolve(),
                                  Path(args.catalog).resolve() if args.catalog else None)
         elif args.command == 'pipeline':
-            return subprocess.call([sys.executable, str(ROOT / '.agents/scripts/run_experiment.py'),
-                                    '--experiment', args.experiment, '--output', args.output,
-                                    '--threads', str(args.threads), '--case-jobs', str(args.case_jobs)], cwd=ROOT)
+            from signal_space.workflow.pipeline import Pipeline
+            if not args.resume and not (args.experiment or args.plan):
+                raise ValueError('pipeline requires --experiment or --plan, or --resume')
+            return Pipeline(ROOT,Path(args.output),args.experiment,args.threads,args.case_jobs,
+                            resume=args.resume,plan_path=args.plan).run()
+        elif args.command == 'export':
+            from signal_space.workflow.artifacts import handoff, export_run
+            if args.pipeline:
+                result = handoff(args.pipeline,args.output,args.locator)
+            else:
+                if not args.plan or not args.output: raise ValueError('run export requires --plan and --output')
+                result = export_run(workspace,args.run_id,args.plan,args.output)
+        elif args.command == 'import':
+            from signal_space.workflow.artifacts import import_handoff
+            result = import_handoff(args.index,args.output)
+        elif args.command == 'compare':
+            from signal_space.workflow.compare import compare
+            result = compare(args.left,args.right,args.output)
+        elif args.command == 'panel':
+            from signal_space.reporting.panels import render_panel
+            result = render_panel(args.spec,args.output)
+        elif args.command == 'report-smoke':
+            from signal_space.workflow.artifacts import smoke_report
+            result = smoke_report(args.run,args.plan,args.output)
+        elif args.command == 'profile':
+            from signal_space.runtime.costs import collect, collect_pipeline, match
+            if args.profile_command=='collect':
+                result = collect_pipeline(args.pipeline,args.output) if args.pipeline else collect(runtime._package(workspace,args.run_id).path,args.output)
+            else: result = match(args.profile,_locked_config(args.plan),ExecutionPolicy(args.threads,args.case_jobs).record())
+        elif args.command == 'campaign':
+            from signal_space.workflow import campaign
+            action = args.campaign_command
+            if action == 'inspect': result = campaign.inspect(args.target)
+            elif action == 'lock': result = campaign.lock_design(args.target)
+            elif action == 'preflight': result = campaign.preflight(args.target,args.output,args.profile,args.jobs,args.case_jobs,args.threads)
+            elif action == 'start': result = campaign.Campaign(args.target,args.output,profile_name=args.profile,jobs=args.jobs,case_jobs=args.case_jobs,threads=args.threads).run()
+            elif action == 'resume': result = campaign.Campaign(None,args.target,resume=True).run()
+            elif action == 'stop': result = campaign.stop(args.target)
+            elif action == 'export': result = campaign.export_campaign(args.target)
+            else:
+                from signal_space.runtime.io import read_json
+                while True:
+                    result = read_json(Path(args.target)/'campaign.json')
+                    if args.human:
+                        print(campaign.human_status(result),flush=True)
+                    elif args.watch: _emit(result)
+                    if not args.watch or result['state']!='running': break
+                    time.sleep(1)
+                if args.human or args.watch: return 0
         else:
             raise AssertionError(args.command)
         _emit(result)
-        if isinstance(result, dict) and (result.get('state') in {'failed', 'interrupted'} or result.get('accepted') is False or result.get('valid') is False):
+        if isinstance(result, dict) and (result.get('state') in {'failed', 'interrupted','blocked'} or result.get('execution_ready') is False or result.get('accepted') is False or result.get('valid') is False):
             return 1
         if isinstance(result, dict) and result.get('state') == 'cancelled':
             return 130

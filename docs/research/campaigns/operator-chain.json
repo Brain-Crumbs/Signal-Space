@@ -1,0 +1,29 @@
+{
+  "campaign_id": "operator-chain",
+  "locked_sha256": "a4f3102cd6b6f6bb24d20f49665e5acc40cc9db7c8eb5b897c7334ff5ea5db19",
+  "nodes": [
+    {
+      "dependencies": [],
+      "id": "algebra",
+      "plan": "docs/research/plans/gross-test-01.json"
+    },
+    {
+      "dependencies": [
+        {
+          "checks": [
+            "identities"
+          ],
+          "classifications": [
+            "pass"
+          ],
+          "node": "algebra"
+        }
+      ],
+      "id": "events",
+      "plan": "docs/research/plans/gross-test-02.json"
+    }
+  ],
+  "question": "Do the registered algebra and reciprocal finite-circuit controls pass in dependency order?",
+  "requires_capabilities": [],
+  "schema_version": "gross-campaign-v1"
+}

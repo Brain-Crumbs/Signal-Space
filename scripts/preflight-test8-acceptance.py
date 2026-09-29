@@ -214,9 +214,23 @@ def main():
         costs = estimate(design, variants, cases)
         if not args.details:
             costs.pop('cases')
+        # Preserve the dated proposal verbatim. Report current engineering
+        # availability separately from the still-missing physical capabilities.
+        import sys
+        sys.path.insert(0, str(ROOT/'src'))
+        from signal_space.engine import capabilities
+        from signal_space.runtime.execution import process_metrics_available
+        engine = capabilities()
+        current_blockers = [design['implementation_blockers'][i] for i in (0, 2, 3, 4, 7)]
+        current_blockers.insert(1, 'Joint preparation, embedded spatial calibration and full-exchange restart state remain absent; existing quiet restart is implemented.')
         result = {'design_valid': True, 'execution_ready': False, 'physics_executed': False,
                   'design_sha256': sha(args.design), 'timing_source_verified': bool(args.timing_source_run),
-                  'blockers': design['implementation_blockers'], 'estimate': costs}
+                  'blockers': current_blockers, 'historical_design_blockers': design['implementation_blockers'],
+                  'engineering': {'engine': engine, 'process_metrics_available_here': process_metrics_available(),
+                      'process_limits': 'sampled process-tree CPU/RSS enforcement plus POSIX limits; unavailable host measurements are disclosed',
+                      'handoff': 'locked-question and resumed-source repairs have engineering render/export fixtures',
+                      'costs': 'exact-work hardware profiles supported; full exchange has no measured implementation'},
+                  'estimate': costs}
         print(json.dumps(result, indent=2))
         return 2 if args.require_executable else 0
     except (ValueError, KeyError, TypeError, OSError) as error:

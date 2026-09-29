@@ -17,3 +17,8 @@ research/experiments/**/*.svg -whitespace
 research/experiments/**/*.csv -whitespace
 # Exported Python sources retain original bytes, including existing final blank lines.
 research/experiments/**/results/source/**/*.py -whitespace
+
+# Hash-linked current ledger and locked campaign designs use canonical LF text.
+docs/research/*.json text eol=lf
+docs/research/*.md text eol=lf
+docs/research/campaigns/** text eol=lf

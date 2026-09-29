@@ -37,30 +37,26 @@ python scripts/run-test8-local.py --recipe gross-test-08-quiet-optimized --case-
 
 The preflight performs validation and an estimate **without evolution**. The final command runs the explicitly selected locked operational preset, independently analyzes saved data, renders figures/PDFs, verifies canonical and reader packages together, checks the outer file index, and produces two ZIPs and `pr-evidence-index.json` outside the Git checkout. It never commits or pushes. The existing CPU/wall projection is 4,816 CPU seconds and 5,473 wall seconds; it is not a measured compiled-backend timing. The new preset estimates 324 MiB retained output in serial or 466 MiB with parallel child evidence, within the unchanged 512 MiB ceiling. The 4 GiB memory ceiling is shared by the coordinator and admitted cases. Reserve additional room for packages and dependency installation. A technical interruption preserves the partial directory and logs. The [CPU backend and quiet restart implementation](test-08-performance-implementation.md) supports checkpointed continuation in a new attempt. The original plan remains available but its default retained-checkpoint estimate is 1,011 MiB and is rejected by preflight. `--package-only` verifies and packages a completed output without running physics again.
 
-During the long `run-plan` stage, inspect `../test8-quiet-001/evidence/status.json` and the `scenario-progress` events in `../test8-quiet-001/evidence/runs/gross.two-object-quiet-calibration.v1/<run-id>/attempts/attempt-0001/events.jsonl`. The command returns only after all six cases and packaging complete; an `unresolved` or `fail` **scientific** classification still yields the paired ZIPs.
+For live per-case progress, checkpoint-and-stop, failed-stage recovery, measured
+profiles and verified handoff, follow the [campaign workbench guide](campaign-workbench.md).
+The wrapper accepts `--resume` and defaults to the optimized recipe. JSON events
+now include nested parallel workers; use `status --watch --human` for the terminal
+view. `pipeline --resume` recovers failed analysis/report/export without repeating
+completed evolution.
 
 ## Results PR handoff
 
-After inspecting `evidence/status.json`, checks, figures and both PDFs, create a **new results branch**. Copy both generated ZIPs and `pr-evidence-index.json` into `research/experiments/gross.two-object-quiet-calibration.v1/packages/`. Keep the archives as a paired immutable unit; do not independently repack one or edit inside it. For a ZIP over 50 MiB, install and configure Git LFS for this specific package path **before** `git add`; confirm the remote repository permits the transfer. Verify a fresh checkout downloads real ZIP data rather than LFS pointer text. Update reviewed results and `gross-progress.md` with measured values, status and remaining G0–G9 gates. Then run `python scripts/verify-repository.py --write-research-index`, repository checks and `git diff --check`, commit and open your PR into `main` referencing issue #82 without closing it unless all its gates have passed.
+Inspect the canonical checks, figure interpretations and both PDFs. Upload the
+unchanged paired ZIPs from `OUTPUT/handoff/` to durable external artifact storage;
+record that locator and the compact `pr-evidence-index.json` in the results PR.
+Verify a fresh download with `signal-space import`. Follow the
+[artifact contract](artifact-contract.md); repeated binary exports do not go into
+Git/LFS by default, and existing archived bytes remain untouched.
 
-```sh
-git switch -c research/test8-quiet-results
-mkdir -p research/experiments/gross.two-object-quiet-calibration.v1/packages
-cp ../test8-quiet-001/*.zip ../test8-quiet-001/pr-evidence-index.json \
-  research/experiments/gross.two-object-quiet-calibration.v1/packages/
-# If either ZIP exceeds 50 MiB, do this before git add:
-# git lfs install
-# git lfs track 'research/experiments/gross.two-object-quiet-calibration.v1/packages/*.zip'
-python scripts/verify-repository.py --write-research-index
-python -m unittest discover -s tests -v
-git diff --check
-git add .gitattributes research/experiments/gross.two-object-quiet-calibration.v1 \
-  research/archive-manifest.json docs/research/gross-progress.md
-git commit -m "Archive local Test 8 quiet calibration evidence"
-git push -u origin research/test8-quiet-results
-# Open a PR from this branch into main in GitHub or with gh pr create.
-```
-
-If `.gitattributes` has not changed, omit it from `git add`. Add any reviewed results Markdown you create to the commit. The two archives and index alone establish provenance and packaging, not scientific acceptance; put the exact check outcomes and your interpretation in the PR description.
+Update reviewed results and the evidence-linked `gross-progress.json` only when
+new evidence supports a status change, then regenerate `gross-current.md`.
+Report exact check outcomes and remaining G0–G9 gates. Packaging and PR review do
+not establish acceptance. Keep issue #82 open while any required gate remains
+unresolved or not evaluated.
 
 The calibration can end in `fail` or `unresolved` while producing valid evidence. Passing short numerical checks only allows design of 100-period calibration and later source-only feasibility; it cannot preselect neutral/structural amplitudes or freeze held-out exchange choices from a nonexistent receiver result.

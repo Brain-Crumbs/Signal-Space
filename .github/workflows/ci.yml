@@ -36,6 +36,7 @@ jobs:
       - run: python -m unittest discover -s .agents/tests -v
       - run: python scripts/verify-repository.py
       - run: python scripts/check-experiment-math.py
+      - run: python scripts/update-research-ledger.py --check
       - run: python .agents/scripts/experiment_contract.py scan research/experiments
       - run: signal-space doctor
       - run: git diff --check

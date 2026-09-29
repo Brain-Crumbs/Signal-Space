@@ -4,12 +4,14 @@ The current registered GROSS models and their locked protocols are the only
 active implementation authority. The archived Paper I/E00/E01 systems are not
 runtime dependencies.
 
-The Python package has seven scientific/runtime layers:
+The Python package has nine scientific/runtime layers:
 
 | Module | Responsibility |
 | --- | --- |
 | `cli` | JSON command boundary and locked plan/pipeline entry points |
 | `contracts` | Closed configuration and evidence validation |
+| `workflow` | Recipes, recoverable stages, campaign dependency gates and paired handoffs |
+| `engine` | Typed existing axisymmetric model/state, pure stepping, preparation and detectors |
 | `runtime` | Lazy registration, resource admission, subprocesses, events, immutable artifacts and restart |
 | `experiments` | Registered protocol stages and scientific classification |
 | `models` | Versioned actions, equations and conserved quantities |
@@ -44,3 +46,12 @@ changes raw data. Model action, acceptance criteria and detector calibration
 remain owned by each registered experiment. The complete package contract is
 [artifact-contract.md](artifact-contract.md); execution and platform limits are
 [gross-runner.md](gross-runner.md).
+
+## Campaign and reusable physics boundaries
+
+The [workbench](campaign-workbench.md) adds a `workflow` layer for locked recipes,
+preflight, durable pipeline/campaign journals, dependency gates and verified
+external handoffs. It never changes equations or promotes scientific status.
+The [physics engine](physics-engine.md) extracts the existing axisymmetric
+state, preparation, finite-volume/RK4 reference and detector functions; experiment
+adapters retain protocol and evidence I/O. Unsupported physics is explicit.
