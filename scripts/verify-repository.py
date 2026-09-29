@@ -22,8 +22,9 @@ def digest(path):
 
 
 def research_index():
-    paths = sorted(p for p in (ROOT/'research').rglob('*') if p.is_file()
-                   and p != ROOT/'research/archive-manifest.json')
+    paths = sorted((p for p in (ROOT/'research').rglob('*') if p.is_file()
+                    and p != ROOT/'research/archive-manifest.json'),
+                   key=lambda p: p.relative_to(ROOT).as_posix())
     return {'schema_version': 1, 'generated_by': 'scripts/verify-repository.py --write-research-index',
             'file_count': len(paths), 'files': [{'path': p.relative_to(ROOT).as_posix(),
              'size': p.stat().st_size, 'sha256': digest(p)} for p in paths]}
@@ -74,7 +75,11 @@ def main():
     else:
         stored = json.loads(manifest.read_text(encoding="utf-8"))
         if stored['files'] != index['files']:
-            problems.append('research content differs from its reviewed index')
+            old = {x['path']: x for x in stored['files']}
+            new = {x['path']: x for x in index['files']}
+            changed = sorted(p for p in old.keys() | new.keys() if old.get(p) != new.get(p))
+            problems.append('research content differs from its reviewed index: ' + ', '.join(changed[:10]) if changed
+                            else 'research index ordering differs from canonical POSIX lexical order')
     for problem in problems: print(problem, file=sys.stderr)
     print(json.dumps({'valid': not problems, 'archived_files': len(archived['files']),
                       'registered_gross_experiments': len(ids), 'locked_plans': plans,
