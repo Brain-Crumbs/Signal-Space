@@ -21,7 +21,11 @@ def main() -> int:
         signal.signal(signal.SIGTERM, lambda *_: (Path(request['attempt_path']) / 'cancel.request').touch())
     if os.name == "posix":
         from signal_space.runtime.limits import _resource_limiter
-        _resource_limiter(request["config"]["resources"])()
+        limits = dict(request["config"]["resources"])
+        from signal_space.runtime.execution import process_metrics_available
+        if request.get('execution_policy', {}).get('case_jobs', 1) > 1 and not process_metrics_available():
+            limits['max_cpu_seconds'] = max(1, limits['max_cpu_seconds'] // (len(request['config']['parameters']['scenarios']) + 1))
+        _resource_limiter(limits)()
     from signal_space.experiments.registry import get_experiment
     plugin = get_experiment(request["config"]["experiment_id"])
     return plugin.run(request_path)

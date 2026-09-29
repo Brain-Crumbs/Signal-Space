@@ -10,6 +10,7 @@ from pathlib import Path
 import threading
 import psutil
 from signal_space.runtime.execution import ExecutionPolicy, process_metrics_available
+from signal_space.runtime.processes import ProcessTree
 from typing import Any, Callable
 
 from signal_space.experiments.registry import get_experiment, list_experiments
@@ -217,6 +218,7 @@ class ResearchRuntime:
         python_root = str(Path(__file__).resolve().parents[2])
         environment["PYTHONPATH"] = python_root + (os.pathsep + environment["PYTHONPATH"] if environment.get("PYTHONPATH") else "")
         with log_path.open("wb") as log:
+            process = None
             try:
                 process = subprocess.Popen(
                     [sys.executable, "-m", "signal_space.runtime.worker", "--request", str(request_path)],
@@ -228,7 +230,10 @@ class ResearchRuntime:
                     if os.name == "nt"
                     else 0,
                 )
+                process_tree = ProcessTree(process)
             except Exception as error:
+                if process is not None:
+                    _terminate_process(process, cooperative_seconds=0)
                 return self._setup_failure(package, attempt, "WORKER_START_FAILED", error)
             attempt["worker_pid"] = process.pid
             write_json(attempt_path / "attempt.json", attempt)
@@ -277,6 +282,7 @@ class ResearchRuntime:
             finally:
                 if process.poll() is None:
                     _terminate_process(process, cooperative_seconds=0)
+                process_tree.close()
         state = "completed" if exit_code == 0 else "cancelled" if exit_code == 130 else "interrupted" if exit_code in {77, 124, -signal.SIGTERM} else "failed"
         checkpoints = sorted((attempt_path / "checkpoints").glob("checkpoint-*.json"))
         checkpoint_record = None

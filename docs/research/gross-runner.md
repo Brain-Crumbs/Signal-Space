@@ -85,6 +85,8 @@ matching code, environment, policy, configuration and verified checkpoint
 bytes. It adds an attempt and preserves the previous one. Ctrl+C in a batch
 cancels active workers and records queued members as cancelled before launch.
 A failed member stays failed; the scheduler does not silently retry it.
+POSIX process groups and Windows kill-on-close Job Objects keep child solvers
+owned through worker failure and supervisor shutdown.
 
 Batch records live in `WORKSPACE/batches/` and are atomically updated at each
 launch/completion. Per-run packages remain the authoritative scientific evidence.

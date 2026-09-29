@@ -141,6 +141,24 @@ class GrossRuntimeTests(unittest.TestCase):
                 _terminate_process(process, cooperative_seconds=0)
             self.assertIsNotNone(process.poll())
 
+    def test_process_tree_owns_descendant_after_parent_exit(self):
+        from signal_space.runtime.processes import ProcessTree
+        with tempfile.TemporaryDirectory() as folder:
+            ready, late = Path(folder)/'ready', Path(folder)/'late'
+            child = "import time; from pathlib import Path; time.sleep(1); Path("+repr(str(late))+").touch()"
+            parent = "import subprocess,sys; from pathlib import Path; subprocess.Popen([sys.executable,'-c',"+repr(child)+"]); Path("+repr(str(ready))+").touch()"
+            # The Job Object must be assigned before the parent exits on Windows.
+            parent = "import time; time.sleep(.2); " + parent
+            process = subprocess.Popen([sys.executable, '-c', parent], start_new_session=os.name=='posix')
+            tree = ProcessTree(process)
+            try:
+                process.wait(timeout=5)
+                self.assertTrue(ready.exists())
+            finally:
+                tree.close()
+            time.sleep(1.1)
+            self.assertFalse(late.exists(), 'orphaned child survived worker exit')
+
     def test_worker_thread_policy_replaces_inherited_oversubscription(self):
         environment = ExecutionPolicy(threads=1).environment()
         self.assertEqual(environment['OPENBLAS_NUM_THREADS'], '1')

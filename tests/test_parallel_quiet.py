@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 import tempfile
+import importlib.util
 import unittest
 from unittest.mock import patch
 
@@ -76,6 +77,18 @@ class ParallelQuietTests(unittest.TestCase):
             request['attempt_id'] = 'attempt-0003'
             with self.assertRaisesRegex(ValueError, 'hash mismatch'):
                 self.execute(root/'split', request)
+
+    @unittest.skipIf(cpu_capacity() < 2 or not importlib.util.find_spec('numba'), 'requires two slots and numba')
+    def test_compiled_parallel_control(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); request = self.request(root)
+            request['config']['parameters']['execution']['backend'] = 'numba'
+            code, serial = self.execute(root/'serial', deepcopy(request))
+            self.assertEqual(code, 0)
+            request['execution_policy'] = {'threads': 1, 'case_jobs': 2}
+            code, parallel = self.execute(root/'parallel', request)
+            self.assertEqual(code, 0)
+            self.compare(serial, parallel)
 
     def test_memory_admission_precedes_case_launch(self):
         with tempfile.TemporaryDirectory() as folder:

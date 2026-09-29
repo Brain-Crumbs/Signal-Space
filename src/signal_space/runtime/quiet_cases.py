@@ -34,7 +34,7 @@ def _checked(root, record):
 
 def _memory_mb(case):
     cells = round(case['radius']/case['h']) * round(2*case['half_length']/case['h'])
-    return max(512, int(cells*.004) + 256)
+    return max(768, int(cells*.004) + 256)
 
 
 def execute(request_path):
