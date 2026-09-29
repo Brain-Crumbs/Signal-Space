@@ -61,9 +61,21 @@ class Test8DesignTests(unittest.TestCase):
         self.assertTrue(status['design_valid'])
         self.assertFalse(status['execution_ready'])
         self.assertFalse(status['physics_executed'])
+        checks = {row['id']: row for row in status['readiness_checks']}
+        self.assertFalse(checks['exchange-registration']['ready'])
+        self.assertTrue(checks['frozen-profile']['ready'])
+        self.assertFalse(checks['locked-stage-plans']['ready'])
+        self.assertFalse(checks['measured-resource-packet']['ready'])
         refused = subprocess.run([*command, '--execute'], capture_output=True, text=True)
         self.assertEqual(refused.returncode, 2)
         self.assertIn('unrecognized arguments', refused.stderr)
+
+    def test_six_period_quiet_plugin_does_not_satisfy_exchange_registration(self):
+        altered = copy.deepcopy(self.design)
+        altered['proposed_experiment_id'] = 'gross.two-object-quiet-calibration.v1'
+        checks = {row['id']: row for row in MODULE.readiness(altered)}
+        self.assertFalse(checks['exchange-registration']['ready'])
+        self.assertIn('missing capabilities', checks['exchange-registration']['reason'])
 
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -198,6 +199,58 @@ def estimate(design, variants, cases):
                         'new stress, tracking, checkpoint and local-event overhead']}
 
 
+def readiness(design, root=ROOT):
+    """Inspect current implementation without accepting a prospective design as a run plan."""
+    sys.path.insert(0, str(root / 'python'))
+    try:
+        from signal_space.experiments.registry import get_experiment
+
+        checks = []
+
+        def record(name, ready, reason):
+            checks.append({'id': name, 'ready': ready, 'reason': reason})
+
+        experiment_id = design['proposed_experiment_id']
+        try:
+            plugin = get_experiment(experiment_id)
+        except ValueError:
+            record('exchange-registration', False, f'{experiment_id} is not registered')
+        else:
+            description = plugin.describe()
+            needed = {'source-exchange', 'recoil', 'proper-time-events', 'reconstruction-history'}
+            available = set(description.get('capabilities', []))
+            missing = sorted(needed - available)
+            record('exchange-registration', not missing,
+                   'registered with required capabilities' if not missing else f'missing capabilities: {missing}')
+
+        profile = design['baseline']
+        source_path = root / 'research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz'
+        record('frozen-profile', source_path.is_file() and sha(source_path) == profile['profile_sha256'],
+               'frozen profile bytes verified' if source_path.is_file() and sha(source_path) == profile['profile_sha256']
+               else 'frozen Test 6 profile is missing or differs from the declared hash')
+
+        plans = []
+        for stage in design['stages']:
+            candidate = root / 'docs/research/plans' / f'test-08-{stage["id"].lower()}.json'
+            if candidate.is_file():
+                plans.append(candidate)
+        record('locked-stage-plans', len(plans) == len(design['stages']),
+               f'{len(plans)}/{len(design["stages"])} stage plans found; each still requires contract and runtime validation')
+
+        cost_path = root / 'docs/research/test-08-campaign-cost.json'
+        record('measured-resource-packet', False,
+               'candidate cost packet exists but has not been verified against saved full-physics measurements'
+               if cost_path.is_file() else 'no measured final-physics campaign cost packet')
+
+        record('reviewed-launch-design', design['manual_execution']['enabled'] is True and
+               design['status'] != 'prospective-design-not-executable',
+               'current design is prospective and explicitly disables launch' if not design['manual_execution']['enabled']
+               else 'launch is enabled in this design')
+        return checks
+    finally:
+        sys.path.pop(0)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--design', type=Path, default=DESIGN)
@@ -212,11 +265,14 @@ def main():
         if args.timing_source_run:
             verify_timing_source(timing, args.timing_source_run)
         costs = estimate(design, variants, cases)
+        checks = readiness(design)
         if not args.details:
             costs.pop('cases')
         result = {'design_valid': True, 'execution_ready': False, 'physics_executed': False,
                   'design_sha256': sha(args.design), 'timing_source_verified': bool(args.timing_source_run),
-                  'blockers': design['implementation_blockers'], 'estimate': costs}
+                  'readiness_checks': checks,
+                  'blockers': design['implementation_blockers'] +
+                  [row['reason'] for row in checks if not row['ready']], 'estimate': costs}
         print(json.dumps(result, indent=2))
         return 2 if args.require_executable else 0
     except (ValueError, KeyError, TypeError, OSError) as error:
