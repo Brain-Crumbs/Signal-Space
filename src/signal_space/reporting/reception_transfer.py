@@ -99,8 +99,8 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
     for wave,audit in s.get('forecast_convergence_audit',{}).items():
         lines += [f"{wave}: forecast-inclusive audit budget {audit['forecast_inclusive_budget']:.8e} versus quarter-order target {audit['quarter_order_separation']:.8e} cycles."]
     for key,value in interpretations.items():lines += ['',key]+[f'{k.title()}: {v}' for k,v in value.items()]
-    md='\n'.join(lines)+'\n';(report_path/'report.md').write_text(md)
-    (report_path/'report.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(md)+'</pre>'+''.join(f'<img width="900" src="figures/{k}.svg">' for k in interpretations))
+    md='\n'.join(lines)+'\n';(report_path/'report.md').write_text(md, encoding="utf-8")
+    (report_path/'report.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(md)+'</pre>'+''.join(f'<img width="900" src="figures/{k}.svg">' for k in interpretations), encoding="utf-8")
     with PdfPages(report_path/'report.pdf') as pdf:
         wrapped=[x for line in lines for x in (textwrap.wrap(line,100) or [''])]
         for offset in range(0,len(wrapped),42):

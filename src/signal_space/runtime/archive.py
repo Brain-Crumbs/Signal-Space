@@ -13,7 +13,7 @@ from signal_space.runtime.verify import verify_package
 
 def archive_run(run_path: Path, archive_root: Path, catalog_path: Path | None = None) -> dict[str, Any]:
     verify_package(run_path)
-    manifest = json.loads((run_path / "manifest.json").read_text())
+    manifest = json.loads((run_path / "manifest.json").read_text(encoding="utf-8"))
     classification = manifest["scientific_classification"]
     if classification not in {"pass", "fail", "unresolved"} or not manifest["completeness"].get("report"):
         raise InvalidState("only verified runs with an explicit scientific classification and report may be archived")
@@ -25,7 +25,7 @@ def archive_run(run_path: Path, archive_root: Path, catalog_path: Path | None = 
     package.update(lambda value: value.update({"technical_state": "archived"}))
     verify_package(destination)
     if catalog_path:
-        catalog = json.loads(catalog_path.read_text())
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
         entry_id = f"run-{manifest['run_id']}"
         if any(entry["id"] == entry_id for entry in catalog["entries"]):
             raise InvalidState(f"catalog already contains {entry_id}")

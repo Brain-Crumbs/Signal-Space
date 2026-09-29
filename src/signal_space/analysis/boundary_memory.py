@@ -10,7 +10,7 @@ from signal_space.analysis.clock import save_csv
 def analyze(run_path,output,config):
     p=config['parameters'];raw=next((run_path/'attempts').glob('*/raw'))
     derived=output/'derived';derived.mkdir(parents=True)
-    log=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
+    log=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
     valid=all(digest(ROOT/x['path'])==x['sha256'] for x in p['frozen_inputs'])
     metrics={};traces=[];drive_rows=[];scale=p['amplitude']/p['local_radius']
     for variant in p['variants']:

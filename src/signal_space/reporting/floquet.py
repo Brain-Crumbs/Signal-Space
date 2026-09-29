@@ -90,8 +90,8 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
     lines += [f"{r['id']}: {r['status']}; {r.get('value')}" for r in checks]
     lines += ['','Strong all-sector vacuum geometry fails only if the numerical controls pass. The equal nonzero preparation has the same decoupling. Counter stability and generic nonzero backgrounds remain separate questions. No autonomous clock, material-response completion or emergent spacetime is established.','', 'Next: derive a non-collinear unequal-port periodic background with active memory response, then test its complete tangent spectrum and withheld sectors.']
     for key,interp in interpretations.items(): lines+=['',f'## {key}']+[f'{k.title()}: {v}' for k,v in interp.items()]
-    markdown='\n'.join(lines)+'\n';(report_path/'report.md').write_text(markdown)
-    (report_path/'report.html').write_text("<!doctype html><meta charset='utf-8'><title>Full spectrum</title><pre style='white-space:pre-wrap'>"+html.escape(markdown)+'</pre>'+''.join(f"<img width='950' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k,q in QUESTIONS.items()))
+    markdown='\n'.join(lines)+'\n';(report_path/'report.md').write_text(markdown, encoding="utf-8")
+    (report_path/'report.html').write_text("<!doctype html><meta charset='utf-8'><title>Full spectrum</title><pre style='white-space:pre-wrap'>"+html.escape(markdown)+'</pre>'+''.join(f"<img width='950' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k,q in QUESTIONS.items()), encoding="utf-8")
     with PdfPages(report_path/'report.pdf') as pdf:
         wrapped=[part for line in lines for part in (textwrap.wrap(line,100) or [''])]
         for start in range(0,len(wrapped),47):

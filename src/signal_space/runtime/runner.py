@@ -238,16 +238,10 @@ class ResearchRuntime:
             attempt["worker_pid"] = process.pid
             write_json(attempt_path / "attempt.json", attempt)
             self._update_attempt(package, attempt, "running")
-            if on_started is not None:
-                on_started(
-                    {
-                        "run_id": manifest["run_id"],
-                        "attempt_id": attempt_id,
-                        "state": "running",
-                    }
-                )
             terminal_error: str | None = None
             try:
+                if on_started is not None:
+                    on_started({"run_id": manifest["run_id"], "attempt_id": attempt_id, "state": "running"})
                 reason, exit_code = _monitor_process(
                     process, attempt_path, config["resources"], cancel_event=cancel_event
                 )

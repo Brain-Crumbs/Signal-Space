@@ -100,8 +100,8 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
     for wave,records in summary['budgets'].items():
         for event,row in records.items():lines.append(f"{wave} {event}: error={row['error']:.6e}; budget={row['budget']:.6e}; target=1e-4.")
     for key,item in interpretations.items():lines+=['',key]+[f'{k.title()}: {v}' for k,v in item.items()]
-    md='\n'.join(lines)+'\n';(report_path/'report.md').write_text(md)
-    (report_path/'report.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(md)+'</pre>'+''.join(f'<img width="900" src="figures/{k}.svg">' for k in interpretations))
+    md='\n'.join(lines)+'\n';(report_path/'report.md').write_text(md, encoding="utf-8")
+    (report_path/'report.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(md)+'</pre>'+''.join(f'<img width="900" src="figures/{k}.svg">' for k in interpretations), encoding="utf-8")
     with PdfPages(report_path/'report.pdf') as pdf:
         wrapped=[x for line in lines for x in (textwrap.wrap(line,100) or [''])]
         for off in range(0,len(wrapped),42):

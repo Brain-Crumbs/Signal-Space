@@ -107,8 +107,8 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
     write_json(report_path/'interpretations.json',
                {key:{**spec['interpretation'],'question':LOCKED_QUESTIONS[key]}
                 for key,_,spec in specs})
-    (report_path/'report.md').write_text('\n'.join(md)+'\n')
-    (report_path/'report.html').write_text('<html><body><pre>'+__import__('html').escape('\n'.join(md))+'</pre></body></html>')
+    (report_path/'report.md').write_text('\n'.join(md)+'\n', encoding="utf-8")
+    (report_path/'report.html').write_text('<html><body><pre>'+__import__('html').escape('\n'.join(md))+'</pre></body></html>', encoding="utf-8")
     with PdfPages(report_path/'report.pdf') as pdf:
         for _,fig,_ in specs:
             pdf.savefig(fig)

@@ -78,11 +78,11 @@ def main():
                 '--threads', str(args.threads), '--case-jobs', str(args.case_jobs))
 
     evidence, reader = output / 'evidence', output / 'reader'
-    status = json.loads((evidence / 'status.json').read_text())
+    status = json.loads((evidence / 'status.json').read_text(encoding="utf-8"))
     if status['technical_status'] != 'completed' or status['experiment'] != 'gross-test-08-quiet':
         raise ValueError('pipeline is incomplete; preserve evidence and inspect its logs')
     source_run = evidence / status['canonical_path']
-    index = json.loads((evidence / 'evidence-index.json').read_text())
+    index = json.loads((evidence / 'evidence-index.json').read_text(encoding="utf-8"))
     for row in index['files']:
         path = evidence / row['path']
         if not path.is_file() or sha(path) != row['sha256']:
@@ -94,7 +94,7 @@ def main():
                    env={**os.environ, **env}, check=True)
     command(sys.executable, str(ROOT / '.agents/scripts/experiment_contract.py'),
             'bundle', str(reader), '--source-run', str(source_run))
-    export = json.loads((reader / 'export.json').read_text())
+    export = json.loads((reader / 'export.json').read_text(encoding="utf-8"))
     identity = export['source_run']
     if identity['experiment_id'] != EXPERIMENT or identity['run_id'] != status['run_id']:
         raise ValueError('reader is not paired with the canonical run')
@@ -106,7 +106,7 @@ def main():
         'experiment_id': EXPERIMENT,
         'scope': 'six-period calibration prerequisite; full Test 8 G0–G9 not assessed',
         'source_commit': status['source_commit'],
-        'plan_lock': json.loads((evidence / 'plan.json').read_text())['locked_sha256'],
+        'plan_lock': json.loads((evidence / 'plan.json').read_text(encoding="utf-8"))['locked_sha256'],
         'run_id': status['run_id'], 'analysis_id': status['analysis_id'],
         'report_id': status['report_id'],
         'technical_status': status['technical_status'],
@@ -114,7 +114,7 @@ def main():
         'canonical_manifest_sha256': sha(manifest),
         'checks': {row['id']: row['status'] for row in status['checks']},
         'archives': [zip_evidence, zip_reader],
-    }, indent=2) + '\n')
+    }, indent=2) + '\n', encoding="utf-8")
     print(f'Completed local handoff: {output}')
     print(f'Classification: {status["scientific_classification"]}; run: {status["run_id"]}')
     print('Keep both ZIPs and pr-evidence-index.json together in the results PR.')

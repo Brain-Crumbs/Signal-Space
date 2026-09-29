@@ -34,7 +34,7 @@ def main():
     parser.add_argument('--write-research-index', action='store_true', help='intentional index update after reviewed research changes')
     args = parser.parse_args()
     problems = []
-    archived = json.loads((ROOT/'archive/manifest.json').read_text())
+    archived = json.loads((ROOT/'archive/manifest.json').read_text(encoding="utf-8"))
     for item in archived['files']:
         path = ROOT/item['archived_path']
         if not path.is_file() or path.stat().st_size != item['size'] or digest(path) != item['sha256']:
@@ -47,7 +47,7 @@ def main():
     if not ids or not all(name.startswith('gross.') for name in ids):
         problems.append('non-GROSS experiment in active registry')
     for p in (ROOT/'src').rglob('*.py'):
-        tree = ast.parse(p.read_text())
+        tree = ast.parse(p.read_text(encoding="utf-8"))
         for node in ast.walk(tree):
             names = [node.module or ''] if isinstance(node,ast.ImportFrom) else [x.name for x in node.names] if isinstance(node,ast.Import) else []
             for name in names:
@@ -55,24 +55,24 @@ def main():
                     problems.append(f'archived import in {p.relative_to(ROOT)}: {name}')
     runtime = ResearchRuntime(); plans = 0
     for path in sorted((ROOT/'docs/research/plans').glob('*.json')):
-        value = json.loads(path.read_text())
+        value = json.loads(path.read_text(encoding="utf-8"))
         if 'locked_sha256' not in value:
             continue  # separately registered design-only Test 8 campaign
         validate_plan(value)
         config_path = verify_runtime_config(value, ROOT)
-        runtime.validate(json.loads(config_path.read_text()))
+        runtime.validate(json.loads(config_path.read_text(encoding="utf-8")))
         plans += 1
     for path in (ROOT/'fixtures/research').glob('*.json'):
-        runtime.validate(json.loads(path.read_text()))
-    for entry in json.loads((ROOT/'research/catalog.json').read_text())['entries']:
+        runtime.validate(json.loads(path.read_text(encoding="utf-8")))
+    for entry in json.loads((ROOT/'research/catalog.json').read_text(encoding="utf-8"))['entries']:
         path = entry.get('path')
         if path and not (ROOT/path).exists(): problems.append('missing catalog entry: '+path)
     index = research_index()
     manifest = ROOT/'research/archive-manifest.json'
     if args.write_research_index:
-        manifest.write_text(json.dumps(index,indent=2)+'\n')
+        manifest.write_text(json.dumps(index,indent=2)+'\n', encoding="utf-8")
     else:
-        stored = json.loads(manifest.read_text())
+        stored = json.loads(manifest.read_text(encoding="utf-8"))
         if stored['files'] != index['files']:
             problems.append('research content differs from its reviewed index')
     for problem in problems: print(problem, file=sys.stderr)

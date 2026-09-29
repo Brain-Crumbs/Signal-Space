@@ -80,7 +80,7 @@ def analyze(run_path, output, config):
     derived=output/'derived';derived.mkdir(parents=True)
     locks=read_json(raw/'prediction-lock.json')
     sha=lambda f:hashlib.sha256(f.read_bytes()).hexdigest()
-    events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
+    events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
     valid=all(sha(raw/f'{key}-{x["grid"]}.npz')==x[key] for x in locks for key in ('surface','input','prediction'))
     boundary=next(i for i,x in enumerate(events) if x['type']=='all-predictions-locked')
     valid=valid and boundary<min(i for i,x in enumerate(events) if x['type']=='receiver-started')

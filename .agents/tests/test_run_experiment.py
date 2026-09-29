@@ -48,13 +48,13 @@ class RunExperimentTests(unittest.TestCase):
             repo = Path(temporary) / "repo"
             repo.mkdir()
             subprocess.run(["git", "init", "--quiet", str(repo)], check=True)
-            (repo / "uncommitted.py").write_text("uncommitted source")
+            (repo / "uncommitted.py").write_text("uncommitted source", encoding="utf-8")
             pipeline = Pipeline(repo, Path(temporary) / "output", "gross-test-01")
             self.assertEqual(pipeline.run(), 1)
-            status = json.loads((pipeline.evidence / "status.json").read_text())
+            status = json.loads((pipeline.evidence / "status.json").read_text(encoding="utf-8"))
             self.assertEqual(status["scientific_classification"], "not-evaluated")
             self.assertEqual(status["technical_status"], "failed")
-            self.assertIn("uncommitted.py", (pipeline.logs / "source-status.stdout.log").read_text())
+            self.assertIn("uncommitted.py", (pipeline.logs / "source-status.stdout.log").read_text(encoding="utf-8"))
             self.assertFalse(pipeline.workspace.exists())
             self.assertTrue((pipeline.evidence / "evidence-index.json").is_file())
 
@@ -65,11 +65,11 @@ class RunExperimentTests(unittest.TestCase):
             pipeline = Pipeline(repo, Path(temporary) / "output", "gross-test-01")
             with self.assertRaisesRegex(RuntimeError, "exited 7"):
                 pipeline.command("failure", [sys.executable, "-c", "import sys; print('partial'); print('problem', file=sys.stderr); sys.exit(7)"])
-            self.assertIn("partial", (pipeline.logs / "failure.stdout.log").read_text())
-            self.assertIn("problem", (pipeline.logs / "failure.stderr.log").read_text())
+            self.assertIn("partial", (pipeline.logs / "failure.stdout.log").read_text(encoding="utf-8"))
+            self.assertIn("problem", (pipeline.logs / "failure.stderr.log").read_text(encoding="utf-8"))
             with self.assertRaises(subprocess.TimeoutExpired):
                 pipeline.command("timeout", [sys.executable, "-c", "import time; print('started', flush=True); time.sleep(5)"], timeout=1)
-            self.assertIn("started", (pipeline.logs / "timeout.stdout.log").read_text())
+            self.assertIn("started", (pipeline.logs / "timeout.stdout.log").read_text(encoding="utf-8"))
 
     def test_scientific_failure_is_not_pipeline_failure_or_next_gate_permission(self):
         for classification in ("pass", "fail", "unresolved", "not-evaluated"):
@@ -94,7 +94,7 @@ class RunExperimentTests(unittest.TestCase):
                 pipeline.status.update({"technical_status": "completed", "scientific_classification": "fail", "stage": "complete"})
             with patch.object(pipeline, "execute", side_effect=completed_negative):
                 self.assertEqual(pipeline.run(), 0)
-            self.assertIn("**fail**", (pipeline.evidence / "README.md").read_text())
+            self.assertIn("**fail**", (pipeline.evidence / "README.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

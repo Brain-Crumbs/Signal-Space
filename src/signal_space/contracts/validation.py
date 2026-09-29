@@ -20,7 +20,7 @@ def _reject_constant(value: str) -> None:
 
 def load_json(path: str | Path) -> Any:
     try:
-        return json.loads(Path(path).read_text(), parse_constant=_reject_constant)
+        return json.loads(Path(path).read_text(encoding="utf-8"), parse_constant=_reject_constant)
     except ContractError:
         raise
     except (OSError, json.JSONDecodeError) as error:

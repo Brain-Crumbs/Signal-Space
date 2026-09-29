@@ -104,7 +104,7 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
     figures = {v["figure_id"]: v for v in plan["visualization_plan"]}
     interpretations = json.loads(interpretations_file.read_text(encoding="utf-8"))
     report_dir = run / report["path"]
-    specs = {json.loads(p.read_text())["id"]: p for p in (report_dir / "figures").glob("*.figure.json")}
+    specs = {json.loads(p.read_text(encoding="utf-8"))["id"]: p for p in (report_dir / "figures").glob("*.figure.json")}
     if set(specs) - set(figures):
         raise ValueError(f"unplanned report figures: {sorted(set(specs) - set(figures))}")
     if any(item["required"] and key not in specs for key, item in figures.items()):
@@ -167,7 +167,7 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
                           "reading": interpretations[key]["reading"], "significance": interpretations[key]["significance"],
                           "limitation": interpretations[key]["limitation"], "source_data": data,
                           "spec_file": spec_out, "transformations": spec["transformations"], "files": files})
-        (destination / "figures/figure_index.json").write_text(json.dumps({"schema_version": "signal-space-figure-index-v1", "figures": index}, indent=2) + "\n")
+        (destination / "figures/figure_index.json").write_text(json.dumps({"schema_version": "signal-space-figure-index-v1", "figures": index}, indent=2) + "\n", encoding="utf-8")
         from matplotlib.backends.backend_pdf import PdfPages
 
         with PdfPages(destination / "Experimental_Setup.pdf") as pdf:
@@ -189,7 +189,7 @@ def package(run: Path, plan_file: Path, interpretations_file: Path, mentor_file:
             "classification": manifest["scientific_classification"], "files": listing,
             "canonical_files": sorted(canonical_files, key=lambda row: row["path"]),
             "known_gaps": manifest["known_gaps"]}
-        (destination / "export.json").write_text(json.dumps(export, indent=2) + "\n")
+        (destination / "export.json").write_text(json.dumps(export, indent=2) + "\n", encoding="utf-8")
         validate_bundle(destination, run)
     except BaseException:
         shutil.rmtree(destination)

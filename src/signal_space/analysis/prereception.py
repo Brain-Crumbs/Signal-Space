@@ -43,7 +43,7 @@ def analyze(run_path, output, config):
     else:
         variants={};metrics={};markerrows=[];spacerows=[]
         locks=read_json(raw/'prediction-lock.json')
-        events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
+        events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
         # Verify actual on-disk order, not only the declared worker path.
         locked_index=next(i for i,x in enumerate(events) if x['type']=='all-predictions-locked')
         first_receiver=min(i for i,x in enumerate(events) if x['type']=='receiver-completed')

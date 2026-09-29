@@ -21,7 +21,7 @@ def verify_package(run_path: Path) -> dict[str, Any]:
 
     expected: dict[str, str] = {}
     try:
-        for line in (run_path / "checksums.sha256").read_text().splitlines():
+        for line in (run_path / "checksums.sha256").read_text(encoding="utf-8").splitlines():
             match = re.fullmatch(r"([a-f0-9]{64})  (.+)", line)
             if not match:
                 errors.append(f"malformed checksum line: {line}")

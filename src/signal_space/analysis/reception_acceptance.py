@@ -32,7 +32,7 @@ def analyze(run_path,output,config):
         checks.append({'id':key,'status':'unresolved' if unresolved else ('pass' if ok else 'fail'),'value':value,'evidence':'derived/summary.json'})
     valid=all(digest(raw/x['name'])==x['sha256'] for x in p['frozen_inputs'])
     check('frozen-calibration',valid,{'hashes_valid':valid})
-    log=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
+    log=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
     lock=read_json(raw/'prediction-lock.json');li=next(i for i,x in enumerate(log) if x['type']=='all-predictions-locked')
     ri=min(i for i,x in enumerate(log) if x['type']=='receiver-started')
     integrity=all(digest(raw/f'{key}-{item["variant"]}.npz')==item[key] for item in lock['forecasts'] for key in ('calibration','input','surface','prediction'))

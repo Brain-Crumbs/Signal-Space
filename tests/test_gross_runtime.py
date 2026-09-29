@@ -125,7 +125,7 @@ class GrossRuntimeTests(unittest.TestCase):
             runtime.report(root, run['run_id'], b['analysis_id'])
             self.assertTrue(runtime.verify(root, run['run_id'])['valid'])
             self.assertEqual(sha256_file(raw), before)
-            raw.write_text('tampered')
+            raw.write_text('tampered', encoding="utf-8")
             with self.assertRaises(IntegrityError):
                 runtime.analyze(root, run['run_id'])
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -155,6 +156,8 @@ def _events(runtime, workspace, run_id, after, follow):
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    # Apply native thread policy before lazy analysis/report imports as well.
+    os.environ.update(ExecutionPolicy().environment())
     runtime = ResearchRuntime()
     workspace = Path(args.workspace).resolve()
     try:

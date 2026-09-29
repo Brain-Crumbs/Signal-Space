@@ -106,8 +106,8 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
         md.append(f'- {name}: **{status}**')
     for key, interpretation in interpretations.items():
         md.extend(['', f'## {key}', '', *(f'{k.title()}: {v}' for k, v in interpretation.items())])
-    (report_path / 'report.md').write_text('\n'.join(md) + '\n')
-    (report_path / 'report.html').write_text('<html><body><pre>' + html.escape('\n'.join(md)) + '</pre></body></html>')
+    (report_path / 'report.md').write_text('\n'.join(md) + '\n', encoding="utf-8")
+    (report_path / 'report.html').write_text('<html><body><pre>' + html.escape('\n'.join(md)) + '</pre></body></html>', encoding="utf-8")
     with PdfPages(report_path / 'report.pdf') as pdf:
         for fig in created:
             pdf.savefig(fig)

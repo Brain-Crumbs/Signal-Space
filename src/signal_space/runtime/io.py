@@ -54,7 +54,7 @@ def write_json(path: Path, value: Any, *, canonical: bool = False) -> None:
 
 
 def read_json(path: Path) -> Any:
-    return json.loads(path.read_text(), parse_constant=lambda value: (_ for _ in ()).throw(ValueError(value)))
+    return json.loads(path.read_text(encoding="utf-8"), parse_constant=lambda value: (_ for _ in ()).throw(ValueError(value)))
 
 
 def safe_child(root: Path, relative: str) -> Path:

@@ -2,7 +2,7 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
-Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. Long-horizon error qualification, full-exchange diagnostics, concurrency/resource enforcement and Test 9 reconstruction retention remain open.
+Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. The GROSS CLI now supplies bounded concurrency and process-tree controls. Long-horizon error qualification, full-exchange diagnostics, measured full-campaign resource qualification and Test 9 reconstruction retention remain open.
 
 | Test | Scope                                 | Prerequisites                                                | Status                                                                                                                                                                                       |
 | ---- | ------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

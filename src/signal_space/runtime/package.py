@@ -302,7 +302,7 @@ class RunPackage:
         write_json(self.manifest_path, manifest)
         lines = [f"{item['sha256']}  {item['path']}" for item in artifacts]
         lines.append(f"{sha256_file(self.manifest_path)}  manifest.json")
-        (self.path / "checksums.sha256").write_text("\n".join(sorted(lines, key=lambda line: line.split("  ", 1)[1])) + "\n")
+        (self.path / "checksums.sha256").write_text("\n".join(sorted(lines, key=lambda line: line.split("  ", 1)[1])) + "\n", encoding="utf-8")
 
 
 

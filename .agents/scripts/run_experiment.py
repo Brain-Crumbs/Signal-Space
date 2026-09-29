@@ -249,7 +249,7 @@ class Pipeline:
         tree = self.command("source-tree", ["git", "rev-parse", "HEAD^{tree}"]).strip()
         self.status["source_commit"] = revision
         plan_path = self.repo / RECIPES[self.experiment]
-        plan = json.loads(plan_path.read_text())
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
         validate_plan(plan)
         config = verify_runtime_config(plan, self.repo)
         shutil.copy2(plan_path, self.evidence / "plan.json")
@@ -270,7 +270,7 @@ class Pipeline:
                 if not path.is_relative_to(self.repo) or not path.exists():
                     raise ValueError(f"missing or unsafe frozen source: {value}")
                 source_paths.add(value)
-        collect_inputs(json.loads(config.read_text()))
+        collect_inputs(json.loads(config.read_text(encoding="utf-8")))
         source_paths = sorted(source_paths)
         self.command("source-snapshot", ["git", "archive", "--format=tar.gz", "--output", str(self.evidence / "source.tar.gz"), revision, *source_paths])
         github = {key: self.env.get(key) for key in (
@@ -299,8 +299,8 @@ class Pipeline:
         verified = self.runtime("verify", run_id)
         if not verified["valid"]:
             raise ValueError("canonical package verification failed")
-        manifest = json.loads((run_path / "manifest.json").read_text())
-        checks = json.loads((run_path / analysis["path"] / "checks.json").read_text())
+        manifest = json.loads((run_path / "manifest.json").read_text(encoding="utf-8"))
+        checks = json.loads((run_path / analysis["path"] / "checks.json").read_text(encoding="utf-8"))
         mentor = self.evidence / "automated-assessment.md"
         mentor.write_text(assessment(manifest, analysis, checks), encoding="utf-8")
         github_run = self.env.get("GITHUB_RUN_ID")

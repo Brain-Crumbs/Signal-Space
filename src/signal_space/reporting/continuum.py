@@ -83,8 +83,8 @@ def render_report(run_path,report_path,manifest,analysis,render_provenance):
       '', 'No clock, detector record, boundary/continuum convergence, stress-energy conservation in evolution, or nonlinear gravity solution is claimed.',
       '', 'Next: Test 6 bound-clock radial profile/eigenmode screen in the flat decoupling limit. Compare branches and trapping removed before long reception protocols.']
     for key,item in interp.items(): lines+=['',f'## {key}']+[f'{k.title()}: {v}' for k,v in item.items()]
-    markdown='\n'.join(lines)+'\n';(report_path/'report.md').write_text(markdown)
-    (report_path/'report.html').write_text("<!doctype html><html><meta charset='utf-8'><title>Test 5</title><body><pre style='white-space:pre-wrap'>"+html.escape(markdown)+'</pre>'+''.join(f"<img width='900' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k,q in QUESTIONS.items())+'</body></html>')
+    markdown='\n'.join(lines)+'\n';(report_path/'report.md').write_text(markdown, encoding="utf-8")
+    (report_path/'report.html').write_text("<!doctype html><html><meta charset='utf-8'><title>Test 5</title><body><pre style='white-space:pre-wrap'>"+html.escape(markdown)+'</pre>'+''.join(f"<img width='900' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k,q in QUESTIONS.items())+'</body></html>', encoding="utf-8")
     # Expose the PDF only after PdfPages has written its trailer and closed.
     temporary_pdf=report_path/'report.pdf.tmp'
     with PdfPages(temporary_pdf) as pdf:

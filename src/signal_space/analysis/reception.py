@@ -34,7 +34,7 @@ def analyze(run_path,output,config):
         checks.append({'id':key,'status':'unresolved' if unresolved else ('pass' if ok else 'fail'),'value':value,'evidence':'derived/summary.json'})
     digest=lambda f:hashlib.sha256(f.read_bytes()).hexdigest()
     check('frozen-inputs',all(digest(raw/x['name'])==x['sha256'] for x in p['frozen_inputs']),p['frozen_inputs'])
-    events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
+    events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
     locked=next(i for i,x in enumerate(events) if x['type']=='all-predictions-locked')
     first=min(i for i,x in enumerate(events) if x['type']=='receiver-started')
     locks=read_json(raw/'prediction-lock.json');valid=all(digest(raw/f'{name}-{x["label"]}.npz')==x[f'{name}_sha256'] for x in locks for name in ('prediction','surface','input','calibration'))

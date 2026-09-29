@@ -57,7 +57,7 @@ def transfer_audit(raw,p):
 
 def analyze(run_path,output,config):
     p=config['parameters'];raw=next((run_path/'attempts').glob('*/raw'));derived=output/'derived';derived.mkdir(parents=True)
-    events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text().splitlines()]
+    events=[json.loads(x) for x in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
     locks=read_json(raw/'prediction-lock.json');index=next(i for i,x in enumerate(events) if x['type']=='all-predictions-locked')
     valid=index<min(i for i,x in enumerate(events) if x['type']=='receiver-started')
     valid=valid and digest(raw/'forecast-markers-and-intervals.json')==locks['forecast_sha256']

@@ -128,8 +128,8 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
       '', 'Error budget: floating-point roundoff, finite-difference group derivatives, finite sampling and contour interpolation. No numerical time integration. Conservation is wave amplitude norm; no physical detector record or mechanical energy-momentum inferred.',
       '', 'Next: Test 4 zero-wave complete tangent spectrum, retaining physical stationary memory variations. Only then attempt one bounded self-consistent nonzero periodic background. Strong shared-cone and geometric-wave-plus-material-memory hypotheses remain distinct.']
     for key,value in interpretations.items(): lines+=['',f'## {key}']+[f'{k.title()}: {v}' for k,v in value.items()]
-    markdown='\n'.join(lines)+'\n'; (report_path/'report.md').write_text(markdown)
-    (report_path/'report.html').write_text("<!doctype html><meta charset='utf-8'><title>Router propagation</title><pre style='white-space:pre-wrap'>"+html.escape(markdown)+'</pre>'+''.join(f"<img width='950' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k,q in QUESTIONS.items()))
+    markdown='\n'.join(lines)+'\n'; (report_path/'report.md').write_text(markdown, encoding="utf-8")
+    (report_path/'report.html').write_text("<!doctype html><meta charset='utf-8'><title>Router propagation</title><pre style='white-space:pre-wrap'>"+html.escape(markdown)+'</pre>'+''.join(f"<img width='950' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k,q in QUESTIONS.items()), encoding="utf-8")
     with PdfPages(report_path/'report.pdf') as pdf:
         wrapped=[part for line in lines for part in (textwrap.wrap(line,100) or [''])]
         for start in range(0,len(wrapped),47):

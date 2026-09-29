@@ -45,7 +45,7 @@ class QuietPrerequisiteTests(unittest.TestCase):
 
     def test_recipe_is_locked_and_cannot_be_accepted_by_short_checks(self):
         plugin = TwoObjectQuietExperiment()
-        config = json.loads((ROOT / 'fixtures/research/gross-test-08-quiet.json').read_text())
+        config = json.loads((ROOT / 'fixtures/research/gross-test-08-quiet.json').read_text(encoding="utf-8"))
         plugin.validate(config)
         statuses = ['pass' if key not in ('joint-preparation', 'long-clocks')
                     else 'unresolved' for key in CRITERIA]
@@ -65,7 +65,7 @@ class QuietPrerequisiteTests(unittest.TestCase):
             root = Path(directory)
             evidence = root / 'evidence'
             evidence.mkdir()
-            (evidence / 'status.json').write_text('{"technical_status":"completed"}\n')
+            (evidence / 'status.json').write_text('{"technical_status":"completed"}\n', encoding="utf-8")
             output = root / 'evidence.zip'
             identity = module.pack(evidence, output)
             self.assertEqual(identity['sha256'], module.sha(output))

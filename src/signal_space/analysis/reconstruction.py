@@ -10,7 +10,7 @@ from signal_space.analysis.clock import save_csv
 def analyze(run_path, output, config):
     p=config['parameters'];raw=next((run_path/'attempts').glob('*/raw'))
     derived=output/'derived';derived.mkdir(parents=True)
-    events=[json.loads(line) for line in (raw.parent/'events.jsonl').read_text().splitlines()]
+    events=[json.loads(line) for line in (raw.parent/'events.jsonl').read_text(encoding="utf-8").splitlines()]
     valid=all(digest(ROOT/x['path'])==x['sha256'] for x in p['frozen_inputs'])
     checks=[];metrics={};traces=[];singular=[]
     def check(key,condition,value,unresolved=False):

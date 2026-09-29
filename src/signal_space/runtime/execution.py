@@ -22,7 +22,7 @@ def cpu_capacity() -> int:
     except (AttributeError, psutil.Error):
         pass
     try:
-        quota, period = Path('/sys/fs/cgroup/cpu.max').read_text().split()
+        quota, period = Path('/sys/fs/cgroup/cpu.max').read_text(encoding="utf-8").split()
         if quota != 'max':
             count = min(count, max(1, int(quota) // int(period)))
     except (OSError, ValueError):
@@ -33,8 +33,8 @@ def cpu_capacity() -> int:
 def memory_capacity_mb() -> int:
     available = psutil.virtual_memory().available
     try:
-        limit = Path('/sys/fs/cgroup/memory.max').read_text().strip()
-        used = int(Path('/sys/fs/cgroup/memory.current').read_text())
+        limit = Path('/sys/fs/cgroup/memory.max').read_text(encoding="utf-8").strip()
+        used = int(Path('/sys/fs/cgroup/memory.current').read_text(encoding="utf-8"))
         if limit != 'max':
             available = min(available, max(0, int(limit) - used))
     except (OSError, ValueError):

@@ -18,7 +18,7 @@ spec.loader.exec_module(contract)
 
 class ExperimentContractTests(unittest.TestCase):
     def setUp(self):
-        self.plan = json.loads((ROOT / "docs/research/plans/gross-test-01.json").read_text())
+        self.plan = json.loads((ROOT / "docs/research/plans/gross-test-01.json").read_text(encoding="utf-8"))
 
     def test_locked_fixture(self):
         contract.validate_plan(self.plan)
@@ -69,7 +69,7 @@ class ExperimentContractTests(unittest.TestCase):
             runtime("analyze", "--run-id", run["run_id"])
             report = runtime("report", "--run-id", run["run_id"])
             mentor = Path(temporary) / "mentor.md"
-            mentor.write_text("# Engineering validation\nGROSS algebra package smoke only; no new physical acceptance.\n")
+            mentor.write_text("# Engineering validation\nGROSS algebra package smoke only; no new physical acceptance.\n", encoding="utf-8")
             self.assertTrue(runtime("verify", "--run-id", run["run_id"])["valid"])
             subprocess.run([sys.executable, str(ROOT / ".agents/scripts/package_experiment.py"),
                             "--run", run["path"], "--plan", str(ROOT / "docs/research/plans/gross-test-01.json"),
@@ -78,7 +78,7 @@ class ExperimentContractTests(unittest.TestCase):
                             "--output", str(output), "--source-locator", "research/experiments/portable-fixture"], cwd=ROOT, check=True, capture_output=True)
             contract.validate_bundle(output)
             contract.validate_bundle(output, Path(run["path"]))
-            export = json.loads((output / "export.json").read_text())
+            export = json.loads((output / "export.json").read_text(encoding="utf-8"))
             self.assertEqual(export["source_run"]["locator"], "research/experiments/portable-fixture")
             self.assertEqual(export["source_run"]["manifest_sha256"], contract.digest((Path(run["path"]) / "manifest.json").read_bytes()))
             self.assertTrue(export["canonical_files"])
@@ -93,7 +93,7 @@ class ExperimentContractTests(unittest.TestCase):
             finally:
                 canonical.write_bytes(original)
             plot = output / "results/data/plot-data/residuals.csv"
-            plot.write_text(plot.read_text() + "0,corrupted\n")
+            plot.write_text(plot.read_text(encoding="utf-8") + "0,corrupted\n", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "checksum mismatch"):
                 contract.validate_bundle(output)
 

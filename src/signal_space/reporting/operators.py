@@ -123,8 +123,8 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
     for key, value in interpretations.items():
         lines += ["", f"## {key}"] + [f"{k.title()}: {v}" for k, v in value.items()]
     markdown = "\n".join(lines) + "\n"
-    (report_path / "report.md").write_text(markdown)
-    (report_path / "report.html").write_text("<!doctype html><html><meta charset='utf-8'><title>Operator identities</title><body><pre style='white-space:pre-wrap'>" + html.escape(markdown) + "</pre>" + "".join(f"<img width='900' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k, q in QUESTIONS.items()) + "</body></html>")
+    (report_path / "report.md").write_text(markdown, encoding="utf-8")
+    (report_path / "report.html").write_text("<!doctype html><html><meta charset='utf-8'><title>Operator identities</title><body><pre style='white-space:pre-wrap'>" + html.escape(markdown) + "</pre>" + "".join(f"<img width='900' src='figures/{k}.svg' alt='{html.escape(q)}'>" for k, q in QUESTIONS.items()) + "</body></html>", encoding="utf-8")
     with PdfPages(report_path / "report.pdf") as pdf:
         wrapped = [piece for line in lines for piece in (textwrap.wrap(line, 100) or [""])]
         for start in range(0, len(wrapped), 48):

@@ -1,4 +1,7 @@
-"""Own a worker tree for its entire lifetime, including an early parent crash."""
+"""Own a worker tree for its entire lifetime, including an early parent crash.
+
+Windows contract: https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects
+"""
 from __future__ import annotations
 
 import os

@@ -147,8 +147,8 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
        'The exact locked method, thresholds and controls are in the plan. Scope: flat spherical matter; no gravitational or nonspherical result.',
        '', 'Locked scientific checks:']+[f"- {k}: {v}" for k,v in s['checks'].items()]
     for key,item in interpretations.items():lines += ['',f'## {key}']+[f'{k.title()}: {v}' for k,v in item.items()]
-    markdown='\n'.join(lines)+'\n';(report_path/'report.md').write_text(markdown)
-    (report_path/'report.html').write_text('<!doctype html><html><meta charset="utf-8"><body><pre style="white-space:pre-wrap">'+html.escape(markdown)+'</pre>'+''.join(f'<img width="900" src="figures/{key}.svg" alt="{key}">' for key in interpretations)+'</body></html>')
+    markdown='\n'.join(lines)+'\n';(report_path/'report.md').write_text(markdown, encoding="utf-8")
+    (report_path/'report.html').write_text('<!doctype html><html><meta charset="utf-8"><body><pre style="white-space:pre-wrap">'+html.escape(markdown)+'</pre>'+''.join(f'<img width="900" src="figures/{key}.svg" alt="{key}">' for key in interpretations)+'</body></html>', encoding="utf-8")
     with PdfPages(report_path/'report.pdf') as pdf:
         wrapped=[x for line in lines for x in (textwrap.wrap(line,100) or [''])]
         for start in range(0,len(wrapped),45):
