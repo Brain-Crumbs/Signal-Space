@@ -4,12 +4,14 @@ The current registered GROSS models and their locked protocols are the only
 active implementation authority. The archived Paper I/E00/E01 systems are not
 runtime dependencies.
 
-The Python package has seven scientific/runtime layers:
+The Python package has nine scientific/runtime layers:
 
 | Module | Responsibility |
 | --- | --- |
 | `cli` | JSON command boundary and locked plan/pipeline entry points |
 | `contracts` | Closed configuration and evidence validation |
+| `workflow` | Recipes, recoverable stages, campaign dependency gates and paired handoffs |
+| `engine` | Typed existing axisymmetric model/state, pure stepping, preparation and detectors |
 | `runtime` | Lazy registration, resource admission, subprocesses, events, immutable artifacts and restart |
 | `experiments` | Registered protocol stages and scientific classification |
 | `models` | Versioned actions, equations and conserved quantities |
