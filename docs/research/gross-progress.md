@@ -2,7 +2,7 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
-Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. Long-horizon error qualification, full-exchange diagnostics, concurrency/resource enforcement and Test 9 reconstruction retention remain open.
+Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. The GROSS CLI now supplies bounded concurrency and process-tree controls. Long-horizon error qualification, full-exchange diagnostics, measured full-campaign resource qualification and Test 9 reconstruction retention remain open.
 
 | Test | Scope                                 | Prerequisites                                                | Status                                                                                                                                                                                       |
 | ---- | ------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,3 +111,13 @@ Next: derive a noncollinear, unequal-port periodic background with active memory
 [Reviewed interpretation](gross-test-05-results.md), [reader export](../../research/experiments/gross.continuum-action.v1/export-run-d3333c7602af3e47/README.md), and [canonical run](../../research/experiments/gross.continuum-action.v1/run-d3333c7602af3e47/manifest.json). Run `run-d3333c7602af3e47`; analysis `analysis-0001-4dbb966f`; report `report-0001`. All seven locked bounded checks pass, with maximum action Hessian/operator-metric residual `8.88e-16`, equations `4.88e-16`, roots `1.77e-15`. A negative `Z` fails health; the separately versioned quartic orientation control has speed `0.934947` against metric speed `1`.
 
 P0/P1: current source matches the program and Test 1 algebra prerequisite is complete. P2B: the SS OCF 1 local action audit is registered with a closed config and named quartic control. P3: plan/config locked before execution. P4: final canonical run and reviewed reader export verified, with setup/results PDFs visually inspected. Two failed pipeline exports are preserved with logs and raw attempts. The gravity result is a flat linearized harmonic-gauge symbol/constraint audit only; nonlinear Einstein constraints, on-shell curved backgrounds and coupled evolution remain untested. No clock has been established. Next: Test 6 profile, independent eigenmode, finite-domain lifetime and trapping-off controls.
+
+## GROSS-only runtime migration (29 September 2026)
+
+GROSS is the sole active implementation and reference. The Python CLI, bounded
+parallel run scheduler and restartable independent Test 8 quiet-case scheduler
+replace the obsolete UI/service entry points. Historical code is under
+`archive/`; all GROSS canonical evidence and scientific classifications are
+preserved. Serial/parallel/restart engineering controls do not satisfy Test 8
+G0–G9 or establish Test 9 readiness. See [the runtime guide](gross-runner.md) and
+[refactor plan](gross-refactor-plan.md).

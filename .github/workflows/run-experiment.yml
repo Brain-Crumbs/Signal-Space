@@ -63,11 +63,13 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: python/requirements-lock.txt
+          cache-dependency-path: requirements-lock.txt
       - name: Install locked scientific dependencies
-        run: python -m pip install -r python/requirements-lock.txt 2>&1 | tee "$RUNNER_TEMP/experiment-install.log"
+        run: python -m pip install -r requirements-lock.txt 2>&1 | tee "$RUNNER_TEMP/experiment-install.log"
+      - name: Install GROSS CLI
+        run: python -m pip install --no-build-isolation --no-deps -e .
       - name: Execute, analyze, report and verify
-        run: python .agents/scripts/run_experiment.py --experiment "$EXPERIMENT" --output "$RUNNER_TEMP/experiment-output"
+        run: signal-space pipeline --experiment "$EXPERIMENT" --output "$RUNNER_TEMP/experiment-output"
       - name: Upload evidence and diagnostic logs
         if: always()
         uses: actions/upload-artifact@v4

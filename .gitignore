@@ -1,10 +1,10 @@
-node_modules/
-dist/
-playwright-report/
-test-results/
 .research-work/
 research/experiments/*/runs/
-*.tsbuildinfo
 __pycache__/
 *.py[cod]
+*.egg-info/
 .venv/
+build/
+dist/
+*.nbc
+*.nbi

@@ -1,0 +1,469 @@
+{
+  "entries": [
+    {
+      "date": "2026-09-18",
+      "id": "e00-runtime-guide",
+      "kind": "guide",
+      "path": "docs/research/runtime.md",
+      "related": [
+        "program-architecture",
+        "artifact-contract",
+        "experiment-plan"
+      ],
+      "status": "implemented framework",
+      "summary": "Installation, lifecycle CLI and loopback API, recovery, resource controls, extension workflow, and reproducibility limits for the synthetic E00 framework fixture.",
+      "tags": ["E00", "runtime", "reproducibility", "reports"],
+      "title": "E00 research runtime guide"
+    },
+    {
+      "date": "2026-09-18",
+      "id": "program-architecture",
+      "kind": "plan",
+      "path": "docs/research/architecture.md",
+      "status": "active design",
+      "summary": "Plugin boundaries, immutable execution lifecycle, local service, analysis, reporting, and UI plan.",
+      "tags": ["architecture", "runtime", "reports", "UI"],
+      "title": "Research architecture"
+    },
+    {
+      "date": "2026-09-18",
+      "id": "research-ui-guide",
+      "kind": "guide",
+      "path": "docs/research/ui.md",
+      "related": ["e00-runtime-guide", "artifact-contract"],
+      "status": "implemented interface",
+      "summary": "Schema-driven preparation, durable run audit, recovery, compatibility comparison, report preview, artifact export, and UI limitations.",
+      "tags": ["UI", "runtime", "audit", "reports"],
+      "title": "Local research workspace guide"
+    },
+    {
+      "date": "2026-09-18",
+      "id": "artifact-contract",
+      "kind": "plan",
+      "path": "docs/research/artifact-contract.md",
+      "status": "active design",
+      "summary": "Run identity, attempts, checkpoints, analysis lineage, figure provenance, claims, and archive verification.",
+      "tags": ["artifacts", "provenance", "reproducibility"],
+      "title": "Research artifact contract"
+    },
+    {
+      "date": "2026-09-18",
+      "id": "experiment-plan",
+      "kind": "plan",
+      "path": "docs/research/experiment-plan.md",
+      "status": "active design",
+      "summary": "Ordered E00\u2013E11 derivation gates from the framework fixture to a shared coexistence test.",
+      "tags": ["roadmap", "experiments", "derivation gates"],
+      "title": "Experiment execution plan"
+    },
+    {
+      "date": "2026-09-18",
+      "id": "e01-protocol",
+      "kind": "protocol",
+      "path": "docs/research/first-experiment.md",
+      "status": "planned",
+      "summary": "Predeclared radial continuation, constrained stability, threshold, convergence, and classification tests.",
+      "tags": ["E01", "3D", "stability", "continuation"],
+      "title": "E01 charged recurrence protocol"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "knot-grid",
+      "kind": "assessment",
+      "path": "research/papers/knot-to-standard-model-research-grid.md",
+      "status": "hypothesis and derivation targets",
+      "summary": "Critical map from winding and internal responses to the exact gauge, chiral, anomaly, and phenomenology gates still required.",
+      "tags": ["knots", "Standard Model", "winding", "gauge"],
+      "title": "Knot topology to Standard Model research grid"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "charged-hopf-model",
+      "kind": "model",
+      "path": "research/papers/charged-recurrence-winding-hopf.md",
+      "status": "specified; key branches untested",
+      "summary": "Action, currents, stationary branch, stability problem, radiation, winding, regulator, and explicit Hopf extension.",
+      "tags": ["3+1D", "charged recurrence", "Hopf", "action"],
+      "title": "3+1D charged recurrence, winding, and Hopf model"
+    },
+    {
+      "date": "2026-09-11",
+      "id": "full-theory-architecture",
+      "kind": "assessment",
+      "path": "research/papers/full-theory-research-architecture.md",
+      "status": "research program",
+      "summary": "Composition, Lorentz cone, clocks, autonomous vacuum, gravity, gauge sectors, gaps, constants, and coexistence tests.",
+      "tags": ["foundations", "geometry", "gravity", "gauge"],
+      "title": "Full theory research architecture"
+    },
+    {
+      "date": "2026-09-11",
+      "id": "signal-states-paper",
+      "kind": "paper",
+      "path": "research/papers/signal-states-lorentz-cones-operational-clocks.md",
+      "status": "manuscript and benchmark",
+      "summary": "Positive signal operators, cone structure, calibration obstructions, phase clocks, benchmark, and modular boundary.",
+      "tags": ["Lorentz cone", "clocks", "calibration", "entropy"],
+      "title": "Signal states, Lorentz cones, and operational clocks"
+    },
+    {
+      "date": "2026-09-16",
+      "id": "formation-milestone",
+      "kind": "milestone",
+      "path": "research/milestones/charged-clock-formation.md",
+      "related": [
+        "formation-figure",
+        "formation-scan-figure",
+        "formation-readout-figure",
+        "formation-source"
+      ],
+      "status": "executed 1+1D result",
+      "summary": "Conservative formation scan, settled configuration, controls, neutral packets, recoil, and causal phase readout.",
+      "tags": ["formation", "1+1D", "recoil", "readout"],
+      "title": "Charged-clock formation milestone"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "radiation-milestone",
+      "kind": "milestone",
+      "path": "research/milestones/charged-clock-radiation.md",
+      "related": ["radiation-figure", "radiation-source"],
+      "status": "executed 1+1D result",
+      "summary": "Frequency-resolved fields, energy and charge flux, nonlinear source overlap, and persistence interpretation.",
+      "tags": ["radiation", "spectrum", "flux", "1+1D"],
+      "title": "Charged-clock radiation milestone"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "damping-milestone",
+      "kind": "milestone",
+      "path": "research/milestones/charged-clock-damping.md",
+      "related": ["damping-figure", "damping-source"],
+      "status": "executed 1+1D result",
+      "summary": "Amplitude scan, resonance checks, damping fits, refinement, and limits of the persistence result.",
+      "tags": ["damping", "resonance", "refinement", "1+1D"],
+      "title": "Charged-clock damping milestone"
+    },
+    {
+      "date": "2026-09-16",
+      "id": "formation-figure",
+      "kind": "figure",
+      "path": "research/figures/formation-diagnostics.png",
+      "related": ["formation-milestone", "formation-source"],
+      "status": "imported evidence",
+      "summary": "Diagnostic panels for the selected conservative formation calculation.",
+      "tags": ["formation", "diagnostics"],
+      "title": "Formation diagnostics"
+    },
+    {
+      "date": "2026-09-16",
+      "id": "formation-scan-figure",
+      "kind": "figure",
+      "path": "research/figures/formation-scan.png",
+      "related": ["formation-milestone", "formation-source"],
+      "status": "imported evidence",
+      "summary": "Parameter-scan overview for the formation milestone.",
+      "tags": ["formation", "scan"],
+      "title": "Formation scan"
+    },
+    {
+      "date": "2026-09-16",
+      "id": "formation-readout-figure",
+      "kind": "figure",
+      "path": "research/figures/formation-readout.png",
+      "related": ["formation-milestone", "formation-source"],
+      "status": "imported evidence",
+      "summary": "Causal phase-readout diagnostics after formation.",
+      "tags": ["formation", "phase", "readout"],
+      "title": "Formation phase readout"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "radiation-figure",
+      "kind": "figure",
+      "path": "research/figures/charged-clock-radiation-diagnostics.png",
+      "related": ["radiation-milestone", "radiation-source"],
+      "status": "imported evidence",
+      "summary": "Spectral and flux diagnostics supporting the radiation milestone.",
+      "tags": ["radiation", "spectrum", "flux"],
+      "title": "Radiation diagnostics"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "damping-figure",
+      "kind": "figure",
+      "path": "research/figures/charged-clock-damping-diagnostics.png",
+      "related": ["damping-milestone", "damping-source"],
+      "status": "imported evidence",
+      "summary": "Amplitude, rate, and refinement diagnostics supporting the damping milestone.",
+      "tags": ["damping", "resonance", "fits"],
+      "title": "Damping diagnostics"
+    },
+    {
+      "date": "2026-09-11",
+      "id": "part-ii-source",
+      "kind": "source",
+      "path": "research/source/part-ii/README.md",
+      "status": "imported reproducibility bundle",
+      "summary": "Section sources, builder, benchmark results, claim ledger, validation, and figure-generation inputs.",
+      "tags": ["source", "paper", "benchmark"],
+      "title": "Operational clocks paper source"
+    },
+    {
+      "date": "2026-09-16",
+      "id": "formation-source",
+      "kind": "source",
+      "path": "research/source/formation/README.md",
+      "related": [
+        "formation-milestone",
+        "formation-figure",
+        "formation-scan-figure",
+        "formation-readout-figure"
+      ],
+      "status": "curated import",
+      "summary": "Evolution and analysis code, configs, metadata, compact analysis, report generator, and deliverables; large raw trajectories omitted.",
+      "tags": ["source", "formation", "C++", "Python"],
+      "title": "Formation calculation source"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "radiation-source",
+      "kind": "source",
+      "path": "research/source/radiation/README.md",
+      "related": ["radiation-milestone", "radiation-figure"],
+      "status": "curated import",
+      "summary": "Evolution, spectrum and diagnostic code, compact spectral outputs, report generator, manifest, and deliverables.",
+      "tags": ["source", "radiation", "C++", "Python"],
+      "title": "Radiation calculation source"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "damping-source",
+      "kind": "source",
+      "path": "research/source/damping/README.md",
+      "related": ["damping-milestone", "damping-figure"],
+      "status": "curated import",
+      "summary": "Scan, resonance, fit and report code, input configurations, compact analyses, summary, manifest, and deliverables.",
+      "tags": ["source", "damping", "resonance", "Python"],
+      "title": "Damping calculation source"
+    },
+    {
+      "date": "2026-09-17",
+      "id": "research-coach",
+      "kind": "guide",
+      "path": "research/research-coach-persona.md",
+      "status": "working guidance",
+      "summary": "Reasoning, rigor, interpretation, and communication guidance for collaborative research sessions.",
+      "tags": ["workflow", "review", "communication"],
+      "title": "Research professor and coach persona"
+    },
+    {
+      "date": "2026-09-18",
+      "id": "e01-running-guide",
+      "kind": "protocol",
+      "path": "docs/research/e01-running.md",
+      "status": "implemented; research run pending",
+      "summary": "Author-controlled launch, equation mapping, numerical methods, refinements, artifact interpretation and limits.",
+      "tags": ["E01", "runtime", "reproducibility"],
+      "title": "E01 author launch and numerical implementation"
+    },
+    {
+      "date": "2026-09-24",
+      "id": "gross-operator-program-v02",
+      "kind": "paper",
+      "path": "research/papers/gross-operator-program-v0.2.md",
+      "status": "analytical model construction and proposed experiments",
+      "summary": "Byte-preserved supplied source: two separate candidates, directional propagation revision, and Tests 1-11. No new executed evolution.",
+      "tags": ["operators", "GROSS", "research-program"],
+      "title": "Signal Space operator models and experimental program v0.2"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "gross-test-01",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-01.md",
+      "status": "registered bounded experiment",
+      "summary": "Operator/observer algebra, conditioning, tetrahedral Gram and nonunitary weight controls. No dynamics claim.",
+      "tags": ["GROSS", "operators", "test-01"],
+      "title": "Signal Space operator identity protocol"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "run-run-2ae9c65dbd171851",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.operator-identities.v1/export-run-2ae9c65dbd171851/README.md",
+      "status": "scientific pass",
+      "summary": "Test 1 passed six operator/observer algebra checks on 1,000 seeded samples; max normalized residual 3.96e-14. Readable PDFs, raw inputs, exact plots and canonical evidence preserved. No dynamics or spacetime-emergence claim.",
+      "tags": [
+        "gross.operator-identities.v1",
+        "signal-space.operator-constitution.v1",
+        "reproducibility"
+      ],
+      "title": "gross.operator-identities.v1 \u2014 run-2ae9c65dbd171851"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "gross-test-02",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-02.md",
+      "status": "registered bounded experiment",
+      "summary": "SS OPS 1 reciprocal event audit; exact integration control, conservation, causal Jacobians, local frames and ordered memory wires.",
+      "tags": ["GROSS", "reciprocal-events", "test-02"],
+      "title": "Signal Space reciprocal event protocol"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "run-run-81319816afe7cf8e",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reciprocal-events.v1/export-run-81319816afe7cf8e/README.md",
+      "status": "scientific pass",
+      "summary": "Test 2 passed ten locked checks on four preparations, both lambdas and twelve events. Largest conservation residual 3.51e-10; legal-schedule and outside-ancestor responses zero. Exact plot data, four figures, PDFs and raw evidence preserved. No metric or clock claim.",
+      "tags": [
+        "gross.reciprocal-events.v1",
+        "signal-space.ss-ops-1.v1",
+        "reproducibility"
+      ],
+      "title": "gross.reciprocal-events.v1 - run-81319816afe7cf8e"
+    },
+    {
+      "date": "2026-09-25",
+      "id": "gross-test-03",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-03.md",
+      "status": "executed bounded experiment",
+      "summary": "Homogeneous SS OPS 1 wave-sector router audit: exact Fourier product, Gram cone, ordered finite-band effects, group directions and full-zone nodes. Nine checks pass; no full-sector geometry or clock.",
+      "tags": ["GROSS", "router-propagation", "test-03"],
+      "title": "Signal Space router propagation protocol"
+    },
+    {
+      "id": "gross-test-07",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07.md",
+      "status": "executed bounded experiment; scientific fail",
+      "summary": "Surface-characteristic-only radial reception with local threshold markers and mesh/time/box, phase, amplitude and pulse-overlap controls. Ten checks pass; interval prediction and all-grid marker timing fail.",
+      "tags": ["GROSS", "test-07", "reception"],
+      "title": "Signal Space Test 7: surface-only predicted reception"
+    },
+    {
+      "id": "run-run-b1677e67610c5870",
+      "date": "2026-09-25",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reception.v1/export-run-b1677e67610c5870/README.md",
+      "status": "scientific fail; technical completion",
+      "summary": "Resolved local clock records and 0.108\u20130.436% finest waveform errors; nominal interval prediction misses 5% gate, coarse marker exceeds timing allowance. No threshold retuning; PDFs, six figures, exact data and next calculation preserved.",
+      "tags": [
+        "gross.reception.v1",
+        "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+        "reproducibility"
+      ],
+      "title": "gross.reception.v1 - run-b1677e67610c5870"
+    },
+    {
+      "id": "gross-test-07-order4",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-order4.md",
+      "status": "executed bounded follow-up; pass of separate criteria",
+      "summary": "Formal fourth-order neutral/core/clock reception and a new locked upstream waveform with marker and sampling controls. Original Test 7 scientific failure remains.",
+      "tags": ["GROSS", "test-07", "fourth-order", "reception"],
+      "title": "Test 7 fourth-order held-out reception protocol"
+    },
+    {
+      "id": "run-run-29c4c4228ffddbb4",
+      "date": "2026-09-25",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reception-order4.v1/export-run-29c4c4228ffddbb4/README.md",
+      "status": "bounded pass of follow-up; original Test 7 fail unchanged",
+      "summary": "Seven locked follow-up checks pass, with an unfitted A^4 inspected-history diagnostic, held-out local interval and known-Z timing control. Two- to four-order interval improvement is below numerical error budget; Test 8 remains blocked.",
+      "tags": [
+        "gross.reception-order4.v1",
+        "signal-space.ss-ocf-1.flat-neutral-clock.v1",
+        "reproducibility"
+      ],
+      "title": "gross.reception-order4.v1 - run-29c4c4228ffddbb4"
+    },
+    {
+      "id": "gross-test-07-transfer",
+      "date": "2026-09-25",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-transfer.md",
+      "status": "executed hosted recovery; original Test 7 status unchanged",
+      "summary": "Discrete transfer with independent profiles, two spectra, strict order budget and separately labeled convergence/inverse audits.",
+      "tags": ["GROSS", "test-07", "discrete-transfer", "reception"],
+      "title": "Test 7 discrete transfer discriminator"
+    },
+    {
+      "id": "run-run-941d5c9e1c37ccc8",
+      "date": "2026-09-26",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reception-transfer.v1/export-run-941d5c9e1c37ccc8/README.md",
+      "status": "registered pass; see reviewed limitations",
+      "summary": "Hosted recovery of fixed Test 7 transfer protocol; original failure unchanged; post-lock forecast and inverse audits retained.",
+      "tags": ["gross.reception-transfer.v1", "reproducibility"],
+      "title": "Test 7 discrete-transfer recovery - run-941d5c9e1c37ccc8"
+    },
+    {
+      "id": "gross-test-07-reconstruction",
+      "date": "2026-09-26",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-reconstruction.md",
+      "status": "executed; conditional inverse robustness failed",
+      "summary": "Linear singular observability and two-site finite capture with separate event budgets. No nonlinear receiver or Test 7 promotion.",
+      "tags": ["GROSS", "Test 7", "reconstruction"],
+      "title": "Test 7 bounded reconstruction and event timing"
+    },
+    {
+      "id": "run-run-ca19609e702134b1",
+      "date": "2026-09-26",
+      "kind": "experiment-run",
+      "path": "research/experiments/gross.reconstruction.v1/README.md",
+      "status": "5 pass, 1 fail, 3 unresolved; Test 8 blocked",
+      "summary": "Late-event inverse sensitivity persists; finite causal capture introduces late ringing after exterior truncation. First-event reconstruction passes its controls.",
+      "tags": ["gross.reconstruction.v1", "observability"],
+      "title": "Test 7 reconstruction audit - run-ca19609e702134b1"
+    },
+    {
+      "id": "gross-test-07-boundary",
+      "date": "2026-09-26",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-boundary.md",
+      "status": "executed: six linear prerequisite checks pass; nonlinear acceptance pending",
+      "summary": "Causal exterior memory, complete versus finite surface acquisition, and prospective local threshold events; nonlinear acceptance remains separate.",
+      "tags": ["GROSS", "Test 7", "boundary memory"],
+      "title": "Test 7 causal exterior memory and prospective events"
+    },
+    {
+      "id": "gross-boundary-memory-run-cbe4ee3c4897af06",
+      "date": "2026-09-27",
+      "kind": "experiment",
+      "path": "research/experiments/gross.boundary-memory.v1/README.md",
+      "status": "bounded linear pass; Test 7 not accepted; Test 8 blocked",
+      "summary": "Causal exterior memory passes all six registered gates. Nonlinear exterior forcing closure and a fresh controlled phase forecast remain required.",
+      "tags": ["gross.boundary-memory.v1", "Test 7"],
+      "title": "Test 7 causal boundary memory \u2014 run-cbe4ee3c4897af06"
+    },
+    {
+      "id": "gross-test-07-acceptance",
+      "date": "2026-09-27",
+      "kind": "protocol",
+      "path": "docs/research/gross-test-07-acceptance.md",
+      "status": "executed: all eleven locked checks pass in known-incident radial scope",
+      "summary": "Program15.7 known-incident local cycle acceptance with fixed proper-time markers, fourth-order unfitted forecast and all required controls.",
+      "tags": ["GROSS", "Test7", "acceptance"],
+      "title": "Test7 known-incident full acceptance protocol"
+    },
+    {
+      "id": "gross-reception-acceptance-run-f2e5dffd14f209f2",
+      "date": "2026-09-27",
+      "kind": "experiment",
+      "path": "research/experiments/gross.reception-acceptance.v1/README.md",
+      "status": "11 pass; Program 15.7 accepted in calibrated known-incident radial scope",
+      "summary": "Fresh fixed-local-marker reception predicts all withheld intervals and passes amplitude, sign, phase, overlap, null, convergence and conservation controls. Earlier surface-only failures unchanged; Test 8 ready for bounded planning.",
+      "tags": ["gross.reception-acceptance.v1", "Test 7"],
+      "title": "Test 7 full known-incident acceptance \u2014 run-f2e5dffd14f209f2"
+    }
+  ],
+  "schema_version": 1,
+  "updated": "2026-09-27"
+}

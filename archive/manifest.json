@@ -1,0 +1,3094 @@
+{
+  "schema_version": "gross-legacy-archive-v1",
+  "baseline_commit": "89b3b307c621033cade9d34b518a6a4389558ecb",
+  "files": [
+    {
+      "original_path": "apps/cli/package.json",
+      "archived_path": "archive/pre-gross/apps/cli/package.json",
+      "sha256": "ec06056b9992cc76cc5912b1cbf2cbbb8a7d430a0028a71f6b1b73de540dcc04",
+      "size": 413,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/cli/src/index.ts",
+      "archived_path": "archive/pre-gross/apps/cli/src/index.ts",
+      "sha256": "6d4c512966777144faba42386d683f0c3b43246c82d7cdb61a8db96f865870f7",
+      "size": 12326,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/index.html",
+      "archived_path": "archive/pre-gross/apps/web/index.html",
+      "sha256": "39a09a957d59109223023f66bc8a734187a19e6eaff8c889506d6aa269869cb5",
+      "size": 449,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/package.json",
+      "archived_path": "archive/pre-gross/apps/web/package.json",
+      "sha256": "3e115073dea64526b6156d63f5f62519134ac743361c5d786f60f25f336663d8",
+      "size": 787,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/App.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/App.tsx",
+      "sha256": "f1794760166713dc4fe0024269cf981ed9e4b62c5233792a9e9878f979ba4e27",
+      "size": 6952,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/ResearchExplorer.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/ResearchExplorer.tsx",
+      "sha256": "11d7187faf9714009e89a63f226004e9bda1f4239ab42b2e42beb549050e67c0",
+      "size": 8232,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/ResearchPlot.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/ResearchPlot.tsx",
+      "sha256": "3bd9d1872d405aceff20e10d2088df346841d953efad6ac4abbdedd7f768699d",
+      "size": 5450,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/ResearchVisualWorkspace.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/ResearchVisualWorkspace.tsx",
+      "sha256": "2ca5857497666c00b858037a41fdd186c96c7532182e6c11dd9a343e0a46fcf9",
+      "size": 18281,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/ResearchWorkspace.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/ResearchWorkspace.tsx",
+      "sha256": "bedc796a5978183ec938f55e3a1bce0553bdfd677eb4421c11a87b94282cd983",
+      "size": 44895,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/SchemaForm.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/SchemaForm.tsx",
+      "sha256": "db9803219b8e70e7336524ede8dc7bb3db6225c3a70c021aed9abec53b3f58e4",
+      "size": 7896,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/ScientificChart.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/ScientificChart.tsx",
+      "sha256": "39bbda8f41c4438161a059fdf24f56ccce6d4ee8d45f979eeecc633459797350",
+      "size": 10200,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/main.tsx",
+      "archived_path": "archive/pre-gross/apps/web/src/main.tsx",
+      "sha256": "1f904d497c0de5bc1c1512d37533a619dc7a994c20336817fe1583f2793dd085",
+      "size": 272,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/researchApi.ts",
+      "archived_path": "archive/pre-gross/apps/web/src/researchApi.ts",
+      "sha256": "1d5d45f24105a4867460ed1dc739a773e044d8b11a6b465e312468d1e0a475c2",
+      "size": 7522,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/researchVisuals.ts",
+      "archived_path": "archive/pre-gross/apps/web/src/researchVisuals.ts",
+      "sha256": "037cf007101745523014abc535ab0870cc0566d258b38636b212c45fc195d9d7",
+      "size": 6683,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/style.css",
+      "archived_path": "archive/pre-gross/apps/web/src/style.css",
+      "sha256": "5733d17c4fff657c122e28153c0c01c625f0ab0adbef4cbffdc085ba8424278d",
+      "size": 17615,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/vite-env.d.ts",
+      "archived_path": "archive/pre-gross/apps/web/src/vite-env.d.ts",
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "size": 38,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/src/worker.ts",
+      "archived_path": "archive/pre-gross/apps/web/src/worker.ts",
+      "sha256": "f9de1ba402479ef1ca6c4e22879593dd887cf00d3322425b89aa3769b2602c78",
+      "size": 308,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "apps/web/vite.config.ts",
+      "archived_path": "archive/pre-gross/apps/web/vite.config.ts",
+      "sha256": "4e5025bb746b4e99ab34c310469e4a6acf9f64693d6a2c96dc2f344f3139ee5e",
+      "size": 570,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/analysis/package.json",
+      "archived_path": "archive/pre-gross/packages/analysis/package.json",
+      "sha256": "5f4941dd06e8757335405e7f1a400cf8117e49cf57df33265e5703712af4008b",
+      "size": 206,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/analysis/src/index.ts",
+      "archived_path": "archive/pre-gross/packages/analysis/src/index.ts",
+      "sha256": "d123f3c689e57d5331f7c8769e31d7bde0fb1f589e7b7fcec2b81dc66d3aec40",
+      "size": 18933,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/package.json",
+      "archived_path": "archive/pre-gross/packages/experiments/package.json",
+      "sha256": "603a381cf9401ccce6ffd871f93bb0470ca0698df5602f4d0a2f51c7641fb08c",
+      "size": 297,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/schema/experiment.v1.schema.json",
+      "archived_path": "archive/pre-gross/packages/experiments/schema/experiment.v1.schema.json",
+      "sha256": "3e5896e2e7fba8180d676bb647a9a066529a45f20975bd06ce115b21c7c1b7ae",
+      "size": 3500,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/src/index.ts",
+      "archived_path": "archive/pre-gross/packages/experiments/src/index.ts",
+      "sha256": "77b01d7f8edad8033f8b04e33e30aa0074ae38efa029e9fd7c3ee717481e56d5",
+      "size": 1966,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/src/runs.ts",
+      "archived_path": "archive/pre-gross/packages/experiments/src/runs.ts",
+      "sha256": "1b5a1dd2ace0d28a2074e2ba6a13d69ade0188b1af7135ea8af940093f8aa3c4",
+      "size": 37136,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/src/setup-a.ts",
+      "archived_path": "archive/pre-gross/packages/experiments/src/setup-a.ts",
+      "sha256": "16792adbf2017a95b51b06221c9be0a454d3302f3cdf0fe37891b0859b0b7d8e",
+      "size": 20995,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/src/setup-b.ts",
+      "archived_path": "archive/pre-gross/packages/experiments/src/setup-b.ts",
+      "sha256": "16454064da5abd47d25820db28a3f63a1486f27929926acb012e8c2943f759a8",
+      "size": 23567,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/src/setup-c.ts",
+      "archived_path": "archive/pre-gross/packages/experiments/src/setup-c.ts",
+      "sha256": "9009c6a4327f40be4a1a19f0429c5ecdf70be04921e3f59c7d51591c4016e72f",
+      "size": 37303,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/experiments/src/setup-d.ts",
+      "archived_path": "archive/pre-gross/packages/experiments/src/setup-d.ts",
+      "sha256": "3c9a1798f8a43b7e3da232fde635459062913bb6f3a598464d2032a9b68540d0",
+      "size": 31987,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/model/package.json",
+      "archived_path": "archive/pre-gross/packages/model/package.json",
+      "sha256": "6ba5bc9ef58ae1ce37adb8a02ec972e48e5ff0a442f4dc7464a356d501e138ba",
+      "size": 255,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/model/schema/scenario.v1.schema.json",
+      "archived_path": "archive/pre-gross/packages/model/schema/scenario.v1.schema.json",
+      "sha256": "d501a8c56935c71b75414cd5e3191666516b02e411469c52d41f43180f2b2fc6",
+      "size": 10640,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/model/src/index.d.ts",
+      "archived_path": "archive/pre-gross/packages/model/src/index.d.ts",
+      "sha256": "1146841396e2541c3935d1991e21819fcc7632874e24737ee16d269ffcba456c",
+      "size": 295,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/model/src/index.js",
+      "archived_path": "archive/pre-gross/packages/model/src/index.js",
+      "sha256": "646aee369f9c82480845bb8db016c910128385df11df6dbced27b8adf27023a7",
+      "size": 91,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/model/src/types.ts",
+      "archived_path": "archive/pre-gross/packages/model/src/types.ts",
+      "sha256": "b31c5be31a4a485ffe054012cee19cce1b48bed56668d36e2b4f9ae63d551c1d",
+      "size": 2990,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/model/src/validate.js",
+      "archived_path": "archive/pre-gross/packages/model/src/validate.js",
+      "sha256": "3fce218ca6413095fc4772b5200ce3a88f3495a8d5b4532a0449e3b4976ed839",
+      "size": 8875,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/research-contracts/package.json",
+      "archived_path": "archive/pre-gross/packages/research-contracts/package.json",
+      "sha256": "a1a8497c150227294c618dd47ca60e967ae95677e88b11a9b95a488a117b1d1b",
+      "size": 160,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/research-contracts/src/generated.ts",
+      "archived_path": "archive/pre-gross/packages/research-contracts/src/generated.ts",
+      "sha256": "48d86946289ab0077cae1a506869115dbb9dd27a8e2615e9edda6d9f70e6a25e",
+      "size": 1502,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/package.json",
+      "archived_path": "archive/pre-gross/packages/sim/package.json",
+      "sha256": "ccc0ac63ac916b652c2e19796caadb9c15e9094265fce88df6e9fc09e3483abc",
+      "size": 257,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/src/envelope.ts",
+      "archived_path": "archive/pre-gross/packages/sim/src/envelope.ts",
+      "sha256": "fa1c9f4a5de0c713868d5e693aaab5a75205a0b51f5fa817ca57a9768e0a505e",
+      "size": 47054,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/src/index.ts",
+      "archived_path": "archive/pre-gross/packages/sim/src/index.ts",
+      "sha256": "95aa374c20a538531f5bc0aaf41ea612b84aa3402368a33f6438958b50581123",
+      "size": 11765,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/src/interventions.ts",
+      "archived_path": "archive/pre-gross/packages/sim/src/interventions.ts",
+      "sha256": "c4b5efd83d93ec55d06d0a2d3d972ab2ada6d4d6d82e88a27785d2bd2bced19e",
+      "size": 2708,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/src/observation.ts",
+      "archived_path": "archive/pre-gross/packages/sim/src/observation.ts",
+      "sha256": "f038e82c26e113757a73e139099ea25acf4d0ae83d3f1aecf1eeac439e184994",
+      "size": 9440,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/src/packets.ts",
+      "archived_path": "archive/pre-gross/packages/sim/src/packets.ts",
+      "sha256": "ad06e82fd59bf50dec9c00b101045a7c901a724e87a9ff4c0997066ed43462af",
+      "size": 23988,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "packages/sim/src/worker.ts",
+      "archived_path": "archive/pre-gross/packages/sim/src/worker.ts",
+      "sha256": "1587965e6fe8cfd0f52b364e8124977878dc0c92a47be7782505d042b98cca65",
+      "size": 997,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "e2e/research-visuals.spec.ts",
+      "archived_path": "archive/pre-gross/e2e/research-visuals.spec.ts",
+      "sha256": "e51390a543cf1e33c55ad7ae0aaad0583d3f41f93cce2542fe7fab2e7d8953ba",
+      "size": 7106,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "e2e/workspace.spec.ts",
+      "archived_path": "archive/pre-gross/e2e/workspace.spec.ts",
+      "sha256": "8baef91a98e706ab9f7f80ccc8a49c474e5dfd814007744077dd8a47ea491202",
+      "size": 36306,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/analysis.test.ts",
+      "archived_path": "archive/pre-gross/test/analysis.test.ts",
+      "sha256": "1a8da7c58a997e6ca997cd47b204fb34f9444948d84b0b3c72aa2c25d1eef16a",
+      "size": 6742,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/cli.test.ts",
+      "archived_path": "archive/pre-gross/test/cli.test.ts",
+      "sha256": "efdb3e6fc5b216594229942e414ab7aa62eea03cd06840119aafb1d08b397d67",
+      "size": 5575,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/envelope.test.ts",
+      "archived_path": "archive/pre-gross/test/envelope.test.ts",
+      "sha256": "72173fd843eaa11a5320a0aaff52a3eaf54ca14df5f0fdf4fa602ea266d34f7f",
+      "size": 35550,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/execution.test.ts",
+      "archived_path": "archive/pre-gross/test/execution.test.ts",
+      "sha256": "396d30d1ee325b1b57db9331e1332c22f39969d68de23d4b006f231c1c04d7ae",
+      "size": 5705,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/model-contract.test.js",
+      "archived_path": "archive/pre-gross/test/model-contract.test.js",
+      "sha256": "b85ecec88dddc65a6527be3c31121aace854347812f09dfd9abffe6eba5610b4",
+      "size": 5313,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/observation.test.ts",
+      "archived_path": "archive/pre-gross/test/observation.test.ts",
+      "sha256": "f16dc1c43ac2914c59f63ce5b9ea6b85e30070aa2e019eba1cd845c1ade9c9ad",
+      "size": 20750,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/packets.test.ts",
+      "archived_path": "archive/pre-gross/test/packets.test.ts",
+      "sha256": "a6e734089d03463d7d2feabce027c7f5609f9d38f0965d1c6565bf33a3fc6c15",
+      "size": 12921,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/preparation-review.test.ts",
+      "archived_path": "archive/pre-gross/test/preparation-review.test.ts",
+      "sha256": "b5fa0b7681d428037f8cae190ff1751a59ea454e8f18da9565c623e9132b6e07",
+      "size": 8945,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/research-contracts.test.ts",
+      "archived_path": "archive/pre-gross/test/research-contracts.test.ts",
+      "sha256": "f2c25197a6e893f10e6c329d455d99652ac233d6e0068357c57b9144103edd94",
+      "size": 974,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/research-visuals.test.ts",
+      "archived_path": "archive/pre-gross/test/research-visuals.test.ts",
+      "sha256": "05996de71ad25426220cd2663f2a025e06230ed962c8dee805a85e8cf74111f1",
+      "size": 3631,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/research-workspace.test.ts",
+      "archived_path": "archive/pre-gross/test/research-workspace.test.ts",
+      "sha256": "02ac494d0e4d4fe141f785b7f8a5e203c614c4a5f6fa2f25e88d9156f657d175",
+      "size": 3040,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/runs.test.ts",
+      "archived_path": "archive/pre-gross/test/runs.test.ts",
+      "sha256": "897e7d799076f2cf32729ca09879909e5a01fe9f4272ca70bf8e519559828417",
+      "size": 12063,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/setup-a.test.ts",
+      "archived_path": "archive/pre-gross/test/setup-a.test.ts",
+      "sha256": "0203b2d35e505ada81a916cde45c881dbcb246baea13acd7791afb606308d002",
+      "size": 6463,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/setup-b.test.ts",
+      "archived_path": "archive/pre-gross/test/setup-b.test.ts",
+      "sha256": "81346e8ce083a273f35d0ba5066589b66f98f9dcb8a7aad9cc595c728b73029c",
+      "size": 10500,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/setup-c.test.ts",
+      "archived_path": "archive/pre-gross/test/setup-c.test.ts",
+      "sha256": "201942d946bb6799f78d9ee45b2f786eca87f8edc769cfe4864bd73702b2a056",
+      "size": 8752,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "test/setup-d.test.ts",
+      "archived_path": "archive/pre-gross/test/setup-d.test.ts",
+      "sha256": "cda262fe175fff08d84cf9828fe7e19b005b49d54497495d2080b2d8753c3843",
+      "size": 7834,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "package.json",
+      "archived_path": "archive/pre-gross/package.json",
+      "sha256": "947e8634f1335d7d02e761f71d20175118a771f6d12310461f6d6882fabc1c41",
+      "size": 1771,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "package-lock.json",
+      "archived_path": "archive/pre-gross/package-lock.json",
+      "sha256": "ee38d0f2f96a7332ae45a30247051744b505d919c45dc4678458569e38e84296",
+      "size": 180916,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "tsconfig.json",
+      "archived_path": "archive/pre-gross/tsconfig.json",
+      "sha256": "221005cac8370224ca760e90f8e362006b4de2d13d22f818e41ebb16576cef1f",
+      "size": 640,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "playwright.config.ts",
+      "archived_path": "archive/pre-gross/playwright.config.ts",
+      "sha256": "3ec8dea55dc0dd2bf84e4fbcf32b55bb2d1a8f0d6a75b3a14c8b534e2cfdf62b",
+      "size": 537,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "eslint.config.js",
+      "archived_path": "archive/pre-gross/eslint.config.js",
+      "sha256": "a2fdaa1d8cd7d52fe4f797f44ca24fc335aabcabf9ba13a0c122295a64fba49a",
+      "size": 1092,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": ".nvmrc",
+      "archived_path": "archive/pre-gross/.nvmrc",
+      "sha256": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
+      "size": 8,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": ".npmrc",
+      "archived_path": "archive/pre-gross/.npmrc",
+      "sha256": "cde76ca04e048c3eba070a2c0dfcf5b723cf6014eab177157096b924f24ec4ca",
+      "size": 35,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": ".prettierignore",
+      "archived_path": "archive/pre-gross/.prettierignore",
+      "sha256": "ffec014216db3ea39b72d5614885bd66c14ec445a64a605acf9d7dcc99117c27",
+      "size": 1130,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": ".prettierrc.json",
+      "archived_path": "archive/pre-gross/.prettierrc.json",
+      "sha256": "b97c7e53de22fe5d478d45994b10f8c4e3a5238b7f369ff93e86e892d2810b9a",
+      "size": 75,
+      "disposition": "moved",
+      "category": "Paper I and UI toolchain"
+    },
+    {
+      "original_path": "scripts/observation-smoke.mjs",
+      "archived_path": "archive/pre-gross/scripts/observation-smoke.mjs",
+      "sha256": "fe7608bbde15e5bb55fa718e6999cfe6c0675cb9f8b46a8e77fefc3d19b33956",
+      "size": 3366,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "scripts/packet-smoke.mjs",
+      "archived_path": "archive/pre-gross/scripts/packet-smoke.mjs",
+      "sha256": "93c54e1788b74115f5a121844db52f3edb16525914f98cbd11adee83fa3ea545",
+      "size": 1983,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "scripts/research-archive.mjs",
+      "archived_path": "archive/pre-gross/scripts/research-archive.mjs",
+      "sha256": "0a735dc61621a4cee78e013089834deacaeaa0c35ac71e8c41a6602d5a8a9982",
+      "size": 3230,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "scripts/generate-research-contracts.py",
+      "archived_path": "archive/pre-gross/scripts/generate-research-contracts.py",
+      "sha256": "bb8e7a73f661d39d31632d2171cde0b2acd0d4e425fae83be0098d0b9f51d473",
+      "size": 4979,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/analysis/charged.py",
+      "archived_path": "archive/pre-gross/python/signal_space/analysis/charged.py",
+      "sha256": "e2f7fd25cb16aaa9ffb7a5d25773cb78a1f0ef2c3308d0ab24a8f4e1b67a810b",
+      "size": 32935,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/analysis/synthetic.py",
+      "archived_path": "archive/pre-gross/python/signal_space/analysis/synthetic.py",
+      "sha256": "cb77d9163c574232828b23d468a66de477521b3900207c3a91a8d82adaf5fdfe",
+      "size": 2935,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/models/charged_scalar.py",
+      "archived_path": "archive/pre-gross/python/signal_space/models/charged_scalar.py",
+      "sha256": "18c8c8bae636dc97af07c67938e7afa312302bbf8f337923ee4f5b4d52a7d3dc",
+      "size": 944,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/models/synthetic.py",
+      "archived_path": "archive/pre-gross/python/signal_space/models/synthetic.py",
+      "sha256": "a169e64f78408e33ad70f9619a80b239768a34636e905658f34310fa73a41ad6",
+      "size": 326,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/numerics/charged_radial.py",
+      "archived_path": "archive/pre-gross/python/signal_space/numerics/charged_radial.py",
+      "sha256": "88435268da46fbef32c154c5aa5ccb3aaf86602c0cb93ef4cc088fab5c3bc711",
+      "size": 5115,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/numerics/charged_spectrum.py",
+      "archived_path": "archive/pre-gross/python/signal_space/numerics/charged_spectrum.py",
+      "sha256": "92cf3dc99d0a8f2ab9d34c3e0004bbe46e67eed80dbccb1ab6807982452bbf83",
+      "size": 7228,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/numerics/synthetic.py",
+      "archived_path": "archive/pre-gross/python/signal_space/numerics/synthetic.py",
+      "sha256": "90298362f169be95fc18e79a6f0dc347f9e042c213a761b4931b16b264df8126",
+      "size": 692,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/experiments/charged.py",
+      "archived_path": "archive/pre-gross/python/signal_space/experiments/charged.py",
+      "sha256": "0b7a22b2fe3917635fbda551952fc8ed9c95e2a4b259a79eddb75b3b37d11683",
+      "size": 6082,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/experiments/charged_worker.py",
+      "archived_path": "archive/pre-gross/python/signal_space/experiments/charged_worker.py",
+      "sha256": "d2d3adf44be531f9884cbdc6589b0024cf6765ae0495527566978885a9a02011",
+      "size": 11310,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/experiments/synthetic.py",
+      "archived_path": "archive/pre-gross/python/signal_space/experiments/synthetic.py",
+      "sha256": "939ff11f883e9d69cf9d74462c8363a1d698273f42d055a5beb3609a4eae4d90",
+      "size": 5004,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/experiments/synthetic_worker.py",
+      "archived_path": "archive/pre-gross/python/signal_space/experiments/synthetic_worker.py",
+      "sha256": "430ca560e1739bd03a262c0e2fa4a6724e5f3219b952449a7f76f0348290d32c",
+      "size": 5684,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/reporting/charged.py",
+      "archived_path": "archive/pre-gross/python/signal_space/reporting/charged.py",
+      "sha256": "693b9c86e362782fe9c85c7e85ffd6ae2e0998328d3d7427e2c2d2050429561e",
+      "size": 11790,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/reporting/synthetic.py",
+      "archived_path": "archive/pre-gross/python/signal_space/reporting/synthetic.py",
+      "sha256": "ddec3d73b1cf863e1935a6c70359faec6e6a524708d4963ddb08a49db693a596",
+      "size": 7418,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/reporting/exploration.py",
+      "archived_path": "archive/pre-gross/python/signal_space/reporting/exploration.py",
+      "sha256": "4f58c39c22437d1cdd3c1dc412ba042b357a858f5bc51d10cd7f3b56d86670ef",
+      "size": 4065,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/contracts/e01.py",
+      "archived_path": "archive/pre-gross/python/signal_space/contracts/e01.py",
+      "sha256": "f29f95aecdbf0c75b058d1599b3f4b7ede5f95ee609328920a95c0bb0f2ee7f1",
+      "size": 3386,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/contracts/generated.py",
+      "archived_path": "archive/pre-gross/python/signal_space/contracts/generated.py",
+      "sha256": "fa70fc0b044f4e5ce19e0b84d6f9cc1e31050c384466337928231779c7bde78f",
+      "size": 1456,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/service/__init__.py",
+      "archived_path": "archive/pre-gross/python/signal_space/service/__init__.py",
+      "sha256": "5f5a0381ad9c986027288aa16b13af049f58c641179dd1e76733e9a32f570608",
+      "size": 74,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/signal_space/service/api.py",
+      "archived_path": "archive/pre-gross/python/signal_space/service/api.py",
+      "sha256": "f3679b394f6127fc07003f18f653b0c3129066dead05ae26136a809b101b1c67",
+      "size": 12687,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/tests/test_e01.py",
+      "archived_path": "archive/pre-gross/python/tests/test_e01.py",
+      "sha256": "7d984b5b6cf6261604ed4b2e521ad7cf089c462d20080b8d52d4a80aa18e994a",
+      "size": 14002,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/tests/test_e01_review.py",
+      "archived_path": "archive/pre-gross/python/tests/test_e01_review.py",
+      "sha256": "93d94bb1d609c59d66ed441b8e21e0f891e673198250e4243af38592e929087f",
+      "size": 9586,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/tests/test_e01_analytic_controls.py",
+      "archived_path": "archive/pre-gross/python/tests/test_e01_analytic_controls.py",
+      "sha256": "c81cea9418150b101007fc08cf915a1cbadf7dab383f4bfb33a682ae85d310d9",
+      "size": 3459,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/tests/test_runtime.py",
+      "archived_path": "archive/pre-gross/python/tests/test_runtime.py",
+      "sha256": "6936d36979a8834da54c6f10ef59cffe6c7a50f7911c52de99f77f56fff141e8",
+      "size": 24453,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "python/tests/test_readiness.py",
+      "archived_path": "archive/pre-gross/python/tests/test_readiness.py",
+      "sha256": "b17079766b8ed996c6c96f0898b46501a9119831d779bcc73615eed5a35ce048",
+      "size": 10695,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "contracts/research/e01.schema.json",
+      "archived_path": "archive/pre-gross/contracts/research/e01.schema.json",
+      "sha256": "c4225bef366b39d4065518ef40c181c68d561eb62f7be02b1d816aa3ea5fc177",
+      "size": 7348,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "contracts/research/experiment.schema.json",
+      "archived_path": "archive/pre-gross/contracts/research/experiment.schema.json",
+      "sha256": "3b4a93b9e8c86366faa44ff7af8d5b47b0b60e35423528d9e63d57404854774f",
+      "size": 3113,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "contracts/research/exploration.schema.json",
+      "archived_path": "archive/pre-gross/contracts/research/exploration.schema.json",
+      "sha256": "1340ced7dcf01d865a64dc6b80d05d86143582ba92c00cf4a65ea0a846762a13",
+      "size": 4129,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/manifests/README.md",
+      "archived_path": "archive/pre-gross/fixtures/manifests/README.md",
+      "sha256": "24998e098e80f32d74467b3a312ec6bb4734532cd87350824f294e5d0ddb9e2f",
+      "size": 398,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/manifests/setup-a.json",
+      "archived_path": "archive/pre-gross/fixtures/manifests/setup-a.json",
+      "sha256": "261ae0236c5f082ffb841842fe465d613cae29b965e0f7255f6df55fb9d963b6",
+      "size": 1756,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/scenarios/isolated.json",
+      "archived_path": "archive/pre-gross/fixtures/scenarios/isolated.json",
+      "sha256": "eff4f14081357b986a67a73405a95eaa942a21fff5ac5c33c7c8f9ed37f2abb0",
+      "size": 1167,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/scenarios/pair.json",
+      "archived_path": "archive/pre-gross/fixtures/scenarios/pair.json",
+      "sha256": "50b7f520ca422553a1f2439f84d1154a5b84046c8827ad49abbea18bb8d942b6",
+      "size": 1830,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/validation/observation-smoke.json",
+      "archived_path": "archive/pre-gross/fixtures/validation/observation-smoke.json",
+      "sha256": "b7e66c7f36eb9a2259df325f495632c42c2b5f0cbd6b5136c1c5ebf2a8d5f854",
+      "size": 9596,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/validation/packets-smoke.json",
+      "archived_path": "archive/pre-gross/fixtures/validation/packets-smoke.json",
+      "sha256": "b5ff9ba976f06275939267d2167274dd679da0d4f349ad690f3060bcca5022cd",
+      "size": 3893,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/research/e01-smoke.json",
+      "archived_path": "archive/pre-gross/fixtures/research/e01-smoke.json",
+      "sha256": "0366d3864b5b308dec4fcd0ebb72bb133c7f468fdf43d26d909f49f430b79d40",
+      "size": 1479,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/research/e01-research.json",
+      "archived_path": "archive/pre-gross/fixtures/research/e01-research.json",
+      "sha256": "e05c97a4497ded82b1b174c92963a9b6282891959b1b4f5a20d4d9a32403a7bf",
+      "size": 1489,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "fixtures/research/synthetic.json",
+      "archived_path": "archive/pre-gross/fixtures/research/synthetic.json",
+      "sha256": "401e8dd06a9672bf288ca91e68e1fe8ff93d8f72bb36c09fe4de6756793081a5",
+      "size": 773,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": ".agents/examples/synthetic-interpretations.json",
+      "archived_path": "archive/pre-gross/.agents/examples/synthetic-interpretations.json",
+      "sha256": "3584be1e5fac73f6ef04dd8f9cbc2941f06200cfa71d8d4fdfdc927080058fee",
+      "size": 582,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": ".agents/examples/synthetic-mentor.md",
+      "archived_path": "archive/pre-gross/.agents/examples/synthetic-mentor.md",
+      "sha256": "26a8b5819af2594293a514687350f1b6dee0d63be8c0cf641ffd0dc1f00e7d72",
+      "size": 600,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": ".agents/examples/synthetic-plan.json",
+      "archived_path": "archive/pre-gross/.agents/examples/synthetic-plan.json",
+      "sha256": "b830b551f27801d4ca9d39f54ce8f584f33e17e213fb90db5cfe1c329cf31dd8",
+      "size": 3037,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/setup-d.md",
+      "archived_path": "archive/pre-gross/docs/setup-d.md",
+      "sha256": "cc683e6d4fbe42a6313b63fb728c8d85ed6544971a789c4da979710b0d3634f8",
+      "size": 3062,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/observation.md",
+      "archived_path": "archive/pre-gross/docs/observation.md",
+      "sha256": "42f04b693210dc722d894072068985ea3b3aa2e8ec7294f45dfea92e5ce06bc4",
+      "size": 11010,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/model-contract.md",
+      "archived_path": "archive/pre-gross/docs/model-contract.md",
+      "sha256": "a221319cb758e62deffd7b39b2e821d5471f0f77a12aec86d4a5afb8328ea984",
+      "size": 4914,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/setup-b.md",
+      "archived_path": "archive/pre-gross/docs/setup-b.md",
+      "sha256": "c86c1f7d52eefa9fa9f78b2559642b07f483cb1d9849eb8cd9029079e773f1a1",
+      "size": 2449,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/setup-a.md",
+      "archived_path": "archive/pre-gross/docs/setup-a.md",
+      "sha256": "13f4d200ff4910fdbc0dcab66cb09e6fd83974e7dd2d95f3fde942d625881aab",
+      "size": 2148,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/packet-engine.md",
+      "archived_path": "archive/pre-gross/docs/packet-engine.md",
+      "sha256": "2d1baff09debc4b5b499d3dc098ca13e0bf956a845b87a98cb87c5c901cf3058",
+      "size": 11608,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/diagnostics.md",
+      "archived_path": "archive/pre-gross/docs/diagnostics.md",
+      "sha256": "76e9bcd86f971c81e1d5fb6b88aeca13890c4da9c154968392ef24eea0ca921f",
+      "size": 1535,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/envelope-solver.md",
+      "archived_path": "archive/pre-gross/docs/envelope-solver.md",
+      "sha256": "e5cc2de750413770301a473ce17d97857affa731b22fcee1e4279add6ced1a44",
+      "size": 10670,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/experiment-runs.md",
+      "archived_path": "archive/pre-gross/docs/experiment-runs.md",
+      "sha256": "48aa2a39726c71355164e10632c502cba9943ed7afd0f1ebe5716e9fcc7c3060",
+      "size": 4481,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/execution-api.md",
+      "archived_path": "archive/pre-gross/docs/execution-api.md",
+      "sha256": "032992583680dcfd559a6cfd87425528d4a3e344c7cea6d270a52fb265c9aa7a",
+      "size": 6086,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/setup-c.md",
+      "archived_path": "archive/pre-gross/docs/setup-c.md",
+      "sha256": "7dba0217e49b39be44ba8fc13f376853ed5e9150a25d7872bcfebeab0f1b5535",
+      "size": 2588,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/paper-i-traceability.md",
+      "archived_path": "archive/pre-gross/docs/paper-i-traceability.md",
+      "sha256": "c519d28769765347963476210fe5414cb538c8372cffb6d95640b4761c86f158",
+      "size": 16060,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/first-experiment.md",
+      "archived_path": "archive/pre-gross/docs/research/first-experiment.md",
+      "sha256": "0b36bef10665d73eff4645b597286a862024d01ec9cd54f701c903c04f3d6d5d",
+      "size": 6666,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/experiment-plan.md",
+      "archived_path": "archive/pre-gross/docs/research/experiment-plan.md",
+      "sha256": "be91dcd093821a705b6326480bc46c14d067b076bfcd1ecb6ece9699529f95ba",
+      "size": 6353,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/e01-analytic-controls.md",
+      "archived_path": "archive/pre-gross/docs/research/e01-analytic-controls.md",
+      "sha256": "f9ad3ab0b8c66940408372f55d6f6deffb2f0ddc2581b8d1a06fc1343c5d95aa",
+      "size": 4461,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/e01-readiness-review.md",
+      "archived_path": "archive/pre-gross/docs/research/e01-readiness-review.md",
+      "sha256": "31bd6a2f407e0fcc16dab80eae8cb9929fed20c709482b759f5f51edb7aa3cfd",
+      "size": 7491,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/e01-running.md",
+      "archived_path": "archive/pre-gross/docs/research/e01-running.md",
+      "sha256": "4a344d7f050519f6f6a0dee9bef17f00f5c69288d4a60567a953a1514aed6d12",
+      "size": 12922,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/ui.md",
+      "archived_path": "archive/pre-gross/docs/research/ui.md",
+      "sha256": "916bffa37b00d2786509e629478097e9f5eb3b99d5069b6ab84f84d9c8d8396a",
+      "size": 5972,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/visual-exploration.md",
+      "archived_path": "archive/pre-gross/docs/research/visual-exploration.md",
+      "sha256": "02506c62e11b2b6d36b9f8c884343a3dbf7f332a245fa7c91c004505f06c4148",
+      "size": 7590,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "AGENTS.md",
+      "archived_path": "archive/pre-gross/AGENTS.md",
+      "sha256": "8f11c1e0666a1445ff6fedda0b0cacf32ecc6003772e4cbc5b4e5018c23d3469",
+      "size": 4621,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "README.md",
+      "archived_path": "archive/pre-gross/README.md",
+      "sha256": "bec086091d404bca9ceedfbf4e648cfc829dcc2b24c7a1beeda9cb624141da05",
+      "size": 9445,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/README.md",
+      "archived_path": "archive/pre-gross/research/README.md",
+      "sha256": "8c1055ac39b37ac66c9b01f3929091ddec7193c0d474d876ad3151308b127686",
+      "size": 2016,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/catalog.json",
+      "archived_path": "archive/pre-gross/research/catalog.json",
+      "sha256": "de6530fdbb10db4ba88b326af84d06a82444cfe3f2a9a591c065ae02a9503b44",
+      "size": 21716,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/archive-manifest.json",
+      "archived_path": "archive/pre-gross/research/archive-manifest.json",
+      "sha256": "556a8319c5a6619fa08b06230f26c39f2878b873684141127dd46510ebcdde9c",
+      "size": 739541,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/architecture.md",
+      "archived_path": "archive/pre-gross/docs/research/architecture.md",
+      "sha256": "049f6554b05c7ada6d284402c0d336665e2c65dfa6e6c0002afb0ea00e7a9584",
+      "size": 8021,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/runtime.md",
+      "archived_path": "archive/pre-gross/docs/research/runtime.md",
+      "sha256": "60af68938aa787597ef73399852013d0a75d010d234dea7dcb460e8f1ee3845b",
+      "size": 11089,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "docs/research/github-actions.md",
+      "archived_path": "archive/pre-gross/docs/research/github-actions.md",
+      "sha256": "933d80ea100072a4796dca82ca7f10bef3283c1785d92d25f0c3d74601e0e06b",
+      "size": 14429,
+      "disposition": "historical-copy",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/README.md",
+      "archived_path": "archive/pre-gross/research/source/damping/README.md",
+      "sha256": "0182f419fff34b640d10309fba4694fa81ac964546be523573922979173b57aa",
+      "size": 4520,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/analyze_scan.py",
+      "archived_path": "archive/pre-gross/research/source/damping/analyze_scan.py",
+      "sha256": "3c6d0dac4e01c5b3f21f7da0289b791ddaca9f80c9626ac47a6528b9d0142ecf",
+      "size": 5070,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/deliverables/Signal_Space_Charged_Clock_Damping_Diagnostics.png",
+      "archived_path": "archive/pre-gross/research/source/damping/deliverables/Signal_Space_Charged_Clock_Damping_Diagnostics.png",
+      "sha256": "6cab64b357b61addc753d76beeb4aa2671f5feac9fa33ec9020ac60adc829be9",
+      "size": 422953,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/deliverables/Signal_Space_Charged_Clock_Damping_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/damping/deliverables/Signal_Space_Charged_Clock_Damping_Milestone.md",
+      "sha256": "38ff1d397bbf324728e37b82be3141156ce17d44307c3eba28f2c62474501e41",
+      "size": 20714,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/discrete_resonance.py",
+      "archived_path": "archive/pre-gross/research/source/damping/discrete_resonance.py",
+      "sha256": "1d580ade7f55f5c005df371beaf88d002c354cdd600dc3b422129c4fef50fa06",
+      "size": 1194,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/environment.json",
+      "archived_path": "archive/pre-gross/research/source/damping/environment.json",
+      "sha256": "b95636e0f7001f2858e5aa0d103634086e953700b7eb3b17a81ad351bedea02e",
+      "size": 145,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/evolve_scan.cpp",
+      "archived_path": "archive/pre-gross/research/source/damping/evolve_scan.cpp",
+      "sha256": "a9a6ab9e130125e1b506bfed18040f6754939dcb993cca76739869dcf17ef794",
+      "size": 2754,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/ground_correction.py",
+      "archived_path": "archive/pre-gross/research/source/damping/ground_correction.py",
+      "sha256": "9695bcc5725b1adaf2362cca0c50c1fd1a93f42aaa98e54409b78104c69d9578",
+      "size": 932,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/Signal_Space_Charged_Clock_Formation_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/Signal_Space_Charged_Clock_Formation_Milestone.md",
+      "sha256": "c1fed799aaee9f4a565476654883184057b2774304cf889f36013bc35c77ae53",
+      "size": 33897,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/Signal_Space_Charged_Clock_Radiation_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/Signal_Space_Charged_Clock_Radiation_Milestone.md",
+      "sha256": "e09ac2398c62a1c77324850acfc312d1f6a66933e9b99b5d7ed226d9533572f8",
+      "size": 22243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/Signal_Space_Charged_Clock_Stability_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/Signal_Space_Charged_Clock_Stability_Milestone.md",
+      "sha256": "c205f5c07c31323c6659c44c6721ebf4925f88a211ba8591555bddc6e4ded06b",
+      "size": 18088,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/Signal_Space_Ordered_Reception_Charged_Clock_Model.md",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/Signal_Space_Ordered_Reception_Charged_Clock_Model.md",
+      "sha256": "c832dced7f8c4f417bb72d29f0c4b1dc2b5413b86fc8056590bff9454c1807cb",
+      "size": 25248,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.0025_fine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.0025_fine.json",
+      "sha256": "e40529860a9c10dcc231561c3bbb0d54b6c75d579fbeadd36762ef08c78a79e6",
+      "size": 349,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.005_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.005_coarse.json",
+      "sha256": "b99fa4284f0496d7010c7854bb30b0516037d48836e905281c74349773a0c226",
+      "size": 348,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.005_fine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.005_fine.json",
+      "sha256": "36f99346b832c6ecf1e0ebffed729e34831e41971867a209a2bbe98902283690",
+      "size": 349,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.01_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.01_coarse.json",
+      "sha256": "f26fcf93808d99d9dbfe8c32570ec0707a44549b378b92e329c6654baad8e375",
+      "size": 347,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.01_fine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.01_fine.json",
+      "sha256": "47d5bee99ef07712ed30559d0b365fa893156d9802e2f22edda135e9f093c21f",
+      "size": 349,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.01_superfine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.01_superfine.json",
+      "sha256": "b5874248eaad028a25aff1bcf2c89ae2f4ad4737075ad2337f8e3d212bda4cdc",
+      "size": 349,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.01_timefine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.01_timefine.json",
+      "sha256": "6ad8bfa8a6994a13b1d1cfcd46c619104070752bd21d475c8a0c39e65853f51e",
+      "size": 350,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.02_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.02_coarse.json",
+      "sha256": "6a9aa2f427fb13d4ce8ff8ed74819817500ff8856163a6896e2f0c7b1bf03b4d",
+      "size": 347,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.02_fine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.02_fine.json",
+      "sha256": "ee267317090125c2c0f09e4ed895114106435755d6074a109b9b7c3092128ade",
+      "size": 346,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.04_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.04_coarse.json",
+      "sha256": "6583600342479eb2428a6a01f2ff6bd18b9e56b19bd8431877170b8f8fa71ad4",
+      "size": 345,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.04_fine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.04_fine.json",
+      "sha256": "3df1b9c67b8cc46746c218ffe677713f3af523381f695e9462df344492c3a1cb",
+      "size": 347,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.06_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.06_coarse.json",
+      "sha256": "c9a7719da576029f947dd71fc20cf424701a1c209bb0bb2f75b0f002bfc8f049",
+      "size": 346,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.09_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.09_coarse.json",
+      "sha256": "55639c5b8c387b1a97e3df7f346c4acdb8e6559b94ebfb86d2d54a242c4c24fb",
+      "size": 346,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0.09_fine.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0.09_fine.json",
+      "sha256": "c099c26bb063cca259539718c803e8306c402688b911b679fed6c436387fd90e",
+      "size": 345,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/inputs/b0_coarse.json",
+      "archived_path": "archive/pre-gross/research/source/damping/inputs/b0_coarse.json",
+      "sha256": "cb93efa2181dd51beaf753e17e2464f9253a6b94b20eb216545d4af6798faf10",
+      "size": 345,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/make_figure.py",
+      "archived_path": "archive/pre-gross/research/source/damping/make_figure.py",
+      "sha256": "2d4d9bef512a8ea06e2feff6df85442b45cd1b1d29a427ceda095ff6e8d23f12",
+      "size": 3740,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/make_report.py",
+      "archived_path": "archive/pre-gross/research/source/damping/make_report.py",
+      "sha256": "67ea172621cb3d3c75700b97e7172852b78a3eb9e0ba2b106d8d751fca9f5988",
+      "size": 21105,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/resonance.py",
+      "archived_path": "archive/pre-gross/research/source/damping/resonance.py",
+      "sha256": "41f34c97e9006998b118f0ffc59863c5e5189126b3ba03a4b69e89586a8e1958",
+      "size": 1859,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/amplitude_scan.csv",
+      "archived_path": "archive/pre-gross/research/source/damping/results/amplitude_scan.csv",
+      "sha256": "43ab85f1ceb972ff13d5a858e700295da6495fa67719eddf50f7a8e82fd9cc03",
+      "size": 3253,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.0025_fine_200_450_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.0025_fine_200_450_analysis.json",
+      "sha256": "1064f03e820c7123e1def3b917f0f1df6fce2536d31cf8601cfcf75739bceb26",
+      "size": 8446,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.0025_fine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.0025_fine_200_700_analysis.json",
+      "sha256": "94bee7e85774e1c44d6d4db08d246e9e98f7f82bd5074fa850d731e63480cda0",
+      "size": 8463,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.0025_fine_450_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.0025_fine_450_700_analysis.json",
+      "sha256": "8adcfca19fae8fad40874b7cd8b9f24f285389eda7236db17fd83b6e3d20db89",
+      "size": 8452,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.005_coarse_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.005_coarse_200_700_analysis.json",
+      "sha256": "7d707c189cb71f2dc32829ac4dc47fa87425b942931f294b00da6925bbdbb530",
+      "size": 8441,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.005_fine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.005_fine_200_700_analysis.json",
+      "sha256": "e8cb33bf6bd9f3e8f8a57e857a7146ccfd602d0314866b90fd6aeda34e7b39c3",
+      "size": 8434,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.01_coarse_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.01_coarse_200_700_analysis.json",
+      "sha256": "467bfa264a8987f8b98079553ba1e096ba02eab52ddf677e68c032e8e214d5e4",
+      "size": 8449,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.01_fine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.01_fine_200_700_analysis.json",
+      "sha256": "2726e8bc6ebda1c7a17f594c66ebe772bfa8f3814592a7d1896b498177097cf2",
+      "size": 8439,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.01_superfine_200_450_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.01_superfine_200_450_analysis.json",
+      "sha256": "c8c541ddceac8d9d2a08e80812b950d1a6c07466ad333073cb696792cb1c13f1",
+      "size": 8448,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.01_superfine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.01_superfine_200_700_analysis.json",
+      "sha256": "e2f439f4b38455624eb863940f793f4f5dd6f9552e2c2d12c05202703e48283f",
+      "size": 8430,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.01_superfine_450_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.01_superfine_450_700_analysis.json",
+      "sha256": "8644f0fbdcdb934762b1c01e34abc9d31b35d8ec08c3072053dca76fcfded738",
+      "size": 8441,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.01_timefine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.01_timefine_200_700_analysis.json",
+      "sha256": "3be057f42673404602c627dc45d5073233e986039d2e6edd9684d9294add5abc",
+      "size": 8446,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.02_coarse_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.02_coarse_200_700_analysis.json",
+      "sha256": "ba388d7a4f6203ab4000bf7d129b0883f15dc36a8a50c6c79b68f694e7b77695",
+      "size": 8438,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.02_fine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.02_fine_200_700_analysis.json",
+      "sha256": "723945bca77b152aa17bb40c3066d593c7419dc094e1aca107321d7bde11bb36",
+      "size": 8449,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.04_coarse_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.04_coarse_200_700_analysis.json",
+      "sha256": "eafb1b07e17d992ade8d795fde57d61d4f6265c9de22ee97840d99cc34cb5641",
+      "size": 8424,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.04_fine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.04_fine_200_700_analysis.json",
+      "sha256": "9db711b61b5adae133cf2f08a06372d62e5b9c22e68ee368c8406f55a6cf73c3",
+      "size": 8416,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.06_coarse_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.06_coarse_200_700_analysis.json",
+      "sha256": "d7710b0391978b649ec0a5afd3e10678e12ad60b18bc18dd2aee54990a224c74",
+      "size": 8426,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.09_coarse_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.09_coarse_200_700_analysis.json",
+      "sha256": "fd6c7e4a87076410fd2084577c8dc4c946ff6e61f57b5be0ecbe30044231203c",
+      "size": 8422,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.09_fine_200_450_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.09_fine_200_450_analysis.json",
+      "sha256": "2ae64c25c26c7a5a6a031adb1c2d91ed0ee12724beefc58109dd196a8abf1758",
+      "size": 8423,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.09_fine_200_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.09_fine_200_700_analysis.json",
+      "sha256": "7a75ce410a873eb3a5f16ab39eac1d85222c1d53e4da105678ae51fc2499356d",
+      "size": 8433,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/b0.09_fine_450_700_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/b0.09_fine_450_700_analysis.json",
+      "sha256": "663178536f12b5a1011db2289ca4114914b9150efd726f3d372d5700c65250f5",
+      "size": 8442,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/discrete_resonance.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/discrete_resonance.json",
+      "sha256": "9bd578a03489ed741446cc5cb21e4f472ff33aa61ad7693d9b94105195b69b35",
+      "size": 853,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/ground_correction.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/ground_correction.json",
+      "sha256": "5933d31036fcc9ddfb1e2577246aa95e356440237cf2cb23373e55ed797b77fb",
+      "size": 2748,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/preparations.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/preparations.json",
+      "sha256": "18965667c6df234dddd957fb4f5d68a2bdb7f3a60f78bfeeb5988a69bfc81d61",
+      "size": 5660,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/resonance_checks.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/resonance_checks.json",
+      "sha256": "7289489934dc474d340caa14e2baf20e30f7b0a022da27b00ca046ca92bcaf35",
+      "size": 1092,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/scan_analysis.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/scan_analysis.json",
+      "sha256": "c65dc76893db97832af29031310143b49aa6137a0f724c000192885c26310739",
+      "size": 126344,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/results/summary.json",
+      "archived_path": "archive/pre-gross/research/source/damping/results/summary.json",
+      "sha256": "64cb2f68fb45b0938be73896ac1f1b3bfe62da037d1772c5d9a8e79712c2b5f2",
+      "size": 137251,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/run_all.py",
+      "archived_path": "archive/pre-gross/research/source/damping/run_all.py",
+      "sha256": "dd226a9397a5d55bd82d4dd44732a6e02f5b54aadaf17ab0fe267401051f0e89",
+      "size": 684,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/run_scan.py",
+      "archived_path": "archive/pre-gross/research/source/damping/run_scan.py",
+      "sha256": "5304ee4bc63b748196757ca5ca620fa3bb87a36673d6943105daa168bc253a7b",
+      "size": 784,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/setup_scan.py",
+      "archived_path": "archive/pre-gross/research/source/damping/setup_scan.py",
+      "sha256": "52008298bfba8e5fbe1d6750dac30b750ebdbb9d2cb2b62285c68f77a61e2c93",
+      "size": 2579,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/damping/summarize.py",
+      "archived_path": "archive/pre-gross/research/source/damping/summarize.py",
+      "sha256": "6175e611202f7fa04c2fef5ac36468456989a7e9b20788bc4edca4996fdc93c8",
+      "size": 3658,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/README.md",
+      "archived_path": "archive/pre-gross/research/source/formation/README.md",
+      "sha256": "bea13a02c73f0255ceea6cdff603eb48ebeaa929338d4a24f18c1aab0e32d677",
+      "size": 4291,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/analysis_stdout.txt",
+      "archived_path": "archive/pre-gross/research/source/formation/analysis_stdout.txt",
+      "sha256": "7c3b3297d0d9d173ed720ae94c924d994efcb3a4327207008051b4fad716a4a9",
+      "size": 9819,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/analyze.py",
+      "archived_path": "archive/pre-gross/research/source/formation/analyze.py",
+      "sha256": "838ed803ed9ac2023e5f610e1b920a7c2873f83332ecaa84d7542044272d4111",
+      "size": 4857,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/deliverables/Signal_Space_Charged_Clock_Formation_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/formation/deliverables/Signal_Space_Charged_Clock_Formation_Milestone.md",
+      "sha256": "c1fed799aaee9f4a565476654883184057b2774304cf889f36013bc35c77ae53",
+      "size": 33897,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/deliverables/Signal_Space_Formation_Diagnostics.png",
+      "archived_path": "archive/pre-gross/research/source/formation/deliverables/Signal_Space_Formation_Diagnostics.png",
+      "sha256": "c0af0ce9ec26d286f0c19e51eb02535c33c82ce8fb28f1e0858e81dca3052dcf",
+      "size": 439200,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/deliverables/Signal_Space_Formation_Readout.png",
+      "archived_path": "archive/pre-gross/research/source/formation/deliverables/Signal_Space_Formation_Readout.png",
+      "sha256": "c28ab265427357c300b6c8f4a375103222df95818a8309e5601718f95640a94d",
+      "size": 181414,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/deliverables/Signal_Space_Formation_Scan.png",
+      "archived_path": "archive/pre-gross/research/source/formation/deliverables/Signal_Space_Formation_Scan.png",
+      "sha256": "da553b904bcfbc29ef012d7bb6471994ed6077a4dcfa86da1516331ca48b3edb",
+      "size": 158617,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/deliverables/formation_scan.csv",
+      "archived_path": "archive/pre-gross/research/source/formation/deliverables/formation_scan.csv",
+      "sha256": "f4c413cfb18651a7ebbdb37bfecb429dfb6a6b7e3bba57ff42a9247d415b0163",
+      "size": 7557,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/environment.json",
+      "archived_path": "archive/pre-gross/research/source/formation/environment.json",
+      "sha256": "06a6d92e7fea1e7877c6a08fd74b7bda9f811c2ee8b248b20a01e474ee98446c",
+      "size": 173,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/evolve.cpp",
+      "archived_path": "archive/pre-gross/research/source/formation/evolve.cpp",
+      "sha256": "6de48499826d229fcf40a709f578d7c6acce9b0a987216a799e6fe31c71f02fd",
+      "size": 8511,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/inputs/Signal_Space_Charged_Clock_Stability_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/formation/inputs/Signal_Space_Charged_Clock_Stability_Milestone.md",
+      "sha256": "c205f5c07c31323c6659c44c6721ebf4925f88a211ba8591555bddc6e4ded06b",
+      "size": 18088,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/inputs/Signal_Space_Ordered_Reception_Charged_Clock_Model.md",
+      "archived_path": "archive/pre-gross/research/source/formation/inputs/Signal_Space_Ordered_Reception_Charged_Clock_Model.md",
+      "sha256": "c832dced7f8c4f417bb72d29f0c4b1dc2b5413b86fc8056590bff9454c1807cb",
+      "size": 25248,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/make_figures.py",
+      "archived_path": "archive/pre-gross/research/source/formation/make_figures.py",
+      "sha256": "10afa7c0df06a874efac191cc6a7bd17aa983f698308d8751669eb8c5896b207",
+      "size": 4106,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/make_report.py",
+      "archived_path": "archive/pre-gross/research/source/formation/make_report.py",
+      "sha256": "67e19ed14475b1c593258726bb41addf830ba3bedeccf8911ac28a2c548f055f",
+      "size": 31553,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/package_results.py",
+      "archived_path": "archive/pre-gross/research/source/formation/package_results.py",
+      "sha256": "0e7e0424abf367dff01f9058a0684684f7222e4628bf2523a0ef95eba82999ef",
+      "size": 1354,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/analysis.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/analysis.json",
+      "sha256": "fdae054127087adf76638c0d672c212122e32f23833b5e908c1701dc68cc7f56",
+      "size": 814735,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/exact_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/exact_meta.json",
+      "sha256": "b04e19635ff2dc84684c89be7469348e44e880a4706be81b7c68dee42c39f2e5",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w0.5_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w0.5_n0.8_meta.json",
+      "sha256": "2ffb49adbf143443228f0eabb8443f15ca5fc404e3c06ff8015dcb3813b2a21d",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w0.5_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w0.5_n0.9_meta.json",
+      "sha256": "cfeaceeb26a166cac4e841ead4933ad82ae519b7ddd49c7a69f055ea0ba17651",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w0.5_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w0.5_n1_meta.json",
+      "sha256": "4c4631233e7c1374c9df25b2a0214f767472ae406b44db11cea02bbd0e3ef943",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w1_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w1_n0.8_meta.json",
+      "sha256": "8e00c6dd9b9633269a8f386b1e6d7c645e09a080ccb4eea214585898d915145f",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w1_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w1_n0.9_meta.json",
+      "sha256": "0cacfc27d0df6b7b6ffa5d666ed914b3ab863e4008204baaebb174bd5827c653",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w1_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w1_n1_meta.json",
+      "sha256": "7cdf003415e3febd91f92a87810251abff35b8e73f362014c5e91ad925352f17",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w2_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w2_n0.8_meta.json",
+      "sha256": "2ef7d0153ae56cf02036f2d3f2055041b734288f269591387bc6b560865c4a42",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w2_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w2_n0.9_meta.json",
+      "sha256": "086016748627283c59739ea0a1c48cb58429d8f921e04f89ac9f2a4d54640b48",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w2_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w2_n1_meta.json",
+      "sha256": "1d615a1ec20e9a3e7bea76a33d28d6bcae4bf85f4e00db88f219b2e102bd938c",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w4_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w4_n0.8_meta.json",
+      "sha256": "62ef91a02e05ac08a2a084bb873c688d94636e47c0f4334112002e88538d5081",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w4_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w4_n0.9_meta.json",
+      "sha256": "1d7a0fe69e6a270b87bc6d0b60c966c9912dbfd009b2d5f06ce2bc379f753ec7",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/fine_o0.90_w4_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/fine_o0.90_w4_n1_meta.json",
+      "sha256": "b1734ae9c4687e6372a25f900f857473c5102d44d26100d8801f4266076c5375",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/long_broad_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/long_broad_meta.json",
+      "sha256": "40ae4cb27ac0760a9ac3fb53361e02492913c1cf40fde9a0cc376da0e4ab9e6d",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/long_narrow_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/long_narrow_meta.json",
+      "sha256": "83e5695896f5442626d0fc9ef9040324e52a28b61a023e6aa8e4041700926a6c",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/long_unbound098_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/long_unbound098_meta.json",
+      "sha256": "902c5aaa65f8452ac9afa5d18547bf1dd75c3df3ffd17e0760cc19b55ce25a55",
+      "size": 242,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_-0.001_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_-0.001_meta.json",
+      "sha256": "2e1ef59bc47bfaee751889d7060fb6fd2af99a1a20ae299a67c844d0e4888324",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_-0.01_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_-0.01_meta.json",
+      "sha256": "9073fa28cbe78166b59646232b299225e96fd1328e673e2dc2662cd7d54efc4f",
+      "size": 242,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_-0.05_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_-0.05_meta.json",
+      "sha256": "7e6417eda1e18b23a04e9adb22c12c7c76d3e63eb6cf2387494ab2c38b68a799",
+      "size": 242,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_0.001_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_0.001_meta.json",
+      "sha256": "b447e46e31f407c8b8a2245a0e47893e4856a47ef927c09e7ad36d3fcb854499",
+      "size": 244,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_0.01_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_0.01_meta.json",
+      "sha256": "10146592d8d9567acc788b31ad511f903c5cdcd5148324659f6e87041131c02b",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_0.05_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_0.05_meta.json",
+      "sha256": "7850d2c3dbb4c979d32efc3e09022c63229f422abbb622dc5a2df76a837e25a5",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_0_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_0_meta.json",
+      "sha256": "9f25881a71a5110005536094b0b312c6bb6528659c4fb78c9bcd8a14c973edde",
+      "size": 240,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_fine_-0.05_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_fine_-0.05_meta.json",
+      "sha256": "214426aceb11978e96fe851bf5ba3ab67d171f3936356493b91cbee616485668",
+      "size": 244,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/neutral_fine_0.05_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/neutral_fine_0.05_meta.json",
+      "sha256": "14566aa1e8c535e072be1433b92a23e2b555be5f5775be12669fc4cbefbbefb3",
+      "size": 245,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/perturbed_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/perturbed_meta.json",
+      "sha256": "52f36877d6e5775a5357296df908dc56f8ddf927a707389f144d12fae2ef26c7",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/pilot_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/pilot_meta.json",
+      "sha256": "728cdf4b4cfbce70b1f290d999286163984ad1e54adc9be341c587eb4c041efc",
+      "size": 213,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/readout_fine_p0.0000_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/readout_fine_p0.0000_meta.json",
+      "sha256": "b02eb9a8e46b1c5b5c99b3d2c7f0aa66fd6be9f401b0afcba407c5fe7c17980c",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/readout_fine_p1.5708_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/readout_fine_p1.5708_meta.json",
+      "sha256": "d948ec7f5cddfb5d1dc31d61e670b2f1f6650f4db000960fe61c269818558759",
+      "size": 257,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/readout_fine_p3.1416_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/readout_fine_p3.1416_meta.json",
+      "sha256": "0145dcb3d82c073c20489ff68115cfc463df5bfb8a03281a1a73d68dc5d6ddd2",
+      "size": 258,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/readout_p0.0000_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/readout_p0.0000_meta.json",
+      "sha256": "675d07d6c86e3b4b9fa7a23436078b39ac2df6a6207a457b8d902ac93cea603f",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/readout_p1.5708_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/readout_p1.5708_meta.json",
+      "sha256": "2725c8ddd26766c3372a0adffed79d25fd32e037e261bdbd820cc1d894ce3d89",
+      "size": 255,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/readout_p3.1416_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/readout_p3.1416_meta.json",
+      "sha256": "0580e42aec309985ad17ae3620e1f03f61ff6461466d449f4c317be23b9150eb",
+      "size": 256,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w0.5_n1_dt_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w0.5_n1_dt_meta.json",
+      "sha256": "de7c744ff276f20aa7c41f946307edb67dd20b3245fa2e415b47941ab462561c",
+      "size": 240,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w0.5_n1_fine_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w0.5_n1_fine_meta.json",
+      "sha256": "4c4631233e7c1374c9df25b2a0214f767472ae406b44db11cea02bbd0e3ef943",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w1_n0.8_dt_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w1_n0.8_dt_meta.json",
+      "sha256": "634b8ab497d35cde97087077273736b46822dd45de511d05cfc491812c2c60fa",
+      "size": 240,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w1_n0.8_fine_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w1_n0.8_fine_meta.json",
+      "sha256": "8e00c6dd9b9633269a8f386b1e6d7c645e09a080ccb4eea214585898d915145f",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w2_n0.9_dt_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w2_n0.9_dt_meta.json",
+      "sha256": "c1cfcc0ba5a1b0225ba13d42a6021f8745c220c27888bce203ffb3317ab0365e",
+      "size": 240,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w2_n0.9_fine_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w2_n0.9_fine_meta.json",
+      "sha256": "086016748627283c59739ea0a1c48cb58429d8f921e04f89ac9f2a4d54640b48",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w4_n0.9_dt_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w4_n0.9_dt_meta.json",
+      "sha256": "6e92b7084bf3467a94c40660f1528f1e1cc9e47561c9244dd530da65e1590516",
+      "size": 242,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/refine_w4_n0.9_fine_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/refine_w4_n0.9_fine_meta.json",
+      "sha256": "1d7a0fe69e6a270b87bc6d0b60c966c9912dbfd009b2d5f06ce2bc379f753ec7",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w0.5_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w0.5_n0.8_meta.json",
+      "sha256": "4ae864a923088c838bb299037bdd859bf43f0c70b513a40eb701d5f3ad44bf93",
+      "size": 216,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w0.5_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w0.5_n0.9_meta.json",
+      "sha256": "2031e2ab6e283906cb3a9fe6fb1d2f70125c6542bd7c0c848fbdf9d2eee394af",
+      "size": 216,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w0.5_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w0.5_n1_meta.json",
+      "sha256": "b80f3670efe4cd02b2a94597ecf1a161c0bec8a6d69b9ab884ece708fcafd629",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w1_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w1_n0.8_meta.json",
+      "sha256": "727b8dcafd8d5eba83373f821d04341f4eb274d60b11ae3411e3948adc451298",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w1_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w1_n0.9_meta.json",
+      "sha256": "412e25f8e409453a77be121e0d05105eaca0c25894b863802a8d4b5bb89e7166",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w1_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w1_n1_meta.json",
+      "sha256": "7cf30fdc38cc720ed7dc71f4262748cdf9a4886db017b2780c04c65ab27b5a79",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w2_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w2_n0.8_meta.json",
+      "sha256": "57cae0bb9b7bcfe01e5bd826c0af466a32d94ed0372cc13269ff5919e7c701df",
+      "size": 213,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w2_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w2_n0.9_meta.json",
+      "sha256": "3f85ea0d21ac63b8215af30e856d5002d94ca5e016c9d7e11db9bf630a6ed16c",
+      "size": 213,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w2_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w2_n1_meta.json",
+      "sha256": "fca92ab319c49baa9a69dcbe214fe5ea984432965315e8863875b38d2ce83399",
+      "size": 211,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w4_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w4_n0.8_meta.json",
+      "sha256": "c16faa467c715d5497b1c77eaf490089c884ba727ed2fecf8daf6b98ee4c3669",
+      "size": 213,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w4_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w4_n0.9_meta.json",
+      "sha256": "9e931a536d1919fad75dd460fd67839e1c3b657895608695617dc69231905394",
+      "size": 213,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.88_w4_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.88_w4_n1_meta.json",
+      "sha256": "72ec2509d236aa1e4e62c9191246c893130a1b56097c232d29afc938abd191ea",
+      "size": 211,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w0.5_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w0.5_n0.8_meta.json",
+      "sha256": "99d4be813816a511274a2f897e5751b502b3ede316ca38e52ae8ee9416d6b111",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w0.5_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w0.5_n0.9_meta.json",
+      "sha256": "54ec78f2a5757a205b59e18a6b1a703c1e284de735961b2a41cb8eecce96739c",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w0.5_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w0.5_n1_meta.json",
+      "sha256": "f74cd5fefc893385b60f9e9e33f511800f7e14adc8af2cab84b56efde12b6e1f",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w1_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w1_n0.8_meta.json",
+      "sha256": "d831824dd1e54d8d497634031586b0cb13d17d3204b65807977b718a3319065d",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w1_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w1_n0.9_meta.json",
+      "sha256": "3337770913627bb66565dcdaf47f77ba2eff34a694db650ca5043cefc981c623",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w1_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w1_n1_meta.json",
+      "sha256": "69635a712829bc73e12226400270df5af970f9449a92cc3f4f0c9e2e38f685d3",
+      "size": 237,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w2_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w2_n0.8_meta.json",
+      "sha256": "7d084b32fa0cf60f480a8af4e772666f70acfd6bfd734bb546f4c6f48d340d4d",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w2_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w2_n0.9_meta.json",
+      "sha256": "60f232b456f4a77f6892e3338dbe5cc9681689b91b9124d5c2e6e4388ae1a58d",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w2_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w2_n1_meta.json",
+      "sha256": "5b1e3e891579c6f94a8e189d1b79555eb48afa462430d730a71d72440690af8f",
+      "size": 237,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w4_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w4_n0.8_meta.json",
+      "sha256": "3f7a192571fc90a10d7289062d8bd91b608b0bb3f4f7c7fedd84edbb9fce0805",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w4_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w4_n0.9_meta.json",
+      "sha256": "bc5b70ac4e5ecaaa63339483300f07dab29d2f4956f419934dc518d7a4f9832a",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.90_w4_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.90_w4_n1_meta.json",
+      "sha256": "dcf5b3b29456ccafbdecdaf14862922057ff1013af7125c86a22de46c9f55ff7",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w0.5_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w0.5_n0.8_meta.json",
+      "sha256": "93eccde3f3d760c40b7fb03c835df7700ddf061a4036ce79a35fe134bb3316d0",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w0.5_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w0.5_n0.9_meta.json",
+      "sha256": "b2136063acf2e2a9944d5dfaafad6ed3e98bf8a207b879bca89ca5dfdf0f47a8",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w0.5_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w0.5_n1_meta.json",
+      "sha256": "30c86502d446aba30eb30aeecf5acd2904bbea1ca5a81c7ad8fde09e8ec343df",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w1_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w1_n0.8_meta.json",
+      "sha256": "50a897cb4451714f3d17207707daea43a8a6b1d118f80ec1dc25c4df580c6117",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w1_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w1_n0.9_meta.json",
+      "sha256": "b00bad566ccdfb4ec05dcd48575c6ec318548ddb498a245e3cf7eb07b4560358",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w1_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w1_n1_meta.json",
+      "sha256": "ebbcf84ab311ad6fbbbdd3a00df83967584da407a1b0c66cc7949bac38722382",
+      "size": 210,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w2_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w2_n0.8_meta.json",
+      "sha256": "1cd5d50cb13f63138f6a8cef5a5d8db2c28c6f8239546f0695528b47a4e54703",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w2_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w2_n0.9_meta.json",
+      "sha256": "6347085e2db6c4d5d4710eab14744cd6acfe69dca703edd5204b98727946a65e",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w2_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w2_n1_meta.json",
+      "sha256": "aa077ea7ecb03884f00ebc2ba50b9191e745cf8d206578d822ebdb7186861efe",
+      "size": 210,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w4_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w4_n0.8_meta.json",
+      "sha256": "5517bfd4cb8baa80c59a9ef225ed6aa3f0d1e06697afa0ca526fe44b9b0b075f",
+      "size": 215,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w4_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w4_n0.9_meta.json",
+      "sha256": "bdc415f555f8e266067cda7cab95d3f9ed2fb55d98ba831f95797cad2db61c16",
+      "size": 215,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.95_w4_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.95_w4_n1_meta.json",
+      "sha256": "1eb7141d49c3f43442e2261362b227e4d39daedfeb2b5ec43cba476bd26b16c9",
+      "size": 213,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w0.5_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w0.5_n0.8_meta.json",
+      "sha256": "8431d67ec1662074b21d55012aa576a18f503dd7b3ec7f40742a0104854677d1",
+      "size": 216,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w0.5_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w0.5_n0.9_meta.json",
+      "sha256": "e4a3b6eb0042a3aa199c65b6c1492d0b634ca219c67d63b2b29df8729ba62202",
+      "size": 216,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w0.5_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w0.5_n1_meta.json",
+      "sha256": "ab695f4ff374a4401ad480d903fe415ea3e719ed08a738ae967304619d9f986f",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w1_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w1_n0.8_meta.json",
+      "sha256": "60ea5780a52ee9bdcd192d1b93630e23c243b8fede4862b09f7b7e57fb779ab4",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w1_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w1_n0.9_meta.json",
+      "sha256": "938ad936b435f0768f6e30c67e3c22a1637f4707a1b0a6d5185876a8b30ab5c6",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w1_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w1_n1_meta.json",
+      "sha256": "2b1f88ee6b2e282a1eddecc40114fd5b6d8e0df51563c0d21bf77536e82b16a6",
+      "size": 212,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w2_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w2_n0.8_meta.json",
+      "sha256": "4fbe2610bf5550e04c5e1873b7d77c68644c5beb6c34d818c08babc0d721ba25",
+      "size": 240,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w2_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w2_n0.9_meta.json",
+      "sha256": "cb3a99600a09115cb807d7a5d5a4fbe48220d8ceaa391585701b0e550b32c9d7",
+      "size": 214,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w2_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w2_n1_meta.json",
+      "sha256": "1010c4cc576218548df61f98a2d19226d6912cc0402ab2426ee2a58135956a6f",
+      "size": 238,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w4_n0.8_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w4_n0.8_meta.json",
+      "sha256": "57b8d9da2d7cb506d37cc1926585f41068591d26f63b2f79f88b4209f2cd67c0",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w4_n0.9_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w4_n0.9_meta.json",
+      "sha256": "8881d44c34c6f7236dd8a4e920267869996223b3f91e9c89b80d4c67a5b8f644",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/scan_o0.98_w4_n1_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/scan_o0.98_w4_n1_meta.json",
+      "sha256": "f8605927a76521ec10be4973c9aaff5e20665949758d5b978c8331ffb81d363c",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/seeded_formation_-0.01_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/seeded_formation_-0.01_meta.json",
+      "sha256": "a9ad642681e17c788f81dbd2e3aab3967d04cd3038186acbd86276469a344a34",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/seeded_formation_0.01_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/seeded_formation_0.01_meta.json",
+      "sha256": "4d747c475bd5c3259b78d385909dac8c9045137cf96958cd3bc6ff53f147201a",
+      "size": 242,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/settled_coarse_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/settled_coarse_meta.json",
+      "sha256": "7baabc52c7b3a2d72d17cf35615d6b6cc812dfbc70aa88ce7bed6f53ca970797",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/settled_fine_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/settled_fine_meta.json",
+      "sha256": "355e19a019f582de9608f204db16d1bf83bbd7dab071b8c19a539047ba523f8f",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/unbound_settled_coarse_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/unbound_settled_coarse_meta.json",
+      "sha256": "66d40b97d4af3f18826d783c168186ae5392330f592f935b4bd24a3435095d85",
+      "size": 241,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/unbound_settled_fine_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/unbound_settled_fine_meta.json",
+      "sha256": "09a00e84499b41672cef690658e0c604395e66dc09335a43c478e256f316ba9d",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/unbound_w1_n0.6_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/unbound_w1_n0.6_meta.json",
+      "sha256": "4fd52f7639b925bd5e92754bdb68e94ae1f557544296b0f6c0ce0c3d9248931a",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/unbound_w1_n1.3_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/unbound_w1_n1.3_meta.json",
+      "sha256": "5e2a464c0e87b112d759ddbb743dd05eeac7b1aeef5995b74ffdadda673a9db4",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/unbound_w2_n0.6_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/unbound_w2_n0.6_meta.json",
+      "sha256": "29aec813d1192d076f09dd3403c9614d075f49718d89e89ab55a11ecb6eda120",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/results/unbound_w2_n1.3_meta.json",
+      "archived_path": "archive/pre-gross/research/source/formation/results/unbound_w2_n1.3_meta.json",
+      "sha256": "0961d1ebb7009c71fc053cdd638e367620d57de048eee0e438f93ac23f12679c",
+      "size": 239,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_all.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_all.py",
+      "sha256": "ddadef8b0465d726a6ef43d8e6b9486042afad94948a6e191cfe67cc5b20a577",
+      "size": 827,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_checks.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_checks.py",
+      "sha256": "2c4011b8d68facfb96cac5c730ed42873e661a5b7332eaea0193dd37b4cf0257",
+      "size": 1332,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_extra.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_extra.py",
+      "sha256": "17e0b2ed8a7301d42b898bf60cc36fa2c26dcf989b09478f54dc4878b02f9fe9",
+      "size": 297,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_long_validation.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_long_validation.py",
+      "sha256": "c8ef18f557320a57525dcbb34a6990683695b5e79416989018505890186e2158",
+      "size": 596,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_protocol_refinement.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_protocol_refinement.py",
+      "sha256": "34be8957e609c6d2ca3187937e1a24689cc32bd83a3f0de464b1e30b6f105867",
+      "size": 761,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_refined_scan.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_refined_scan.py",
+      "sha256": "2d0a9d097e0f024891a6e5e1b2990bf576cd329c2f15b93386f14497f10858c5",
+      "size": 622,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/formation/run_scan.py",
+      "archived_path": "archive/pre-gross/research/source/formation/run_scan.py",
+      "sha256": "3d8fd5c37c989cc02f20fa85d135699827d506d497e533c0ddcc75b9d795490a",
+      "size": 612,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/ARCHITECTURE_REVIEW.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/ARCHITECTURE_REVIEW.md",
+      "sha256": "6b98d2d88b6794e526044c7aceda573b98f0afcfe6cb69d08a53ea0ddd70b9e6",
+      "size": 9736,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/CHANGELOG.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/CHANGELOG.md",
+      "sha256": "5d2a6732770d60c102ad79dac9b75de063f91d0686841a6842f579d79bda58b3",
+      "size": 744,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/CLAIM_LEDGER.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/CLAIM_LEDGER.md",
+      "sha256": "7c671696fdea505de31612ed0499941109a70e830840918381aa3075430b30fb",
+      "size": 3725,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/README.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/README.md",
+      "sha256": "33216ead751590617f9aa3355e10ed4cc19f161151eb3b99205016323d5bac9e",
+      "size": 3146,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/SOURCE_PROVENANCE.json",
+      "archived_path": "archive/pre-gross/research/source/part-ii/SOURCE_PROVENANCE.json",
+      "sha256": "3ec5777302e98a499fb7a395e05333f135df9dcf9121efeb502272102d1b4247",
+      "size": 655,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/Signal_Space_Part_II_Signal_States_Lorentz_Cones_and_Operational_Clocks.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/Signal_Space_Part_II_Signal_States_Lorentz_Cones_and_Operational_Clocks.md",
+      "sha256": "524b626df8d0a0c3daaf264c95a160d8cbf3dbe3c4c1089c73735c30baa00e7e",
+      "size": 61714,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/VALIDATION.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/VALIDATION.md",
+      "sha256": "07e3a89feda32e36b59192691b60395ac3e2c7042b0a035a62250966655da046",
+      "size": 729,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/build.py",
+      "archived_path": "archive/pre-gross/research/source/part-ii/build.py",
+      "sha256": "deccff537ae8e305d7bcef19e5bbe1ea8c97369729726a0a5a56bdf8be41fec3",
+      "size": 828,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/figures/clock_comparison.pdf",
+      "archived_path": "archive/pre-gross/research/source/part-ii/figures/clock_comparison.pdf",
+      "sha256": "8f4cfb7efd61fafc074d76478a1abc7214f0b893805f937c5e0ed2312b842bd0",
+      "size": 17208,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/figures/clock_comparison.png",
+      "archived_path": "archive/pre-gross/research/source/part-ii/figures/clock_comparison.png",
+      "sha256": "722495776eb6d7c3027bb87c1f0dca0884430ed18c9f414f1b97a569259eeb90",
+      "size": 109988,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/metadata.yaml",
+      "archived_path": "archive/pre-gross/research/source/part-ii/metadata.yaml",
+      "sha256": "b4ae6370da39bbc6a5ca1f8d5ccf8ebb13b9c2b522e7611161e9bf68adb20b2f",
+      "size": 847,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/results.json",
+      "archived_path": "archive/pre-gross/research/source/part-ii/results.json",
+      "sha256": "76d88dc5bb8e2fe2f80965d985cf00ec0217df2d9fed62e3345f291191fc50f2",
+      "size": 2142,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/00_abstract.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/00_abstract.md",
+      "sha256": "7d5837f375aa2d8f8c0bd0c4d7a918b5643e90cc88f8a4c0de4c57c046ddc46c",
+      "size": 2539,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/01_introduction.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/01_introduction.md",
+      "sha256": "7a01ea0738c6b4c1df5c6f674f7aedf779adf1d7b15acde39224231a12706285",
+      "size": 3328,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/02_interfaces.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/02_interfaces.md",
+      "sha256": "4385f63febfe97578cb88032a36065282481e1aaf67db11e17de667aa78b240a",
+      "size": 4347,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/03_signal_operator.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/03_signal_operator.md",
+      "sha256": "2ba9becaf495c2958ff48ca32236be482636f1b9d798daf3435989d69d40ef21",
+      "size": 4714,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/04_cone.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/04_cone.md",
+      "sha256": "516c1d6313c6ef5f1588bc871a96ec97bb430e7bc1a5edf1520885c2c0461284",
+      "size": 4439,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/05_covariance.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/05_covariance.md",
+      "sha256": "3bedfaefa03e96c9f1da4ac73e9016af48c9b484f6e45b7d62d6e6ede5a9b262",
+      "size": 3980,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/06_count_clocks.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/06_count_clocks.md",
+      "sha256": "81ee376de3478084393038f23c4396cdafa2e9e725b9750b8b834b619d47fd68",
+      "size": 5434,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/07_echoes.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/07_echoes.md",
+      "sha256": "35e2fcab3980e878bd2448435b1b67a080e6370280444fe03bc23f39f837f25b",
+      "size": 3450,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/08_phase_clock.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/08_phase_clock.md",
+      "sha256": "9531cb295a2ecd0d344a94457cba556187878555d676808613b87af6be840f8b",
+      "size": 6858,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/09_benchmark.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/09_benchmark.md",
+      "sha256": "43b5095a1028fa229ec6fdcaaf6a9aeb1becacfa2228bfaeabcac9048fd0328e",
+      "size": 5138,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/10_geometry.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/10_geometry.md",
+      "sha256": "8a70254b367985fb8e7a10121fae74c7dfc67ac31175b7281e2e794fffd4f79f",
+      "size": 5510,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/11_entropy.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/11_entropy.md",
+      "sha256": "67742ac299957bf70ec8297294eb27f8c7e0405cbb915a5352c1eb42cc460bed",
+      "size": 2623,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/12_discussion.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/12_discussion.md",
+      "sha256": "bde30f2a149467d480cdf0da0d0958d3c396d08166fba920c1a05be443d4c6e0",
+      "size": 6007,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/sections/13_references.md",
+      "archived_path": "archive/pre-gross/research/source/part-ii/sections/13_references.md",
+      "sha256": "157907830dbd863f7e6539f91988dc0d553cdbda01c8b02cf0ee9ba7ae6829df",
+      "size": 2486,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/part-ii/verify.py",
+      "archived_path": "archive/pre-gross/research/source/part-ii/verify.py",
+      "sha256": "d39177aca3abed5ad052e753647b35e7d6f79e4836c0a97b36c0afc43ce77cae",
+      "size": 6263,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/README.md",
+      "archived_path": "archive/pre-gross/research/source/radiation/README.md",
+      "sha256": "b8c278da9ca0d857efcfe78b2b1208ca2178b11b10d326850a90ea061ba4d1b1",
+      "size": 4982,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/analyze_spectrum.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/analyze_spectrum.py",
+      "sha256": "7424e590934fc44c15732e45fa23a16e9fb16d83b80c635b6bc03a1a0f29b9b7",
+      "size": 5092,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/deliverables/Signal_Space_Charged_Clock_Radiation_Diagnostics.png",
+      "archived_path": "archive/pre-gross/research/source/radiation/deliverables/Signal_Space_Charged_Clock_Radiation_Diagnostics.png",
+      "sha256": "61017883243d34899988c68e96b4124eb481dfee883b4484783aaa2d168da828",
+      "size": 334751,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/deliverables/Signal_Space_Charged_Clock_Radiation_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/radiation/deliverables/Signal_Space_Charged_Clock_Radiation_Milestone.md",
+      "sha256": "e09ac2398c62a1c77324850acfc312d1f6a66933e9b99b5d7ed226d9533572f8",
+      "size": 22243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/diagnostics.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/diagnostics.py",
+      "sha256": "beeb275dfee82801664026c65b7aaa03ccf128fc6db32306b43a182b53273650",
+      "size": 3271,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/environment.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/environment.json",
+      "sha256": "9058ce1783ed88fc4ad6a8ec911c8f85a6f591d71a40944018c005d3985cc74a",
+      "size": 120,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/evolve_spectrum.cpp",
+      "archived_path": "archive/pre-gross/research/source/radiation/evolve_spectrum.cpp",
+      "sha256": "4a4a51e1760ee22c22b63ff6b5a2ded56142981d7452a03e1b1e8c544ecaa03a",
+      "size": 3067,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/inputs/Signal_Space_Charged_Clock_Formation_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/radiation/inputs/Signal_Space_Charged_Clock_Formation_Milestone.md",
+      "sha256": "c1fed799aaee9f4a565476654883184057b2774304cf889f36013bc35c77ae53",
+      "size": 33897,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/inputs/Signal_Space_Charged_Clock_Stability_Milestone.md",
+      "archived_path": "archive/pre-gross/research/source/radiation/inputs/Signal_Space_Charged_Clock_Stability_Milestone.md",
+      "sha256": "c205f5c07c31323c6659c44c6721ebf4925f88a211ba8591555bddc6e4ded06b",
+      "size": 18088,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/inputs/Signal_Space_Ordered_Reception_Charged_Clock_Model.md",
+      "archived_path": "archive/pre-gross/research/source/radiation/inputs/Signal_Space_Ordered_Reception_Charged_Clock_Model.md",
+      "sha256": "c832dced7f8c4f417bb72d29f0c4b1dc2b5413b86fc8056590bff9454c1807cb",
+      "size": 25248,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/inputs/formation_metadata.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/inputs/formation_metadata.json",
+      "sha256": "09a00e84499b41672cef690658e0c604395e66dc09335a43c478e256f316ba9d",
+      "size": 243,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/make_figure.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/make_figure.py",
+      "sha256": "767723205332533c2b4cb3df1697a244333caa34a561c3774ff818e4908d860f",
+      "size": 3153,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/make_report.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/make_report.py",
+      "sha256": "2f90ea5a700bcf28baed7a97feb24ab8136d7e6954bcb0373bc6f87311609c8e",
+      "size": 22902,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/package_results.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/package_results.py",
+      "sha256": "9ed56fc6784659961fbf820020372d109f768587029997c2316ae7ac19977dfa",
+      "size": 1705,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/results/diagnostics.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/results/diagnostics.json",
+      "sha256": "fb8b7a879cdcee8febe00f8b83ce585704c6b17c35d75f94dd437e8f7dbf5cbb",
+      "size": 5323,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/results/kick_coarse_200_1000_spectrum.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/results/kick_coarse_200_1000_spectrum.json",
+      "sha256": "b264e6a6966dce74db9eea50faafc49e64aa15dd26ee597bbba50509c5f69960",
+      "size": 17590,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/results/kick_fine_200.0_600.0_spectrum.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/results/kick_fine_200.0_600.0_spectrum.json",
+      "sha256": "f7f1c51993477f6a8ff8e0b262a1baa57558bddc53dde22f27eb6da7182ab612",
+      "size": 17576,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/results/kick_fine_200_1000_spectrum.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/results/kick_fine_200_1000_spectrum.json",
+      "sha256": "96c42198b4e4159f2e4b527f193bbdd0fa26418acfc182d6b0456111e5727b76",
+      "size": 17593,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/results/kick_fine_600.0_1000.0_spectrum.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/results/kick_fine_600.0_1000.0_spectrum.json",
+      "sha256": "7ac9084674f8787d38fac141d09c17e02c79c51cdc51e1ee5a2d5a7551d78a59",
+      "size": 17582,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/results/kick_timefine_200_1000_spectrum.json",
+      "archived_path": "archive/pre-gross/research/source/radiation/results/kick_timefine_200_1000_spectrum.json",
+      "sha256": "f77769c5c9a93040123454f35768a7e602d9f9a0bfc68e6780faae38e9823255",
+      "size": 17563,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/run_all.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/run_all.py",
+      "sha256": "4f2f9772954d1900395b43f5ba1096067bfe428b4ebaec2733ac64822ee1a28f",
+      "size": 773,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/source/radiation/run_kick.py",
+      "archived_path": "archive/pre-gross/research/source/radiation/run_kick.py",
+      "sha256": "6654752c6c6c96296db06b06da7dccf38aef0ec0e0d73a1ecb0d139715291c64",
+      "size": 497,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/figures/charged-clock-damping-diagnostics.png",
+      "archived_path": "archive/pre-gross/research/figures/charged-clock-damping-diagnostics.png",
+      "sha256": "6cab64b357b61addc753d76beeb4aa2671f5feac9fa33ec9020ac60adc829be9",
+      "size": 422953,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/figures/charged-clock-radiation-diagnostics.png",
+      "archived_path": "archive/pre-gross/research/figures/charged-clock-radiation-diagnostics.png",
+      "sha256": "61017883243d34899988c68e96b4124eb481dfee883b4484783aaa2d168da828",
+      "size": 334751,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/figures/formation-diagnostics.png",
+      "archived_path": "archive/pre-gross/research/figures/formation-diagnostics.png",
+      "sha256": "c0af0ce9ec26d286f0c19e51eb02535c33c82ce8fb28f1e0858e81dca3052dcf",
+      "size": 439200,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/figures/formation-readout.png",
+      "archived_path": "archive/pre-gross/research/figures/formation-readout.png",
+      "sha256": "c28ab265427357c300b6c8f4a375103222df95818a8309e5601718f95640a94d",
+      "size": 181414,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/figures/formation-scan.png",
+      "archived_path": "archive/pre-gross/research/figures/formation-scan.png",
+      "sha256": "da553b904bcfbc29ef012d7bb6471994ed6077a4dcfa86da1516331ca48b3edb",
+      "size": 158617,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/milestones/charged-clock-damping.md",
+      "archived_path": "archive/pre-gross/research/milestones/charged-clock-damping.md",
+      "sha256": "196a058bbb647e43f61ab68d964a1b46ff9edb2ce38e4e45d5a798a25db266ac",
+      "size": 22323,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/milestones/charged-clock-formation.md",
+      "archived_path": "archive/pre-gross/research/milestones/charged-clock-formation.md",
+      "sha256": "afc8593591a4cf92eb515063eca82f4065daa3b29024cadcb571fc558264e9ec",
+      "size": 39515,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/milestones/charged-clock-radiation.md",
+      "archived_path": "archive/pre-gross/research/milestones/charged-clock-radiation.md",
+      "sha256": "671ad92eb632f4732cd13160eb404849e460ec037eee6031e4a652b97c9b26f0",
+      "size": 22875,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/research-coach-persona.md",
+      "archived_path": "archive/pre-gross/research/research-coach-persona.md",
+      "sha256": "c36cbf8345acf5811c032f8203f668a2176b42c21670ce7e2288dd4ec39d4361",
+      "size": 17994,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/papers/charged-recurrence-winding-hopf.md",
+      "archived_path": "archive/pre-gross/research/papers/charged-recurrence-winding-hopf.md",
+      "sha256": "acd3fa281c950f104ec59dfb34dff82a76a56b6f90f44b245aa47a2bd430264f",
+      "size": 38095,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/papers/full-theory-research-architecture.md",
+      "archived_path": "archive/pre-gross/research/papers/full-theory-research-architecture.md",
+      "sha256": "7064a27c14e9c81a6d957c34239155bff09b8fb6a4816f69e108fa881271221b",
+      "size": 35055,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/papers/knot-to-standard-model-research-grid.md",
+      "archived_path": "archive/pre-gross/research/papers/knot-to-standard-model-research-grid.md",
+      "sha256": "bb36ba0253052f9417a7921730cf18211516861aa110f5aec360652d5c8efaf9",
+      "size": 35352,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": "research/papers/signal-states-lorentz-cones-operational-clocks.md",
+      "archived_path": "archive/pre-gross/research/papers/signal-states-lorentz-cones-operational-clocks.md",
+      "sha256": "076ac322d1ffce3094a497440663f2179d133a493edd9a230cedca823593fa77",
+      "size": 62031,
+      "disposition": "moved",
+      "category": "superseded"
+    },
+    {
+      "original_path": ".github/workflows/recover-transfer.yml",
+      "archived_path": "archive/pre-gross/.github/workflows/recover-transfer.yml",
+      "sha256": "8b50b145ee3a8db1a045600609d1ce75fbe7afa6146543745a6ce5f220c87801",
+      "size": 4283,
+      "disposition": "moved",
+      "category": "retired GROSS recovery tool"
+    },
+    {
+      "original_path": ".agents/scripts/archive_transfer_recovery.py",
+      "archived_path": "archive/pre-gross/.agents/scripts/archive_transfer_recovery.py",
+      "sha256": "e9a9609fdcbc7a9302d07756dcd0b7ea57c19297d812de829f82e6847a5668c5",
+      "size": 7488,
+      "disposition": "moved",
+      "category": "retired GROSS recovery tool"
+    }
+  ]
+}

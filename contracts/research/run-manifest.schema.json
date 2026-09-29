@@ -32,47 +32,112 @@
     "checksum_path"
   ],
   "properties": {
-    "schema_version": { "const": "research-run-manifest-v1" },
-    "package_version": { "const": 1 },
-    "experiment_id": { "type": "string", "minLength": 1 },
-    "experiment_version": { "type": "string", "minLength": 1 },
-    "model_id": { "type": "string", "minLength": 1 },
-    "run_id": { "type": "string", "pattern": "^run-[a-f0-9]{16}$" },
-    "parent_run_id": { "type": ["string", "null"] },
-    "created_at": { "type": "string", "format": "date-time" },
-    "updated_at": { "type": "string", "format": "date-time" },
-    "technical_state": { "$ref": "#/$defs/technicalState" },
-    "scientific_classification": { "$ref": "#/$defs/scientificClassification" },
-    "config_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "config_path": { "const": "resolved-config.json" },
-    "code_identity": { "$ref": "#/$defs/codeIdentity" },
-    "execution_identity": { "$ref": "#/$defs/executionIdentity" },
-    "seed_algorithm": { "const": "sha256-stream-v1" },
-    "seed_ledger": { "$ref": "#/$defs/seedLedger" },
+    "schema_version": {
+      "const": "research-run-manifest-v1"
+    },
+    "package_version": {
+      "const": 1
+    },
+    "experiment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "experiment_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-[a-f0-9]{16}$"
+    },
+    "parent_run_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "technical_state": {
+      "$ref": "#/$defs/technicalState"
+    },
+    "scientific_classification": {
+      "$ref": "#/$defs/scientificClassification"
+    },
+    "config_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "config_path": {
+      "const": "resolved-config.json"
+    },
+    "code_identity": {
+      "$ref": "#/$defs/codeIdentity"
+    },
+    "execution_identity": {
+      "$ref": "#/$defs/executionIdentity"
+    },
+    "seed_algorithm": {
+      "const": "sha256-stream-v1"
+    },
+    "seed_ledger": {
+      "$ref": "#/$defs/seedLedger"
+    },
     "attempts": {
       "type": "array",
-      "items": { "$ref": "#/$defs/attempt" }
+      "items": {
+        "$ref": "#/$defs/attempt"
+      }
     },
     "analyses": {
       "type": "array",
-      "items": { "$ref": "#/$defs/analysis" }
+      "items": {
+        "$ref": "#/$defs/analysis"
+      }
     },
     "reports": {
       "type": "array",
-      "items": { "$ref": "#/$defs/report" }
+      "items": {
+        "$ref": "#/$defs/report"
+      }
     },
     "artifacts": {
       "type": "array",
-      "items": { "$ref": "artifact.schema.json" }
+      "items": {
+        "$ref": "artifact.schema.json"
+      }
     },
     "acceptance_criteria": {
       "type": "array",
-      "items": { "$ref": "#/$defs/acceptanceCriterion" }
+      "items": {
+        "$ref": "#/$defs/acceptanceCriterion"
+      }
     },
-    "completeness": { "$ref": "#/$defs/completeness" },
-    "known_gaps": { "type": "array", "items": { "type": "string" } },
-    "checksum_algorithm": { "const": "sha256" },
-    "checksum_path": { "const": "checksums.sha256" }
+    "completeness": {
+      "$ref": "#/$defs/completeness"
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "checksum_algorithm": {
+      "const": "sha256"
+    },
+    "checksum_path": {
+      "const": "checksums.sha256"
+    }
   },
   "$defs": {
     "technicalState": {
@@ -90,7 +155,12 @@
       ]
     },
     "scientificClassification": {
-      "enum": ["pass", "fail", "unresolved", "not-evaluated"]
+      "enum": [
+        "pass",
+        "fail",
+        "unresolved",
+        "not-evaluated"
+      ]
     },
     "codeIdentity": {
       "type": "object",
@@ -102,16 +172,32 @@
         "runtime_version"
       ],
       "properties": {
-        "revision": { "type": "string" },
-        "tree_state": { "enum": ["clean", "dirty", "unknown"] },
-        "dirty_patch_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-        "runtime_version": { "type": "string" }
+        "revision": {
+          "type": "string"
+        },
+        "tree_state": {
+          "enum": [
+            "clean",
+            "dirty",
+            "unknown"
+          ]
+        },
+        "dirty_patch_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "runtime_version": {
+          "type": "string"
+        }
       }
     },
     "executionIdentity": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["environment", "dependencies"],
+      "required": [
+        "environment",
+        "dependencies"
+      ],
       "properties": {
         "environment": {
           "type": "object",
@@ -125,32 +211,81 @@
             "accelerator"
           ],
           "properties": {
-            "python": { "type": "string" },
-            "implementation": { "type": "string" },
-            "os": { "type": "string" },
-            "architecture": { "type": "string" },
+            "python": {
+              "type": "string"
+            },
+            "implementation": {
+              "type": "string"
+            },
+            "os": {
+              "type": "string"
+            },
+            "architecture": {
+              "type": "string"
+            },
             "numeric_libraries": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["numpy", "matplotlib"],
+              "required": [
+                "numpy",
+                "matplotlib"
+              ],
               "properties": {
-                "numpy": { "type": "string" },
-                "matplotlib": { "type": "string" },
-                "numba": { "type": "string" },
-                "llvmlite": { "type": "string" },
-                "scipy": { "type": "string" }
+                "numpy": {
+                  "type": "string"
+                },
+                "matplotlib": {
+                  "type": "string"
+                },
+                "numba": {
+                  "type": "string"
+                },
+                "llvmlite": {
+                  "type": "string"
+                },
+                "scipy": {
+                  "type": "string"
+                }
               }
             },
-            "accelerator": { "type": "string" }
+            "accelerator": {
+              "type": "string"
+            },
+            "execution_policy": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "threads",
+                "case_jobs"
+              ],
+              "properties": {
+                "threads": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "case_jobs": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
           }
         },
         "dependencies": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["path", "sha256"],
+          "required": [
+            "path",
+            "sha256"
+          ],
           "properties": {
-            "path": { "type": "string" },
-            "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            "path": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
           }
         }
       }
@@ -158,32 +293,75 @@
     "seedLedger": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["initialization", "perturbations", "sampling", "analysis"],
+      "required": [
+        "initialization",
+        "perturbations",
+        "sampling",
+        "analysis"
+      ],
       "properties": {
-        "initialization": { "type": "integer", "minimum": 0 },
-        "perturbations": { "type": "integer", "minimum": 0 },
-        "sampling": { "type": "integer", "minimum": 0 },
-        "analysis": { "type": "integer", "minimum": 0 }
+        "initialization": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "perturbations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sampling": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "analysis": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
     },
     "checkpoint": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["path", "sha256", "step"],
+      "required": [
+        "path",
+        "sha256",
+        "step"
+      ],
       "properties": {
-        "path": { "type": "string" },
-        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-        "step": { "type": "integer", "minimum": 0 }
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "step": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
     },
     "failure": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["code", "recoverable", "message"],
+      "required": [
+        "code",
+        "recoverable",
+        "message"
+      ],
       "properties": {
-        "code": { "type": "string", "minLength": 1 },
-        "recoverable": { "type": "boolean" },
-        "message": { "type": ["string", "null"] }
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recoverable": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "attempt": {
@@ -201,8 +379,16 @@
         "failure"
       ],
       "properties": {
-        "attempt_id": { "type": "string", "pattern": "^attempt-[0-9]{4,}$" },
-        "parent_attempt_id": { "type": ["string", "null"] },
+        "attempt_id": {
+          "type": "string",
+          "pattern": "^attempt-[0-9]{4,}$"
+        },
+        "parent_attempt_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "state": {
           "enum": [
             "prepared",
@@ -213,15 +399,43 @@
             "failed"
           ]
         },
-        "path": { "type": "string", "pattern": "^attempts/attempt-[0-9]{4,}$" },
-        "created_at": { "type": "string", "format": "date-time" },
-        "updated_at": { "type": "string", "format": "date-time" },
-        "exit_code": { "type": ["integer", "null"] },
+        "path": {
+          "type": "string",
+          "pattern": "^attempts/attempt-[0-9]{4,}$"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exit_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
         "checkpoint": {
-          "anyOf": [{ "$ref": "#/$defs/checkpoint" }, { "type": "null" }]
+          "anyOf": [
+            {
+              "$ref": "#/$defs/checkpoint"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "failure": {
-          "anyOf": [{ "$ref": "#/$defs/failure" }, { "type": "null" }]
+          "anyOf": [
+            {
+              "$ref": "#/$defs/failure"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       }
     },
@@ -242,7 +456,9 @@
         "supersedes"
       ],
       "properties": {
-        "schema_version": { "const": "research-analysis-v1" },
+        "schema_version": {
+          "const": "research-analysis-v1"
+        },
         "analysis_id": {
           "type": "string",
           "pattern": "^analysis-[a-zA-Z0-9._-]+$"
@@ -251,7 +467,10 @@
           "type": "string",
           "pattern": "^analyses/analysis-[a-zA-Z0-9._-]+$"
         },
-        "created_at": { "type": "string", "format": "date-time" },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
         "input_artifacts": {
           "type": "object",
           "additionalProperties": {
@@ -259,12 +478,27 @@
             "pattern": "^[a-f0-9]{64}$"
           }
         },
-        "raw_source": { "type": "string" },
-        "parameters": { "type": "object" },
-        "code_identity": { "$ref": "#/$defs/codeIdentity" },
-        "classification": { "$ref": "#/$defs/scientificClassification" },
-        "summary": { "type": "object" },
-        "supersedes": { "type": ["string", "null"] }
+        "raw_source": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object"
+        },
+        "code_identity": {
+          "$ref": "#/$defs/codeIdentity"
+        },
+        "classification": {
+          "$ref": "#/$defs/scientificClassification"
+        },
+        "summary": {
+          "type": "object"
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "report": {
@@ -281,20 +515,47 @@
         "render_provenance"
       ],
       "properties": {
-        "schema_version": { "const": "research-report-v1" },
-        "report_id": { "type": "string", "pattern": "^report-[0-9]{4,}$" },
-        "analysis_id": { "type": "string" },
-        "path": { "type": "string", "pattern": "^reports/report-[0-9]{4,}$" },
-        "created_at": { "type": "string", "format": "date-time" },
-        "required_inputs": { "type": "array", "items": { "type": "string" } },
-        "outputs": { "type": "object" },
+        "schema_version": {
+          "const": "research-report-v1"
+        },
+        "report_id": {
+          "type": "string",
+          "pattern": "^report-[0-9]{4,}$"
+        },
+        "analysis_id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^reports/report-[0-9]{4,}$"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputs": {
+          "type": "object"
+        },
         "render_provenance": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["code_identity", "execution_identity"],
+          "required": [
+            "code_identity",
+            "execution_identity"
+          ],
           "properties": {
-            "code_identity": { "$ref": "#/$defs/codeIdentity" },
-            "execution_identity": { "$ref": "#/$defs/executionIdentity" }
+            "code_identity": {
+              "$ref": "#/$defs/codeIdentity"
+            },
+            "execution_identity": {
+              "$ref": "#/$defs/executionIdentity"
+            }
           }
         }
       }
@@ -302,11 +563,26 @@
     "acceptanceCriterion": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "description", "evidence"],
+      "required": [
+        "id",
+        "description",
+        "evidence"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "description": { "type": "string", "minLength": 1 },
-        "evidence": { "type": ["string", "null"] }
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "completeness": {
@@ -320,11 +596,21 @@
         "report"
       ],
       "properties": {
-        "config": { "type": "boolean" },
-        "provenance": { "type": "boolean" },
-        "attempts_terminal": { "type": "boolean" },
-        "analysis": { "type": "boolean" },
-        "report": { "type": "boolean" }
+        "config": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "type": "boolean"
+        },
+        "attempts_terminal": {
+          "type": "boolean"
+        },
+        "analysis": {
+          "type": "boolean"
+        },
+        "report": {
+          "type": "boolean"
+        }
       }
     }
   }

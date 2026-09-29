@@ -1,0 +1,133 @@
+# Signal Space
+
+Signal Space is a computational research program testing whether local, finite-speed reception dynamics can support stable recurrence structures, topology-constrained matter states, and—only after explicit derivation gates—the gauge and gravitational limits of known physics.
+
+The project is deliberately organized around questions and falsifiable experiments rather than particle-name correspondences. Knot or winding topology may constrain a state space; it does not, by itself, produce a gauge theory, fermions, or the Standard Model.
+
+## Current research position
+
+The working hypothesis is that a complete finite-energy recurrence can carry protected winding and coherent internal response modes. In the hadronic branch, effective quark labels are treated as responses of the complete object, not as three independently postulated classical knots.
+
+What is established in the imported record is narrower:
+
+- selected 1+1-dimensional charged formation and phase-sensitive interaction results;
+- weak structural radiation and damping diagnostics for that model family;
+- an operational positive-signal construction, Lorentz-cone representation, and clock-calibration analysis;
+- explicit 3+1-dimensional charged and Hopf model proposals that still require independent numerical tests.
+
+Stable three-dimensional charged branches, charged–Hopf binding, fermionic quantization, emergent gauge fields, chiral matter, and a common gravitational limit remain open. The repository must preserve that boundary between result, proposal, and conjecture.
+
+## Program map
+
+| Area                  | Purpose                                                                                | Start here                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Research architecture | Shared runtime, model plugins, audit trail, analysis, reports, and UI boundaries       | [`docs/research/architecture.md`](docs/research/architecture.md)           |
+| E00 runtime guide     | Install, lifecycle CLI/API, recovery, extension workflow, and reproducibility limits   | [`docs/research/runtime.md`](docs/research/runtime.md)                     |
+| Artifact contract     | Immutable run packages, provenance, checksums, figures, reports, and claims            | [`docs/research/artifact-contract.md`](docs/research/artifact-contract.md) |
+| Experiment workflow   | Locked plans, question-driven visuals, and standard reader exports                     | [`.agents/output-contract.md`](.agents/output-contract.md)                 |
+| Experiment sequence   | Ordered gates from synthetic fixture through integrated theory tests                   | [`docs/research/experiment-plan.md`](docs/research/experiment-plan.md)     |
+| First experiment      | Three-dimensional charged recurrence branch and constrained stability protocol         | [`docs/research/first-experiment.md`](docs/research/first-experiment.md)   |
+| Theory and evidence   | Papers, milestones, figures, source code, configurations, and compact results          | [`research/README.md`](research/README.md)                                 |
+| Local UI              | Prepare, run, audit, compare, report, and browse evidence through the loopback runtime | [`docs/research/ui.md`](docs/research/ui.md)                               |
+
+The first implementation issues are [#37 common framework](https://github.com/Brain-Crumbs/Signal-Space/issues/37), [#38 research UI](https://github.com/Brain-Crumbs/Signal-Space/issues/38), and [#39 E01 charged branch](https://github.com/Brain-Crumbs/Signal-Space/issues/39).
+
+## Repository layout
+
+```text
+apps/
+  cli/                 Historical CLI plus thin `research` runtime adapter
+  web/                 Local research browser and historical workspace
+contracts/research/    Authoritative versioned runtime and artifact schemas
+docs/research/         Architecture and experiment protocols
+packages/              Historical delay-network model and shared UI engine
+python/signal_space/   Scientific plugins, bounded runtime, analysis, reports, service
+research/
+  papers/              Theory manuscripts and research assessments
+  milestones/          Executed-result reports
+  figures/             Curated diagnostic figures
+  source/              Reproducibility code, configs, manifests, compact outputs
+  experiments/         Accepted immutable run packages
+```
+
+The existing TypeScript delay-network implementation is preserved as a separately labeled historical workspace. It is not the numerical foundation for the new charged-recurrence and knot program.
+
+## Operator program experiments
+
+The GROSS operator program uses the same research runtime with separately versioned models. See the [source program](research/papers/gross-operator-program-v0.2.md), [Test 1 protocol](docs/research/gross-test-01.md), and [Tests 1-11 progress ledger](docs/research/gross-progress.md). The operator identity experiment checks algebra only; it does not register either candidate's dynamical solver.
+
+Run the locked Test 1 on demand with [GitHub Actions](docs/research/github-actions.md). Each run produces downloadable evidence and reader packages; selected results can be checked in afterward.
+
+## Quick start
+
+Install Node **24.19.0** (see `.nvmrc`), npm **11.9.0**, and Python **3.12**, then:
+
+```sh
+npm ci
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r python/requirements-lock.txt
+python -m pip install -e python --no-deps
+npm run verify:research
+npm run check
+npm run dev -- --host 127.0.0.1 --port 5173
+```
+
+In a second terminal, start the origin-bound runtime with a stable local port:
+
+```sh
+npm run research -- --workspace .research-work serve \
+  --origin http://127.0.0.1:5173 \
+  --port 8765
+```
+
+Open the Vite URL, leave the runtime API field set to `/runtime`, and enter the printed ephemeral bearer token. The same-origin Vite proxy also supports forwarded development URLs such as Codespaces; do not connect through a separately forwarded port 8765 URL. The UI can prepare, validate, execute, cancel, resume, audit, compare, analyze, and regenerate reports for registered framework experiments. It also searches papers, milestones, figures, source collections, and their cataloged relationships. See the [local workspace guide](docs/research/ui.md) and [E00 runtime guide](docs/research/runtime.md).
+
+Run the synthetic framework fixture, which makes no physics claim:
+
+```sh
+npm run research -- validate --config fixtures/research/synthetic.json
+npm run research -- estimate --config fixtures/research/synthetic.json
+npm run research -- --workspace .research-work run --config fixtures/research/synthetic.json
+```
+
+The first physical experiment is implemented and ready for an author-launched run. See [Running E01](docs/research/e01-running.md) for the opt-in research preset, headless commands, numerical decisions and unresolved-result interpretation. No research-scale E01 scan is included in this implementation.
+
+The historical workspace remains available on the same page. Its direct CLI commands are unchanged:
+
+```sh
+npm run cli -- --sample isolated
+npm run cli -- --sample pair --until 1
+```
+
+## Research discipline
+
+Every experiment must:
+
+1. begin with a declared model/action, units, boundary conditions, and input ledger;
+2. define success, failure, and unresolved outcomes before the expensive run;
+3. use independent analytic, convergence, conservation, and negative controls;
+4. preserve seeds, solver state, failures, and incomplete sweep coverage;
+5. separate raw outputs, derived analysis, figures, and scientific claims;
+6. regenerate reports without rerunning the physical simulation;
+7. compare against held-out observables only after calibrations are frozen.
+
+Negative and unresolved results are valid completed experiments. A visual resemblance, fitted particle label, or post-hoc numerical coincidence is not a derivation.
+
+## Validation
+
+```sh
+npm run verify:research
+npm run check
+npx playwright install --with-deps chromium
+npm run test:browser
+git diff --check
+```
+
+`verify:research` checks the catalog and byte-level archive manifest. `check` runs formatting, lint, strict type checking, generated contract checks, historical and E00 lifecycle tests, and production builds. Browser tests exercise the built worker, schema-driven research journey, interruption/resume audit, reports, narrow screens, keyboard access, and research explorer.
+
+GitHub CI runs formatting, lint, type checking, generated-contract and research-file validation, builds, and the CLI sample. Automated test suites (JavaScript/TypeScript, Python, experiment-contract fixtures, and Playwright) run locally via the commands above; CI does not invoke them. The manual **Run experiment** workflow remains available for scientific runs and downloadable results.
+
+## Data policy
+
+Git stores manuscripts, source, configurations, compact tabular/JSON results, report code, and curated figures. Large field arrays, probe streams, and transient binaries belong in immutable external run packages identified by hashes; accepted run summaries and manifests are archived under `research/experiments/`. This prevents Git history from becoming the raw-data backend while keeping every accepted claim traceable.

@@ -1,46 +1,72 @@
 # Signal Space contributor instructions
 
-Read parent issue #1, your assigned child, its dependencies and this file before editing. Work on an issue-focused branch and PR; preserve others' changes. Do not merge or deploy unless separately authorized.
+## Authority and scope
 
-## Active research program
+GROSS is the sole active Signal Space implementation and research campaign.
+Read `research/papers/gross-operator-program-v0.2.md`, the current protocol,
+`docs/research/gross-progress.md`, `docs/research/architecture.md`, and
+`docs/research/artifact-contract.md` before changing the model or runner.
+Issue #1 and everything under `archive/` are historical evidence, not current
+requirements. Do not import archived code or silently reuse historical equations.
 
-- Signal Space is the sole active program name in new documentation, code, schemas, and UI copy. Historical artifacts may be preserved, but do not extend superseded names into new work.
-- Read `docs/research/architecture.md`, `docs/research/artifact-contract.md`, and the relevant experiment protocol before changing the new research framework.
-- The historical delay-network implementation and its Paper I task tree remain separate from the charged-recurrence, winding, and knot program. Do not silently reuse its equations or close its issues from new-model work.
-- Treat the research catalog as evidence, not as established truth. Preserve each source's status and distinguish executed results, proposed models, assessments, and conjectures.
-- New experiments use registered model and experiment IDs, immutable run packages, append-only attempts/events, independent analyses, and reports regenerated from saved outputs.
-- For new end-to-end experiment requests, use `.agents/skills/experiment-pipeline/SKILL.md` and `.agents/output-contract.md`. Lock the question, competing hypotheses, criteria, controls, and visual plan before executing. Validate reader exports with `.agents/scripts/experiment_contract.py`; retain the canonical run package as evidence.
-- Never infer gauge structure, particle identity, stability, topology, or a continuum limit from visual resemblance. Link every scientific classification to preregistered checks and uncertainty.
+Work on a feature branch and commit coherent tasks. Preserve others' work and
+all canonical GROSS evidence. Do not merge or deploy without authorization.
 
-## Scientific scope
+## Active implementation
 
-- Use the `paper-i-v1` contract and the source provenance in `docs/paper-i-traceability.md`. The current Paper I manuscript is not committed. Paper III and the original galaxy-rotation paper are different scopes.
-- Record material ambiguities as explicit decisions. Never silently add forces, phase resets, readable source labels, synchronization or a hidden-state oracle. Name model variants separately.
-- Keep physical state, observer records, deterministic envelopes and stochastic realizations distinct. Detector deletion changes records; physical pulse removal is an intervention.
-- Preserve unwrapped phase, delay history, pending packets/responses, filters and RNG state. Current phases alone are not a restartable network.
-- Validate units and admissible domains at boundaries; document tolerances and solver settings. Keep browser UI and Node imports out of shared numerical packages.
-- Use independent analytic, causal, state-bound and statistical controls where appropriate. Preserve independent seeds and uncertainty in stochastic work. A test must not assert a desired scientific conclusion.
-- Small reproducible fixtures are authorized. Publication-scale scans, regime findings, manuscript conclusions, binding, generated motion and conservation closure remain deferred.
+- Python 3.12+, source in `src/signal_space`, regression tests in `tests`.
+- `signal-space` / `python -m signal_space` is the supported CLI.
+- Closed schemas in `contracts/research`; locked configurations in
+  `fixtures/research`; plans/protocols in `docs/research`.
+- The runtime owns lifecycle, resource scheduling, subprocess isolation, events,
+  provenance and immutable package verification. Plugins own scientific stages.
+- Use the common schema API `signal_space.contracts.schema.check`.
+- Register only `gross.*` experiments. No browser, npm, TypeScript, HTTP service,
+  E00 demo, or E01 charged-branch compatibility work belongs in the active tree.
+- Parallelize independent preparations, never coupled timesteps or a forecast
+  and the receiver whose response it predicts. Keep native threads bounded.
 
-## Architecture and task boundaries
+## Scientific discipline
 
-Use `packages/model`, `sim`, `analysis`, `experiments`, `apps/cli`, `apps/web`; all consumers use the same engine. Browser work runs in a Web Worker with typed messages. `inspect` is only a T02 preparation check at t=0, not a numerical solver or replay implementation. Keep future features in their assigned tasks.
+Use `.agents/skills/experiment-pipeline/SKILL.md` and `.agents/output-contract.md`
+for experiments. Lock equations, exact config hashes, controls, resource ceilings,
+criteria and planned figures before execution. Validate using the registered
+runtime. A model/numerical change requires a new versioned plan and run identity.
 
-UI controls must be keyboard accessible and show units, assumptions, loading, cancellation and failure states. Use saved engine data for charts and clearly label simulator-only information. No server, database, login or hosted deployment is required.
+Preserve every failed/interrupted attempt, seeds, full restart state and raw
+bytes. Reanalysis and report regeneration create new identities. Technical
+completion and scientific pass/fail/unresolved/not-evaluated are distinct.
+Never change acceptance thresholds to make a run pass. Do not infer geometry,
+gauge structure, protected topology or particle identity from visual resemblance.
 
-## Required validation
+Keep directional drift, anisotropy and geometry with material response open to
+discrimination. Distinguish coordinate changes from invariant local detector
+records. Keep Candidate A and Candidate B separately versioned. Update the
+Tests 1–11 progress ledger only when new evidence justifies a status change.
 
-Use Node from `.nvmrc` and npm 11.9.0. From a fresh checkout:
+Every research figure includes Question, Reading, Significance and Limitation,
+with exact saved plot data. Full evidence, figures and reader exports belong in
+run artifacts; avoid adding repeated binary exports to Git. Existing checksummed
+GROSS evidence must remain byte-identical during code refactors.
+
+## Validation
+
+From the repository root:
 
 ```sh
-npm ci
-npm run check
-node apps/cli/dist/index.js --sample pair
-npx playwright install --with-deps chromium
-npm run test:browser
+python -m pip install -r requirements-lock.txt
+python -m pip install --no-build-isolation --no-deps -e .
+python -m unittest discover -s tests -v
+python -m unittest discover -s .agents/tests -v
+python scripts/verify-repository.py
+python scripts/check-experiment-math.py
 git diff --check
 ```
 
-`check` includes formatting, lint, strict type checking, contract/execution/CLI tests and both production builds. Run browser integration tests when changing web, worker, build or shared execution paths. Use `npm run format` after edits. Commit package-lock.json for dependency changes. Never bypass failing gates; report environmental limitations accurately.
+Compiled-backend tests require `requirements-performance-lock.txt`. Use bounded
+engineering fixtures for a refactor; publication-scale physics campaigns need
+their own locked plans and resource gates. Report missing platform/dependency
+coverage honestly. Do not run archived test suites or install archived npm files.
 
-Each PR must link its child issue, explain the problem and resulting behavior, map paper sections/equations, list validation evidence and limits, and update traceability/docs. Resolve relevant review findings with tested commits; explain irrelevant findings with evidence. Close a child only after acceptance criteria are met. Do not report tests as reviewer approval.
+Explain the problem, resulting behavior, numerical limits and validation in PRs.
+Never represent engineering tests as new scientific acceptance or reviewer approval.

@@ -23,7 +23,7 @@ import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'python'))
+sys.path.insert(0, str(ROOT / 'src'))
 for name in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'NUMBA_NUM_THREADS'):
     os.environ[name] = '1'
 
@@ -96,11 +96,11 @@ def main():
                 neutral, .0003*neutral, 0., 0.)
     rows = []
     partial = None
-    paths = ['scripts/benchmark-test8-backends.py', 'python/requirements-performance-lock.txt',
-             'python/requirements-lock.txt', 'python/signal_space/numerics/two_object_compiled.py',
-             'python/signal_space/numerics/two_object_quiet.py',
-             'python/signal_space/numerics/two_object_checkpoint.py',
-             'python/signal_space/numerics/two_object.py', 'python/signal_space/models/two_object.py']
+    paths = ['scripts/benchmark-test8-backends.py', 'requirements-performance-lock.txt',
+             'requirements-lock.txt', 'src/signal_space/numerics/two_object_compiled.py',
+             'src/signal_space/numerics/two_object_quiet.py',
+             'src/signal_space/numerics/two_object_checkpoint.py',
+             'src/signal_space/numerics/two_object.py', 'src/signal_space/models/two_object.py']
     # A fresh cache is selected by the caller for a true cold measurement.
     tiny = AbsorbingGrid(.5, 3, 4, 1, .12)
     cold = timed(lambda: CompiledStepper(tiny, fixture(tiny, True)).advance(.005))

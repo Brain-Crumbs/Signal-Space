@@ -1,7 +1,16 @@
 # Byte-indexed archives and the locked runtime fixture must survive Windows
 # checkout without newline conversion. Preserve the exact committed bytes.
 research/** -text
-fixtures/research/synthetic.json -text
+fixtures/research/** -text
+archive/** -text
+# Source/configuration tools must behave identically on Windows and Unix.
+src/** text eol=lf
+tests/** text eol=lf
+scripts/** text eol=lf
+.agents/** text eol=lf
+docs/research/plans/** text eol=lf
+contracts/** text eol=lf
+requirements*.txt text eol=lf
 # Plot renderers emit significant spaces at SVG line ends; immutable figure hashes must not be edited.
 research/experiments/**/*.svg -whitespace
 # CSV plot data preserves the writer's CRLF dialect for exact figure provenance.

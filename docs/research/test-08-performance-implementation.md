@@ -30,7 +30,7 @@ Use `neutral_mode: full` for independent null controls or any active neutral fie
 
 The retained-state estimate is now explicit: the default 1,000-step checkpoint cadence projects 1,011 MiB and is rejected against the old 512 MiB output ceiling. The example 5,000-step cadence projects 324 MiB before extra resume attempts. This is a retention choice, not a change to sampling or physical observation duration. The old CPU/wall estimate remains a legacy value and must not be treated as measured optimized throughput; the separate campaign preflight remains blocked.
 
-Create an isolated environment and install `python/requirements-performance-lock.txt`; do not upgrade the evidence-producing environment in place. The engineering benchmark can be run without a physical profile:
+Create an isolated environment and install `requirements-performance-lock.txt`; do not upgrade the evidence-producing environment in place. The engineering benchmark can be run without a physical profile:
 
 ```powershell
 .research-work/test8-perf-env/Scripts/python.exe scripts/benchmark-test8-backends.py --output .research-work/new-backend-observation.json
