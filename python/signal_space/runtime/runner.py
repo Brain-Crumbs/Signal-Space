@@ -7,6 +7,9 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import threading
+import psutil
+from signal_space.runtime.execution import ExecutionPolicy, process_metrics_available
 from typing import Any, Callable
 
 from signal_space.experiments.registry import get_experiment, list_experiments
@@ -63,31 +66,32 @@ class ResearchRuntime:
         if estimate["cpu_seconds"] > limits["max_cpu_seconds"]: rejected.append("CPU")
         return {"estimate": estimate, "limits": limits, "accepted": not rejected, "rejected_limits": rejected}
 
-    def run(self, value: Any, workspace: Path) -> dict[str, Any]:
-        created = self.create_run(value, workspace)
-        return self.execute(workspace, created["run_id"])
+    def run(self, value: Any, workspace: Path, *, policy: ExecutionPolicy | None = None,
+            cancel_event: threading.Event | None = None) -> dict[str, Any]:
+        created = self.create_run(value, workspace, policy=policy)
+        return self.execute(workspace, created["run_id"], cancel_event=cancel_event)
 
-    def create_run(self, value: Any, workspace: Path) -> dict[str, Any]:
+    def create_run(self, value: Any, workspace: Path, *, policy: ExecutionPolicy | None = None) -> dict[str, Any]:
         config = self.validate(value)
         estimate = self.estimate(config)
         if not estimate["accepted"]:
             raise ResourceRejected("resource estimate exceeds: " + ", ".join(estimate["rejected_limits"]))
         plugin = get_experiment(config["experiment_id"])
-        package = RunPackage.create(workspace, config, plugin.version)
+        package = RunPackage.create(workspace, config, plugin.version, (policy or ExecutionPolicy()).record())
         return {
             "run_id": package.manifest["run_id"],
             "state": "validated",
             "path": str(package.path),
         }
 
-    def execute(self, workspace: Path, run_id: str) -> dict[str, Any]:
+    def execute(self, workspace: Path, run_id: str, *, cancel_event: threading.Event | None = None) -> dict[str, Any]:
         package = self._package(workspace, run_id)
         manifest = package.manifest
         if manifest["attempts"]:
             raise InvalidState("initial execution has already been created")
         config = read_json(package.path / "resolved-config.json")
         plugin = get_experiment(manifest["experiment_id"])
-        return self._attempt(package, plugin, config, None)
+        return self._attempt(package, plugin, config, None, cancel_event=cancel_event)
 
     def resume(
         self,
@@ -110,7 +114,7 @@ class ResearchRuntime:
             raise CheckpointMismatch("checkpoint config/code identity is incompatible")
         if sha256_bytes(canonical_bytes(code_identity())) != code_hash:
             raise CheckpointMismatch("current code identity differs from the checkpoint producer")
-        if execution_identity() != manifest["execution_identity"]:
+        if execution_identity(manifest["execution_identity"]["environment"].get("execution_policy")) != manifest["execution_identity"]:
             raise CheckpointMismatch("current execution environment differs from the checkpoint producer")
         package.verify_immutable()
         config = read_json(package.path / "resolved-config.json")
@@ -130,6 +134,7 @@ class ResearchRuntime:
         config: dict[str, Any],
         resume: dict[str, Any] | None,
         on_started: Callable[[dict[str, Any]], None] | None = None,
+        cancel_event: threading.Event | None = None,
     ) -> dict[str, Any]:
         with package.locked():
             manifest = package.manifest
@@ -184,6 +189,7 @@ class ResearchRuntime:
 
         identity_hash = sha256_bytes(canonical_bytes(manifest["code_identity"]))
         request = {
+            "execution_policy": manifest["execution_identity"]["environment"].get("execution_policy", {}),
             "config": config,
             "config_hash": manifest["config_hash"],
             "code_identity_hash": identity_hash,
@@ -202,6 +208,8 @@ class ResearchRuntime:
         attempt["state"] = "running"
         attempt["updated_at"] = now()
         environment = os.environ.copy()
+        policy = ExecutionPolicy.from_record(request["execution_policy"])
+        environment.update(policy.environment())
         python_root = str(Path(__file__).resolve().parents[2])
         environment["PYTHONPATH"] = python_root + (os.pathsep + environment["PYTHONPATH"] if environment.get("PYTHONPATH") else "")
         with log_path.open("wb") as log:
@@ -232,10 +240,15 @@ class ResearchRuntime:
             terminal_error: str | None = None
             try:
                 reason, exit_code = _monitor_process(
-                    process, attempt_path, config["resources"]
+                    process, attempt_path, config["resources"], cancel_event=cancel_event
                 )
-                if reason == "cancel":
-                    append_event(events, "cancellation-timeout", "runtime", {"grace_seconds": 2})
+                if reason in {"memory", "cpu"}:
+                    (attempt_path / "cancel.request").touch()
+                    append_event(events, f"{reason}-limit-exceeded", "runtime", {"limits": config["resources"]})
+                    _terminate_process(process)
+                    exit_code = 126
+                elif reason == "cancel":
+                    append_event(events, "cancellation-timeout", "runtime", {"grace_seconds": 10})
                     _terminate_process(process, cooperative_seconds=0)
                     exit_code = 130
                 elif reason == "wall":
@@ -271,7 +284,7 @@ class ResearchRuntime:
             "updated_at": now(),
             "exit_code": exit_code,
             "checkpoint": checkpoint_record,
-            "failure": None if state in {"completed", "cancelled"} else {"code": "PROCESS_INTERRUPTED" if state == "interrupted" else "OUTPUT_LIMIT_EXCEEDED" if exit_code == 125 else "WORKER_FAILED", "recoverable": bool(checkpoint_record), "message": terminal_error},
+            "failure": None if state in {"completed", "cancelled"} else {"code": "PROCESS_INTERRUPTED" if state == "interrupted" else "OUTPUT_LIMIT_EXCEEDED" if exit_code == 125 else "RESOURCE_LIMIT_EXCEEDED" if exit_code == 126 else "WORKER_FAILED", "recoverable": bool(checkpoint_record), "message": terminal_error},
         })
         attempt.pop("worker_pid", None)
         (attempt_path / "cancel.request").unlink(missing_ok=True)
@@ -503,32 +516,87 @@ def _monitor_process(
     process: subprocess.Popen[bytes],
     attempt_path: Path,
     resources: dict[str, Any],
+    *, cancel_event: threading.Event | None = None,
 ) -> tuple[str, int | None]:
-    deadline = time.monotonic() + float(resources["max_wall_seconds"])
+    started = time.monotonic()
+    deadline = started + float(resources["max_wall_seconds"])
     output_limit = int(resources["max_output_mb"]) * 1024 * 1024
+    memory_limit = int(resources["max_memory_mb"]) * 1024 * 1024
+    cpu_limit = float(resources["max_cpu_seconds"])
     cancellation_deadline = None
-    while True:
-        if (attempt_path / "cancel.request").exists():
-            if cancellation_deadline is None:
-                cancellation_deadline = time.monotonic() + 2
-            elif time.monotonic() >= cancellation_deadline:
-                return "cancel", process.poll()
-        if _directory_size(attempt_path) > output_limit:
-            return "output", None
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
-            return "wall", None
-        try:
-            exit_code = process.wait(timeout=min(0.05, remaining))
-            if _directory_size(attempt_path) > output_limit:
-                return "output", exit_code
-            return "completed", exit_code
-        except subprocess.TimeoutExpired:
-            continue
+    next_scan = 0.
+    peaks = {"peak_rss_bytes": 0, "cpu_seconds": 0., "output_bytes": 0}
+    cpu_seen = {}
+    metrics_available = process_metrics_available()
+    try:
+        root = psutil.Process(process.pid) if metrics_available else None
+    except psutil.NoSuchProcess:
+        root = None
+    reason, code = "completed", None
+    try:
+        while True:
+            instant = time.monotonic()
+            if cancel_event is not None and cancel_event.is_set():
+                (attempt_path / "cancel.request").touch(exist_ok=True)
+            if (attempt_path / "cancel.request").exists():
+                if cancellation_deadline is None:
+                    cancellation_deadline = instant + 10
+                elif instant >= cancellation_deadline:
+                    reason = "cancel"
+                    break
+            if instant >= next_scan:
+                size = _directory_size(attempt_path)
+                peaks["output_bytes"] = max(peaks["output_bytes"], size)
+                rss = 0
+                try:
+                    processes = [root, *root.children(recursive=True)] if root else []
+                except psutil.NoSuchProcess:
+                    processes = []
+                for child in processes:
+                    try:
+                        with child.oneshot():
+                            rss += child.memory_info().rss
+                            cpu = child.cpu_times()
+                            cpu_seen[(child.pid, child.create_time())] = cpu.user + cpu.system
+                    except psutil.NoSuchProcess:
+                        continue
+                peaks["peak_rss_bytes"] = max(peaks["peak_rss_bytes"], rss)
+                peaks["cpu_seconds"] = sum(cpu_seen.values())
+                if size > output_limit:
+                    reason = "output"
+                    break
+                if rss > memory_limit:
+                    reason = "memory"
+                    break
+                if peaks["cpu_seconds"] > cpu_limit:
+                    reason = "cpu"
+                    break
+                next_scan = instant + .5
+            remaining = deadline - instant
+            if remaining <= 0:
+                reason = "wall"
+                break
+            try:
+                code = process.wait(timeout=min(.1, remaining))
+                size = _directory_size(attempt_path)
+                peaks["output_bytes"] = max(peaks["output_bytes"], size)
+                reason = "output" if size > output_limit else "completed"
+                break
+            except subprocess.TimeoutExpired:
+                continue
+    finally:
+        write_json(attempt_path / "resource-usage.json", {
+            **peaks, "wall_seconds": time.monotonic() - started,
+            "sampling_seconds": .5, "reason": reason,
+            "process_metrics_available": metrics_available,
+            "scope": "sampled aggregate process tree; RSS includes shared pages per process" if metrics_available
+                else "process namespace is opaque; POSIX per-worker kernel limits only",
+        })
+    return reason, code
 
 
 def _terminate_process(
-    process: subprocess.Popen[bytes], cooperative_seconds: float = 2.0
+    process: subprocess.Popen[bytes], cooperative_seconds: float = 10.0
 ) -> int:
     if process.poll() is not None:
         return int(process.returncode)

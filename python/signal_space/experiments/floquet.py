@@ -1,7 +1,7 @@
 """Registered Test 4: a complete, explicitly chosen reciprocal routing circuit."""
 from copy import deepcopy
 from pathlib import Path
-from signal_space.contracts.e01 import check
+from signal_space.contracts.schema import check
 from signal_space.experiments.base import ExperimentPlugin
 from signal_space.runtime.io import read_json, write_json
 ROOT=Path(__file__).resolve().parents[3]

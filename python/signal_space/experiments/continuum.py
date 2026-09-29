@@ -1,7 +1,7 @@
 """Registered bounded action/characteristic audit for SS OCF 1."""
 from copy import deepcopy
 from pathlib import Path
-from signal_space.contracts.e01 import check
+from signal_space.contracts.schema import check
 from signal_space.experiments.base import ExperimentPlugin
 from signal_space.runtime.io import read_json, write_json
 

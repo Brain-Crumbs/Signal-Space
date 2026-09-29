@@ -15,6 +15,10 @@ def main() -> int:
     request_path = Path(args.request)
     request = read_json(request_path)
     import os
+    import signal
+    # Termination first requests a checkpoint; the supervisor provides a bounded grace.
+    if hasattr(signal, 'SIGTERM'):
+        signal.signal(signal.SIGTERM, lambda *_: (Path(request['attempt_path']) / 'cancel.request').touch())
     if os.name == "posix":
         from signal_space.runtime.limits import _resource_limiter
         _resource_limiter(request["config"]["resources"])()

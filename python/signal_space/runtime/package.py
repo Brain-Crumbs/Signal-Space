@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import mimetypes
+from importlib.metadata import version, PackageNotFoundError
 import os
 import platform
 import shutil
@@ -73,9 +74,9 @@ def dependency_identity() -> dict[str, str]:
     return {"path": "python/requirements-lock.txt", "sha256": sha256_file(lock)}
 
 
-def execution_identity() -> dict[str, Any]:
+def execution_identity(policy: dict[str, Any] | None = None) -> dict[str, Any]:
     return {
-        "environment": environment_identity(),
+        "environment": {**environment_identity(), **({"execution_policy": policy} if policy is not None else {})},
         "dependencies": dependency_identity(),
     }
 
@@ -143,12 +144,12 @@ class RunPackage:
                         msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
 
     @classmethod
-    def create(cls, workspace: Path, config: dict[str, Any], experiment_version: str) -> "RunPackage":
+    def create(cls, workspace: Path, config: dict[str, Any], experiment_version: str, policy: dict[str, Any] | None = None) -> "RunPackage":
         from signal_space.experiments.registry import get_experiment
 
         plugin = get_experiment(config["experiment_id"])
         identity = code_identity()
-        execution = execution_identity()
+        execution = execution_identity(policy)
         run_id, config_hash = run_identity(config, identity, execution)
         path = workspace / config["experiment_id"] / run_id
         if path.exists():
@@ -299,16 +300,10 @@ class RunPackage:
             )
         manifest["artifacts"] = artifacts
         write_json(self.manifest_path, manifest)
-        lines = []
-        for path in sorted(self.path.rglob("*")):
-            if (
-                path.is_file()
-                and path.name != "checksums.sha256"
-                and not path.name.endswith(".jsonl.lock")
-                and not path.name.startswith(".")
-            ):
-                lines.append(f"{sha256_file(path)}  {path.relative_to(self.path).as_posix()}")
-        (self.path / "checksums.sha256").write_text("\n".join(lines) + "\n")
+        lines = [f"{item['sha256']}  {item['path']}" for item in artifacts]
+        lines.append(f"{sha256_file(self.manifest_path)}  manifest.json")
+        (self.path / "checksums.sha256").write_text("\n".join(sorted(lines, key=lambda line: line.split("  ", 1)[1])) + "\n")
+
 
 
 def _mutable_attempt_prefixes(manifest: dict[str, Any]) -> tuple[str, ...]:
@@ -321,9 +316,8 @@ def _mutable_attempt_prefixes(manifest: dict[str, Any]) -> tuple[str, ...]:
 
 def _module_version(name: str) -> str:
     try:
-        module = __import__(name)
-        return str(module.__version__)
-    except ImportError:
+        return version(name)
+    except PackageNotFoundError:
         return "unavailable"
 
 

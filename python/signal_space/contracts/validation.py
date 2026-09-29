@@ -283,9 +283,13 @@ def _validate_code_identity(value: Any, path: str) -> None:
 
 def _validate_execution_identity(value: Any, path: str) -> None:
     identity = _object(value, path, {"environment", "dependencies"})
-    environment = _object(identity["environment"], f"{path}.environment", {"python", "implementation", "os", "architecture", "numeric_libraries", "accelerator"})
+    environment = _object(identity["environment"], f"{path}.environment", {"python", "implementation", "os", "architecture", "numeric_libraries", "accelerator"}, {"execution_policy"})
     for name in ("python", "implementation", "os", "architecture", "accelerator"):
         _require_string(environment[name], f"{path}.environment.{name}")
+    if "execution_policy" in environment:
+        policy = _object(environment["execution_policy"], f"{path}.execution_policy", {"threads", "case_jobs"})
+        for name, value in policy.items():
+            _integer(value, f"{path}.execution_policy.{name}", 1, 65536)
     libraries = _object(environment["numeric_libraries"], f"{path}.environment.numeric_libraries", {"numpy", "matplotlib"}, {"scipy", "numba", "llvmlite"})
     for name in libraries:
         _require_string(libraries[name], f"{path}.environment.numeric_libraries.{name}")

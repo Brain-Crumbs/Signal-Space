@@ -1,52 +1,34 @@
-from __future__ import annotations
-
+"""GROSS-only registry. Load one plugin on demand; never import solvers here."""
+from functools import lru_cache
+from importlib import import_module
 from signal_space.experiments.base import ExperimentPlugin
-from signal_space.experiments.synthetic import SyntheticExperiment
-from signal_space.experiments.charged import ChargedExperiment
-from signal_space.experiments.operators import OperatorExperiment
-from signal_space.experiments.reciprocal import ReciprocalExperiment
-from signal_space.experiments.router import RouterExperiment
-from signal_space.experiments.floquet import FloquetExperiment
-from signal_space.experiments.continuum import ContinuumExperiment
-from signal_space.experiments.clock import ClockExperiment
-from signal_space.experiments.prereception import PrereceptionExperiment
-from signal_space.experiments.reception import ReceptionExperiment
-from signal_space.experiments.reception_order4 import ReceptionOrder4Experiment
-from signal_space.experiments.reception_transfer import ReceptionTransferExperiment
-from signal_space.experiments.reconstruction import ReconstructionExperiment
-from signal_space.experiments.boundary_memory import BoundaryMemoryExperiment
-from signal_space.experiments.reception_acceptance import ReceptionAcceptanceExperiment
-from signal_space.experiments.two_object import TwoObjectCalibrationExperiment
-from signal_space.experiments.two_object_quiet import TwoObjectQuietExperiment
 
-_PLUGINS: dict[str, ExperimentPlugin] = {
-    SyntheticExperiment.experiment_id: SyntheticExperiment(),
-    ChargedExperiment.experiment_id: ChargedExperiment(),
-    OperatorExperiment.experiment_id: OperatorExperiment(),
-    ReciprocalExperiment.experiment_id: ReciprocalExperiment(),
-    RouterExperiment.experiment_id: RouterExperiment(),
-    FloquetExperiment.experiment_id: FloquetExperiment(),
-    ContinuumExperiment.experiment_id: ContinuumExperiment(),
-    ClockExperiment.experiment_id: ClockExperiment(),
-    "gross.clock-longevity.v1": PrereceptionExperiment("longevity"),
-    "gross.clock-response.v1": PrereceptionExperiment("response"),
-    ReceptionExperiment.experiment_id: ReceptionExperiment(),
-    ReceptionOrder4Experiment.experiment_id: ReceptionOrder4Experiment(),
-    ReceptionTransferExperiment.experiment_id: ReceptionTransferExperiment(),
-    ReconstructionExperiment.experiment_id: ReconstructionExperiment(),
-    BoundaryMemoryExperiment.experiment_id: BoundaryMemoryExperiment(),
-    ReceptionAcceptanceExperiment.experiment_id: ReceptionAcceptanceExperiment(),
-    TwoObjectCalibrationExperiment.experiment_id: TwoObjectCalibrationExperiment(),
-    TwoObjectQuietExperiment.experiment_id: TwoObjectQuietExperiment(),
+_PLUGINS = {
+    'gross.operator-identities.v1': ('operators', 'OperatorExperiment', ()),
+    'gross.reciprocal-events.v1': ('reciprocal', 'ReciprocalExperiment', ()),
+    'gross.router-propagation.v1': ('router', 'RouterExperiment', ()),
+    'gross.full-spectrum.v1': ('floquet', 'FloquetExperiment', ()),
+    'gross.continuum-action.v1': ('continuum', 'ContinuumExperiment', ()),
+    'gross.bound-clock.v1': ('clock', 'ClockExperiment', ()),
+    'gross.reception.v1': ('reception', 'ReceptionExperiment', ()),
+    'gross.reception-order4.v1': ('reception_order4', 'ReceptionOrder4Experiment', ()),
+    'gross.reception-transfer.v1': ('reception_transfer', 'ReceptionTransferExperiment', ()),
+    'gross.reconstruction.v1': ('reconstruction', 'ReconstructionExperiment', ()),
+    'gross.boundary-memory.v1': ('boundary_memory', 'BoundaryMemoryExperiment', ()),
+    'gross.reception-acceptance.v1': ('reception_acceptance', 'ReceptionAcceptanceExperiment', ()),
+    'gross.two-object-calibration.v1': ('two_object', 'TwoObjectCalibrationExperiment', ()),
+    'gross.two-object-quiet-calibration.v1': ('two_object_quiet', 'TwoObjectQuietExperiment', ()),
+    "gross.clock-longevity.v1": ("prereception", "PrereceptionExperiment", ("longevity",)),
+    "gross.clock-response.v1": ("prereception", "PrereceptionExperiment", ("response",)),
 }
 
-
+@lru_cache(maxsize=None)
 def get_experiment(experiment_id: str) -> ExperimentPlugin:
     try:
-        return _PLUGINS[experiment_id]
+        module, name, arguments = _PLUGINS[experiment_id]
     except KeyError as error:
-        raise ValueError(f"unregistered experiment id: {experiment_id}") from error
-
+        raise ValueError(f"unregistered GROSS experiment id: {experiment_id}") from error
+    return getattr(import_module(f"signal_space.experiments.{module}"), name)(*arguments)
 
 def list_experiments() -> list[dict[str, object]]:
-    return [plugin.describe() for plugin in _PLUGINS.values()]
+    return [get_experiment(key).describe() for key in sorted(_PLUGINS)]

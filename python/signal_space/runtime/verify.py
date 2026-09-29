@@ -30,7 +30,7 @@ def verify_package(run_path: Path) -> dict[str, Any]:
         actual_paths = {
             path.relative_to(run_path).as_posix()
             for path in run_path.rglob("*")
-            if path.is_file() and path.name not in {"checksums.sha256", ".package.lock"}
+            if path.is_file() and path.name not in {"checksums.sha256", ".package.lock"} and not path.name.endswith(".jsonl.lock")
         }
         if set(expected) != actual_paths:
             errors.append("checksum path set does not match package files")
