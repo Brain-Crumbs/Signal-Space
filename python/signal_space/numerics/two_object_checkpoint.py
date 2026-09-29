@@ -85,7 +85,7 @@ def restore_checkpoint(request):
         raise ValueError('checkpoint preparation mismatch')
     if saved['producing_attempt_id'] != request['parent_attempt_id']:
         raise ValueError('checkpoint parent mismatch')
-    root = Path(request['attempt_path']).parent.parent
+    root = Path(request.get('checkpoint_root', Path(request['attempt_path']).parent.parent))
     references = saved['completed_outputs'] + ([saved['solver_state']['state']] if saved['solver_state']['state'] else [])
     for record in references:
         if sha256_file(safe_child(root, record['path'])) != record['sha256']:
@@ -102,7 +102,7 @@ def restore_checkpoint(request):
 
 
 def restore_fields(request, saved, grid):
-    root = Path(request['attempt_path']).parent.parent
+    root = Path(request.get('checkpoint_root', Path(request['attempt_path']).parent.parent))
     with np.load(safe_child(root, saved['solver_state']['state']['path']), allow_pickle=False) as data:
         for name, expected in (('rho', grid.r), ('z', grid.z), ('absorber', grid.gamma)):
             if not np.array_equal(data[name], expected):

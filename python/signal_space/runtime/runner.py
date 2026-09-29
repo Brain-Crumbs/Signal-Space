@@ -73,6 +73,9 @@ class ResearchRuntime:
 
     def create_run(self, value: Any, workspace: Path, *, policy: ExecutionPolicy | None = None) -> dict[str, Any]:
         config = self.validate(value)
+        policy = policy or ExecutionPolicy()
+        if policy.case_jobs > 1 and config['experiment_id'] != 'gross.two-object-quiet-calibration.v1':
+            raise ValueError('case parallelism is registered only for Test 8 quiet calibration; use batch for independent runs')
         estimate = self.estimate(config)
         if not estimate["accepted"]:
             raise ResourceRejected("resource estimate exceeds: " + ", ".join(estimate["rejected_limits"]))

@@ -86,6 +86,9 @@ def local_observables(grid, state, profile, nominal_centers, separation):
 
 def execute(request_path):
     request = read_json(request_path)
+    if request.get('execution_policy', {}).get('case_jobs', 1) > 1:
+        from signal_space.runtime.quiet_cases import execute as execute_cases
+        return execute_cases(request_path)
     config = request['config']['parameters']
     attempt = Path(request['attempt_path'])
     raw = attempt / 'raw'

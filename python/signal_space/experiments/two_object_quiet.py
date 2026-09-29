@@ -114,7 +114,7 @@ class TwoObjectQuietExperiment(ExperimentPlugin):
                 'wall_time_class': 'long'}
 
     def prepare(self, config, run_path, attempt_path, resume):
-        if resume and resume.get('kind') != 'signal-space-quiet-fv-rk4-v1':
+        if resume and resume.get('kind') not in {'signal-space-quiet-fv-rk4-v1', 'gross-quiet-parallel-v1'}:
             raise ValueError('unsupported quiet checkpoint')
         if config['parameters'].get('execution', {}).get('backend') == 'numba':
             try:
