@@ -1,0 +1,208 @@
+{
+  "schema_version": "gross-progress-ledger-v1",
+  "as_of": "2026-09-29",
+  "scope": "Current evidence summary; engineering validation does not change scientific classifications. Historical narratives remain in gross-progress.md.",
+  "tests": [
+    {
+      "test": 1,
+      "title": "Operator and observer identities",
+      "status": "pass",
+      "scope": "1,000 samples; six bounded algebra checks. Does not establish dynamics or spacetime.",
+      "prerequisites": [],
+      "missing_capabilities": [],
+      "evidence": [
+        {
+          "path": "research/experiments/gross.operator-identities.v1/run-2ae9c65dbd171851/manifest.json",
+          "sha256": "3e40753272e8be1d211d796279c55f5d0cac3f8494a151335d873ac263fcb9c9"
+        }
+      ]
+    },
+    {
+      "test": 2,
+      "title": "Reciprocal event law and rescheduling",
+      "status": "pass",
+      "scope": "Four preparations, both lambdas; ten finite-circuit controls.",
+      "prerequisites": [
+        1
+      ],
+      "missing_capabilities": [],
+      "evidence": [
+        {
+          "path": "research/experiments/gross.reciprocal-events.v1/run-81319816afe7cf8e/manifest.json",
+          "sha256": "f3f7ac076230c90ce87b7ff8520d1ef41ca18627c50ef7831110f411d7bd7aa3"
+        }
+      ]
+    },
+    {
+      "test": 3,
+      "title": "Router propagation",
+      "status": "pass",
+      "scope": "624 wave-block samples; nine checks on the selected routing benchmark.",
+      "prerequisites": [
+        1,
+        2
+      ],
+      "missing_capabilities": [],
+      "evidence": [
+        {
+          "path": "research/experiments/gross.router-propagation.v1/run-915ed88048939f8f/manifest.json",
+          "sha256": "811e50a6d60129726102550e9705f1fd96bb8642d90e714af9470274bd98a735"
+        }
+      ]
+    },
+    {
+      "test": 4,
+      "title": "Complete microscopic spectrum",
+      "status": "mixed",
+      "scope": "Eight controls pass; strong all-sector vacuum cone fails; counter-background stability unresolved.",
+      "prerequisites": [
+        2,
+        3
+      ],
+      "missing_capabilities": [
+        "generic-active-background-spectrum"
+      ],
+      "evidence": [
+        {
+          "path": "research/experiments/gross.full-spectrum.v1/run-5a55cb5041050589/manifest.json",
+          "sha256": "45ac76d2d857cf655a759d946dc1153d4e466bab12566c34fd25cbc82f790f56"
+        }
+      ]
+    },
+    {
+      "test": 5,
+      "title": "Continuum action and characteristics",
+      "status": "bounded-pass",
+      "scope": "200 coframes, 48,000 roots; seven checks of the chosen action. Nonlinear Einstein evolution untested.",
+      "prerequisites": [
+        1
+      ],
+      "missing_capabilities": [
+        "dynamical-gravity"
+      ],
+      "evidence": [
+        {
+          "path": "docs/research/gross-test-05-results.md",
+          "sha256": "5033d80abffc5664aa9c131a983a4a0e06058fdca2997b72f1a4873660851012"
+        }
+      ]
+    },
+    {
+      "test": 6,
+      "title": "Bound readable clock",
+      "status": "bounded-pass",
+      "scope": "Selected flat radial omega=0.900 branch and radial-response prerequisites pass. Two thinner trials and distinct clock radiation remain unresolved.",
+      "prerequisites": [
+        1,
+        5
+      ],
+      "missing_capabilities": [
+        "embedded-spatial-mode-solve"
+      ],
+      "evidence": [
+        {
+          "path": "docs/research/gross-test-06-results.md",
+          "sha256": "11d1037cc59b8456c6e90a13a905e56ee4e1573e270037fe7bb3b5b41165fb0d"
+        }
+      ]
+    },
+    {
+      "test": 7,
+      "title": "Predicted reception",
+      "status": "accepted-bounded",
+      "scope": "Known-incident flat radial protocol: all eleven locked checks pass. Earlier surface-only failures remain unchanged.",
+      "prerequisites": [
+        6
+      ],
+      "missing_capabilities": [
+        "autonomous-detector"
+      ],
+      "evidence": [
+        {
+          "path": "docs/research/gross-test-07-acceptance-results.md",
+          "sha256": "18216147763d161d8c3b737c1d94eed627c0bdc598531bf5653bad80446656bc"
+        }
+      ]
+    },
+    {
+      "test": 8,
+      "title": "Two objects, exchange and recoil",
+      "status": "unresolved",
+      "scope": "Spatial pilot unresolved. Compact record reports six short quiet checks pass for run-2d17955e8ce845cb; external canonical source not reverified here. Optimized quiet run and full exchange G0\u2013G9 not evaluated.",
+      "prerequisites": [
+        6,
+        7
+      ],
+      "missing_capabilities": [
+        "joint-relaxed-pair",
+        "embedded-spatial-mode-solve",
+        "physical-source-exchange",
+        "momentum-worldtube-flux",
+        "proper-time-marker-tracking"
+      ],
+      "evidence": [
+        {
+          "path": "docs/research/test-08-quiet-timing.json",
+          "sha256": "3aef244b72646c2a091362c9bcd38cb4e7449c0914386a306b3d5985a3f573a5"
+        }
+      ]
+    },
+    {
+      "test": 9,
+      "title": "Observer and coordinate invariance",
+      "status": "not-evaluated",
+      "scope": "Operational transformation/reconstruction test has not run.",
+      "prerequisites": [
+        6,
+        7
+      ],
+      "missing_capabilities": [
+        "Test9-reconstruction"
+      ],
+      "evidence": [
+        {
+          "path": "research/papers/gross-operator-program-v0.2.md",
+          "sha256": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123"
+        }
+      ]
+    },
+    {
+      "test": 10,
+      "title": "Spatial topology extension",
+      "status": "not-evaluated",
+      "scope": "Requires an explicit extended action, spatial invariant, stabilization and characteristic-health audit.",
+      "prerequisites": [],
+      "missing_capabilities": [
+        "protected-topology"
+      ],
+      "evidence": [
+        {
+          "path": "research/papers/gross-operator-program-v0.2.md",
+          "sha256": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123"
+        }
+      ]
+    },
+    {
+      "test": 11,
+      "title": "Drift and mode dependence",
+      "status": "partial-diagnostics",
+      "scope": "Paired spectral diagnostics in Tests 3\u20134; opposite port drift derived for the six-gate circuit. Operational drift discrimination not evaluated.",
+      "prerequisites": [
+        3,
+        4,
+        6,
+        9
+      ],
+      "missing_capabilities": [
+        "proper-time-marker-tracking",
+        "Test9-reconstruction"
+      ],
+      "evidence": [
+        {
+          "path": "research/experiments/gross.full-spectrum.v1/run-5a55cb5041050589/manifest.json",
+          "sha256": "45ac76d2d857cf655a759d946dc1153d4e466bab12566c34fd25cbc82f790f56"
+        }
+      ]
+    }
+  ]
+}

@@ -117,3 +117,10 @@ Use a new output path for each command; these are alternative complete launch
 commands, not sequential stages of one run. Install the performance dependency
 lock first. CPU/wall estimates remain the conservative existing projection;
 compiled full-case throughput is not inferred from the small scheduler benchmark.
+
+## Recoverable campaigns and saved-data tools
+
+See [campaign-workbench.md](campaign-workbench.md) for recipe-specific doctor,
+new locked resource plans, pipeline resume, campaign status/stop/resume, measured
+cost profiles, comparison, reusable panels and paired export/import. The local
+quiet wrapper defaults to the optimized preset. Full exchange remains blocked.

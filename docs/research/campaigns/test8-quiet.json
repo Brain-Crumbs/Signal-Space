@@ -1,0 +1,14 @@
+{
+  "campaign_id": "test8-quiet",
+  "locked_sha256": "b8051e026cd1d9dc847895c5cb5d3fdeac29f9cb4b4caa19acdbf5e460eb6ad5",
+  "nodes": [
+    {
+      "dependencies": [],
+      "id": "quiet",
+      "plan": "docs/research/plans/gross-test-08-quiet-optimized.json"
+    }
+  ],
+  "question": "Do the six short quiet controls satisfy their bounded prerequisite checks?",
+  "requires_capabilities": [],
+  "schema_version": "gross-campaign-v1"
+}

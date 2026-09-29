@@ -44,3 +44,12 @@ changes raw data. Model action, acceptance criteria and detector calibration
 remain owned by each registered experiment. The complete package contract is
 [artifact-contract.md](artifact-contract.md); execution and platform limits are
 [gross-runner.md](gross-runner.md).
+
+## Campaign and reusable physics boundaries
+
+The [workbench](campaign-workbench.md) adds a `workflow` layer for locked recipes,
+preflight, durable pipeline/campaign journals, dependency gates and verified
+external handoffs. It never changes equations or promotes scientific status.
+The [physics engine](physics-engine.md) extracts the existing axisymmetric
+state, preparation, finite-volume/RK4 reference and detector functions; experiment
+adapters retain protocol and evidence I/O. Unsupported physics is explicit.
