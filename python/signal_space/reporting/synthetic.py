@@ -44,7 +44,7 @@ def render_report(
     figure_spec = {
         "schema_version": "research-figure-spec-v1",
         "id": "fixture-recurrence",
-        "source_datasets": [str(plot_csv.relative_to(report_path))],
+        "source_datasets": [plot_csv.relative_to(report_path).as_posix()],
         "transformations": [],
         "axes": {"x": {"label": "Step", "unit": "index"}, "y": {"label": "Value", "unit": "dimensionless"}},
         "ranges": "automatic",
