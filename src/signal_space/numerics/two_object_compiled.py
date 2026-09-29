@@ -99,7 +99,7 @@ class CompiledStepper:
     """
 
     def __init__(self, grid, state, *, exact_zero=False):
-        from signal_space.numerics.two_object_quiet import AbsorbingGrid
+        from signal_space.engine.axisymmetric import AbsorbingGrid
         if type(grid) is not AbsorbingGrid:
             raise ValueError('compiled equations require the registered AbsorbingGrid')
         if len(state) != 8:

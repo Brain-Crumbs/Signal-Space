@@ -8,6 +8,7 @@ not silently interpreted as physical isolated-clock evolution.
 from __future__ import annotations
 
 import hashlib
+import time
 from pathlib import Path
 
 import numpy as np
@@ -18,71 +19,7 @@ from signal_space.runtime.events import append_event
 from signal_space.runtime.io import read_json, write_json
 
 
-class AbsorbingGrid(AxisGrid):
-    def __init__(self, h: float, radius: float, half_length: float, width: float, strength: float):
-        super().__init__(h, radius, half_length)
-        r = np.clip((self.r[:, None] - (radius - width)) / width, 0, 1)
-        z = np.clip((abs(self.z[None, :]) - (half_length - width)) / width, 0, 1)
-        self.gamma = strength * np.maximum(np.sin(np.pi * r / 2) ** 2,
-                                            np.sin(np.pi * z / 2) ** 2)
-
-    def rhs_with_sinks(self, state):
-        fields = state[:6]
-        phi, pi, chi, pchi, a, pia = fields
-        spatial = self.rhs(fields)
-        gamma = self.gamma
-        z = neutral_stiffness(abs(phi) ** 2)
-        power = gamma * (2 * abs(pi) ** 2 + pchi ** 2 + pia ** 2 / z)
-        removed_charge = gamma * charge_density(phi, pi)
-        return (spatial[0], spatial[1] - gamma * pi,
-                spatial[2], spatial[3] - gamma * pchi,
-                spatial[4], spatial[5] - gamma * pia,
-                float(np.sum(self.volume * power)),
-                float(np.sum(self.volume * removed_charge)))
-
-
-def step(grid, state, dt):
-    def add(base, k, factor):
-        return tuple(x + factor * dx for x, dx in zip(base, k))
-    a = grid.rhs_with_sinks(state)
-    b = grid.rhs_with_sinks(add(state, a, dt / 2))
-    c = grid.rhs_with_sinks(add(state, b, dt / 2))
-    d = grid.rhs_with_sinks(add(state, c, dt))
-    return tuple(x + dt * (ka + 2 * kb + 2 * kc + kd) / 6
-                 for x, ka, kb, kc, kd in zip(state, a, b, c, d))
-
-
-def frozen_mode(grid, profile, center):
-    r = profile['r']
-    shape = np.r_[profile['mode'][0] / r[1], profile['mode'] / r[1:-1], 0.]
-    distance = np.hypot(grid.r[:, None], grid.z[None, :] - center)
-    return np.interp(distance, r, shape, left=shape[0], right=0.)
-
-
-def local_observables(grid, state, profile, nominal_centers, separation):
-    phi, pi, chi, pchi, _, _ = state[:6]
-    rho_limit = min(grid.r[-1], 20.)
-    observations = []
-    for center in nominal_centers:
-        mask_z = abs(grid.z - center) < separation / 4 if len(nominal_centers) == 2 else abs(grid.z) < 20
-        mask_r = grid.r < rho_limit
-        mask = mask_r[:, None] & mask_z[None, :]
-        density = charge_density(phi, pi)
-        positive_weight = grid.volume * np.maximum(density, 0) * mask
-        total = float(np.sum(positive_weight))
-        measured_center = float(np.sum(positive_weight * grid.z[None, :]) / total) if total > 0 else float('nan')
-        mode = frozen_mode(grid, profile, measured_center)
-        weights = grid.volume * mask
-        norm = float(np.sum(weights * mode ** 2))
-        q = float(np.sum(weights * mode * chi) / norm)
-        p = float(np.sum(weights * mode * pchi) / norm)
-        local = (9 * chi[0] - chi[1]) / 8  # regular-axis quadratic extrapolation
-        observations.append({'center': measured_center, 'charge': float(np.sum(grid.volume * density * mask)),
-                             'mode_q': q, 'mode_p': p,
-                             'mode_energy': .5 * norm * (p * p + .41274991 ** 2 * q * q),
-                             'axis_chi': float(np.interp(measured_center, grid.z, local))})
-    return observations
-
+from signal_space.engine.axisymmetric import AbsorbingGrid, step, frozen_mode, local_observables
 
 def execute(request_path):
     request = read_json(request_path)
@@ -116,10 +53,14 @@ def execute(request_path):
     cases = saved['accumulated_diagnostics']['cases'] if saved else []
     first_case = saved['solver_state']['case_index'] if saved else 0
     total_step = saved['solver_state']['step'] if saved else 0
+    timings = []
     for case_index, entry in enumerate(config['scenarios']):
         if case_index < first_case:
             continue
         label = entry['label']
+        case_started = time.perf_counter()
+        case_cpu = time.process_time()
+        measured = dict(setup=0., step=0., health=0., diagnostics=0., checkpoint=0., serialization=0.)
         grid = AbsorbingGrid(entry['h'], entry['radius'], entry['half_length'],
                             entry['absorber_width'], entry['absorber_strength'])
         initial = initial_state(grid, profile, config['separation'], pair=entry['pair'])
@@ -142,31 +83,43 @@ def execute(request_path):
             from signal_space.numerics.two_object_compiled import CompiledStepper
             integrator = CompiledStepper(grid, state, exact_zero=options['neutral_mode'] == 'exact-zero')
             state = integrator.state
+        measured['setup'] = time.perf_counter()-case_started
         for index in range(start_index, steps + 1):
             cancelled = (attempt / 'cancel.request').exists()
             if cancelled or (index < steps and index % options['checkpoint_stride'] == 0):
+                checkpoint_started = time.perf_counter()
                 checkpoint = save_checkpoint(request, step=total_step, case_index=case_index,
                     index=index, state=state, grid=grid, samples=samples, cases=cases,
                     max_neutral=max_neutral, initial_energy=energy0, initial_charge=charge0)
-                append_event(events, 'checkpoint-written', 'run', {'step': total_step, 'checkpoint': checkpoint.name})
+                measured['checkpoint'] += time.perf_counter()-checkpoint_started
+                append_event(events, 'checkpoint-written', 'run', {'step': total_step, 'label': label, 'checkpoint': checkpoint.name})
             if cancelled:
                 append_event(events, 'worker-cancelled', 'run', {'step': total_step})
                 return 130
             if index % entry['sample_stride'] == 0 or index == steps:
+                diagnostics_started = time.perf_counter()
                 energy, charge = grid.energy_charge(state[:6])
                 samples.append({'t': index * entry['dt'], 'energy': energy, 'charge': charge,
                                 'energy_sink': state[6], 'charge_sink': state[7],
                                 'clocks': local_observables(grid, state, profile, centers, config['separation'])})
+                measured['diagnostics'] += time.perf_counter()-diagnostics_started
             if index == steps:
                 break
+            step_started = time.perf_counter()
             state = integrator.advance(entry['dt']) if integrator else step(grid, state, entry['dt'])
+            measured['step'] += time.perf_counter()-step_started
+            health_started = time.perf_counter()
             total_step += 1
             if not all(np.isfinite(x).all() for x in state):
                 raise ValueError(f'{label} nonfinite state at step {index}')
             max_neutral = max(max_neutral, float(np.max(abs(state[4]))), float(np.max(abs(state[5]))))
+            measured['health'] += time.perf_counter()-health_started
             if (index + 1) % 1000 == 0:
                 append_event(events, 'scenario-progress', 'run',
-                             {'label': label, 'step': index + 1, 'total_steps': steps})
+                             {'label': label, 'step': index + 1, 'total_steps': steps,
+                              'elapsed_seconds': time.perf_counter()-case_started,
+                              'steps_per_second': (index+1-start_index)/max(time.perf_counter()-case_started, 1e-9)})
+        serialization_started = time.perf_counter()
         atomic_npz(raw / f'{label}-final.npz', phi=state[0], pi=state[1],
                             chi=state[2], pchi=state[3], a=state[4], pia=state[5],
                             rho=grid.r, z=grid.z, absorber=grid.gamma,
@@ -177,10 +130,17 @@ def execute(request_path):
                       'absorber_width': entry['absorber_width'], 'steps': steps,
                       'duration': steps * entry['dt'], 'initial_energy': energy0,
                       'initial_charge': charge0, 'max_neutral': max_neutral})
-        append_event(events, 'scenario-completed', 'run', {'label': label, 'steps': steps})
+        measured['serialization'] += time.perf_counter()-serialization_started
+        checkpoint_started = time.perf_counter()
         save_checkpoint(request, step=total_step, case_index=case_index + 1,
             index=0, state=None, grid=None, samples=[], cases=cases,
             max_neutral=0., initial_energy=None, initial_charge=None)
+        measured['checkpoint'] += time.perf_counter()-checkpoint_started
+        timings.append({'label': label, 'case': entry, 'steps_measured': steps-start_index, 'complete_case': start_index==0,
+                        'wall_seconds': time.perf_counter()-case_started, 'cpu_seconds': time.process_time()-case_cpu,
+                        'phases_seconds': measured})
+        write_json(attempt / 'performance.json', {'schema_version':'gross-case-performance-v1','cases':timings,'execution':options})
+        append_event(events, 'scenario-completed', 'run', {'label': label, 'steps': steps})
     write_json(raw / 'scenarios.json', cases)
     write_json(raw / 'execution.json', {'scope': 'short outgoing-layer quiet calibration, no source or joint solve',
                                         'profile_sha256': source_sha, 'seed_ledger': request['seed_ledger'],
