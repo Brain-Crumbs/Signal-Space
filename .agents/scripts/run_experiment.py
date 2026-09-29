@@ -213,7 +213,8 @@ def floquet_assessment(manifest, analysis, checks):
 
 
 class Pipeline:
-    def __init__(self, repo: Path, output: Path, experiment: str):
+    def __init__(self, repo: Path, output: Path, experiment: str, threads: int = 1, case_jobs: int = 1):
+        self.threads, self.case_jobs = threads, case_jobs
         self.repo, self.output, self.experiment = repo.resolve(), output.resolve(), experiment
         if self.output.is_relative_to(self.repo):
             raise ValueError("output must be outside the checkout so generated files cannot dirty source provenance")
@@ -222,7 +223,7 @@ class Pipeline:
         self.logs = self.evidence / "logs"
         self.logs.mkdir(parents=True)
         self.workspace = self.evidence / "runs"
-        self.env = {**os.environ, "PYTHONPATH": str(self.repo / "python"),
+        self.env = {**os.environ, "PYTHONPATH": str(self.repo / "src"),
                     "OPENBLAS_NUM_THREADS": "1", "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "MPLBACKEND": "Agg"}
         self.status = {"experiment": experiment, "technical_status": "running",
                        "scientific_classification": "not-evaluated", "stage": "preflight"}
@@ -254,24 +255,23 @@ class Pipeline:
         shutil.copy2(plan_path, self.evidence / "plan.json")
         shutil.copy2(config, self.evidence / "config.json")
         # Portable source recovery even if a development branch is later removed.
-        source_paths = []
-        if self.experiment == "gross-test-08-calibration":
-            # This pilot needs the registered Python runtime and one frozen
-            # profile, not the repository's unrelated historical archives.
-            source_paths = ["AGENTS.md", ".agents", "python", "contracts/research",
-                            "fixtures/research/gross-test-08-calibration.json",
-                            "docs/research/gross-test-08.md",
-                            "docs/research/gross-test-08-calibration-results.md",
-                            "docs/research/plans/gross-test-08-calibration.json",
-                            "research/papers/gross-operator-program-v0.2.md",
-                            "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz"]
-        elif self.experiment == "gross-test-08-quiet":
-            source_paths = ["AGENTS.md", ".agents", "python", "contracts/research",
-                            "fixtures/research/gross-test-08-quiet.json",
-                            "docs/research/gross-test-08.md", "docs/research/gross-test-08-quiet.md",
-                            "docs/research/plans/gross-test-08-quiet.json",
-                            "research/papers/gross-operator-program-v0.2.md",
-                            "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz"]
+        source_paths = {"AGENTS.md", ".agents", "src", "pyproject.toml", "requirements-lock.txt",
+                        "requirements-performance-lock.txt", "contracts/research", "fixtures/research",
+                        "docs/research", "research/papers"}
+        # Include frozen inputs actually named by this config, not every past
+        # run/export or the quarantined legacy source tree.
+        def collect_inputs(value):
+            if isinstance(value, dict):
+                for child in value.values(): collect_inputs(child)
+            elif isinstance(value, list):
+                for child in value: collect_inputs(child)
+            elif isinstance(value, str) and value.startswith("research/"):
+                path = (self.repo / value).resolve()
+                if not path.is_relative_to(self.repo) or not path.exists():
+                    raise ValueError(f"missing or unsafe frozen source: {value}")
+                source_paths.add(value)
+        collect_inputs(json.loads(config.read_text()))
+        source_paths = sorted(source_paths)
         self.command("source-snapshot", ["git", "archive", "--format=tar.gz", "--output", str(self.evidence / "source.tar.gz"), revision, *source_paths])
         github = {key: self.env.get(key) for key in (
             "GITHUB_REPOSITORY", "GITHUB_SHA", "GITHUB_REF", "GITHUB_WORKFLOW_REF", "GITHUB_WORKFLOW_SHA",
@@ -281,7 +281,8 @@ class Pipeline:
                    "github": github, "plan_path": RECIPES[self.experiment], "plan_lock": plan["locked_sha256"]})
         output = self.command("run-plan", [sys.executable, str(self.repo / ".agents/scripts/run_plan.py"),
                               "--plan", str(plan_path), "--repo-root", str(self.repo),
-                              "--workspace", str(self.workspace), "--execute"],
+                              "--workspace", str(self.workspace), "--execute",
+                              "--threads", str(self.threads), "--case-jobs", str(self.case_jobs)],
                               timeout=plan["resources"]["max_wall_seconds"] + 60)
         stages = [json.loads(line) for line in output.splitlines() if line.strip()]
         run = next(item["result"] for item in stages if item["stage"] == "run")
@@ -310,7 +311,7 @@ class Pipeline:
         self.command("package", [sys.executable, str(self.repo / ".agents/scripts/package_experiment.py"),
                      "--run", str(run_path), "--plan", str(plan_path),
                      "--interpretations", str(run_path / report["path"] / "interpretations.json"),
-                     "--mentor", str(mentor), "--source-dir", str(self.repo / "python/signal_space"),
+                     "--mentor", str(mentor), "--source-dir", str(self.repo / "src/signal_space"),
                      "--source-locator", locator, "--output", str(self.output / "reader")])
         validate_bundle(self.output / "reader", run_path)
         self.status.update({"technical_status": "completed", "stage": "complete",
@@ -362,9 +363,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--experiment", choices=RECIPES, default="gross-test-01")
     parser.add_argument("--output", required=True, type=Path, help="new directory outside the checkout")
+    parser.add_argument("--threads", type=int, default=1)
+    parser.add_argument("--case-jobs", type=int, default=1)
     args = parser.parse_args()
     try:
-        return Pipeline(ROOT, args.output, args.experiment).run()
+        return Pipeline(ROOT, args.output, args.experiment, args.threads, args.case_jobs).run()
     except (OSError, ValueError) as error:
         print(f"experiment rejected: {error}", file=sys.stderr)
         return 1

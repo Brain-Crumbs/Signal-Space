@@ -1,4 +1,4 @@
-name: CI
+name: GROSS Python CI
 on:
   pull_request:
   push:
@@ -10,33 +10,32 @@ concurrency:
   cancel-in-progress: true
 jobs:
   validate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      NUMBA_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+      PYTHONUNBUFFERED: '1'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm install --global npm@11.9.0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: npm ci
-      # Test suites remain available locally; CI runs only validation and builds.
-      - run: npm run format:check
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm run contracts:check
-      - run: npm run verify:research
+          cache: pip
+          cache-dependency-path: requirements-performance-lock.txt
+      - run: python -m pip install -r requirements-performance-lock.txt
+      - run: python -m pip install --no-build-isolation --no-deps -e .
+      - run: python -m unittest discover -s tests -v
+      - run: python -m unittest discover -s .agents/tests -v
+      - run: python scripts/verify-repository.py
       - run: python scripts/check-experiment-math.py
-      - name: Validate experiment plans and saved exports
-        run: |
-          python .agents/scripts/experiment_contract.py plan .agents/examples/synthetic-plan.json
-          python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-02.json
-          python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-03.json
-          python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-04.json
-          python .agents/scripts/experiment_contract.py scan research/experiments
-      - run: npm run build
-      - name: Run built CLI sample
-        run: node apps/cli/dist/index.js --sample pair
+      - run: python .agents/scripts/experiment_contract.py scan research/experiments
+      - run: signal-space doctor
+      - run: git diff --check

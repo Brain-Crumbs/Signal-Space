@@ -20,7 +20,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'python'))
+sys.path.insert(0, str(ROOT / 'src'))
 
 import numpy as np
 from signal_space.numerics.two_object_quiet import AbsorbingGrid, step
@@ -79,8 +79,8 @@ def main():
                     for key, value in sorted(stats.stats.items(), key=lambda item: item[1][2], reverse=True)[:20]]
             rows.append(row)
             print(f'h={h}, active={active}: {row["operations"]["rk4_step"]["median_wall_seconds"]:.4f} s/step', flush=True)
-    paths = ['scripts/benchmark-test8-kernels.py', 'python/signal_space/numerics/two_object.py',
-             'python/signal_space/numerics/two_object_quiet.py', 'python/signal_space/models/two_object.py']
+    paths = ['scripts/benchmark-test8-kernels.py', 'src/signal_space/numerics/two_object.py',
+             'src/signal_space/numerics/two_object_quiet.py', 'src/signal_space/models/two_object.py']
     result = {
         'schema_version': 'signal-space-kernel-timing-observation-v1',
         'recorded_at_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),

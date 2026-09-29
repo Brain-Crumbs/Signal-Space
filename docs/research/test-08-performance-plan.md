@@ -42,10 +42,10 @@ These synthetic timings are not replacements for complete-run measurements. The 
 
 Code inspection identifies the following work:
 
-- [AxisGrid](../../python/signal_space/numerics/two_object.py): repeated face arrays, zero-filled divergence accumulators, coefficient averages, polynomial temporaries and full-grid passes. Geometry is stored as repeated 2D arrays although much depends only on radius.
-- [Quiet integrator](../../python/signal_space/numerics/two_object_quiet.py): four field-update evaluations plus allocated intermediate states per RK4 step; recomputed density/stiffness in the sink calculation; all neutral work executed even in the exactly invariant zero sector.
+- [AxisGrid](../../src/signal_space/numerics/two_object.py): repeated face arrays, zero-filled divergence accumulators, coefficient averages, polynomial temporaries and full-grid passes. Geometry is stored as repeated 2D arrays although much depends only on radius.
+- [Quiet integrator](../../src/signal_space/numerics/two_object_quiet.py): four field-update evaluations plus allocated intermediate states per RK4 step; recomputed density/stiffness in the sink calculation; all neutral work executed even in the exactly invariant zero sector.
 - The same module loops through scenarios sequentially, computes moving mode projections at sample times, and rejects resume. Final NPZ data is not yet a complete accepted restart protocol.
-- [Runtime worker](../../python/signal_space/runtime/worker.py): OS resource limiting is applied on POSIX. Full Windows process-tree accounting/enforcement must be established before running multiple workers under a campaign budget.
+- [Runtime worker](../../src/signal_space/runtime/worker.py): OS resource limiting is applied on POSIX. Full Windows process-tree accounting/enforcement must be established before running multiple workers under a campaign budget.
 
 ## Work packages, in execution order
 
@@ -145,7 +145,7 @@ Higher-order spatial methods, mesh refinement and a different integrator are lat
 4. **Qualified numerical settings:** independent timestep/grid/domain/output/error decisions and a capped source-only pilot design, with no held-out response tuning.
 5. **Launch packet:** measured final cost and budget decision, registered stage configs and actual locked plans only when implemented, complete G0–G9 coverage, preserved 100/20-period gates, eight evidentiary visual groups and Test 9 data audit.
 
-Implementation PRs must follow repository validation with Node .nvmrc/npm 11.9.0, numerical equivalence/restart tests, relevant runtime integration checks and byte-preserving evidence verification. This planning change does not establish those future implementation gates.
+Implementation PRs must follow the current Python validation in AGENTS.md, numerical equivalence/restart tests, runtime integration checks and byte-preserving evidence verification. This planning change does not establish those future implementation gates.
 
 Validation for this planning update: the six existing campaign-design tests, eight spatial/quiet numerical and packaging controls, and solver-free preflight pass; the saved benchmark's four source hashes match the Git-LF representations; the harness compiles and refuses to overwrite the saved observation. Local document links and `git diff --check` pass. Formatting passes with Node 24.19.0/npm 11.9.0. The full repository check stops at the existing 74 lint errors in third-party `.venv` JavaScript; later gates are not represented as having passed in this update. The prior PR records separate archive/fixture hash limitations. No web, shared execution path or numerical engine was changed.
 

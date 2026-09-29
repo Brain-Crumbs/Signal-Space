@@ -1,2 +1,0 @@
-[console_scripts]
-signal-space-research = signal_space.cli:main

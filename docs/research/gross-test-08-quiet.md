@@ -28,7 +28,7 @@ Use Python 3.12 in Linux or WSL2. On an implementation branch after its PR is me
 ```sh
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r python/requirements-lock.txt
+python -m pip install -r requirements-lock.txt
 python .agents/scripts/experiment_contract.py plan docs/research/plans/gross-test-08-quiet.json
 python .agents/scripts/run_plan.py --plan docs/research/plans/gross-test-08-quiet.json --repo-root . --workspace ../test8-preflight
 git status --short
@@ -41,7 +41,7 @@ During the long `run-plan` stage, inspect `../test8-quiet-001/evidence/status.js
 
 ## Results PR handoff
 
-After inspecting `evidence/status.json`, checks, figures and both PDFs, create a **new results branch**. Copy both generated ZIPs and `pr-evidence-index.json` into `research/experiments/gross.two-object-quiet-calibration.v1/packages/`. Keep the archives as a paired immutable unit; do not independently repack one or edit inside it. For a ZIP over 50 MiB, install and configure Git LFS for this specific package path **before** `git add`; confirm the remote repository permits the transfer. Verify a fresh checkout downloads real ZIP data rather than LFS pointer text. Update reviewed results and `gross-progress.md` with measured values, status and remaining G0–G9 gates. Then run `npm run research:manifest`, repository checks and `git diff --check`, commit and open your PR into `main` referencing issue #82 without closing it unless all its gates have passed.
+After inspecting `evidence/status.json`, checks, figures and both PDFs, create a **new results branch**. Copy both generated ZIPs and `pr-evidence-index.json` into `research/experiments/gross.two-object-quiet-calibration.v1/packages/`. Keep the archives as a paired immutable unit; do not independently repack one or edit inside it. For a ZIP over 50 MiB, install and configure Git LFS for this specific package path **before** `git add`; confirm the remote repository permits the transfer. Verify a fresh checkout downloads real ZIP data rather than LFS pointer text. Update reviewed results and `gross-progress.md` with measured values, status and remaining G0–G9 gates. Then run `python scripts/verify-repository.py --write-research-index`, repository checks and `git diff --check`, commit and open your PR into `main` referencing issue #82 without closing it unless all its gates have passed.
 
 ```sh
 git switch -c research/test8-quiet-results
@@ -51,8 +51,8 @@ cp ../test8-quiet-001/*.zip ../test8-quiet-001/pr-evidence-index.json \
 # If either ZIP exceeds 50 MiB, do this before git add:
 # git lfs install
 # git lfs track 'research/experiments/gross.two-object-quiet-calibration.v1/packages/*.zip'
-npm run research:manifest
-npm run check
+python scripts/verify-repository.py --write-research-index
+python -m unittest discover -s tests -v
 git diff --check
 git add .gitattributes research/experiments/gross.two-object-quiet-calibration.v1 \
   research/archive-manifest.json docs/research/gross-progress.md

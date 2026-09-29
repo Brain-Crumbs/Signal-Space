@@ -61,6 +61,8 @@ def main():
                         help='new output directory outside the checkout')
     parser.add_argument('--package-only', action='store_true',
                         help='verify and ZIP a previously completed output without rerunning physics')
+    parser.add_argument("--threads", type=int, default=1)
+    parser.add_argument("--case-jobs", type=int, default=1)
     args = parser.parse_args()
     output = args.output.resolve()
     if output.is_relative_to(ROOT):
@@ -72,7 +74,8 @@ def main():
         if output.exists():
             parser.error('a fresh run requires a new output directory')
         command(sys.executable, str(ROOT / '.agents/scripts/run_experiment.py'),
-                '--experiment', 'gross-test-08-quiet', '--output', str(output))
+                '--experiment', 'gross-test-08-quiet', '--output', str(output),
+                '--threads', str(args.threads), '--case-jobs', str(args.case_jobs))
 
     evidence, reader = output / 'evidence', output / 'reader'
     status = json.loads((evidence / 'status.json').read_text())
@@ -84,7 +87,7 @@ def main():
         path = evidence / row['path']
         if not path.is_file() or sha(path) != row['sha256']:
             raise ValueError(f"outer evidence checksum mismatch: {row['path']}")
-    env = {'PYTHONPATH': str(ROOT / 'python')}
+    env = {'PYTHONPATH': str(ROOT / 'src')}
     import os
     subprocess.run([sys.executable, '-m', 'signal_space', '--workspace', str(evidence / 'runs'),
                     'verify', '--run-id', status['run_id']], cwd=ROOT,
