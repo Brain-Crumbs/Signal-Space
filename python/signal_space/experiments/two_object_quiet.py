@@ -24,15 +24,15 @@ CRITERIA = {
 class TwoObjectQuietExperiment(ExperimentPlugin):
     experiment_id = 'gross.two-object-quiet-calibration.v1'
     model_id = 'signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1'
-    version = '0.1.0'
+    version = '0.2.0'
 
     def describe(self):
         return {'experiment_id': self.experiment_id, 'model_id': self.model_id,
-                'version': self.version, 'name': 'GROSS Test 8 outgoing-layer quiet calibration',
+                'version': self.version, 'name': 'Signal Space Test 8 outgoing-layer quiet calibration',
                 'equations': ['Operator Program v0.2 sections 7–10, 15.8'],
                 'equation_sources': [{'label': 'Test 8 protocol', 'path': 'docs/research/gross-test-08.md',
                                       'catalog_id': 'gross-test-08'}],
-                'capabilities': ['axisymmetric', 'outgoing-layer', 'short-clock', 'quiet-pair', 'analysis', 'report'],
+                'capabilities': ['axisymmetric', 'outgoing-layer', 'short-clock', 'quiet-pair', 'checkpoint', 'resume', 'analysis', 'report'],
                 'unavailable_capabilities': ['joint-relaxed pair', '100-period result',
                                                'source exchange', 'recoil', 'Test 9 readiness']}
 
@@ -44,6 +44,9 @@ class TwoObjectQuietExperiment(ExperimentPlugin):
     def validate(self, config):
         check(config, self.schema())
         p = config['parameters']
+        options = p.get('execution', {})
+        if options.get('neutral_mode') == 'exact-zero' and options.get('backend') != 'numba':
+            raise ValueError('exact-zero specialization requires the compiled backend')
         scenarios = {s['label']: s for s in p['scenarios']}
         required = {'isolated-base', 'isolated-fine', 'pair-base', 'pair-fine', 'pair-time', 'pair-wide'}
         if set(scenarios) != required:
@@ -94,18 +97,30 @@ class TwoObjectQuietExperiment(ExperimentPlugin):
                           for s in scenarios)
         biggest = max(round(s['radius'] / s['h']) * round(2 * s['half_length'] / s['h'])
                       for s in scenarios)
-        # A conservative single-core preflight estimate; actual timing is
-        # measured on the user's machine before larger follow-up matrices.
+        stride = config['parameters'].get('execution', {}).get('checkpoint_stride', 1000)
+        # Include every retained checkpoint, final state, geometry and a trace/
+        # metadata allowance. Compression is not credited before measurement.
+        checkpoint_bytes = sum(
+            round(s['radius']/s['h']) * round(2*s['half_length']/s['h']) * 72
+            * ((round(s['periods']*2*3.141592653589793/(.41274991*s['dt'])) - 1)//stride + 1)
+            for s in scenarios)
+        # Legacy CPU/wall projection, not measured optimized throughput. The
+        # separate campaign preflight remains blocked pending full-case costs.
         return {'cpu_seconds': max(300, int(cells_steps / 2500000)),
                 'wall_seconds': max(330, int(cells_steps / 2200000)),
                 'memory_mb': max(300, int(biggest * .004) + 150),
                 'disk_mb': max(40, int(sum(round(s['radius']/s['h']) * round(2*s['half_length']/s['h'])
-                                           for s in scenarios) * .00015) + 25),
+                                           for s in scenarios) * .00015) + 25) + (checkpoint_bytes + 1048575)//1048576,
                 'wall_time_class': 'long'}
 
     def prepare(self, config, run_path, attempt_path, resume):
-        if resume:
-            raise ValueError('this atomic qualification cannot resume')
+        if resume and resume.get('kind') != 'signal-space-quiet-fv-rk4-v1':
+            raise ValueError('unsupported quiet checkpoint')
+        if config['parameters'].get('execution', {}).get('backend') == 'numba':
+            try:
+                from signal_space.numerics.two_object_compiled import CompiledStepper
+            except ImportError as error:
+                raise ValueError('numba backend requires python/requirements-performance-lock.txt in an isolated environment') from error
         preparation = {'source': 'docs/research/gross-test-08-quiet.md',
                        'status': 'short outgoing-layer qualification; no exchange'}
         write_json(attempt_path / 'preparation.json', preparation)

@@ -1,0 +1,4 @@
+# Optional isolated CPU backend. Keep the reference environment unchanged.
+-r requirements-lock.txt
+numba==0.67.0
+llvmlite==0.49.0

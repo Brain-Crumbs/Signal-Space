@@ -2,7 +2,9 @@
 
 This protocol implements the first spatial prerequisite of [issue #82](https://github.com/Brain-Crumbs/Signal-Space/issues/82). It is **not** the full exchange experiment. The full `gross.two-object-exchange.v1` registration and held-out matrix remain pending. The separate pilot ID is `gross.two-object-calibration.v1`; the model ID is `signal-space.ss-ocf-1.flat-axisymmetric-neutral-clock.v1`.
 
-The subsequent [local twelve-period outgoing-layer and quiet-pair qualification](gross-test-08-quiet.md) has its own registered `gross.two-object-quiet-calibration.v1` identity and locked plan. It also cannot certify G0–G9 or preselect held-out source preparations.
+The subsequent [local six-period outgoing-layer and quiet-pair qualification](gross-test-08-quiet.md) has its own registered `gross.two-object-quiet-calibration.v1` identity and locked plan. It also cannot certify G0–G9 or preselect held-out source preparations.
+
+The [full acceptance campaign design](test-08-acceptance-plan.md) maps G0–G9 to staged tests, measured runtime projections and a validation-only preflight. Source/recoil/local-event/restart capabilities and a viable resource budget remain implementation gates. The existing six-period registration is unchanged.
 
 ## Action and numerical mapping
 

@@ -1,0 +1,95 @@
+{
+  "schema_version": "signal-space-timing-observation-v1",
+  "run_id": "run-2d17955e8ce845cb",
+  "source_commit": "1decc9070a331d071ebe41d299b5195e8dc777d0",
+  "source_locator": "test8-quiet-005-recovery/evidence/runs/gross.two-object-quiet-calibration.v1/run-2d17955e8ce845cb",
+  "manifest_sha256": "049f8034ebf7f318bae32c2eb4ae80a2a06722ad80ad56b60b44d5915a0e34f9",
+  "events_sha256": "fe5b84148ad555e05aae12ba7ef95c19599084058deed24688a398758796da33",
+  "environment": {
+    "accelerator": "none",
+    "architecture": "AMD64",
+    "implementation": "CPython",
+    "numeric_libraries": {
+      "matplotlib": "3.10.8",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "measurement": "Consecutive worker-started/scenario-completed timestamps, including scenario setup, sampling and final serialization; wall time, not instrumented per-case CPU time. Worker was observed using approximately one CPU core.",
+  "cases": [
+    {
+      "label": "isolated-base",
+      "started_at": "2026-09-28T17:14:03.530152Z",
+      "completed_at": "2026-09-28T17:17:39.635858Z",
+      "wall_seconds": 216.105706,
+      "steps": 9134,
+      "h": 0.2,
+      "dt": 0.01,
+      "radius": 24,
+      "half_length": 32,
+      "periods": 6
+    },
+    {
+      "label": "isolated-fine",
+      "started_at": "2026-09-28T17:17:39.635858Z",
+      "completed_at": "2026-09-28T18:32:41.157590Z",
+      "wall_seconds": 4501.521732,
+      "steps": 18267,
+      "h": 0.1,
+      "dt": 0.005,
+      "radius": 24,
+      "half_length": 32,
+      "periods": 6
+    },
+    {
+      "label": "pair-base",
+      "started_at": "2026-09-28T18:32:41.157590Z",
+      "completed_at": "2026-09-28T18:41:45.931368Z",
+      "wall_seconds": 544.773778,
+      "steps": 9134,
+      "h": 0.2,
+      "dt": 0.01,
+      "radius": 24,
+      "half_length": 64,
+      "periods": 6
+    },
+    {
+      "label": "pair-fine",
+      "started_at": "2026-09-28T18:41:45.931368Z",
+      "completed_at": "2026-09-28T21:14:29.392597Z",
+      "wall_seconds": 9163.461229,
+      "steps": 18267,
+      "h": 0.1,
+      "dt": 0.005,
+      "radius": 24,
+      "half_length": 64,
+      "periods": 6
+    },
+    {
+      "label": "pair-time",
+      "started_at": "2026-09-28T21:14:29.392597Z",
+      "completed_at": "2026-09-28T21:35:32.673234Z",
+      "wall_seconds": 1263.280637,
+      "steps": 18267,
+      "h": 0.2,
+      "dt": 0.005,
+      "radius": 24,
+      "half_length": 64,
+      "periods": 6
+    },
+    {
+      "label": "pair-wide",
+      "started_at": "2026-09-28T21:35:32.673234Z",
+      "completed_at": "2026-09-28T21:53:37.150334Z",
+      "wall_seconds": 1084.4771,
+      "steps": 9134,
+      "h": 0.2,
+      "dt": 0.01,
+      "radius": 32,
+      "half_length": 80,
+      "periods": 6
+    }
+  ]
+}

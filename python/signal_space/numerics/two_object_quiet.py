@@ -86,8 +86,6 @@ def local_observables(grid, state, profile, nominal_centers, separation):
 
 def execute(request_path):
     request = read_json(request_path)
-    if request.get('resume_checkpoint'):
-        raise ValueError('quiet qualification is atomic; stopped cases require a new run')
     config = request['config']['parameters']
     attempt = Path(request['attempt_path'])
     raw = attempt / 'raw'
@@ -102,8 +100,22 @@ def execute(request_path):
         profile = {key: data[key].copy() for key in ('r', 'u', 'mode')}
     write_json(raw / 'source.json', {'path': config['profile']['path'], 'sha256': source_sha,
                                      'omega_Q': .9, 'omega_chi': .41274991, 'mode_peak': .001})
-    cases = []
-    for entry in config['scenarios']:
+    from signal_space.numerics.two_object_checkpoint import (
+        atomic_npz, restore_checkpoint, restore_fields, save_checkpoint,
+    )
+    options = config.get('execution', {'backend': 'numpy', 'neutral_mode': 'full', 'checkpoint_stride': 1000})
+    backend = options['backend']
+    if backend not in ('numpy', 'numba') or options['neutral_mode'] not in ('full', 'exact-zero'):
+        raise ValueError('unknown execution backend/neutral mode')
+    if backend == 'numpy' and options['neutral_mode'] != 'full':
+        raise ValueError('exact-zero specialization requires the compiled backend')
+    saved = restore_checkpoint(request) if request.get('resume_checkpoint') else None
+    cases = saved['accumulated_diagnostics']['cases'] if saved else []
+    first_case = saved['solver_state']['case_index'] if saved else 0
+    total_step = saved['solver_state']['step'] if saved else 0
+    for case_index, entry in enumerate(config['scenarios']):
+        if case_index < first_case:
+            continue
         label = entry['label']
         grid = AbsorbingGrid(entry['h'], entry['radius'], entry['half_length'],
                             entry['absorber_width'], entry['absorber_strength'])
@@ -114,7 +126,29 @@ def execute(request_path):
         steps = round(entry['periods'] * 2 * np.pi / (.41274991 * entry['dt']))
         samples = []
         max_neutral = 0.
-        for index in range(steps + 1):
+        start_index = 0
+        if saved and case_index == first_case and saved['solver_state']['state']:
+            state = restore_fields(request, saved, grid)
+            start_index = saved['solver_state']['index']
+            samples = saved['accumulated_diagnostics']['samples']
+            max_neutral = saved['solver_state']['max_neutral']
+            energy0 = saved['solver_state']['initial_energy']
+            charge0 = saved['solver_state']['initial_charge']
+        integrator = None
+        if backend == 'numba':
+            from signal_space.numerics.two_object_compiled import CompiledStepper
+            integrator = CompiledStepper(grid, state, exact_zero=options['neutral_mode'] == 'exact-zero')
+            state = integrator.state
+        for index in range(start_index, steps + 1):
+            cancelled = (attempt / 'cancel.request').exists()
+            if cancelled or (index < steps and index % options['checkpoint_stride'] == 0):
+                checkpoint = save_checkpoint(request, step=total_step, case_index=case_index,
+                    index=index, state=state, grid=grid, samples=samples, cases=cases,
+                    max_neutral=max_neutral, initial_energy=energy0, initial_charge=charge0)
+                append_event(events, 'checkpoint-written', 'run', {'step': total_step, 'checkpoint': checkpoint.name})
+            if cancelled:
+                append_event(events, 'worker-cancelled', 'run', {'step': total_step})
+                return 130
             if index % entry['sample_stride'] == 0 or index == steps:
                 energy, charge = grid.energy_charge(state[:6])
                 samples.append({'t': index * entry['dt'], 'energy': energy, 'charge': charge,
@@ -122,14 +156,15 @@ def execute(request_path):
                                 'clocks': local_observables(grid, state, profile, centers, config['separation'])})
             if index == steps:
                 break
-            state = step(grid, state, entry['dt'])
+            state = integrator.advance(entry['dt']) if integrator else step(grid, state, entry['dt'])
+            total_step += 1
             if not all(np.isfinite(x).all() for x in state):
                 raise ValueError(f'{label} nonfinite state at step {index}')
             max_neutral = max(max_neutral, float(np.max(abs(state[4]))), float(np.max(abs(state[5]))))
             if (index + 1) % 1000 == 0:
                 append_event(events, 'scenario-progress', 'run',
                              {'label': label, 'step': index + 1, 'total_steps': steps})
-        np.savez_compressed(raw / f'{label}-final.npz', phi=state[0], pi=state[1],
+        atomic_npz(raw / f'{label}-final.npz', phi=state[0], pi=state[1],
                             chi=state[2], pchi=state[3], a=state[4], pia=state[5],
                             rho=grid.r, z=grid.z, absorber=grid.gamma,
                             energy_sink=state[6], charge_sink=state[7])
@@ -140,8 +175,12 @@ def execute(request_path):
                       'duration': steps * entry['dt'], 'initial_energy': energy0,
                       'initial_charge': charge0, 'max_neutral': max_neutral})
         append_event(events, 'scenario-completed', 'run', {'label': label, 'steps': steps})
+        save_checkpoint(request, step=total_step, case_index=case_index + 1,
+            index=0, state=None, grid=None, samples=[], cases=cases,
+            max_neutral=0., initial_energy=None, initial_charge=None)
     write_json(raw / 'scenarios.json', cases)
     write_json(raw / 'execution.json', {'scope': 'short outgoing-layer quiet calibration, no source or joint solve',
-                                        'profile_sha256': source_sha, 'seed_ledger': request['seed_ledger']})
+                                        'profile_sha256': source_sha, 'seed_ledger': request['seed_ledger'],
+                                        'execution': options, 'resumed': saved is not None})
     append_event(events, 'worker-completed', 'run', {'scenarios': len(cases)})
     return 0

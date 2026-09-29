@@ -61,6 +61,8 @@ def environment_identity() -> dict[str, Any]:
             "numpy": _module_version("numpy"),
             "scipy": _module_version("scipy"),
             "matplotlib": _module_version("matplotlib"),
+            "numba": _module_version("numba"),
+            "llvmlite": _module_version("llvmlite"),
         },
         "accelerator": "none",
     }
@@ -160,6 +162,8 @@ class RunPackage:
         write_json(provenance / "code.json", identity)
         write_json(provenance / "environment.json", execution["environment"])
         shutil.copy2(ROOT / "python/requirements-lock.txt", provenance / "dependencies.lock")
+        if execution["environment"]["numeric_libraries"].get("numba", "unavailable") != "unavailable":
+            shutil.copy2(ROOT / "python/requirements-performance-lock.txt", provenance / "performance-dependencies.lock")
         write_json(provenance / "inputs.json", {"config_hash": config_hash, "resolved_config": "resolved-config.json"})
         manifest = {
             "schema_version": "research-run-manifest-v1",

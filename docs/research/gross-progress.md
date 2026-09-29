@@ -2,6 +2,8 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. Long-horizon error qualification, full-exchange diagnostics, concurrency/resource enforcement and Test 9 reconstruction retention remain open.
+
 | Test | Scope                                 | Prerequisites                                                | Status                                                                                                                                                                                       |
 | ---- | ------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | Operator and observer identities      | Source audit; registered algebra plugin; locked plan         | Pass: 1,000 samples, six checks; run-2ae9c65dbd171851, analysis-0001-d3c876ea, report-0002                                                                                                   |
@@ -31,6 +33,12 @@ The [bounded reconstruction audit](gross-test-07-reconstruction-results.md), run
 Runtime status: the repository's common runtime is available. Test 2 registers a bounded SS OPS 1 reciprocal event circuit; Tests 3 and 4 verify routing and full physical spectra on their stated backgrounds. Test 5 registers a local action audit of SS OCF 1. Test 6 now registers and executes its flat spherical matter evolution with reciprocal core/clock response. Both the earlier surface-only Test 7 protocol (two locked failures) and the new known-incident protocol (eleven passes) have executed; autonomous detector hardware, generic noncollinear active-background spectra, Candidate A clocks and nonlinear Einstein evolution remain untested.
 
 The user-authorized workflow is a focused branch, locked experiment, verified evidence and reader export, then a PR. Raw data and prior classifications stay immutable. PR review and merge are separate from scientific classification.
+
+## Test 8 acceptance planning update
+
+The [Test 8 performance plan](test-08-performance-plan.md) adds a 58.7-second synthetic kernel profile and a staged code-first optimization proposal: compiled/preallocated updates, validated restart, measured case scheduling, storage/reconstruction accounting and bounded numerical preflight. Conditional runtime targets do not change the 127-evolution design, physical parameters, G0–G9 thresholds or current unresolved status. No acceptance campaign or optimized backend has been run.
+
+The [full acceptance campaign design](test-08-acceptance-plan.md) maps issue #82 G0–G9 and the complete control matrix without executing new physics. Local six-period run `run-2d17955e8ce845cb` supplies the [measured timing basis](test-08-quiet-timing.json); its six short checks pass while joint preparation/long clocks remain unresolved and full exchange is not evaluated. The design preflight distinguishes valid planning from launch readiness and reports missing implementation and resource gates. No full Test 8 acceptance or Test 9 readiness is claimed.
 
 ## Test 7 accepted known-incident evidence
 

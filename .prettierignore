@@ -3,6 +3,8 @@ node_modules
 dist
 playwright-report
 test-results
+.venv
+.research-work
 research/source
 research/figures
 # Byte-preserved source and immutable, checksummed experiment evidence.

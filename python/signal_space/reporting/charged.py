@@ -258,7 +258,7 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
         "required_inputs": [
             analysis["raw_source"],
             *[
-                str((raw / row["file"]).relative_to(run_path))
+                (raw / row["file"]).relative_to(run_path).as_posix()
                 for row in branch["records"]
                 if row["status"] == "accepted"
                 and row["kind"] in ("seed", "continue")

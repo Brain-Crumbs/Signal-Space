@@ -136,6 +136,8 @@
               "properties": {
                 "numpy": { "type": "string" },
                 "matplotlib": { "type": "string" },
+                "numba": { "type": "string" },
+                "llvmlite": { "type": "string" },
                 "scipy": { "type": "string" }
               }
             },

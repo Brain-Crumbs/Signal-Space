@@ -11,7 +11,7 @@ test.beforeAll(async () => {
   test.setTimeout(120_000);
   workspace = await mkdtemp(join(tmpdir(), 'signal-visuals-'));
   server = spawn(
-    'python3',
+    process.env.PYTHON ?? 'python3',
     [
       '-u',
       '-c',
@@ -59,6 +59,10 @@ serve(w,'http://127.0.0.1:4173')
     server.on('exit', (code) => {
       clearTimeout(timer);
       reject(new Error(`Runtime exit ${code}: ${err}`));
+    });
+    server.on('error', (error) => {
+      clearTimeout(timer);
+      reject(error);
     });
   });
 });

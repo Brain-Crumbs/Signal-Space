@@ -42,7 +42,7 @@ def trace_error(reference, candidate):
 
 
 def analyze(run_path, analysis_path, config):
-    attempt = next(iter(sorted((run_path / 'attempts').glob('attempt-*'))))
+    attempt = sorted((run_path / 'attempts').glob('attempt-*'))[-1]
     raw = attempt / 'raw'
     cases = read_json(raw / 'scenarios.json')
     traces = {c['label']: read_json(raw / f"{c['label']}-traces.json")['samples'] for c in cases}

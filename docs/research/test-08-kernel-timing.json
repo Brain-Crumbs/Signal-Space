@@ -1,0 +1,424 @@
+{
+  "schema_version": "signal-space-kernel-timing-observation-v1",
+  "recorded_at_utc": "2026-09-28T22:59:36Z",
+  "scope": "Synthetic engineering microbenchmark; repeated same-state calls; no physical evolution history, registered run, optimization or acceptance evidence.",
+  "method": "One untimed warm-up, three wall/process-CPU samples per operation; dt=.005; output discarded. Operations overlap and their times must not be added. Profiler is separate from timing samples.",
+  "source_commit": "4cb569e7600b7d72e0ef762966836e70c0e49386",
+  "source_sha256_git_lf": {
+    "scripts/benchmark-test8-kernels.py": "1ee76a4057440cb6e8f35732e8a53133d961e4787053a14c6328125e2deb47ba",
+    "python/signal_space/numerics/two_object.py": "f8c54833be4cd402c432c4db222951f2df47d4bc1c4b1ff7b4bd25f3aefe7dc1",
+    "python/signal_space/numerics/two_object_quiet.py": "900bccfdb861ace36633dffceeedacaa41949726ae7deb33ac3087c39f4a1803",
+    "python/signal_space/models/two_object.py": "e1ebb152063214b85a95f14a76f74608973da76bccad45662770ba3507e443e8"
+  },
+  "environment": {
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Python314\\python.exe",
+    "numpy": "2.3.5",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "logical_cpus": 20,
+    "thread_settings": {
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null
+    }
+  },
+  "limitations": [
+    "Not a complete-run ETA; no local tracking, events, checkpoint, serialization or future acceptance diagnostics.",
+    "Only three samples; no long thermal/concurrency test or peak-memory measurement.",
+    "Synthetic fields differ from the frozen clock; timings cannot replace saved physical-run timings."
+  ],
+  "rows": [
+    {
+      "h": 0.2,
+      "radius": 32,
+      "half_length": 80,
+      "cells": 128000,
+      "neutral_active": false,
+      "state_bytes": 8192000,
+      "operations": {
+        "rhs_with_sinks": {
+          "wall_seconds": [
+            0.03388299996731803, 0.03850719996262342, 0.03466369997477159
+          ],
+          "median_wall_seconds": 0.03466369997477159,
+          "process_cpu_seconds": [0.03125, 0.046875, 0.03125]
+        },
+        "rk4_step": {
+          "wall_seconds": [
+            0.16667690000031143, 0.1710437000147067, 0.19720900000538677
+          ],
+          "median_wall_seconds": 0.1710437000147067,
+          "process_cpu_seconds": [0.171875, 0.171875, 0.203125]
+        },
+        "energy_charge": {
+          "wall_seconds": [
+            0.030422199983149767, 0.03212910000002012, 0.031049600045662373
+          ],
+          "median_wall_seconds": 0.031049600045662373,
+          "process_cpu_seconds": [0.03125, 0.03125, 0.03125]
+        },
+        "health_and_neutral_scan": {
+          "wall_seconds": [
+            0.0009050999651663005, 0.0006730000022798777, 0.0008142999722622335
+          ],
+          "median_wall_seconds": 0.0008142999722622335,
+          "process_cpu_seconds": [0.0, 0.0, 0.0]
+        }
+      }
+    },
+    {
+      "h": 0.2,
+      "radius": 32,
+      "half_length": 80,
+      "cells": 128000,
+      "neutral_active": true,
+      "state_bytes": 8192000,
+      "operations": {
+        "rhs_with_sinks": {
+          "wall_seconds": [
+            0.046385399997234344, 0.0368727000313811, 0.035092599980998784
+          ],
+          "median_wall_seconds": 0.0368727000313811,
+          "process_cpu_seconds": [0.046875, 0.03125, 0.03125]
+        },
+        "rk4_step": {
+          "wall_seconds": [
+            0.17389079998247325, 0.17465680005261675, 0.20252610003808513
+          ],
+          "median_wall_seconds": 0.17465680005261675,
+          "process_cpu_seconds": [0.1875, 0.171875, 0.203125]
+        },
+        "energy_charge": {
+          "wall_seconds": [
+            0.028637600014917552, 0.031018299981951714, 0.028413199994247407
+          ],
+          "median_wall_seconds": 0.028637600014917552,
+          "process_cpu_seconds": [0.015625, 0.03125, 0.03125]
+        },
+        "health_and_neutral_scan": {
+          "wall_seconds": [
+            0.0008732000133022666, 0.0005652999971061945, 0.0005240999744273722
+          ],
+          "median_wall_seconds": 0.0005652999971061945,
+          "process_cpu_seconds": [0.0, 0.0, 0.0]
+        }
+      }
+    },
+    {
+      "h": 0.1,
+      "radius": 32,
+      "half_length": 80,
+      "cells": 512000,
+      "neutral_active": false,
+      "state_bytes": 32768000,
+      "operations": {
+        "rhs_with_sinks": {
+          "wall_seconds": [
+            0.1825857000076212, 0.1867058000061661, 0.20256949996110052
+          ],
+          "median_wall_seconds": 0.1867058000061661,
+          "process_cpu_seconds": [0.171875, 0.1875, 0.203125]
+        },
+        "rk4_step": {
+          "wall_seconds": [
+            0.9130783000146039, 0.9272464999812655, 0.9290302000008523
+          ],
+          "median_wall_seconds": 0.9272464999812655,
+          "process_cpu_seconds": [0.90625, 0.921875, 0.9375]
+        },
+        "energy_charge": {
+          "wall_seconds": [
+            0.1794625999755226, 0.16386859997874126, 0.14836509997257963
+          ],
+          "median_wall_seconds": 0.16386859997874126,
+          "process_cpu_seconds": [0.1875, 0.15625, 0.15625]
+        },
+        "health_and_neutral_scan": {
+          "wall_seconds": [
+            0.00489530002232641, 0.005559100012760609, 0.005922799988184124
+          ],
+          "median_wall_seconds": 0.005559100012760609,
+          "process_cpu_seconds": [0.0, 0.015625, 0.0]
+        }
+      }
+    },
+    {
+      "h": 0.1,
+      "radius": 32,
+      "half_length": 80,
+      "cells": 512000,
+      "neutral_active": true,
+      "state_bytes": 32768000,
+      "operations": {
+        "rhs_with_sinks": {
+          "wall_seconds": [
+            0.18407720001414418, 0.1916751999524422, 0.2217891999753192
+          ],
+          "median_wall_seconds": 0.1916751999524422,
+          "process_cpu_seconds": [0.1875, 0.1875, 0.234375]
+        },
+        "rk4_step": {
+          "wall_seconds": [
+            0.9012375000165775, 0.9413589999894612, 0.9248936999938451
+          ],
+          "median_wall_seconds": 0.9248936999938451,
+          "process_cpu_seconds": [0.90625, 0.9375, 0.9375]
+        },
+        "energy_charge": {
+          "wall_seconds": [
+            0.1703929000068456, 0.15028760000132024, 0.15603890002239496
+          ],
+          "median_wall_seconds": 0.15603890002239496,
+          "process_cpu_seconds": [0.171875, 0.140625, 0.15625]
+        },
+        "health_and_neutral_scan": {
+          "wall_seconds": [
+            0.004509299993515015, 0.004664399952162057, 0.006719400000292808
+          ],
+          "median_wall_seconds": 0.004664399952162057,
+          "process_cpu_seconds": [0.0, 0.0, 0.015625]
+        }
+      },
+      "profile_total_seconds": 2.7596039,
+      "profile_by_self_time": [
+        {
+          "file": "two_object.py",
+          "line": 39,
+          "function": "faces",
+          "calls": 36,
+          "self_seconds": 0.5379611000000001,
+          "cumulative_seconds": 0.5379611000000001
+        },
+        {
+          "file": "two_object.py",
+          "line": 86,
+          "function": "rhs",
+          "calls": 12,
+          "self_seconds": 0.48259,
+          "cumulative_seconds": 1.7305922
+        },
+        {
+          "file": "two_object_quiet.py",
+          "line": 29,
+          "function": "rhs_with_sinks",
+          "calls": 12,
+          "self_seconds": 0.3706895,
+          "cumulative_seconds": 2.2738948000000003
+        },
+        {
+          "file": "two_object_quiet.py",
+          "line": 51,
+          "function": "<genexpr>",
+          "calls": 27,
+          "self_seconds": 0.2533942,
+          "cumulative_seconds": 0.2533942
+        },
+        {
+          "file": "two_object.py",
+          "line": 49,
+          "function": "divergence",
+          "calls": 36,
+          "self_seconds": 0.2094608,
+          "cumulative_seconds": 0.20979550000000002
+        },
+        {
+          "file": "two_object_quiet.py",
+          "line": 46,
+          "function": "<genexpr>",
+          "calls": 81,
+          "self_seconds": 0.19441180000000002,
+          "cumulative_seconds": 0.19441180000000002
+        },
+        {
+          "file": "two_object.py",
+          "line": 60,
+          "function": "squared_gradient",
+          "calls": 12,
+          "self_seconds": 0.1731861,
+          "cumulative_seconds": 0.18109630000000002
+        },
+        {
+          "file": "two_object.py",
+          "line": 14,
+          "function": "potential_prime",
+          "calls": 12,
+          "self_seconds": 0.0925285,
+          "cumulative_seconds": 0.0925285
+        },
+        {
+          "file": "two_object.py",
+          "line": 30,
+          "function": "charge_density",
+          "calls": 12,
+          "self_seconds": 0.09249360000000001,
+          "cumulative_seconds": 0.0925367
+        },
+        {
+          "file": "two_object.py",
+          "line": 18,
+          "function": "clock_well",
+          "calls": 12,
+          "self_seconds": 0.0772635,
+          "cumulative_seconds": 0.0772635
+        },
+        {
+          "file": "two_object.py",
+          "line": 57,
+          "function": "laplacian",
+          "calls": 36,
+          "self_seconds": 0.0740964,
+          "cumulative_seconds": 0.8218530000000001
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.abs>",
+          "calls": 36,
+          "self_seconds": 0.059811100000000006,
+          "cumulative_seconds": 0.059811100000000006
+        },
+        {
+          "file": "two_object.py",
+          "line": 26,
+          "function": "neutral_stiffness",
+          "calls": 24,
+          "self_seconds": 0.052837800000000004,
+          "cumulative_seconds": 0.052837800000000004
+        },
+        {
+          "file": "two_object_quiet.py",
+          "line": 44,
+          "function": "step",
+          "calls": 3,
+          "self_seconds": 0.037719300000000004,
+          "cumulative_seconds": 2.7595669000000003
+        },
+        {
+          "file": "two_object.py",
+          "line": 22,
+          "function": "clock_well_prime",
+          "calls": 12,
+          "self_seconds": 0.029163,
+          "cumulative_seconds": 0.029163
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<method 'reduce' of 'numpy.ufunc' objects>",
+          "calls": 24,
+          "self_seconds": 0.013155100000000001,
+          "cumulative_seconds": 0.013155100000000001
+        },
+        {
+          "file": "numeric.py",
+          "line": 98,
+          "function": "zeros_like",
+          "calls": 12,
+          "self_seconds": 0.0078747,
+          "cumulative_seconds": 0.0079022
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method numpy.zeros>",
+          "calls": 48,
+          "self_seconds": 0.0003489,
+          "cumulative_seconds": 0.0003489
+        },
+        {
+          "file": "fromnumeric.py",
+          "line": 69,
+          "function": "_wrapreduction",
+          "calls": 24,
+          "self_seconds": 0.000165,
+          "cumulative_seconds": 0.0133456
+        },
+        {
+          "file": "two_object_quiet.py",
+          "line": 45,
+          "function": "add",
+          "calls": 9,
+          "self_seconds": 0.00014680000000000002,
+          "cumulative_seconds": 0.19455860000000003
+        }
+      ]
+    },
+    {
+      "h": 0.05,
+      "radius": 32,
+      "half_length": 80,
+      "cells": 2048000,
+      "neutral_active": false,
+      "state_bytes": 131072000,
+      "operations": {
+        "rhs_with_sinks": {
+          "wall_seconds": [
+            0.7914100000052713, 0.78417040000204, 0.7885683000204153
+          ],
+          "median_wall_seconds": 0.7885683000204153,
+          "process_cpu_seconds": [0.78125, 0.78125, 0.796875]
+        },
+        "rk4_step": {
+          "wall_seconds": [
+            4.01782369997818, 3.9797788999858312, 3.8494259999715723
+          ],
+          "median_wall_seconds": 3.9797788999858312,
+          "process_cpu_seconds": [4.015625, 3.96875, 3.859375]
+        },
+        "energy_charge": {
+          "wall_seconds": [
+            0.6585396999726072, 0.6627181000076234, 0.6899044000310823
+          ],
+          "median_wall_seconds": 0.6627181000076234,
+          "process_cpu_seconds": [0.65625, 0.671875, 0.6875]
+        },
+        "health_and_neutral_scan": {
+          "wall_seconds": [
+            0.03233859996544197, 0.025930500007234514, 0.02704369998537004
+          ],
+          "median_wall_seconds": 0.02704369998537004,
+          "process_cpu_seconds": [0.03125, 0.03125, 0.03125]
+        }
+      }
+    },
+    {
+      "h": 0.05,
+      "radius": 32,
+      "half_length": 80,
+      "cells": 2048000,
+      "neutral_active": true,
+      "state_bytes": 131072000,
+      "operations": {
+        "rhs_with_sinks": {
+          "wall_seconds": [
+            0.7876539999851957, 0.7926371999783441, 0.791488999966532
+          ],
+          "median_wall_seconds": 0.791488999966532,
+          "process_cpu_seconds": [0.796875, 0.78125, 0.796875]
+        },
+        "rk4_step": {
+          "wall_seconds": [
+            3.913307399954647, 3.9889878000249155, 4.001889900013339
+          ],
+          "median_wall_seconds": 3.9889878000249155,
+          "process_cpu_seconds": [3.90625, 3.96875, 4.015625]
+        },
+        "energy_charge": {
+          "wall_seconds": [
+            0.6571167000220157, 0.6802484000218101, 0.6566486000083387
+          ],
+          "median_wall_seconds": 0.6571167000220157,
+          "process_cpu_seconds": [0.65625, 0.6875, 0.65625]
+        },
+        "health_and_neutral_scan": {
+          "wall_seconds": [
+            0.02771500003291294, 0.02763060003053397, 0.026586599997244775
+          ],
+          "median_wall_seconds": 0.02763060003053397,
+          "process_cpu_seconds": [0.03125, 0.015625, 0.03125]
+        }
+      }
+    }
+  ],
+  "total_wall_seconds": 58.694273700006306
+}

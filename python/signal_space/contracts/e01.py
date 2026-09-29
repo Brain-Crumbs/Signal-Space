@@ -18,7 +18,7 @@ def check(value, spec, path="config"):
     if kind == "object":
         if not isinstance(value, dict):
             raise ContractError(f"{path} must be an object")
-        if set(value) != set(spec["required"]):
+        if not set(spec["required"]).issubset(value) or set(value) - set(spec["properties"]):
             raise ContractError(f"{path} has missing or unknown fields")
         for key, item in value.items():
             check(item, spec["properties"][key], f"{path}.{key}")
@@ -55,6 +55,8 @@ def check(value, spec, path="config"):
             raise ContractError(f"{path} invalid string")
     if "const" in spec and value != spec["const"]:
         raise ContractError(f'{path} must equal {spec["const"]!r}')
+    if "enum" in spec and value not in spec["enum"]:
+        raise ContractError(f'{path} must be one of {spec["enum"]!r}')
 
 
 def validate(value):
