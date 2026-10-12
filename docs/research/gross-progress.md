@@ -2,6 +2,15 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+**Research-program revision, 12 October 2026.** [Program v0.3](gross-research-program-v0.3.md)
+makes the projector/signal/memory foundation and model-specific certification
+explicit, with Candidate B retained as a separate continuum benchmark.
+The [source audit](gross-projector-control-audit.md) also records the later
+Common Derivations revision 1.1 and its reported instability of three active
+preparations. Those source supplements are not silently substituted for this
+ledger's canonical run identities. No Test 1-11 classification, model equation
+or locked acceptance criterion changes in this documentation revision.
+
 Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. The GROSS CLI now supplies bounded concurrency and process-tree controls. Long-horizon error qualification, full-exchange diagnostics, measured full-campaign resource qualification and Test 9 reconstruction retention remain open.
 
 | Test | Scope                                 | Prerequisites                                                | Status                                                                                                                                                                                       |

@@ -1,6 +1,51 @@
 {
   "entries": [
     {
+      "date": "2026-10-12",
+      "id": "gross-research-program-v03",
+      "kind": "research-design",
+      "path": "docs/research/gross-research-program-v0.3.md",
+      "status": "documentation revision; no new experiment",
+      "summary": "Projector/signal/memory foundation, model-specific residual/control certification and a separate continuum benchmark; existing actions and Test 1-11 criteria preserved.",
+      "tags": [
+        "GROSS",
+        "projectors",
+        "memory",
+        "certification",
+        "research-program"
+      ],
+      "title": "GROSS research program v0.3"
+    },
+    {
+      "date": "2026-10-12",
+      "id": "gross-projector-control-audit",
+      "kind": "source-audit",
+      "path": "docs/research/gross-projector-control-audit.md",
+      "status": "source-backed architectural comparison",
+      "summary": "Compares current projector spaces, coherent signal state, supplied incidence, continuum assumptions and residual/barrier certification; source supplements remain distinct from canonical acceptance.",
+      "tags": [
+        "GROSS",
+        "architecture",
+        "projectors",
+        "residuals"
+      ],
+      "title": "Projector architecture and control/residual source audit"
+    },
+    {
+      "date": "2026-10-12",
+      "id": "gross-claim-register-v03",
+      "kind": "claim-register",
+      "path": "docs/research/gross-claim-register.md",
+      "status": "assumptions, identities, reported evidence and conjectures classified",
+      "summary": "Tracks twenty scoped architectural and certification claims without promoting legacy Tests 1-11.",
+      "tags": [
+        "GROSS",
+        "claims",
+        "evidence"
+      ],
+      "title": "GROSS research claim register"
+    },
+    {
       "date": "2026-09-24",
       "id": "gross-operator-program-v02",
       "kind": "paper",

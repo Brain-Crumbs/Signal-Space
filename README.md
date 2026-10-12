@@ -5,8 +5,17 @@ campaign: registered models, bounded experiments, immutable evidence and
 question-driven scientific reports.
 
 **GROSS is the sole active implementation.** Start with the
-[current program](research/papers/gross-operator-program-v0.2.md),
-[Tests 1–11 progress ledger](docs/research/gross-progress.md), and
+[research program v0.3](docs/research/gross-research-program-v0.3.md) and its
+[architecture/source comparison](docs/research/gross-projector-control-audit.md).
+The foundation track studies projector geometry, coherent signals and reciprocal
+memory on explicitly supplied incidence. Residual/control certification supports
+that track and the separate continuum benchmark; no microscopic-to-continuum
+derivation is claimed.
+
+The [operator models v0.2](research/papers/gross-operator-program-v0.2.md)
+remain the unchanged equation source for registered experiments. Candidate A's
+event model and Candidate B's assumed continuum/coframe model are distinct.
+See the [Tests 1–11 progress ledger](docs/research/gross-progress.md) and
 [CLI guide](docs/research/gross-runner.md). Prior campaigns are preserved in
 [archive/](archive/README.md) for historical audit.
 

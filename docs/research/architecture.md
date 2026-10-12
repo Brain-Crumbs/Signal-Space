@@ -1,5 +1,16 @@
 # GROSS execution architecture
 
+This document describes software organization. The scientific research layers
+and their assumptions are defined in [program v0.3](gross-research-program-v0.3.md)
+and the [source audit](gross-projector-control-audit.md). A common runtime does
+not identify the projector/event candidate with the continuum candidate.
+
+| Scientific track | Present role | Boundary |
+| --- | --- | --- |
+| Projector, signal and memory foundation | Exact local laws, configuration persistence, retained-state observation and supplied-incidence propagation | Internal operator geometry is not physical spacetime; graph, order and transports must be declared |
+| Residual/control certification | Model-specific existence, finite-time error, invariant regions and observation conditioning | Analysis projections do not replace physical memories or provide a new interaction law |
+| Candidate B continuum benchmark | Existing core/clock/reception and Test 8 experiments in the stated continuum action | Four-dimensional domain, metric coupling and Einstein action are assumptions; results do not transfer to Candidate A |
+
 The current registered GROSS models and their locked protocols are the only
 active implementation authority. The archived Paper I/E00/E01 systems are not
 runtime dependencies.

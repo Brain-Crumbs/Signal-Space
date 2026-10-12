@@ -104,6 +104,28 @@ Every scientific claim is a record with:
 
 A report may summarize a claim but cannot create evidence that is absent from its linked analysis. `unresolved` remains visible and is not coerced to pass/fail.
 
+### Scientific scope and certification
+
+The claim's scope identifies its scientific track and supplied structure:
+operator algebra, event incidence/order/transport, observation protocol,
+continuum domain/action, and numerical restrictions as applicable. An exact
+operator identity cannot supply a missing dynamical or spacetime derivation.
+The [claim register](gross-claim-register.md) demonstrates these distinctions
+without adding fields to the runtime manifest schema.
+
+For an approximation, retain the residual definition and norm, admissible
+state region, initial discrepancy, inverse/sensitivity bound, nonlinear
+remainder and time horizon. Existence, stability, orbital confinement, phase
+accuracy and observation conditioning are separate claims. Reducing a residual,
+fitting away phase, or passing a checksum does not establish them.
+Certified all-time claims need the applicable invariant-region or comparable
+proof; periodic scheduling does not reset a finite-time error budget.
+
+When a source supplement revises an older interpretation, identify both
+versions and the exact scope of the new evidence. Keep the old canonical
+bytes and classifications. Report a source certificate as such when its
+verifier has not been rerun in the current work.
+
 ## 9. Verification
 
 `verify` checks schemas, hashes, referenced paths, sequence continuity, terminal-state consistency, parent links, checkpoint compatibility, acceptance-evidence completeness, and report/figure inputs. It does not declare the physics correct; it establishes package integrity and traceability.
