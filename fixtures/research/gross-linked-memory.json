@@ -1,0 +1,67 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.linked-memory-persistence.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "parameters": {
+    "cycles": 64,
+    "sensitivity_cycles": 32,
+    "kappa": 1.5707963267948966,
+    "lambda": 0,
+    "samples_per_gate": 17,
+    "refined_samples_per_gate": 33,
+    "rtol": 1e-11,
+    "atol": 1e-13,
+    "max_step": 0.0625,
+    "jacobian_steps": [
+      1e-05,
+      5e-06
+    ],
+    "initial_error": 1e-06,
+    "sensitivity_preparations": [
+      "active-plus",
+      "active-minus"
+    ],
+    "events": [
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        2,
+        4
+      ]
+    ],
+    "word": [
+      0,
+      1
+    ]
+  },
+  "units": {
+    "state": "dimensionless",
+    "gate_parameter": "dimensionless",
+    "couplings": "dimensionless"
+  },
+  "seeds": {
+    "root": 2026101203
+  },
+  "resources": {
+    "max_cpu_seconds": 300,
+    "max_wall_seconds": 300,
+    "max_memory_mb": 1024,
+    "max_output_mb": 128
+  },
+  "analysis": {
+    "max_residual": 1e-09,
+    "max_tangent_difference": 0.0001,
+    "record_target": 0.001,
+    "preparation_budget": 0.00025,
+    "integration_budget": 0.00025,
+    "omitted_budget": 0.00025,
+    "readout_budget": 0.00025
+  },
+  "report": {
+    "title": "GROSS v0.3: Linked-Memory Persistence and Record Sensitivity"
+  }
+}

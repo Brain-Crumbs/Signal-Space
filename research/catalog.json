@@ -2,6 +2,22 @@
   "entries": [
     {
       "date": "2026-10-12",
+      "id": "gross-linked-memory",
+      "kind": "experiment-protocol",
+      "path": "docs/research/gross-linked-memory.md",
+      "status": "implemented and locked; campaign execution pending",
+      "summary": "Unchanged SS OPS 1 three-port/two-memory F0/F2/C1 seed, corrected commuting full-word prediction, independent coherent lift and full physical sensitivity. Engineering qualification only.",
+      "tags": [
+        "GROSS",
+        "projectors",
+        "memory",
+        "coherence",
+        "certification"
+      ],
+      "title": "GROSS v0.3 linked-memory persistence seed"
+    },
+    {
+      "date": "2026-10-12",
       "id": "gross-research-program-v03",
       "kind": "research-design",
       "path": "docs/research/gross-research-program-v0.3.md",

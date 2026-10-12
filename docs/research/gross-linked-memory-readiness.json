@@ -1,0 +1,73 @@
+{
+  "artifact_kind": "research-implementation-readiness",
+  "version": "1.0",
+  "date": "2026-10-12",
+  "experiment_id": "gross.linked-memory-persistence.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "base_commit": "9668e7394fc463075546971448a4d0b923d2a06e",
+  "campaign_execution_status": "pending",
+  "campaign_scientific_status": "not-evaluated",
+  "config_file_sha256": "296a700bd6ad3cfc8d6fd21f3cea5d642facb1df8539b73ffef529b2ea6950c2",
+  "locked_plan_sha256": "25ee1feefd7190fe3a23bf386bd26c6d310550459decb6f1ec2a56d85a031266",
+  "locked_cycles": 64,
+  "sensitivity_cycles": 32,
+  "targeted_tests_passed": 12,
+  "core_tests": {
+    "ran": 89,
+    "passed": 83,
+    "skipped": 6,
+    "skip_scope": "optional compiled Test8 backend"
+  },
+  "agent_contract_tests_passed": 13,
+  "repository_check": {
+    "valid": true,
+    "archived_files": 386,
+    "registered_gross_experiments": 17,
+    "locked_plans": 20,
+    "research_files": 2825
+  },
+  "engineering_fixture": {
+    "run_id": "run-cea81a267ad9dcac",
+    "cycles": 1,
+    "analysis_id": "analysis-0002-6143bf19",
+    "report_id": "report-0002",
+    "canonical_and_reader_verified": true,
+    "scientific_classification": "fail",
+    "scope": "engineering only; does not satisfy locked campaign horizon"
+  },
+  "resource_preflight": {
+    "accepted": true,
+    "estimate": {
+      "basis": "Conservative serial engineering envelope; see readiness evidence. No campaign measurement.",
+      "cpu_seconds": 178,
+      "disk_mb": 112.0,
+      "memory_mb": 384,
+      "wall_seconds": 218.4,
+      "wall_time_class": "short"
+    },
+    "limits": {
+      "max_cpu_seconds": 300,
+      "max_memory_mb": 1024,
+      "max_output_mb": 128,
+      "max_wall_seconds": 300
+    },
+    "rejected_limits": []
+  },
+  "observed_worker_wall_seconds": 0.8674233959900448,
+  "cpu_rss_measurements_available": false,
+  "review": "independent mathematical and implementation review; substantive objections resolved",
+  "qualification_limits": [
+    "campaign unrun",
+    "zero conservative full-cycle preparation horizon",
+    "no validated numerical residual/roundoff/readout certificate",
+    "CPU/RSS measurements unavailable",
+    "no Test1-11 acceptance changes"
+  ],
+  "source_hashes": {
+    "src/signal_space/analysis/linked_memory.py": "eeccb687ad93576e60f791ddd17194cab35a0181ff0b18e228e4bc46dee80210",
+    "src/signal_space/experiments/linked_memory.py": "dd52a95483fd43536f8560671bf3c1a55ecc75b4f3e8a3a3574b731974b19023",
+    "src/signal_space/models/linked_memory.py": "d1bfc3b2648d81ba3bd39c564eac3f32b80045c7601984dbed9da9996f43341e",
+    "src/signal_space/numerics/linked_memory.py": "f8cfe1df91004aae4f9d715bb2dca5e833d97c9607428eae2c807357b2aa50d6",
+    "src/signal_space/reporting/linked_memory.py": "03921ddcc1518a54dcb629005a9e3c29488bd9881f9dc3f6f95d19148eb24de5"
+  }
+}
