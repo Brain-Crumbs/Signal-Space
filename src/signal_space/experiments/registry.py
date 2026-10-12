@@ -4,6 +4,7 @@ from importlib import import_module
 from signal_space.experiments.base import ExperimentPlugin
 
 _PLUGINS = {
+    'gross.two-object-evolution.v1': ('two_object_evolution', 'TwoObjectEvolutionExperiment', ()),
     'gross.operator-identities.v1': ('operators', 'OperatorExperiment', ()),
     'gross.reciprocal-events.v1': ('reciprocal', 'ReciprocalExperiment', ()),
     'gross.router-propagation.v1': ('router', 'RouterExperiment', ()),

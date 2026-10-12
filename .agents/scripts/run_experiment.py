@@ -29,6 +29,8 @@ RECIPES["gross-test-07-transfer"] = "docs/research/plans/gross-test-07-transfer.
 RECIPES["gross-test-08-calibration"] = "docs/research/plans/gross-test-08-calibration.json"
 RECIPES["gross-test-08-quiet"] = "docs/research/plans/gross-test-08-quiet.json"
 RECIPES["gross-test-08-quiet-optimized"] = "docs/research/plans/gross-test-08-quiet-optimized.json"
+RECIPES["gross-test-08-evolution-pilot"] = "docs/research/plans/gross-test-08-evolution-pilot.json"
+RECIPES["gross-test-08-clock-phase-pilot"] = "docs/research/plans/gross-test-08-clock-phase-pilot.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
 for kind in ("longevity", "response"):
@@ -41,6 +43,16 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.two-object-evolution.v1":
+        lines = ["# Test 8 doublet implementation: automated assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "A startup/implementation qualification. The default window is 0.526 signed periods and ends before reception.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "The unchanged action retains both doublet components, measured constrained initial corrections, local proper-time derivatives, compact initial sources, and complete restart.",
+                  "A smaller residual is not a stationary solution or a nonlinear error bound. Fixed-tube momentum stress and proper-time/flux quadrature remain unqualified.",
+                  "Next: qualify long freely evolving quiet clocks and weak-mode error budgets before selecting held-out exchange sources. Full G0-G9 and Test 9 remain not evaluated."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.two-object-calibration.v1":
         lines = ["# Test 8 spatial calibration: automated assessment", "",
                  f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",

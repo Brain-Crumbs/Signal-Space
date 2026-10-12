@@ -23,6 +23,8 @@ on:
           - gross-test-07-boundary
           - gross-test-07-acceptance
           - gross-test-08-calibration
+          - gross-test-08-evolution-pilot
+          - gross-test-08-clock-phase-pilot
         default: gross-test-01
         required: true
       retention_days:

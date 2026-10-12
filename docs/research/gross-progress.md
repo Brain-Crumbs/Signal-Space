@@ -2,6 +2,22 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+Test 8 implementation update (12 October 2026): the [doublet pair evolution
+stage](gross-test-08-evolution.md) adds both internal components, constrained
+preparation corrections, local moving-detector records, exact discrete
+energy/charge currents, continuum stress diagnostics and complete restart.
+Its separately locked 13-case startup pilot is shorter than one signed period;
+it cannot promote long-clock survival, reception, recoil or G0-G9 acceptance.
+All Tests 1-11 statuses below remain unchanged.
+
+The [bounded startup result](test-08-evolution-results.md), run
+`run-527cfda410152d85`, completes 13 cases with seven engineering passes and
+two physical gates not evaluated. Residual reduction and local records are
+supported on this short window; long-clock and full Test 8 acceptance are not.
+The separate quadrature-clock control `run-40d81f37cf3c7599` also completes
+13 cases with seven engineering passes. Its phase-dependent startup correction
+benefit is retained; it does not promote any physical gate.
+
 Test 8 engineering update: an [optional compiled CPU backend and complete quiet-prerequisite restart](test-08-performance-implementation.md) now accompany the NumPy reference. Numerical equivalence and split-run fixtures are engineering controls, not new physical acceptance. The GROSS CLI now supplies bounded concurrency and process-tree controls. Long-horizon error qualification, full-exchange diagnostics, measured full-campaign resource qualification and Test 9 reconstruction retention remain open.
 
 | Test | Scope                                 | Prerequisites                                                | Status                                                                                                                                                                                       |

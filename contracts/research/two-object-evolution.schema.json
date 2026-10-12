@@ -1,0 +1,309 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "const": "gross.two-object-evolution.v1"
+    },
+    "model_id": {
+      "const": "signal-space.ss-ocf-1.flat-axisymmetric-doublet.v1"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "correction",
+        "checkpoint_stride",
+        "scenarios"
+      ],
+      "properties": {
+        "profile": {
+          "const": {
+            "path": "research/experiments/gross.bound-clock.v1/run-080a63d117abd84d/attempts/attempt-0001/raw/profile-0.900.npz",
+            "sha256": "6b1e06d47b6a9236698f044e103764b397b77c16f927ab2f1e539f263d43a3db"
+          }
+        },
+        "correction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "iterations",
+            "damping",
+            "max_linear_iterations",
+            "max_correction_fraction"
+          ],
+          "properties": {
+            "iterations": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            },
+            "damping": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 1
+            },
+            "max_linear_iterations": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "max_correction_fraction": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 0.05
+            }
+          }
+        },
+        "checkpoint_stride": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 100000
+        },
+        "scenarios": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 13,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "pair",
+              "separation",
+              "matter_phase",
+              "orientation",
+              "clock_phase",
+              "clock_peak",
+              "omega_clock",
+              "preparation",
+              "h",
+              "dt",
+              "radius",
+              "half_length",
+              "absorber_width",
+              "absorber_strength",
+              "tube_radius",
+              "duration",
+              "sample_stride",
+              "source"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "pair": {
+                "type": "boolean"
+              },
+              "separation": {
+                "type": "number",
+                "minimum": 36,
+                "maximum": 90
+              },
+              "matter_phase": {
+                "type": "number",
+                "minimum": -6.284,
+                "maximum": 6.284
+              },
+              "orientation": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1.571
+              },
+              "clock_phase": {
+                "type": "number",
+                "minimum": -6.284,
+                "maximum": 6.284
+              },
+              "clock_peak": {
+                "type": "number",
+                "minimum": 0.0001,
+                "maximum": 0.001
+              },
+              "omega_clock": {
+                "const": 0.41274991
+              },
+              "preparation": {
+                "enum": [
+                  "naive",
+                  "residual-reduced"
+                ]
+              },
+              "h": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 0.8
+              },
+              "dt": {
+                "type": "number",
+                "minimum": 0.001,
+                "maximum": 0.05
+              },
+              "radius": {
+                "type": "number",
+                "minimum": 24,
+                "maximum": 80
+              },
+              "half_length": {
+                "type": "number",
+                "minimum": 44,
+                "maximum": 180
+              },
+              "absorber_width": {
+                "type": "number",
+                "minimum": 3.2,
+                "maximum": 12
+              },
+              "absorber_strength": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 0.2
+              },
+              "tube_radius": {
+                "type": "number",
+                "minimum": 10,
+                "maximum": 16
+              },
+              "duration": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 100
+              },
+              "sample_stride": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 200
+              },
+              "source": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "channel",
+                  "amplitude",
+                  "radius",
+                  "carrier",
+                  "phase"
+                ],
+                "properties": {
+                  "channel": {
+                    "enum": [
+                      "none",
+                      "neutral",
+                      "structural"
+                    ]
+                  },
+                  "amplitude": {
+                    "type": "number",
+                    "minimum": -0.05,
+                    "maximum": 0.05
+                  },
+                  "radius": {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "carrier": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 4
+                  },
+                  "phase": {
+                    "type": "number",
+                    "minimum": -6.284,
+                    "maximum": 6.284
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "units": {
+      "const": {
+        "mass": "m=1",
+        "length": "m^-1",
+        "time": "m^-1",
+        "signal": "c=hbar=1"
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root"
+      ],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1800
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1800
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 2048
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 1024
+        }
+      }
+    },
+    "analysis": {
+      "const": {
+        "energy_fraction": 0.001,
+        "charge_fraction": 0.001,
+        "minimum_envelope_fraction": 0.1,
+        "trace_difference_fraction": 0.05,
+        "neutral_sign_absolute": 1e-12,
+        "full_acceptance": "not-evaluated",
+        "minimum_zero_slope_fraction": 0.1
+      }
+    },
+    "report": {
+      "const": {
+        "title": "Test 8: doublet pair preparation and evolution implementation pilot"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

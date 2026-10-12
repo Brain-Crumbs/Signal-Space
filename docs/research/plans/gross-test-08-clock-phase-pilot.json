@@ -1,0 +1,305 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.two-object-evolution.v1",
+  "model_id": "signal-space.ss-ocf-1.flat-axisymmetric-doublet.v1",
+  "question": "Does the freely evolving doublet implementation retain independently seeded quadrature clock records with the same preparation and numerical controls?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md §§7-10,15.8",
+    "docs/research/gross-test-08-evolution.md",
+    "Candidate_B_Quiet_Pair_Derivation_and_Results.pdf, 2026-10-12, run-fa0c8e4cdc561952"
+  ],
+  "runtime_config": "fixtures/research/gross-test-08-clock-phase-pilot.json",
+  "runtime_config_sha256": "5d14c195b45de8861b4af1866bd80fd376b6d46fa7280d18d2bfeb6bfe86da33",
+  "method": {
+    "action": "Unchanged SS OCF 1; both complex doublet components; U=s-s^2+s^3, Z=1+.2s, V=.25-.4s+.2s^2, zeta=.1. Gravity decoupled.",
+    "units": "c=hbar=m=1; time/length m^-1, scalar fields m; one signed period contains two invariant ticks.",
+    "domain": "D=40; rho<24, |z|<48; h=.8 base and .4 spatial at fixed dt; wider 32/56 at fixed h/dt/buffer.",
+    "boundaries": "Regular axis and mirror faces beyond a measured damping buffer; width4,strength.12; all damping sinks accounted.",
+    "initial_data": "Exact nominal Test6 .900 profile bytes; independent weak clock quadratures, naive vs bounded residual-reduced rotating matter; isolated, matter quadrature, orthogonal doublet, compact neutral/structural +/- controls. Source variables all effective. No force after t=0. This separate control starts B at pi/2 relative clock phase; A starts at zero. The relative B phase is inapplicable to isolated A cases.",
+    "solver": "Serial annular variational doublet NumPy RK4, dt=.02, time control .01; duration8; local samples .1; atomic hash-verified full-state restart.",
+    "tolerances": "Engineering total E/Q error<.001; trace controls<.05; envelope and at least one simple-zero slope>=.1 initial; neutral sign error<1e-12; correction must lower actual residual. The weak-mode and full G0-G9 gates remain unqualified/not evaluated."
+  },
+  "hypotheses": [
+    {
+      "id": "faithful-implementation",
+      "prediction": "Action-derived forces, exact neutral sign/null, genuine local crossings, independent numerical controls and residual descent agree within locked limits."
+    },
+    {
+      "id": "implementation-or-preparation-failure",
+      "prediction": "A force/current/readout defect, uncontrolled embedding startup or nondecreasing preparation residual triggers a failed check without promoting physical survival."
+    }
+  ],
+  "controls": [
+    {
+      "id": "space",
+      "purpose": "Separate spatial embedding error",
+      "method": "h=.4 while dt=.02 and all other pair parameters remain fixed."
+    },
+    {
+      "id": "time",
+      "purpose": "Isolate RK4 error",
+      "method": "dt=.01 on the .8 grid, same sample interval."
+    },
+    {
+      "id": "domain",
+      "purpose": "Expose boundary sensitivity",
+      "method": "Widen both extents at fixed h/dt/sponge width and strength."
+    },
+    {
+      "id": "preparation",
+      "purpose": "Separate core embedding from pair residual",
+      "method": "Matched naive/reduced isolated and pair preparations; record initial E/Q and residual changes."
+    },
+    {
+      "id": "orientation",
+      "purpose": "Retain different internal states sharing density",
+      "method": "Quadrature matter phase and orthogonal doublets."
+    },
+    {
+      "id": "source-signs",
+      "purpose": "Test source preparation and exact neutral symmetry",
+      "method": "Identical quiet, neutral +/- and structural +/- initial preparations; no reception claim before arrival."
+    },
+    {
+      "id": "clock-phase",
+      "purpose": "Do not qualify only the symmetric in-phase clock preparation",
+      "method": "Repeat the same 13-case matrix with B clock quadrature pi/2, using independent isolated-profile velocities. This is one extra phase control, not an all-phase guarantee."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "source-identity",
+      "observable": "Frozen radial profile matches its exact byte identity.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "neutral-null",
+      "observable": "All unseeded neutral fields and momenta remain exactly zero.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "global-ledgers",
+      "observable": "Energy plus absorber work and charge plus sink meet the locked short-pilot limits.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "residual-reduction",
+      "observable": "Bounded corrections strictly reduce the actual unprojected discrete quiet residual.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "local-records",
+      "observable": "Both components and local timelike detector records are retained with valid envelopes.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "independent-controls",
+      "observable": "Fixed-dt spatial, fixed-grid temporal and fixed-grid/time domain comparisons are retained.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "source-controls",
+      "observable": "Compact neutral and structural initial data have matched quiet and sign controls.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "long-clocks",
+      "observable": "100-period and postinteraction survival qualification is available.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    },
+    {
+      "id": "exchange-recoil",
+      "observable": "Full held-out G0-G9 reception, stress-recoil closure and Test 9 readiness.",
+      "pass_if": "The corresponding fixed configuration check meets its predeclared engineering threshold; physical gates require their separate qualified campaign.",
+      "fail_if": "A measured finite engineering check violates its locked threshold.",
+      "unresolved_if": "Required physical horizon, causal arrival, weak-signal error budget or acceptance controls are absent; long-clocks and exchange-recoil are not-evaluated in this stage.",
+      "uncertainty": "Nominal calibration, finite spatial/time/domain controls, startup and saved-data integration errors; no continuum enclosure."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "pair-fields",
+      "question": "What changes when the quiet pair is allowed to evolve freely?",
+      "role": "diagnostic",
+      "observables": [
+        "pair-fields"
+      ],
+      "representation": "PNG/SVG/PDF with exact plot arrays and four-part interpretation",
+      "competing_signatures": {
+        "faithful-implementation": "Resolved local data, residual descent and controllable diagnostic differences.",
+        "implementation-or-preparation-failure": "Nondecreasing residual, lost crossing, failed currents or unresolved control differences."
+      },
+      "controls": [
+        "space",
+        "time",
+        "domain",
+        "preparation",
+        "orientation",
+        "source-signs"
+      ],
+      "uncertainty": "Coarse startup pilot, nominal input stencil, no long horizon or received signal; stress is continuum-consistent and flux integrals need refinement.",
+      "source_data": [
+        "plot-data/spatial.npz"
+      ],
+      "transformations": [
+        "Only declared interpolation, unwrapping, proper-time/flux quadrature and normalization of saved outputs."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "preparation-residuals",
+      "question": "Does a bounded preparation correction reduce the actual residual?",
+      "role": "evidentiary",
+      "observables": [
+        "preparation-residuals"
+      ],
+      "representation": "PNG/SVG/PDF with exact plot arrays and four-part interpretation",
+      "competing_signatures": {
+        "faithful-implementation": "Resolved local data, residual descent and controllable diagnostic differences.",
+        "implementation-or-preparation-failure": "Nondecreasing residual, lost crossing, failed currents or unresolved control differences."
+      },
+      "controls": [
+        "space",
+        "time",
+        "domain",
+        "preparation",
+        "orientation",
+        "source-signs"
+      ],
+      "uncertainty": "Coarse startup pilot, nominal input stencil, no long horizon or received signal; stress is continuum-consistent and flux integrals need refinement.",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Only declared interpolation, unwrapping, proper-time/flux quadrature and normalization of saved outputs."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "local-clock-records",
+      "question": "Can both local detector records be retained without using global mode phase?",
+      "role": "diagnostic",
+      "observables": [
+        "local-clock-records"
+      ],
+      "representation": "PNG/SVG/PDF with exact plot arrays and four-part interpretation",
+      "competing_signatures": {
+        "faithful-implementation": "Resolved local data, residual descent and controllable diagnostic differences.",
+        "implementation-or-preparation-failure": "Nondecreasing residual, lost crossing, failed currents or unresolved control differences."
+      },
+      "controls": [
+        "space",
+        "time",
+        "domain",
+        "preparation",
+        "orientation",
+        "source-signs"
+      ],
+      "uncertainty": "Coarse startup pilot, nominal input stencil, no long horizon or received signal; stress is continuum-consistent and flux integrals need refinement.",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Only declared interpolation, unwrapping, proper-time/flux quadrature and normalization of saved outputs."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "conservation-scales",
+      "question": "Do conservation errors resolve the weak clock energy scale?",
+      "role": "evidentiary",
+      "observables": [
+        "conservation-scales"
+      ],
+      "representation": "PNG/SVG/PDF with exact plot arrays and four-part interpretation",
+      "competing_signatures": {
+        "faithful-implementation": "Resolved local data, residual descent and controllable diagnostic differences.",
+        "implementation-or-preparation-failure": "Nondecreasing residual, lost crossing, failed currents or unresolved control differences."
+      },
+      "controls": [
+        "space",
+        "time",
+        "domain",
+        "preparation",
+        "orientation",
+        "source-signs"
+      ],
+      "uncertainty": "Coarse startup pilot, nominal input stencil, no long horizon or received signal; stress is continuum-consistent and flux integrals need refinement.",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Only declared interpolation, unwrapping, proper-time/flux quadrature and normalization of saved outputs."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "independent-controls",
+      "question": "How sensitive are local records and fixed-tube balances to numerical controls?",
+      "role": "diagnostic",
+      "observables": [
+        "independent-controls"
+      ],
+      "representation": "PNG/SVG/PDF with exact plot arrays and four-part interpretation",
+      "competing_signatures": {
+        "faithful-implementation": "Resolved local data, residual descent and controllable diagnostic differences.",
+        "implementation-or-preparation-failure": "Nondecreasing residual, lost crossing, failed currents or unresolved control differences."
+      },
+      "controls": [
+        "space",
+        "time",
+        "domain",
+        "preparation",
+        "orientation",
+        "source-signs"
+      ],
+      "uncertainty": "Coarse startup pilot, nominal input stencil, no long horizon or received signal; stress is continuum-consistent and flux integrals need refinement.",
+      "source_data": [
+        "plot-data/traces.csv",
+        "plot-data/summary.json"
+      ],
+      "transformations": [
+        "Only declared interpolation, unwrapping, proper-time/flux quadrature and normalization of saved outputs."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 1500,
+    "max_memory_mb": 1536,
+    "max_output_mb": 256
+  },
+  "prohibited_inferences": [
+    "No stationary pair, 100-period survival, physical reception/recoil, full G0-G9 acceptance, emergent geometry or Test9 readiness from an 8-time-unit pilot.",
+    "Neither a small residual nor a working software test is a nonlinear error enclosure.",
+    "One additional clock phase is not an all-phase nonlinear guarantee."
+  ],
+  "locked_sha256": "eb29b4043b43644c3737d3ed15127c8d3f2a1f4e45cacbce9498fbeed178016a"
+}
