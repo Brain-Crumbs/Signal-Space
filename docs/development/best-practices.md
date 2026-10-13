@@ -34,7 +34,8 @@ identify gate endpoints, full-cycle endpoints and the tested perturbation
 directions. Coordinate-basis tests cannot certify every combined perturbation
 inside an initial-error ball or every within-gate readout.
 
-Evidence: the [full linked-memory campaign](../research/gross-linked-memory-results.md)
+Evidence: [result PR #91](https://github.com/Brain-Crumbs/Signal-Space/pull/91)
+and the [full linked-memory campaign](../research/gross-linked-memory-results.md)
 has a failed global 64-cycle coherent comparison and an unresolved frozen
 endpoint gate, alongside an independent post-run exact endpoint counterexample.
 The active-minus largest signed record error and active-plus largest singular
