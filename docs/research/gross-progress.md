@@ -130,3 +130,15 @@ replace the obsolete UI/service entry points. Historical code is under
 preserved. Serial/parallel/restart engineering controls do not satisfy Test 8
 G0–G9 or establish Test 9 readiness. See [the runtime guide](gross-runner.md) and
 [refactor plan](gross-refactor-plan.md).
+
+## v0.3 linked-memory implementation (12 October 2026)
+
+The [separate linked-memory seed](gross-linked-memory.md) now registers the
+unchanged SS OPS 1 event law with three coherent ports and two ordered memories.
+Its [readiness record](gross-linked-memory-readiness.md) separates one-cycle
+engineering qualification from the locked 64-cycle campaign, which is unrun
+and not evaluated. A false commuting-full-word prediction was corrected before
+lock; original preparations and scientific thresholds remain preserved.
+The conservative global record bound has zero useful full cycles; end-to-end
+certification stays unresolved. No Test 1-11 classification or prerequisite
+has changed. All existing canonical evidence remains byte-identical.

@@ -1,0 +1,277 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "model_id",
+    "parameters",
+    "units",
+    "seeds",
+    "resources",
+    "analysis",
+    "report"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "research-experiment-v1"
+    },
+    "experiment_id": {
+      "type": "string",
+      "const": "gross.linked-memory-persistence.v1"
+    },
+    "model_id": {
+      "type": "string",
+      "const": "signal-space.ss-ops-1.v1"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cycles",
+        "sensitivity_cycles",
+        "kappa",
+        "lambda",
+        "samples_per_gate",
+        "refined_samples_per_gate",
+        "rtol",
+        "atol",
+        "max_step",
+        "jacobian_steps",
+        "initial_error",
+        "sensitivity_preparations",
+        "events",
+        "word"
+      ],
+      "properties": {
+        "cycles": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "sensitivity_cycles": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "kappa": {
+          "type": "number",
+          "const": 1.5707963267948966
+        },
+        "lambda": {
+          "type": "integer",
+          "const": 0
+        },
+        "samples_per_gate": {
+          "type": "integer",
+          "const": 17
+        },
+        "refined_samples_per_gate": {
+          "type": "integer",
+          "const": 33
+        },
+        "rtol": {
+          "type": "number",
+          "const": 1e-11
+        },
+        "atol": {
+          "type": "number",
+          "const": 1e-13
+        },
+        "max_step": {
+          "type": "number",
+          "const": 0.0625
+        },
+        "jacobian_steps": {
+          "type": "array",
+          "const": [
+            1e-05,
+            5e-06
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "initial_error": {
+          "type": "number",
+          "const": 1e-06
+        },
+        "sensitivity_preparations": {
+          "type": "array",
+          "const": [
+            "active-plus",
+            "active-minus"
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string"
+          }
+        },
+        "events": {
+          "type": "array",
+          "const": [
+            [
+              0,
+              1,
+              3
+            ],
+            [
+              1,
+              2,
+              4
+            ]
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "word": {
+          "type": "array",
+          "const": [
+            0,
+            1
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "gate_parameter",
+        "couplings"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "const": "dimensionless"
+        },
+        "gate_parameter": {
+          "type": "string",
+          "const": "dimensionless"
+        },
+        "couplings": {
+          "type": "string",
+          "const": "dimensionless"
+        }
+      }
+    },
+    "seeds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root"
+      ],
+      "properties": {
+        "root": {
+          "type": "integer",
+          "const": 2026101203
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_cpu_seconds",
+        "max_wall_seconds",
+        "max_memory_mb",
+        "max_output_mb"
+      ],
+      "properties": {
+        "max_cpu_seconds": {
+          "type": "integer",
+          "const": 300
+        },
+        "max_wall_seconds": {
+          "type": "integer",
+          "const": 300
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "const": 1024
+        },
+        "max_output_mb": {
+          "type": "integer",
+          "const": 128
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_residual",
+        "max_tangent_difference",
+        "record_target",
+        "preparation_budget",
+        "integration_budget",
+        "omitted_budget",
+        "readout_budget"
+      ],
+      "properties": {
+        "max_residual": {
+          "type": "number",
+          "const": 1e-09
+        },
+        "max_tangent_difference": {
+          "type": "number",
+          "const": 0.0001
+        },
+        "record_target": {
+          "type": "number",
+          "const": 0.001
+        },
+        "preparation_budget": {
+          "type": "number",
+          "const": 0.00025
+        },
+        "integration_budget": {
+          "type": "number",
+          "const": 0.00025
+        },
+        "omitted_budget": {
+          "type": "number",
+          "const": 0.00025
+        },
+        "readout_budget": {
+          "type": "number",
+          "const": 0.00025
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "const": "GROSS v0.3: Linked-Memory Persistence and Record Sensitivity"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://signal-space.dev/research/linked-memory.v1.schema.json",
+  "title": "Unchanged SS OPS 1 linked-memory v0.3 seed"
+}

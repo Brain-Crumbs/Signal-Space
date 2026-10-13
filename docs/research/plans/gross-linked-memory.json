@@ -1,0 +1,293 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.linked-memory-persistence.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "question": "Do initially complementary linked memories remain complementary continuously or only at endpoints, and which finite-horizon local records can be bounded?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md section 5; SHA256 c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123",
+    "docs/research/gross-research-program-v0.3.md sections 3,5,6,8",
+    "docs/research/gross-linked-memory.md; preparation v0.1 JSON SHA256 cd96483516183eab5716103828d24780a1a893b9c27e6712bd62aaee9bfd913d; commuting full-word claim corrected before lock"
+  ],
+  "runtime_config": "fixtures/research/gross-linked-memory.json",
+  "runtime_config_sha256": "296a700bd6ad3cfc8d6fd21f3cea5d642facb1df8539b73ffef529b2ea6950c2",
+  "method": {
+    "action": "Unchanged SS OPS 1 lambda=0, H_a=kappa d-dagger P_a d, d=z_i-z_j, P_a=w_a w_a-dagger; canonical reciprocal amplitude law and its pure coherent commutator lift. Inactive variables fixed.",
+    "units": "Amplitudes, couplings and gate parameter dimensionless; kappa=pi/2, each gate s in [0,1]. Gate parameter is not physical proper time.",
+    "domain": "Three coherent two-component ports, two unit memory projectors; supplied A=(ports1,2,memoryA), B=(ports2,3,memoryB); serial A then B, 64 cycles. Two active phase cases get 32-cycle full physical tangent studies.",
+    "boundaries": "All ports/memories retained, identity transports, no external input or loss. No spatial mesh/domain or continuum boundary; isolated event words and physical order controls replace inapplicable mesh/domain refinements.",
+    "initial_data": "Seven deterministic original preparations: dark, initially-commuting, active-plus, active-minus, noncomplement, coherence-plus and coherence-minus. Case2 is preserved as a deformation witness; its isolated gates, not full word, are exact commuting controls. N=1; both memory norms=1. No random case selection.",
+    "solver": "Reuse existing exact_gate at 17 samples per gate; independently integrate full W,PA,PB with DOP853 rtol=1e-11 atol=1e-13 max_step=1/16. Halve both tolerances and use 33 samples. Differentiate exact gate with Frechet exponential, retaining 12 wave+4 physical memory dimensions, and compare centered differences at 1e-5 and 5e-6.",
+    "tolerances": "Normalized coherent-state, record and conservation residuals <=1e-9 on both refinements; direct half-tolerance comparison <=1e-9. Relative tangent agreement <=1e-4 at every prefix. Local record target 1e-3 from admissible initial error <=1e-6: preparation/integration/omitted/readout allocations each2.5e-4. Carry exponential sensitivity across switches without resetting. Global exact-region bound gives zero full-cycle preparation horizon; numerical/readout certification remains unresolved without validated enclosures."
+  },
+  "hypotheses": [
+    {
+      "id": "continuous-family",
+      "prediction": "Under explicit vanishing active commutators a restricted complementary family persists throughout every event; generic complementarity alone does not imply this."
+    },
+    {
+      "id": "endpoint-return",
+      "prediction": "A trajectory may return at endpoints while deforming inside gates; evaluate endpoint persistence separately."
+    },
+    {
+      "id": "generic-deformation",
+      "prediction": "The active preparations have nonzero initial constraint derivatives; universal continuous persistence is falsified analytically. Endpoint defects may also be resolved."
+    },
+    {
+      "id": "error-or-blind-record",
+      "prediction": "Apparent persistence or accurate records may reflect numerical error or insensitive readout; exact/operator refinement and full tangent sectors discriminate these effects."
+    }
+  ],
+  "controls": [
+    {
+      "id": "exact-nulls",
+      "purpose": "Separate genuine restricted persistence from a false commuting full-word assumption",
+      "method": "Dark stationary full word; initially-commuting isolated A and isolated B. Preserve its unchanged full word as a deformation case."
+    },
+    {
+      "id": "coherent-refinement",
+      "purpose": "Discriminate representation mismatch and numerical error",
+      "method": "Exact amplitude samples versus independent full W/P DOP853 at two tolerances; refine within-event sampling17 to33. Compare plus/minus coherence witnesses with identical local rays."
+    },
+    {
+      "id": "physical-interventions",
+      "purpose": "Test actual order and reciprocal response",
+      "method": "For all seven preparations, isolated A, isolated B, reversed B then A, and deliberately frozen memories. Reverse order need not agree."
+    },
+    {
+      "id": "description-covariance",
+      "purpose": "Separate description changes from physical records",
+      "method": "Rotate every port and memory with fixed U(2); separately multiply only all waves by a common phase; restore the description and compare full invariant histories."
+    },
+    {
+      "id": "complete-sensitivity",
+      "purpose": "Retain genuine memory and orientation directions and test the prediction norm",
+      "method": "Active plus/minus: 16 chart directions, exact-word Frechet derivative, centered steps1e-5 and5e-6, +/- admissible initial1e-6 perturbations. Independent variational ODE is an engineering benchmark. No fixed-J deletion or port-phase fitting."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "coverage",
+      "observable": "Seven deterministic preparations, both operator tolerances, all controls and all 16 physical tangent directions are saved.",
+      "pass_if": "Seven deterministic preparations, both operator tolerances, all controls and all 16 physical tangent directions are saved.",
+      "fail_if": "Complete finite evidence for this observable violates its stated frozen threshold.",
+      "unresolved_if": "This observable has missing, nonfinite or invalid coverage, unresolved conditioning, or an unverified comparison.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "coherent-equivalence",
+      "observable": "Pure coherent lift and local records agree with exact_gate; direct tolerance halving is <=1e-9.",
+      "pass_if": "Pure coherent lift and local records agree with exact_gate; direct tolerance halving is <=1e-9.",
+      "fail_if": "Complete finite evidence for this observable violates its stated frozen threshold.",
+      "unresolved_if": "This observable has missing, nonfinite or invalid coverage, unresolved conditioning, or an unverified comparison.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "conservation",
+      "observable": "Within-gate H, total N/J, memory constraints and coherent purity residuals are <=1e-9 at both tolerances.",
+      "pass_if": "Within-gate H, total N/J, memory constraints and coherent purity residuals are <=1e-9 at both tolerances.",
+      "fail_if": "Complete finite evidence for this observable violates its stated frozen threshold.",
+      "unresolved_if": "This observable has missing, nonfinite or invalid coverage, unresolved conditioning, or an unverified comparison.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "null-commuting",
+      "observable": "Exact dark word and isolated commuting gates preserve their analytically specified projectors within 1e-9.",
+      "pass_if": "Exact dark word and isolated commuting gates preserve their analytically specified projectors within 1e-9.",
+      "fail_if": "Complete finite evidence for this observable violates its stated frozen threshold.",
+      "unresolved_if": "This observable has missing, nonfinite or invalid coverage, unresolved conditioning, or an unverified comparison.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "description-controls",
+      "observable": "Fixed common U(2) and common wave phase preserve invariant histories within 1e-9.",
+      "pass_if": "Fixed common U(2) and common wave phase preserve invariant histories within 1e-9.",
+      "fail_if": "Complete finite evidence for this observable violates its stated frozen threshold.",
+      "unresolved_if": "This observable has missing, nonfinite or invalid coverage, unresolved conditioning, or an unverified comparison.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "tangent-refinement",
+      "observable": "Differentiated exact word agrees with centered chart differences at 1e-5 and 5e-6 within relative 1e-4 over the stated horizon.",
+      "pass_if": "Differentiated exact word agrees with centered chart differences at 1e-5 and 5e-6 within relative 1e-4 over the stated horizon.",
+      "fail_if": "Complete finite evidence for this observable violates its stated frozen threshold.",
+      "unresolved_if": "This observable has missing, nonfinite or invalid coverage, unresolved conditioning, or an unverified comparison.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "continuous-complement",
+      "observable": "Universal continuous complementarity; a derived nonzero constraint derivative falsifies it.",
+      "pass_if": "A proof verifies continuous complementarity throughout the whole declared complementary family and event word.",
+      "fail_if": "A derived nonzero constraint derivative in one declared complementary preparation.",
+      "unresolved_if": "The analytical constraint calculation is unverified; sampled agreement is not a proof.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "endpoint-complement",
+      "observable": "Universal endpoint complementarity; a defect resolved by five numerical budgets falsifies it, sampled agreement alone is unresolved.",
+      "pass_if": "An exact proof verifies endpoint return for the declared full family; sampled agreement alone remains unresolved.",
+      "fail_if": "At least one initially complementary preparation has an endpoint defect above five numerical comparison budgets with all numerical integrity/equivalence controls passing.",
+      "unresolved_if": "Numerical gates fail, the defect overlaps uncertainty, or endpoint agreement has no exact proof.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    },
+    {
+      "id": "prediction-certification",
+      "observable": "End-to-end 1e-3 record-error certificate from initial error <=1e-6; missing validated integration/roundoff or readout enclosures remains unresolved.",
+      "pass_if": "Validated residual, roundoff, preparation region, omitted-term and readout enclosures certify an absolute record-error horizon within every allocation.",
+      "fail_if": "A claimed valid bound is analytically inconsistent or resolved observed errors exceed it.",
+      "unresolved_if": "Conservative bound supplies zero full cycles or validated integration/roundoff/readout enclosures are absent; report unresolved, even if empirical errors are small.",
+      "uncertainty": "Exact baseline; half tolerances and denser sampling; two centered steps. Numerical budgets are empirical; global comparison bound is exact-law conditional and lacks end-to-end floating/readout enclosure."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "linked-incidence",
+      "question": "What is supplied by the event word, and what moves internally?",
+      "role": "illustrative",
+      "observables": [
+        "port-memory incidence",
+        "internal Bloch coordinates"
+      ],
+      "representation": "incidence diagram and first-four-cycle Bloch x/z projection",
+      "competing_signatures": {
+        "continuous-family": "Supplied incidence and internal motion are separate.",
+        "generic-deformation": "An apparent spatial network or bound object would be an overinterpretation."
+      },
+      "controls": [
+        "exact-nulls"
+      ],
+      "uncertainty": "Save exact plotted rows; empirical operator refinement and tangent steps remain distinct from rigorous residual and roundoff bounds.",
+      "source_data": [
+        "derived/trajectories.csv"
+      ],
+      "transformations": [
+        "No fitting or smoothing; exact zeros retained with explicit log display floor where used.",
+        "First-four-cycle internal view only for incidence figure; other plots retain declared full horizons."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "complement-persistence",
+      "question": "Does complementarity persist within gates and at endpoints?",
+      "role": "evidentiary",
+      "observables": [
+        "complement defect",
+        "memory overlap",
+        "gate endpoints"
+      ],
+      "representation": "full within-event lines, endpoint markers, dark and initially-commuting comparisons",
+      "competing_signatures": {
+        "continuous-family": "Restricted persistence keeps c=0; endpoint return can still deform within events.",
+        "generic-deformation": "Generic deformation gives resolved c and nonzero constraint derivatives."
+      },
+      "controls": [
+        "exact-nulls",
+        "physical-interventions"
+      ],
+      "uncertainty": "Save exact plotted rows; empirical operator refinement and tangent steps remain distinct from rigorous residual and roundoff bounds.",
+      "source_data": [
+        "derived/trajectories.csv"
+      ],
+      "transformations": [
+        "No fitting or smoothing; exact zeros retained with explicit log display floor where used.",
+        "First-four-cycle internal view only for incidence figure; other plots retain declared full horizons."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "coherent-equivalence",
+      "question": "Does the coherent lift retain the relative phase that local rays lose?",
+      "role": "evidentiary",
+      "observables": [
+        "operator-amplitude mismatch",
+        "witness initial H"
+      ],
+      "representation": "per-gate maximum numerical mismatch and initial witness-energy bars",
+      "competing_signatures": {
+        "continuous-family": "Pure coherent W agrees with amplitude dynamics on both refinements.",
+        "generic-deformation": "Lost cross blocks or numerical errors create mismatches; identical local rays can have distinct H."
+      },
+      "controls": [
+        "coherent-refinement"
+      ],
+      "uncertainty": "Save exact plotted rows; empirical operator refinement and tangent steps remain distinct from rigorous residual and roundoff bounds.",
+      "source_data": [
+        "derived/audit.csv",
+        "derived/trajectories.csv"
+      ],
+      "transformations": [
+        "No fitting or smoothing; exact zeros retained with explicit log display floor where used.",
+        "First-four-cycle internal view only for incidence figure; other plots retain declared full horizons."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "finite-time-sensitivity",
+      "question": "How do all physical wave and memory perturbations amplify?",
+      "role": "evidentiary",
+      "observables": [
+        "largest singular amplification",
+        "record derivatives by sector",
+        "tangent refinement"
+      ],
+      "representation": "complete finite-time SVD and wave/memory record derivatives by cycle",
+      "competing_signatures": {
+        "continuous-family": "Resolved full tangent estimates predict finite-time responses.",
+        "generic-deformation": "Growing amplification or centered-step disagreement limits the prediction horizon."
+      },
+      "controls": [
+        "complete-sensitivity"
+      ],
+      "uncertainty": "Save exact plotted rows; empirical operator refinement and tangent steps remain distinct from rigorous residual and roundoff bounds.",
+      "source_data": [
+        "derived/sensitivity.csv"
+      ],
+      "transformations": [
+        "No fitting or smoothing; exact zeros retained with explicit log display floor where used.",
+        "First-four-cycle internal view only for incidence figure; other plots retain declared full horizons."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "record-error-budget",
+      "question": "Does the comparison bound support a full-cycle record forecast?",
+      "role": "evidentiary",
+      "observables": [
+        "observed record errors",
+        "conditional bound",
+        "budget and horizon"
+      ],
+      "representation": "observed versus conditional exact-law bound with independent error allocations",
+      "competing_signatures": {
+        "continuous-family": "A closed bound within every allocation supports only its stated horizon.",
+        "generic-deformation": "Loose amplification or missing enclosure forces zero horizon or unresolved certification."
+      },
+      "controls": [
+        "complete-sensitivity",
+        "coherent-refinement"
+      ],
+      "uncertainty": "Save exact plotted rows; empirical operator refinement and tangent steps remain distinct from rigorous residual and roundoff bounds.",
+      "source_data": [
+        "derived/budget.csv",
+        "derived/sensitivity.csv"
+      ],
+      "transformations": [
+        "No fitting or smoothing; exact zeros retained with explicit log display floor where used.",
+        "First-four-cycle internal view only for incidence figure; other plots retain declared full horizons."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 300,
+    "max_memory_mb": 1024,
+    "max_output_mb": 128
+  },
+  "prohibited_inferences": [
+    "No emerged physical space, binding, common cone, proper-time clock or four-ray classification follows from this seed.",
+    "Finite-time singular values are not Floquet stability without verified recurrence and phase treatment.",
+    "A pure coherent lift is not a mixed-state ensemble closure or a local distributed storage theorem.",
+    "Numerical refinement is not a rigorous certificate; report zero conservative full-cycle horizon and missing residual/roundoff/readout enclosures.",
+    "Campaign execution is pending; one-cycle engineering validation does not satisfy this plan or alter Tests1-11."
+  ],
+  "locked_sha256": "25ee1feefd7190fe3a23bf386bd26c6d310550459decb6f1ec2a56d85a031266"
+}

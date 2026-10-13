@@ -6,6 +6,7 @@ from signal_space.experiments.base import ExperimentPlugin
 _PLUGINS = {
     'gross.operator-identities.v1': ('operators', 'OperatorExperiment', ()),
     'gross.reciprocal-events.v1': ('reciprocal', 'ReciprocalExperiment', ()),
+    'gross.linked-memory-persistence.v1': ('linked_memory', 'LinkedMemoryExperiment', ()),
     'gross.router-propagation.v1': ('router', 'RouterExperiment', ()),
     'gross.full-spectrum.v1': ('floquet', 'FloquetExperiment', ()),
     'gross.continuum-action.v1': ('continuum', 'ContinuumExperiment', ()),

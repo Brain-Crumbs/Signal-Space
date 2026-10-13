@@ -31,6 +31,7 @@ RECIPES["gross-test-08-quiet"] = "docs/research/plans/gross-test-08-quiet.json"
 RECIPES["gross-test-08-quiet-optimized"] = "docs/research/plans/gross-test-08-quiet-optimized.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
+RECIPES["gross-linked-memory"] = "docs/research/plans/gross-linked-memory-v2.json"
 for kind in ("longevity", "response"):
     RECIPES[f"gross-test-06-{kind}"] = f"docs/research/plans/gross-test-06-{kind}.json"
 
@@ -41,6 +42,18 @@ def write_json(path: Path, value: object) -> None:
 
 def assessment(manifest: dict, analysis: dict, checks: dict) -> str:
     """A conditional, evidence-derived assessment; not a human or AI review."""
+    if manifest.get("experiment_id") == "gross.linked-memory-persistence.v1":
+        lines = ["# GROSS v0.3 linked-memory seed: automated assessment", "",
+                 f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
+                 "Universal complementarity, endpoint return and forecast certification are separate claims.", "",
+                 "| Locked check | Status |", "| --- | --- |"]
+        lines += [f"| {c['id']} | {c['status']} |" for c in checks['checks']]
+        lines += ["", "The preparation's full-word commuting claim was corrected before locking; isolated commuting gates remain controls.",
+                  "A nonzero constraint derivative is an analytical obstruction. Finite-time amplification is not Floquet stability.",
+                  "The conservative global bound gives no positive full-cycle horizon; validated integration/roundoff and readout remain unresolved.",
+                  "Next: sharpen the same-family comparison bound without deleting genuine wave or memory directions.",
+                  "This F0/F2/C1 seed does not complete the four-ray problem or change Tests 1-11 acceptance."]
+        return "\n".join(lines) + "\n"
     if manifest.get("experiment_id") == "gross.two-object-calibration.v1":
         lines = ["# Test 8 spatial calibration: automated assessment", "",
                  f"Run {manifest['run_id']}; analysis {analysis['analysis_id']}; classification {analysis['classification']}.",
