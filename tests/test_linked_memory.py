@@ -14,7 +14,7 @@ from signal_space.models.linked_memory import (preparations, EVENTS, gate, word,
 from signal_space.numerics.linked_memory import trace, sensitivity, PartialTraceError
 from signal_space.experiments.linked_memory import LinkedMemoryExperiment
 from signal_space.contracts.validation import ContractError
-from signal_space.analysis.linked_memory import conditional_budget,validate_trace
+from signal_space.analysis.linked_memory import conditional_budget,validate_trace,record_derivative_comparisons
 from signal_space.runtime.runner import ResearchRuntime
 from signal_space.runtime.io import read_json
 
@@ -128,6 +128,31 @@ class LinkedMemoryTests(unittest.TestCase):
         self.assertEqual(caught.exception.arrays["flow"].shape[0],1)
         np.testing.assert_allclose(caught.exception.arrays["state"],base["flow"][0,-1])
 
+    def test_saved_record_derivatives_cover_both_steps_every_prefix_and_sector(self):
+        p=deepcopy(self.p);p["sensitivity_cycles"]=2
+        limit=self.config["analysis"]["max_tangent_difference"]
+        for name in p["sensitivity_preparations"]:
+            data=sensitivity(self.states[name],p)
+            clean=record_derivative_comparisons(data,p)
+            self.assertEqual(clean.shape,(4,3))
+            self.assertLess(clean.max(),limit)
+            for g in range(4):
+                for sector in (slice(0,12),slice(12,14),slice(14,16)):
+                    with self.subTest(name=name,prefix=g,sector=sector):
+                        changed={**data,"record_derivatives":data["record_derivatives"].copy()}
+                        changed["record_derivatives"][g,:,sector]+=1
+                        errors=record_derivative_comparisons(changed,p)
+                        self.assertTrue(np.all(errors[g,:2]>limit))
+                        np.testing.assert_array_equal(np.delete(errors,g,axis=0),np.delete(clean,g,axis=0))
+                for h in range(2):
+                    with self.subTest(name=name,prefix=g,step=h):
+                        changed={**data,"finite_states":data["finite_states"].copy()}
+                        changed["finite_states"][h,:,:,g]=0
+                        errors=record_derivative_comparisons(changed,p)
+                        self.assertGreater(errors[g,h],limit)
+                        self.assertLess(errors[g,1-h],limit)
+                        self.assertGreater(errors[g,2],limit)
+
     def test_global_bound_and_record_conversion_do_not_reset(self):
         l,k,n=comparison_constants(self.k,1e-6)
         self.assertGreater(l,6*self.k)
@@ -169,7 +194,7 @@ class LinkedMemoryTests(unittest.TestCase):
         from experiment_contract import validate_plan,verify_runtime_config,validate_bundle
         from package_experiment import package
         from run_experiment import assessment
-        plan_path=ROOT/"docs/research/plans/gross-linked-memory-smoke.json"
+        plan_path=ROOT/"docs/research/plans/gross-linked-memory-smoke-v2.json"
         plan=read_json(plan_path);validate_plan(plan)
         config=read_json(verify_runtime_config(plan,ROOT))
         self.assertEqual(config["parameters"]["cycles"],1)
@@ -191,6 +216,20 @@ class LinkedMemoryTests(unittest.TestCase):
             package(path,plan_path,path/report["path"]/"interpretations.json",mentor,folder/"reader",ROOT/"src/signal_space")
             validate_bundle(folder/"reader",path)
             self.assertTrue(runtime.verify(folder/"runs",run["run_id"])["valid"])
+
+            # Mutate only a disposable copy, never sealed canonical evidence.
+            import shutil
+            from signal_space.analysis.linked_memory import analyze
+            copied=folder/"corrupted";shutil.copytree(path,copied)
+            raw=next(copied.glob("attempts/*/raw/active-plus-sensitivity.npz"))
+            with np.load(raw,allow_pickle=False) as archive: changed=dict(archive)
+            changed["record_derivatives"].fill(0)
+            np.savez_compressed(raw,**changed)
+            corrupted=analyze(copied,folder/"corrupted-analysis",config)
+            check=next(c for c in corrupted["checks"]["checks"] if c["id"]=="tangent-refinement")
+            self.assertEqual(check["status"],"fail")
+            self.assertGreater(corrupted["summary"]["max_record_derivative_difference"],config["analysis"]["max_tangent_difference"])
+            self.assertEqual(corrupted["summary"]["certification_status"],"unresolved")
 
 
 if __name__=="__main__":unittest.main()

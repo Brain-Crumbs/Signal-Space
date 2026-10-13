@@ -13,7 +13,7 @@ CRITERIA = {
     "conservation": "Within-gate H, total N/J, memory constraints and coherent purity residuals are <=1e-9 at both tolerances.",
     "null-commuting": "Exact dark word and isolated commuting gates preserve their analytically specified projectors within 1e-9.",
     "description-controls": "Fixed common U(2) and common wave phase preserve invariant histories within 1e-9.",
-    "tangent-refinement": "Differentiated exact word agrees with centered chart differences at 1e-5 and 5e-6 within relative 1e-4 over the stated horizon.",
+    "tangent-refinement": "Differentiated exact word and local record derivatives agree with centered chart differences at 1e-5 and 5e-6 within relative 1e-4 over the stated horizon.",
     "continuous-complement": "Universal continuous complementarity; a derived nonzero constraint derivative falsifies it.",
     "endpoint-complement": "Universal endpoint complementarity; a defect resolved by five numerical budgets falsifies it, sampled agreement alone is unresolved.",
     "prediction-certification": "End-to-end 1e-3 record-error certificate from initial error <=1e-6; missing validated integration/roundoff or readout enclosures remains unresolved.",
@@ -23,7 +23,7 @@ CRITERIA = {
 class LinkedMemoryExperiment(ExperimentPlugin):
     experiment_id = "gross.linked-memory-persistence.v1"
     model_id = "signal-space.ss-ops-1.v1"
-    version = "1.0.0"
+    version = "1.0.1"
 
     def describe(self):
         return {"experiment_id":self.experiment_id,"model_id":self.model_id,"version":self.version,

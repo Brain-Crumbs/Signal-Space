@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "upstream_head": "d6707e4f17ddbe58d099c1b070cfcea6b30a3880",
+  "upstream_tree": "3f9d6591aa784afa60e32c68c91972030be07920",
+  "integration_status": "pending-A-source",
+  "campaign_status": "unrun-not-evaluated",
+  "source_hashes": {
+    "src/signal_space/analysis/linked_memory.py": "83ce9b348f3c0aa0e38204b25f80218f4cb2ccfaa046f53572ee29690eda4fcb",
+    "src/signal_space/experiments/linked_memory.py": "3a3ac68982ca5b46e315372e29f0f1fe06535b8e12d847d40f83e024d5bb2a4b",
+    "src/signal_space/models/linked_memory.py": "d1bfc3b2648d81ba3bd39c564eac3f32b80045c7601984dbed9da9996f43341e",
+    "src/signal_space/numerics/linked_memory.py": "f8cfe1df91004aae4f9d715bb2dca5e833d97c9607428eae2c807357b2aa50d6",
+    "src/signal_space/reporting/linked_memory.py": "b2dfcefaab052591c8302dcb4a6837986e3a028603edbf518407669d4bd9095b",
+    "tests/test_linked_memory.py": "03e6e0f2deb34bb4d879b626c1457e18c0b743e179280ddab898112f96c4c63d",
+    "contracts/research/linked-memory.schema.json": "9247ad114473ba395432acb7df22337c6e1935c09529b26ae0ee145121917b1c"
+  },
+  "plans": {
+    "gross-linked-memory-smoke-v2.json": {
+      "locked_sha256": "b9e5419e895f471e8cf21395fc3a5b0d2d15a148be9f1d0164fcae7f95c6f784",
+      "file_sha256": "69709116eb87473038c219581e7f874be34c72b2f497b6859e0932be72aa5497"
+    },
+    "gross-linked-memory-smoke.json": {
+      "locked_sha256": "9bc30bdcefd466e17789fe315741ce96272d387f8ad6153b5a34d21d5a2e2b2f",
+      "file_sha256": "a31a7acda08299a148d06bc89c8552e2f96b4a305f7d1dfb1ae6806b092c149b"
+    },
+    "gross-linked-memory-v2.json": {
+      "locked_sha256": "0d89f3641d4f384d89eb54249bc65de5a436b29f5a459bfbe7ca4695a8ad99fa",
+      "file_sha256": "9e0186478665771b2c6b7442d20d90dabe9664ebbb0446bc219d925dc4e30ea7"
+    },
+    "gross-linked-memory.json": {
+      "locked_sha256": "25ee1feefd7190fe3a23bf386bd26c6d310550459decb6f1ec2a56d85a031266",
+      "file_sha256": "5139b3051dc44528051bfc0eee85a624c7bb587ac3b30a65a4a11c736351b76f"
+    }
+  },
+  "tests": {
+    "core_ran": 90,
+    "core_passed": 84,
+    "optional_compiled_skipped": 6,
+    "agent_contract_passed": 13,
+    "targeted_passed": 13
+  },
+  "corruption_reproduction": {
+    "original_checks_unchanged": true,
+    "clean_record_difference": 2.2660675566389265e-10,
+    "zeroed_record_difference": 2.322011662383833,
+    "fixed_gate_status": "fail"
+  }
+}

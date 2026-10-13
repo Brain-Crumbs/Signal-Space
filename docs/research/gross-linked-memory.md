@@ -138,6 +138,19 @@ Local mathematical records are $r_i=|w_a^\dagger z_i|^2$, $r_j$ and
 $q_a=|w_a^\dagger d|^2$. Their derivatives retain both wave and memory terms.
 These are declared observation functions, not autonomous hardware.
 
+Validation revision 2 independently reconstructs each centered record derivative
+from saved finite-state endpoints via the coherent operator readout. Both steps,
+all 16 directions and every A/B prefix are compared to the saved derivative;
+the two steps are also compared directly. Record errors use the Frobenius norm
+divided by max(1, the saved record derivative's Frobenius norm), with the existing
+1e-4 tangent threshold. All three errors enter the tangent-refinement gate and
+are retained in sensitivity.csv. This closes the unchecked record-plot input;
+it does not supply a validated numerical or readout certificate.
+
+Current plans are `plans/gross-linked-memory-v2.json` and
+`plans/gross-linked-memory-smoke-v2.json`. Original plan files and locks remain
+unchanged for comparison. See [revision provenance](gross-linked-memory-validation-gap.md).
+
 ## Closed-region comparison and its obstruction
 
 Use the lifted norm $\|\delta x\|^2=\sum_i\|\delta z_i\|^2+

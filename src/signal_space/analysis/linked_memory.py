@@ -73,6 +73,29 @@ def conditional_budget(parameters, criteria):
     return rows
 
 
+def record_derivative_comparisons(data, parameters):
+    """Independently reconstruct record differences from saved coherent states.
+
+    No evolution or analytical record derivative is called here. Rows retain
+    both centered steps and their difference at every ordered-word prefix.
+    """
+    ng = 2 * parameters["sensitivity_cycles"]
+    finite = np.empty((2, ng, 3, 16))
+    for h_index, epsilon in enumerate(parameters["jacobian_steps"]):
+        for g in range(ng):
+            for direction in range(16):
+                pair = data["finite_states"][h_index, direction, :, g]
+                values = [measures(*lift(state), g % 2, parameters["kappa"])[3]
+                          for state in pair]
+                finite[h_index, g, :, direction] = (values[1] - values[0]) / (2 * epsilon)
+    comparisons = []
+    for g, derivative in enumerate(data["record_derivatives"]):
+        norm = max(1., np.linalg.norm(derivative))
+        comparisons.append([np.linalg.norm(finite[h, g] - derivative) / norm for h in range(2)]
+                           + [np.linalg.norm(finite[0, g] - finite[1, g]) / norm])
+    return np.asarray(comparisons)
+
+
 def analyze(run_path, output, config):
     executions = sorted((run_path / "attempts").glob("*/raw/execution.json"))
     if not executions: raise ValueError("no completed linked-memory attempt")
@@ -89,7 +112,7 @@ def analyze(run_path, output, config):
         raise ValueError("incomplete nominal, control or sensitivity coverage")
     trajectories, audits, controls, sensitivities, endpoint_cases = [], [], [], [], []
     max_equivalence = max_conservation = max_null = max_description = max_operator_refinement = 0.
-    max_tangent = 0.
+    max_tangent = max_record_derivative = 0.
     analytic_derivatives = {}
     for name in PREPARATIONS:
         exact = load(raw / f"{name}-exact.npz")
@@ -223,15 +246,20 @@ def analyze(run_path, output, config):
                         measured=(physical_features(pair[1])-physical_features(pair[0]))/(2*epsilon)
                         if np.max(abs(measured-data["finite_differences"][h_index,g,:,direction_index]))>1e-12:
                             raise ValueError("finite difference differs from saved endpoints")
+            record_comparisons = record_derivative_comparisons(data, p)
+            max_record_derivative = max(max_record_derivative, float(record_comparisons.max()))
             for g, matrix in enumerate(data["tangent"]):
                 norm = max(1.,np.linalg.norm(matrix))
                 errors = [np.linalg.norm(fd[g]-matrix)/norm for fd in data["finite_differences"]]
                 halving = np.linalg.norm(data["finite_differences"][0,g]-data["finite_differences"][1,g])/norm
-                max_tangent = max(max_tangent, *errors, halving)
+                max_tangent = max(max_tangent, *errors, halving, *record_comparisons[g])
                 dr = data["record_derivatives"][g]
                 sensitivities.append({"preparation":name, "gate":g, "cycle":(g+1)/2,
                     "singular_amplification":np.linalg.svd(matrix,compute_uv=False)[0],
                     "tangent_error_h":errors[0], "tangent_error_half_h":errors[1], "tangent_step_difference":halving,
+                    "record_derivative_error_h":record_comparisons[g,0],
+                    "record_derivative_error_half_h":record_comparisons[g,1],
+                    "record_derivative_step_difference":record_comparisons[g,2],
                     "wave_record_sensitivity":np.max(np.linalg.norm(dr[:,:12],axis=1)),
                     "memory_A_record_sensitivity":np.max(np.linalg.norm(dr[:,12:14],axis=1)),
                     "memory_B_record_sensitivity":np.max(np.linalg.norm(dr[:,14:],axis=1)),
@@ -260,6 +288,7 @@ def analyze(run_path, output, config):
         "prediction-certification":("unresolved",0)}
     summary = {"cycles":p["cycles"], "cases":7, "physical_tangent_dimensions":16,
         "max_equivalence":max_equivalence,"max_conservation":max_conservation,"max_tangent_difference":max_tangent,
+        "max_record_derivative_difference":max_record_derivative,
         "max_null":max_null,"max_description":max_description,"max_operator_tolerance_difference":max_operator_refinement,
         "numerical_gates_pass":bool(numerical_ok),"coverage":{"expected_files":sorted(expected),
             "samples_per_gate":p["samples_per_gate"],"refined_samples_per_gate":p["refined_samples_per_gate"],

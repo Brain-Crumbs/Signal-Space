@@ -31,7 +31,7 @@ RECIPES["gross-test-08-quiet"] = "docs/research/plans/gross-test-08-quiet.json"
 RECIPES["gross-test-08-quiet-optimized"] = "docs/research/plans/gross-test-08-quiet-optimized.json"
 RECIPES["gross-test-05"] = "docs/research/plans/gross-test-05.json"
 RECIPES["gross-test-06"] = "docs/research/plans/gross-test-06-v2.json"
-RECIPES["gross-linked-memory"] = "docs/research/plans/gross-linked-memory.json"
+RECIPES["gross-linked-memory"] = "docs/research/plans/gross-linked-memory-v2.json"
 for kind in ("longevity", "response"):
     RECIPES[f"gross-test-06-{kind}"] = f"docs/research/plans/gross-test-06-{kind}.json"
 

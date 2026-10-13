@@ -122,7 +122,7 @@ def render_report(run_path, report_path, manifest, analysis, render_provenance):
     for ax in axes: ax.legend(fontsize=7)
     save(fig,"finite-time-sensitivity",["sensitivity.csv"],["SVD of physical feature derivative; unphysical memory phases removed",
         "max row norm by wave/memory input sector; 12+2+2 real directions"],
-        f"Largest relative tangent comparison error is {summary['max_tangent_difference']:.3g}; check it against 1e-4 before trusting a linear forecast.",
+        f"Largest relative state/record derivative comparison error is {summary['max_tangent_difference']:.3g}; check it against 1e-4 before trusting a linear forecast.",
         "Retains genuine orientation and memory response rather than studying only wave or charge-preserving directions.",
         "This is finite-time amplification, not Floquet stability. Finite differences may cease to resolve the derivative at a long horizon.")
 
