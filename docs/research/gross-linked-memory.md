@@ -246,7 +246,7 @@ transforms, Question/Reading/Significance/Limitation accompany every figure.
 To validate and estimate the locked plan without running:
 
 ```sh
-python .agents/scripts/run_plan.py --plan docs/research/plans/gross-linked-memory.json --repo-root . --workspace ../linked-memory-campaign --threads 1
+python .agents/scripts/run_plan.py --plan docs/research/plans/gross-linked-memory-v2.json --repo-root . --workspace ../linked-memory-campaign --threads 1
 ```
 
 After separate campaign authorization, a clean checkout supports the complete

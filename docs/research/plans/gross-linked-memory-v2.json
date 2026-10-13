@@ -14,7 +14,7 @@
     "src/signal_space/numerics/linked_memory.py SHA256 f8cfe1df91004aae4f9d715bb2dca5e833d97c9607428eae2c807357b2aa50d6",
     "src/signal_space/reporting/linked_memory.py SHA256 b2dfcefaab052591c8302dcb4a6837986e3a028603edbf518407669d4bd9095b",
     "contracts/research/linked-memory.schema.json SHA256 9247ad114473ba395432acb7df22337c6e1935c09529b26ae0ee145121917b1c",
-    "docs/research/gross-linked-memory.md SHA256 5353824291fbcf4fd75af009dbdeb85e0c023b44469772a7ee5a18f5aa1b52e2"
+    "docs/research/gross-linked-memory.md SHA256 30cc5f875eb233fe544fc4ab2b50ef76bea35b8a4c3d07778584701d7e83664e"
   ],
   "runtime_config": "fixtures/research/gross-linked-memory.json",
   "runtime_config_sha256": "296a700bd6ad3cfc8d6fd21f3cea5d642facb1df8539b73ffef529b2ea6950c2",
@@ -297,5 +297,5 @@
     "Numerical refinement is not a rigorous certificate; report zero conservative full-cycle horizon and missing residual/roundoff/readout enclosures.",
     "Campaign execution is pending; one-cycle engineering validation does not satisfy this plan or alter Tests1-11."
   ],
-  "locked_sha256": "0d89f3641d4f384d89eb54249bc65de5a436b29f5a459bfbe7ca4695a8ad99fa"
+  "locked_sha256": "4dc63d74faea280ea9ab1782223bac4004c8377efe5406f259855c8fb6fc280f"
 }

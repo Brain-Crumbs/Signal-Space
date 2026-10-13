@@ -14,7 +14,7 @@
     "src/signal_space/numerics/linked_memory.py SHA256 f8cfe1df91004aae4f9d715bb2dca5e833d97c9607428eae2c807357b2aa50d6",
     "src/signal_space/reporting/linked_memory.py SHA256 b2dfcefaab052591c8302dcb4a6837986e3a028603edbf518407669d4bd9095b",
     "contracts/research/linked-memory.schema.json SHA256 9247ad114473ba395432acb7df22337c6e1935c09529b26ae0ee145121917b1c",
-    "docs/research/gross-linked-memory.md SHA256 5353824291fbcf4fd75af009dbdeb85e0c023b44469772a7ee5a18f5aa1b52e2"
+    "docs/research/gross-linked-memory.md SHA256 30cc5f875eb233fe544fc4ab2b50ef76bea35b8a4c3d07778584701d7e83664e"
   ],
   "runtime_config": "fixtures/research/gross-linked-memory-smoke.json",
   "runtime_config_sha256": "2f6fc81a423d90383fa2028f9697fd8a8c8c255679bd2dbf1d0a23214b5b7489",
@@ -298,5 +298,5 @@
     "Campaign execution is pending; one-cycle engineering validation does not satisfy this plan or alter Tests1-11.",
     "This one-cycle fixture is software qualification only, and cannot satisfy the main campaign horizon or clear any research prerequisite."
   ],
-  "locked_sha256": "b9e5419e895f471e8cf21395fc3a5b0d2d15a148be9f1d0164fcae7f95c6f784"
+  "locked_sha256": "b958a54649e8e7cde2ca487594f4a165f25411cb9d59d9ca7df159581096ed25"
 }
