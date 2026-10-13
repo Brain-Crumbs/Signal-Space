@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-13",
+  "experiment_id": "gross.linked-memory-persistence.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "plugin_version": "1.0.1",
+  "source_commit": "2a00525036008fb3fd7d8bc119cd1a0929957618",
+  "source_tree": "8b81ddb7bfdb55099e0222bd81dbe4d7e77c848e",
+  "run_id": "run-e350aab835156851",
+  "attempt_id": "attempt-0001",
+  "analysis_id": "analysis-0001-3daf98c8",
+  "canonical_report_id": "report-0001",
+  "plan_path": "docs/research/plans/gross-linked-memory-v2.json",
+  "plan_lock": "4dc63d74faea280ea9ab1782223bac4004c8377efe5406f259855c8fb6fc280f",
+  "config_file_sha256": "296a700bd6ad3cfc8d6fd21f3cea5d642facb1df8539b73ffef529b2ea6950c2",
+  "resolved_config_sha256": "c1f1824056d290266a480907a68e1ddbfb5bbcea236ba998df7ec04034adf03c",
+  "technical_status": "completed",
+  "scientific_classification": "fail",
+  "checks": [
+    {
+      "evidence": "derived/summary.json",
+      "id": "coverage",
+      "status": "pass",
+      "value": 72.0
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "coherent-equivalence",
+      "status": "fail",
+      "value": 1.0750771912889952e-06
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "conservation",
+      "status": "pass",
+      "value": 9.325413901370899e-11
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "null-commuting",
+      "status": "pass",
+      "value": 8.881784197001252e-16
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "description-controls",
+      "status": "pass",
+      "value": 1.2904807735312284e-10
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "tangent-refinement",
+      "status": "pass",
+      "value": 1.7701680845150967e-06
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "continuous-complement",
+      "status": "fail",
+      "value": 0.7404804896930612
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "endpoint-complement",
+      "status": "unresolved",
+      "value": 0.6259649709606883
+    },
+    {
+      "evidence": "derived/summary.json",
+      "id": "prediction-certification",
+      "status": "unresolved",
+      "value": 0.0
+    }
+  ],
+  "post_run_endpoint_claim": {
+    "preparation": "initially-commuting",
+    "formula": "sqrt(2/5)*abs(sin(pi*sqrt(5)/4))",
+    "value": 0.6216160267903696,
+    "saved_exact_endpoint": 0.6216160267903694,
+    "frozen_endpoint_gate": "unresolved; no retroactive reclassification"
+  },
+  "per_case_saved_audit": [
+    {
+      "preparation": "dark",
+      "initial_defect": 0.0,
+      "initial_overlap": 0.0,
+      "first_A_defect": 0.0,
+      "first_AB_defect": 0.0,
+      "max_sampled_defect": 4.440892098500626e-16,
+      "max_gate_endpoint_defect": 0.0,
+      "max_full_cycle_endpoint_defect": 0.0,
+      "final_cycle_defect": 0.0,
+      "max_mismatch": 1.016692814629043e-15,
+      "first_exceeding_gate": null,
+      "completed_full_cycles_before_first_exceedance": 64,
+      "first_cycle_max_mismatch": 4.440892098500626e-16,
+      "max_overlap_identity_error": 1.9721522630525295e-31
+    },
+    {
+      "preparation": "initially-commuting",
+      "initial_defect": 0.0,
+      "initial_overlap": 0.0,
+      "first_A_defect": 2.220446049250313e-16,
+      "first_AB_defect": 0.6216160267903694,
+      "max_sampled_defect": 0.6328433299928612,
+      "max_gate_endpoint_defect": 0.6259649709515634,
+      "max_full_cycle_endpoint_defect": 0.6216160267903694,
+      "final_cycle_defect": 0.19422663058179487,
+      "max_mismatch": 2.094167987562931e-09,
+      "first_exceeding_gate": 112,
+      "completed_full_cycles_before_first_exceedance": 56,
+      "first_cycle_max_mismatch": 1.860129104826272e-12,
+      "max_overlap_identity_error": 3.434752482434078e-16
+    },
+    {
+      "preparation": "active-plus",
+      "initial_defect": 6.651518334681649e-18,
+      "initial_overlap": 2.212134807830307e-35,
+      "first_A_defect": 0.4456002090012578,
+      "first_AB_defect": 0.4644339664467884,
+      "max_sampled_defect": 0.6089288562398506,
+      "max_gate_endpoint_defect": 0.6089288562398505,
+      "max_full_cycle_endpoint_defect": 0.6089288562398505,
+      "final_cycle_defect": 0.25238291298637344,
+      "max_mismatch": 8.594245375771456e-11,
+      "first_exceeding_gate": null,
+      "completed_full_cycles_before_first_exceedance": 64,
+      "first_cycle_max_mismatch": 1.1683240320525448e-12,
+      "max_overlap_identity_error": 3.920475055707584e-16
+    },
+    {
+      "preparation": "active-minus",
+      "initial_defect": 6.651518334681649e-18,
+      "initial_overlap": 2.212134807830307e-35,
+      "first_A_defect": 0.4456002090012578,
+      "first_AB_defect": 0.2605924444203028,
+      "max_sampled_defect": 0.5500607262488901,
+      "max_gate_endpoint_defect": 0.5473444689726041,
+      "max_full_cycle_endpoint_defect": 0.5473444689726041,
+      "final_cycle_defect": 0.06171611941297471,
+      "max_mismatch": 8.546861466324936e-11,
+      "first_exceeding_gate": null,
+      "completed_full_cycles_before_first_exceedance": 64,
+      "first_cycle_max_mismatch": 1.6174088120922626e-12,
+      "max_overlap_identity_error": 3.3306690738754696e-16
+    },
+    {
+      "preparation": "noncomplement",
+      "initial_defect": 0.9999999999999999,
+      "initial_overlap": 0.4999999999999999,
+      "first_A_defect": 0.6358626905347617,
+      "first_AB_defect": 0.5241294564146811,
+      "max_sampled_defect": 1.0822983463086042,
+      "max_gate_endpoint_defect": 1.0664870566047577,
+      "max_full_cycle_endpoint_defect": 1.0664870566047577,
+      "final_cycle_defect": 0.8302356811615433,
+      "max_mismatch": 8.652634279493573e-11,
+      "first_exceeding_gate": null,
+      "completed_full_cycles_before_first_exceedance": 64,
+      "first_cycle_max_mismatch": 1.1682544354521742e-12,
+      "max_overlap_identity_error": 6.661338147750939e-16
+    },
+    {
+      "preparation": "coherence-plus",
+      "initial_defect": 0.9999999999999998,
+      "initial_overlap": 0.4999999999999998,
+      "first_A_defect": 0.9999999999999998,
+      "first_AB_defect": 0.9999999999999998,
+      "max_sampled_defect": 1.0,
+      "max_gate_endpoint_defect": 0.9999999999999998,
+      "max_full_cycle_endpoint_defect": 0.9999999999999998,
+      "final_cycle_defect": 0.9999999999999875,
+      "max_mismatch": 2.084533742194732e-14,
+      "first_exceeding_gate": null,
+      "completed_full_cycles_before_first_exceedance": 64,
+      "first_cycle_max_mismatch": 5.551115123125783e-16,
+      "max_overlap_identity_error": 2.220446049250313e-16
+    },
+    {
+      "preparation": "coherence-minus",
+      "initial_defect": 0.9999999999999998,
+      "initial_overlap": 0.4999999999999998,
+      "first_A_defect": 0.6056998670788126,
+      "first_AB_defect": 0.538311905632456,
+      "max_sampled_defect": 1.1162077096841267,
+      "max_gate_endpoint_defect": 1.1102292129727065,
+      "max_full_cycle_endpoint_defect": 1.0040044517490685,
+      "final_cycle_defect": 0.7880989385065199,
+      "max_mismatch": 1.0750771912889952e-06,
+      "first_exceeding_gate": 42,
+      "completed_full_cycles_before_first_exceedance": 21,
+      "first_cycle_max_mismatch": 2.3363200263304407e-11,
+      "max_overlap_identity_error": 6.661338147750939e-16
+    }
+  ],
+  "sensitivity_saved_audit": [
+    {
+      "preparation": "active-plus",
+      "max_observed_record_error": 2.888845170834209e-05,
+      "max_singular_amplification": 168.2784714663092,
+      "final_singular_amplification": 159.6783464329322,
+      "max_state_record_comparison": 1.770168022909044e-06,
+      "all_64_prefixes_below_preparation_allocation": true,
+      "all_64_prefixes_below_total_target": true
+    },
+    {
+      "preparation": "active-minus",
+      "max_observed_record_error": 2.2424052976754982e-05,
+      "max_singular_amplification": 103.51825553675289,
+      "final_singular_amplification": 103.51825553675289,
+      "max_state_record_comparison": 1.209217403773757e-07,
+      "all_64_prefixes_below_preparation_allocation": true,
+      "all_64_prefixes_below_total_target": true
+    }
+  ],
+  "coverage": {
+    "nominal_cycles": 64,
+    "sensitivity_cycles": 32,
+    "preparations": 7,
+    "physical_input_dimensions": 16,
+    "raw_files": 72
+  },
+  "resources": {
+    "ceilings": {
+      "max_cpu_seconds": 300,
+      "max_wall_seconds": 300,
+      "max_memory_mib": 1024,
+      "max_output_mib": 128
+    },
+    "pipeline_wall_seconds": 47.385,
+    "worker_wall_seconds": 21.359328,
+    "raw_bytes": 25445552,
+    "cpu_seconds": null,
+    "peak_rss_mib": null,
+    "unavailable_metrics": "Process CPU/RSS measurements unavailable in this namespace; not measured zero."
+  },
+  "verification": {
+    "canonical_valid": true,
+    "original_reader_paired_valid": true,
+    "reviewed_reader_paired_valid": true,
+    "plugin_tests_passed": 13,
+    "intuition_pdf_pages_visually_checked": 8,
+    "reader_result_pdf_pages_visually_checked": 7,
+    "setup_pdf_pages_visually_checked": 6,
+    "fresh_scientific_review": "All reporting objections resolved; no blocker to negative/limited conclusions; independent-review/review-resolution.md in packet"
+  },
+  "artifact_hashes": {
+    "packet_index_sha256": "f4d00888e3da5565efae69b31ce6aaf5b2e48f8bf17d086206af83f98c582920",
+    "manifest_sha256": "773a7d085ed0b3a26f8a60779579c1ee913c610dbbafafb971396046a49f5c16",
+    "evidence_index_sha256": "1c6e3ca4ef5298ebb0cd6407ba03b98ebcb67728f290b32a27f13696489121ca",
+    "source_archive_sha256": "67e33e559080ba9e07a09d738e8e3bfe95abe330c3f937c6f21fd8011cbdd9d5",
+    "canonical_checksums_sha256": "f7b6eb63026eee5e0db3f5cd4cad6b3434f1a9128d55b2f3dc5fedb304ceb50b"
+  },
+  "artifacts": [
+    {
+      "kind": "intuition_report",
+      "filename": "GROSS_v03_Linked_Memory_Results_and_Interpretation.pdf",
+      "size_bytes": 1516541,
+      "sha256": "40395519c719111995581add80965ea53a3fa7f410476bdb2105a1ad44345477",
+      "durable_locator": {
+        "provider": "ChatGPT Library",
+        "library_file_id": "libfile_5e171b42b5f48191a7c3c27d782ba15e",
+        "file_id": "file_00000000f14c8230a026bd774acbbea7",
+        "path": "/GROSS_v03_Linked_Memory_Results_and_Interpretation.pdf",
+        "version_number": 0
+      }
+    },
+    {
+      "kind": "complete_evidence_packet",
+      "filename": "GROSS_v03_Linked_Memory_Executed_Test_Packet.zip",
+      "size_bytes": 42312027,
+      "sha256": "ab8f5e38227c473344f371a63fe1bd38ca379fa77e1c7ba884bd18bf3190c010",
+      "durable_locator": {
+        "provider": "ChatGPT Library",
+        "library_file_id": "libfile_0f98e25b77f88191871c3b732e61e73e",
+        "file_id": "file_00000000b1848230a6840b717a7d7cbf",
+        "path": "/GROSS_v03_Linked_Memory_Executed_Test_Packet.zip",
+        "version_number": 0
+      }
+    }
+  ],
+  "unchanged_acceptance_tests": "Tests1-11",
+  "next_question": "Derive a trajectory-dependent uniform record-error bound for both active seeds and every physical initial discrepancy <=1e-6, retaining nonlinear and accumulated numerical/readout enclosures; no follow-up run executed."
+}

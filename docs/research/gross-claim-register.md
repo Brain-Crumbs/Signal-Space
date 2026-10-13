@@ -1,6 +1,6 @@
 # GROSS research claim register
 
-Date: 12 October 2026. This register classifies claims needed by
+Date: 13 October 2026. This register classifies claims needed by
 [program v0.3](gross-research-program-v0.3.md).
 Source IDs refer to the [source audit](gross-projector-control-audit.md).
 It does not replace the canonical [Tests 1-11 ledger](gross-progress.md).
@@ -27,6 +27,9 @@ It does not replace the canonical [Tests 1-11 ledger](gross-progress.md).
 | RC-18 | Reference-assisted neutral reception can include forcing linear in the small signal | Exact forcing identity; receiver usefulness is a proposed protocol | Nonzero evolved reference, overlap, phase, energy/momentum and survival controls; no autonomous emission |
 | RC-19 | A pure coordinate/basis change can rescue failed physical local records | Rejected as a relabeling claim | Transform apparatus, trajectories and comparisons together; physical records persist |
 | RC-20 | A certified projector-to-continuum reduction with universal geometry now exists | Conjectural research target | Stable/finite-horizon regime, complete sectors, calibration, limits and withheld records must be established |
+| RC-21 | Initial complementarity guarantees continuous or AB-endpoint persistence in the three-port/two-memory seed | Refuted under unchanged SS OPS 1: exact nonzero continuous derivative and independently reviewed post-run first-AB counterexample; [linked-memory result](gross-linked-memory-results.md) | Supplied serial AB incidence; dark and isolated commuting controls persist. Frozen numerical endpoint gate remains unresolved because global comparison fails |
+| RC-22 | The same seed's active signed 1e-6 basis perturbations preserve close local records through 32 cycles | Measured at every saved gate endpoint: maximum errors 2.888845e-5 and 2.242405e-5, with full state/record derivative comparisons passing | 16 physical chart directions, both signs and all 64 prefixes; no uniform initial-error-ball, within-gate or all-time claim |
+| RC-23 | The linked-memory seed supplies a positive rigorous 1e-3 local-record forecast horizon | Unresolved; global exact-region bound has zero useful full cycles, and numerical/readout enclosures are absent | Small empirical errors and conserved quantities do not supply certification; [locked statuses and evidence](gross-linked-memory-results.md) preserved |
 
 Each future revision should change only claims supported by newly identified
 sources or evidence. Preserve a previous claim's scope and objections when a

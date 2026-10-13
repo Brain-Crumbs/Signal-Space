@@ -136,9 +136,31 @@ G0–G9 or establish Test 9 readiness. See [the runtime guide](gross-runner.md) 
 The [separate linked-memory seed](gross-linked-memory.md) now registers the
 unchanged SS OPS 1 event law with three coherent ports and two ordered memories.
 Its [readiness record](gross-linked-memory-readiness.md) separates one-cycle
-engineering qualification from the locked 64-cycle campaign, which is unrun
-and not evaluated. A false commuting-full-word prediction was corrected before
+engineering qualification from the locked 64-cycle campaign, which was unrun
+and not evaluated at that stage. A false commuting-full-word prediction was corrected before
 lock; original preparations and scientific thresholds remain preserved.
 The conservative global record bound has zero useful full cycles; end-to-end
 certification stays unresolved. No Test 1-11 classification or prerequisite
 has changed. All existing canonical evidence remains byte-identical.
+
+## v0.3 linked-memory campaign (13 October 2026)
+
+The [full linked-memory result](gross-linked-memory-results.md), run
+`run-e350aab835156851`, analysis `analysis-0001-3daf98c8`, report `report-0001`,
+technically completed under the validation-v2 lock: seven 64-cycle preparations,
+all controls and two 32-cycle complete sensitivity studies. Formal result:
+**fail (5 pass, 2 fail, 2 unresolved)**. Universal continuous complementarity
+fails analytically; global coherent numerical comparison fails at 1.07508e-6
+against 1e-9. The frozen endpoint gate and prediction certificate remain
+unresolved.
+
+A separately reviewed post-run exact first-A-B calculation gives
+`c=sqrt(2/5)*abs(sin(pi*sqrt(5)/4))=0.621616` for the unchanged initially
+commuting preparation, refuting universal endpoint persistence without
+reclassifying the frozen numerical gate. All saved active signed 1e-6 basis
+gate-endpoint record errors through 32 cycles are below 2.88885e-5; this is
+empirical endpoint evidence, not a bound for the full error ball or a certificate.
+The conservative bound still gives zero useful full cycles. Complete evidence,
+original and reviewed readers, intuition PDF, audits and fresh review are
+identified in the [compact result record](gross-linked-memory-results.json).
+No Test 1-11 status or Candidate B prerequisite changes.
