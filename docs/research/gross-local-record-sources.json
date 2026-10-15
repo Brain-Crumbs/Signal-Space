@@ -1,0 +1,34 @@
+{
+  "scope": "issue #93 source audit; no raw campaign reuse",
+  "baseline_commit": "2a00525036008fb3fd7d8bc119cd1a0929957618",
+  "pinned_result_commit": "444b4b6425b734b62dd2f4627509f577b8e99c4f",
+  "baseline_files": {
+    "research/papers/gross-operator-program-v0.2.md": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123",
+    "src/signal_space/models/reciprocal.py": "e74cb8c10f1a1d3e13d71b6d44a3535dc7597c26cfc21f7e649ed1984d698e82",
+    "src/signal_space/models/linked_memory.py": "d1bfc3b2648d81ba3bd39c564eac3f32b80045c7601984dbed9da9996f43341e",
+    "src/signal_space/numerics/linked_memory.py": "f8cfe1df91004aae4f9d715bb2dca5e833d97c9607428eae2c807357b2aa50d6",
+    "tests/test_linked_memory.py": "03e6e0f2deb34bb4d879b626c1457e18c0b743e179280ddab898112f96c4c63d",
+    "docs/research/gross-linked-memory.md": "30cc5f875eb233fe544fc4ab2b50ef76bea35b8a4c3d07778584701d7e83664e",
+    "docs/research/gross-progress.md": "645f83de5dc1be66738d184f914818dd2daa710ecdde482a3a026de40c44f6f5",
+    "docs/research/gross-claim-register.md": "f738ef2abf6095f79f73c30f60074f0075aef150ef6928f4a6fdcbc267e58929",
+    "docs/research/gross-research-program-v0.3.md": "33c5cececd0f2e79692d0c37ff6ab36b65cb09f4bcdc1b3c5824989746b9945e",
+    "AGENTS.md": "5cfc1cccfeb3d75233a7467b4ae0ca42f52d94591f433e89879dea6a379836de",
+    ".agents/skills/experiment-pipeline/SKILL.md": "88203cc2aaad1b7297f0210af0651ba764a3734588ffca9e9dc402a4d62eb5cc",
+    ".agents/skills/experiment-planner/SKILL.md": "2501014ff8142a3683ea30b10e87d29862cd79df4fed9f43dc6867b2e8d5a9c5",
+    ".agents/output-contract.md": "c1a5f163bec996ba77f7301c6e69d4505c1f3c604895b79d973edc1bdccf3a74",
+    "docs/research/architecture.md": "bf0d10cb7e1faf87e5b21fbbbee49545f4b76aa9cc9a5c42abc068df6d23c8bc",
+    "docs/research/artifact-contract.md": "fc4d6afc5aa434bbae4de71a78e1dcafa18abe17bc2bd3a4c1e11ccb3f9467f3",
+    "docs/development/best-practices.md": "a85af30a779201bd87e2047c131f2b7ac31a0edf884ff16bd09995a78374e616",
+    ".github/workflows/ci.yml": "0d1c0927d22441adbbc73077d1f99a694da5cd9770a0b5d3335e9ad854803ec7"
+  },
+  "pinned_result_files": {
+    "docs/research/gross-linked-memory-results.md": {
+      "sha256": "7d796b49776f6cab5b9e0dfa7740b9897925b076e4fb39b8efb21fb31b27599c",
+      "verified_git_blob": "83f845221d8495ce26dba803e08a9c4857a05857"
+    },
+    "docs/research/gross-linked-memory-results.json": {
+      "sha256": "be39f3641e7ecc5d136a3c5c0fd4f3b3c26a9febe86b3ce4a585874d0cbe82e8",
+      "verified_git_blob": "5c04f2867f3a101d01f31577e259dda8d159ebbb"
+    }
+  }
+}

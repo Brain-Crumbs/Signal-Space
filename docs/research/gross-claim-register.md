@@ -31,3 +31,15 @@ It does not replace the canonical [Tests 1-11 ledger](gross-progress.md).
 Each future revision should change only claims supported by newly identified
 sources or evidence. Preserve a previous claim's scope and objections when a
 new model, observation protocol or assumption is introduced.
+
+## C1 conditional analysis, 15 October 2026
+
+| ID | Claim and scope | Evidence class / current status | Dependency and limit |
+| --- | --- | --- | --- |
+| RC-C1-01 | Exact Hermitian event extension and full 16-direction preparation chart for the supplied SS OPS 1 AB circuit | Analytical derivation in the [theorem](gross-local-record-theorem.md) | Exact lambda=0 law, dimensionless gate parameter; no new physical interpretation |
+| RC-C1-02 | Uniform endpoint record bound from separately enclosed preparation and numerical-reference tracks | Conditional theorem; not a computed certificate | Complete tube Hessians, derivative/rounding/product/norm enclosures and all endpoint budgets must be discharged by later children |
+
+The [source audit](gross-local-record-source-audit.md) preserves open PR #91's
+pinned failed result without importing its unverified raw packet or reserving
+its RC-21..23 identifiers. Existing Tests 1–11 and Candidate B claims are
+unchanged. Basis diagnostics are not whole-ball evidence; novelty is unassessed.

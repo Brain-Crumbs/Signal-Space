@@ -2,6 +2,14 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+**C1 source/theorem preparation, 15 October 2026 (#93).** The
+[full-direction conditional theorem](gross-local-record-theorem.md) and
+[source audit](gross-local-record-source-audit.md) define the complete physical
+preparation ball and separate preparation, propagation and readout budgets.
+This is analysis and bounded engineering validation, not a new campaign or
+computed certificate. Pinned open PR #91 remains separate evidence with its
+failed/unresolved classifications; no Tests 1–11 status changes.
+
 **Research-program revision, 12 October 2026.** [Program v0.3](gross-research-program-v0.3.md)
 makes the projector/signal/memory foundation and model-specific certification
 explicit, with Candidate B retained as a separate continuum benchmark.
