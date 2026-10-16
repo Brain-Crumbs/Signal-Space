@@ -13,7 +13,7 @@ from time import monotonic
 from signal_space.numerics.dyadic import Interval as I, norm_upper, pi_interval
 
 BACKEND = "dyadic-taylor-v1"
-PYTHON = (3, 12, 14)
+PYTHON = ((3, 12, 14), (3, 12, 10))
 TERMS = 32
 SQUARINGS = 8
 
@@ -289,8 +289,8 @@ def ball_box(center, radius, bits=96):
 
 
 def require_runtime():
-    if platform.python_implementation() != "CPython" or sys.version_info[:3] != PYTHON:
-        raise ValueError("unsupported arithmetic runtime (requires CPython 3.12.14)")
+    if platform.python_implementation() != "CPython" or sys.version_info[:3] not in PYTHON:
+        raise ValueError("unsupported arithmetic runtime (requires CPython 3.12.14 or 3.12.10)")
 
 
 def source_chart(seed="active-plus", u=None, *, bits=96):

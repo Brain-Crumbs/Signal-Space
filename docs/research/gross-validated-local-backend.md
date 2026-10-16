@@ -11,7 +11,8 @@ canonical evidence are unchanged. PR #91 is not modified or merged.
 ## Arithmetic choice and trust boundary
 
 The certified path uses a small outward dyadic kernel, `numerics/dyadic.py`,
-with CPython **3.12.14** pinned in `requirements-validated-lock.txt` and CI.
+with CPython **3.12.14 on Linux / 3.12.10 on Windows** pinned in
+`requirements-validated-lock.txt` and CI. Both exact patches are allowlisted.
 Its arithmetic dependencies are the standard-library exact integers,
 `fractions.Fraction`, and `math.isqrt`, not NumPy, SciPy, libm or a floating
 rounding mode. Unsupported runtimes fail closed. There is no new third-party
@@ -198,6 +199,20 @@ returning success. Memory allocation failure also fails closed where Python
 can catch it. An externally killed process produces no certificate. No
 unbounded precision escalation or scientific resource admission is performed.
 
+## Runtime qualification correction
+
+The first submitted-head CI run passed Ubuntu but failed Windows before tests:
+setup-python has no Windows 3.12.14 distribution. The official
+[actions version manifest](https://github.com/actions/python-versions/blob/main/versions-manifest.json)
+was checked; 3.12.10 is the latest supplied Windows 3.12 build. The corrected
+matrix pins 3.12.14/Linux and 3.12.10/Windows and retains the original check
+names. The same exact integer/Fraction/isqrt specification applies, and the
+full Windows suite must pass on the revised head before qualification is
+complete. There is no optional skip or weakened arithmetic check. Unsupported
+patches continue to fail closed. The independent exact-head review identified
+this platform failure as blocking; its resolution and re-review are recorded
+in the PR, separately from GitHub approvals.
+
 ## Qualification and measured limits
 
 The fixed [engineering fixture](../../tests/fixtures/local-record-backend-smoke.json)
@@ -225,9 +240,9 @@ A [complete local proof fixture](../../tests/fixtures/local-record-proof-active-
 retains the active-plus/event-A/96-bit point result. The other raw local smoke
 outputs are engineering scratch, not canonical scientific artifacts.
 
-After moving engineering fixtures out of the registered-config directory, the
-final 24-call attempt used about 5.48 wall / 5.47 CPU seconds,
-16.3 MB sampled RSS, and 2.41 MB of local output. RSS is sampled after each
+After the fixture placement and runtime qualification corrections, the
+final 24-call attempt used about 5.75 wall / 5.75 CPU seconds,
+16.6 MB sampled RSS, and 2.41 MB of local output. RSS is sampled after each
 call, not a kernel peak measurement. The fixed ceilings are 30 CPU / 45 wall
 seconds, 1024 MiB and 8 MiB, with one process and no native numerical threads.
 All costs are separate from the later #92 scientific ceiling. No launch gate

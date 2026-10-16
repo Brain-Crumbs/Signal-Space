@@ -21,9 +21,9 @@ the sole open PR and remains untouched. Isolated branch:
 
 The [proof/API document](../research/gross-validated-local-backend.md) maps
 all local quantities to code. The [cost record](../research/gross-local-backend-costs.json)
-preserves the failed rational-size attempt and both successful fixed smokes.
+preserves the failed rational-size attempt and successful fixed smokes.
 The 24-call fixture is bounded to 30 CPU / 45 wall seconds, 1024 MiB and 8 MiB;
-the final measured run used 5.47 CPU / 5.48 wall seconds and 2.41 MB output.
+the final measured run used 5.75 CPU / 5.75 wall seconds and 2.41 MB output.
 A repeated full development suite has a 120-second timeout; targeted tests,
 agent-contract checks and repository verifiers are also engineering work.
 No pilot, 32-cycle campaign, scientific budget expenditure, experiment
@@ -36,7 +36,7 @@ registration, #95 implementation or positive certified-horizon claim occurs.
   independent variational ODE, dark/commuting/degenerate/off-manifold cases,
   all chart sectors, invalid modes/deadlines, local-output corruptions,
   exact first-word complement witness, N/J/r3 and covariance controls.
-- Full suite: 106 tests; local compiled-backend coverage has six expected skips
+- Full suite: 106 tests passed in 28.698 seconds; local compiled-backend coverage has six expected skips
   because numba/llvmlite are not installed. The initial full-suite attempt
   found a test setup calling the newly guarded chart under a deliberately
   unsupported runtime; the setup was corrected, without weakening the guard.
@@ -54,6 +54,16 @@ were unavailable. Repository AGENTS, experiment pipeline/planner skills,
 output/artifact contracts, current protocol, architecture, operator §5,
 program v0.3, progress ledger, theorem/source audit and best practices were
 read. This is numerical qualification, not an experiment-pipeline execution.
+
+Independent review of initial remote head
+`35a7fd067d67254f92a227edd9872f95b4c13222` found no arithmetic, proof or API
+correctness defect, and independently passed 11 targeted tests, 1,008 exact
+rational endpoint cases, a zero-wave record-Hessian control and retained-proof
+recomputation. It marked C2-AC-04 incomplete because Windows CI could not
+install Python 3.12.14. The fix pins available Windows 3.12.10, keeps Linux
+3.12.14 and the original CI check names, and allowlists those exact runtimes.
+This is a platform qualification correction, not a skipped check; revised-head
+review and both complete CI jobs remain required. Initial Ubuntu CI passed.
 
 Git transport and the optional Arb package installation returned proxy CONNECT
 403. Neither was bypassed. The existing authorized GitHub connector supplies
