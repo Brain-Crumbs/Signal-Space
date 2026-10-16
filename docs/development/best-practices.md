@@ -38,3 +38,23 @@ and [source audit](../research/gross-local-record-source-audit.md) distinguish
 The independent Hermitian ODE and polynomial Hessian diagnostics in
 `tests/test_local_record_contract.py` test algebra without representing
 floating agreement as a validated numerical certificate.
+
+## Local enclosure qualification
+
+Preserve the mathematical constants as enclosed exact sources; a stored float
+is a reference value with an error, not a replacement law. Include derivative
+remainders when differentiating a truncated exponential, and exercise a missing
+tail with an independent analytic inequality whose gap exceeds rounding noise.
+A recomputation/hash guard alone cannot qualify its own arithmetic algorithm.
+
+Bound curvature on the entire requested ambient domain, including indefinite
+Hermitian memories when the domain contains them. Record point-rounding width
+separately from interval wrapping across a tube; more precision need not shrink
+wrapping. Keep local engineering costs and failed qualification attempts
+separate from scientific pilot/confirmation budgets and horizon claims.
+
+Evidence: #94's [local backend proof and qualification](../research/gross-validated-local-backend.md),
+`test_exponential_tail_obligation_is_exercised`, exact rational polynomial
+controls, and the fixed point/ball smoke fixture. The 128-bit smoke initially
+hit an explicit rational-size ceiling; the bounded adjustment and repeated
+fixture are retained without substituting numerical agreement for enclosure.

@@ -1,0 +1,11 @@
+{
+  "kind": "bounded-engineering-only",
+  "backend": "dyadic-taylor-v1",
+  "coupling": "exact-pi/2",
+  "seeds": ["active-plus", "active-minus"],
+  "events": [0, 1],
+  "bits": [64, 96, 128],
+  "radii": ["0", "0.000001"],
+  "duration": "1",
+  "limits": {"calls": 24, "cpu_seconds": 30, "wall_seconds": 45, "output_bytes": 8388608, "rss_bytes": 1073741824}
+}

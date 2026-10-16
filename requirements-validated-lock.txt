@@ -1,0 +1,6 @@
+# Local C1 validation: CPython==3.12.14 (Linux), CPython==3.12.10 (Windows).
+# These exact runtime patches are installed by CI setup-python and allowlisted.
+# The enclosure kernel uses only exact int, fractions.Fraction and math.isqrt
+# from that runtime. No floating numerical package is trusted by the kernel.
+# Existing packages below are for independent diagnostics/repository checks.
+-r requirements-lock.txt
