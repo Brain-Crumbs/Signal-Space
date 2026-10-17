@@ -1,0 +1,249 @@
+{
+  "kind": "bounded-engineering-demonstration-not-scientific-campaign",
+  "scientific_budget_used": 0,
+  "config": {
+    "kind": "bounded-engineering-demonstration-not-scientific-campaign",
+    "seeds": [
+      "active-plus",
+      "active-minus"
+    ],
+    "bits": 96,
+    "gates": 2,
+    "limits": {
+      "cpu_seconds": 30,
+      "wall_seconds": 45,
+      "rss_bytes": 1073741824,
+      "output_bytes": 8388608
+    }
+  },
+  "config_sha256": "85d249533284e3664ecf01e153a8b823b3698c3e54faf19c9ee4d4b0ade70370",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "rows": [
+    {
+      "seed": "active-plus",
+      "proof_sha256": "72246b336bd4480ed0c6ccb64ea6ab316440c26fc79a4eac1c5204430840ecaf",
+      "bytes": 439552,
+      "wall_seconds": 1.557359128999451,
+      "cpu_seconds": 1.557211375,
+      "check": {
+        "verified": true,
+        "seed": "active-plus",
+        "verified_endpoints": 2,
+        "record_endpoint_horizons": [
+          2,
+          2,
+          2
+        ],
+        "record_cycle_horizons": [
+          1,
+          1,
+          1
+        ],
+        "endpoint_horizon": 2,
+        "cycle_horizon": 1,
+        "classification": "certified-prefix",
+        "target_met": true,
+        "terms": [
+          {
+            "endpoint": 1,
+            "event": 0,
+            "record": 1,
+            "linear": 3.390472709893677e-07,
+            "remainder": 9.872672557990687e-11,
+            "preparation": 3.391459977149476e-07,
+            "numerical": 1.8499734860518992e-25,
+            "readout": 3.7865323450608567e-29,
+            "total": 3.391459977149476e-07
+          },
+          {
+            "endpoint": 1,
+            "event": 0,
+            "record": 2,
+            "linear": 9.989105721852678e-07,
+            "remainder": 3.0921544966851e-10,
+            "preparation": 9.992197876349363e-07,
+            "numerical": 7.2632001265509e-25,
+            "readout": 5.048709793414476e-29,
+            "total": 9.992197876349363e-07
+          },
+          {
+            "endpoint": 1,
+            "event": 0,
+            "record": 3,
+            "linear": 1.7638342073772757e-06,
+            "remainder": 5.031683419484819e-10,
+            "preparation": 1.764337375719224e-06,
+            "numerical": 1.1561924080153655e-24,
+            "readout": 6.310887241768094e-29,
+            "total": 1.764337375719224e-06
+          },
+          {
+            "endpoint": 2,
+            "event": 1,
+            "record": 1,
+            "linear": 7.493907408652701e-07,
+            "remainder": 4.174999746700907e-09,
+            "preparation": 7.53565740611971e-07,
+            "numerical": 3.025477209027075e-24,
+            "readout": 3.7865323450608567e-29,
+            "total": 7.53565740611971e-07
+          },
+          {
+            "endpoint": 2,
+            "event": 1,
+            "record": 2,
+            "linear": 1.2380474171383777e-06,
+            "remainder": 5.343068394310922e-09,
+            "preparation": 1.2433904855326886e-06,
+            "numerical": 3.878835381858957e-24,
+            "readout": 3.7865323450608567e-29,
+            "total": 1.2433904855326886e-06
+          },
+          {
+            "endpoint": 2,
+            "event": 1,
+            "record": 3,
+            "linear": 1.81587176601391e-06,
+            "remainder": 7.847769819995451e-09,
+            "preparation": 1.8237195358339057e-06,
+            "numerical": 5.6840268120432696e-24,
+            "readout": 3.7865323450608567e-29,
+            "total": 1.8237195358339057e-06
+          }
+        ],
+        "limitation": "gate endpoints only; no 32-cycle campaign or physical detector claim"
+      }
+    },
+    {
+      "seed": "active-minus",
+      "proof_sha256": "0e31a1650421ff88fdddb6d50e783efbf5514b49c08058a86e5c2748b31d6095",
+      "bytes": 440156,
+      "wall_seconds": 1.4637746309999784,
+      "cpu_seconds": 1.463714445,
+      "check": {
+        "verified": true,
+        "seed": "active-minus",
+        "verified_endpoints": 2,
+        "record_endpoint_horizons": [
+          2,
+          2,
+          2
+        ],
+        "record_cycle_horizons": [
+          1,
+          1,
+          1
+        ],
+        "endpoint_horizon": 2,
+        "cycle_horizon": 1,
+        "classification": "certified-prefix",
+        "target_met": true,
+        "terms": [
+          {
+            "endpoint": 1,
+            "event": 0,
+            "record": 1,
+            "linear": 3.390472709893677e-07,
+            "remainder": 9.872672557990687e-11,
+            "preparation": 3.391459977149476e-07,
+            "numerical": 1.8499734860518992e-25,
+            "readout": 3.7865323450608567e-29,
+            "total": 3.391459977149476e-07
+          },
+          {
+            "endpoint": 1,
+            "event": 0,
+            "record": 2,
+            "linear": 9.989105721852678e-07,
+            "remainder": 3.0921544966851e-10,
+            "preparation": 9.992197876349363e-07,
+            "numerical": 7.2632001265509e-25,
+            "readout": 5.048709793414476e-29,
+            "total": 9.992197876349363e-07
+          },
+          {
+            "endpoint": 1,
+            "event": 0,
+            "record": 3,
+            "linear": 1.7638342073772757e-06,
+            "remainder": 5.031683419484819e-10,
+            "preparation": 1.764337375719224e-06,
+            "numerical": 1.1561924080153655e-24,
+            "readout": 6.310887241768094e-29,
+            "total": 1.764337375719224e-06
+          },
+          {
+            "endpoint": 2,
+            "event": 1,
+            "record": 1,
+            "linear": 1.0056756059820992e-06,
+            "remainder": 5.213490779589137e-09,
+            "preparation": 1.0108890967616884e-06,
+            "numerical": 4.379932450629827e-24,
+            "readout": 3.7865323450608567e-29,
+            "total": 1.0108890967616884e-06
+          },
+          {
+            "endpoint": 2,
+            "event": 1,
+            "record": 2,
+            "linear": 1.2709757610453913e-06,
+            "remainder": 5.787958167510896e-09,
+            "preparation": 1.2767637192129022e-06,
+            "numerical": 4.8662494214804764e-24,
+            "readout": 5.048709793414476e-29,
+            "total": 1.2767637192129022e-06
+          },
+          {
+            "endpoint": 2,
+            "event": 1,
+            "record": 3,
+            "linear": 1.9253508453505498e-06,
+            "remainder": 1.0482328552457313e-08,
+            "preparation": 1.935833173903007e-06,
+            "numerical": 8.806704306368057e-24,
+            "readout": 5.048709793414476e-29,
+            "total": 1.935833173903007e-06
+          }
+        ],
+        "limitation": "gate endpoints only; no 32-cycle campaign or physical detector claim"
+      }
+    }
+  ],
+  "source_sha256": {
+    "src/signal_space/numerics/dyadic.py": "1d56978e587f2a48e2db5ca8195cd06a3cc4cc6d8669e6d728320ecd0b37232c",
+    "src/signal_space/numerics/validated_linked_memory.py": "54f22871818b6a72ccb98eb5fa8110b056d7f9492f7afb5289e236ea8c355e6f",
+    "src/signal_space/numerics/record_certificate_math.py": "2ea86f365705803f5938829547020e55cda3fea1250ec920001c3545d96892f5",
+    "src/signal_space/numerics/record_tubes.py": "1d7d04a8b0373a263d46468a6792b8880b45867a4f751eccd8c608020b281b9b",
+    "src/signal_space/numerics/record_certificate_check.py": "18f802fe0ba5b4de3bb5b632e70c6d9214d9755a93021e44d7765f67ae9d7d2f",
+    "docs/research/gross-local-record-theorem.md": "7dda6add49dbda424be21a00c67b943599d3261f7466f22b0cdbd4b24996640d",
+    "research/papers/gross-operator-program-v0.2.md": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123",
+    "requirements-validated-lock.txt": "660f18fcfb2a178b2e0f300a7235d7243f4cbe2e0666d9e44f00f7e6d9a18115"
+  },
+  "rss_measurement": "getrusage-self-maxrss",
+  "status": "completed-engineering-demonstration",
+  "wall_seconds": 3.0230382609988737,
+  "cpu_seconds": 3.021713811,
+  "rss_peak_bytes": 19382272,
+  "output_bytes": 879708,
+  "failed_or_superseded_attempts": [
+    {
+      "attempt": "development-v1",
+      "status": "superseded-before-independent-checker-fixes",
+      "summary_sha256": "80a6ab110623a062c7f84a0623b4e300e7ac54d0e23ec6f3399ee5279ba6ee4d",
+      "note": "Earlier implementation smoke; replaced after independent record-formula and margin review. Its psutil RSS is not used for resource qualification."
+    },
+    {
+      "attempt": "development-v2",
+      "status": "interrupted-after-first-proof",
+      "reason": "psutil.NoSuchProcess: process PID not found (pid=2)",
+      "retained_first_proof_sha256": "72246b336bd4480ed0c6ccb64ea6ab316440c26fc79a4eac1c5204430840ecaf",
+      "note": "No summary or resource success was produced. Unix self rusage replaces psutil PID-namespace lookup in final smoke."
+    }
+  ],
+  "fixture_proofs": {
+    "active-plus": "tests/fixtures/record-tube-proof-active-plus.json",
+    "active-minus": "tests/fixtures/record-tube-proof-active-minus.json"
+  }
+}
