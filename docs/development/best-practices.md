@@ -58,3 +58,30 @@ Evidence: #94's [local backend proof and qualification](../research/gross-valida
 controls, and the fixed point/ball smoke fixture. The 128-bit smoke initially
 hit an explicit rational-size ceiling; the bounded adjustment and repeated
 fixture are retained without substituting numerical agreement for enclosure.
+
+## Continuous proof transport and saved-proof checks
+
+Carry all initial uncertainty and every forcing term through the entire ordered
+word. Retain intact transition products when sharpening a norm bound; preserve
+all ambient directions and include interval matrix-product rounding. A later
+endpoint must not overwrite an earlier error allowance or skip a failed budget.
+Keep preparation, numerical-reference and mathematical readout allocations
+separate, including reference/preparation cross terms.
+
+A saved-proof checker must reconstruct the induction from source enclosures,
+local obligations and factorization, rather than trusting stored success flags
+or scalar majorants. State its shared arithmetic/analytic trusted base. Validate
+corruption at the obligation it breaks, and distinguish excessive upper bounds
+from an admissible physical witness with a validated lower bound.
+
+Evidence: [#95](https://github.com/Brain-Crumbs/Signal-Space/issues/95),
+[proof contract](../research/gross-record-tube-certificates.md),
+`tests/test_record_tubes.py`: exact cancellation/nonlinear controls, all sixteen
+combined preparation directions, missing-force/column/order/reset/rounding
+mutations, and physical-source witness validation. Added 17 October 2026.
+
+## Change history
+
+| Date | Practice | Change | Evidence |
+| --- | --- | --- | --- |
+| 2026-10-17 | Continuous proof transport and saved-proof checks | Added explicit retained-forcing, shared-trust and counterexample requirements | #95 and its proof/corruption controls |

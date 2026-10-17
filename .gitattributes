@@ -17,3 +17,6 @@ research/experiments/**/*.svg -whitespace
 research/experiments/**/*.csv -whitespace
 # Exported Python sources retain original bytes, including existing final blank lines.
 research/experiments/**/results/source/**/*.py -whitespace
+
+# The validated proof source manifest hashes this analytic authority on both OSes.
+docs/research/gross-local-record-theorem.md text eol=lf

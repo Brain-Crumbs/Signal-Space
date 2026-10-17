@@ -2,6 +2,15 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+**C1 error-tube implementation, 17 October 2026 (#95).** The
+[nonresetting proof producer and saved checker](gross-record-tube-certificates.md)
+retain all sixteen physical preparation directions in eighteen ambient
+coordinates, with separate preparation/numerical/readout allocations and intact
+transition products. The bounded one-AB-cycle engineering fixture checks both
+active seeds and all three endpoint records. Registration and scientific
+admission remain #96; the 32-cycle confirmation remains #97. No new registered
+campaign, Tests 1–11 promotion or modification of previous results is implied.
+
 **C1 source/theorem preparation, 15 October 2026 (#93).** The
 [full-direction conditional theorem](gross-local-record-theorem.md) and
 [source audit](gross-local-record-source-audit.md) define the complete physical
