@@ -1,0 +1,7 @@
+{
+  "kind": "bounded-engineering-demonstration-not-scientific-campaign",
+  "seeds": ["active-plus", "active-minus"],
+  "bits": 96,
+  "gates": 2,
+  "limits": {"cpu_seconds": 30, "wall_seconds": 45, "rss_bytes": 1073741824, "output_bytes": 8388608}
+}
