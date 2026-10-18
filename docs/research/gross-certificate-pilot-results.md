@@ -41,7 +41,7 @@ The2.64MB evidence ZIP contains canonical raw/proof/checker bytes, immutable
 analysis, both reports, budget reservations and retained checker staging, exact
 figure data, reader setup/results PDFs, final readiness and source snapshot/Git
 bundle. Archive SHA-256:
-`f4c5e4986ac6d84ad01c1e5d0d441882987e895292482f9dc6bd498831a80764`.
+`0692ccf94a5b08f4e7c824c7fa0610b62cf2d014f4143c1a1ade8309b2770f00`.
 The initial renderer failed before sealing; an integer-string presentation fix
 produced report0001. Aligning figure-question strings with the immutable plan
 produced report0002. Failed export notes and recovery logs remain saved. Raw
