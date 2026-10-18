@@ -1,0 +1,77 @@
+{
+  "analysis_id": "analysis-0001-ec7930b5",
+  "artifact": {
+    "bytes": 2636177,
+    "filename": "gross-c1-issue-96-evidence.zip",
+    "library_file_id": "libfile_a03f1e592bdc8191b72d09d3e7b1dad9",
+    "sha256": "f4c5e4986ac6d84ad01c1e5d0d441882987e895292482f9dc6bd498831a80764"
+  },
+  "blockers": [
+    "unqualified confirmatory cpu_seconds admission",
+    "unqualified confirmatory wall_seconds admission",
+    "unqualified confirmatory memory_mb admission"
+  ],
+  "budget": {
+    "confirmation_analysis_cpu_wall": 50,
+    "confirmation_output_mb": 112,
+    "confirmation_worker_cpu_wall": 190,
+    "pilot_analysis_cpu_wall": 15,
+    "pilot_output_mb": 16,
+    "pilot_worker_cpu_wall": 45,
+    "remaining_reserved_cpu_wall": 240,
+    "total_cpu_wall_ceiling": 300,
+    "total_output_mb": 128
+  },
+  "canonical_checksums_sha256": "afafcfe8e3d93aa23b7e6b2d723e4cbde88a82fb897fa5df1b79204ebaa0b7e8",
+  "canonical_run": "evidence/runs/gross.local-record-certificate.v1/run-4fb4fc6333a29dbd",
+  "config_file_sha256": "b50cfd2e3721df09bd80eb81a022243b425ea3c7fc7d6cc77efbaef0ae20640a",
+  "confirmation_status": "blocked/not-evaluated",
+  "confirmatory_estimate": {
+    "basis": "2x safety * two seeds * measured max complete per-seed producer/checker cost * (g+g(g+1)/2) work ratio; g64 vs g2. Includes controls/checks conservatively in full budget. This is an extrapolation, not measured long-prefix feasibility.",
+    "cpu_seconds": 2143.7740549888,
+    "measured_gate_evaluations": 8,
+    "measured_max_seed_cpu_seconds": 1.2498682689999998,
+    "measured_pilot_cpu_seconds": 9.488839946999999,
+    "measured_pilot_wall_seconds": 9.497990984998978,
+    "measured_transition_products": 12,
+    "memory_mb": 2375.25,
+    "output_mb": 60.78173828125,
+    "wall_seconds": 2147.134112921683
+  },
+  "estimate_admitted": false,
+  "launch_allowed": false,
+  "next_action": "Sharpen the qualified cost estimate under a new bounded lock or obtain a revised explicit budget; do not substitute a32-cycle run.",
+  "one_cycle_checked": true,
+  "pilot_run_id": "run-4fb4fc6333a29dbd",
+  "plan_sha256": "ab7e1e9bcf4f4ef385d88381f67e6c876d8ac69ddfd0408d97a814f4468463d7",
+  "readiness_file_sha256": "267e070119c2e96901f7be2d9fd1bd66223996fafe9dba10dcb21b5f0043310f",
+  "report_id": "report-0002",
+  "schema": "gross.c1-readiness.v1",
+  "scientific_classification": "pass",
+  "source_revision": "770729bc416d866d0948fff34f01295dafb953fc",
+  "source_sha256": {
+    "docs/research/gross-local-record-theorem.md": "7dda6add49dbda424be21a00c67b943599d3261f7466f22b0cdbd4b24996640d",
+    "requirements-validated-lock.txt": "660f18fcfb2a178b2e0f300a7235d7243f4cbe2e0666d9e44f00f7e6d9a18115",
+    "research/papers/gross-operator-program-v0.2.md": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123",
+    "src/signal_space/analysis/local_certificate.py": "80c84d346e98655d488bdd9a64af7c96b761f0f2aaa19a0e956bc5e77b0820be",
+    "src/signal_space/experiments/local_certificate.py": "051a6a2a7ab8568e6c69922b2c4f4b038ebd256db63629858c1318aa459a2bfc",
+    "src/signal_space/numerics/certificate_controls.py": "1a4ee480e245d8d17eaf653aa120bfe3656bb047bcd2a5e7ebc9e651dc20b243",
+    "src/signal_space/numerics/dyadic.py": "1d56978e587f2a48e2db5ca8195cd06a3cc4cc6d8669e6d728320ecd0b37232c",
+    "src/signal_space/numerics/local_certificate.py": "3bdbbf605b3da482c9f1de0d54825aff9d7ae7a7baf37b30356b8f63c5cdbd3f",
+    "src/signal_space/numerics/record_certificate_check.py": "18f802fe0ba5b4de3bb5b632e70c6d9214d9755a93021e44d7765f67ae9d7d2f",
+    "src/signal_space/numerics/record_certificate_math.py": "2ea86f365705803f5938829547020e55cda3fea1250ec920001c3545d96892f5",
+    "src/signal_space/numerics/record_tubes.py": "1d7d04a8b0373a263d46468a6792b8880b45867a4f751eccd8c608020b281b9b",
+    "src/signal_space/numerics/validated_linked_memory.py": "54f22871818b6a72ccb98eb5fa8110b056d7f9492f7afb5289e236ea8c355e6f",
+    "src/signal_space/runtime/certificate_budget.py": "fcffe767d97a641217518f3669d1521411be7f7bb44e29283f483fec742d407a"
+  },
+  "task5_command": null,
+  "verification": {
+    "analyses": 1,
+    "artifacts": 61,
+    "attempts": 1,
+    "files": 62,
+    "reports": 2,
+    "run_id": "run-4fb4fc6333a29dbd",
+    "valid": true
+  }
+}

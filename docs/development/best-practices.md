@@ -85,3 +85,21 @@ mutations, and physical-source witness validation. Added 17 October 2026.
 | Date | Practice | Change | Evidence |
 | --- | --- | --- | --- |
 | 2026-10-17 | Continuous proof transport and saved-proof checks | Added explicit retained-forcing, shared-trust and counterexample requirements | #95 and its proof/corruption controls |
+
+## Pilot admission and reserved aggregate budgets
+
+Separate a successful short certificate from permission to run a longer
+confirmation. Retain measured work counts, extrapolation assumptions and
+explicit unknown process metrics. Reserve the full stage ceilings before each
+scientific worker/checker; failed stages consume their reservation. Protect
+one-shot reservations atomically and preserve them with the campaign archive.
+A resource upper estimate that is too loose blocks admission; it does not
+falsify the physical robustness hypothesis or justify a substituted run.
+
+Evidence: #96's [registered pilot protocol](../research/gross-certificate-pilot.md),
+`tests/test_certificate_pilot.py` (duplicate/racing stage reservations and
+closed-parameter rejection), and the saved-analysis process supervisor.
+
+| Date | Practice | Change | Evidence |
+| --- | --- | --- | --- |
+|2026-10-18|Pilot admission and reserved aggregate budgets|Added stage reservation and obstruction semantics|#96 protocol and negative controls|

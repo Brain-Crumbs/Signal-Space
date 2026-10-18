@@ -159,3 +159,13 @@ lock; original preparations and scientific thresholds remain preserved.
 The conservative global record bound has zero useful full cycles; end-to-end
 certification stays unresolved. No Test 1-11 classification or prerequisite
 has changed. All existing canonical evidence remains byte-identical.
+
+## C1-4 certificate pilot (18 October 2026)
+
+The separately registered [one-cycle pilot](gross-certificate-pilot-results.md)
+passes all five locked checks for both seeds, both precisions and all physical
+preparation directions. Run `run-4fb4fc6333a29dbd`; analysis
+`analysis-0001-ec7930b5`; selected report `report-0002`. The conservative measured
+work extrapolation blocks admission for32 cycles: confirmation is not evaluated
+and has no executable Task5 command. This does not demonstrate physical record
+failure. No Test1–11 status or other campaign result is promoted.
