@@ -1,0 +1,289 @@
+{
+  "format": "gross.c1-two-cycle-result.v1",
+  "experiment_id": "gross.local-record-qualification.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "run_id": "run-bf4c1feafc6cb66c",
+  "attempt_id": "attempt-0001",
+  "analysis_id": "analysis-0001-ccec2742",
+  "report_id": "report-0002",
+  "technical_state": "analyzed",
+  "qualification_classification": "pass",
+  "confirmation_classification": "not-evaluated",
+  "confirmation_status": "blocked",
+  "scientific_source": {
+    "dirty_patch_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "revision": "1e2c0d4a02088191f9ca733cd9b48a429781e1d7",
+    "runtime_version": "0.2.0",
+    "tree_state": "clean"
+  },
+  "identical_published_scientific_tree_head": "1751bc95cd1ede89e02367087f4cdfa1c35b81fb",
+  "plan_sha256": "4798dcc727d16106e715e08190b740e1334355ff6b8273fe11bfbbdb60786422",
+  "config_file_sha256": "d785bb60331288d3e985f1e4b750c00a5e54b12e705de20901858f3ad776181e",
+  "canonical_checksums_sha256": "9c9901af835ca782ce430e0459073c61d17182a73ff7f6e068250abab4df786c",
+  "relative_canonical_run": "runs/gross.local-record-qualification.v1/run-bf4c1feafc6cb66c",
+  "horizons": [
+    {
+      "seed": "active-plus",
+      "bits": 96,
+      "verified_endpoints": 4,
+      "record_endpoint_horizons": [
+        4,
+        4,
+        4
+      ],
+      "record_cycle_horizons": [
+        2,
+        2,
+        2
+      ],
+      "endpoint_horizon": 4,
+      "cycle_horizon": 2,
+      "target_met": true
+    },
+    {
+      "seed": "active-minus",
+      "bits": 96,
+      "verified_endpoints": 4,
+      "record_endpoint_horizons": [
+        4,
+        4,
+        4
+      ],
+      "record_cycle_horizons": [
+        2,
+        2,
+        2
+      ],
+      "endpoint_horizon": 4,
+      "cycle_horizon": 2,
+      "target_met": true
+    },
+    {
+      "seed": "active-plus",
+      "bits": 128,
+      "verified_endpoints": 4,
+      "record_endpoint_horizons": [
+        4,
+        4,
+        4
+      ],
+      "record_cycle_horizons": [
+        2,
+        2,
+        2
+      ],
+      "endpoint_horizon": 4,
+      "cycle_horizon": 2,
+      "target_met": true
+    },
+    {
+      "seed": "active-minus",
+      "bits": 128,
+      "verified_endpoints": 4,
+      "record_endpoint_horizons": [
+        4,
+        4,
+        4
+      ],
+      "record_cycle_horizons": [
+        2,
+        2,
+        2
+      ],
+      "endpoint_horizon": 4,
+      "cycle_horizon": 2,
+      "target_met": true
+    }
+  ],
+  "max_preparation": {
+    "exact": "225129491232142011417315/79228162514264337593543950336",
+    "approximate": 2.841533667925334e-06,
+    "conservative_display_upper": "2.85e-6",
+    "seed": "active-minus",
+    "bits": 96,
+    "endpoint": 3,
+    "record": 3
+  },
+  "max_total_exact": "225129491232142013598581/79228162514264337593543950336",
+  "worker_metrics": {
+    "output_bytes": 5155991,
+    "rss_bytes": 81977344,
+    "rss_measurement": "kernel-self-maxrss",
+    "worker_cpu_seconds": 15.742012629,
+    "worker_wall_seconds": 15.761200474000361
+  },
+  "worker_supervisor_wall_seconds": 15.921086119000393,
+  "analysis_supervisor_wall_seconds": 10.465167920003296,
+  "supervisor_cpu_seconds": null,
+  "supervisor_peak_rss_bytes": null,
+  "supervisor_process_metrics_available": false,
+  "confirmatory_estimate": {
+    "basis": "2x safety * two96-bit seeds * measured complete per-seed producer/checker cost * intact-product work ratio g64/g4. Memory scales16x; not a measured long-prefix cost or rigorous runtime bound.",
+    "cpu_seconds": 1612.3271329005715,
+    "memory_mb": 1250.875,
+    "output_mb": 62.30059814453125,
+    "wall_seconds": 1616.8350736077077
+  },
+  "blockers": [
+    "32-cycle confirmation registration and reviewed lock absent",
+    "unqualified confirmatory cpu_seconds admission",
+    "unqualified confirmatory wall_seconds admission",
+    "unqualified confirmatory memory_mb admission"
+  ],
+  "reservation": {
+    "future_confirmation_analysis": 50,
+    "future_confirmation_worker": 145,
+    "prior_output_mb": 16,
+    "prior_pilot": 60,
+    "qualification_analysis": 15,
+    "qualification_output_mb": 16,
+    "qualification_worker": 30,
+    "remaining_confirmation": 195,
+    "remaining_output_mb": 96,
+    "total": 300,
+    "total_output_mb": 128
+  },
+  "checks": {
+    "checks": [
+      {
+        "evidence": "derived/summary.json",
+        "id": "coverage",
+        "status": "pass",
+        "value": 1
+      },
+      {
+        "evidence": "derived/summary.json",
+        "id": "saved-proofs",
+        "status": "pass",
+        "value": 1
+      },
+      {
+        "evidence": "derived/summary.json",
+        "id": "two-cycle-budgets",
+        "status": "pass",
+        "value": 1
+      },
+      {
+        "evidence": "derived/summary.json",
+        "id": "controls",
+        "status": "pass",
+        "value": 1
+      },
+      {
+        "evidence": "derived/summary.json",
+        "id": "precision",
+        "status": "pass",
+        "value": 1
+      }
+    ],
+    "schema_version": "research-checks-v1"
+  },
+  "controls": [
+    {
+      "id": "dark-word",
+      "kind": "outward-enclosure",
+      "limit": "1/1000000000000",
+      "status": "pass",
+      "upper": "4101/39614081257132168796771975168"
+    },
+    {
+      "id": "isolated-commuting",
+      "kind": "outward-enclosure",
+      "limit": "1/1000000000000",
+      "status": "pass",
+      "upper": "3135/19807040628566084398385987584"
+    },
+    {
+      "id": "conservation-r3-memory",
+      "kind": "outward-enclosure",
+      "limit": "1/1000000000000",
+      "status": "pass",
+      "upper": "249105/39614081257132168796771975168"
+    },
+    {
+      "id": "description-covariance",
+      "kind": "outward-enclosure",
+      "limit": "1/1000000000000",
+      "status": "pass",
+      "upper": "135311/79228162514264337593543950336"
+    },
+    {
+      "id": "variational-diagnostic",
+      "kind": "floating-independent-formulation",
+      "limit": "1/100000000",
+      "status": "pass",
+      "upper": "4673/18014398509481984"
+    },
+    {
+      "id": "linear-majorant",
+      "kind": "outward-enclosure",
+      "limit": "0",
+      "status": "pass",
+      "upper": "0"
+    },
+    {
+      "id": "corrupt-certificate",
+      "kind": "negative-control",
+      "limit": "0",
+      "status": "pass",
+      "upper": "0"
+    },
+    {
+      "id": "serialization",
+      "kind": "outward-enclosure",
+      "limit": "0",
+      "status": "pass",
+      "upper": "0"
+    }
+  ],
+  "verification": {
+    "canonical_valid": true,
+    "paired_reader_valid": true,
+    "pdf_qa_complete": true,
+    "independent_artifact_review": "no blocking findings; separate from GitHub approval",
+    "pdf_pages": {
+      "Experimental_Setup.pdf": 4,
+      "Experiment_Results.pdf": 7
+    }
+  },
+  "prior_pilot": {
+    "run_id": "run-4fb4fc6333a29dbd",
+    "unchanged_checksums_sha256": "afafcfe8e3d93aa23b7e6b2d723e4cbde88a82fb897fa5df1b79204ebaa0b7e8",
+    "archive_sha256": "0692ccf94a5b08f4e7c824c7fa0610b62cf2d014f4143c1a1ade8309b2770f00"
+  },
+  "validation": {
+    "python_tests": 130,
+    "agent_contract_tests": 13,
+    "python_test_wall_seconds": 66.535,
+    "agent_test_wall_seconds": 6.937,
+    "initial_exact_head_ci": "https://github.com/Brain-Crumbs/Signal-Space/actions/runs/39181504973"
+  },
+  "scope_limits": [
+    "gate endpoints only",
+    "shared qualified arithmetic and analytic chart trust base",
+    "no32-cycle result",
+    "no hardware detector noise",
+    "no stable object, autonomous clock, emergent metric or CandidateA/B bridge",
+    "Tests1-11 and older outcomes unchanged"
+  ],
+  "archive": {
+    "filename": "GROSS_C1_Two_Cycle_Evidence.zip",
+    "library_file_id": "libfile_1e6ca0eb16c0819182b799f5ce41b139",
+    "size_bytes": 6428762,
+    "sha256": "8b873a8e4f57e426e1d4fb9eb4be10e7ea96f5f5354d9e106c2a6743aad80566",
+    "indexed_files": 497,
+    "retention": "persistent artifact; complete canonical pilot/qualification, reservations, readers, source and logs"
+  },
+  "reader_outputs": [
+    {
+      "filename": "GROSS_C1_Two_Cycle_Results.pdf",
+      "library_file_id": "libfile_66597e5a4d988191ab75e0e16dbe13d1",
+      "pages": 7
+    },
+    {
+      "filename": "GROSS_C1_Two_Cycle_Setup.pdf",
+      "library_file_id": "libfile_9ffcff80ab5c8191afc18cd24d205ed3",
+      "pages": 4
+    }
+  ]
+}

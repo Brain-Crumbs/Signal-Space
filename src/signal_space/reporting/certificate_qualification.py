@@ -63,8 +63,12 @@ def render_report(run_path, output, manifest, analysis, render_provenance):
         for memory, marker in (('A', 'o'), ('B', 's')):
             points = [r for r in centers if r['seed'] == seed]
             axes[0, col].scatter([r[memory+'_x'] for r in points], [r[memory+'_y'] for r in points], marker=marker, label=memory)
+            labels = {}
             for r in points:
-                axes[0, col].annotate(str(r['endpoint']), (r[memory+'_x'], r[memory+'_y']), xytext=(3, 4), textcoords='offset points')
+                labels.setdefault((r[memory+'_x'], r[memory+'_y']), []).append(str(r['endpoint']))
+            for position, indices in labels.items():
+                axes[0, col].annotate(memory+','.join(indices), position,
+                                     xytext=(4, 6 if memory == 'A' else -12), textcoords='offset points', fontsize=8)
         axes[0, col].set(title=seed, xlabel='Internal Bloch x', ylabel='Internal Bloch y', xlim=(-1.1, 1.1), ylim=(-1.1, 1.1))
         axes[0, col].legend()
         for record in (1, 2, 3):
@@ -121,8 +125,12 @@ def render_report(run_path, output, manifest, analysis, render_provenance):
          'Diagnostic decomposition of upper bounds. Large upper bounds are not physical counterexamples. The long-prefix cost projection remains unmeasured.')
     write_json(output/'interpretations.json', interpretations)
     metrics = summary['worker_metrics']
+    largest = max((float(r['preparation']) for r in records), default=None)
     paragraphs = [
         f"Qualification classification: {analysis['classification']}. Common certified horizon: {summary['common_endpoint_horizon']} ordered endpoints / {summary['common_endpoint_horizon']//2} full AB cycles.32-cycle confirmation: BLOCKED / NOT EVALUATED.",
+        ('All covered preparation bounds are below2.85e-6, against allocation2.5e-4; the full preparation ball is covered.'
+         if largest is not None and largest < 2.85e-6 else
+         'Read the per-record budget table for the actual proved prefix; missing or excessive bounds remain unresolved.'),
         'Question: Does doubling the existing prefix reveal excessive bound growth or clarify the conservative cost obstruction? This is a predeclared two-cycle qualification, not a32-cycle confirmation.',
         'The unchanged CandidateA law couples three coherent complex doublets to two projector memories. A uses ports1/2 and memoryA; B uses ports2/3 and memoryB. Coupling is exact pi/2, lambda=0, transports identity. All variables and gate parameters are dimensionless.',
         'The physical preparation ball has radius1e-6 in wave norm plus half the projector Frobenius norm squared. Its chart retains12 real wave directions and2 memory directions each. The ambient proof transports18 coordinates; it does not reset at event switches.',

@@ -2,6 +2,16 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+**C1 two-cycle qualification, 18 October 2026 (#96/#97 under #92).** The
+[locked continuation result](gross-certificate-qualification-results.md), run
+`run-bf4c1feafc6cb66c`, analysis `analysis-0001-ccec2742`, certifies all three
+records through four ordered endpoints for both active seeds, both96/128-bit
+precisions and the entire radius1e-6 physical preparation ball. All16 directions
+remain simultaneous; no resets. Five checks pass, worst preparation/total
+bound is less than2.85e-6. The32-cycle target is still blocked/not evaluated by
+the conservative cost estimate;105s is reserved and195s remains in the original
+300s ceiling. No Tests1-11 status, CandidateB or prior failed outcome changes.
+
 **C1 error-tube implementation, 17 October 2026 (#95).** The
 [nonresetting proof producer and saved checker](gross-record-tube-certificates.md)
 retain all sixteen physical preparation directions in eighteen ambient
