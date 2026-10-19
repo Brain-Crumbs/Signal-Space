@@ -64,3 +64,27 @@ Main-branch protection and repository-ruleset reads also returned `Forbidden`;
 merge requirements remain unverified. Keep PR #101 and issue/master tracking
 open. Confirmation remains blocked by CPU/wall/memory admission; PR #91 is
 outside this follow-up.
+
+## Archival recovery and two-cycle continuation
+
+The original archive was subsequently materialized successfully and its exact
+SHA-256 `0692ccf94a5b08f4e7c824c7fa0610b62cf2d014f4143c1a1ade8309b2770f00`
+verified. Original pilot canonical verification and paired-reader validation
+both pass. The [Git evidence index](../research/evidence/README.md) now retains
+the byte-identical original manifest/checksums, alongside those of the separately
+locked two-cycle qualification. Its pinned archive locator retains the complete
+raw/proof/analysis/report packages, spent budget markers and selected reader.
+This resolves the specific historical archival/access blocker above; that
+section remains the record of the earlier failed transfer.
+
+The [continuation result](../research/gross-certificate-qualification-results.md)
+passes five checks through four endpoints for both seeds/precisions and all16
+physical directions. Run `run-bf4c1feafc6cb66c`, analysis `analysis-0001-ccec2742`,
+selected `report-0003`. Scientific source and old pilot bytes are unchanged.
+Local130 Python/13 agent tests pass; final submitted-head review and CI belong
+on PR #101. Agent review is not an authenticated GitHub approval.
+
+Confirmation remains blocked/not evaluated by conservative admission, with195s
+remaining after60s pilot +45s qualification reservations. No merge or issue
+closure is authorized by archival recovery. Protection/ruleset visibility and
+any actual merge gates remain separate from this resolved evidence gap.

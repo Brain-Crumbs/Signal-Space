@@ -5,7 +5,7 @@
   "run_id": "run-bf4c1feafc6cb66c",
   "attempt_id": "attempt-0001",
   "analysis_id": "analysis-0001-ccec2742",
-  "report_id": "report-0002",
+  "report_id": "report-0003",
   "technical_state": "analyzed",
   "qualification_classification": "pass",
   "confirmation_classification": "not-evaluated",
@@ -19,7 +19,7 @@
   "identical_published_scientific_tree_head": "1751bc95cd1ede89e02367087f4cdfa1c35b81fb",
   "plan_sha256": "4798dcc727d16106e715e08190b740e1334355ff6b8273fe11bfbbdb60786422",
   "config_file_sha256": "d785bb60331288d3e985f1e4b750c00a5e54b12e705de20901858f3ad776181e",
-  "canonical_checksums_sha256": "9c9901af835ca782ce430e0459073c61d17182a73ff7f6e068250abab4df786c",
+  "canonical_checksums_sha256": "860e7288e23ac0ce9e7f604f455fb077b514207d12090b6b6ac3e001b72d6161",
   "relative_canonical_run": "runs/gross.local-record-qualification.v1/run-bf4c1feafc6cb66c",
   "horizons": [
     {
@@ -269,9 +269,9 @@
   "archive": {
     "filename": "GROSS_C1_Two_Cycle_Evidence.zip",
     "library_file_id": "libfile_1e6ca0eb16c0819182b799f5ce41b139",
-    "size_bytes": 6428762,
-    "sha256": "8b873a8e4f57e426e1d4fb9eb4be10e7ea96f5f5354d9e106c2a6743aad80566",
-    "indexed_files": 497,
+    "size_bytes": 8112100,
+    "sha256": "aaf8c985b5df1efd88df17e9971f85fd2cda88fc61287a3722256e769bdbfd3e",
+    "indexed_files": 674,
     "retention": "persistent artifact; complete canonical pilot/qualification, reservations, readers, source and logs"
   },
   "reader_outputs": [
@@ -285,5 +285,31 @@
       "library_file_id": "libfile_9ffcff80ab5c8191afc18cd24d205ed3",
       "pages": 4
     }
-  ]
+  ],
+  "git_evidence_index": {
+    "locator": "docs/research/evidence/c1-two-cycle-archive.json",
+    "runs": [
+      {
+        "experiment_id": "gross.local-record-certificate.v1",
+        "run_id": "run-4fb4fc6333a29dbd",
+        "git_index": "docs/research/evidence/gross.local-record-certificate.v1/run-4fb4fc6333a29dbd",
+        "canonical_manifest_sha256": "d4b01a5fda392740fbc8384461ad4d6a3d8f63664d20c2ecb634ada99c8c4fa0",
+        "canonical_checksums_sha256": "afafcfe8e3d93aa23b7e6b2d723e4cbde88a82fb897fa5df1b79204ebaa0b7e8",
+        "archive_canonical_path": "gross-c1-two-cycle/runs/gross.local-record-certificate.v1/run-4fb4fc6333a29dbd",
+        "technical_state": "analyzed",
+        "scientific_classification": "pass"
+      },
+      {
+        "experiment_id": "gross.local-record-qualification.v1",
+        "run_id": "run-bf4c1feafc6cb66c",
+        "git_index": "docs/research/evidence/gross.local-record-qualification.v1/run-bf4c1feafc6cb66c",
+        "canonical_manifest_sha256": "476547c1fb15afd6c1761852d0439387c4192f41e2b131873d28e1b8c0f2895d",
+        "canonical_checksums_sha256": "860e7288e23ac0ce9e7f604f455fb077b514207d12090b6b6ac3e001b72d6161",
+        "archive_canonical_path": "gross-c1-two-cycle/runs/gross.local-record-qualification.v1/run-bf4c1feafc6cb66c",
+        "technical_state": "analyzed",
+        "scientific_classification": "pass"
+      }
+    ],
+    "canonical_bytes_identical": true
+  }
 }

@@ -9,10 +9,10 @@ This continues #96 on draft PR #101 and supplies scoped execution/obstruction
 evidence for #97 under #92. No issue closure or merge is implied.
 
 Run `run-bf4c1feafc6cb66c`, attempt `attempt-0001`, analysis
-`analysis-0001-ccec2742`, selected `report-0002`. The clean scientific launch
+`analysis-0001-ccec2742`, selected `report-0003`. The clean scientific launch
 revision is `1e2c0d4a02088191f9ca733cd9b48a429781e1d7`; its tested tree equals
 published `1751bc95cd1ede89e02367087f4cdfa1c35b81fb`. The later report-only
-revision groups coincident endpoint labels and regenerates the presentation
+revision groups coincident endpoint labels, states the squared norm precisely and regenerates the presentation
 without changing raw/analysis bytes. Exact identities, tables, checks and archive
 locator belong in the [machine-readable result](gross-certificate-qualification-results.json).
 
@@ -79,7 +79,7 @@ Neither further scientific execution nor a larger budget is assumed here.
 ## Review, verification and limits
 
 A fresh independent reviewer checked the precise prelaunch source/plan, all17
-source/configuration pins and the actual saved artifacts. They independently
+source pins and the separate runtime-config hash and the actual saved artifacts. They independently
 compared all48 plotted budget rows with exact proof terms and checked retained
 forcing, full18x16 matrices, horizon semantics, original pilot integrity and
 campaign markers. No blocking mathematical or implementation defect was found.
@@ -95,10 +95,10 @@ changes require fresh final-head CI; do not infer it from that earlier result.
 Four saved-data figures distinguish internal motion/nominal records, full
 response/reference row sensitivity, certified budgets and precision/remainder
 decomposition. Every figure has exact plot data and Question, Reading,
-Significance and Limitation. Canonical verification passes81files; paired-reader validation passes and all11
+Significance and Limitation. Canonical verification passes106files; paired-reader validation passes and all11
 setup/results PDF pages were visually checked. Prior report/reader versions
 remain preserved. The durable evidence archive SHA-256 is
-`8b873a8e4f57e426e1d4fb9eb4be10e7ea96f5f5354d9e106c2a6743aad80566`;
+`aaf8c985b5df1efd88df17e9971f85fd2cda88fc61287a3722256e769bdbfd3e`;
 its exact identity and reader locators are in the compact result.
 
 The certificate covers these mathematical gate endpoints under the supplied
@@ -106,3 +106,9 @@ circuit and trusted source assumptions. No physical detector noise, within-gate
 uniformity, all-time behavior, stable object, autonomous clock, emergent metric
 or CandidateA/B bridge follows. Tests1-11, CandidateB and the older linked-memory
 fail/unresolved result remain unchanged. Novelty has not been assessed.
+
+The [external evidence index](evidence/README.md) retains byte-identical canonical
+manifest/checksum pairs for both runs in Git, together with the pinned archive
+locator. It is explicitly a sparse index; complete raw/analysis/report bytes
+remain in the verified external packet. This resolves the prior #96 Git-archive
+manifest/checksum gap without rewriting the original pilot or either lock.
