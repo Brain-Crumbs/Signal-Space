@@ -103,3 +103,22 @@ closed-parameter rejection), and the saved-analysis process supervisor.
 | Date | Practice | Change | Evidence |
 | --- | --- | --- | --- |
 |2026-10-18|Pilot admission and reserved aggregate budgets|Added stage reservation and obstruction semantics|#96 protocol and negative controls|
+
+## Budget continuity across experiment registrations
+
+When a separately registered qualification continues an existing campaign,
+require the verified original run and its unchanged reservation markers. Reserve
+the additional allocation in that original campaign atomically, and explicitly
+reduce the unspent future allowance. A new experiment ID, checkout or restored
+archive cannot replenish an already consumed allocation. Include checker
+staging and its canonical duplicate in output reservations. Keep the previous
+lock and sources intact; a revised cost projection is still not a measurement
+of the unrun target.
+
+Evidence: [two-cycle qualification](../research/gross-certificate-qualification.md),
+#96/#97 under #92, and `tests/test_certificate_qualification.py` (missing pilot,
+prior-confirmation and concurrent/changed-identity reservation rejection).
+
+| Date | Practice | Change | Evidence |
+| --- | --- | --- | --- |
+|2026-10-19|Budget continuity across experiment registrations|Added explicit cross-registration reservation and future-allowance accounting|C1 qualification and admission tests|

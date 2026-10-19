@@ -1,0 +1,84 @@
+{
+  "schema_version": "research-experiment-v1",
+  "experiment_id": "gross.local-record-qualification.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "parameters": {
+    "stage": "two-cycle-qualification",
+    "cycles": 2,
+    "seeds": [
+      "active-plus",
+      "active-minus"
+    ],
+    "precision_bits": [
+      96,
+      128
+    ],
+    "coupling": "exact-pi/2",
+    "physical_directions": 16,
+    "ambient_coordinates": 18,
+    "epsilon": "1/1000000",
+    "word": [
+      0,
+      1
+    ],
+    "algorithm": "dyadic-taylor-v1",
+    "subdivision": "none-complete-box",
+    "closure": "sequential-voc-no-reset",
+    "controls": [
+      "dark-word",
+      "isolated-commuting",
+      "conservation-r3-memory",
+      "description-covariance",
+      "variational-diagnostic",
+      "linear-majorant",
+      "corrupt-certificate",
+      "serialization"
+    ],
+    "source_sha256": {
+      "src/signal_space/numerics/dyadic.py": "1d56978e587f2a48e2db5ca8195cd06a3cc4cc6d8669e6d728320ecd0b37232c",
+      "src/signal_space/numerics/validated_linked_memory.py": "54f22871818b6a72ccb98eb5fa8110b056d7f9492f7afb5289e236ea8c355e6f",
+      "src/signal_space/numerics/record_certificate_math.py": "2ea86f365705803f5938829547020e55cda3fea1250ec920001c3545d96892f5",
+      "src/signal_space/numerics/record_tubes.py": "1d7d04a8b0373a263d46468a6792b8880b45867a4f751eccd8c608020b281b9b",
+      "src/signal_space/numerics/record_certificate_check.py": "18f802fe0ba5b4de3bb5b632e70c6d9214d9755a93021e44d7765f67ae9d7d2f",
+      "docs/research/gross-local-record-theorem.md": "7dda6add49dbda424be21a00c67b943599d3261f7466f22b0cdbd4b24996640d",
+      "research/papers/gross-operator-program-v0.2.md": "c733c958fde54c810c38889e5096de54358a77cc10e69d9f885870832595e123",
+      "requirements-validated-lock.txt": "660f18fcfb2a178b2e0f300a7235d7243f4cbe2e0666d9e44f00f7e6d9a18115"
+    },
+    "scientific_source_sha256": {
+      "src/signal_space/experiments/local_certificate.py": "051a6a2a7ab8568e6c69922b2c4f4b038ebd256db63629858c1318aa459a2bfc",
+      "src/signal_space/numerics/local_certificate.py": "3bdbbf605b3da482c9f1de0d54825aff9d7ae7a7baf37b30356b8f63c5cdbd3f",
+      "src/signal_space/numerics/certificate_controls.py": "1a4ee480e245d8d17eaf653aa120bfe3656bb047bcd2a5e7ebc9e651dc20b243",
+      "src/signal_space/analysis/local_certificate.py": "80c84d346e98655d488bdd9a64af7c96b761f0f2aaa19a0e956bc5e77b0820be",
+      "src/signal_space/runtime/certificate_budget.py": "fcffe767d97a641217518f3669d1521411be7f7bb44e29283f483fec742d407a",
+      "src/signal_space/experiments/certificate_qualification.py": "a9bc963452c86b7dced209a1a6184d31f1531fce5999e219ac877e5400af6323",
+      "src/signal_space/runtime/certificate_qualification.py": "04bc09ff6a6671fc4a897147379828a1034f5212041d757427a48f36bd2915c1",
+      "src/signal_space/numerics/certificate_qualification.py": "2f758f741be4964303a9f721e409604a7949392840342cf282322ae8766189ff",
+      "src/signal_space/analysis/certificate_qualification.py": "53192d48540c7d9176cf45300e3976b9f086523053f66de5fbd4fbcefc87700d"
+    },
+    "pilot_run_id": "run-4fb4fc6333a29dbd",
+    "pilot_checksums_sha256": "afafcfe8e3d93aa23b7e6b2d723e4cbde88a82fb897fa5df1b79204ebaa0b7e8"
+  },
+  "units": {
+    "state": "dimensionless",
+    "gate_parameter": "dimensionless"
+  },
+  "seeds": {
+    "root": 2026101901
+  },
+  "resources": {
+    "max_cpu_seconds": 30,
+    "max_wall_seconds": 30,
+    "max_memory_mb": 1024,
+    "max_output_mb": 8
+  },
+  "analysis": {
+    "preparation": "1/4000",
+    "numerical": "1/4000",
+    "readout": "1/4000",
+    "omitted_law": "1/4000",
+    "total": "1/1000"
+  },
+  "report": {
+    "title": "C1 two-cycle bound and cost qualification"
+  }
+}
