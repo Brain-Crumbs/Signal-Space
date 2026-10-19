@@ -1,0 +1,192 @@
+{
+  "schema_version": "signal-space-plan-v1",
+  "experiment_id": "gross.local-record-certificate.v1",
+  "model_id": "signal-space.ss-ops-1.v1",
+  "question": "Does the entire physical radius1e-6 ball keep all three records predictable at both one-cycle endpoints, and does measured cost admit a separately locked32-cycle confirmation?",
+  "source_equations": [
+    "research/papers/gross-operator-program-v0.2.md section5, lambda=0; exact mathematical pi/2",
+    "docs/research/gross-local-record-theorem.md: preparation chart, ambient gate, theorem(B), full16 directions",
+    "docs/research/gross-record-tube-certificates.md: variation of constants, full18D errors and saved-proof checker"
+  ],
+  "runtime_config": "fixtures/research/gross-certificate-pilot.json",
+  "runtime_config_sha256": "b50cfd2e3721df09bd80eb81a022243b425ea3c7fc7d6cc77efbaef0ae20640a",
+  "method": {
+    "action": "Unchanged reciprocal SS OPS1 event law, identity transports and supplied AB order.",
+    "units": "All state, coupling and gate parameters dimensionless; gate parameter is not proper time.",
+    "domain": "Three coherent complex doublet ports, two rank-one memories;18 ambient/16 physical directions. One AB cycle; endpoints only.",
+    "boundaries": "No spatial mesh/domain or physical boundary exists. Precision refinement, complete bootstrap boxes and analytic controls are the relevant refinements.",
+    "initial_data": "Exact active-plus/minus source formulas from #93/#94 with radius1e-6 in wave+Pauli norm; no fixed-N/J projection, no dropped phases.",
+    "solver": "Qualified dyadic Taylor backend. Precision96 and128 predetermined, whole boxes without subdivision, intact transition products, separate proof tracks and independent saved checker. Controls use exact dyadic local evaluations; independent DOP853 tangent comparison is diagnostic only.",
+    "tolerances": "Preparation/numerical/readout/omitted allocations each1/4000, total1/1000. Control interval residuals <=1e-12; independent ODE diagnostic <=1e-8. No reset, tuning or retry. Exponential tails and every product/norm enclosed."
+  },
+  "hypotheses": [
+    {
+      "id": "closes",
+      "prediction": "Both seeds, both precisions and every endpoint/record close all source/tube/arithmetic/budget obligations."
+    },
+    {
+      "id": "obstructed",
+      "prediction": "Loose curvature, wrapping, arithmetic or admission leave the launch unresolved; an excessive upper bound is not physical failure."
+    }
+  ],
+  "controls": [
+    {
+      "id": "dark-word",
+      "purpose": "Qualify dark-word without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "isolated-commuting",
+      "purpose": "Qualify isolated-commuting without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "conservation-r3-memory",
+      "purpose": "Qualify conservation-r3-memory without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "description-covariance",
+      "purpose": "Qualify description-covariance without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "variational-diagnostic",
+      "purpose": "Qualify variational-diagnostic without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "linear-majorant",
+      "purpose": "Qualify linear-majorant without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "corrupt-certificate",
+      "purpose": "Qualify corrupt-certificate without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    },
+    {
+      "id": "serialization",
+      "purpose": "Qualify serialization without changing the physical law",
+      "method": "Frozen control in numerics/certificate_controls.py; raw local enclosures or independent saved ODE columns retained."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "coverage",
+      "observable": "Both fixed seeds, both precisions and every declared endpoint/record retained.",
+      "pass_if": "Both fixed seeds, both precisions and every declared endpoint/record retained.",
+      "fail_if": "A physical robustness fail would require an admissible perturbation and validated lower-bound witness; no such witness search is part of this pilot.",
+      "unresolved_if": "Any missing/invalid source, incomplete prefix, excessive upper bound or failed control; do not invent a32-cycle result.",
+      "uncertainty": "Outward exact dyadic intervals except explicitly labelled floating variational diagnostics. Mathematical records, no hardware noise."
+    },
+    {
+      "id": "saved-proofs",
+      "observable": "Independent saved-proof checker verifies every full-direction obligation.",
+      "pass_if": "Independent saved-proof checker verifies every full-direction obligation.",
+      "fail_if": "A physical robustness fail would require an admissible perturbation and validated lower-bound witness; no such witness search is part of this pilot.",
+      "unresolved_if": "Any missing/invalid source, incomplete prefix, excessive upper bound or failed control; do not invent a32-cycle result.",
+      "uncertainty": "Outward exact dyadic intervals except explicitly labelled floating variational diagnostics. Mathematical records, no hardware noise."
+    },
+    {
+      "id": "one-cycle-budgets",
+      "observable": "Both seeds meet every allocation at every one-cycle endpoint.",
+      "pass_if": "Both seeds meet every allocation at every one-cycle endpoint.",
+      "fail_if": "A physical robustness fail would require an admissible perturbation and validated lower-bound witness; no such witness search is part of this pilot.",
+      "unresolved_if": "Any missing/invalid source, incomplete prefix, excessive upper bound or failed control; do not invent a32-cycle result.",
+      "uncertainty": "Outward exact dyadic intervals except explicitly labelled floating variational diagnostics. Mathematical records, no hardware noise."
+    },
+    {
+      "id": "controls",
+      "observable": "All preregistered analytic, diagnostic, negative and serialization controls pass.",
+      "pass_if": "All preregistered analytic, diagnostic, negative and serialization controls pass.",
+      "fail_if": "A physical robustness fail would require an admissible perturbation and validated lower-bound witness; no such witness search is part of this pilot.",
+      "unresolved_if": "Any missing/invalid source, incomplete prefix, excessive upper bound or failed control; do not invent a32-cycle result.",
+      "uncertainty": "Outward exact dyadic intervals except explicitly labelled floating variational diagnostics. Mathematical records, no hardware noise."
+    },
+    {
+      "id": "precision",
+      "observable": "96-bit and 128-bit bounds independently qualify; width need not be monotone.",
+      "pass_if": "96-bit and 128-bit bounds independently qualify; width need not be monotone.",
+      "fail_if": "A physical robustness fail would require an admissible perturbation and validated lower-bound witness; no such witness search is part of this pilot.",
+      "unresolved_if": "Any missing/invalid source, incomplete prefix, excessive upper bound or failed control; do not invent a32-cycle result.",
+      "uncertainty": "Outward exact dyadic intervals except explicitly labelled floating variational diagnostics. Mathematical records, no hardware noise."
+    }
+  ],
+  "visualization_plan": [
+    {
+      "figure_id": "internal-endpoints",
+      "question": "What changes while local records remain predictable?",
+      "role": "illustrative",
+      "observables": [
+        "internal memory endpoints"
+      ],
+      "representation": "Labelled internal projection or logarithmic endpoint bounds; exact plotted data retained",
+      "competing_signatures": {
+        "closes": "Full one-cycle source/tube/budget checks close.",
+        "obstructed": "Large errors or unclosed proof/admission hypotheses remain visible."
+      },
+      "controls": [
+        "dark-word",
+        "isolated-commuting",
+        "conservation-r3-memory",
+        "description-covariance",
+        "variational-diagnostic",
+        "linear-majorant",
+        "corrupt-certificate",
+        "serialization"
+      ],
+      "uncertainty": "Exact proof quantities; diagnostic center projection is not physical space.",
+      "source_data": [
+        "plot-data/internal-endpoints.csv"
+      ],
+      "transformations": [
+        "Endpoint centers and max across three records only; no smoothing/fitting."
+      ],
+      "required": true
+    },
+    {
+      "figure_id": "record-budgets",
+      "question": "Does every endpoint fit every allocation?",
+      "role": "evidentiary",
+      "observables": [
+        "separate record budgets"
+      ],
+      "representation": "Labelled internal projection or logarithmic endpoint bounds; exact plotted data retained",
+      "competing_signatures": {
+        "closes": "Full one-cycle source/tube/budget checks close.",
+        "obstructed": "Large errors or unclosed proof/admission hypotheses remain visible."
+      },
+      "controls": [
+        "dark-word",
+        "isolated-commuting",
+        "conservation-r3-memory",
+        "description-covariance",
+        "variational-diagnostic",
+        "linear-majorant",
+        "corrupt-certificate",
+        "serialization"
+      ],
+      "uncertainty": "Exact proof quantities; diagnostic center projection is not physical space.",
+      "source_data": [
+        "plot-data/record-budgets.csv"
+      ],
+      "transformations": [
+        "Endpoint centers and max across three records only; no smoothing/fitting."
+      ],
+      "required": true
+    }
+  ],
+  "resources": {
+    "max_wall_seconds": 60,
+    "max_memory_mb": 1024,
+    "max_output_mb": 16
+  },
+  "prohibited_inferences": [
+    "No32-cycle confirmation is executed by this plan.",
+    "No within-gate/all-time certificate, stable objects, clocks, physical detector or emergent metric.",
+    "The older failure and Tests1-11 classifications are unchanged.",
+    "Future runtime estimates are extrapolations, not measured long-prefix executions."
+  ],
+  "locked_sha256": "ab7e1e9bcf4f4ef385d88381f67e6c876d8ac69ddfd0408d97a814f4468463d7"
+}

@@ -43,3 +43,15 @@ The [source audit](gross-local-record-source-audit.md) preserves open PR #91's
 pinned failed result without importing its unverified raw packet or reserving
 its RC-21..23 identifiers. Existing Tests 1–11 and Candidate B claims are
 unchanged. Basis diagnostics are not whole-ball evidence; novelty is unassessed.
+
+## C1 bounded certificate, 18 October 2026
+
+| ID | Claim and scope | Evidence class / current status | Dependency and limit |
+| --- | --- | --- | --- |
+| RC-C1-03 | All three mathematical records remain within the separate frozen budgets through four ordered ABAB endpoints, for both active seeds and every radius1e-6 physical preparation displacement | Computer-assisted finite endpoint bound under the qualified shared arithmetic/chart base; five checks pass at96/128 bits in run `run-bf4c1feafc6cb66c`, analysis `analysis-0001-ccec2742`; [result](gross-certificate-qualification-results.md) | All16 physical directions retained simultaneously in18 ambient coordinates, no reset; maximum preparation/total less than2.85e-6. Supplied incidence/order/transport and unchanged SS OPS1 law. Not a physical detector or formal-proof-assistant certificate. |
+| RC-C1-04 | The same32-cycle target has been certified or physically falsified | Not evaluated; confirmation launch remains blocked | Conservative cost extrapolation exceeds reduced145s worker/1024MiB limits; a large cost/error upper estimate is not a physical failure witness.195s total future allowance remains, without a confirmation registration or lock. |
+
+The earlier generic theorem remains conditional; RC-C1-03 discharges its
+obligations only on this saved finite prefix. Previous linked-memory outcomes,
+Tests1-11 and CandidateB are preserved. Independent artifact review does not
+eliminate the shared trusted arithmetic/analytic base or establish novelty.

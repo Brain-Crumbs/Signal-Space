@@ -1,0 +1,5 @@
+# External C1 evidence indexes
+
+These two scoped directories retain byte-identical canonical manifest.json and checksums.sha256 for the original one-cycle pilot and the two-cycle qualification, as required by artifact-contract.md section2. They are external-package indexes, not locally complete or runnable canonical packages. Full raw proofs, analysis, reports, source, reader exports and budget reservations are retained in the pinned archive described by c1-two-cycle-archive.json. Restore that archive before using runtime verify or resuming campaign work; preserve all spent reservation markers.
+
+The compact scientific result is ../gross-certificate-qualification-results.json. The archive includes both canonical runs under gross-c1-two-cycle/runs/. Its SHA-256 isaaf8c985b5df1efd88df17e9971f85fd2cda88fc61287a3722256e769bdbfd3e. The locator indexes exact per-run manifest/checksum hashes and archive-relative paths. Do not treat an intact index as proof that externally retained files were locally verified; this delivery separately verified both complete canonical packages and the paired reader before archiving.

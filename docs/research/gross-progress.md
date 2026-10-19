@@ -2,6 +2,16 @@
 
 This ledger tracks Tests 1-11 of the operator program v0.2. These numbers are independent of the older E01-E11 charged/knot sequence.
 
+**C1 two-cycle qualification, 18 October 2026 (#96/#97 under #92).** The
+[locked continuation result](gross-certificate-qualification-results.md), run
+`run-bf4c1feafc6cb66c`, analysis `analysis-0001-ccec2742`, certifies all three
+records through four ordered endpoints for both active seeds, both96/128-bit
+precisions and the entire radius1e-6 physical preparation ball. All16 directions
+remain simultaneous; no resets. Five checks pass, worst preparation/total
+bound is less than2.85e-6. The32-cycle target is still blocked/not evaluated by
+the conservative cost estimate;105s is reserved and195s remains in the original
+300s ceiling. No Tests1-11 status, CandidateB or prior failed outcome changes.
+
 **C1 error-tube implementation, 17 October 2026 (#95).** The
 [nonresetting proof producer and saved checker](gross-record-tube-certificates.md)
 retain all sixteen physical preparation directions in eighteen ambient
@@ -159,3 +169,13 @@ lock; original preparations and scientific thresholds remain preserved.
 The conservative global record bound has zero useful full cycles; end-to-end
 certification stays unresolved. No Test 1-11 classification or prerequisite
 has changed. All existing canonical evidence remains byte-identical.
+
+## C1-4 certificate pilot (18 October 2026)
+
+The separately registered [one-cycle pilot](gross-certificate-pilot-results.md)
+passes all five locked checks for both seeds, both precisions and all physical
+preparation directions. Run `run-4fb4fc6333a29dbd`; analysis
+`analysis-0001-ec7930b5`; selected report `report-0002`. The conservative measured
+work extrapolation blocks admission for32 cycles: confirmation is not evaluated
+and has no executable Task5 command. This does not demonstrate physical record
+failure. No Test1–11 status or other campaign result is promoted.

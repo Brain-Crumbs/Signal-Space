@@ -4,6 +4,8 @@ from importlib import import_module
 from signal_space.experiments.base import ExperimentPlugin
 
 _PLUGINS = {
+    'gross.local-record-qualification.v1': ('certificate_qualification', 'CertificateQualificationExperiment', ()),
+    'gross.local-record-certificate.v1': ('local_certificate', 'LocalCertificateExperiment', ()),
     'gross.operator-identities.v1': ('operators', 'OperatorExperiment', ()),
     'gross.reciprocal-events.v1': ('reciprocal', 'ReciprocalExperiment', ()),
     'gross.linked-memory-persistence.v1': ('linked_memory', 'LinkedMemoryExperiment', ()),
